@@ -41,15 +41,15 @@ import { ClerkProvider } from '@clerk/clerk-react'
 
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-console.log("VITE_CLERK_PUBLISHABLE_KEY detected:", PUBLISHABLE_KEY ? "Yes (length: " + PUBLISHABLE_KEY.length + ")" : "No");
 
 if (!PUBLISHABLE_KEY) {
-  console.error("CRITICAL: Missing VITE_CLERK_PUBLISHABLE_KEY. Application will not render.");
-  // Still try to render something to avoid total white screen
+  console.error("CRITICAL: Missing VITE_CLERK_PUBLISHABLE_KEY.");
+  // Render a user-friendly error instead of a white screen
   createRoot(document.getElementById('root')).render(
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Configuration Error</h1>
-      <p>Missing VITE_CLERK_PUBLISHABLE_KEY</p>
+    <div style={{ padding: '40px', textAlign: 'center', fontFamily: 'sans-serif' }}>
+      <h1 style={{ color: '#e11d48' }}>Configuration Error</h1>
+      <p>The application is missing a required security key (Clerk Publishable Key).</p>
+      <p style={{ fontSize: '0.9rem', color: '#666' }}>Please check your environment variables or GitHub Secrets.</p>
     </div>
   );
   throw new Error("Missing Publishable Key");
