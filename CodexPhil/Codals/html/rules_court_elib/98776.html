@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>A.M. No. 23-10-18-SC - FURTHER AMENDMENTS TO SUPREME COURT AMENDED ADMINISTRATIVE CIRCULAR NO. 83-2015 (RE: PROTOCOLS AND PROCEDURES IN THE PROMULGATION, PUBLICATION, AND POSTING ON THE WEBSITES OF DECISIONS, FINAL RESOLUTIONS, AND FINAL ORDERS USING FICTITIOUS NAMES/PERSONAL CIRCUMSTANCES)RESOLUTION - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/98776' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2>EN BANC</H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ A.M. No. 23-10-18-SC, February 04, 2025 ]</H2>
+					<H3>FURTHER AMENDMENTS TO SUPREME COURT AMENDED ADMINISTRATIVE CIRCULAR NO. 83-2015 (RE: PROTOCOLS AND PROCEDURES IN THE PROMULGATION, PUBLICATION, AND POSTING ON THE WEBSITES OF DECISIONS, FINAL RESOLUTIONS, AND FINAL ORDERS USING FICTITIOUS NAMES/PERSONAL CIRCUMSTANCES)<BR><BR>RESOLUTION</H3>
+					</CENTER>
+					<p><div align="JUSTIFY"><b>WHEREAS,</b> Supreme Court (SC) Amended Administrative Circular No. 83-2015 was issued on September 5, 2017, reiterating and supplementing the Guidelines set forth in Administrative Matter No. 12-7-15-SC by further detailing the procedures in the promulgation, publication, and posting of decisions, resolutions, and final and interlocutory orders in cases covered by the said Administrative Circular and using fictitious names or personal circumstances where the confidentiality of court proceedings and the identities of parties is mandated by law;<br><br><b>WHEREAS,</b> there is a need to similarly redact the identity of the private offended party in sexual harassment cases<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> regardless of their gender in recognition of the severity of the offense and of the state policy to value and uphold the dignity of every human person, and to guarantee full respect for human rights;<br><br><b>WHEREAS,</b> there is a need to further amend Titles V, VII, VIII, and IX of Amended Administrative Circular No. 83-2015 to simplify the procedure in the promulgation, publication, and posting of cases covered therein and in line with A.M. No. 11-9-4-SC or the Efficient Use of Paper Rule.<br><br><b>NOW, THEREFORE,</b> for the guidance of all courts, their respective clerks of court, and other court personnel, the Court resolves to <b>APPROVE</b> this Further Amendments to Supreme Court Amended Administrative Circular No. 83-2015 or the "Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names or Personal Circumstances":<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>I. </b></td> <td width="95%"><b>COVERED CASES</b></td> </tr> </tbody></table><br>1. This Amended Protocol shall govern the procedure in the promulgation, publication, and posting of decisions, resolutions, and final and interlocutory orders of the courts in cases where the confidentiality of the identities of the parties, records, and court proceedings is mandated by law and/or by the rules.<br><br>2. Confidentiality of the identities of the parties, records, and court proceedings is mandated by the following laws:<br>&nbsp; <table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> (a) </td> <td width="90%" valign="top"> Republic Act No. 7610<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> in cases of child abuse, exploitation, and discrimination; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (b) </td> <td valign="top"> Article 266-A of the Revised Penal Code; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (c) </td> <td valign="top"> Republic Act No. 8505<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> in cases of rape and other forms of sexual abuse or assault; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (d) </td> <td valign="top"> Republic Act No. 9208,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> as amended by Republic Act No. 10364,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> in cases of human trafficking; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (e) </td> <td valign="top"> Republic Act No. 9262<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> in cases of violence against women and their children; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (f) </td> <td valign="top"> Republic Act No. 9344,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> as amended by Republic Act No. 10630,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> in cases involving children at risk and those in conflict with the law; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (g) </td> <td valign="top"> Republic Act No. 9775<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> in cases of child pornography; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> (h) </td> <td valign="top"> Republic Act No. 10175<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> in cases involving cybercrimes and violations of the aforementioned laws committed by, through, and with the use of information and communications technologies; and </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">(i) </td> <td valign="top">Republic Act No. 11313<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> in cases involving gender-based sexual harassment.</td> </tr></tbody></table><br>3. This Amended Protocol shall also apply to cases where the confidentiality of the identities of the parties, records, and court proceedings is mandated by laws or rules not expressly mentioned herein and by similar laws or rules to be enacted in the future.<br><br>4. This Amended Protocol shall also apply to criminal, civil, and administrative cases involving acts and/or omissions that may be construed as violations of the laws as enumerated above.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>II.</b> </td> <td width="95%"><b>PROSPECTIVE AND LIMITED RETROACTIVE APPLICATION</b></td> </tr> </tbody></table><br>1. The decisions, resolutions, and orders issued or promulgated or to be issued or promulgated by the courts in cases covered by this Amended Protocol shall be modified in accordance with the provisions of this Resolution.<br><br>2. The modification of previously issued and promulgated decisions, resolutions, and orders shall extend to those published on the official website of the Supreme Court (SC Website) beginning 1996—the earliest year when decisions of the Court were uploaded and made publicly accessible.<br><br>3. Henceforth, application systems, database management systems, and all other software systems that store, retrieve, display, print, or process confidential data in any digitized form using any type of electronic device must be designed, developed, and implemented to enforce confidentiality in accordance with this Resolution using appropriate techniques such as, but not limited to, encryption, data masking, data replacement, and user access rights restriction.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>III.</b> </td> <td width="95%"><b>MODIFICATION REQUIREMENTS FOR COVERED CASES</b></td></tr></tbody></table><dl><dt>1. The cases covered by this Amended Protocol shall be modified in the following manner:<br><br></dt><dd>(a) By replacing, with fictitious initials, the complete names of the private offended parties in the decisions, resolutions, and orders of the court in cases covered by this Amended Protocol. For example, AAA should be written in place of the name of the private offended party in the crime of rape.<br><br>The courts may, in the exercise of their discretion, use different combinations of letters as long as the fictitious initials used shall not identify, directly or indirectly, the individual whose real name is replaced by the fictitious initials.<br><br>(b) The personal circumstances and other information that tend to establish or compromise, directly or indirectly, the identities of the private offended parties, such as, but not limited to, their date of birth, complete address, and complete names of parents, relatives, or other household members, shall be blotted out from the decision, resolution, and order of the courts in covered cases.<br><br>The complete names and personal circumstances of the private offended parties' family members or relatives, who may be mentioned in the court's decision or resolution, shall likewise be similarly treated.<br><br>(c) At the private offended parties' instance or, if the private offended parties are minors, that of their guardian, the complete names of the accused may be replaced by fictitious initials and their personal circumstances blotted out from the decision, resolution, or order if the names and personal circumstances of the accused may tend to establish or compromise the private offended parties' identities. The private offended parties or their guardians should manifest to the trial court at the earliest opportunity, i.e., after the filing of the complaint, information, or original petition, their desire to have the names of the accused be replaced with fictitious initials and their personal circumstances be blotted out from the decision, resolution, and order of the court.<br><br>If the accused are minors, the complete names of the accused shall be replaced with fictitious initials and their personal circumstances, except for the fact of minority, shall be blotted out from the decision, resolution, and order.<br><br>Where the private offended parties or their guardians manifest their desire to have the name of the accused be replaced with fictitious initials and their personal circumstances be blotted out from the decision, resolution, and order of the courts, it shall be the duty of the handling court or judge<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(i) </div></td> <td width="90%" valign="top"> <div align="JUSTIFY">to inform the private offended parties actively of their option to reveal or redact the complete name and personal circumstances of the accused; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(ii) </div></td> <td valign="top"> <div align="JUSTIFY">to discuss the implications of each of these choices; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(iii) </div></td> <td valign="top"> <div align="JUSTIFY">to confirm explicitly the preferences of the private offended parties given the circumstances. </div></td> </tr> </tbody></table><br>(d) As to the geographical location the decisions, resolutions, and orders in covered cases should refer only to the province or city where the incident occurred or where the crime was committed. References to the specific<i> barangay</i> or town should be blotted out from the body of the decision, resolution, or order if its identification could lead to the disclosure of the identities of the private offended parties.</dd></dl>2. The trial court shall determine the use of fictitious initials in place of the private offended party's complete name at the earliest opportunity, i.e., after the filing of the complaint, information, or original petition and shall then issue an order or resolution to this effect.<br><br>3. The fictitious initials determined by the court to replace the real names of the private offended parties in covered cases should be used consistently in the body and dispositive portion of the decision, resolution, and order, as well as in all subsequent court issuances. The court may, however, use the real names of the private offended parties in its issuance of interlocutory orders, where the identification of the private offended parties is necessary to avoid mistake or confusion in the enforcement of these interlocutory orders.<br><br>4. The use of fictitious initials, however, may be waived by the private offended parties in accordance with Title IV of this Amended Protocol.<br><br>5. The order or resolution issued by the court under Title III, Paragraph 2 of this Amended Protocol shall be effective in all subsequent proceedings in the case, even under Rules 38 of the Rules of Court and on appeal to the higher courts under Rules 41, 42, 45, and 47 of the Rules of Court.<br><br>6. The court's order or resolution shall also apply to petitions for <i>certiorari</i>, prohibition, or<i> mandamus</i> under Rule 65 of the Rules of Court filed by either the accused-appellant or the private offended parties as petitioner(s), assailing the proceedings, orders, or judgment by a lower court in covered cases.<br><dl><dt>7. In cases where the private offended parties or their guardians have manifested their desire to replace the complete name of the accused with fictitious initials, the caption or title of the case should be written as follows:<br><br></dt><dd>(a) The fictitious initials in the caption or title of the case shall be followed by the case number, or government record (G.R.) number, assigned to the case written in parenthesis. For example, in the lower courts,<i> 'People of the Philippines v. AAA</i> (Case No. _____).'<br><br>(b) If the case is appealed to the higher courts, the fictitious initials shall be followed by the case number assigned by the appellate court with proper notation of the original case number of the case before the trial court written in parenthesis. For example,<i> 'BBB v. People (current appellate court case number [formerly lower court case number]).'</i><br><br>(c) If the case filed is a separate and independent petition for <i>certiorari</i>, prohibition, or<i> mandamus</i> under Rule 65 of the Rules of Court, the fictitious initials shall be followed by the case number assigned by the higher court. Examples are as follows:<i> 'BBB v. Public/Private Respondents (Case No.),' and 'People of the Philippines and BBB v. Public/Private Respondents (Case No. _____ ).'</i></dd></dl>8. The rules under this Amended Protocol shall also be observed in modifying the decisions, resolutions, and orders to be uploaded and already uploaded on the SC Website or the Supreme Court E-Library (SC E- Library).<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>IV.</b> </td> <td width="95%"><b>WAIVER BY THE PRIVATE OFFENDED PARTIES</b></td> </tr> </tbody></table><br>1. The private offended parties in covered cases, may, at any time, consent to the disclosure of their real names, personal circumstances, and other information in the decisions, resolutions, and orders of the court. In such case, the private offended parties giving the consent must personally, or with the assistance of counsel, execute a written waiver in the presence of the handling court or before a notary public. The waiver shall automatically cause the corresponding disclosure of the complete names and personal circumstances of the accused.<br><br>2. In cases where the private offended party giving the consent is a minor, the waiver must be executed by the parent or guardian. In the absence of the parent or guardian, the court shall designate a person who shall execute the waiver on the minor's behalf. The person so designated by the court must fully explain the consequences of the waiver to the minor. The waiver may be executed in the presence of the handling court or before a notary public and must be approved by the handling court.<br><br>3. The handling court must explicitly confirm from the private offended parties their consent to the disclosure of their real names and personal circumstances, as well as those of the accused, in the decisions, resolutions, and orders of the court.<br><br>4. For good and meritorious cause shown to the handling court, the waiver, under this Amended Protocol, may be revoked by those who gave their consent to the disclosure of their real names and personal circumstances in the decisions, resolutions, and orders of the court.<br><br>5. The revocation of the waiver must be in writing and executed in the presence of the handling court or before a notary public. In the latter case, the revocation shall be effective upon the approval thereof by the handling court.<br><br>6. In cases where the waiver was executed on behalf of a minor, the revocation of such waiver may be executed by either the minor's parent, guardian, or person duly designated by the handling court for the said purpose. The handling court to which the revocation is submitted shall give its approval if, in the exercise of its discretion, the revocation will serve the greater good of the private offended parties. The handling court shall set the terms for the modification of decisions, resolutions, or orders issued between the time a waiver is made and its revocation.<br><br>7. The private offended parties waiving the confidentiality of their identities or revoking such waiver must present the waiver or revocation of the waiver duly executed under the provisions of Title IV of this Amended Protocol to the handling judge or the court, office or officer responsible for the modification of the decisions, resolutions, and orders in cases covered by this Amended Protocol.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>V. </b></td> <td width="95%"><b>PROMULGATION OF DECISION, FINAL RESOLUTION, OR FINAL ORDER</b></td> </tr> </tbody></table><br><center><b>FIRST-LEVEL AND SECOND-LEVEL COURTS</b></center><br>1. In the promulgation of decisions (original, amended, or new), final resolutions, and final orders in covered cases in the first-level and second-level courts, the handling court shall prepare two copies of its decision, final resolution, or order. The first (unmodified) copy of the decision, final resolution, or order shall be the version where the real name of the private offended party is used and their personal circumstances are disclosed. The second (modified) copy shall be the version where the fictitious name and personal circumstances of the private offended party are used and blotted out, respectively, in accordance with this Amended Protocol. This second (modified) copy of the decision, final resolution, or order shall be the only one to be circulated, together with a separate sheet ("Annex A") containing the details of the concealed or redacted information or circumstances, placed in a blue-colored envelope stamped "confidential."<br><br>2. The first (unmodified) copy of the decision, final resolution, or order of the handling court is confidential and shall be placed, after the promulgation thereof by the branch clerk of court, in a blue-colored envelope, duly signed, dated, the docket number of the case in the Court written thereon by the branch clerk of court, and sealed. If the handling court renders an amended decision, final resolution, or order, the judge of the handling court shall prepare two copies of the amended decision, final resolution, or order—the first (unmodified) copy containing the genuine name and personal circumstances of the private offended party, and a second (modified) copy containing the fictitious name and personal circumstances of said private offended party and accused, if warranted. The branch clerk of court shall, after the promulgation of the amended decision, final resolution, or order of the court, open the blue-colored envelope upon written authority of the judge of the handling court and place the first (unmodified) copy of the amended decision, final resolution, or order in the same blue-colored envelope and, thereafter, duly reseal, reauthenticate, redate, and rewrite thereon the docket number of the case in the court.<br><br>3. Only the authenticated hard copies of the second (modified) copy of the promulgated decision and/or the amended or new decision, final resolution, or order of the handling court shall be released to and served on the parties in accordance with the Rules of Court.<br><br>4. The blue-colored envelope containing the first (unmodified) copy of the original and/or the amended or new decision, final resolution, or order of the court shall be attached to and form part of the record of the case. The second (modified) copy of the original and/or amended or new decision, final resolution, or order shall be attached to and form part of the open records of the case.<br><br>5. The blue-colored envelope cannot be opened or reopened without the written authority of the judge of the handling court or, in the absence of the judge of the handling court, of the pairing judge of the handling court or, in the absence of the pairing judge of the handling court, of the executive judge of the handling court.<br><br>6. The blue-colored envelope may also be reopened upon written order of the Court of Appeals or of the Supreme Court.<br><br><center><b>COURT OF APPEALS AND SANDIGANBAYAN</b></center><br>1. The member of the Court of Appeals or Sandiganbayan, chosen by a division (regular or special), to be the<i> ponente</i> shall submit two copies of the decision, final resolution, or order. The first (unmodified) copy contains the genuine name and personal circumstances of the private offended party. The second (modified) copy contains the fictitious name and personal circumstances of said private offended party and accused, if warranted. Any member of the court who opts to submit a concurring, dissenting, or separate opinion shall likewise submit to the court a first (unmodified) copy, which contains the genuine name and personal circumstances of the private offended party, and a second (modified) copy, which contains the fictitious name and personal circumstances of the private offended party of such opinion. The fictitious name and personal circumstances of the private offended party and accused, if warranted, contained in the second (modified) copy of the dissenting, concurring, or separate opinion(s) of the other justice(s) of the division shall be the same as those contained in the second (modified) copy of the decision, final resolution, or final order of the<i> ponente</i>. This second (modified) copy of the decision, final resolution, order, or opinion shall be the one to be circulated together with a separate sheet "(Annex A)" containing the details of the concealed or redacted information or circumstances placed in a blue-colored envelope stamped "confidential."<br><br>2. After the promulgation of the final copy and second (modified) copy of the decision, final resolution, or order of the court, in accordance with the Internal Rules of the Court of Appeals or the Sandiganbayan and the Rules of Court, the division clerk of court shall place the first (unmodified) copy of the decision, final resolution, or order, as well as any concurring, dissenting, or separate opinion(s) of the other justice(s) of the division, in a blue-colored envelope, seal the envelope, write thereon the date and the docket number of the case in the Court of Appeals or the Sandiganbayan, authenticate the envelope, and cause the delivery thereof to the reporter of the Court of Appeals or the Sandiganbayan for safekeeping.<br><br>3. If the original decision, final resolution, or order is amended or reversed after the promulgation thereof, the<i> ponente</i> shall prepare and submit to the court two copies of the amended decision, final resolution, or order, the first (unmodified) copy of the amended decision, final resolution, or order containing the genuine name and personal circumstances of the private offended party, and a second (modified) copy containing the fictitious name and personal circumstances of the said private offended party and accused, if warranted. The first (unmodified) copy of the amended or new decision, final resolution, or order, as well as any concurring, dissenting, or separate opinion(s) of the other justice(s) of the division shall be promulgated by the division clerk of court, who shall thereafter retrieve the blue-colored envelope containing the first (unmodified) copy of the original decision, final resolution, or order of the court from the reporter of the court, open the envelope, place the amended or new decision or resolution in the same blue-colored envelope, reseal, reauthenticate, redate, rewrite the docket number of the case in the Court of Appeals or the Sandiganbayan, and return the said envelope containing the original and amended or new decision or resolution, and any concurring, dissenting or separate opinion to the reporter of the Court of Appeals or the Sandiganbayan for safekeeping.<br><br>4. The sealed blue-colored envelope containing the original copy of the first (unmodified) copy of the original and/or amended or new decision, final resolution, and order of the court cannot be opened or reopened except by the division clerk of court as provided herein, or as directed by the Supreme Court, or unless with the written authority of the <i>ponente</i>, or by the chairperson of the division if the<i> ponente</i> has died or retired, resealed and reauthenticated, and the date and docket number of the case written thereon.<br><br>5. After the promulgation of the original, amended, or new decision, final resolution, or order of the court, the division clerk of court shall furnish the<i> ponente</i>, the parties, the Solicitor General, the Director of Prisons if the accused is detained, and the Information and the Statistical Data Division and Judicial Records Division with hard copies of the second (modified) copy of the original, amended, or new decision, final resolution, or order, and attach the second (modified) copy thereof to the <i>rollo</i> of the case.<br><br>6. Only a hard copy of the second (modified) copy of the original, amended, or new decision, final resolution, or order of the court may be published in the Official Gazette or in the Philippine Reports or the SC Website if authorized by the Supreme Court.<br><br>7. In the case of the Sandiganbayan, after the promulgation of the original, and/or amended or new decision, final resolution, or order, the division clerk of court shall place the first (unmodified) copy thereof in a blue-colored envelope, duly dated, authenticated and sealed, and the docket number of the case in the Sandiganbayan written thereon, and caused to be delivered to the executive director of the legal and technical staff of the Sandiganbayan for safekeeping.<br><br><center><b>SUPREME COURT</b></center><br>1. The Member of the Supreme Court (or the<i> ponente</i>) who is assigned by the Court (<i>En Banc</i> or Division) to finalize the<i> ponencia</i> via a decision, signed resolution, or unsigned resolution shall prepare the (1) redacted gilbert copy of the<i> ponencia</i>, which shall contain the fictitious name, personal circumstances, and other information of the private offended party and accused, if warranted, and (2) Annex "A" where the genuine name and personal circumstances of the private offended party are indicated and disclosed, both duly signed by the<i> ponente</i>. Any other member who opts to submit a dissenting, concurring, or separate opinion shall likewise submit the redacted gilbert copy and Annex "A" of such dissenting, concurring, or separate opinion, containing the same fictitious name and personal circumstances of the private offended party as contained in the redacted gilbert copy of the<i> ponencia</i>, duly signed by the opining member. For cases resolved via decision or signed resolution, the redacted gilbert copy of the<i> ponencia</i> and the opinion, if applicable, shall be routed to the other members for their signatures.<br><br>At the same time, an electronic PDF of the redacted gilbert copy of the<i> ponencia</i> and the opinion, if applicable, must likewise be circulated by the<i> ponente</i> and the opining member, respectively, to all the members and the Office of the Clerk of Court (OCC) or the Office of the Division Clerk of Court (ODCC), following the rule in Item V of the Rules on the Promulgation of Decisions and Resolutions and Submission of Opinions (Rules on Promulgation).<br><br>2. The judicial staff head of the<i> ponente</i> shall submit the signed redacted gilbert copy and Annex "A" of the<i> ponencia</i> and the signed redacted gilbert copy and Annex "A" of the opinion, if applicable, together with the<i> rollo</i>(s) and the records of the case, for promulgation:<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="90%" valign="top"> <div align="JUSTIFY">for decisions and signed resolutions in <i> En Banc</i> cases, to the Office of the Chief Justice (OCJ) for the Chief Justice's signature, certification on the consultations held, and annotation regarding "deemed signing," if applicable, before sending the same to the OCC. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">for unsigned resolutions in <i> En Banc</i> cases, to the OCJ for Chief Justice's authentication before sending the same to the OCC. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">for decisions and signed resolutions in Division cases, to the Office of the Working Chairperson (OWC) or Office of the Division Chairperson (ODC) for the Chairperson's signature and annotation regarding "deemed signing," if applicable, as well as the attestation on the consultations held, before sending the same to the OCJ for the Chief Justice's signature and certification on the consultations held. Afterward, the OCJ shall transmit the same to the ODCC. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td valign="top"> <div align="JUSTIFY">for unsigned resolutions in Division cases, to the OWC or ODC for the Chairperson's authentication, before sending the same to the ODCC. </div></td> </tr> </tbody></table><br>3. Following Item X of the Rules on Promulgation, an electronic copy in Word format of the redacted gilbert copy of the unsigned resolution must be submitted to the OCJ/OWC/ODCC or OCC/ODCC, while an electronic copy in Word format of the redacted gilbert copy of the decisions or signed resolutions and opinions may be submitted to the OCJ/OWC/ODC or OCC/ODCC or the<i> ponente</i> when requested.<br><br>4. For decisions and signed resolutions in both<i> En Banc</i> and Division cases, upon receipt of the redacted gilbert copy and Annex "A" of the <i>ponencia</i> and the redacted filbert copy and Annex "A" of the opinion, if applicable, as well as the <i>rollo</i>(s) and records of the case, the Clerk of Court or the Division Clerk of Court shall cause (1) the reproduction of printed authenticated copies of the redacted gilbert copies of the<i> ponencia</i> and the opinion, if applicable, and (2) the transmittal for promulgation of the reproduced printed authenticated copies to the parties, the Supreme Court Communications Office, Supreme Court Office of the Spokesperson, Management Information Systems Office, Office of the Court Administrator, Office of the Chief Attorney, the Supreme Court Library, and the Philippine Judicial Academy pursuant to the Internal Rules of the Supreme Court. A printed authenticated copy of the redacted gilbert copies of the<i> ponencia</i> and the opinion, if any, shall likewise be given to the Office of the Reporter.<br><br>For unsigned resolutions in both<i> En Banc</i> and Division cases, upon receipt of the redacted gilbert copy and Annex "A" of the<i> ponencia</i> and the redacted gilbert copy and Annex "A" of the opinion, if applicable, as well as the<i> rollo</i>(s) and records of the case, the Clerk of Court or the Division Clerk of Court shall cause the (1) reproduction of printed authenticated copies of the redacted gilbert copies of the<i> ponencia</i> and the opinion, if applicable, and (2) the transmittal for promulgation of the same to the parties.<br><br>5. After promulgation, the Clerk of Court<i> (En Banc</i> or Division) shall place the original redacted gilbert copy and Annex "A" of the<i> ponencia</i> and the redacted gilbert copy and Annex "A" of the opinion, if applicable, in a red-colored envelope, duly sealed, initialed, and the date and docket number of the case in the Supreme Court written thereon, and cause the delivery of the red-colored envelope and its contents to the Office of the Reporter for safekeeping.<br><br>6. If the original<i> ponencia</i> is amended or a new decision is rendered after the promulgation of the original<i> ponencia</i>, the<i> ponente</i> shall prepare the (1) redacted gilbert copy of the amended or new<i> ponencia</i>, which shall contain the fictitious name and personal circumstances of the private offended party and accused, if warranted, and (2) Annex "A" where only the genuine name and personal circumstances of the said private offended party are indicated and disclosed, both duly signed by the<i> ponente</i>. Any other member who opts to submit a dissenting, concurring, or separate opinion to the amended or a new<i> ponencia</i> shall likewise submit the redacted gilbert copy and Annex "A" of such dissenting, concurring or separate opinion, containing the same fictitious name and personal circumstances of the private offended party as contained in the redacted gilbert copy of the amended or new<i> ponencia</i>, duly signed by the opining member.<br><br>7. The redacted gilbert copy and Annex "A" of the amended or new <i>ponencia</i> and the redacted gilbert copy and Annex "A" of the opinion to the amended or a new<i> ponencia</i> shall be transmitted for promulgation in accordance with procedures laid down in Item Nos. 1–5.<br><br>8. After promulgation, the Clerk of Court or the Division Clerk of Court shall retrieve the red-colored envelope containing the original redacted gilbert copy and Annex "A" of the<i> ponencia</i>, together with the original redacted gilbert copy and Annex "A" of the opinion, if applicable, from the Office of the Reporter. The Clerk of Court or the Division Clerk of Court shall place the redacted gilbert copy and the Annex "A" of the amended or new<i> ponencia</i>, together with the redacted gilbert copy and Annex "A" of the opinion to the amended or new<i> ponencia</i>, if applicable, inside the same red-colored envelope, reauthenticate, reseal, redate, and rewrite the docket number in the Supreme Court thereon, and cause the delivery of the envelope and its contents to the Office of the Reporter for safekeeping.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%"><b>VI. </b></td> <td width="95%"><b>RESPONSIBILITY FOR THE MODIFICATION OF PROMULGATED DECISIONS, FINAL RESOLUTIONS, AND ORDERS</b></td> </tr> </tbody></table><br>1. In the first-level and second-level courts, only the presiding judge of the handling court or the branch clerk of court designated by the judge of the handling court to modify the decision, final resolution, or order of the court shall be responsible for the modification of decisions (original or amended), final resolutions, and orders in their respective courts conformably with Paragraphs 2 to 7 (a, b, and c), Title III of this Amended Protocol.<br><br>2. Only the<i> ponente</i> of the case in the Supreme Court, the Court of Appeals, or the Sandiganbayan or the judicial staff head or any of the lawyers in the legal staff of the<i> ponente</i> who is designated by the latter to modify the original or amended decision, final resolution, or order shall be responsible for the modification of the said decision, final resolution, or order of the Court conformably with Paragraphs 2 to 7 (a, b, and c), Title III of this Amended Protocol. Any member of the Supreme Court, Court of Appeals, or Sandiganbayan opting to file any concurring, dissenting, or separate opinion or any lawyer in the legal staff of the said member and designated by the latter to modify any concurring, dissenting, or separate opinion shall be responsible for the modification thereof.<br><br>3. The head of the Supreme Court Communications Office shall be responsible for the modification of decisions, final resolutions, or orders of the Supreme Court, in covered cases, published on the SC Website beginning 1996 up to July 26, 2015 when the Supreme Court issued its Administrative Circular No. 83-2015, which became effective on July 27, 2015.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%"><b>VII. </b></td> <td width="95%"><b>PUBLICATION AND POSTING OF DECISIONS, FINAL RESOLUTIONS, AND ORDERS</b></td> </tr> </tbody></table><br>1. Only the redacted gilbert copy of the decision or signed resolution (original, amended, or new) of the Supreme Court and the redacted gilbert copy of the separate, concurring, or dissenting opinion in the covered cases shall be published in the Philippine Reports, Supreme Court Reports Annotated, or in the Official Gazette. Other decisions and signed resolutions not so published may also be published in the Philippine Reports in the form of memoranda prepared by the Office of the Reporter.<br><br>2. The Supreme Court Communications Office may choose and submit the decisions, signed resolutions, and orders of the Court in covered cases for publication in the Official Gazette.<br><br>3. Only the redacted gilbert copy of the decisions and signed resolutions and the redacted gilbert copy of the separate, concurring, or dissenting opinion in covered cases of the Supreme Court shall be posted on the SC Website and the SC E-Library.<br><br>4. Likewise, only the second (modified) copies decisions, final resolutions, and orders promulgated by the Court of Appeals, Sandiganbayan, and the lower courts in covered cases may also be posted on the SC Website, if so directed by the Supreme Court.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>VIII. </b></td> <td width="95%"><b>PROHIBITION AGAINST RELEASE TO THE PUBLIC AND THE MEDIA</b></td> </tr> </tbody></table><br>1. The first (unmodified) copy and the Annex "A" of the decisions, final resolutions, and orders in covered cases, and the records, including copies thereof, certified and issued by the clerk of court of the first-level and second-level courts, Court of Appeals, Sandiganbayan or the Supreme Court, shall not be released to the public and to the media, except with the written authority of the handling court in first-level and second-level courts or by the division in the Court of Appeals or Sandiganbayan that rendered the said decision, final resolution, or order; or by the Division of the Supreme Court, in Division cases; or by the Supreme Court <i>En Banc</i>, in <i>En Banc</i> cases, which rendered the said decision, final resolution, or order; or when the private offended party have a written waiver in accordance with Title IV of this Amended Protocol.<br><br>2. Neither shall the records containing the real names and personal circumstances of the private extended parties, mentioned in Title III(4) above, be released to the public and to the media, except with the authority of the judges or justices as hereinabove provided.<br><br>3. Any court official or employee having personal knowledge or verified information of any decision, final resolution, or order of the court in covered cases, containing the genuine name and personal circumstances of the private offended party and accused, if warranted, in the printed and electronic copy of the second (modified) copy/redacted gilbert copy thereof is mandated to submit immediately a written report thereof to the executive judge of the handling court concerned, in the first-level or second-level courts; or to the chairperson of the concerned division of the Court of Appeals or Sandiganbayan or to the presiding justice thereof; or the chairperson of the concerned division in the Supreme Court or the chief justice of the Supreme Court, as the case may be, for appropriate action.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>IX.</b> </td> <td width="95%"><b>LIABILITY</b></td> </tr> </tbody></table><br>1. The court officials or staff members responsible for the modification of the decisions, final resolutions, and orders by the courts, in covered cases, or tasked to handle the covered cases under the terms of this Amended Protocol, as well as the court employees designated to carry out tasks related to the implementation of this Amended Protocol, must strictly observe the provisions thereof.<br><br>2. The court administrator, in consultation and coordination with the executive judges of the first-level and second-level courts and the clerks of court thereof; the presiding justice, in consultation and coordination with the associate justices of the Court of Appeals and the reporter of the Court of Appeals, the clerk of court and division clerks of court of the Court of Appeals; the presiding justice, in consultation and coordination with the associate justices of the Sandiganbayan, as well as the division clerks of courts and the executive director of the legal and technical staff thereof, must adopt measures, rules, and systems within their courts or offices within three months from the approval by the Supreme Court<i> En Banc</i> of this Amended Protocol to fully implement the terms and purposes of this Amended Protocol via appropriate circulars or amendments of their respective "Internal Rules" for the said purpose.<br><br>3. The unauthorized release to the public or to the media of printed or electronic copies of the first (unmodified) copy or the Annex "A" of the second (modified) copy or redacted gilbert copy of the decision (original, amended, or new), final resolutions, or orders of the courts, and opinions in covered cases as well as the true copies thereof, certified and issued by the clerks of court of the first-level and second-level courts, appellate courts, and the Supreme Court, and the unauthorized use and revelation of the genuine name and personal circumstances of the private offended party and accused, if warranted, in covered cases, in the printed or electronic copies of the first (unmodified) copy or the Annex "A" of the second (modified) copy or redacted gilbert copy of the decision (original, amended, or new), final resolutions, or orders of the court, and opinions in covered cases shall be considered grave offenses and shall be punishable with the penalties provided under Rule 140 of the Rules of Court, as further amended, for grave offenses without prejudice to the criminal or civil liabilities that the violators may incur under applicable laws.<br><br>4. Court officials and employees, by themselves and/or in connivance with private individuals, who violate and/or fail or refuse to comply with and/or abide by the terms and conditions of this Amended Protocol may be held liable for indirect contempt under Section 3, Rule 71 of the Rules of Court, for a grave offense under the Civil Service Rules on Administrative Cases; and civilly and/or criminally liable under the appropriate laws and rules.<br><br>5. Third parties who do not have any direct responsibility for the implementation of this Amended Protocol and who violate the confidentiality covered by this Amended Protocol, by themselves or with the connivance of court officials and employees, may be held liable under the appropriate laws or rules.<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><b>X.</b> </td> <td width="95%"><b>EFFECTIVITY</b></td> </tr> </tbody></table><br>This Amended Protocol shall take effect 15 calendar days after its publication in the Official Gazette or in a newspaper of general circulation.<br><br>Issued this 4<sup>th</sup> day of February, 2025.<br><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"><div align="CENTER"><b>(Sgd.) </b><b>ALEXANDER G. GESMUNDO</b><br> Chief Justice&nbsp; </div></td> </tr> <tr> <td colspan="2" valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>MARVIC M.V.F. LEONEN</b><br>&nbsp;&nbsp; Senior Associate Justice</div></td> <td valign="top"> <div align="CENTER"> <b>(Sgd.) </b><b>ALFREDO BENJAMIN S. CAGUIOA</b><br>&nbsp;&nbsp; Associate Justice&nbsp; </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"><div align="CENTER"><b>(Sgd.) </b><b>RAMON PAUL L. HERNANDO</b><br>&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"><div align="CENTER"><b>(Sgd.) </b><b>AMY C. LAZARO-JAVIER</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.)</b><b> HENRI JEAN PAUL B. INTING</b><br>&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>RODIL V. ZALAMEDA&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>MARIO V. LOPEZ&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>SAMUEL H. GAERLAN&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>RICARDO R. ROSARIO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JHOSEP Y. LOPEZ</b>&nbsp; <br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JAPAR B. DIMAAMPAO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JOSE MIDAS P. MARQUEZ&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b><br> </b><b>(Sgd.) </b><b>ANTONIO T. KHO, JR.</b>&nbsp; <br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(on leave) </b><br> <b>MARIA FILOMENA D. SINGH</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> </tbody></table><br><br><br><hr width="60%" size="1" noshade="" align="CENTER"><br><br><b>TEMPLATE</b><br><br><center>(Image supposed to be here)<br><br><br></center><br><center><b>ANNEX"A"</b></center><br><b>DOCKET NUMBER:&nbsp;&nbsp;&nbsp; _________________________<br><br>CASE TITLE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _________________________</b><br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td width="57%" height="42" valign="top"><div align="CENTER"><br><center>Victim(s) <br>Complainant(s)</center> <br> </div></td> <td width="41%" valign="top"><div align="JUSTIFY"><br><br> (referred to as ________ in the redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Accused<br> (if warranted)</center> <br> </div></td><td valign="top"><div align="JUSTIFY"><br><br> (referred to as ________ in the redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Date of Birth of Victim(s)</center> <br> </div></td> <td valign="top"><div align="JUSTIFY"><br> (referred to as ________ in the redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Complete Address(es) of Victim(s)</center> <br> </div></td> <td valign="top"><div align="JUSTIFY"><br> (referred to as ________ in the redacted copy </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Parents of Victim(s)</center> <br> </div></td> <td valign="top"> <div align="JUSTIFY"><br> (referred to as ________ in the redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Relatives or other Household Members of Victim(s)</center> <br> </div></td> <td valign="top"> <div align="JUSTIFY"><br> (referred to as ________ in the redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Town or Barangay&nbsp; </center><br></div></td> <td valign="top"> <div align="JUSTIFY"><br> (referred to as ________ in the&nbsp; redacted copy) </div></td> </tr> <tr> <td valign="top"> <div align="CENTER"><br> <center>Other Information/s where confidentiality is mandated by law</center> <br> </div></td> <td valign="top"> <div align="JUSTIFY"><br> (referred to as ________ in the redacted copy) </div></td> </tr> </tbody></table><br><div align="RIGHT">_________________<br><i><b>PONENTE</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br></i></div><br><br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Notably, Republic Act No. 7877, known as the "Anti-Sexual Harassment Act of 1995," did not specifically provide for confidentiality. It delegated to the employer or the head of the work-related, educational or training environment or institution the duty to promulgate appropriate rules and regulations to prevent or deter the commission of "acts of sexual harassment and to provide the procedures for the investigation, resolution, settlement, or prosecution and the administrative sanctions for acts of sexual harassment in their respective offices.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Special Protection of Children Against Abuse, Exploitation, and Discrimination Act (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Rape Victim Assistance and Protection Act of 1998 (1998).<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Anti-Trafficking in Persons Act of 2003 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Expanded Anti-Trafficking in Persons Act of 2012 (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Anti-Violence Against Women and Their Children Act of 2004 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Juvenile Justice and Welfare Act of 2006 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> An Act Strengthening the Juvenile Justice System in the Philippines, Amending for the Purpose Republic Act No. 9344, Otherwise Known as the "Juvenile Justice and Welfare Act of 2006" and Appropriating Funds Therefor (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Anti-Child Pornography Act of 2009 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Cybercrime Prevention Act of 2012 (2012).<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Safe Spaces Act (2019).</div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

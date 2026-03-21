@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>API Timing Test</title>
+</head>
+
+<body>
+    <h1>API Timing Test</h1>
+    <p>Open browser console (F12) to see timing results.</p>
+    <div id="results"></div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        async function testAPI(name, url) {
+            const start = performance.now();
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const end = performance.now();
+                const time = (end - start) / 1000;
+
+                const result = `${name}: ${time.toFixed(2)}s (${data.data?.length || data.length || 'unknown'} items)<br>`;
+                resultsDiv.innerHTML += result;
+                console.log(result);
+
+                return time;
+            } catch (error) {
+                const end = performance.now();
+                const time = (end - start) / 1000;
+                const result = `${name}: FAILED after ${time.toFixed(2)}s - ${error}<br>`;
+                resultsDiv.innerHTML += result;
+                console.error(result);
+                return time;
+            }
+        }
+
+        async function runTests() {
+            resultsDiv.innerHTML = '<strong>Running tests...</strong><br>';
+            const totalStart = performance.now();
+
+            await testAPI('SC Decisions', '/api/sc_decisions?search=&page=1&limit=20');
+            await testAPI('Ponentes', '/api/sc_decisions/ponentes');
+            await testAPI('Doctrinal Cases', '/api/doctrinal_cases?t=' + Date.now());
+            await testAPI('Questions', '/api/questions?limit=3000');
+
+            const totalEnd = performance.now();
+            const totalTime = (totalEnd - totalStart) / 1000;
+
+            resultsDiv.innerHTML += `<br><strong>Total Time: ${totalTime.toFixed(2)}s</strong>`;
+        }
+
+        runTests();
+    </script>
+</body>
+
+</html>

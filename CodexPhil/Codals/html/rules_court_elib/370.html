@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>REVISED RULES ON EVIDENCE (RULES 128-134, RULES OF COURT) - REVISED RULES ON EVIDENCE(RULES 128-134, RULES OF COURT) - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/370' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2></H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ REVISED RULES ON EVIDENCE (RULES 128-134, RULES OF COURT), July 01, 1989 ]</H2>
+					<H3>REVISED RULES ON EVIDENCE(RULES 128-134, RULES OF COURT)</H3>
+					</CENTER>
+					<p><div align="JUSTIFY"><i>Resolution dated March 14, 1989“Bar Matter No. 411</i>. – Re: Proposed Rules on Evidence as submitted by the Rules of Court Revision Committee on August 31, 1987. – The Court Resolved to&nbsp; (a) APPROVE the Proposed Rules on Evidence as submitted by the Rules of Court Revision Committee on August 31, 1987 effective July 1, 1989 and&nbsp; (b) cause its PUBLICATION immediately in the Official Gazette and newspapers of general circulation.&nbsp; Feliciano, J., is on leave.<center><b><p><br>&nbsp;&nbsp;&nbsp; PART IV&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; RULES ON EVIDENCE</p><p> RULE 128&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; <strong>General Provisions</strong></p></b></center><p><b>SECTION 1.&nbsp; <i>Evidence defined.</i></b> – Evidence is the means, sanctioned by these rules, of ascertaining in a judicial proceeding the truth respecting a matter of fact. (1)&nbsp; </p><p><b>SEC. 2.&nbsp; <i>Scope. </i></b>– The rules of evidence shall be the same in all courts and in all trials and hearings, except as otherwise provided by law or these rules. (2a)&nbsp; </p><p><b>SEC. 3.&nbsp; <i>Admissibility of evidence.</i></b> – Evidence is admissible when it is relevant to the issue and is not excluded by the law or these rules. (3a)&nbsp; </p><p><b>SEC. 4.&nbsp; <i>Relevancy; collateral matters. </i></b>– Evidence must have such a relation to the fact in issue as to induce belief in its existence or non-existence.&nbsp; Evidence on collateral matters shall not be allowed, except when it tends in any reasonable degree to establish the probability or improbability of the fact in issue. (4a)&nbsp; </p><center><b>&nbsp; <p><strong>RULE 129&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; What Need Not be Proved&nbsp; </strong></p></b></center><p><b>SECTION 1.&nbsp; <i>Judicial notice, when mandatory. </i></b> – A court shall take judicial notice, without the introduction of evidence, of the existence and territorial extent of states, their political history, forms of government and symbols of nationality, the law of nations, the admiralty and maritime courts of the world and their seals, the political constitution and history of the Philippines, the official acts of the legislative, executive and judicial departments of the Philippines, the laws of nature, the measure of time, and the geographical divisions. (1a)&nbsp; </p><p><b>SEC. 2.&nbsp; <i>Judicial notice, when discretionary. </i></b> – A court may take judicial notice of matters which are of public knowledge, or are capable of unquestionable demonstration, or ought to be known to judges because of their judicial functions. (1a)&nbsp; </p><p><b>SEC. 3.&nbsp; <i>Judicial notice, when hearing necessary. </i></b> – During the trial, the court, on its own initiative, or on request of a party, may announce its intention to take judicial notice of any matter and allow the parties to be heard thereon.&nbsp; &nbsp; After the trial, and before judgment or on appeal, the proper court, on its own initiative or on request of a party, may take judicial notice of any matter and allow the parties to be heard thereon if such matter is decisive of a material issue in the case. (n)&nbsp; &nbsp; </p><p><b>SEC. 4.&nbsp; <i>Judicial admissions.</i></b> – An admission, verbal or written, made by a party in the course of the proceedings in the same case, does not require proof.&nbsp; The admission may be contradicted only by showing that it was made through palpable mistake or that no such admission was made. (2a)&nbsp; </p><center><b><br>&nbsp; RULE 130&nbsp;&nbsp;&nbsp; <br>&nbsp; Rules of Admissibility</b><br>&nbsp; <br></center><center>A.&nbsp; OBJECT (REAL) EVIDENCE<br>&nbsp; <br></center><b>SECTION 1.&nbsp; <i>Object as evidence.</i></b> – Objects as evidence are those addressed to the senses of the court.&nbsp; When an object is relevant to the fact in issue, it may be exhibited to, examined or viewed by the court. (1a)<br><br><center>B.&nbsp; DOCUMENTARY EVIDENCE<br>&nbsp; <br></center><strong>SEC. 2</strong>.&nbsp; Documentary evidence. – Documents as evidence consists of writings or any material containing letters, words, numbers, figures, symbols or other modes of written expressions offered as proof of their contents. (n)<center>1.&nbsp; BEST EVIDENCE RULE<br>&nbsp; <br></center><b>SEC. 3.&nbsp; <i>Original document must be produced; exceptions.</i></b> – When the subject of inquiry is the contents of a document, no evidence shall be admissible other than the original document itself, except in the following cases:(a)&nbsp; When the original has been lost or destroyed, or cannot be produced in court, without bad faith on the part of the offeror;(b)&nbsp; When the original is in the custody or under the control of the party against whom the evidence is offered, and the latter fails to produce it after reasonable notice;(c)&nbsp; When the original consists of numerous accounts or other documents which cannot be examined in court without great loss of time and the fact sought to be established from them is only the general result of the whole; and(d)&nbsp; When the original is a public record in the custody of a public officer or is recorded in a public office. (2a)<b>SEC. 4.&nbsp; <i>Original of document.</i></b> –(a)&nbsp; The original of a document is one the contents of which are the subject of inquiry.(b)&nbsp; When a document is in two or more copies executed at or about the same time, with identical contents, all such copies are equally regarded as originals.(c)&nbsp; When an entry is repeated in the regular course of business, one being copied from another at or near the time of the transaction, all the entries are likewise equally regarded as originals. (3a)<br><br><center>2.&nbsp; SECONDARY EVIDENCE<br>&nbsp; <br></center><b>SEC. 5.&nbsp; <i>When original document is unavailable. </i></b> – When the original document has been lost or destroyed, or cannot be produced in court, the offeror, upon proof of its execution or existence and the cause of its unavailability without bad faith on his part, may prove its contents by a copy, or by a recital of its contents in some authentic document, or by the testimony of witnesses in the order stated. (4a)<b>SEC. 6.&nbsp; <i>When original document is in adverse party’s custody or control.</i></b> – If the document is in the custody of under the control of the adverse party, he must have reasonable notice to produce it.&nbsp; If after such notice and after satisfactory proof of its existence, he fails to produce the document, secondary evidence may be presented as in the case of its loss. (5a)<b>SEC. 7.&nbsp; <i>Evidence admissible when original document is a public record. </i></b>– When the original of a document is in the custody of a public officer or is recorded in a public office, its contents may be proved by a certified copy issued by the public officer in custody thereof. (2a)<b>SEC. 8.&nbsp; <i>Party who calls for document not bound to offer it.</i></b> – A party who calls for the production of a document and inspects the same is not obliged to offer it as evidence. (6a)<center>&nbsp; <p>3.&nbsp; PAROL EVIDENCE RULE</p></center><b>SEC. 9.&nbsp; <i>Evidence of written agreements.</i></b> – When the terms of an agreement have been reduced to writing, it is considered as containing all the terms agreed upon and there can be, between the parties and their successors in interest, no evidence of such terms other than the contents of the written agreement.However, a party may present evidence to modify, explain or add to the terms of the written agreement if he puts in issue in his pleading:(a)&nbsp; An intrinsic ambiguity, mistake or imperfection in the written agreement;(b)&nbsp; The failure of the written agreement to express the true intent and agreement of the parties thereto;(c)&nbsp; The validity of the written agreement; or(d)&nbsp; The existence of other terms agreed to by the parties or their successors in interest after the execution of the written agreement.The term “agreement” includes wills. (7a)<br><br><center>4.&nbsp; INTERPRETATION OF DOCUMENTS<br>&nbsp; <br></center><p><b>SEC. 10.&nbsp; <i>Interpretation of a writing according to its legal meaning.</i></b> – The language of a writing is to be interpreted according to the legal meaning it bears in the place of its execution, unless the parties intended otherwise. (8)&nbsp; </p><p><b>SEC. 11.&nbsp; <i>Instrument construed so as to give effect to all provisions. </i></b>– In the construction of an instrument where there are several provisions or particulars, such a constructions is, if possible, to be adopted as will give effect to all. (9)&nbsp; </p><p><b>SEC. 12.&nbsp; <i>Interpretation according to intention; general and particular provisions. </i></b>– In the construction if an instrument, the intention of the parties is to be pursued; and when a general and a particular provision are inconsistent, the latter is paramount to the former.&nbsp; So a particular intent will control a general one that is inconsistent with it. (10)&nbsp; </p><p><b>SEC. 13. <i> Interpretation according to circumstances.</i></b> – For the proper construction of an instrument, the circumstances under which it was made, including the situation of the subject thereof and of the parties to it, may be shown, so that the judge may be placed in the position of those whose language he is to interpret. (11)&nbsp; </p><p><b>SEC. 14. <i> Peculiar signification of terms. </i></b> – The terms of a writing are presumed to have been used in their primary and general acceptation, but evidence is admissible to show that they have a local, technical, or otherwise peculiar signification, and were so used and understood in the particular instance, in which case the agreement must be construed accordingly. (12)&nbsp; </p><p><b>SEC. 15.&nbsp; <i>Written words control printed. </i></b> – When an instrument consists partly of written words and partly of a printed form, and the two are inconsistent, the former controls the latter. (13)&nbsp; </p><p><b>SEC. 16. <i> Experts and interpreters to be used in explaining certain writings.</i></b> – When the characters in which an instrument is written are difficult to be deciphered, or the language is not understood by the court, the evidence of persons skilled in deciphering the characters, or who understand the language, is admissible to declare the characters or the meaning of the language. (14)&nbsp; </p><p><b>SEC. 17. <i> Of two constructions, which preferred. </i></b>&nbsp; – When the terms of an agreement have been intended in a different sense by the different parties to it, that sense is to prevail against either partly in which he supposed the other understood it, and when different constructions of a provision are otherwise equally proper, that is to be taken which is the most favorable to the party in whose favor the provision was made. (15)&nbsp; </p><p><b>SEC. 18. <i> Construction in favor of natural right. </i></b>– When an instrument is equally susceptible of two interpretations, one in favor of natural right and the other against it, the former is to be adopted. (16)&nbsp; </p><p><b>SEC. 19. <i> Interpretation according to usage. </i></b> – An instrument may be construed according to usage, in order to determine its true character. (17)&nbsp; </p><center>C.&nbsp; TESTIMONIAL EVIDENCE1.&nbsp; QUALIFICATION OF WITNESSES<br><br></center><p><b>SEC. 20. <i> Witnesses; their qualifications. </i></b> – Except as provided in the next succeeding section, all persons who can perceive, and perceiving, can make known their perception to others, may be witnesses.&nbsp; &nbsp; Religious or political belief, interest in the outcome of the case, or conviction of a crime unless otherwise provided by law, shall not be a ground for disqualification. (18a)&nbsp; </p><p><b>SEC. 21.&nbsp; <i>Disqualification by reason of mental incapacity or immaturity.</i></b> – The following persons cannot be witnesses:&nbsp; &nbsp; (a)&nbsp; Those whose mental condition, at the time of their production for examination, is such that they are incapable of intelligently making known their perception to others;&nbsp; &nbsp; (b)&nbsp; Children whose mental maturity is such as to render them incapable of perceiving the facts respecting which they are examined and of relating them truthfully. (19a)</p><p> <b>SEC. 22. <i> Disqualification by reason of marriage. </i></b> – During their marriage, neither the husband nor the wife may testify for or against the other without the consent of the affected spouse, except in a civil case by one against the other, or in a criminal case for a crime committed by one against the other or the latter’s direct descendants or ascendants. (20a)&nbsp; </p><p><b>SEC. 23. <i> Disqualification by reason of death or insanity of adverse party.</i></b> – Parties or assignors of parties to a case, or persons in whose behalf a case if prosecuted, against an executor or administrator or other representative of a deceased person, or against a person of unsound mind, upon a claim or demand against the estate of such deceased person or against such person of unsound mind, cannot testify as to any matter of fact occurring before the death of such deceased person or before such person became of unsound mind. (20a)&nbsp; </p><p><b>SEC. 24. <i> Disqualification by reason of privileged communication. </i></b>– The following persons cannot testify as to matters learned in confidence in the following cases:</p><blockquote>(a)&nbsp; The husband or the wife, during or after the marriage, cannot be examined without the consent of the other as to any communication received in confidence by one from the other during the marriage except in a civil case by one against the other, or in a criminal case for a crime committed by one against the other or the latter’s direct descendants or ascendants;(b)&nbsp; An attorney cannot, without the consent of his client, be examined as to any communication made by the client to him, or his advice given thereon in the course of, or with a view to, professional employment, nor can an attorney’s secretary, stenographer, or clerk be examined, without the consent of the client and his employer, concerning any fact the knowledge of which has been acquired in such capacity;(c)&nbsp; A person authorized to practice medicine, surgery or obstetrics cannot in a civil case, without the consent of the patient, be examined as to any advice or treatment given by him or any information which he may have acquired in attending such patient in a professional capacity, which information was necessary to enable him to act in that capacity, and which would blacken the reputation of the patient;(d)&nbsp; A minister or priest cannot, without the consent of the person making the confession, be examined as to any confession made to or any advice given by him in his professional character in the course of discipline enjoined by the church to which the minister or priest belongs;(e)&nbsp; A public officer cannot be examined during his term of office or afterwards, as to communications made to him in official confidence, when the court finds that the public interest would suffer by the disclosure. (21a)</blockquote><center>2.&nbsp; TESTIMONIAL PRIVILEGE<br>&nbsp; <br></center><b>SEC. 25.&nbsp; <i>Parental and filial privilege.</i></b> – No person may be compelled to testify against his parents, other direct ascendants, children or other direct descendants. (20a)<center>&nbsp; <br>&nbsp; 3.&nbsp; ADMISSIONS AND CONFESSIONS&nbsp; <br></center><p><b>SEC. 26.&nbsp; <i>Admissions of a party. </i></b>– The act, declaration or omission of a party as to a relevant fact may be given in evidence against him. (22)&nbsp; </p><p><b>SEC. 27.&nbsp; <i>Offer of compromise not admissible. </i></b> – In civil cases, an offer of compromise is not an admission of any liability, and is not admissible in evidence against the offerror.&nbsp; &nbsp; In criminal cases, except those involving quasi-offenses (criminal negligence) or those allowed by law to be compromised, an offer of compromise by the accused may be received in evidence as an implied admission of guilt.&nbsp; &nbsp; A plea of guilty later withdrawn, or an unaccepted offer of a plea of guilty to a lesser offense, is not admissible in evidence against the accused who made the plea or offer.&nbsp; &nbsp; An offer to pay or the payment of medical, hospital or other expenses occasioned by an injury is not admissible in evidence as proof of civil or criminal liability for the injury. (24a)&nbsp; &nbsp; </p><p><b>SEC. 28. <i> Admission by third party.</i></b> – The rights of a party cannot be prejudiced by an act, declaration, or omission of another, except as hereinafter provided. (25a)&nbsp; &nbsp; </p><p><b>SEC. 29.&nbsp; <i>Admission by co-partner or agent. </i></b> – The act or declaration of a partner or agent of the party within the scope of his authority and during the existence of the partnership or agency, may be given in evidence against such party after the partnership or agency is shown by evidence other than such act or declaration.&nbsp; The same rule applies to the act or declaration of a joint owner, joint debtor, or other person jointly interested with the party. (26a)&nbsp; &nbsp; </p><p><b>SEC. 30.&nbsp; <i>Admission by conspirator.</i></b> – The act or declaration of a conspirator relating to the conspiracy and during its existence, may be given in evidence against the co-conspirator after the conspiracy is shown by evidence other than such act or declaration. (27)&nbsp; &nbsp; </p><p><b>SEC. 31.&nbsp; <i>Admission by privies.</i></b> – Where one derives title to property from another, the act, declaration, or omission of the latter, while holding the title, in relation to the property, is evidence against the former. (28)&nbsp; &nbsp; </p><p><b>SEC. 32.&nbsp; <i>Admission by silence.</i></b> – An act or declaration made in the presence and within the hearing or observation of a party who does or says nothing when the act or declaration is such as naturally to call for action or comment if not true, and when proper and possible for him to do so, may be given in evidence against him. (23a)&nbsp; &nbsp; </p><p><b>SEC. 33.&nbsp; <i>Confession.</i></b> – The declaration of an accused acknowledging his guilt of the offense charged, or of any offense necessarily included therein, may be given in evidence against him. (29a)&nbsp; &nbsp; <br></p><center>4.&nbsp; PREVIOUS CONDUCT AS EVIDENCE<br>&nbsp; <br></center><b>SEC. 34.&nbsp; <i>Similar acts as evidence.</i></b> – Evidence that one did or did not do a certain thing at one time is not admissible to prove that he did or did not do the same or a similar thing at another time; but it may be received to prove a specific intent or knowledge, identity, plan, system, scheme, habit, custom or usage, and the like. (48a)<b>SEC. 35.&nbsp; <i>Unaccepted offer. </i></b>– An offer in writing to pay a particular sum of money or to deliver a written instrument or specific personal property is, if rejected without valid cause, equivalent to the actual production and tender of the money, instrument, or property. (49a)<center>&nbsp; <br>&nbsp; &nbsp; 5.&nbsp; TESTIMONIAL KNOWLEDGE&nbsp; <br>&nbsp; <br></center><b>SEC. 36.&nbsp; <i>Testimony generally confined to personal knowledge; hearsay excluded.</i></b> – A witnesses can testify only to those facts which he knows of his personal knowledge; that is, which are derived from his own perception, except as otherwise provided in these rules. (30a)<center>&nbsp; <br>&nbsp; 6. EXCEPTIONS TO THE HEARSAY RULE<br>&nbsp; <br></center><p><b>SEC. 37.&nbsp; <i>Dying declaration.</i></b> – The declaration of a dying person, made under the consciousness of an impending death, may be received in any case wherein his death is the subject of inquiry, as evidence of the cause and surrounding circumstances of such death. (31a)&nbsp; </p><p><b>SEC. 38.&nbsp; <i>Declaration against interest. </i></b>– The declaration made by a person deceased, or unable to testify, against the interest of the declarant, if the fact asserted in the declaration was at the time it was made so far contrary to declarant’s own interest, that a reasonable man in his position would not have made the declaration unless he believed it to be true, may be received in evidence against himself or his successors in interest and against third persons. (32a)&nbsp; </p><p><b>SEC. 39.&nbsp; <i>Act or declaration about pedigree.</i></b> – The act or declaration of a person deceased, or unable to testify, in respect to the pedigree of another person related to him by birth or marriage, may be received in evidence where it occurred before the controversy, and the relationship between the two persons is shown by evidence other than such act or declaration.&nbsp; The word “pedigree” includes relationship, family genealogy, birth, marriage, death, the dates when the places where these facts occurred, and the names of the relatives.&nbsp; It embraces also facts of family history intimately connected with pedigree. (33a)&nbsp; </p><p><b>SEC. 40.&nbsp; <i>Family reputation or tradition regarding pedigree.</i></b> – The reputation of tradition existing in a family previous to the controversy, in respect to the pedigree of any one of its members, may be received in evidence if the witness testifying thereon be also a member of the family, either by consanguinity or affinity.&nbsp; Entries in family bibles or other family books or charts, engravings on rings, family portraits and the like, may be received as evidence of pedigree. (34a)&nbsp; </p><p><b>SEC. 41.&nbsp; <i>Common reputation.</i></b> – Common reputation existing previous to the controversy, respecting facts of public or general interest more than thirty years old, or respecting marriage or moral character, may be given in evidence.&nbsp; Monuments and inscriptions in public places may be received as evidence of common reputation. (35)&nbsp; </p><p><b>SEC. 42.&nbsp; <i>Part of the res gestae.</i></b> – Statements made by a person while a startling occurrence is taking place or immediately prior or subsequent thereto with respect to the circumstances thereof, may be given in evidence as part of the res gestae.&nbsp; So, also, statements accompanying an equivocal act material to the issue, and giving it a legal significance, may be received as part of the res gestae. (36a)&nbsp; </p><p><b>SEC. 43.&nbsp; <i>Entries in the course of business. </i></b> – Entries made at, or near the time of the transactions to which they refer, by a person deceased, or unable to testify, who was in a position to know the facts therein stated, may be received as prima facie evidence, if such person made the entries in his professional capacity or in the performance of duty and in the ordinary or regular course of business or duty. (37a)&nbsp; </p><p><b>SEC. 44.&nbsp; <i>Entries in official records.</i></b> – Entries in official records made in the performance of his duty by a public officer of the Philippines, or by a person in the performance of a duty specially enjoined by law, are prima facie evidence of the facts therein stated. (38)&nbsp; </p><p><b>SEC. 45. <i> Commercial lists and the like. </i></b> – Evidence of statements of matters of interest to persons engaged in an occupation contained in a list, register, periodical, or other published compilation is admissible as tending to prove the truth of any relevant matter so stated if that compilation is published for use by persons engaged in that occupation and is generally used and relied upon by them therein. (39)&nbsp; </p><p><b>SEC. 46.&nbsp; <i>Learned treatises.</i></b> – A published treatise, periodical or pamphlet on a subject of history, law, science or art is admissible as tending to prove the truth of a matter stated therein if the court takes judicial notice, or a witness expert in the subject testifies, that the writer of the statement in the treatise, periodical or pamphlet is recognized in his profession or calling as expert in the subject. (40a)&nbsp; </p><p><b>SEC. 47. <i> Testimony or deposition at a former proceeding. </i></b> – The Testimony or deposition of a witnesses deceased or unable to testify, given in a former case or proceeding, judicial or administrative, involving the same parties and subject matter, may be given in evidence against the adverse party who had the opportunity to cross-examine him. (41a)&nbsp; &nbsp; <br></p><center>7.&nbsp; OPINION RULE&nbsp; <br></center><p><b>SEC. 48.&nbsp; <i>General rule.</i></b> – The opinion of a witness is not admissible, except as indicated in the following sections. (42)&nbsp; </p><p><b>SEC. 49.&nbsp; <i>Opinion of expert witness.</i></b> – The opinion of a witness on a matter requiring special knowledge, skill, experience or training which he is shown to possess, may be received in evidence. (43a)&nbsp; </p><p><b>SEC. 50.&nbsp; <i>Opinion of ordinary witnesses.</i></b> – The opinion of a witness for which proper basis is given, may be received in evidence regarding–</p><blockquote>(a)&nbsp; the identity of a person about whom he has adequate knowledge;(b)&nbsp; A handwriting with which he has sufficient familiarity; and(c)&nbsp; The mental sanity of a person with whom he is sufficiently acquainted.</blockquote>The witness may also testify on his impressions of the emotion, behavior, condition or appearance of a person. (44a)<br><br><center>8.&nbsp; CHARACTER EVIDENCE<br>&nbsp; <br></center><b>SEC. 51.&nbsp; <i>Character evidence not generally admissible; exceptions:</i></b> -(a)&nbsp; In Criminal Cases:<ol><ol>&nbsp;&nbsp;&nbsp;&nbsp; <li>&nbsp; The accused may prove his hood moral character which is pertinent to the moral trait involved in the offense charged.&nbsp;&nbsp;&nbsp;&nbsp; </li><li>&nbsp; Unless in rebuttal, the prosecution may not prove his bad moral character which is pertinent to the moral trait involved in the offense charged.&nbsp;&nbsp;&nbsp;&nbsp; </li><li>&nbsp; The good or bad moral character of the offended party may be proved if it tends to establish in any reasonable degree the probability or improbability of the offense charged.</li></ol></ol>(b)&nbsp; In Civil Cases:Evidence of the moral character of a party in a civil case is admissible only when pertinent to the issue of character involved in the case.(c) In the case provided for in Rule 132, Section 14. (46a, 47a)<br><br><center><b>Rule 131&nbsp; &nbsp; Burden of Proof and Presumptions<br><br></b></center><p><b>SECTION 1. <i>Burden of proof.</i></b> — Burden of proof is the duty of a party to present evidence on the facts in issue necessary to establish his claim or defense by the amount of evidence required by law. (1a, 2a)&nbsp; </p><p><b>SEC. 2. <i>Conclusive presumptions.</i></b>— The following are instances of conclusive presumptions:&nbsp; &nbsp; (a) Whenever a party has, by his own declaration, act, or omission, intentionally and deliberately led another to believe a particular thing true, and to act upon such belief, he cannot, in any litigation arising out of such declaration, act or omission, be permitted to falsify it;&nbsp; &nbsp; (b) The tenant is not permitted to deny the title of his landlord at the time of the commencement of the relation of landlord and tenant between them. (3a)&nbsp; </p><p><b>SEC. 3. <i>Disputable presumptions.</i></b>— The following presumptions are satisfactory if uncontradicted, but may be contradicted and overcome by other evidence:</p><blockquote>&nbsp; <p>(a)&nbsp; That a person is innocent of crime or wrong;&nbsp;&nbsp;&nbsp; <br>&nbsp; (b)&nbsp; That an unlawful act was done with an unlawful intent; <br>&nbsp; (c)&nbsp; That a person intends the ordinary consequences of his voluntary act; <br>&nbsp; (d)&nbsp; That a person takes ordinary care of his concerns;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (e)&nbsp; That evidence willfully suppressed would be adverse if produced;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (f)&nbsp; That money paid by one to another was due to the latter;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (g)&nbsp; That a thing delivered by one to another belonged to the latter;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (h)&nbsp; That an obligation delivered up to the debtor has been paid;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (i)&nbsp; That prior rents or installments had been paid when a receipt for the later ones is produced;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (j)&nbsp; That a person found in possession of a thing taken in the doing of a recent wrongful act is the taker and the doer of the whole act; otherwise, that things which a person possesses, or exercises acts of ownership over, are owned by him;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (k)&nbsp; That a person in possession of an order on himself for the payment of the money, or the delivery of anything, has paid the money or delivered the thing accordingly;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (l)&nbsp; That a person acting in a public office was regularly appointed or elected to it;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (m)&nbsp; That official duty has been regularly performed;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (n)&nbsp; That a court, or judge acting as such, whether in the Philippines or elsewhere, was acting in the lawful exercise of jurisdiction;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (o)&nbsp; That all the matters within an issue raised in a case were laid before the court and passed upon by it; and in like manner that all matters within an issue raised in a dispute submitted for arbitration were laid before the arbitrators and passed upon by them;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (p)&nbsp; That private transactions have been fair and regular;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (q)&nbsp; That the ordinary course of business has been followed;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (r)&nbsp; That there was a sufficient consideration for a contract;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (s)&nbsp; That a negotiable instrument was given or indorsed for a sufficient consideration;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (t)&nbsp; That an indorsement of a negotiable instrument was made before the instrument was overdue and at the place where the instrument is dated;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (u)&nbsp; That a writing is truly dated;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; (v)&nbsp; That a letter duly directed and mailed was received in the regular course of the mail;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp; (w)&nbsp; That after an absence of seven years, it being unknown whether or not the absentee still lives, he is considered dead for all purposes, except for those of succession.</p></blockquote>The absentee shall not be considered dead for the purpose of opening his succession till after an absence of ten years. If he disappeared after the age of seventy-five years, an absence of five years shall be sufficient in order that his succession may be opened.The following shall be considered dead for all purposes including the division of the estate among the heirs:<ol><ol><li> A person on board a vessel lost during a sea voyage, or an aircraft which is missing, who has not been heard of for four years since the loss of the vessel or aircraft;</li><li> A member of the armed forces who has taken part in armed hostilities, and has been missing for four years;</li><li> A person who has been in danger of death under other circumstances and whose existence has not been known for four years;</li><li> If a married person has been absent for four consecutive years, the spouse present may contract a subsequent marriage if he or she has a well-founded belief that the absent spouse is already dead.&nbsp; In case of disappearance, where there is danger of death under the circumstances hereinabove provided, an absence of only two years shall be sufficient for the purpose of contracting a subsequent marriage.&nbsp; However, in any case, before marrying again, the spouse present must institute a summary proceeding as provided in the Family Code and in the rules for a declaration of presumptive death of the absentee, without prejudice to the effect of reappearance of the absent spouse.</li></ol></ol><blockquote>(x)&nbsp; That acquiescence resulted from a belief that the thing acquiesced in was conformable to the law or fact;(y)&nbsp; That things have happened according to the ordinary course of nature and the ordinary habits of life;(z)&nbsp; That persons acting as copartners have entered into a contract of copartnership;(aa) That a man and woman deporting themselves as husband and wife have entered into a lawful contract of marriage;(bb)&nbsp; That property acquired by a man and a woman who are capacitated to marry each other and who live exclusively with each other as husband and wife without the benefit of marriage or under a void marriage, has been obtained by their joint efforts, work or industry.(cc)&nbsp; That in cases of cohabitation by a man and a woman who are not capacitated to marry each other and who have acquired property through their actual joint contribution of money, property or industry, such contributions and their corresponding shares including joint deposits of money and evidences of credit are equal.(dd)&nbsp; That if the marriage is terminated and the mother contracted another marriage within three hundred days after such termination of the former marriage, these rules shall govern in the absence of proof to the contrary:</blockquote><ol><ol><li>&nbsp; A child born before one hundred eighty days after the solemnization of the subsequent marriage is considered to have been conceived during the former marriage, provided it be born within three hundred days after the termination of the former marriage;</li><li>&nbsp; A child born after one hundred eighty days following the celebration of the subsequent manage is considered to have been conceived during such marriage, even though it be born within the three hundred days after the termination of the former marriage.</li></ol></ol><blockquote>(ee)&nbsp; That a thing once proved to exist continues as long as is usual with things of that nature;(ff)&nbsp; That the law has been obeyed;(gg)&nbsp; That a printed or published book, purporting to be printed or published by public authority, was so printed or published;(hh)&nbsp; That a printed or published book, purporting to contain reports of cases adjudged in tribunals of the country where the book is published, contains correct reports of such cases;(ii)&nbsp; That a trustee or other person whose duty it was to convey real property to a particular person has actually conveyed it to him when such presumption is necessary to perfect the title of such person or his successor in interest;(jj)&nbsp; That except for purposes of succession, when two persons perish in the same calamity, such as wreck, battle, or conflagration, and it is not shown who died first, and there are no particular circumstances from which it can be inferred, the survivorship is determined from the probabilities resulting from the strength and age of the sexes, according to the following rules:</blockquote><ol><ol><li>&nbsp; If both were under the age of fifteen years, the older is deemed to have survived;</li><li>&nbsp; If both were above the age of sixty, the younger is deemed to have survived;</li><li>&nbsp; If one is under fifteen and the other above sixty, the former is deemed to have survived;</li><li>&nbsp; If both be over fifteen and under sixty, and the sex be different, the male is deemed to have survived; if the sex be the same, the older;</li><li>&nbsp; If one be under fifteen or over sixty, and the other between those ages, the latter is deemed to have survived.</li></ol></ol><blockquote>(kk)&nbsp; That if there is a doubt, as between two or more persons who are called to succeed each other, as to which of them died first, whoever alleges the death of one prior to the other, shall prove the same; in the absence of proof, they shall be considered to have died at the same time. (5a)</blockquote><b>SEC. 4. <i>No presumption of legitimacy or illegitimacy. </i></b>— There is no presumption of legitimacy or illegitimacy of a child born after three hundred days following the dissolution of the marriage or the separation of the spouses. Whoever alleges the legitimacy or illegitimacy of such child must prove his allegation. (6)<center><b><br>&nbsp; <br>&nbsp; RULE 132Presentation of EvidenceA. EXAMINATION OF WITNESSES<br><br></b></center><p><b>SECTION 1. <i>Examination to be done in open court.</i></b> — The examination of witnesses presented in a trial or hearing shall be done in open court, and under oath or affirmation.&nbsp; Unless the witness is incapacitated to speak, or the question calls for a different mode of answer, the answers of the witness shall be given orally. (1a)&nbsp; </p><p><b>SEC. 2. <i>Proceedings to be recorded.</i></b>— The entire proceedings of a trial or hearing, including the questions propounded to a witness and his answers thereto, the statements made by the judge or any of the parties, counsel, or witnesses with reference to the case, shall be recorded by means of shorthand or stenotype or by other means of recording found suitable by the court.&nbsp; &nbsp; A transcript of the record of the proceedings made by the official stenographer, stenotypist or recorder and certified as correct by him shall be deemed prima facie a correct statement of such proceedings. (2a)&nbsp; </p><p><b>SEC. 3. <i>Rights and obligations of a witness. </i></b>— A witness must answer questions, although his answer may tend to establish a claim against him. However, it is the right of a witness:</p><ol><li>&nbsp; To be protected from irrelevant, improper, or insulting questions, and from harsh or insulting demeanor;</li><li>&nbsp; Not to be detained longer than the interests of justice require;</li><li>&nbsp; Not to be examined except only as to matters pertinent to the issue;</li><li>&nbsp; Not to give an answer which will tend to subject him to a penalty for an offense unless otherwise provided by law; or</li><li>&nbsp; Not to give an answer which will tend to degrade his reputation, unless it be to the very fact at issue or to a fact from which the fact in issue would be presumed.&nbsp; But a witness must answer to the fact of his previous final conviction for an offense. (3a, 19a)</li></ol><b>SEC. 4.<i> Order in the examination of an individual witness.</i></b>— The order in which an individual witness may be examined is as follows:<blockquote>(a)&nbsp; Direct examination by the proponent;(b)&nbsp; Cross-examination by the opponent;(c)&nbsp; Re-direct examination by the proponent;(d)&nbsp; Re-cross-examination by the opponent. (4)</blockquote><p><b>SEC. 5. <i>Direct examination.</i></b>— Direct examination is the examination-in-chief of a witness by the party presenting him on the facts relevant to the issue. (5a)&nbsp; </p><p><b>SEC. 6. <i>Cross-examination; its purpose and extent.</i></b>— Upon the termination of the direct examination, the witness may be cross-examined by the adverse party as to any matters stated in the direct examination, or connected therewith, with sufficient fullness and freedom to test his accuracy and truthfulness and freedom from interest or bias, or the reverse, and to elicit all important facts bearing upon the issue. (8a)&nbsp; </p><p><b>SEC. 7. <i>Re-direct examination; its purpose and extent.</i></b>— After the cross-examination of the witness has been concluded, he may be re-examined by the party calling him, to explain or supplement his answers given during the cross-examination. On re-direct examination, questions on matters not dealt with during the cross-examination, may be allowed by the court in its discretion. (12)&nbsp; </p><p><b>SEC. 8. <i>Re-cross-examination.</i></b> — Upon the conclusion of the re-direct examination, the adverse party may re-cross-examine the witness on matters stated in his re-direct examination, and also on such other matters as may be allowed by the court in its discretion. (13)&nbsp; </p><p><b>SEC. 9. <i>Recalling witness.</i></b>— After the examination of a witness by both sides has been concluded, the witness cannot be recalled without leave of the court. The court will grant or withhold leave in its discretion, as the interests of justice may require. (14)&nbsp; </p><p><b>SEC. 10. <i>Leading and misleading questions. </i></b> — A question which suggests to the witness the answer which the examining party desires is a leading question. It is not allowed, except:</p><blockquote>(a)&nbsp; On cross examination;(b)&nbsp; On preliminary matters;(c)&nbsp; When there is difficulty in getting direct and intelligible answers from a witness who is ignorant, or a child of tender years, or is of feeble mind, or a deaf-mute;(d)&nbsp; Of an unwilling or hostile witness; or(e)&nbsp; Of a witness who is an adverse party or an officer, director, or managing agent of a public or private corporation or of a partnership or association which is an adverse party.</blockquote><p>A misleading question is one which assumes as true a fact not yet testified to by the witness, or contrary to that which he has previously stated. It is not allowed. (5a, 6a, and 8a) </p><p><b>SEC. 11. <i>Impeachment of adverse party's witness. </i></b> — A witness may be impeached by the party against whom he was called, by contradictory evidence, by evidence that his general reputation for truth, honesty, or integrity is bad, or by evidence that he has made at other times statements inconsistent with his present testimony, but not by evidence of particular wrongful acts, except that it may be shown by the examination of the witness, or the record of the judgment, that he has been convicted of an offense. (15)&nbsp; </p><p><b>SEC. 12. <i>Party may not impeach his own witness. </i></b> — Except with respect to witnesses referred to in paragraphs (d) and (e) of Section 10, the party producing a witness is not allowed to impeach his credibility.&nbsp; &nbsp; A witness may be considered as unwilling or hostile only if so declared by the court upon adequate showing of his adverse interest, unjustified reluctance to testify, or his having misled the party into calling him to the witness stand.&nbsp; &nbsp; The unwilling or hostile witness so declared, or the witness who is an adverse party, may be impeached by the party presenting him in all respects as if he had been called by the adverse party, except by evidence of his bad character. He may also be impeached and cross-examined by the adverse party, but such cross-examination must only be on the subject matter of his examination-in-chief. (6a, 7a)&nbsp; &nbsp; </p><p><b>SEC. 13. <i>How witness impeached by evidence of inconsistent statements.</i></b>—Before a witness can be impeached by evidence that he has made at other times statements inconsistent with his present testimony, the statements must be related to him, with the circumstances of the times and places and the persons present, and he must be asked whether he made such statements, and if so, allowed to explain them. If the statements be in writing they must be shown to the witness before any question is put to him concerning them. (16)&nbsp; &nbsp; </p><p><b>SEC. 14.&nbsp; <i>Evidence of good character of witness. </i></b>— Evidence of the good character of a witness is not admissible until such character has been impeached. (17)&nbsp; &nbsp; </p><p><b>SEC. 15.&nbsp; <i>Exclusion and separation of witnesses. </i></b>— On any trial or hearing, the judge may exclude from the court any witness not at the time under examination, so that he may not hear the testimony of other witnesses. The judge may also cause witnesses to be kept separate and to be prevented from conversing with one another until all shall have been examined. (18)&nbsp; &nbsp; </p><p><b>SEC. 16.&nbsp; <i>When witness may refer to memorandum. </i></b>— A witness may be allowed to refresh his memory respecting a fact, by anything written or recorded by himself or under his direction at the time when the fact occurred, or immediately thereafter, or at any other time when the fact was fresh in his memory and he knew that the same was correctly written or recorded; but in such case the writing or record must be produced and may be inspected by the adverse party, who may, if he chooses, cross-examine the witness upon it, and may read it in evidence. So, also, a witness may testify from such a writing or record, though he retain no recollection of the particular facts, if he is able to swear that the writing or record correctly stated the transaction when made; but such evidence must be received with caution. (10a)&nbsp; &nbsp; </p><p><b>SEC. 17. <i> When part of transaction, writing or record given in evidence, the remainder admissible. </i></b> — When part of an act, declaration, conversation, writing or record is given in evidence by one party, the whole of the same subject may be inquired into by the other, and when a detached act, declaration, conversation, writing or record is given in evidence, any other act, declaration, conversation, writing or record necessary to its understanding may also be given in evidence. (11a)&nbsp; &nbsp; </p><p><b>SEC. 18. <i> Right to inspect writing shown to witness.</i></b>— Whenever a writing is shown to a witness, it may be inspected by the adverse party. (9a)&nbsp; </p><center>&nbsp; <br>&nbsp; B. AUTHENTICATION AND PROOF OF DOCUMENTS<br>&nbsp; <br></center><b>SEC. 19.&nbsp; <i>Classes of documents.</i></b>— For the purpose of their presentation in evidence, documents are either public or private.&nbsp; &nbsp;Public documents are:<blockquote>(a)&nbsp; The written official acts, or records of the official acts of the sovereign authority, official bodies and tribunals, and public officers, whether of the Philippines, or of a foreign country;(b)&nbsp; Documents acknowledged before a notary public except last wills and testaments; and(c)&nbsp; Public records, kept in the Philippines, of private documents required by law to be entered therein.</blockquote>&nbsp; <p>&nbsp;All other writings are private. (20a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 20. <i>Proof of private document. </i></b>— Before any private document offered as authentic is received in evidence, its due execution and authenticity must be proved either:&nbsp; </p>&nbsp; <blockquote>(a)&nbsp; By anyone who saw the document executed or written; or(b)&nbsp; By evidence of the genuineness of the signature or handwriting of the maker.</blockquote>&nbsp; <p>Any other private document need only be identified as that which it is claimed to be. (21a) </p>&nbsp; <p><b>SEC. 21.&nbsp; <i>When evidence of authenticity of private document not necessary.</i></b> - Where a private document is more than thirty years old, is produced from a custody in which it would naturally be found if genuine, and is unblemished by any alterations or circumstances of suspicion, no other evidence of its authenticity need be given. (22a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 22.&nbsp; <i>How genuineness of handwriting proved.</i></b>— The handwriting of a person may be proved by any witness who believes it to be the handwriting of such person because he has seen the person write, or has seen writing purporting to be his upon which the witness has acted or been charged, and has thus acquired knowledge of the handwriting of such person. Evidence respecting the handwriting may also be given by a comparison, made by the witness or the court, with writings admitted or treated as genuine by the party against whom the evidence is offered, or proved to be genuine to the satisfaction of the judge. (23a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 23. <i> Public documents as evidence.</i></b>— Documents consisting of entries in public records made in the performance of a duty by a public officer are prima facie evidence of the facts therein stated. All other public documents are evidence, even against a third person, of the fact which gave rise to their execution and of the date of the latter. (24a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 24.&nbsp; <i>Proof of official record.</i></b>— The record of public documents referred to in paragraph (a) of Section 19, when admissible for any purpose, may be evidenced by an official publication thereof or by a copy attested by the officer having the legal custody of the record, or by his deputy, and accompanied, if the record is not kept in the Philippines, with a certificate that such officer has the custody. If the office in which the record is kept is in a foreign country, the certificate may be made by a secretary of the embassy or legation, consul general, consul, vice consul, or consular agent or by any officer in the foreign service of the Philippines stationed in the foreign country in which the record is kept, and authenticated by the seal of his office. (25a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 25. <i>What attestation of copy must state. </i></b>— Whenever a copy of a document or record is attested for the purpose of evidence, the attestation must state, in substance, that the copy is a correct copy of the original, or a specific part thereof, as the case may be. The attestation must be under the official seal of the attesting officer, if there be any, or if he be the clerk of a court having a seal, under the seal of such court. (26a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 26.&nbsp; <i>Irremovability of public record. </i></b>— Any public record, an official copy of which is admissible in evidence, must not be removed from the office in which it is kept, except upon order of a court where the inspection of the record is essential to the just determination of a pending case. (27a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 27.&nbsp; <i>Public record of a private document.</i></b>— An authorized public record of a private document may be proved by the original record, or by a copy thereof, attested by the legal custodian of the record, with an appropriate certificate that such officer has the custody. (28a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 28.&nbsp; <i>Proof of lack of record.</i></b>— A written statement signed by an officer having the custody of an official record or by his deputy that after diligent search no record or entry of a specified tenor is found to exist in the records of his office, accompanied by a certificate as above provided, is admissible as evidence that the records of his office contain no such record or entry. (29)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 29.&nbsp; <i>How judicial record impeached.</i></b>— Any judicial record may be impeached by evidence of: (a) want of jurisdiction in the court or judicial officer, (b) collusion between the parties, or (c) fraud in the party offering the record, in respect to the proceedings. (30a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 30. <i> Proof of notarial documents.</i></b>— Every instrument duly acknowledged or proved and certified as provided by law, may be presented in evidence without further proof, the certificate of acknowledgment being prima facie evidence of the execution of the instrument or document involved. (31a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 31. <i>Alterations in document, how to explain.</i></b>— The party producing a document as genuine which has been altered and appears to have been altered after its execution, in a part material to the question in dispute, must account for the alteration. He may show that the alteration was made by another, without his concurrence, or was made with the consent of the parties affected by it, or was otherwise properly or innocently made, or that the alteration did not change the meaning or language of the instrument. If he fails to do that, the document shall not be admissible in evidence. (32a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 32.&nbsp; <i>Seal.</i></b>—There shall be no difference between sealed and unsealed private documents insofar as their admissibility as evidence is concerned. (33a)&nbsp;&nbsp; &nbsp;&nbsp; &gt;B&gt;SEC. 33.&nbsp; <i>Documentary evidence in an unofficial language.</i>— Documents written in an unofficial language shall not be admitted as evidence, unless accompanied with a translation into English or Filipino. To avoid interruption of proceedings, parties or their attorneys are directed to have such translation prepared before trial. (34a)&nbsp;&nbsp; &nbsp;&nbsp; </p>&nbsp; <center>&nbsp;&nbsp;&nbsp; C. OFFER AND OBJECTION&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; <br>&nbsp; </center>&nbsp; <p><b>SEC. 34.&nbsp; <i>Offer of evidence.</i></b>— The court shall consider no evidence which has not been formally offered. The purpose for which the evidence is offered must be specified. (35)</p>&nbsp; <p> <b>SEC. 35.&nbsp; <i>When to make offer.</i></b>— As regards the testimony of a witness, the offer must be made at the time the witness is called to testify.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Documentary and object evidence shall be offered after the presentation of a party's testimonial evidence. Such offer shall be done orally unless allowed by the court to be done in writing, (n)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 36.&nbsp; <i>Objection.</i></b>— Objection to evidence offered orally must be made immediately after the offer is made.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Objection to a question propounded in the course of the oral examination of a witness shall be made as soon as the grounds therefor shall become reasonably apparent.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; An offer of evidence in writing shall be objected to within three (3) days after notice of the offer unless a different period is allowed by the court.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; In any case, the grounds for the objections must be specified. (36a)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 37.&nbsp; <i>When repetition of objection unnecessary.</i></b>— When it becomes reasonably apparent in the course of the examination of a witness that the questions being propounded are of the same class as those to which objection has been made, whether such objection was sustained or overruled, it shall not be necessary to repeat the objection, it being sufficient for the adverse party to record his continuing objection to such class of questions. (37a)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 38.&nbsp; <i>Ruling.</i></b>— The ruling of the court must be given immediately after the objection is made, unless the court desires to take a reasonable time to inform itself on the question presented; but the ruling shall always be made during the trial and at such time as will give the party against whom it is made an opportunity to meet the situation presented by the ruling.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; The reason for sustaining or overruling an objection need not be stated. However, if the objection is based on two or more grounds, a ruling sustaining the objection on one or some of them must specify the ground or grounds relied upon. (38a)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 39.&nbsp; <i>Striking out answer.</i></b>— Should a witness answer the question before the adverse party had the opportunity to voice fully its objection to the same, and such objection is found to be meritorious, the court shall sustain the objection and order the answer given to be stricken off the record.&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; On proper motion, the court may also order the striking out of answers which are incompetent, irrelevant, or otherwise improper. (n)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 40.&nbsp; <i>Tender of excluded evidence.</i></b>— If documents or things offered in evidence are excluded by the court, the offeror may have the same attached to or made part of the record. If the evidence excluded is oral, the offeror may state for the record the name and other personal circumstances of the witness and the substance of the proposed testimony. (n)&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; <br>&nbsp; </p>&nbsp; <center><b>RULE 133WEIGHT AND SUFFICIENCY OF EVIDENCE<br><br>&nbsp; </b></center>&nbsp; <p><b>SECTION 1.&nbsp; <i>Preponderance of evidence, how determined.</i></b>— In civil cases, the party having the burden of proof must establish his case by a preponderance of evidence. In determining where the preponderance or superior weight of evidence on the issues involved lies, the court may consider all the facts and circumstances of the case, the witnesses' manner of testifying, their intelligence, their means and opportunity of knowing the facts to which they are testifying, the nature of the facts to which they testify, the probability or improbability of their testimony, their interest or want of interest, and also their personal credibility so far as the same may legitimately appear upon the trial. The court may also consider the number of witnesses, though the preponderance is not necessarily with the greater number. (1a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 2.&nbsp; <i>Proof beyond reasonable doubt.</i></b>— In a criminal case, the accused is entitled to an acquittal, unless his guilt is shown beyond reasonable doubt. Proof beyond reasonable doubt does not mean such a degree of proof as, excluding possibility of error, produces absolute certainty. Moral certainty only is required, or that degree of proof which produces conviction in an unprejudiced mind. (2a)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 3. <i> Extrajudicial confession, not sufficient ground for conviction.</i></b>— An extrajudicial confession made by an accused, shall not be sufficient ground for conviction, unless corroborated by evidence of corpus delicti. (3)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 4.&nbsp; <i>Circumstantial evidence, when sufficient.</i></b>— Circumstantial evidence is sufficient for conviction if:&nbsp; </p>&nbsp; <blockquote>(a)&nbsp; There is more than one circumstance;(b)&nbsp; The facts from which the inferences are derived are proven; and(c)&nbsp; The combination of all the circumstances is such as to produce a conviction beyond reasonable doubt. (5)</blockquote>&nbsp; <p><b>SEC. 5.&nbsp; <i>Substantial evidence.</i></b>— In cases tiled before administrative or quasi-judicial bodies, a fact maybe deemed established if it is supported by substantial evidence, or that amount of relevant evidence which a reasonable mind might accept as adequate to justify a conclusion. (n)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 6.&nbsp; <i>Power of the court to stop further evidence.</i></b> — The court may stop the introduction of further testimony upon any particular point when the evidence upon it is already so full that more witnesses to the same point cannot be reasonably expected to be additionally persuasive. But this power should be exercised with caution. (6)&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 7.&nbsp; <i>Evidence on motion.</i></b>— When a motion is based on facts not appearing of record the court may hear the matter on affidavits or depositions presented by the respective parties, but the court may direct that the matter be heard wholly or partly on oral testimony or depositions. (7).&nbsp; </p>&nbsp; <center>&nbsp;&nbsp;&nbsp; RULE 134[1]Perpetuation of Testimony<br><br>&nbsp; </center>&nbsp; <p><b>SECTION 1.&nbsp; <i>Petition.</i></b> — A person who desires to perpetuate his own testimony or that of another person regarding any matter that may be cognizable in any court of the Philippines, may file a verified petition in the court of the province of the residence of any expected adverse party.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 2. <i>Contents of petition.</i></b>— The petition shall be entitled in the name of the petitioner and shall show: (a) that the petitioner expects to be a party to an action in a court of the Philippines but is presently unable to bring it or cause it to be brought; (b) the subject matter of the expected action and his interest therein; (c) the facts which he desires to establish by the proposed testimony and his reasons for desiring to perpetuate it; (d) the names or a description of the persons he expects will be adverse parties and their addresses so far as known; and (e) the names and addresses of the persons to be examined and the substance of the testimony which he expects to elicit from each, and shall ask for an order authorizing the petitioner to take the depositions of the persons to be examined named in the petition for the purpose of perpetuating their testimony.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 3.&nbsp; <i>Notice and service.</i></b> — The petitioner shall thereafter serve a notice upon each person named in the petition as an expected adverse party, together with a copy of the petition, stating that the petitioner will apply to the court, at a time and place named therein, for the order described in the petition.&nbsp; At least twenty (20) days before the date of hearing the notice shall be served in the manner provided for service of summons.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 4.&nbsp; <i>Order of examination.</i></b>— It the court is satisfied that the perpetuation of the testimony may prevent a failure or delay of justice, it shall make an order designating or describing the persons whose deposition may be taken and specifying the subject matter of the examination, and whether the depositions shall be taken upon oral examination or written interrogatories. The depositions may then be taken in accordance with Rule 24 before the hearing.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 5.&nbsp; <i>Reference to court.</i></b>-— For the purpose of applying Rule 24 to depositions for perpetuating testimony, each reference therein to the court in which the action is pending shall be deemed to refer to the court in which the petition for such deposition was filed.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 6. <i> Use of deposition.</i></b>— If a deposition to perpetuate testimony is taken under this rule, or if, although not so taken, it would be admissible in evidence, it may be used in any action .involving the same subject matter subsequently brought in accordance with the provisions of Sections 4 and 5 of Rule 24.&nbsp;&nbsp;&nbsp; </p>&nbsp; <p><b>SEC. 7.&nbsp; <i>Depositions pending appeal.</i></b>— If an appeal has been taken from a judgment of the Regional Trial Court or before the taking of an appeal if the time therefor has not expired, the Regional Trial Court in which the judgment was rendered may allow the taking of depositions of witnesses to perpetuate their testimony for use in the event of further proceedings in the said court. In such case the party who desires to perpetuate the testimony may make a motion in the said Regional Trial Court for leave to take the depositions, upon the same notice and service thereof as if the action was pending therein.&nbsp; The motion shall show (a) the names and addresses of the persons to be examined and the substance of the testimony which he expects to elicit from each; and (b) the reason for perpetuating their testimony.&nbsp; If the court finds that the perpetuation of the testimony is proper to avoid a failure or delay of justice, it may make an order allowing the depositions to be taken, and thereupon the depositions may be taken and used in the same manner and under the same conditions as are prescribed in these rules for depositions taken in actions pending in the Regional Trial Court. (7a)&nbsp; </p>&nbsp; <blockquote>[1] This rule will be transposed to Part I of the Rules of Court on Depositions and Discovery.</blockquote><div></div></div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

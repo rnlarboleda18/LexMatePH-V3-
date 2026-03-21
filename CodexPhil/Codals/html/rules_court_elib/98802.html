@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>A.M. No. 25-01-13-SC - RESOLUTIONRE: INCLUSION OF THE DECLARATION OF ABSOLUTE NULLITY OF MARRIAGE AND ANNULMENT OF MARRIAGE IN THE COVERAGE OF RULE 13-A OF THE RULES OF COURT - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/98802' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2>EN BANC</H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ A.M. No. 25-01-13-SC, February 04, 2025 ]</H2>
+					<H3>RESOLUTION<br><br>RE: INCLUSION OF THE DECLARATION OF ABSOLUTE NULLITY OF MARRIAGE AND ANNULMENT OF MARRIAGE IN THE COVERAGE OF RULE 13-A OF THE RULES OF COURT</H3>
+					</CENTER>
+					<p><div align="JUSTIFY"><b>WHEREAS,</b> the 2019 Amendments to the 1997 Rules of Civil Procedure took effect on May 1, 2020;<br><br><b>WHEREAS,</b> this Court, in A.M. No. 22-04-26-SC, crafted the Strategic Plan for Judicial Innovations 2022-2027, which lays down the reform initiatives necessary toward achieving a technology-driven Judiciary;<br><br><b>WHEREAS,</b> a key activity under the Innovation outcome of the Strategic Plan for Judicial Innovations 2022-2027 is the development of an eCourt System Version 2.0 (eCourt PH 2.0) for the digitalization of adjudication, a key component of which is the digital filing and service of all pleadings, motions, and other court documents as well as the digital service of court orders in civil cases;<br><br><b>WHEREAS,</b> on August 20, 2024, this Court issued the Guidelines on the Submission of Electronic Copies of Pleadings and Other Court Submissions Being Filed Before the Lower Courts Pursuant to the Efficient Use of Paper Rule/Moving Towards Digital Courts: Component One: Transition to Electronic Filing and Service of Pleading, Motions and Other Documents as Well as Digital Services of all Orders in Civil Cases;<br><br><b>WHEREAS,</b> this Court, in the Resolution dated November 26, 2024 in A.M. No. 19-10-20-SC, approved the Interim Rule on the Electronic Filing and Service of Pleadings, Judgments, and Other Papers in Civil Cases, which became Rule 13-A of the 1997 Rules of Civil Procedure, as amended by the Resolution dated October 15, 2019 in the same administrative matter;<br><br><b>WHEREAS,</b> Rule 13-A provides for mandatory electronic filing and service of pleading, motions, and other paper for civil cases in the first- and second-level courts only;<br><br><b>WHEREAS,</b> under Section 1, Rule 13-A, special proceedings are not covered by mandatory electronic filing and service of pleadings, motions, and other papers for civil cases in the first- and second-level courts;<br><br><b>WHEREAS,</b> cases concerning the declaration of absolute nullity of marriage and annulment of marriage are currently classified as special proceedings, with the Benchbook for Trial Court Judges specifically categorizing the declaration of nullity of marriage under Article 36 of the Family Code as a special proceeding;<br><br><b>WHEREAS,</b> the litigation of cases involving the declaration of absolute nullity of marriage and annulment of marriage is procedurally similar to the prosecution of civil actions;<br><br><b>NOW, THEREFORE,</b> acting on the recommendation of the Office of the Court Administrator, this Court, sitting<i> En Banc</i>, resolves to include cases involving the declaration of absolute nullity of marriage and annulment of marriage under the coverage of Rule 13-A by amending Section 1 of the said Rule to read as follows:<br><blockquote><b>SECTION 1.</b><i> Coverage. –</i> This Rule shall govern the electronic filing of all pleadings, motions, and other papers, as well as their service, except those for which a different mode of service is prescribed. <u>This Rule shall be applicable exclusively in:</u><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><u>Cases involving the declaration of absolute nullity of marriage and annulment of marriage; and </u></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><u></u></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">2) </div></td> <td valign="top"> <div align="JUSTIFY"><u>Civil cases before first- and second-level courts. </u></div></td> </tr> </tbody></table><br><u>Aside from item (1), no other cases falling under the classification of special proceedings shall be covered by this Rule.</u><br><br>This Rule shall have no suppletory effect on other types of cases. (Amendments underscored)</blockquote>This amendment shall take effect following its publication in the Official Gazette or in two newspapers of general circulation.<br><br>February 4, 2025, Manila, Philippines.<br><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"><div align="CENTER"><b>(Sgd.)</b><b> ALEXANDER G. GESMUNDO</b><br> Chief Justice&nbsp; </div></td> </tr> <tr> <td colspan="2" valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>MARVIC M.V.F. LEONEN</b><br>&nbsp;&nbsp; Senior Associate Justice</div></td> <td valign="top"> <div align="CENTER"> <b>(Sgd.) </b><b>ALFREDO BENJAMIN S. CAGUIOA</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"><div align="CENTER"><b>(Sgd.) </b><b>RAMON PAUL L. HERNANDO</b><br>&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"><div align="CENTER"><b>(Sgd.) </b><b>AMY C. LAZARO-JAVIER</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>HENRI JEAN PAUL B. INTING</b><br>&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>RODIL V. ZALAMEDA&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>MARIO V. LOPEZ&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>SAMUEL H. GAERLAN&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>RICARDO R. ROSARIO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JHOSEP Y. LOPEZ</b>&nbsp; <br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JAPAR B. DIMAAMPAO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.) </b><b>JOSE MIDAS P. MARQUEZ&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b><br> </b><b>(Sgd.) </b><b>ANTONIO T. KHO, JR.</b>&nbsp; <br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>On leave </b><br> <b>MARIA FILOMENA D. SINGH</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> </tbody></table></div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

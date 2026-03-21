@@ -1,0 +1,759 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>RULES OF COURT THE SUPREME COURT OF THE PHILIPPINE ISLANDS, THE COURTS OF FIRST INSTANCE, AND RULES - RULES OF COURT THE SUPREME COURT OF THE PHILIPPINE ISLANDS, THE COURTS OF FIRST INSTANCE, AND RULES
+FOR THE EXAMINATION OF CANDIDATES FOR ADMISSION TO THE PRACTICE OF LAW - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/371' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2></H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ RULES OF COURT THE SUPREME COURT OF THE PHILIPPINE ISLANDS, THE COURTS OF FIRST INSTANCE, AND RULES, October 02, 1918 ]</H2>
+					<H3>RULES OF COURT THE SUPREME COURT OF THE PHILIPPINE ISLANDS, THE COURTS OF FIRST INSTANCE, AND RULES
+FOR THE EXAMINATION OF CANDIDATES FOR ADMISSION TO THE PRACTICE OF LAW</H3>
+					</CENTER>
+					<p><CENTER><B>MANILA
+
+BUREAU OF PRINTING
+
+1918
+
+RULES OF THE SUPREME COURT OF THE PHILIPPINE ISLANDS.
+
+SEAL </CENTER></B>
+<OL>
+<LI>     The seal of this court shall be of the usual size, and shall bear, running from left to right, on the outside edge, the words "Supreme Court of the Philippine Islands" and in the center the design of an eagle similar to that contained in the seal of the Supreme Court of the United States.
+
+<CENTER><B>CLERK'S OFFICE</CENTER></B>
+
+<LI>     The clerk of this court shall keep his office at Manila. All papers authorized or required to be filed in said office shall be filed at Manila. The clerk shall mark on all papers the day and hour when they were filed.
+
+<LI>     In addition to the books which the clerk is now, by law, required to keep, he shall keep a judgment book, in which shall be recorded at length all the final judgments rendered by the court.
+
+<LI>     The Attorney-General and attorneys de officio shall be permitted to withdraw the record of any case during the period allowed for the preparation of briefs. No other records shall be taken from the clerk's office without an order of the court, except as provided in the rule relating to the printing of the record.
+
+<LI>     The clerk shall have power to administer oaths in all actions or proceedings pending in the court, and in all other cases where it may be necessary in the exercise of the powers of the court, except those cases in which the law requires the oath to be administered by a Judge.
+
+<LI>     All unprinted documents presented to the Supreme Court of the Philippine Islands shall be written on paper of good quality twelve and three-eight inches in length by eight and one-half inches in width, leaving a margin at the top and at the left-hand side not less than one inch and one-half in width. Papel Catalan of the first and second classes, legal cap, and typewriting paper of such weight as not to permit the writing of more than one original and two carbons at one time, will be accepted, provided that such paper is of the required size and of good quality. Documents written with ink shall not be of more than twenty-five lines to one page. Typewritten documents shall be written double-spaced. One side only of the page will be written upon, and the different sheets will be sewn together, firmly, by five stitches in the left-hand border in order to facilitate the formation of the expediente, and they must not be doubled. The first page will bear the heading prescribed by Form 1 of section 784 of the Code of Civil Procedure.
+
+<LI>     All papers required by these rules to be printed shall be printed with black ink on unglazed paper, with pages six inches in width by nine inches in length, in pamphlet form. The type used shall not be smaller than ten points. The paper used shall be of sufficient weight to prevent the printing upon one side from being visible upon the other.
+
+<LI>     All documents presented to this court must bear the postal address of the attorney or party by whom they are signed.
+
+All attorneys representing litigants in any civil or criminal case pending before this court shall leave their postal address in the clerk's office.
+
+All notifications to attorneys or to parties who appear in person required to be made by the clerk shall be sent by mail to the residences of said attorneys or parties. In case the residence or office of the attorney or party shall be unknown, the clerk will mail the same to the best of his ability and in conformity with such data as he may then have at hand concerning the residence of said attorney or party. Attorneys and parties have no right to any other notice than that required by this rule.
+
+<CENTER><B>TITLE OF CASES.</CENTER></B>
+
+<LI>     In all actions, special proceedings, and criminal cases removed to this court, the party bringing the case here shall be called the "appellant" and the adverse party the "appellee," but the title of the case shall remain as it was below in all actions or criminal cases. The full names of all the parties to the proceeding shall be stated in the caption of the bill of exceptions or record on appeal.
+
+<CENTER><B>ATTORNEYS.</CENTER></B>
+
+<LI> Attorneys and guardians ad litem of the respective parties in the court below shall be considered as the attorney and guardians of the same parties respectively in this court until others are appointed and notice thereof is served on the adverse party.
+
+<CENTER><B>MOTIONS AND NOTICES.</CENTER></B>
+
+<LI> No oral argument will be heard in support of motions, but a typewritten or printed statement of the grounds for the motion shall be submitted with the motion and served with the notice. Objections to the allowance of the motion may be presented in like manner, within the periods prescribed by rule 13, computed from the date of the service of the motion, after the expiration of which the motion shall be deemed submitted for decision.
+
+<LI> Whenever by these rules a notice is required to be given by the parties, and the period thereof is not elsewhere prescribed, the time of the notice shall be governed by Rule 13. All notices of motions shall be given in writing by the moving party to the adverse party, shall state generally the nature and grounds of the motion, and shall be accompanied by copies of all affidavits or other papers presented to the court in support thereof. Proof of the service of such notice shall be filed, such proof to consist of a written acceptance of the service, or the affidavit of the person making the service that he has delivered a copy of the papers to the attorney for the adverse party, or has left it at his office or residence in the hands of some person, to be designated by name, employed or resident therein and of sufficient discretion to receive the same, or the certificate of a sheriff or other authorized process server that he has made such service. Service may also be made by sending a copy of the papers to the attorney for the adverse party by registered mail, and proof of such service shall be made by affidavit as to the mailing of the papers, and by the production of the registry return card.
+
+<LI> The periods within which all notifications required by these rules shall take effect, unless otherwise expressly provided, shall be as follows:
+
+Five days, if service is made in the city of Manila, or the Provinces of Rizal, Cavite, or Bulacan; seven days if service is made in any other province directly connected with Manila by any line of railroad; ten days if service is made in any province of Luzon not directly connected with Manila by any line of railroad, except the Provinces of Cagayan, Isabela, Albay, Ambos Camarines, and Sorsogon; twenty days if service is made in any province in the Islands of Panay, Cebu, or Negros, or in the Provinces of Mindoro, Albay, Ambos Camarines or Sorsogon, except the Province of Antique; thirty days if service is made in any province of the Archipelago for which no shorter period is provided by this rule. Such periods shall be computed to begin with the day following that upon which the notice is served.
+
+<CENTER><B>MAKING RETURN.</CENTER></B>
+
+<LI> (a) Should the clerk of the trial court fail or refuse to transmit to the court the bill of exceptions or the record on appeal within ten days after its allowance and approval, it shall be the duty of the attorney for the appellant, by application to the judge of the lower court or to this court to require the performance of this obligation. If the bill of exceptions or the record on appeal is not received by the clerk of this court within thirty days after the allowance and certification thereof, the appellee may, upon notice to the appellant, move this court to grant an order directing the clerk of the lower court forthwith to transmit such bill of exceptions or record, or to declare the same abandoned for failure to prosecute. If upon such motion it appears that the attorney for the appellant has made no effort to cause the clerk of the lower court to transmit the bill of exceptions or record, and no reasonable excuse is given for such failure, this court may, in its discretion, declare the bill of exceptions or the appeal abandoned. The motion shall be supported by the affidavit of the moving party or of his attorney.
+
+      (b) The clerk of the lower court shall give notice in writing, by registered mail, to the attorneys for the appellant. and appellee, of the date of transmission of the bill of exceptions or record on appeal to this court, and shall certify to this court that he has complied with this requirement and shall attach to such certificate the registry return card. It shall be the duty of the appellant in all civil cases, within ten days from the expiration of the periods respectively prescribed by rule 13, computed from the date of the receipt of the notice of the transmission of the bill of exceptions or record, as shown by the certificate of the clerk of the lower court, and the registry return card, to pay the clerk of this court the fees for the docketing of the appeal. If the docketing fee is not paid within the period prescribed by this rule, the appeal shall be deemed abandoned and dismissed, and the clerk of this court shall return the bill of exceptions or record to the court below, accompanied by a certificate under the seal of the court, showing that the appeal has been dismissed pursuant to section 500 of the Code of Civil Procedure and this rule. Upon the receipt of such certificate in the court below the case shall stand as though no bill of exceptions had been allowed or appeal taken.
+
+(c) The appellant may, at his election, pay the docketing fee to the clerk of the lower court at any time before the transmission of the bill of exceptions or record on appeal, in which event the docketing fee shall be transmitted with the record or bill of exceptions.
+
+<CENTER><B>PRINTING RECORD.</CENTER></B>
+
+<LI> Upon the receipt of a bill of exceptions or record on appeal the clerk shall make an estimate of the expense of printing thirty copies of the same, exclusive of the evidence, and shall notify the appellant thereof. The appellant shall pay the clerk the estimated cost of the printing within ten days from the expiration of the period prescribed by Rule 13 after the date of the receipt of the notice. (As amended, September 5, 1919.)
+
+<LI> If the appellant shall fail to pay the estimated cost of printing, in accordance with the preceding rule, the court may, on motion of the appellee and notice to the appellant, or upon its own motion, declare the bill of exceptions or the appeal abandoned. (As amended, September 5,191)
+
+<LI> Upon payment by their party of the said estimated expense the clerk shall at once cause to be printed for the use of the court and counsel thirty copies of the bill of exceptions or of the record on appeal. The clerk shall send to the printer the bill of exceptions transmitted from the court below or the transmitted record on appeal in special proceedings, and shall see that same is returned by the printer. The clerk shall supervise the printing and read the proof.
+
+<LI> Upon receipt of said printed copies the clerk shall at once send by registered mail or otherwise deliver to each of the lawyers in the case five copies thereof.
+
+<CENTER><B>BRIEFS AND ASSIGNMENT OF ERRORS. </CENTER></B>
+
+<LI> Prefixed to the brief of the appellant, but stated separately, shall be an assignment of the errors intended to be urged. The specifications of error shall be separately, distinctly, and concisely stated without repetition, and shall be numbered consecutively. All briefs shall be printed and shall exhibit an abstract of the argument on the points of law or fact to be discussed, with reference to the pages of the record and the authorities relied upon in support of each point. The authorities relied upon shall be cited by the page of the report at which the case begins and the page of the report on which the citation is found. The brief of the appellant shall also contain a concise statement of the facts in the case.
+
+<LI> No error not affecting the jurisdiction over the subject matter will be considered unless stated in the assign­ment of errors and relied upon in the brief.
+
+<LI> Within thirty days from the receipt of the printed record on appeal or bill of exceptions the appellant shall serve upon the appellee three printed copies of his brief and of his assignment of errors and file thirty copies thereof with the clerk.
+
+<LI> Within thirty days of the receipt of the brief of the appellant, the appellee shall serve on the appellant three printed copies of his brief and file thirty copies thereof with the clerk.
+
+<LI> Motions for extension of time for the filing of briefs must be presented before the expiration of the time mentioned in rules 21 and 22, or within a time fixed by special order of the court. No such extension will be allowed except on notice to the opposite party in accordance with rule 13, and for good and sufficient cause shown. Extensions may also be granted upon stipulation of counsel, within reasonable limits.
+
+<LI>  (a) If the appellant, in any civil case, fails to serve his brief within the time prescribed by these rules the court may, on motion of the appallee and notice to the appellant, or on its own motion, dismiss the bill of exceptions or the appeal.
+
+(b) It shall be the duty of the clerk of the trial court upon the presentation of a notice of appeal in a criminal case, to ascertain from the appellant if he desires this court to appoint an attorney to defend him de oficio, and to transmit with the record, upon a form to be prepared by the clerk of this court, a certificate of compliance with this duty and of the response of the appellant to his inquiry. If it appears from the certificate that the accused desires to be defended de oficio the clerk of this court will designate a member of the bar to defend him, such designations to be made by strict rotation, unless otherwise directed by order of the court.
+
+If no attorney de oficio is appointed pursuant to this rule the appeal will be dismissed upon motion of the Attorney-General, if no brief is filed on behalf of the appellant within the time prescribed by these rules.
+
+<CENTER><B>DEATH OF PARTY.</CENTER></B>
+
+<LI> Whenever it is suggested on the record of this court in a pending case, before the same is finally submitted, that a party to the cause is dead, the court shall order upon proper notice, the personal representative of the deceased to appear and to be substituted for the deceased, within a period of sixty days, or within such time as may be granted. If such representative fails to appear within said time, the court may order the opposing party (whether he be appellant or appellee) to procure the appointment of a personal representative of the deceased, within a time specified by the court, which personal representative shall immediately appear for and on behalf of the interests of the deceased. The court charges involved in procuring such appointment, if defrayed by the opposing party, may be recovered as costs. The court may, when the interests of the parties can best be conserved thereby, appoint a guardian ad litem to represent the minor heirs of the deceased, or permit his heirs to intervene, without requiring the appointment of an executor or administrator.
+
+<CENTER><B>CALENDARS AND HEARING.</CENTER></B>
+
+<LI> Six days before the opening of every calendar term the clerk shall prepare for the use of the court and counsel a calendar of all cases ready for hearing at the respective terms.
+
+<LI> After the service of the appellee's brief or the expiration of the time for such service the clerk shall place the case on the next calendar of the court.
+
+<LI> On the second Monday of January and July, and on the first Monday of February, March, August, September, October, and November, the court will, in public session, call the calendar and assign cases for hearing on specified days during the term. No other notice will be given of the date so assigned. The parties may, however, by agreement, submit any case at any time upon the printed briefs without oral argument. Either party may submit his side of the case on his printed brief without oral argument.
+
+<LI> All matters submitted to the court for its consideration and adjudication will be deemed to be submitted for consideration and adjudication by any and all of the justices who are members of the court at the time when such matters are taken up for consideration and adjudication, whether such justices were or were not members of the court and whether they were or were not present at the date of submission: Provided, That only those members present when any matter is submitted on oral argument will take part in its consideration and adjudication, if the parties, or either of them, express a desire to that effect in writing filed with the clerk at the date of submission.
+
+<LI> In any civil case, on appeal, wherein it does not affirmatively appear from the judgment entered in the court below that the amount in controversy exceeds ten thousand pesos, and in any civil case submitted to this court in the exercise of its original jurisdiction, it will be assumed, for the purpose of assigning such case to one of the divisions of the court, that the parties have agreed that the amount in controversy does not exceed ten thousand pesos, unless it is made to appear by written statement, filed with the record and supported by appropriate affidavits, that the amount in controversy exceeds ten thousand pesos; such written statement to be filed at or before the date of submission for final disposition.
+
+<LI> Each party shall be entitled to one hour and no more for oral argument. upon bills of exceptions, appeals in special proceedings and in criminal cases, unless the case is one which may be disposed of by a division, in which event oral argument shall be limited to not more than half an hour for each party; but the court may, by special order, enlarge this time in particular cases.
+
+<LI> Whenever it is necessary or proper in the opinion of this court that original papers of any kind should be inspected in this court on appeal, it may make such order for the transmission, safe-keeping, and return of such original papers as may seem proper, and the court may receive and consider such original papers in connection with the record.
+
+<CENTER><B>COSTS AND JUDGMENT.</CENTER></B>
+
+<LI> Upon the publication of the decision, the clerk shall mail notice thereof to the respective parties or their counsel, and judgment shall not be entered until ten days after such publication. (As amended, February 7, 1919.)
+
+<LI> Five days after entry of judgment the clerk shall remand the case to the lower court, unless notice is given, pursuant to rule 40 of intention to petition the Supreme Court of the United States for a. writ of certiorari, in which event the mittimus shall be stayed pending action by this court upon such notice.
+
+<LI> Applications for a rehearing shall be made ex parte on motion setting forth the grounds on which they are made, and filed within fifteen days after the publication of the decision of the court. No oral argument thereon shall be allowed. If the motion is granted, the cause shall be reheard in conformity with the requirements for the first hearing. The mittimus shall be stayed during the pendency of a motion for a rehearing.
+
+<LI> Whenever the appellant fails to pay the estimated cost of printing within the time prescribed by rule 13 or fails to file his brief within the time prescribed by rule 21 or such enlargement as may have been granted pursuant to rule 23, and the appellee moves to dismiss the appeal upon that ground, he shall be allowed twenty pesos, recoverable from the appellant, whether the motion be granted or denied, unless the court shall otherwise provide in its ruling upon the motion. If such sum is not paid, upon notice of the ruling, within the period prescribed by rule 13, the clerk of this court, upon the written petition of the counsel for the appellee, supported by his affidavit that such payment has not been made, shall issue execution therefor against the appellant, addressed to the sheriff of the court in which the case was tried below. The payment may be made directly to the attorney of the appellee or to the clerk of this court. (As amended, September 5, 1919.)
+
+<LI> Costs shall be taxed by the clerk on five days’ written notice given by the prevailing party to the adverse party. With this notice shall be served a statement of the items of costs claimed by the prevailing part, verified by his oath or that of his attorney. Objections to the taxation shall be made in writing, specifying the items objected to. Either party may appeal to the court from the clerk's taxation. The costs shall be inserted in the judgment if taxed before its entry, and payment thereof shall be enforced by the lower court. If taxed after the entry of the judgment payment of the costs shall be enforced by execution issued by the clerk of this court, addressed to the sheriff of the court below.
+
+<LI> When the record in this court contains any unnecessary, irrelevant, or immaterial matter, the party at whose instance the same was inserted or at whose instance the same was printed, shall not be allowed as costs any disbursement for preparing, certifying, or printing such unnecessary matter.
+
+<LI> Upon remanding the case the clerk shall transmit to the court below a certified copy of the judgment.
+
+<CENTER><B>ORIGINAL JURISDICTION.</CENTER></B>
+
+<LI> When the original jurisdiction of this court is invoked in cases of certiorari, mandamus, prohibition, and quo warranto the same procedure shall be followed, with respect to the service of process and notices and the filing of pleadings as is prescribed by the Code of Civil Procedure and the Rules of Court for actions in which the Courts of First Instance have original jurisdiction.
+
+<LI> In original proceedings in habeas corpus in this court in criminal cases the officer shall serve a copy of the writ and petition on the Attorney-General at the time he serves the writ on the respondent, and for this purpose the petitioner shall file with his petition two copies thereof.
+
+<CENTER><B>CERTIORARI TO THE SUPREME COURT OF THE UNITED STATES.</CENTER></B>
+
+<LI>  (a) Whenever it is made to appear by notice in writing that any party to a civil case in which final judgment has been rendered by this court intends to petition the Supreme Court of the United States for a writ of certiorari for the review of the decision and judgment of this court, and it appears that the case is one which, by reason of the amount involved or the nature of the questions of law presented, may be removed to the Supreme Court of the United States by writ of certiorari, and it further appears that the party intending to make application for such writ desires to stay the enforcement of the judgment of this court during the pendency of the application for the writ of certiorari and of the proceedings in the Supreme Court of the United States, if such is granted, this court shall grant a stay, for a term not to exceed ten days, within which the moving party may give a supersedeas bond, and shall designate one of its members to determine the sufficiency of such bond.
+
+(b) Within the time limited by the order the moving party shall cause to be delivered to the designated justice a bond subscribed by an authorized surety company or by two or more individuals, as solidary sureties, conditioned for the performance of the judgment which it is sought to stay, in the event that the moving party shall fail, for any cause whatever, to obtain a writ of certiorari from the Supreme Court of the United States or of its affirmance by that court, wholly or in part, should the writ of certiorari be granted, whether such affirmance is upon the merits of the appeal or is the result of the dismissal of the proceeding for any cause whatever.
+
+(c) Before the bond tendered by the moving party is accepted the justice authorized to approve it shall give the adverse party ample opportunity to be heard as to the legal sufficiency of the bond and the solvency of the sureties.
+
+(d) The filing of the supersedeas bond, approved as herein provided shall operate as a stay of the mittimus or of the execution of the judgment until further order of this court.
+
+(e) If at any time prior to the granting of the writ of certiorari or of its denial by the Supreme Court of the United States it shall be made to appear, upon petition of the opposing party or otherwise, that the applicant for the writ is not making diligent efforts to submit his petition for a writ of certiorari by complying with the requirements of the law and of the Rules of the Supreme Court of the United States relating to such writs, this court may revoke the supersedeas.
+
+(f) When the defendant in a criminal case gives notice of his desire to apply to the Supreme Court of the United States for a writ of certiorari to review a judgment of conviction by this court, in a case subject to such review, and prays for a stay of execution pending such application, and it appears that he has been granted bail by the trial court during the pendency of his appeal, the stay shall be allowed. Nevertheless, if it shall be made to appear by the Attorney-General, upon whom a copy of the notice shall be served, that the bail is insufficient, or that the circumstances are such that the accused should be taken into custody, additional bail may be required, or the bail canceled and the accused held in detention pending the certiorari proceedings.
+
+(g) If the offense of which the applicant has been convicted in this court is not bailable, a stay may be granted, but the accused will be, held in detention during the pendency of the certiorari proceedings.
+
+(h) If the accused has been convicted of a bailable offense, but has been held in detention during the pendency of his appeal to this court, a stay may be granted, but a request for release on bail will not be entertained unless the writ of certiorari is allowed by the Supreme Court of the United States.
+
+(i) Any stay granted in a criminal case may be revoked, upon petition of the Attorney-General for any of the reasons specified in paragraph (e) of this rule.
+
+<LI> These rules shall take effect the first day of January, 1919.</OL></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

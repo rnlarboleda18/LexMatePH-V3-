@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>A.M. No. 22-03-29-SC - RULES ON EXTRADITION PROCEEDINGS - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/100128' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2>EN BANC</H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ A.M. No. 22-03-29-SC, April 08, 2025 ]</H2>
+					<H3>RULES ON EXTRADITION PROCEEDINGS</H3>
+					</CENTER>
+					<p><div align="JUSTIFY"><b>WHEREAS,</b> pursuant to Section 5(5), Article VIII, of the 1987 Constitution, this Court is empowered to "[p]romulgate rules concerning the protection and enforcement of constitutional rights, pleading, practice, and procedure in all courts, the admission to the practice of law, the Integrated Bar, and legal assistance to the underprivileged";<br><br><b>WHEREAS</b>, there is a need to provide rules on extradition proceedings to ensure consistency and give guidance in handling extradition cases;<br><br><b>WHEREAS</b>, through Memorandum Order No. 49-2023 dated March 27, 2023, Memorandum Order No. 57-2023 dated April 12, 2023, Memorandum Order No. 18-2024 dated February 15, 2024, Memorandum Order No. 18-A-2024 dated February 28, 2024, Memorandum Order No. 18- B-2024 dated July 31, 2024, and Memorandum Order No. 07-2025 dated January 30, 2025, a Technical Working Group was organized to prepare a draft of the proposed Special Rules on Extradition, now referred to as the Rules on Extradition Proceedings, and is composed of the following:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="20%" valign="top"> <div align="JUSTIFY">Chairperson: </div></td> <td width="80%" valign="top"> <div align="JUSTIFY"><b>HON. RODIL V. ZALAMEDA&nbsp; </b><br><i>Associate Justice, Supreme Court</i> </div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Vice&nbsp; Chairperson: </div></td> <td valign="top"> <div align="JUSTIFY"><b>HON. ANTONIO T. KHO, JR.&nbsp; </b><br><i>Associate Justice, Supreme Court</i> </div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Members: </div></td> <td valign="top"> <div align="JUSTIFY"><b>HON. RAUL B. VILLANUEVA&nbsp; </b><br><i>Court Administrator</i> </div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <br></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>HON. MICHAEL P. ONG&nbsp; </b> <br> <i>Associate Justice, Court of Appeals</i> </div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <br></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>HON. JULIET M. MANALO-SAN GASPAR&nbsp; </b><br><i>Associate Justice, Sandiganbayan </i> </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>CHIEF STATE COUNSEL DENNIS ARVIN L. CHAN </b></div></td> </tr> <tr> <td valign="top">  <br></td> <td valign="top"> <div align="JUSTIFY"><b>ASSISTANT CHIEF STATE COUNSEL MILDRED </b><b>BERNADETTE B. ALVOR </b></div> </td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>SENIOR STATE COUNSEL GRACE L. ESTRADA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>STATE COUNSEL ULYSES A. AGUILA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>STATE COUNSEL DAVE FLORENZ M. FATALLA </b></div></td> </tr> <tr> <td valign="top">  <br></td> <td valign="top"> <div align="JUSTIFY"><b>STATE COUNSEL NORELIZA MORANA-</b><b>MANLANGIT </b></div> </td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>STATE COUNSEL REDMOND JOHN D. ZULUETA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Department of Justice </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. ROUSSEL R. REYES </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. PATRICIA ANNE G. LAGGUI </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. RAINER J. CASIS </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. J.P. LEO F. ASONG </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. AMERODEN DAUDEY B. TAGO </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Department of Foreign Affairs </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. ANDRE C. PALACIOS </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Integrated Bar of the Philippines </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. CHANTAL C. CHUA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. NASHMYLEEN A. MAROHOMSALIC </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Representatives, Office of the Chief Justice </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Secretariat: </div></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. NELDA ETHEL P. TORIO </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. REYNOLD L. ORSUA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. JO-ANNE MONIQUE D. COLOQUIO </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. KARLO JENNUEL R. ANTONIO </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. JASMIN RACELI M. RODRIGUEZ </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Office of Associate Justice Rodil V. Zalameda </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. JONAS S. NIEVES </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. DREIANN B. ABLAZA </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>ATTY. ALFREDO NICCOLO T. LIM </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Office of Associate Justice Antonio T. Kho, Jr. </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Support/ Services Staff: </div> </td> <td valign="top"> <div align="JUSTIFY"><b>MS. KEREEN R. VASQUEZ </b></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"><b>MS. ELIZABETH M. SANTOS </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Office of Associate Justice Rodil V. Zalameda </i></div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><b>MS. FLORIDE D. INMENZO </b></div></td> </tr> <tr> <td valign="top"> <br></td> <td valign="top"> <div align="JUSTIFY"><i>Stenographer</i> </div></td> </tr> </tbody></table></blockquote><b>NOW</b>, <b>THEREFORE</b>, the Court, sitting<i> en banc</i>, resolves to <b>APPROVE</b> the "Rules on Extradition Proceedings."<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"><div align="CENTER"><b>(Sgd.)<br> ALEXANDER G. GESMUNDO</b><br> Chief Justice&nbsp; </div></td> </tr> <tr> <td colspan="2" valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.)</b><br> <b>MARVIC M.V.F. LEONEN</b><br>&nbsp;&nbsp; Senior Associate Justice</div></td> <td valign="top"> <div align="CENTER"> <b>(Sgd.)</b><br> <b>ALFREDO BENJAMIN S. CAGUIOA</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"><div align="CENTER"><b>(Sgd.)<br> RAMON PAUL L. HERNANDO</b><br>&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"><div align="CENTER">On official business but left a concurring vote <b><br></b><b>AMY C. LAZARO-JAVIER</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER">On official business but left a concurring vote <b><br> HENRI JEAN PAUL B. INTING</b><br>&nbsp;&nbsp;&nbsp; Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> RODIL V. ZALAMEDA&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER">On official business but left a concurring vote<b><br> MARIO V. LOPEZ </b><br>&nbsp; Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> SAMUEL H. GAERLAN&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> RICARDO R. ROSARIO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER">On official business but left a concurring vote<b><br> JHOSEP Y. LOPEZ</b>&nbsp; <br>&nbsp; Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> JAPAR B. DIMAAMPAO&nbsp; </b><br> Associate Justice </div></td> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> JOSE MIDAS P. MARQUEZ&nbsp; </b><br> Associate Justice </div></td> </tr> <tr> <td valign="top"><div align="CENTER"></div><br></td> <td valign="top"><div align="CENTER"></div><br></td> </tr> <tr> <td valign="top"> <div align="CENTER"><b>(Sgd.)<br> ANTONIO T. KHO, JR.</b>&nbsp; <br> Associate Justice </div></td> <td valign="top"> <div align="CENTER">On leave but left a concurring vote<br>&nbsp; <b>MARIA FILOMENA D. SINGH</b><br>&nbsp;&nbsp; Associate Justice </div></td> </tr> </tbody></table></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><br><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>RULES ON EXTRADITION PROCEEDINGS</b><br><br><b>RULE 1<br><br>GENERAL PROVISIONS</b></center><br><b>Section 1.<i> Title. —</i></b> This Rules shall be known as the "Rules on Extradition Proceedings."<br><br><b>Section 2.<i> Applicability.</i></b> — This Rules shall apply to all proceedings related to Extradition, including applications for warrants of arrest or hold departure orders, whether provisional and precautionary or otherwise, and applications for bail.<dl><dt><b>Section 3.<i> Definition of Terms.</i></b> — For purposes of this Rules, the following terms are defined as follows:<br><br></dt><dd>(a) <i>Central Authority</i> means the Secretary of Justice, or the designated and authorized State Counsels of the Office of the Chief State Counsel, who shall act on all requests for Extradition and provisional arrest for the purpose of Extradition, regardless of the offense involved, and advise, assist, and represent the Requesting State in all proceedings related to Extradition before Philippine courts.<br><br>(b) <i>Clear and Convincing Evidence</i> refers to the degree of proof required in an application for bail in Extradition proceedings that will produce a firm belief in the mind of the court that the Extraditee is not a flight risk and will abide by all the orders and processes of the court. It is less than proof beyond reasonable doubt but greater than preponderance of evidence.<br><br>(c) <i>Executive Authority</i> means the Secretary of Foreign Affairs, or an official authorized to act on behalf of the latter, who shall transmit to the Central Authority the request for Extradition upon determining that the request complies with the law and the applicable Extradition Treaty.<br><br>(d) <i>Extraditee</i> means any person who is, or is suspected of being, within the territory of the Philippines and whose Extradition, or provisional arrest for the purpose of Extradition, is requested by the Requesting State.<br><br>(e) <i>Extradition</i> means the removal of an Extraditee from the Philippines with the object of placing them at the disposal of foreign authorities to enable the Requesting State to hold the Extraditee in connection with any criminal investigation directed against them or for the execution of a penalty imposed under the penal or criminal law of the Requesting State.<br><br>(f) <i>Extradition Court</i> means the second-level court with which a petition for Extradition is filed, where the Extraditee resides, or, if unknown, the court that has jurisdiction over the place where the office of the Central Authority is located.<br><br>(g) <i>Extradition Treaty</i> means a bilateral agreement between the Republic of the Philippines and a Requesting State, or a multilateral agreement to which both the Philippines and the Requesting State are state parties, containing provisions governing Extradition.<br><br>(h) <i>Extradition Warrant of Arrest</i> means a warrant of arrest issued by the Extradition Court upon a finding of Probable Cause, in relation to a petition for Extradition filed by the Central Authority against an Extraditee.<br><br>(i) <i> Hold Departure Order</i> means a written directive, which may be issued by the Extradition Court upon request and upon the issuance of an Extradition Warrant of Arrest, commanding the Bureau of Immigration and other law enforcement authorities to prevent any attempt by an Extraditee to depart from the Philippines.<br><br>(j)<i> Precautionary Hold Departure Order</i> means a written directive, which may be issued<i> ex parte</i> by the second-level court upon request and upon the issuance of a Warrant of Provisional Arrest, commanding the Bureau of Immigration and other law enforcement authorities to prevent any attempt by an Extraditee to depart from the Philippines.<br><br>(k)<i> Prima Facie Case</i> in Extradition proceedings refers to that amount of evidence sufficient to sustain a judgment in favor of the issue it supports, despite presentation of contrary evidence.<br><br>(l)<i> Probable Cause</i> means the existence of such facts and circumstances that would lead a reasonably discreet and prudent person to believe that the person sought to be arrested is extraditable.<br><br>(m)<i> Requesting State</i> means the foreign state that submits to the Executive Authority a request for Extradition or provisional arrest of an Extraditee for the purpose of Extradition.<br><br>(n)<i> Warrant of Provisional Arrest</i> means a warrant of arrest issued by the second-level court where the Extraditee resides, or, if unknown, the court that has jurisdiction over the place where the office of the Central Authority is located, upon a finding of Probable Cause, in relation to a request for provisional arrest.</dd></dl><b>Section 4.<i> Extraditable Offense.</i></b> — An offense is extraditable when the act or omission is punishable under the laws of both the Philippines and the Requesting State by imprisonment or other deprivation of liberty.<br><br>Where the request for Extradition relates to a person who is wanted for the service of a sentence of imprisonment or other deprivation of liberty imposed for such an offense, Extradition shall be granted only if the remaining sentence to be served is at least six months.<br><br>In all cases, the definition of an extraditable offense, including the remaining sentence to be served, is subject to the provisions of the applicable Extradition Treaty.<dl><dt><b>Section 5.<i> Dual Criminality.</i></b> — The requirement of dual criminality in the applicable Extradition Treaty is satisfied when an offense is punishable under the laws of both the Philippines and the Requesting State, regardless of the following:<br><br></dt><dd>(a) whether the laws of both the Philippines and the Requesting State place the acts or omissions constituting the offense within the same category of offenses or describe the offense using different terminology, so long as the underlying conduct is criminal in both states; or<br><br>(b) whether the elements of the offense differ under the laws of the Philippines and the Requesting State, provided that the acts or omissions, as presented by the Requesting State, satisfy the elements of the relevant offenses under both jurisdictions.</dd></dl>Unless otherwise provided in the applicable Extradition Treaty, dual criminality must exist at the time of receipt of the request for Extradition.<br><br><b>Section 6.<i> Nature and Purpose of the Proceedings.</i></b> — Extradition proceedings are<i> sui generis</i> and summary in nature. They do not involve the adjudication of the guilt or innocence of the Extraditee.<br><br>The purpose of Extradition proceedings is to determine whether the request, as expressed in the petition, supported by its annexes and any evidence that may be adduced during the hearing, complies with the law and the applicable Extradition Treaty and whether the person sought is extraditable.<br><br><b>Section 7.<i> Accessory Extradition.</i></b> — If the request for Extradition relates to a number of offenses, each of which is punishable under the laws of both the Philippines and the Requesting State, but some of which are punishable by deprivation of liberty of less than one year, Extradition may be granted for said offenses, provided that the person is to be extradited for at least one extraditable offense, if allowed under the applicable Extradition Treaty.<br><br><b>Section 8.<i> Applicability of the Rules of Court.</i></b> — The provisions of the Rules of Court, insofar as practicable and not inconsistent with this Rules and the summary nature of the proceedings, shall apply to Extradition cases.<br><br><b>Section 9.<i> Construction.</i></b> — In the interpretation of this Rules, the following order of preference shall apply on substantive matters: (1) the applicable Extradition Treaty; and (2) Presidential Decree No. 1069.<br><br>On procedural matters, this Rules shall take precedence.<br><br><center><b>RULE 2<br><br>EXTRADITION PROCEEDINGS</b></center><br><b>Section 1.<i> Commencement of Action.</i></b> — An action for Extradition is commenced by the filing of a verified petition by the Central Authority before the Extradition Court.<br><br>The court with which the petition is filed shall have, and shall continue to have, exclusive jurisdiction to hear and decide the case, regardless of the subsequent whereabouts of the Extraditee or any changes in their place of residence.<dl><dt><b>Section 2. <i>Contents of the Petition.</i></b> — The petition must contain the following:<br><br></dt><dd>(a) The name, together with a description as accurate as possible, of the Extraditee, and any other information that may help establish his or her identity;<br><br>(b) The applicable Extradition Treaty;<br><br>(c) An allegation that an extraditable offense under the applicable Extradition Treaty was committed;<br><br>(d) An allegation that the offense constitutes a crime under the laws of both the Requesting State and the Philippines;<br><br>(e) A summary of the factual circumstances of the alleged offense showing that the Extraditee is the person charged or convicted and has committed the offense charged or for which they were convicted, the date and the place of commission of the offense, and the issuance of the warrant of arrest or the judgment of conviction. For multiple offenses, the said circumstances pertaining to each offense must be alleged separately;<br><br>(f) The imposable penalty for the extraditable offense under the laws of the Requesting State, and if the Extraditee has been convicted, the sentence imposed and the extent to which such sentence remains to be served;<br><br>(g) An allegation of the whereabouts or residence of the Extraditee; and<br><br>(h) Other allegations as may be required under the applicable Extradition Treaty.</dd></dl><dl><dt><b>Section 3.<i> Attachments to the Petition.</i></b> — The following must be attached to the petition:<br><br></dt><dd>(a) A copy of the arrest warrant, charging instrument, or judgment of conviction issued by the competent authorities of the Requesting State, showing the offense charged, along with any other documents on which the petition is based;<br><br>(b) If the extraditable offense is punishable by death penalty, a statement that such penalty will not be imposed;<br><br>(c) A sworn or verified statement by the appropriate foreign legal authority describing the facts and referencing relevant documents;<br><br>(d) Affidavits, documents, and evidence on the applicable foreign law and the facts alleged; and<br><br>(e) Other attachments as may be required under the applicable Extradition Treaty.</dd></dl>Documents shall be received and admitted as evidence in Extradition proceedings if they are certified by the principal diplomatic or consular officer of the Requesting State in the Philippines, or as otherwise provided in the applicable Extradition Treaty.<dl><dt><b>Section 4.<i> Extradition Warrant of Arrest.</i></b> — The Extradition Court, upon receipt of the petition for Extradition, shall conduct an ex<i> parte</i> review of the petition and determine whether (1) the petition is sufficient in form and substance; (2) it complies with the law and the applicable Extradition Treaty; and (3) there is Probable Cause that<br><br></dt><dd>(a) the Extraditee is the same, person identified in the warrant of arrest, indictment, or judgment issued by the Requesting State;<br><br>(b) the offense involved is an extraditable offense; and<br><br>(c) the Extraditee committed the offense subject of the warrant of arrest, indictment, or judgment issued by the Requesting State.</dd></dl>If necessary, the Extradition Court may require additional documentation from the petitioner.<br><br>Upon a finding that the foregoing requisites are satisfied, the Extradition Court shall issue a warrant of arrest against the Extraditee. Such warrant may be served anywhere within the Philippines. For this purpose, the electronic version of the warrant (e-warrant) shall be uploaded to the website of the Philippine National Police, or other subsequent website that will be used as a platform for e-warrants, to implement the same nationwide.<br><br>If, after consideration of the submissions of the petitioner, the Extradition Court finds that any of the above requisites have not been met, it shall dismiss the petition.<br><br><b>Section 5.<i> Custody of the Extraditee.</i></b> — The Extraditee arrested pursuant to a Warrant of Provisional Arrest or an Extradition Warrant of Arrest shall be detained at the National Bureau of Investigation (NBI) detention facility in the city or province where the court that issued the warrant is located. In the absence of such a facility, the Extraditee shall be detained at the appropriate detention facility nearest to the said court.<br><br>The NBI or any law enforcement agent who effected the arrest shall file a return with the said court within 24 hours from the arrest, with notice to the Central Authority.<br><br><b>Section 6.<i> Issuance of Hold Departure Order.</i></b> — Upon the issuance of an Extradition Warrant of Arrest, the Extradition Court may, upon request, issue a Hold Departure Order directing the Bureau of Immigration and other law enforcement authorities to prevent any attempt by the Extraditee to depart from the Philippines, except for the purpose of Extradition.<br><br><b>Section 7.<i> Issuance of Summons.</i></b> — The Extradition Court shall, upon notice of arrest, immediately direct the clerk of court to issue the corresponding summons. The summons, together with the petition and all its annexes, shall be personally served on the Extraditee.<br><br><b>Section 8.<i> Answer.</i></b> — Within 15 calendar days from receipt of the summons and a copy of the petition with its annexes, the Extraditee shall file a verified answer to the petition and serve a copy on the petitioner. The answer shall contain the Extraditee's affirmative defenses, if any. Failure to raise affirmative defenses in the answer shall constitute a waiver of those defenses.<br><br><b>Section 9.<i> Effect of Failure To Answer.</i></b> — Should the Extraditee fail to answer the petition within the period provided, the Extradition Court shall,<i> motu proprio</i> or on motion of the petitioner, render judgment as may be warranted by the facts alleged in the petition and the supporting documents annexed to the petition.<br><br><b>Section 10.<i> Pleadings Allowed.</i></b> — The pleadings allowed to be filed are the petition for Extradition, answer, application for bail, and comment on the application for bail. The petition and answer shall be verified.<dl><dt><b>Section 11.<i> Prohibited Pleadings and Motions.</i></b> — The following pleadings or motions shall not be allowed:<br><br></dt><dd>(a) motion to dismiss the petition, except on the ground of lack of jurisdiction over the subject matter;<br><br>(b) motion for a bill of particulars;<br><br>(c) motion for new trial, motion for reconsideration of a judgment, or motion or reopening of trial;<br><br>(d) petition for relief from judgment;<br><br>(e) motion for extension of time to file pleadings, affidavits, or any other paper;<br><br>(f) motion for inhibition;<br><br>(g) motion to suspend proceedings without a temporary restraining order or injunction issued by a higher court;<br><br>(h) petition for<i> certiorari</i>,<i> mandamus</i>, or prohibition against any interlocutory order issued by the Extradition Court;<br><br>(i) dilatory motions for postponement;<br><br>(j) reply and rejoinder;<br><br>(k) memorandum; and<br><br>(l) interventions.</dd></dl><dl><dt><b>Section 12.<i> Hearing in Public; Exception.</i></b> — The hearing shall be conducted in open court, unless the Extraditee or the petitioner requests, with leave of court, that it be conducted in chambers, such as when the matter to be heard involves any of the following:<br><br></dt><dd>(a) national security;<br><br>(b) privileged information;<br><br>(c) a minor; or<br><br>(d) any analogous circumstances, as determined by the Extradition Court.</dd></dl><b>Section 13.<i> Presentation of Witnesses.</i></b> — Unless found necessary by the Extradition Court, the testimonies of witnesses shall not be required, and judgment may be rendered based solely on the pleadings and documents submitted.<br><br>No witness shall be required to authenticate and verify documents that have already been duly authenticated by the appropriate foreign post, and no testimony shall be presented to prove that the Extraditee did or did not commit the offense for which Extradition is requested.<br><br>The party presenting a witness shall file the judicial affidavit of said witness with the Extradition Court, with proof of service to the adverse party, not later than five calendar days before the scheduled hearing for the presentation of the witness.<br><br><b>Section 14.<i> One-Day Examination of Witness Rule.</i></b> — The Extradition Court shall strictly adhere to the rule that a witness must be fully examined in one day.<br><br><b>Section 15.<i> Judgment.</i></b> — If the Extradition Court allows the presentation of witnesses, it shall render judgment within 30 calendar days from the date the last witness is presented. The formal offer of evidence shall be made on the same day as the presentation of the last witness. In case no witnesses are presented, the Extradition Court shall render judgment within 30 calendar days from receipt of the last pleading, or upon the expiration of the period for its filing.<dl><dt>The Extradition Court shall render judgment on the petition for Extradition and state the reasons for its ruling. The petition shall be granted if the Extradition Court finds, based on the evidence adduced during the hearing, that a<i> Prima Facie </i>Case exists showing that<br><br></dt><dd>(a) the petition complies with the law and the applicable Extradition Treaty;<br><br>(b) the Extraditee is the same person identified in the warrant of arrest, indictment, or judgment issued by the Requesting State;<br><br>(c) the offense is an extraditable offense;<br><br>(d) the Extraditee committed the offense subject of the warrant of arrest, indictment, or judgment issued by the Requesting State; and<br><br>(e) none of the grounds for mandatory refusal of Extradition under the applicable Extradition Treaty or international law and conventions raised by the Extraditee exists.</dd></dl><b>Section 16.<i> Postponement of Execution of Judgment.</i></b> — The execution of the judgment may be postponed in order for the Extraditee to face criminal prosecution or serve a sentence in the Philippines for an offense other than the one for which Extradition is requested, unless a temporary surrender of the Extraditee is granted under Section 17, Rule 2 of this Rules.<br><br><b>Section 17.<i> Temporary Surrender.</i></b> — Where the judgment granting Extradition cannot be enforced because of the Extraditee's pending criminal case in the Philippines, the Central Authority may file a motion in the court where the said criminal case is pending requesting the temporary surrender of the Extraditee to the Requesting State. The said court may allow the temporary surrender, under such conditions as it deems as proper considering the circumstances of the case.<br><br><b>Section 18.<i> Appeal.</i></b> — Any party may, within 10 calendar days from receipt of the decision of the Extradition Court on the petition for Extradition, file an ordinary appeal with the Court of Appeals. The appeal shall stay the execution of the decision of the Extradition Court.<br><br>The Court of Appeals shall issue its decision on appeal within 90 calendar days from the time the appeal is submitted for resolution. The said decision shall be final and immediately executory.<br><br><center><b>RULE 3<br><br>BAIL</b></center><br><b>Section 1.<i> Bail During the Pendency of the Extradition Proceedings.</i></b> —<br><br>(a) Bail is a matter of discretion.<br><br>(b) Bail shall not be granted to an Extraditee who is sought for the service of sentence for a prior conviction in the Requesting State or who has been convicted but not yet sentenced by the Requesting State.<br></div><div align="JUSTIFY"><br></div><div align="JUSTIFY">(c) Bail may be granted if the Extraditee proves, by Clear and Convincing Evidence, that they<ol><li>are not a flight risk; and</li><li>will abide by all the orders and processes of the Extradition Court.</li></ol><b>Section 2.<i> Comment.</i></b> — Within 10 calendar days from receipt of the application for bail, the petitioner shall file a comment on the said application.<br><br><b>Section 3.<i> Resolution of the Application for Bail.</i></b> — Within five calendar days from receipt of the comment or the lapse of the period for filing thereof, the Extradition Court shall either resolve the application for bail or set it for hearing for the reception of additional evidence.<br><br>If the court deems it necessary to receive additional evidence, the application for bail shall be resolved within 15 calendar days from the lapse of the five-calendar day period.<br><br><center><b>RULE 4<br><br>PROVISIONAL ARREST</b></center><br><b>Section 1.<i> Provisional Arrest.</i></b> —<br><br>(a) Upon determination by the Central Authority of the urgency of the provisional arrest of the Extraditee pending receipt of the request for Extradition, the Central Authority shall direct the NBI to file an<i> ex parte</i> application for provisional arrest with the second-level court where the Extraditee resides, or if unknown, that which has jurisdiction over the place where the office of the Central Authority is located. The Executive Judge of the second-level court shall immediately raffle the <i>ex parte</i> application.<br><br>The court that issued the Warrant of Provisional Arrest shall be the Extradition Court when a petition for Extradition is filed before it.<dl><dt>(b) Upon receipt of the<i> ex parte</i> application, the second-level court shall promptly issue a Warrant of Provisional Arrest based on the existence of Probable Cause if it is satisfied that the following information and/or documents are provided:<br><br></dt><dd>1. a description of the Extraditee, accompanied by a photograph or any other identifying documents, if available;<br><br>2. a statement that the Extraditee is present in the territory of the Philippines;<br><br>3. the location of the Extraditee, if known;<br><br>4. a brief statement of the facts of the case, including the date and the place of the commission of the offense;<br><br>5. an English translation of the law violated, which shall include the penalty imposed or that may be imposed;<br><br>6. where the Extraditee is wanted for prosecution, a copy of the charging document and warrant or order of arrest;<br><br>7. where the Extraditee has been convicted, an English translation of the decision of conviction against them, or any other document setting out the conviction;<br><br>8. a statement that the request for Extradition and its supporting documents shall be submitted within a period of 60 calendar days from the provisional arrest of the Extraditee, unless a different period is provided in the applicable Extradition Treaty; and<br><br>9. other documents and/or information as may be required under the applicable Extradition Treaty.</dd></dl>(c) The request for provisional arrest and its supporting documents are not required to be authenticated.<br><br>(d) The request for Extradition and its supporting documents must be received by the Executive Authority within 60 calendar days from the provisional arrest of the Extraditee, unless a different period is provided in the applicable Extradition Treaty.<br><br>If the Executive Authority does not receive the request for Extradition and its supporting documents within the 60-calendar-day period, or the period provided in the applicable Extradition Treaty, the person provisionally arrested shall be automatically released from detention or their bail shall be discharged.<br><br>(e) The release of the Extraditee shall be without prejudice to their rearrest if the request for Extradition and its supporting documents are subsequently received by the Executive Authority.<br><br><b>Section 2.<i> Issuance of Precautionary Hold Departure Order.</i></b> — Upon the issuance of a Warrant of Provisional Arrest, the second-level court may, upon request, issue a Precautionary Hold Departure Order directing the Bureau of Immigration and other law enforcement authorities to prevent any attempt by the Extraditee to depart from the Philippines.<br><br>Any Precautionary Hold Departure Order issued is deemed superseded upon the issuance of a Hold Departure Order.<br><br><b>Section 3.<i> Bail.</i></b> — The provisions on Bail under Rule 3 hereof shall likewise apply to an Extraditee detained pursuant to a warrant for their provisional arrest.<br><br><center><b>RULE 5<br><br>VOLUNTARY SURRENDER</b></center><br><b>Section 1.<i> Voluntary Surrender.</i></b> —<br><br>(a) While under provisional arrest, during the pendency of the Extradition proceedings, or at any time before the judgment or order granting the petition for Extradition becomes final, the Extraditee may consent to their Extradition by filing with the second-level court that issued the Warrant of Provisional Arrest or with the Extradition Court, a notarized affidavit of waiver of the right to Extradition proceedings, executed with the assistance of counsel.<dl>(b) The notarized affidavit of waiver shall be subject to the following requirements:<br><br><dd>1. It must be in a language known to the Extraditee. If not in English or Filipino, it must be accompanied by a translation in English or Filipino;<br><br>2. It must be executed by the Extraditee with the assistance of counsel, preferably of the Extraditee's choice. If the Extraditee cannot afford the services of counsel, they must be provided with one;<br><br><dl><dt>3. It shall contain the following:<br><br></dt><dd>i. the name, age, and residence of the Extraditee;<br><br>ii. a statement that the Extraditee irrevocably waives the right to Extradition proceedings;<br><br>iii. a statement that the consent of the Extraditee was knowingly and voluntarily given after having been advised by counsel of their rights and the legal consequences of voluntary surrender; and<br><br>iv. a sworn attestation executed by the lawyer confirming that they assisted the Extraditee in drafting the affidavit and informed the Extraditee of the effects of the waiver of the right to Extradition proceedings.</dd></dl></dd></dl><dl><dt>(c) The second-level court that issued the Warrant of Provisional Arrest, or the Extradition Court, shall, after being satisfied that the Extraditee knowingly and voluntarily waived the right to Extradition proceedings and consented to their voluntary surrender,<i> motu proprio</i> issue an order<br><br></dt><dd>1. directing the appropriate authorities to implement the Extraditee's surrender to the Requesting State; and<br><br>2. dispensing with the filing of a petition for Extradition or terminating the pending Extradition proceedings.<br><br>Such an order shall be immediately final and executory.</dd><dt><br></dt></dl><center><b>RULE 6<br><br>MISCELLANEOUS PROVISIONS</b></center><br><b>Section 1.<i> Turnover of the Extraditee.</i></b> — After the decision granting the petition for Extradition becomes final and executory, jurisdiction over the Extraditee shall be turned over to the authorities of the Requesting State at a time and place to be determined and made known to the Extradition Court by the Central Authority, in consultation with the Executive Authority and the Requesting State.<br><br><b>Section 2.<i> Seizure and Turnover of the Properties of the Extraditee.</i></b> —<dl><dt>a) Upon the order of the Extradition Court and upon the instance of the Requesting State, the following properties shall be turned over to that state, to the extent permitted under Philippine laws:<br><br></dt><dd>1. properties found in the possession of the Extraditee upon their arrest, which relate to the evidence or fruits of the offense committed in the Requesting State; and<br><br>2. any other properties mentioned in the applicable Extradition Treaty.</dd></dl>b) The turnover of any of the properties indicated in paragraph (a) of this section may be ordered even when Extradition, although already granted, cannot be effected due to the death, disappearance, or escape of the Extraditee.<br><br><b>Section 3.<i> Costs and Expenses; By Whom Paid.</i></b> — Unless otherwise provided in the applicable Extradition Treaty, all costs or expenses incurred in the Extradition proceedings shall be shouldered by the Requesting State.<br><br><b>Section 4.<i> Transitory Provisions.</i></b> — This Rules shall apply to all pending proceedings in Extradition cases, including applications for warrants of arrest or hold departure orders, whether provisional and precautionary or otherwise, and applications for bail.<br><br><b>Section 5.<i> Effectivity.</i></b> — This Rules shall take effect after 15 calendar days from publication in the Official Gazette or in a newspaper of general circulation in the Philippines.</div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

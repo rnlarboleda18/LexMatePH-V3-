@@ -1,0 +1,22 @@
+import sys
+
+sys.path.append(r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api')
+
+from db_pool import get_db_connection, put_db_connection
+from psycopg2.extras import RealDictCursor
+
+def inspect_row3():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        cur.execute("SELECT * FROM consti_codal WHERE id = 3")
+        row = cur.fetchone()
+        if row:
+            print("\n--- ROW 3 ---")
+            for k, v in row.items():
+                print(f"{k}: {v}")
+    except Exception as e:
+        print(f"Error: {e}")
+    put_db_connection(conn)
+
+inspect_row3()

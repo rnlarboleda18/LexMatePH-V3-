@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>A.M. No. 25-09-16-SC - (2025 TRANSITORY RULES ON ELECTRONIC FILING AND SERVICE IN THE SUPREME COURT) - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '64da01eca41b43c4ebb92dda2f348261' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '64da01eca41b43c4ebb92dda2f348261' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/99969' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2>EN BANC</H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ A.M. No. 25-09-16-SC, September 30, 2025 ]</H2>
+					<H3>(2025 TRANSITORY RULES ON ELECTRONIC FILING AND SERVICE IN THE SUPREME COURT)</H3>
+					</CENTER>
+					<p><div align="justify"> <p> <b>WHEREAS</b>, under Article VIII, Section 5(5) of the 1987 Constitution, the Supreme Court is vested with the power to "promulgate rules concerning the protection and enforcement of constitutional rights, pleading, practice, and procedure in all courts, the admission to the practice of law, the Integrated Bar of the Philippines, and legal assistance to the underprivileged. Such rules shall provide a simplified and inexpensive procedure for the speedy disposition of cases, shall be uniform for all courts of the same grade, and shall not diminish, increase, or modify substantive rights";</p><p> <b>WHEREAS</b>, in preparation for the eventual establishment of an electronic filing paperless system in the Judiciary, the Supreme Court in 2013 approved the Guidelines on Submission and Processing of Soft Copies of Supreme Court-Bound Papers Pursuant to the Efficient Use of Paper Rule through A.M. No. 10-3-7-SC and A.M. No. 11-9-4-SC, which was later revised in 2022;</p><p> <b>WHEREAS</b>, the Supreme Court <i>En Banc</i>, in A.M. No. 22-04-26-SC, crafted the Strategic Plan for Judicial Innovations 2022-2027, which lays down the reform initiatives necessary toward achieving a technology-driven Judiciary;</p><p> <b>WHEREAS</b>, among the initiatives for the Innovation outcome of the Strategic Plan for Judicial Innovations 2022-2027 is the development of an eCourt System (eCourt PH), a key component of which is the digital filing and service in civil cases in the Supreme Court;</p><p> <b>WHEREAS</b>, the Supreme Court <i>En Banc</i> issued the Guidelines on the Transition to Electronic Filing ("the Transition Guidelines") in the Supreme Court in A.M. No. 25-05-16-SC, providing a transition period for electronic filing in the Court and electronic service using the Philippine Judiciary Platform's eCourt PH application;</p><p> <b>NOW THEREFORE,</b> the Supreme Court <i>En Banc</i> resolves to <b>ADOPT</b> and <b>APPROVE</b> the "2025 Transitory Rules on Electronic Filing and Service in the Supreme Court," which shall take effect on October 30, 2025, following its publication in the Official Gazette or in two newspapers of general circulation, and on the Supreme Court website. Until such time, A.M. No. 25-5-16-SC, or the Transition to Electronic Filing in the Supreme Court, shall remain in effect. </p><p> September 30, 2025, Manila, Philippines. <br> </p><table width="100%" border="0"> <tbody> <tr> <td colspan="2"><div align="center">(On official leave)<strong><br> ALEXANDER G. GESMUNDO<br> </strong>Chief Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td width="50%"><div align="center"><strong>(Sgd.)</strong> <strong>MARVIC M.V.F. LEONEN</strong><br> Senior Associate Justice</div></td> <td width="50%"><div align="center">(On official business) <br> <strong>ALFREDO BENJAMIN S. CAGUIOA<br> </strong>Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"> <strong>(Sgd.) RAMON PAUL L. HERNANDO</strong><br> Associate Justice </div></td> <td><div align="center"><strong>(Sgd.) AMY C. LAZARO-JAVIER </strong><br> Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"> <strong>(Sgd.)</strong> <strong>HENRI JEAN PAUL B. INTING </strong><br> Associate Justice</div></td> <td><div align="center"><strong>(Sgd.)</strong> <strong>RODIL V. ZALAMEDA</strong> <br> Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"><strong>(Sgd.)</strong> <strong>SAMUEL H. GAERLAN</strong> <br> Associate Justice </div></td> <td><div align="center"> <strong>(Sgd.)</strong> <strong>RICARDO R. ROSARIO </strong><br> Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"><strong>(Sgd.)</strong> <strong>JHOSEP Y. LOPEZ</strong> <br> Associate Justice </div></td> <td><div align="center"> <strong>(Sgd.)</strong> <strong>JAPAR B. DIMAAMPAO </strong><br> Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"><strong>(Sgd.)</strong> <strong>JOSE MIDAS P. MARQUEZ</strong><br> Associate Justice </div></td> <td><div align="center"> <strong>Sgd.)</strong> <strong>ANTONIO T. KHO, JR. </strong><br> Associate Justice </div></td> </tr> <tr valign="bottom"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="bottom"> <td><div align="center"><strong>(Sgd.)</strong> <strong>MARIA FILOMENA D. SINGH</strong> <br> Associate Justice </div></td> <td><div align="center"> <strong>(Sgd.) RAUL B. VILLANUEVA </strong><br> Associate Justice </div></td> </tr> </tbody> </table> <p align="center"> </p><p align="center"> </p></div><div align="justify"><br></div><div align="justify"><hr align="center" width="60%" size="1" noshade="noshade"> <p align="center"><strong><br></strong></p><p align="center"><strong>EN BANC</strong></p><p align="center"><strong>A.M. No. 25-09-16-SC<br> (RE: 2025 TRANSITORY RULES ON ELECTRONIC FILING AND <br> SERVICE IN THE SUPREME COURT) </strong> </p><p align="center"> <b>RULE I <br> GENERAL PROVISIONS</b> </p><p> <b>Section 1.</b> <i>Coverage; excluded cases</i>. — Starting October 30, 2025 and subject to the transitory period for electronic service, all pleadings, motions, and other papers filed in the Supreme Court, whether initiatory or for a docketed case, must be electronically filed in accordance with this Rules, except in the following cases which shall continue to be governed by existing rules of procedure ("excluded cases"): </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">Appeals in all criminal cases pursuant to Rule 122 of the Rules of Criminal Procedure, from the first- and second­-level courts, the Court of Appeals, the Court of Tax Appeals, and the Sandiganbayan;</div></td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">Administrative complaints against personnel of the Supreme Court and its decentralized units, including the Presidential Electoral Tribunal;</div></td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td><div align="justify">Administrative complaints and matters involving the Court of Appeals, the Sandiganbayan, the Court of Tax Appeals, and first- and second-level courts, its justices, judges, and personnel;</div></td> </tr> <tr valign="top"> <td><div align="justify">(4)</div></td> <td><div align="justify">Complaints against lawyers and other Bar matters; and</div></td> </tr> <tr valign="top"> <td><div align="justify">(5)</div></td> <td><div align="justify">All cases within the jurisdiction of the Presidential Electoral Tribunal, the Senate Electoral Tribunal, and the House of Representatives Electoral Tribunal, which shall continue to be governed by their respective rules of procedure.</div></td> </tr> </tbody></table> </blockquote> <p><b>Section 2.</b> <i>Who shall file electronically; covered filers</i>. — A covered filer shall electronically file, serve, and be served all pleadings, motions, and other papers, as well as Court-issued documents, except in excluded cases. Covered filers must have valid and existing registered accounts with the Philippine Judiciary Platform (<a href="https://portal.judiciary.gov.ph">https://portal.judiciary.gov.ph</a>) before they may electronically file, serve, and be served in accordance with this Rules.</p> <p> Members of the Philippine Bar shall automatically be deemed covered filers for cases in the Court, whether as party to a case or as counsel. Philippine Judiciary Platform accounts of members of the Philippine Bar must be fully verified by the Office of the Bar Confidant.</p><p> Covered filers shall not be permitted to file or serve any pleading, motion, or other paper with the Court using any other manner of filing or mode of service provided in the Rules of Civil Procedure, unless expressly authorized by the Court.</p><p> <b>Section 3.</b> <i>Non-covered filers</i>. — The following shall be considered non-covered filers under this Rules: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">All persons who are not members of the Philippine Bar;</div></td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify"><i>Amicus curiae</i> appointed by the Court, including those who are members of the Philippine Bar; and </div></td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td><div align="justify">Law student practitioners, even if the pleading, motion, or other paper is signed by a lawyer.</div></td> </tr> </tbody></table> </blockquote> <p>However, upon order of the Court, an <i>amicus curiae</i> who is a member of the Philippine Bar may be permitted to file and serve electronically in the case for which they are appointed.</p> <p align="center"> <b>RULE II <br> ELECTRONIC FILING APPLICATION</b> </p><p> <b>Section 1.</b> <i>Access to the electronic filing application</i>. — Registration with the Philippine Judiciary Platform is required for access to the electronic filing application, through which electronic filing and service shall exclusively be done. Access to the <i>rollo</i> of cases shall also be provided through the electronic filing application, subject to the rules and guidelines of the Court.</p><p> <b>Section 2.</b> <i>Counsel of record, individual and collective</i>. — For the purposes of this Rules, "counsel of record" may be an individual member of the Philippine Bar, a partnership, a law firm, a legal aid office or organization, a government law office created by law for a particular purpose, or any other legal organization or lawyers' group.</p><p> Each counsel of record is entitled to one e-mail address on record for each case, which may be different from the registered e-mail address of their Philippine Judiciary Platform account. The e-mail address on record shall be for the purpose of receiving notifications of service of pleadings, motions, or other papers, as well as Court-issued documents for a particular case. The e-mail address must be a valid and professional e-mail address and capable of receiving e-mails from the electronic filing application.</p><p> When several lawyers appear for one party in a case, each appearing lawyer shall be equally considered as the party's counsel of record in the electronic filing application. </p><p> No partnership, law firm, legal aid office or organization, government law office created by law for particular purposes, or any other legal organization or lawyers' group shall be allowed to register as a filer separate from any individual member of the Philippine Bar in the electronic filing application. </p><p> <b>Section 3.</b> <i>Counsel of record in new cases</i>. — The lawyer who electronically files the motion for extension of time to file a petition, or the initiatory petition or pleading, shall be deemed the counsel of record of the party on whose behalf the motion or initiatory petition or pleading is filed. All lawyers who signed the motion or petition, and those who are included as handling lawyers in the electronic filing application, shall likewise be deemed the party's counsel of record. </p><p> For the purposes of notifications of service and the management of counsel of record under Rule II, Section 6 of this Rules, the partnership, law firm, legal aid office or organization, government law office created by law for a particular purpose, or any other legal organization or lawyers' group on whose behalf a lawyer has filed the motion or petition shall also be the counsel of record in the new case, provided that the name, mailing address, and e-mail address of the partnership, law firm, legal aid office or organization, government law office, or legal organization or lawyers' group is stated in the motion or petition, or submitted in the electronic filing application. </p><p> <b>Section 4.</b> <i>Counsel of record in docketed cases, when entry made</i>. — A counsel of record for a party who has entered their appearance in a docketed case before the Court prior to the effectivity of this Rules, whether individually or collectively, shall continue to be deemed the counsel of record in the electronic filing application under this Rules. </p><p> The covered filer who electronically files any pleading, motion, or other paper for a party in a case docketed prior to the effectivity of this Rules shall likewise be considered a counsel of record for that party even if they did not sign the pleading, motion, or other paper, unless they are filing as collaborating counsel or counsel by special appearance. </p><p> Upon the Court's approval, a withdrawal of entry of appearance in a docketed case filed with the Court and served upon all parties shall have the effect of removing the filing lawyer's status as counsel of record for that case in the electronic filing application. A lawyer who has not been automatically removed from a case in the electronic filing application upon the approval of their withdrawal must immediately inform the administrators of the electronic filing application of their non-removal. </p><p> <b>Section 5.</b> <i>Collaborating counsel; special appearance</i>. — Lawyers who have entered their appearance as collaborating counsel, or have entered their special appearance, may electronically file and serve in cases for which they have made their appearance, but are not entitled to service of Court-issued documents or access to digital files other than their own filings, unless otherwise authorized by the Court. </p><p> <b>Section 6.</b> <i>Management of counsel of record</i>. — Notice shall be filed with the Court for changes involving counsel of record in the electronic filing application including, but not limited, to the addition or removal of lawyers, changes in the collective name such as firm name, and changes in the e-mail addresses of record. The notice shall be served on all parties. </p><p> <b>Section 7.</b> <i>Prohibition against account sharing</i>. — All filings made in the electronic filing application using a registered account are conclusively presumed to have been made by the lawyer under whose name the account is registered, even if the lawyer has not signed their name in the pleading, motion, or other paper filed.</p><p> The filing and service of any document by a person using the account of another is strictly prohibited. Any lawyer who deliberately allows, or through negligence in the safekeeping or security of their account credentials makes it possible for, another person to file or serve any document using their account shall be subject to disciplinary action. The person who files or serves using another's account shall be penalized under relevant laws and regulations. If they are a lawyer, they shall additionally be subject to disciplinary action.</p><p> Under no circumstances should any covered filer disclose the password of their Philippine Judiciary Platform account in any filing before the Court or to any Judiciary office, official, or employee.</p><p align="center"> <b>RULE III <br> DIGITAL FILE FORMAT</b> </p><p> <b>Section 1.</b> <i>File format</i>. — The term "digital file format," when used to refer to pleadings, motions, and other papers, shall mean the Portable Document Format (PDF) or Portable Document Format Archive (PDF/A). The primary pleading or other paper, as well as any additional accompanying documents such as annexes or affidavits, must be in the prescribed digital file format for the purpose of electronic filing under this Rules. </p><p> The digital file may be electronically generated from a word processing or portable document format creation program, or be scanned images of an original document on paper compiled in a digital file, or a combination of both methods. </p><p> The pleading, motion, or other paper must be written in single space, with a 1.5-line spacing between paragraphs, using an easily readable font style of the party's choice, in 14-point font. The paper size must be 8.5 x 13 inches, with a white background. If an additional accompanying document was originally on paper, the paper size of the digital file shall approximate the paper size of the original document on paper. </p><p> Contents of all digital files must be completely legible, regardless of any watermarks. </p><p> If a digital file is wholly or partially generated from scanned images of an original document on paper, the filer shall ensure that the digital file is an exact and complete copy of the original document on paper, including the reproduction of colors in the original document. If an original document on paper is a certified true copy as required by law or the Rules of Court, the certification must be visible in the digital file. If an original document on paper has been notarized, the notarial seal must be visible in the digital file. When laws or rules require the submission of an original document, and the original document is a document on paper, the digital file of the original document on paper, if an exact and complete copy thereof, shall be deemed as the original document for the purpose of compliance with electronic filing under this Rules, subject to the rules on evidence, including electronic evidence.</p><p> In case of discrepancies between the images of scanned text and any machine-readable text generated using optical character recognition or similar technologies, the former shall be the controlling text.</p><p> Photographs, illustrations, or other two-dimensional images not otherwise incorporated in a document must be converted to, or embodied in the PDF or PDF/A file formats, reproducing as far as technically possible the properties of the original two-dimensional image, in accordance with the pertinent rules on evidence. The filer must retain the original two-dimensional image for inspection by the Court, or other parties, upon order or motion. </p><p> Audio, video, and audiovisual files may be submitted as additional accompanying documents if they are in the acceptable file formats of the electronic filing application, provided that each file is accompanied by a metadata document in the PDF or PDF/A file format stating the following file properties: (1) the position of the file in the sequence of additional accompanying documents, followed by the filename which must follow the naming convention in Rule III, Section 3; (2) the file format; and (3) the file size. When it is necessary to encode, transcode, or convert an audio, video, or audiovisual file to an acceptable file format, the metadata document must also contain a declaration of such encoding, transcoding, or conversion and that the file as submitted to the Court is an exact and complete copy of the original. The filer must retain the original audio, video, or audiovisual file for inspection by the Court, or other parties, upon order or motion.</p><p> A single digital file must have a maximum file size of 100 megabytes.</p><p> <b>Section 2.</b> <i>Separation of digital files</i>. — The digital file of the primary pleading, motion, or other paper must be separate from the electronic copies of any additional accompanying documents, each of which must be contained in their own digital files.</p><p> <b>Section 3.</b> <i>Filename conventions</i>. — The digital file of a pleading, motion, or other paper shall have the same filename as its designation, in accordance with Rule 7, Section 2 of the Rules of Civil Procedure. At the option of the filer, the designation of the pleading, motion, or other paper may be shortened for the filename, but must still contain sufficient information to ascertain the nature of the relief sought.</p><p> The digital file of each additional accompanying document, if any, shall have the same filename as the document's title, which must further be appended with the designation of the pleading, motion, or other paper to which it is attached or annexed. All filename information shall be separated with a hyphen(-). Any special characters that cannot be used in a filename by reason of technical limitations may be omitted entirely, or substituted with an underscore (_), at the option of the filer.</p><p> In case of any discrepancy between the filename and the designation of the digital file of a pleading, motion, or other paper, the latter shall be controlling.</p><p> In case of any discrepancy between the filename of the digital file of an additional accompanying document and any visible mark on the first page of the document serving as the label of its position in the sequence of the set of additional accompanying documents, the latter shall be controlling.</p><p> <b>Section 4.</b> <i>Prohibited digital files</i>. — Digital files with password protection or other encryption; with embedded executable code or scripts; in archive files; or are corrupted files, even if in the digital file formats in Section 1, shall be deemed as not filed and shall be excluded from the case <i>rollo</i>.</p><p> The filing of digital copies not in accordance with the format and manner stated under this Rule shall subject the filing party, lawyer, or law firm or equivalent to disciplinary action or any appropriate sanction to be imposed by the Court. </p><p> <b>Section 5.</b> <i>Exceptions to the digital file requirement</i>. — Noncompliance with the digital file requirement due to lack of technical capacity, volume of documents or pages thereof, quality of the original document on paper, existence of confidential or secret material or personal data, or other similar reasons shall not be excused. </p><p> If the total number of digital files to be submitted exceeds the maximum allowable for a single filing in the electronic filing application, the filer may, with leave of the Court, opt for supplemental filings for the excess digital files or for the provision of an alternative bulk document upload facility. However, the filing is only deemed completed at the time that all digital files intended to be filed have been filed with the Court. </p><p> If an additional accompanying document to a pleading, motion, or other paper that must be filed electronically is in a format not readily amenable to digitization in the prescribed digital file format or in other file formats supported by the electronic filing application, the filer may move for the submission of the document to the Court using any other manners of filing prescribed under the Rules of Civil Procedure. The motion must describe the physical or technical limitations of the additional accompanying document, and must be filed electronically, and served to all parties. </p><p> <b>Section 6.</b> <i>Digital files of Court-issued documents</i>. — When the original of a Court-issued document is on paper, the responsible offices or units of the Court shall ensure that the digital file is the exact and complete copy of the original document on paper. When applicable, the digital files must be compliant with the Amended Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances and other relevant laws and rules. </p><p> The Court shall provide for a process by which digital files of Court-issued documents may be verified. </p><p align="center"> <b>RULE IV <br> ELECTRONIC FILING</b> </p><p> <b>Section 1.</b> <i>Electronic filing of pleadings, motions, or other papers</i>. — Only one digital file of the pleading, motion, or other paper shall be uploaded to the electronic filing application. Only one digital file of each and all additional accompanying documents, if any, shall be uploaded to the electronic filing application, in the order by which they have been enumerated or referenced in the pleading, motion, or other paper. </p><p> In case it is determined that more than one digital file of the same pleading, motion, or other paper was submitted in a single electronic filing, the Court shall include only the first submitted file, as determined by the timestamps in the electronic filing application, in the case <i>rollo</i>, without need of notice to the filer.</p><p> The electronic filing application shall be open for filing at all times, regardless of the working hours and days of the Court, unless there is scheduled maintenance of the application. The unavailability of the electronic filing application shall neither stay the running nor extend the timeline of any reglementary period provided under the Rules of Court. Should the expiry of any reglementary period for the filing of a pleading, motion, or other paper fall within the duration of the unavailability of the electronic filing application, filing may be made in accordance with Rule V of this Rules, and service to covered filers in accordance with the Rules of Civil Procedure, without need for prior leave of court.</p><p> <b>Section 2.</b> <i>Proof of filing</i>. — The electronic filing of any pleading, motion, other paper, or additional accompanying document shall be proved by its existence in the case<i> rollo</i>.</p><p> <b>Section 3.</b> <i>Timeliness of filing</i>. — The date and time of the confirmation of a successful filing as recorded in the electronic filing application shall be considered the date and time of the Court's receipt of the filing.</p><p> However, the timeliness of the filing is subject to the Court's subsequent assessment and determination of the filing's compliance with the requirements in the Rules of Court including, but not limited, to the required attachments, full payment of the required docket and other court fees, and completed service on the other parties. </p><p> <b>Section 4.</b> <i>Effect of erroneous manner of filing</i>. — When a covered filer uses any manner of filing other than electronic filing under this Rules without express authority from the Court, the pleading, motion, or other paper shall be deemed not filed, and the erroneous manner of filing shall not toll the reglementary period for the filing of the pleading, motion, or other paper.</p><p align="center"> <b>RULE V <br> CONVENTIONAL FILING</b> </p><p> <b>Section 1.</b> <i>Manner of filing of non-covered filers.</i> — In all cases before the Court, non-covered filers shall file preferably by personally submitting the pleading, motion, or other paper to the Court, or by electronic transmittal of the pleading, motion, or other paper via e-mail. </p><p> Non-covered filers may also file with the Court by sending the pleading, motion, or other paper by registered mail or by accredited courier, in accordance with the Rules of Civil Procedure. </p><p> Only one original pleading, motion, or other paper, and one set of its additional accompanying documents, shall be filed with the Court. </p><p> If a non-covered filer is represented by a covered filer in a case, the non-covered filer may be permitted to file according to this Rule, provided that their pleading, motion, or other paper is not signed by a covered filer. The filing is subject to the prohibition against circumvention in Section 6 of this Rule. </p><p> <b>Section 2.</b> <i>Filing via electronic transmittal</i>. — When filing by electronic transmittal, the digital file of the pleading, motion, or other paper and its additional accompanying documents must comply with the prescribed digital file format in Rule III. The filing must be sent to the e-mail address of the appropriate docketing office of the Court, a directory of which is published on the Court website (<a href="https://sc.judiciary.gov.ph">https://sc.judiciary.gov.ph</a>).</p><p> The date and time of the electronic transmittal, as recorded by the appropriate docketing office of the Court, shall be considered as the date and time of filing. Should a filing by electronic transmittal be made over multiple e-mails further to Section 4(c) of this Rule, the date and time of the final e-mail as received by the Court's docketing office shall be the date and time of filing.</p><p> The transmittal e-mail must comply with Section 4 of this Rule.</p><p> <b>Section 3.</b> <i>Submission of digital file, when required</i>. — When a pleading, motion, or other paper is filed personally, through registered mail or accredited courier, a digital file thereof must be submitted to the Court via e-mail within 24 hours from the filing of the pleading, motion, or other paper. The submission must also include all additional accompanying documents.</p><p> The date and time of the original filing, not the submission of the electronic copy, shall be the date and time of filing of the pleading, motion, or other paper.</p><p> The electronic copy submitted must comply with the prescribed digital file format in Rule III. No verified declaration of electronic submission need be submitted by the filing party.</p><p> The electronic copy must be submitted to the e-mail address of the appropriate docketing office of the Court.</p><p> A pleading, motion, or other paper shall not be acted upon until the digital file has been submitted to the Court in accordance with this Rules.</p><p> <b>Section 4.</b> <i>Submission e-mail format.</i> — </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td colspan="2"><div align="justify"><i>Subject</i>. The subject of the e-mail shall have the docket number(s), case title(s), and the designation of the primary pleading, motion, or other paper being submitted, which shall indicate its nature.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><br></td> <td colspan="2"><div align="justify">If there is no docket number for the filing, the filer may leave this blank.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td colspan="2"><div align="justify"><i>Body</i>. The body of the e-mail shall follow the prescribed format and must contain sufficient information to enable the Court to ascertain: (1) the party or parties filing the pleading, motion or other paper; (2) the nature of the pleading, motion, or other paper; (3) the party or parties against whom relief, if any, is sought; and (4) the nature of the relief sought:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><br></td> <td><div align="justify">(i)</div></td> <td><div align="justify">Primary manner of filing;</div></td> </tr> <tr valign="top"> <td><br></td> <td><div align="justify">(ii)</div></td> <td><div align="justify">Filing date, based on the primary manner of filing; and</div></td> </tr> <tr valign="top"> <td><br></td> <td width="5%"><div align="justify">(iii)</div></td> <td width="90%"> <div align="justify">Case data, namely: (1) docket number(s), (2) case title(s); (3) name of the filing party, and (4) a list of the document titles of the attachments to the submission e-mail.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td colspan="2"><div align="justify"><i>Attachments</i>. A submission e-mail shall contain only digital files pertaining to one filing, pertaining to one case. For the purposes of filing, consolidated cases with more than one docket number shall be considered as one case.</div></td> </tr> <tr valign="top"> <td><br></td> <td colspan="2"><br></td> </tr> <tr valign="top"> <td><br></td> <td colspan="2"><div align="justify">In case the total file size of the documents exceeds the maximum size allowed for attachments by the e-mail service provider being used by the filer, the filer shall transmit the electronic documents in several batches, but each e-mail must be clearly marked by indicating in the subject the batch number of the e-mail and the total batches of e-mails sent. It is the responsibility of the filer to ensure that the docketing office of the Court will not reject or block a submission e-mail due to its size, and that all of the e-mails in a batch are successfully transmitted.</div></td> </tr> </tbody></table> </blockquote> <p><b>Section 5.</b> <i>Excluded cases</i>. — This Rule shall apply to all filings of pleadings, motions, and other papers in excluded cases in Rule I, Section 1, of this Rules.</p> <p> This Rule shall also apply to instances where a covered filer is authorized by the Court or this Rules to file non-electronically. </p><p> <b>Section 6.</b> <i>Prohibition against circumvention</i>. — If the Court determines that a filing made under this Rule is to circumvent the electronic filing requirement for covered filers, it shall impose sanctions on the covered filer and the person who made the filing. The lawyer shall also be subject to disciplinary action.</p><p align="center"> <b>RULE VI <br> ELECTRONIC SERVICE</b> </p><p> <b>Section 1.</b> <i>Service of initiatory motions, petitions, or other pleadings.</i> — In all cases, service of motions for extensions of time to file initiatory petitions or pleadings, or initiatory petitions or pleadings, on all parties and their counsel shall be made personally or by registered mail or accredited courier, in accordance with the Rules of Civil Procedure.</p><p> Service shall be proved in accordance with the Rules of Civil Procedure. When the initiatory motion, petition, or pleading is filed electronically according to this Rules, the covered filer shall include in the electronic filing a digital file of the proof of service. </p><p> When a motion for extension of time to file an initiatory petition or pleading has already been filed and served, the initiatory petition or pleading shall be treated as a subsequent pleading for the purpose of this Rule.</p><p> <b>Section 2.</b> <i>Electronic service of subsequent pleadings, motions, or other papers</i>. — Service of subsequent pleadings, motions, and other papers by covered filers on other covered filers shall be made through the electronic filing application.</p><p> Electronic service shall consist of the submission of the digital file of the pleading, motion, or paper, as well as all digital files of additional accompanying documents, to the electronic filing application. Electronic service shall be made upon all counsel of record individual or collective regardless of their designation as lead or co-counsel, including those whose withdrawal of appearance has not been approved by the Court at the time the filing is made. A notification of such fact of submission shall be electronically transmitted to all covered filers for that case to their e-mail addresses on record.</p><p> Electronic service shall be proved by the record of the service to a covered filer in the electronic filing application. No additional proof of electronic service shall be required, but the filer's affidavit of service may state the fact of electronic service to covered filers using the electronic filing application.</p><p> <b>Section 3.</b> <i>Service of pleadings, motions, and other papers on and by a non-covered filer</i>. — When the Court or the rules of procedure requires service of a pleading, motion, or other paper by a covered filer on a non-covered filer, the service shall be made in accordance with the Rules of Civil Procedure.</p><p> Service of pleadings, motions, and other papers on courts or tribunals appealed from shall be made in accordance with the Rules of Civil Procedure, unless otherwise ordered by the Court.</p><p> The covered filer shall include in the electronic filing a digital file of the proof of service on the non-covered filer. The covered filer shall certify under oath that the copy of the pleading, motion, or other paper served on a non-covered filer is the exact and complete copy of the digital file submitted to the Court. The covered filer shall also state the mode and attach the proof of service to the affidavit of filing and service of the pleading, motion or other paper.</p><p> Service between non-covered filers, and service by a non-covered filer on a covered filer, shall be in accordance with the Rules of Civil Procedure.</p><p> <b>Section 4.</b> <i>Service of decisions, resolutions, notices, and other issuances of the Court</i>. — Service of Court-issued documents, such as decisions, resolutions, notices, and other processes, on covered filers shall be through the electronic filing application. The electronic service shall consist of the upload of the digital file of the Court-issued document to the electronic filing application. </p><p> Service of Court-issued documents on non-covered filers and the court or tribunal appealed from shall be made in accordance with the Rules of Civil Procedure, including electronic transmittal upon prior agreement of the non-covered filer.</p><p> The first service to newly-impleaded parties shall be in accordance with the Rules of Civil Procedure.</p><p> <b>Section 5.</b> <i>Completion of electronic service</i>. — Electronic service shall be completed upon the submission of the electronic filing or upload of the Court-issued document to the electronic filing application. The date and time of electronic service shall be determined based on the server timestamps in the electronic filing application, and not from the date and time of electronic transmittal of the notification to a covered filer.</p><p> <b>Section 6.</b> <i>When electronic service is effected</i>. — Electronic service may be effected in the electronic filing application at all times, even outside the working hours and days of the Court.</p><p> <b>Section 7. </b><i>Electronic notification</i>. — A notification of the fact of submission of an electronic filing or upload of a Court-issued document shall be electronically transmitted to all covered filers to their e-mail addresses on record.</p><p> The electronic transmittal of the notification shall not determine completion of electronic service. Successful delivery of the notification shall not be required for the completion of electronic service.</p><p> <b>Section 8.</b> <i>Effect of multiple modes of service</i>. — When a covered filer serves a pleading, motion, or other paper on a covered filer both through the electronic filing application and any of the prescribed modes in the Rules of Civil Procedure, the service through the electronic filing application shall be controlling.</p><p align="center"> <b>RULE VII<br> OTHER PROVISIONS</b> </p><p> <b>Section 1.</b> <i>Administration of the electronic filing application; technical support.</i> — The Judicial Records Office and the Management Information Systems Office shall jointly administer the electronic filing application under this Rules.</p><p> The administrators of the electronic filing application shall ensure that pagination and other requirements for case <i>rollos</i> as prescribed in the rules of the Court are consistent without regard to the format of the document to be included in the <i>rollo</i>.</p><p> Technical issues with the electronic filing application may be reported to the Management Information Systems Office eCourt PH Helpdesk from Monday to Friday, 8:00 a.m. to 4:30 p.m., excluding Court-announced holidays. However, urgent cybersecurity issues may be reported at any time of any day.</p><p> All other inquiries concerning filing with the Court shall be directed to the Judicial Records Office from Monday to Friday, 8:00 a.m. to 4:30 p.m., excluding court-announced holidays without designation of skeleton staff.</p><p> The Court shall publish the contact information of the eCourt PH Helpdesk and the Judicial Records Office on the Court's website.</p><p> <b>Section 2.</b> <i>Transition to electronic service</i>. — Starting October 30, 2025, the exclusive mode of service of pleadings, motions, and other papers and Court-issued documents in covered cases and among covered filers shall be through the electronic filing application in accordance with this Rules.</p><p> <b>Section 3.</b> <i>Duties of covered filers</i>. — Covered filers are duty-bound to regularly monitor the electronic filing application for activity in cases covered by this Rules.</p><p> Covered filers shall ensure that the case and filing data provided to the electronic filing application are consistent with the contents of the pleading, motion, or other paper being filed. It shall be the responsibility of the filer to ensure that the pleading, motion, or other paper is electronically filed under the correct docket number(s) and case title(s). Any discrepancy between the user-inputted case and filing data; the filed pleading, motion, or paper; and the case record with the Court shall be resolved on a case-to-case basis, based on the circumstances surrounding such discrepancy.</p><p> However, if the Court finds that any discrepancy was made by the filer to delay the case or deceive the Court or other parties, or the discrepancy resulted in delay of the proceedings or deception of the Court or other parties, the one who made the electronic filing shall be subject to disciplinary action.</p><p> <b>Section 4.</b> <i>Effectivity</i>. — This Rules shall take effect on October 30, 2025, following its publication in the Official Gazette or in two newspapers of general circulation, and on the Supreme Court website.</p><p> A.M. No. 25-5-16-SC, the Transition Guidelines, shall remain in effect until October 29, 2025.</p><p> All Court-issued documents in docketed cases which shall be issued after the effectivity of this Rules shall be made electronically available to covered filers in the electronic filing application in due course.</p><p> No pleading, motion, or other paper filed and served in accordance with the Rules of Court prior to the effectivity of this Rules shall be required to be re-filed or re-served unless otherwise ordered by the Court, in which case the original date and time of filing and service shall be controlling. </p><p> Pertinent provisions of the Rules of Civil Procedure; rules and guidelines issued under A.M. No. 10-4-20-SC (Re: Internal Rules of the Supreme Court), A.M. No. 10-3-7-SC (Re: Proposed Rule on E-Filing), and A.M. No. 11-9-4-SC (Re: Proposed Rule for the Efficient Use of Paper); and other issuances by the Court for pleading and practice before the Supreme Court inconsistent with this Rules are hereby repealed or modified accordingly.</p></div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

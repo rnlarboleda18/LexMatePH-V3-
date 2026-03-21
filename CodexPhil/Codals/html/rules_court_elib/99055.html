@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>A.M. No. 19-10-20-SC - RE: 2019 PROPOSED AMENDMENTS TO THE 1997 RULES OF CIVIL PROCEDURE - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '570106fab4d6adcbc6c7d6716d905887' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '570106fab4d6adcbc6c7d6716d905887' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/99055' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2>EN BANC</H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ A.M. No. 19-10-20-SC, November 26, 2024 ]</H2>
+					<H3>RE: 2019 PROPOSED AMENDMENTS TO THE 1997 RULES OF CIVIL PROCEDURE</H3>
+					</CENTER>
+					<p><div align="justify"><p align="center"><b>EN BANC</b></p><p><i>Sirs/Mesdames:&nbsp;</i></p><p><i>Please take notice that the Court En Banc issued a Resolution dated</i> <b><i>November 26, 2024</i></b>, <i>which reads as follows:</i></p> <p> <b>"A.M. No. 19-10-20-SC <i>(Re: 2019 Proposed Amendments to the 1997 Rules of Civil Procedure)</i></b></p><p align="center"> <b> RESOLUTION</b></p><p> <b>WHEREAS,</b> the 2019 Amendments to the 1997 Rules of Civil Procedure took effect on May 1, 2020; </p><p> <b>WHEREAS,</b> this Court, in A.M. No. 22-04-26-SC, crafted the Strategic Plan for Judicial Innovations 2022-2027, which lays down the reform initiatives necessary toward achieving a technology-driven Judiciary; </p><p> <b>WHEREAS,</b> a key activity in the innovation outcome in the Strategic Plan for Judicial Innovations 2022-2027 is the development of an eCourt System Version 2.0 (eCourt PH 2.0) for the digitalization of adjudication, a key component of which is the digital filing and service of all pleadings, motions, and other court documents as well as the digital service of court orders in civil cases; </p><p> <b>WHEREAS,</b> on August 20, 2024, this Court, in A.M. No. 10-3-7-SC and A.M. No. 11-9-4-SC, issued the Guidelines on Submission of Electronic Copies of Pleadings and Other Court Submissions Being Filed Before the Lower Courts Pursuant to the Efficient Use of Paper Rule/Moving Towards Digital Courts: Component One: Transition to Electronic Filing and Service of Pleadings, Motions, and Other Documents as Well as Digital Services of All Orders in Civil Cases; </p><p> <b>WHEREAS,</b> there is a need to amend Rule 13 of the 2019 Amendments to the 1997 Rules of Civil Procedure to provide for mandatory electronic filing and service for civil cases only in the first- and second-level courts; </p><p> <b>NOW, THEREFORE,</b> acting on the recommendations of Senior Associate Justice Marvic M.V.F. Leonen, this Court, sitting <i>En Banc</i>, resolves to <b>AMEND</b> the 2019 Amendments to the 1997 Rules of Civil Procedure and <b>APPROVE</b> the "Interim Rule on the Electronic Filing and Service of Pleadings, Judgments, and Other Papers in Civil Cases." </p><p> This Interim Rule shall take effect on December 1, 2024, following its publication in the Official Gazette or in two newspapers of general circulation. </p><p> November 26, 2024, Manila, Philippines. </p><p> <em>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, M. Lopez, Gaerlan, J. Lopez, Dimaampao, Marquez</em>, and <em>Kho, Jr., JJ</em>., concur.<br> <em>Rosario, J.</em>, on official business, but left a vote of concurrence. <br> <em>Singh, J.</em>, on official business. <br><br></p><hr align="center" width="60%" size="1" noshade="noshade"> <p align="center"><b>EN BANC</b> </p> <p align="center"><b>A.M. No. 19-10-20-SC<br> (RE: 2019 PROPOSED AMENDMENTS TO THE 1997 RULES OF CIVIL PROCEDURE)</b> </p> <p align="center"> <b>Rule 13-A<br> INTERIM RULE ON THE ELECTRONIC FILING AND SERVICE OF PLEADINGS, JUDGMENTS, AND OTHER PAPERS IN CIVIL CASES</b> </p><p> <b>SECTION 1.</b> <i>Coverage</i>. – This Rule shall govern the electronic filing of all pleadings, motions, and other papers as well as their service, except those for which a different mode of service is prescribed. This Rule shall be applicable exclusively in civil cases before the first- and second-level courts, with no suppletory effect on other types of cases. </p><p> <b>SECTION 2.</b> <i>Filing and service, defined</i>. – Filing is the act of submitting a pleading or other paper to the court. </p><p> Service is the act of providing a party with a copy of the pleading or any other paper. If a party has appeared by counsel, service upon such party shall be made upon their counsel, unless service upon the party and the party's counsel is ordered by the court. When one counsel appears for several parties, such counsel shall be entitled to only one copy of any paper served by the opposite side. </p><p> When several counsels appear for one party, such party shall be entitled to only one copy of any pleading or paper to be served upon the lead counsel, if one is designated, or upon any one of them if there is no designation of a lead counsel. The date and time of receipt of the pleading or other paper by the lead counsel of record shall be the reckoning date and time for purposes of counting reglementary periods. </p><p> <b>SECTION 3.</b> <i>Manner of filing of complaints and other initiatory pleadings</i>. – The filing of complaints and other initiatory pleadings shall be done by: </p><ol start="" type="a"><li> Submitting personally the original paper, plainly indicated as such, to the court; <br> </li><li>Sending the paper by registered mail; or, <br> </li><li>Sending the paper by accredited courier. </li></ol> <p> In the case of Section 3.a., the clerk of court shall endorse the date and hour of filing of the complaint or initiatory pleading. In the case of Section 3.b. or 3.c., the date of mailing of the complaint or initiatory pleading and payments or deposits, as shown by the post office stamp on the envelope or the registry receipt, shall be considered as the date of filing, payment, or deposit in court. The envelope shall be attached to the record of the case. </p><p> After the complaint or initiatory pleading has been filed through any of the three modes provided in the first paragraph of this Section, the filing party shall subsequently email the complaint or initiatory pleading in digital file format to the court. Digital copies of the additional accompanying documents of the complaint or initiatory pleading, such as annexes, appendices, or exhibits, shall likewise be emailed. The electronic transmittal of the complaint or initiatory pleading and the accompanying documents must be made within 24 hours from the completeness of the primary mode of the complaint or initiatory pleading's filing. </p><p> The term "digital file format," when used to refer to pleadings, papers, and other documents, shall mean the portable document format. </p><p> No court shall act upon any complaint or initiatory pleading unless the latter's filing is accompanied by the electronic transmittal required in the third paragraph of this Section. If the electronic transmittal is not completed before the period, the complaint or initiatory pleading shall be deemed not filed, regardless of the completeness of the primary mode of its filing. </p><p> <b>SECTION 4.</b> <i>Manner of filing and service of pleadings subsequent to the complaint or initiatory pleading, written motion, notice, appearance, demand, offer a/judgment, or similar papers</i>. – </p><blockquote> <p> a. The filing and service of non-initiatory pleadings, written motion, notice, appearance, demand, offer of judgment, or similar papers shall only be made by transmitting them in digital file format through email. The date of the electronic mailing shall be considered as the date of filing and service. </p> <p> b. Digital copies of the additional accompanying documents of non-initiatory pleadings, written motion, notice, appearance, demand, offer of judgment, or similar papers—such as annexes, appendices, or exhibits—shall likewise be filed and served through email. </p> <p> c. Non-initiatory pleadings, written motion, notice, appearance, demand, offer of judgment, and other similar papers not emailed to the court shall be deemed not filed, and those not emailed to the party or their counsel shall be deemed not served. </p> </blockquote> <p> <b>SECTION 5.</b> <i>Papers required to be filed and served</i>. – Every pleading subsequent to the complaint, written motion, notice, appearance, demand, offer of judgment, or similar papers shall be filed with the court. These papers as well as every judgment, resolution, order, and notice issued by the court, shall likewise be served upon the parties affected, except for summons, which shall continue to be governed by Rule 14. </p><p> <b>SECTION 6.</b> <i>Presumptive service</i>. – There shall be a presumptive notice of a court setting to a party if such notice appears on the records to have been successfully emailed to the party. </p><p> <b>SECTION 7.</b> <i>Email address of record.</i> – </p><blockquote> <p> a. <i>Notice</i>. A notice of appearance shall be filed in all cases containing the valid and professional email address of all counsels, their law firms, if any, and the parties they represent. </p> <p> b. <i>Valid email address</i>. An email address is deemed valid when it is in the [local-part]@[domain] syntax and is capable of receiving emails from other senders, especially those outside the address' own domain. The email addresses, as filed in the notice of appearance, shall serve as the email addresses of record of the parties and their individual counsels and law firms. </p> <p> c. <i>Mandatory submission of counsels' email address</i>. The submission of email addresses of the counsels, and their law firms, if any, shall be mandatory. The counsels of record are required to use their professional email accounts as their email addresses of record. To preserve the confidentiality, privacy, and security of communications, the use by lawyers of personal and/or nonprofessional email accounts as their email addresses of record is prohibited. </p> <p> d. <i>Optional submission of parties' email address; exception</i>. The submission of email addresses of the parties shall be optional but highly encouraged, unless they are not represented by counsel, in which case, submission is mandatory. </p> <p> e. <i>Electronic carbon copies</i>. Transmittal of all documents, filing or service by email shall include, through electronic carbon copy (CC:), all the email addresses of record of all counsels and their law firms, if any, and optionally, all parties. </p> <p> f. <i>Effect of non-use of email address of record</i>. All electronic transmittals must be made with any of the email addresses of record of the counsels of record, or that of their law firms, if any, or the e-mail address of record of the filing party. If an electronic transmittal is made with an email address not of record, the entire transmittal shall be deemed as not received until such time that the transmittal is made using a valid email address of record. </p> <p> g. <i>Obligation to monitor e-mail address of record</i>. Counsel and parties, the latter when not represented by a lawyer, have the obligation to regularly and diligently monitor the inboxes of their email addresses of record, including that of their law firms, if any, with the courts. No court shall accept as an excuse for any purpose that counsel or parties have not checked the inboxes of their email addresses of record. Any lawyer who neglects to check regularly and diligently the inbox of their email address of record shall be subjected to disciplinary action. </p> <p> h. <i>Change of electronic mail address</i>. A party or counsel who changes their email address for a compelling or justified reason while the action is pending must promptly file a notice of change of email address with the court within five calendar days from such change and serve the notice on all other parties. A lawyer who fails to comply with this rule, to the detriment of the cause of the client, shall be subjected to disciplinary action. </p> </blockquote> <p> <b>SECTION 8.</b><i> Transmittal to official court email address</i>. – Digital files must be transmitted by the filing party or counsel to the official email address of the court where the case is pending. A directory of the official email addresses of the lower courts maintained by the Supreme Court of the Philippines is available at https://sc.judiciary.gov.ph/court-locator/.</p><p> <b>SECTION 9.</b> <i>Electronic file format</i>. – </p><blockquote> <p> a. The digital file of the primary pleading or other paper must be separated from the electronic copies in digital file format of any accompanying additional documents, each of which must be contained in their own digital files. </p> <p> b. The digital file may be electronically generated from a word processing or portable document format creation program, or be scanned images of the original document in paper compiled in a digital file, or a combination of both methods. However, in all cases, the contents must be completely legible. If the digital copy is wholly or partially generated from scanned images of the original document on paper, the filing party or counsel shall ensure that the digital copy is an exact and complete copy of the original document in paper. In case of discrepancies between the images of scanned text and any machine­ readable text generated using optical character recognition or similar technologies, the former shall be the controlling text. The filing party or counsel shall retain the original document for inspection by the court or other parties when necessary. </p> <p> c. The size of each digital file must be reasonable. The party or their counsel responsible for filing is also responsible for ensuring that the receiving court's official email address will not reject or block a transmittal email due to the file size of an attachment. Likewise, other parties or counsel, as recipients, are responsible for ensuring that they will be able to receive a transmittal email. </p> <p> d. The form and substance of the contents of the digital files filed in court shall be controlling. If the court determines, on motion or <i>motu proprio</i> and after notice and hearing, that there are material discrepancies between the paper copy and the electronic copy of a paper filed with the court, the court may impose an appropriate sanction or refer such finding to the proper office for disciplinary action against the lawyer, law firm, or party responsible for the filing. </p> <p> e. The digital file of a pleading or other paper shall have the same filename as its designation, in accordance with Rule 7, Section 2. At the option of the one filing, the designation of the pleading or paper may be shortened for the filename, but must still contain sufficient information to ascertain the nature of the relief sought. </p> <p> f. The digital file of each accompanying additional document, if any, shall have the same filename as the document's title, which must further be appended with the designation of the pleading or paper to which it is attached or annexed. Finally, all filenames must be appended with the docket number/s of the easels being filed. All information shall be separated with a hyphen (-). Any special characters that cannot be used in a filename by reason of technical limitations may be omitted entirely, or substituted with an underscore ( _ ), at the option of the one filing. </p> <blockquote> <p> Example:</p> <p> The digital file for the Complaint for Unlawful Detainer for Civil Case No. 123456 should have the filename "Complaint for Unlawful Detainer-Civil Case No. 123456.pdf"</p> <p> The digital file of Annex A of the Complaint for Unlawful Detainer for Civil Case No. 123456 should have a filename "Annex A-Complaint for Unlawful Detainer-Civil Case No. 123456.pdf"</p> </blockquote> <p> g. Electronic copies of pleadings and other papers transmitted to the court in the following cases: not in digital file format; transmitted as digital files with password protection or other encryption; with embedded executable code or scripts; in archive files; or as corrupted files, shall be deemed as not filed. Copies of additional accompanying documents transmitted to the court not in digital file format; as digital files with password protection or other encryption; with embedded executable code or scripts; in archive files; or as corrupted files, shall be excluded from the records or <i>rollo</i> of the easels for which they have been submitted, even if the digital file of the primary pleading or other paper has been correctly filed. The filing of digital copies not in accordance with the format and manner as stated here shall subject the filing lawyer, law firm, or party to disciplinary action or any appropriate sanction to be imposed by the court. </p> </blockquote> <p> <b>SECTION 10.</b> <i>Transmittal email format</i>. – </p><blockquote> <p> a. <i>Subject</i>. The subject of the transmittal email shall contain the docket number/s, case title/s, and the designation of the pleading or paper being transmitted, which shall indicate its nature. </p> <blockquote> <p> Subject: [Docket Number/s and Case Title] – Designation of the Pleading or Paper] </p> <blockquote> <p> <i>Example</i>: </p> <blockquote> <p> Subject: Civil Case No. 123456, <i>Maria dela Cruz v. Juan dela Cruz</i> – Complaint for Unlawful Detainer</p> </blockquote> </blockquote> </blockquote> <p> b. <i>Body</i>. The body of the email shall follow the prescribed format and must contain sufficient information to enable the court to ascertain the following: (1) the party or parties filing the pleading or other paper; (2) the nature of the pleading or paper; (3) the party or parties against whom relief, if any, is sought; and (4) the nature of the relief sought: </p> <blockquote> <table width="100%" border="0"> <tbody><tr valign="top"> <td><div align="justify">(i)</div></td> <td colspan="2"><div align="justify">Primary manner of filing (i.e., electronic transmittal, or personal filing, registered mail, or accredited courier)</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">(ii)</div></td> <td colspan="2"><div align="justify">Filing date, which should be in the MM/DD/YYYY format (based on the primary manner of filing)</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(iii)</div></td> <td colspan="2"><div align="justify">Case data, namely: (1) docket number/s; (2) case title/s; (3) name of the filing party; (4) contact number/s of the filer; (5) other email address of the filer, if any; and (6) a list of the document titles of the attachments to the transmittal email.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="10%"><div align="justify"></div><br></td> <td width="85%"><div align="justify"><i>Example</i>: <p></p> <p align="justify">Primary manner of filing: Electronic transmittal</p> <p align="justify"> Filing date: 03/01/2024 </p> <p align="justify">Docket number: Civil Case No. 123456 </p> <p align="justify">Case Title: Maria dela Cruz v. Juan dela Cruz </p> <p align="justify">Name of Filing Party: Juan dela Cruz </p> <p align="justify">Contact Numbers: (02) 888-9900 (landline), 0900-1122334 (mobile)</p> <p align="justify"> Other e-mail address/es, if any: [filer's other e-mail address/es]</p> <p align="justify"> Title/s of Attachment/s: </p> <p align="justify">1. Answer <br> 2. Acknowledgment Receipt</p></div></td> </tr> </tbody></table> </blockquote> <p>c. <i>Attachments</i>. –</p> <blockquote> <table width="100%" border="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(i)</div></td> <td colspan="2"><div align="justify">A transmittal email shall contain only digital copies pertaining to one case. For the purposes of electronic submission, consolidated cases with more than one docket number shall be considered as one case. All files must be enclosed as individual attachments to the transmittal email. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(ii)</div></td> <td colspan="2"><div align="justify">All digital files must be transmitted as direct attachments to the transmittal email, and not as external links to cloud storage, filesharing sites, or similar thereto. Digital copies must not be contained in archive files, such as ZIP (.zip) or RAR (.rar), and must not require additional extraction or conversion into portable document format. Failure to file any document as a direct attachment shall result in the document being deemed not filed. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(iii)</div></td> <td colspan="2"><div align="justify">In case the total file size of the documents exceeds the maximum size allowed for attachments by the email service provider being used by the one filing, the filer shall transmit the electronic documents in several batches, but each email must indicated in the subject the batch number of the email and the total batches of emails sent, following the prescribed format in this Rule. It is the responsibility of the one filing to ensure that the receiving court's official email service provider will not reject or block a transmittal email due to its size. The time and date of the final transmittal email, as indicated in the sequence, shall be considered as the time and date of filing of the pleading or other paper.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="10%"><div align="justify"></div><br></td> <td width="85%"><div align="justify"><i>Example</i>: <p></p> <p align="justify">Subject: Civil Case No. 123456, <i>Maria dela Cruz v. Juan dela Cruz</i> – Answer (batch 1 of 3) </p> <p align="justify">Subject: Civil Case No. 123456, <i>Maria dela Cruz v. Juan dela Cruz</i> – Answer (batch 2 of 3) </p> <p align="justify">Subject Civil Case No. 123456, <i>Maria dela Cruz v. Juan dela Cruz</i> – Answer (batch 3 of 3)</p></div></td> </tr> </tbody></table> </blockquote> <p> d. <i>Retention requirement</i>. In all instances, the filing party or counsel must retain a copy of each transmittal email, in any form prescribed by pertinent rules on evidence, while the case is pending for the inspection of the court or other parties when necessary.</p> </blockquote> <p> <b>SECTION 11.</b> <i>Service of Judgments, Final Orders, or Resolutions</i>. – Judgments, final orders, or resolutions shall be served electronically by emailing digital copies to the email addresses of record of the parties and their counsels.</p><p> The date and time of delivery appearing in the internet message header of the email sent by the court shall be the date and time of receipt of the judgment, final order, or resolution. Under exceptional circumstances, the court, upon motion and hearing, may allow the inspection of headers of the court's transmittal email by a counsel or party. Motions for inspection filed on frivolous grounds shall subject the filing counsel to disciplinary action.</p><p> In case the electronic service to a counsel, or a patty not represented by counsel results in an email delivery failure message, the court shall attempt retransmittal to the unserved counsel twice, with a five-day interval between each attempt. If, after the second attempt, the email continues to be rejected by the receiving server, the date and time of the first successful service to the party shall be considered the date and time of receipt of counsel or party. The court shall indicate the facts and circumstances warranting the re-transmittal in the body of each re-transmittal email and shall copy all email addresses of record of the parties and their counsel as notice of the re-transmittal; <i>provided</i>, that if a counsel provides more than one email address of record, the first successful service to one email address shall be considered as service to all email addresses of record of that counsel.</p><p> In case the electronic service to a party, represented by counsel, results in an email delivery failure message, the court shall attempt re-transmittal to the unserved party twice, with a five-day interval between each attempt. Nevertheless, the date and time of first successful service to counsel shall be controlling. The court shall indicate the facts and circumstances warranting the re-transmittal in the body of each re-transmittal e-mail and shall copy all email addresses of record of the parties and their counsel as notice of the re­ transmittal.</p><p> When a party summoned by publication fails to appear in the action, judgments, final orders, or resolutions against them shall be served upon them also by means of publication at the expense of the prevailing party.</p><p> <b>SECTION 12.</b> <i>Conventional service or filing of orders, pleadings, and other papers</i>. – Upon motion of the filing party or counsel, a court may expressly waive the requirement of electronic transmittal of the following submissions: </p><blockquote> <table width="100%" border="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(i)</div></td> <td><div align="justify">annexes, appendices, exhibits, or other accompanying documents to pleadings or other court submissions not readily amenable to digitization in the prescribed digital file format; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(ii)</div></td> <td> <div align="justify">sealed and confidential documents or records.</div></td> </tr> </tbody></table> </blockquote> <p>These submissions may be filed either personally, by registered mail, or by accredited courier in the manner provided in Sections 3.a., 3.b., or 3.c. </p> <p> These submissions may likewise be served personally, by registered mail, or by accredited courier. Personal service of court submissions is made through the following modes: personal delivery of a copy to the party or to the party's counsel, or to their authorized representative named in the appropriate pleading or motion; or by leaving it in their office with their clerk, or with a person having charge thereof. If no person is found in their office, or their office is not known, or they have no office, then the copy may be delivered between the hours of 8:00 a.m. and 6:00 p.m. at the party's or counsel's residence, if known, with a person of sufficient age and discretion residing in the said residence. </p><p> Service by registered mail shall be made by depositing the copy in the post office, in a sealed envelope, plainly addressed to the party or to the party's counsel at their office, if known, otherwise at their residence, if known. Postage must be fully prepaid and with instructions to the postmaster to return the mail to the sender after 10 calendar days if undelivered. If no registry service is available in the locality of either the sender or the addressee, service may be done by ordinary mail. </p><p> Service by accredited courier shall be made by availing the services of a courier service duly accredited by the Supreme Court for the express delivery and/or messengerial delivery of letters or written messages and other mailable matters. </p><p> The court shall ensure that all orders expressly waiving the electronic transmittal requirement for particular filings are included in the electronic case record or<i> rollo</i>. </p><p> <b>SECTION 13.</b> <i>Completeness of service</i>. – Electronic service is complete at the time of the electronic transmission of the document. Electronic service is not effective or complete if the party serving the document learns that it did not reach the addressee or the person to be served. </p><p> In cases where the court has expressly waived the requirement of electronic transmittal under Section 12, personal service is complete upon delivery. Service by registered mail is complete upon actual receipt by the addressee or after five calendar days from the date they received the first notice of the postmaster, whichever date is earlier. Service by accredited courier is complete upon actual receipt by the addressee, or after at least two attempts to deliver by the courier service, or upon the expiration of five calendar days after the first attempt to deliver, whichever is earlier. </p><p> <b>SECTION 14.</b> <i>Proof of filing</i>. – The filing of a pleading or any other paper shall be proved by its existence in the electronic case record or <i>rollo</i>. </p><ol start="" type="a"><li> If the complaint or initiatory pleading is not in the record but is claimed to have been filed personally, the filing shall be proven by the written or stamped acknowledgment of its filing by the clerk of court on a copy of the pleading or paper.<br><br></li><li> If the complaint or initiatory pleading was filed by registered mail, the filing shall be proven by the registry receipt and by the affidavit of the person who mailed it. Such mail must contain a full statement of the date and place of deposit in the post office, in a sealed envelope addressed to the court, with postage fully prepaid, and with instructions to the postmaster to return the mail to the sender after 10 calendar days if not delivered.<br><br></li><li>If the complaint or initiatory pleading was filed through an accredited courier service, the filing shall be proven by an affidavit of service of the person who brought the pleading or other paper to the service provider, together with the courier's official receipt and document tracking number. <br><br></li><li> If the non-initiatory pleading or any other paper was filed by email, the same shall be proven by an affidavit of electronic filing of the filing party, accompanied by a paper copy of the pleading or other document transmitted, or electronic acknowledgment of the submission's filing by the clerk of court.<br><br></li><li>The clerk of court or branch clerk of court shall have the primary responsibility of ensuring that all pleadings and other court submissions electronically transmitted to their court are properly accounted for and are included in the case record or <i>rollo</i>. A digital copy of the transmittal email clearly showing the sender and the date and time of receipt of the email by the receiving court shall be included as the cover sheet of the filing and shall form part of the case record or <i>rollo</i>. </li></ol> <p> <b>SECTION 15.</b> <i>Proof of service</i>. – Proof of service shall consist of the metadata in the email header showing the date of sending and receipt of the email in digital filing. When necessary, the court may require the filing of an affidavit of service executed by the person who sent the email, together with a printed proof of transmittal. </p><p> In cases where the court has expressly waived the requirement of electronic transmittal under Section 12, proof of personal service shall consist of a written admission of the party served, or the official return of the server, or the affidavit of the party serving, containing a statement of the date, place, and manner of service. </p><p> <b>SECTION 16.</b> <i>Notice of lis pendens</i>. – In an action affecting the title or the right of possession of real property, the plaintiff and the defendant, when affirmative relief is claimed in their answer, may record a notice of pendency of action in the office of the registry of deeds of the province where the property is situated. The notice of <i>lis pendens</i> shall contain the names of the parties and the object of the action or defense, and a description of the property in the affected province. Only from the time of filing such notice for record shall a purchaser, or encumbrancer of the affected property, be deemed to have constructive notice of the pendency of the action and only of its pendency against the parties designated by their real names. </p><p> The notice of <i>lis pendens</i> may be cancelled only upon order of the court, after proper showing that the notice is for the purpose of molesting the adverse party, or that it is not necessary to protect the rights of the party that recorded it. </p></div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

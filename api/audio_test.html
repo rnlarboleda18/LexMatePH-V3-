@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Test</title>
+</head>
+<body>
+    <h2>Direct Audio Test</h2>
+    <p>Testing UUID: d8fd88e1-28d8-4cab-9daa-1886d21bcd77</p>
+    
+    <audio controls id="player" style="width: 400px;"></audio>
+    <div id="log" style="font-family: monospace; margin-top: 20px; white-space: pre-wrap;"></div>
+
+    <script>
+        const log = (msg) => {
+            document.getElementById('log').innerText += new Date().toISOString().split('T')[1].split('.')[0] + ' - ' + msg + '\n';
+        };
+
+        const player = document.getElementById('player');
+        
+        player.onloadstart = () => log('loadstart event fired');
+        player.ondurationchange = () => log('durationchange: ' + player.duration);
+        player.onloadedmetadata = () => log('loadedmetadata event fired');
+        player.onloadeddata = () => log('loadeddata event fired');
+        player.oncanplay = () => log('canplay event fired');
+        player.onplay = () => log('play event fired');
+        player.onplaying = () => log('playing event fired');
+        player.onpause = () => log('pause event fired');
+        player.onstalled = () => log('stalled event fired');
+        player.onsuspend = () => log('suspend event fired');
+        player.onwaiting = () => log('waiting event fired');
+        player.onerror = (e) => {
+            const err = player.error;
+            log(`ERROR event fired! Code: ${err ? err.code : 'unknown'}, Message: ${err ? err.message : 'no message'}`);
+            if (err && err.code === 1) log('MEDIA_ERR_ABORTED - fetching process aborted by user');
+            if (err && err.code === 2) log('MEDIA_ERR_NETWORK - error occurred when downloading');
+            if (err && err.code === 3) log('MEDIA_ERR_DECODE - error occurred when decoding');
+            if (err && err.code === 4) log('MEDIA_ERR_SRC_NOT_SUPPORTED - audio/video not supported');
+        };
+
+        const url = 'http://localhost:7071/api/audio/codal/d8fd88e1-28d8-4cab-9daa-1886d21bcd77?code=rpc';
+        log('Setting src to: ' + url);
+        player.src = url;
+    </script>
+</body>
+</html>

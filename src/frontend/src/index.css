@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Outfit', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Custom Scrollbar (Global) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  /* Gray-400 with opacity */
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(107, 114, 128, 0.8);
+  /* Gray-500 with opacity */
+}
+
+/* Dark Mode Scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.6);
+  /* Gray-600 with opacity */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.8);
+  /* Gray-400 with opacity */
+}
+
+/* Smart Citation Markers & Tooltips */
+.smart-citation {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 2px;
+}
+
+/* The Red Superscript Marker */
+.smart-citation::before {
+  content: attr(data-marker);
+  /* Dynamic numbering */
+  color: #e74c3c;
+  /* A distinct "legal" red */
+  font-size: 0.7rem;
+  font-weight: 600;
+  vertical-align: super;
+  text-decoration: none;
+}
+
+/* The Citation Pop-up (Tooltip) */
+.smart-citation:hover::after {
+  content: attr(data-citation);
+  position: absolute;
+  bottom: 150%;
+  /* Position above the text */
+  left: 0;
+  width: 300px;
+  /* Wider for legal strings */
+  background: #1a1a1a;
+  color: #ecf0f1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  z-index: 99;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border-left: 3px solid #e74c3c;
+  /* Visual link to the marker */
+
+  /* Handle long URLs and text wrapping */
+  word-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  /* Prevent tooltip from interfering */
+}
+
+/* Glassmorphism & Premium Design Tokens */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-blur: blur(12px);
+  
+  --dark-glass-bg: rgba(17, 24, 39, 0.7);
+  --dark-glass-border: rgba(255, 255, 255, 0.1);
+
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  --premium-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.dark .glass {
+  background: var(--dark-glass-bg);
+  border: 1px solid var(--dark-glass-border);
+}
+
+/* Dynamic Gradients */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  border-radius: inherit;
+  border: 2px solid currentColor;
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* Standardized Typography for Codex */
+.codex-body {
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* Global Flat Header System: All headers match body size */
+h1, h2, h3, h4, h5, h6,
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-size: 16px !important;
+  line-height: inherit !important;
+}
+
+/* Internal Markdown Headers are centered */
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  text-align: center !important;
+}
+
+/* 
+   Manual Markdown List Styling 
+   (Kept as specific overrides)
+*/
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 0.25em;
+  /* Small gap from marker */
+}
+
+/* Ensure bolding is distinct in dark mode */
+.dark strong,
+.dark .font-bold,
+.dark .font-extrabold {
+  color: #fbbf24;
+  /* Amber-400 for contrast */
+}
+
+/* Mobile "Active" state fallback (if class added by JS) */
+.smart-citation.active::after {
+  content: attr(data-citation);
+  position: absolute;
+  bottom: 150%;
+  left: 0;
+  width: 250px;
+  background: #1a1a1a;
+  color: #ecf0f1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  z-index: 99;
+  display: block;
+}
+
+/* Markdown Table Styling (Explicit Borders) */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  font-size: 0.9em;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #d1d5db;
+  /* Gray-300 */
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.prose th {
+  background-color: #f3f4f6;
+  /* Gray-100 */
+  color: #374151;
+  /* Gray-700 */
+  font-weight: 600;
+}
+
+/* Dark Mode Tables */
+.dark .prose th,
+.dark .prose td {
+  border-color: #374151;
+  /* Gray-700 */
+}
+
+.dark .prose th {
+  background-color: #1f2937;
+  /* Gray-800 */
+  color: #e5e7eb;
+  /* Gray-200 */
+}

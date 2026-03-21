@@ -1,0 +1,33 @@
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import sys
+
+# Add path to db_pool
+sys.path.append(r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api')
+from db_pool import get_db_connection
+
+try:
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    # List all rows where book = 1 sorted by article_num
+    cur.execute("""
+        SELECT article_num, content_md, article_title 
+        FROM rpc_codal 
+        WHERE book = '1'
+        ORDER BY 
+            CAST(REGEXP_REPLACE(article_num, '\D', '', 'g') AS INTEGER) ASC,
+            article_num ASC
+    """)
+    rows = cur.fetchall()
+
+    print(f"Total rows: {len(rows)}")
+    for i, r in enumerate(rows[:50]):  # Print first 50 rows
+        print(f"[{i+1}] ArticleNum: {repr(r['article_num'])} | Title: {repr(r['article_title'])}")
+        print(f"    ContentMD (first 40): {repr(r['content_md'][:40] if r['content_md'] else '')}")
+
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    if 'conn' in locals():
+        conn.close()

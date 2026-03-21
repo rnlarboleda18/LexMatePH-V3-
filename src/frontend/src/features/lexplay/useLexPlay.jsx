@@ -1,0 +1,624 @@
+import React, { createContext, useContext, useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { useAuth } from '@clerk/clerk-react';
+
+const LexPlayContext = createContext();
+const LexPlayApiContext = createContext();
+
+export const useLexPlay = () => {
+    return useContext(LexPlayContext);
+};
+
+export const useLexPlayApi = () => {
+    return useContext(LexPlayApiContext);
+};
+
+export const LexPlayProvider = ({ children }) => {
+    const { getToken, isLoaded, isSignedIn } = useAuth();
+    const [playlist, setPlaylist] = useState([]); // This is the "Active Queue"
+    const [savedPlaylists, setSavedPlaylists] = useState([]);
+    const [activePlaylistId, setActivePlaylistId] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(-1);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [playbackRate, setPlaybackRate] = useState(1.0);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const audioRef = useRef(null);
+    const playlistRef = useRef([]);
+    const currentIndexRef = useRef(-1);
+
+    // Keep refs in sync with state
+    useEffect(() => { playlistRef.current = playlist; }, [playlist]);
+    useEffect(() => { currentIndexRef.current = currentIndex; }, [currentIndex]);
+
+    const currentTrack = currentIndex >= 0 && currentIndex < playlist.length ? playlist[currentIndex] : null;
+
+    const getAuthHeaders = async () => {
+        const token = await getToken();
+        if (!token) return { 'Content-Type': 'application/json' };
+        
+        return { 
+            'Authorization': `Bearer ${token}`,
+            'X-Clerk-Authorization': `Bearer ${token}`, // Bypass Azure header hijacking
+            'Content-Type': 'application/json' 
+        };
+    };
+
+    // Handle initial state load and sync
+    const [isStateLoaded, setIsStateLoaded] = useState(false);
+
+    const savePlaybackState = useCallback(async (state) => {
+        if (!isSignedIn) return;
+        try {
+            const headers = await getAuthHeaders();
+            await fetch('/api/lexplay/state', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(state)
+            });
+        } catch (e) { console.error("Failed to save playback state:", e); }
+    }, [isSignedIn, getToken]);
+
+    const loadPlaybackState = useCallback(async () => {
+        if (!isLoaded || !isSignedIn || isStateLoaded) return;
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch('/api/lexplay/state', { headers });
+            if (res.ok) {
+                const state = await res.json();
+                console.log("Loaded playback state:", state);
+                
+                if (state.playlist_id) {
+                    // 1. Load the playlist
+                    const itemsRes = await fetch(`/api/playlists/${state.playlist_id}/items`, { headers });
+                    if (itemsRes.ok) {
+                        const tracks = await itemsRes.json();
+                        setPlaylist(tracks);
+                        setActivePlaylistId(state.playlist_id);
+                        
+                        // 2. Find and set current track
+                        if (state.current_track_id && tracks.length > 0) {
+                            const foundIndex = tracks.findIndex(t => String(t.id) === String(state.current_track_id));
+                            if (foundIndex !== -1) {
+                                setCurrentIndex(foundIndex);
+                                setPlaybackRate(state.playback_rate || 1.0);
+                                
+                                // 3. Seek to time (if possible)
+                                if (audioRef.current && state.current_time > 0) {
+                                    audioRef.current.__targetTime = state.current_time;
+                                }
+                            }
+                        }
+                    }
+                } else if (state.current_track_id) {
+                    // Anonymous track persistence (limited)
+                    // If we have a track but no playlist, we can't easily restore context yet
+                    // so we just mark as loaded.
+                }
+                setIsStateLoaded(true);
+            } else {
+                // If 404 or other error, still mark as loaded to allow new saves
+                setIsStateLoaded(true);
+            }
+        } catch (e) { console.error("Failed to load playback state:", e); }
+    }, [isLoaded, isSignedIn, isStateLoaded, getToken]);
+
+    // 1. Immediate save on track/playlist change
+    useEffect(() => {
+        if (!isStateLoaded || !isSignedIn || !currentTrack) return;
+        
+        savePlaybackState({
+            playlist_id: activePlaylistId,
+            current_track_id: currentTrack.id,
+            current_time: audioRef.current?.currentTime || 0,
+            playback_rate: playbackRate
+        });
+    }, [activePlaylistId, currentTrack?.id, playbackRate, isStateLoaded, isSignedIn]);
+
+    // 2. Debounced save for time updates
+    useEffect(() => {
+        if (!isStateLoaded || !isSignedIn || !currentTrack || !isPlaying) return;
+        
+        const interval = setInterval(() => {
+            if (audioRef.current && !audioRef.current.paused) {
+                savePlaybackState({
+                    playlist_id: activePlaylistId,
+                    current_track_id: currentTrack.id,
+                    current_time: audioRef.current.currentTime,
+                    playback_rate: playbackRate
+                });
+            }
+        }, 10000); // Sync time every 10 seconds while playing
+
+        return () => clearInterval(interval);
+    }, [activePlaylistId, currentTrack?.id, playbackRate, isStateLoaded, isSignedIn, isPlaying]);
+
+
+    // Initialize Audio Element
+    useEffect(() => {
+        if (!audioRef.current) {
+            audioRef.current = new Audio();
+            audioRef.current.onended = handleTrackEnd;
+            audioRef.current.onerror = (e) => {
+                // Ignore "empty src" errors which happen during cleanup or initialization
+                if (!audioRef.current || !audioRef.current.src || audioRef.current.src === window.location.href) {
+                     return;
+                }
+                console.error("Audio playback error:", e);
+                setError('Audio failed to play. The file may be unavailable.');
+                setIsPlaying(false);
+                setIsLoading(false);
+            };
+            audioRef.current.onplaying = () => {
+                setIsLoading(false);
+                setIsPlaying(true);
+                setError(null);
+                
+                // Handle initial seek from loaded state
+                if (audioRef.current.__targetTime) {
+                    audioRef.current.currentTime = audioRef.current.__targetTime;
+                    delete audioRef.current.__targetTime;
+                }
+            };
+            audioRef.current.onwaiting = () => setIsLoading(true);
+        }
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.removeAttribute('src'); // Do not use src = '' as it throws an error
+            }
+        };
+    }, []);
+
+    // --- Saved Playlists API Logic ---
+
+    const fetchPlaylists = useCallback(async () => {
+        if (!isLoaded || !isSignedIn) {
+            setSavedPlaylists([]);
+            return;
+        }
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch('/api/playlists', { headers });
+            if (res.ok) {
+                const data = await res.json();
+                setSavedPlaylists(data);
+            }
+        } catch (e) { console.error("Failed to fetch playlists:", e); }
+    }, [isLoaded, isSignedIn, getToken]);
+
+    useEffect(() => {
+        // Fetch saved playlists on mount
+        fetchPlaylists();
+        loadPlaybackState();
+    }, [fetchPlaylists, loadPlaybackState]);
+
+    const createPlaylist = async (name) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch('/api/playlists', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ name })
+            });
+            if (res.ok) {
+                const newPlaylist = await res.json();
+                fetchPlaylists();
+                return newPlaylist;
+            } else {
+                const err = await res.json();
+                throw new Error(err.error || "Failed to create playlist");
+            }
+        } catch (e) {
+            console.error("Create playlist error:", e);
+            throw e;
+        }
+    };
+
+    const renamePlaylist = async (id, name) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${id}`, {
+                method: 'PUT', headers, body: JSON.stringify({ name })
+            });
+            if (res.ok) {
+                fetchPlaylists();
+            } else {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.error || `Failed to rename playlist (${res.status})`);
+            }
+        } catch (e) {
+            console.error("Rename playlist error:", e);
+            throw e;
+        }
+    };
+
+    const deletePlaylist = async (id) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${id}`, { method: 'DELETE', headers });
+            if (res.ok) {
+                if (activePlaylistId === id) setActivePlaylistId(null);
+                fetchPlaylists();
+            } else {
+                const errorData = await res.json().catch(() => ({}));
+                throw new Error(errorData.error || `Failed to delete playlist (${res.status})`);
+            }
+        } catch (e) {
+            console.error("Delete playlist error:", e);
+            throw e;
+        }
+    };
+
+    const addToSpecificPlaylist = async (playlistId, track) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${playlistId}/items`, {
+                method: 'POST', headers,
+                body: JSON.stringify({
+                    content_id: track.id,
+                    content_type: track.type,
+                    code_id: track.code_id,
+                    title: track.title,
+                    subtitle: track.subtitle
+                })
+            });
+            if (res.ok) {
+                fetchPlaylists(); // update counts
+                // If it's the currently active playlist, reload it
+                if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
+            } else {
+                const err = await res.json();
+                throw new Error(err.error || "Failed to add item to playlist");
+            }
+        } catch (e) { 
+            console.error("Add item error:", e);
+            throw e;
+        }
+    };
+
+    const addBulkToSpecificPlaylist = async (playlistId, items) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${playlistId}/bulk_items`, {
+                method: 'POST', headers,
+                body: JSON.stringify({ items })
+            });
+            if (res.ok) {
+                fetchPlaylists();
+                if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
+            }
+        } catch (e) { console.error("Bulk add error:", e); }
+    };
+
+    const removeFromSpecificPlaylist = async (playlistId, itemId) => {
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${playlistId}/items/${itemId}`, { method: 'DELETE', headers });
+            if (res.ok) {
+                fetchPlaylists();
+                if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
+            }
+        } catch (e) { console.error("Remove item error:", e); }
+    };
+
+    const loadSavedPlaylist = async (playlistId) => {
+        handleStop();
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${playlistId}/items`, { headers });
+            if (res.ok) {
+                const tracks = await res.json();
+                setActivePlaylistId(playlistId);
+                setPlaylist(tracks);
+                if (tracks.length > 0) setCurrentIndex(0);
+                else setCurrentIndex(-1);
+            }
+        } catch (e) { console.error("Load playlist error:", e); }
+    };
+
+    // --- Active Queue Logic ---
+    // Handle Playback Rate changes
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.playbackRate = playbackRate;
+        }
+    }, [playbackRate]);
+
+    const handleStop = useCallback(() => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+            setIsPlaying(false);
+        }
+    }, []);
+
+    const playTrack = useCallback(async (index, trackOverride = null) => {
+        // Use ref to avoid stale closure on playlist
+        const latestPlaylist = playlistRef.current;
+        const track = trackOverride || latestPlaylist[index];
+        if (!track) return;
+
+        setCurrentIndex(index);
+        setIsLoading(true);
+        setIsPlaying(false);
+        setError(null);
+
+        // Revoke previous object URL to free memory
+        if (audioRef.current?.src?.startsWith('blob:')) {
+            URL.revokeObjectURL(audioRef.current.src);
+        }
+
+        try {
+            const fetchUrl = `/api/audio/${track.type}/${track.id}${track.code_id ? `?code=${track.code_id}` : ''}`;
+            console.log("LEXPLAY AUDIO: Direct native load from:", fetchUrl);
+
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.removeAttribute('src');
+                audioRef.current.load(); // Reset previous errors
+
+                // Let the browser natively handle the request. This avoids strict CORS
+                // blocks on Javascript fetch() when following 302 redirects to Azure.
+                audioRef.current.src = fetchUrl;
+                audioRef.current.playbackRate = playbackRate;
+                
+                await audioRef.current.play();
+                setIsPlaying(true);
+                updateMediaSession(track);
+            }
+        } catch (error) {
+            // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted by pause() or unmounted.
+            // We gently sweep this under the rug so it doesn't terrify the user with a giant red banner.
+            if (error.name === 'AbortError' || error.name === 'NotAllowedError' || error.message?.includes('interrupted')) {
+                console.warn("LexPlay playback interrupted:", error.message);
+                return;
+            }
+            console.error("Error playing track:", error);
+            setError(error.message || 'Failed to load audio.');
+            setIsPlaying(false);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [playbackRate]);
+
+    const handlePlayPause = useCallback(() => {
+        if (!audioRef.current) return;
+
+        if (isPlaying) {
+            audioRef.current.pause();
+            setIsPlaying(false);
+        } else {
+            if (currentTrack) {
+                // Check if the current src matches what we expect for this track
+                const expectedPath = `/api/audio/${currentTrack.type}/${currentTrack.id}${currentTrack.code_id ? `?code=${currentTrack.code_id}` : ''}`;
+                const currentSrc = audioRef.current.src;
+                const isCorrectSrc = currentSrc && (currentSrc.endsWith(expectedPath) || currentSrc === expectedPath);
+
+                if (!isCorrectSrc) {
+                    // Need to load it first if completely stopped or source mismatch
+                    playTrack(currentIndex);
+                } else {
+                    audioRef.current.play().catch(e => {
+                        if (e.name !== 'AbortError' && e.name !== 'NotAllowedError' && !e.message?.includes('interrupted')) {
+                            console.error("Error resuming playback:", e);
+                            setError(e.message);
+                        }
+                    });
+                    setIsPlaying(true);
+                }
+            } else if (playlist.length > 0) {
+                playTrack(0);
+            }
+        }
+    }, [isPlaying, currentTrack, playlist.length, playTrack, currentIndex]);
+
+    const handleNext = useCallback(() => {
+        if (currentIndex < playlist.length - 1) {
+            playTrack(currentIndex + 1);
+        }
+    }, [currentIndex, playlist.length, playTrack]);
+
+    const handlePrevious = useCallback(() => {
+        if (currentIndex > 0) {
+            playTrack(currentIndex - 1);
+        } else if (audioRef.current) {
+            // If at start of first track, just restart it
+            audioRef.current.currentTime = 0;
+            if (!isPlaying) handlePlayPause();
+        }
+    }, [currentIndex, isPlaying, handlePlayPause, playTrack]);
+
+    const handleTrackEnd = useCallback(() => {
+        const idx = currentIndexRef.current;
+        const list = playlistRef.current;
+        if (idx < list.length - 1) {
+            playTrack(idx + 1);
+        } else {
+            setIsPlaying(false);
+            // Don't set to -1, stay at the last track or go to 0, but stop.
+            // This prevents UI crashes that expect a valid currentTrack.
+            if (list.length > 0) setCurrentIndex(0);
+            else setCurrentIndex(-1);
+        }
+    }, [playTrack]);
+
+    const updateMediaSession = useCallback((track) => {
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: track.title,
+                artist: 'LexPlay - Bar Reviewer',
+                album: track.type === 'codal' ? 'Codal Provisions' : 'Case Digests',
+                // artwork: [{ src: '/lexplay-icon.png', sizes: '512x512', type: 'image/png' }] // Optional artwork
+            });
+
+            navigator.mediaSession.setActionHandler('play', handlePlayPause);
+            navigator.mediaSession.setActionHandler('pause', handlePlayPause);
+            navigator.mediaSession.setActionHandler('previoustrack', handlePrevious);
+            navigator.mediaSession.setActionHandler('nexttrack', handleNext);
+
+            // Optional: Seek handlers
+            navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+                if (audioRef.current) audioRef.current.currentTime = Math.max(audioRef.current.currentTime - (details.seekOffset || 10), 0);
+            });
+            navigator.mediaSession.setActionHandler('seekforward', (details) => {
+                if (audioRef.current) audioRef.current.currentTime = Math.min(audioRef.current.currentTime + (details.seekOffset || 10), audioRef.current.duration);
+            });
+        }
+    }, [handlePlayPause, handleNext, handlePrevious]);
+
+    const addToPlaylist = useCallback((item) => {
+        setActivePlaylistId(null);
+        setPlaylist((prev) => {
+            // Avoid immediate duplicates
+            if (prev.length > 0 && prev[prev.length - 1].id === item.id) {
+                return prev;
+            }
+            const newList = [...prev, item];
+            // If it's the first item added, prepare it but don't auto-play yet
+            if (currentIndex === -1) {
+                setCurrentIndex(0);
+            }
+            return newList;
+        });
+    }, [currentIndex]);
+
+    const playNow = useCallback((item) => {
+        setActivePlaylistId(null);
+        // Clear queue and add this item
+        setPlaylist([item]);
+        setCurrentIndex(0);
+        setIsDrawerOpen(true);
+        // Trigger the internal playback logic with immediate track object to bypass async state race
+        playTrack(0, item);
+    }, [playTrack]);
+
+    const removeFromPlaylist = useCallback((indexToRemove) => {
+        setPlaylist((prev) => {
+            const newList = [...prev];
+            newList.splice(indexToRemove, 1);
+            return newList;
+        });
+
+        if (indexToRemove === currentIndex) {
+            // If removing current track, play next (or stop if it was the last)
+            if (currentIndex >= playlist.length - 1) {
+                handleStop();
+                setCurrentIndex(-1);
+            } else {
+                playTrack(currentIndex); // Will play the new item at this index
+            }
+        } else if (indexToRemove < currentIndex) {
+            // Adjust current index if we removed something before it
+            setCurrentIndex(prev => prev - 1);
+        }
+    }, [currentIndex, playlist.length, handleStop, playTrack]);
+
+    const value = useMemo(() => ({
+        playlist,
+        currentTrack,
+        currentIndex,
+        isPlaying,
+        isLoading,
+        error,
+        playbackRate,
+        isDrawerOpen,
+        setIsDrawerOpen,
+        addToPlaylist,
+        playNow,
+        removeFromPlaylist,
+        playTrack,
+        handlePlayPause,
+        handleNext,
+        handlePrevious,
+        handleStop,
+        setPlaybackRate,
+        audioRef,
+        
+        // Playlist API Context
+        savedPlaylists,
+        activePlaylistId,
+        fetchPlaylists,
+        createPlaylist,
+        renamePlaylist,
+        deletePlaylist,
+        addToSpecificPlaylist,
+        addBulkToSpecificPlaylist,
+        removeFromSpecificPlaylist,
+        loadSavedPlaylist
+    }), [
+        playlist,
+        currentTrack,
+        currentIndex,
+        isPlaying,
+        isLoading,
+        error,
+        playbackRate,
+        isDrawerOpen,
+        savedPlaylists,
+        activePlaylistId,
+        addToPlaylist,
+        playNow,
+        removeFromPlaylist,
+        playTrack,
+        handlePlayPause,
+        handleNext,
+        handlePrevious,
+        handleStop,
+        fetchPlaylists,
+        createPlaylist,
+        renamePlaylist,
+        deletePlaylist,
+        addToSpecificPlaylist,
+        addBulkToSpecificPlaylist,
+        removeFromSpecificPlaylist,
+        loadSavedPlaylist
+    ]);
+
+    const apiValue = useMemo(() => ({
+        playNow,
+        addToPlaylist,
+        removeFromPlaylist,
+        handlePlayPause,
+        handleNext,
+        handlePrevious,
+        handleStop,
+        setPlaybackRate,
+        fetchPlaylists,
+        createPlaylist,
+        renamePlaylist,
+        deletePlaylist,
+        addToSpecificPlaylist,
+        addBulkToSpecificPlaylist,
+        removeFromSpecificPlaylist,
+        loadSavedPlaylist,
+        setIsDrawerOpen
+    }), [
+        playNow,
+        addToPlaylist,
+        removeFromPlaylist,
+        handlePlayPause,
+        handleNext,
+        handlePrevious,
+        handleStop,
+        setPlaybackRate,
+        fetchPlaylists,
+        createPlaylist,
+        renamePlaylist,
+        deletePlaylist,
+        addToSpecificPlaylist,
+        addBulkToSpecificPlaylist,
+        removeFromSpecificPlaylist,
+        loadSavedPlaylist,
+        setIsDrawerOpen
+    ]);
+
+    return (
+        <LexPlayApiContext.Provider value={apiValue}>
+            <LexPlayContext.Provider value={value}>
+                {children}
+            </LexPlayContext.Provider>
+        </LexPlayApiContext.Provider>
+    );
+};

@@ -1,0 +1,63 @@
+'local.settings.json' found in root directory (C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api).
+Resolving worker runtime to 'python'.
+Found Python version 3.12.10 (py).
+
+
+Azure Functions Core Tools
+Core Tools Version:       4.5.0+e74aae22c9630777c9f58354f290a6e214218546 (64-bit)
+Function Runtime Version: 4.1044.400.25520
+
+Skipping 'DB_CONNECTION_STRING' from local settings as it's already defined in current environment variables.
+[2026-01-02T18:36:32.623Z] C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api\blueprints\ai_processor.py:7: FutureWarning: 
+[2026-01-02T18:36:32.630Z] All support for the `google.generativeai` package has ended. It will no longer be receiving 
+[2026-01-02T18:36:32.637Z] updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+[2026-01-02T18:36:32.638Z] See README for more details:
+[2026-01-02T18:36:32.639Z] https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+[2026-01-02T18:36:32.639Z]   import google.generativeai as genai
+[2026-01-02T18:36:32.707Z] Worker process started and initialized.
+
+Functions:
+
+	ai_clean_case: [POST] http://localhost:7071/api/ai/clean/{id:int}
+
+	ai_digest_case: [POST] http://localhost:7071/api/ai/digest/{id:int}
+
+	ai_mock_exam: [POST] http://localhost:7071/api/ai/mock-exam/{id:int}
+
+	ai_tts_proxy: [POST] http://localhost:7071/api/ai/tts
+
+	backfill_per_curiam_endpoint:  http://localhost:7071/api/backfill_per_curiam
+
+	fix_ponentes_endpoint:  http://localhost:7071/api/fix_ponentes
+
+	get_doctrinal_cases:  http://localhost:7071/api/doctrinal_cases
+
+	get_questions: [GET] http://localhost:7071/api/questions
+
+	get_schedule: [GET] http://localhost:7071/api/schedule
+
+	get_statute:  http://localhost:7071/api/statutes
+
+	get_user_history: [GET] http://localhost:7071/api/history
+
+	grade_essay: [POST] http://localhost:7071/api/grade_essay
+
+	health_check: [GET] http://localhost:7071/api/health
+
+	login_user: [POST] http://localhost:7071/api/login
+
+	register_user: [POST] http://localhost:7071/api/register
+
+	sc_decisions:  http://localhost:7071/api/sc_decisions
+
+	supreme_decision_detail:  http://localhost:7071/api/sc_decisions/{id:int}
+
+	supreme_decision_ponentes:  http://localhost:7071/api/sc_decisions/ponentes
+
+For detailed output, run func with --verbose flag.
+[2026-01-02T18:40:45.219Z] Executing 'Functions.get_questions' (Reason='This function was programmatically called via the host APIs.', Id=380bf7da-1482-4356-b2b9-0390497c6c05)
+[2026-01-02T18:40:45.387Z] Error getting questions: connection failed: connection to server at "127.0.0.1", port 5432 failed: FATAL:  database "bar_reviewer_local " does not exist
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: '5432', hostaddr: '::1': connection failed: connection to server at "::1", port 5432 failed: FATAL:  database "bar_reviewer_local " does not exist
+- host: 'localhost', port: '5432', hostaddr: '127.0.0.1': connection failed: connection to server at "127.0.0.1", port 5432 failed: FATAL:  database "bar_reviewer_local " does not exist
+[2026-01-02T18:40:45.410Z] Executed 'Functions.get_questions' (Succeeded, Id=380bf7da-1482-4356-b2b9-0390497c6c05, Duration=213ms)

@@ -1,0 +1,609 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>CRIMINAL PROCEDURE 1900 (GENERAL ORDER NO. 58) - CRIMINAL PROCEDURE 1900 (GENERAL ORDER NO. 58) - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '7064ee9b5669c1589a9487184a9c0baa' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/11/367' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+					
+					<CENTER>	
+					<H2></H2>
+					<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>
+					[ CRIMINAL PROCEDURE 1900 (GENERAL ORDER NO. 58), April 23, 1900 ]</H2>
+					<H3>CRIMINAL PROCEDURE 1900 (GENERAL ORDER NO. 58)</H3>
+					</CENTER>
+					<p><div align="JUSTIFY"><br><center><b>OFFICE OF THE U. S. MILITARY GOVERNOR ON THE PHILIPPINE ISLANDS.</b></center><b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p>GENERAL ORDERS, NO. 58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p>In the interests of justice, and to safeguard the civil liberties of the inhabitants of these Islands, the criminal code of procedure now in force therein is hereby amended in certain of its important provisions, as indicated in the following enumerated sections: </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SECTION 1.</b> The following provisions shall have the force and effect of law in criminal matters in the Philippine Islands from and after the 15th day of May, 1900, but existing laws on the same subjects shall remain valid except in so far as hereinafter modified or repealed expressly or by necessary implication.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <center><b>PROSECUTION OF OFFENSES<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SEC. 2.</b> All prosecutions for public offenses shall be in the name of the United States against the persons charged with the offences.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SEC. 3.</b> All public offences triable in courts of first instance or in courts of similar jurisdiction, now established or that hereafter may be established, must be prosecuted by complaint or information.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SEC. 4.</b> A complaint is a sworn written statement made to a court or magistrate that a person has been guilty of designated offence.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SEC. 5.</b> An information is an accusation in writing charging a person with a public offence, presented and signed by the promoter fiscal or his deputy and filed with the clerk of court.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <p><b>SEC. 6.</b> A complaint or information is sufficient if it shows:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ol><li> The name of the defendant, or, if his name cannot be discovered, that he is described under a fictitious name with a statement that his true name is unknown to the informant or official signing the same. His true name may be inserted at any stage of the proceedings instituted against him, whenever ascertained.</li><li> The designation of the crime or public offence charged.</li><li> The acts or omission complained of as constituting the crime or public offence in ordinary and concise language, without repetition, not necessarily in the words of the statute, but in such form as to enable a person of common understanding to know what is intended and the court to pronounce judgment according to right.</li><li> That the offence was committed within the jurisdiction of the court and is triable therein.</li><li> The names of the persons against whom, or against whose property, the offence was committed, if known.</li></ol><p><b>SEC. 7.</b> Except when tie is a material ingredient of an offence, the precise time of commission need not be stated in a complaint or information, but the act may be alleged to have been committed at any time before the filing thereof. And when an offence shall have been described with sufficient certainty to identify the act, an erroneous allegation as to the person injured shall be deemed immaterial.&nbsp;&nbsp; </p><p><b>SEC. 8.</b> A complaint or information may be substantially in the following form:&nbsp; </p><blockquote>United States against A. B.In the Court of ……………………, to ……………………Province of ………………….the ………. day of ………………, 19……….&nbsp;&nbsp;A. B. is accused by the undersigned of the crime of (giving its legal appellation, such as murder, arson, robbery, or the like, or designating it as a felony or misdemeanor), committed as follows:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; That said A. B. on the ……… day of ………., 19….., at the …………….. Province of ………….. (here set forth the acts or omissions charged as an offence), contrary to the statute in such case made and provided.</blockquote><blockquote><blockquote><blockquote>(Signed)……………………………….</blockquote></blockquote></blockquote><p><b>SEC. 9.</b> The information or complaint may be amended in substance or form, without leave of court, at any time before the defendant pleads; and thereafter, during the trial, as to all matters of form, at the discretion to the rights of the defendant.&nbsp; </p><p><b>SEC. 10.</b> No information or complaint is insufficient, nor can the trial, judgment or other proceeding be affected by reason of a defect in matter of form which does not tend to prejudice a substantial right of the defendant upon the merits.&nbsp; </p><p><b>SEC. 11.</b> A complaint or information must charge but one offence; except only in those cases in which existing laws prescribe a single punishment for various allied offences.&nbsp;&nbsp; </p><p><b>SEC. 12.</b> Every person making complaint charging the commission of a crime or public offence, must inform the magistrate of all persons whom he believes to have any knowledge of its commission; and the magistrate shall issue subpoenas for such persons, requiring them to attend at a specified time and place as witnesses.&nbsp;&nbsp; </p><p><b>SEC. 13.</b> When a complaint or information alleging the commission of a crime is laid before a magistrate, he must examine on oath, the informant or prosecutor and the witnesses produced, and take their depositions in writing, causing them to be subscribed by the parties making them. If the magistrate be satisfied from the investigation that the crime complained of has been committed, and that there is reasonable ground to believe that the party charged has committed it, he must issue an order for his arrest. If the offence be admitted to bail; and the defendant offer for his arrest. If the offence be bailable, and the defendant offer a sufficient security, he shall be admitted to bail; otherwise he shall be committed to prison.&nbsp;&nbsp; </p><p><b>SEC. 14.</b> If the magistrate shall believe from the evidence submitted, either that the crime complained of was not committed, or that, if committed, the person charged did not commit it, he must set the person at liberty; but such release shall not prevent the filing of a new complaint or information and the arrest of the accused thereon at any time before the prosecution of the offence shall be barred by the statute. In case the promoter fiscal may appeal from the order of release, the judge shall subject the accused to such inspection and measures of vigilance as may be deemed prudent to prevent his escape.&nbsp; </p><center><b>RIGHTS OF ACCUSED AT THE TRIAL<br>&nbsp; <br></b></center>&nbsp;<b>SEC. 15.</b> In all criminal prosecutions the defendant shall be entitled:<ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To appear and defined in person and by counsel at every stage of the proceedings.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To be informed of the nature and cause of the accusation.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To testify as a witness in his own behalf; but if a defendant offers himself as a witness he may be cross-examined as any other witness. His neglect or refusal to be a witness shall not in any manner prejudice or be used against him.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To exempt from testifying against himself.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To be confronted at the trial by and cross-examine the witnesses against him. Where the testimony of a witness for the prosecution has previously been taken down by question and answer in the presence of the accused or his counsel, the defence having had an opportunity to cross-examine the witness, the deposition of the latter may be read, upon satisfactory proof to the court that he is dead or insane, or cannot with due diligence be found in the Islands.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To have compulsory process issue for obtaining witnesses in his own favor.</li><li>&nbsp;&nbsp;&nbsp;&nbsp; To have a speedy and public trial.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To have the right of appeal in all cases.</li></ol>&nbsp;<center><b>ARRAIGNMENT AND COUNSEL&nbsp; <br></b></center><p><b>SEC. 16.</b> When a complaint or information shall have been filed the defendant must be arraigned thereon before the court in which it is filed, unless the cause shall have been transferred elsewhere for trial. If the charge is for a felony (delito), the defendant must be personally present at the arraignment; but if for a misdemeanor (falta), he may appear by counsel.&nbsp; </p><p><b>SEC. 17.</b> If the defendant appears without counsel, he must be informed by the court that it is his right to have counsel before being arraigned, and must be asked if he desires the aid of counsel. If he desires and is unable to employ counsel, the court must assigned counsel to defend him. A reasonable time must be allowed for procuring counsel.&nbsp; </p><p><b>SEC. 18.</b> The arraignment must be made by the court or clerk, and shall consist in reading the complaint or information to the defendant and delivering to him a copy thereof, including a list of witnesses, and asking him whether he pleads guilty or not guilty as charged. The prosecution may call at the trial other witnesses than those named in the complaint or information.&nbsp; </p><center><b>DEMURRERS AND PLEAS<br>&nbsp; <br></b></center><p><b>SEC. 19.</b> If, on the arraignment, the defendant requires it, he must be allowed a reasonable time, not less than one day, to answer the complaint or information. He may, in his answer to the arraignment, demur or plead to the complaint or information.</p><p> <b>SEC. 20.</b> Both demurrer and plea must be submitted in open court, either at the arraignment or at such other time as may be allowed to the defendant for the purpose.&nbsp; </p><p><b>SEC. 21.</b> The defendant may demur to the complaint or information, when it appears on the face thereof:</p><ol> <li> That the offence charged is not within the jurisdiction of the court.</li><li> That it does not conform substantially to the prescribed form.</li><li> That more than one offence is charged; except only in those cases in which existing laws prescribe a single punishment for various allied offences,</li><li> That the facts charged do not constitute a public offence.</li><li> That it contains averments which, if true, would constitute a legal jurisdiction or excuse.</li></ol>&nbsp;<p><b>SEC. 22.</b> In courts of first instance or of like jurisdiction, the demurrer must be in writing, signed by the defendant or his counsel, and must distinctly set forth the grounds of objection, or it shall be disregarded. The formal demurrer shall be accompanied by such arguments in writing as the defence may desire to submit to sustain it. Within three days after the filing of a demurrer the promoter fiscal must file his answer thereto in writing. The judgment of the court, either allowing or disallowing it, must be in writing and shall be filed with the papers in the case within three days after the demurrer is heard.&nbsp; </p><p><b>SEC. 23.</b> If the demurrer is sustained, the judgment shall be final on the complaint or information demurred to, and it shall be a bar to another prosecution for the same offence, unless the court delivering judgment was without jurisdiction, or unless the court being of opinion that the objection may be avoided, directs a new complaint or information to be filed. If the court does not direct that the accused be remanded to a court of proper jurisdiction for trial or that a new information be filed, the defendant must be discharged or his bail be exonerated.&nbsp; </p><p><b>SEC. 24.</b> Should the demurrer be disallowed, the court must require the defendant to plead. If he refuses, a plea of not guilty shall be entered for him.&nbsp; </p><blockquote>&nbsp;&nbsp; There are four kind of pleas to an information or complaint: (1) guilty; (2) not guilty; (3) a former judgment of conviction or acquittal of the offence charged which may be pleaded either with or without the plea of not guilty; (4) once in jeopardy, which may be pleaded with or without the plea of not guilty.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The plea must be oral, and a minute thereof in writing filed with the papers in the case.</blockquote>&nbsp;<p><b>SEC. 25.</b> A plea of guilty can be put in only by the defendant himself in open court. The court may at any time before judgment upon a plea of guilty, permit it to be withdrawn and a plea of not guilty substituted.&nbsp;&nbsp; </p><p><b>SEC. 26.</b> When a defendant shall have been convicted or acquitted or once placed in jeopardy upon an information or complaint, the conviction, acquittal shall be a bar to another information or indictment for the offence charged, or for an attempt to commit the same, or for a frustration thereof, or for any offence necessarily therein included of which he might have been convicted under such complaint or information.&nbsp;&nbsp; </p><p><b>SEC. 27. </b>If the defendant shall have been formerly acquitted on the ground of variance between the complaint or information and the proof, or if the complaint or information shall have been dismissed upon objection to its form or substance or in order to hold the defendant for a higher offence without a judgment of acquittal, it shall not be considered an acquittal of the same offence.</p><p> <b>SEC. 28. </b>A person cannot be tried for an offence, nor for any attempt to commit the same of frustration thereof, for which he has been previously brought to trail in a court of competent jurisdiction upon a valid complaint or information or other formal charge sufficient inform and substance to sustain a conviction, after issue properly joined, when the case is dismissed or otherwise terminated before judgment without the consent of the accused.&nbsp;&nbsp; </p><p><b>SEC. 29.</b> The court may find the defendant guilty of any offence, or of any frustrated or attempted offence, the commission of which is necessarily included in the charge in the complaint or information.&nbsp;&nbsp; </p><p><b>SEC. 30.</b> After his plea the defendant shall be entitled, on demand, to at least two days in which to prepare for trial.&nbsp; </p><center><b>THE TRIAL<br>&nbsp; <br></b></center>&nbsp;<b>SEC. 31.</b> The plea of not guilty having been entered, the trial must proceed in the following order:<ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The counsel for the United States must offer evidence in support of the charges.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The defendant or his counsel may offer evidence in support of the charges.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The parties may then respectively offer rebutting testimony, but rebutting testimony only, unless the court, in furtherance of justice, permit them to offer new and additional evidence bearing upon the main issue in question.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When the introduction of testimony shall have been concluded, unless the case is submitted to the court without argument, the counsel for the United States must open the argument, the counsel for the United States must open the argument, the counsel for the defence must follow, and the counsel for the United States may conclude the same. The argument by either counsel may be oral or written, or partly oral and partly written, but only the written arguments, or such portions of the same as may be in writing shall be preserved in the records of the case.</li></ol><p><b>SEC. 32.</b> In court s of first instance or similar jurisdiction each witness must be duly sworn and his testimony reduced to writing as a deposition by the court or under its direction. The deposition must state the name, residence, and occupation of the witness. It must contain all questions put to the witness and his answers thereto. If a question put is objected to and the objection be either over-ruled or sustained, the fact of objection and its nature, together with the ground on which it shall have been sustained or over-ruled must be stated, or if a witness declines to answer a question put, the fact and the proceedings taken thereon shall be entered in the record. The deposition must be read to the witness and made to conform to what he declares to be the truth. He must sign the same, or, if he refuses, his reason for such refusal must be stated. It must also be signed by the magistrate and certified by the clerk. Incases where an official stenographer is engaged, the testimony and proceedings may be taken by him in shorthand, and it will not be necessary to read the testimony to the witness nor for the latter to sign the same; but a transcript of the record made by the official stenographer and certified as correct by him shall be prima facie a correct statement of such testimony and proceedings.&nbsp;&nbsp; </p><p><b>SEC. 33.</b> When two or more defendants are jointly charged with a felony, any of the defendants demanding it must be tried separately.&nbsp;&nbsp; </p><p><b>SEC. 34.</b> When two or more persons shall be included in the same charge, the court, at any time before the defendants have entered upon their defence or upon the application of the counsel of the government, may direct any defendant to be discharged that he may be a witness for the United States.&nbsp;&nbsp; </p><p><b>SEC. 35.</b> When two or more persons shall be included in the same charge, and the court shall be of opinion in respect to a particular defendant that there is not sufficient evidence to put him on his defence, it must order him to be discharged before the evidence is closed, that he may be a witness for his co-defendant.&nbsp;&nbsp; </p><p><b>SEC. 36.</b> The order indicated in sections 34 and 35 shall amount to an acquittal of the defendant and shall be a bar to future prosecution for the same offence.&nbsp;&nbsp; </p><p><b>SEC. 37. </b>When it appears at any time before judgment is taken, that a mistake had been made in charging the proper offence, the defendant must not be discharged if there appear to be good cause to detain him in custody, but the court must commit him to answer to the proper offence, and may also require the witness to give bail for their appearance at the trial.&nbsp;&nbsp; </p><p><b>SEC. 38.</b> If the promoter fiscal or his deputy fails to be present at the trial, the court must appoint some attorney at-law to perform the duties of prosecutor at the trial.&nbsp;&nbsp; </p><p><b>SEC. 39. </b>While a witness shall be under examination, the magistrate may exclude all witnesses who have not testifies. He may also cause witnesses to be kept separate and to be prevented from conversing with one another until all shall have been examined.&nbsp;&nbsp; </p><p><b>SEC. 40.</b> The court must also, upon the request of the defendant, exclude from the trial every person except the officers of the court and the attorneys for the prosecution and defence.&nbsp;&nbsp; </p><p><b>SEC. 41.</b> The defendant must be personally present at the time of pronouncing judgment, if the conviction is for a felony; if for a misdemeanor, the judgment may be pronounced in his absence.&nbsp; </p><center><b>RE-OPENING OF THE TRIAL.&nbsp; <br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 42.</b> At any time before the final entry of a judgment for conviction, the defendant may move, either in the court in which the trial was had or an appeal to a higher court, for a re-opening of the case upon the ground of newly discovered evidence material to his defence. The motion must be made to the court which pronounced sentence, or to the appellate court if the case shall have been appealed, and must be made in writing and be supported by the affidavits of the witnesses by whom such evidence is expected to be given, or by duly authenticated copies of documents which it is proposed to introduce in evidence. Within a like period after conviction, a case may be re-opened on account of errors of law committed at the trial. The motion must be in writing and must set forth the errors alleged to have been committed. In courts of higher jurisdiction, the decision of the court on such motions shall be in writing, and, together with the motion and affidavit, shall be attached to the papers in the case, and any evidence admitted must be taken and recorded as upon the original hearing. The new hearing, if allowed, shall take place in the court of original jurisdiction.&nbsp;&nbsp; </p><p><b>SEC. 43.</b> From all final judgments of the courts of first instance or courts of similar jurisdiction, and in all cases in which the law now provides for appeals from said courts, an appeal may be taken to the Supreme Court as hereinafter prescribed. Appeals shall also lies from the final judgments of justices of the peace in criminal cases to the courts of the next superior grade, and the decisions of the latter thereon shall be final and conclusive except in cases involving the validity or constitutionality of a statute, wherein appeal may be made to the Supreme Court.&nbsp;&nbsp; </p><p><b>SEC. 44.</b> Either party may appeal from a final judgment or from an order made after judgment affecting the substantial rights of the appellant or in any case now permitted by law. The United States may also appeal from a judgment for the defendant rendered on a demurrer to an information or complaint, and from an order of dismissing a complaint or information.</p><p> <b>SEC. 45.</b> An appeal shall be taken by filing with the clerk of the court in which the judgment or order was rendered or with such court, a notice stating the appeal, and by serving a copy there upon the adverse party or his attorney.&nbsp;&nbsp; </p><p><b>SEC. 46.</b> If personal service of the copy on the notice of appeal cannot be made, the court may order the publication of the notice in some newspaper, having general circulation in the vicinity, at least once each week for a period not exceeding thirty days, and such publication shall be deemed equivalent thirty days, and such publication shall be deemed equivalent to personal service.&nbsp; </p><p><b>SEC. 47.</b> An appeal must be taken within fifteen days from the rendition of the judgment or order appealed from.&nbsp; </p><p><b>SEC. 48.</b> Upon an appeal being taken, the clerk or judge of the court with whom the notice of appeal shall have been filed, must, within five days after the filing of the notice, transmit to the clerk of the court to which the appeal is taken, the complete record in the case together with the notice of the appeal, but upon appeals from justices’ courts a transcript of the papers and entries in the docket will be forwarded to the court to which the appeal is taken.&nbsp;&nbsp; </p><p><b>SEC. 49.</b> When several defendants are tried jointly, any one or more of them may make an appeal; but those who do not join in the appeal shall not be affected thereby.&nbsp; </p><center><b>RECORDS OF TRIALS&nbsp; <br>&nbsp; <br></b></center><b>SEC. 50.</b> It shall not be necessary to forward to the Supreme Court the record, or any part thereof, of any part thereof, of any case in which there shall have been an acquittal, or in which the sentence imposed does not exceed confinement in prison for one year, or a fine of 250 pesos, exclusive if costs, unless case shall have been duly appealed. But such sentences shall be executed upon the order of the court in which the trial was ha. The record of all cases in which the death penalty, or imprisonment exceeding one year, or a fine exceeding 250 pesos, exclusive of costs of trial, shall have been imposed, shall be forwarded to the clerk of the Criminal Branch of the Supreme Court within twenty days, but not earlier than fifteen days, after the rendition of the sentence. All cases involving sentence of death, or of imprisonment exceeding six years, or if fine exceeding 1250 pesos, or in which an appeal shall have been taken, shall be submitted to the Criminal Branch of the Supreme Court, and shall thereafter take the same course as in now provided by law. Cases forwarded to the Supreme Court involving sentences less serious than those herein before last mentioned, and not appealed, shall be referred by the clerk to the Ministerio Fiscal for consideration, and if the latter return the same concurring in the sentence imposed, the record shall immediately be returned to the trial court for execution of sentence. If the Ministerio Fiscal shall not concur in the sentence, the case shall be submitted to the Criminal Branch of the Supreme Court, and shall thereafter take the same course as in now provided by law when that officer shall recommend a sentence in any respect more severe than that imposed by the trial judge; and for the consideration of the court, without the necessity of a further defence or hearing, when that officer recommends a lighter sentence.<br><br><center><b>TRIALS IN JUSTICES’ COURTS. APPEALS.<br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 51.</b> Proceedings and actions before a justice’s court must be commenced by complaint under oath setting forth the offence charged with such particulars as to enable the defendant to understand distinctly the character of the offence charged and to answer the complaint.&nbsp; </p><p><b>SEC. 52.</b> Every plea before a justice of the peace must be oral and entered in the minutes.&nbsp; </p><p><b>SEC 53. </b>In proceedings before justices of the peace it will not be necessary to furnish the accused with a copy o f the complaint unless he demand the same, nor to reduce the testimony or proceedings to writing. But each justice shall keep a docket book in which must be entered:</p><ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The title of the action.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The offence charged.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The date of arrest.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The date of trial with minute of all adjournments.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The plea.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The names and addresses of all witnesses sworn and examined.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The judgment of the court.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An itemized statement of the costs.</li><li>&nbsp;&nbsp;&nbsp;&nbsp; The filing of a notice of appeal, if the case be appealed.</li></ol>&nbsp;<b>SEC. 54.</b> All cases appealed from a justice’s court shall be tried in all respect anew in the court to which the same are appealed; but on the hearing of such appeals it shall not be necessary unless the appeal shall involve the constitutionality or legality of a statute, that a written record of the proceedings be kept; but shall be sufficient if the appellate court keeps a docket of the proceedings in the form prescribed in ht next preceding section.<br><br><center><b>EVIDENCE AND PROOF&nbsp; <br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 55.</b> All persons, without exception, who, having organs of sense, can perceive, and, perceiving can make known their perceptions to others, may be witnesses. Therefore, neither parties nor other persons who have an interest in the event of the trial are excluded; nor are those who have been convicted of crime nor persons on account of their opinions on matters of religious belief; although in every case the credibility of the witness may be drawn in question by the manner in which he testifies, by the character of his testimony, by evidence affecting his character for truth, honesty, or integrity or his motives, or by contradictory evidence.</p><p> <b>SEC. 56.</b> A witness must answer questions legal and pertinent to the matters at issue, though his answer may tend to establish a claim against himself; but he need not give an answer which will have tendency to subject him to punishment for felony; nor need he give an answer which will have a direct tendency to degrade his character, unless it to be the very fact at issue or to a fact from which the fact at issue would be presumed. But a witness must answer to the fact of his previous conviction for felony.</p><p> <b>SEC. 57.</b> A defendant in a criminal action shall be presumed to be innocent until the contrary is proved, and in case of a reasonable doubt that his guilt is satisfactorily shown he shall be entitled to an acquittal.&nbsp;&nbsp; </p><p><b>SEC. 58.</b> Except with the consent of both, or except in cases of crime committed by one against the other, neither husband nor wife shall be a competent witness for or against in a criminal action or proceeding to which one or both shall be parties.&nbsp;&nbsp; </p><p><b>SEC. 59.</b> In all criminal prosecutions the evidence admitted must be relevant to the fact at issue, the burden of proof of guilt shall be upon the prosecution, and the best evidence must be produced of which the case is susceptible. But copies of public records and documents, of papers lost or destroyed, and of writings properly admissible in evidence which are in the possession of the opposite party and have not been produced upon written request of the party desiring to offer them, shall be admissible in lieu of the originals.&nbsp;&nbsp; </p><p><b>SEC. 60.</b> When a defendant has been held to answer for a public offence, he may upon application have witnesses conditionally examined in his behalf in manner as hereinafter shown, but not otherwise. The application must be supported by affidavit stating: (1) The name and residence of the witness and that his testimony is material to the defence of the action; (2) that the witness is about to leave the province, or is so sick or infirm as to afford reasonable grounds for apprehending that he will not be able to attend the trial.&nbsp;&nbsp; </p><p><b>SEC. 61.</b> If the court is satisfied that the examination is necessary, an order will be made directing that the witness be examined at a specified time and place, and that a copy of the order be served on the promoter fiscal within a given time prior to that fixed for the examination. The examination will be taken before the judge ordering the same, or, if the order be granted by a court of superior jurisdiction, before an inferior tribunal to be designated in the order. The examination shall proceed notwithstanding the absence of the promoter fiscal, if it appear that he has been duly notified of the hearing. The testimony shall be reduced to writing.&nbsp;&nbsp; </p><p><b>SEC. 62.</b> When the judge of a court shall be satisfied, by proof or oath, that there is reason to believe that a material witness on the part of the prosecution will not appear and testify when required, he may order the witness to give bail in such sum as he may deem proper for such appearance. Upon refusal to give bail, the court must commit him to prison until he complies or is legally discharged. Where, however, it shall satisfactorily appear that the witness cannot procure bail as directed by the order of the court, he may forthwith be conditionally examined. Such examination must be by question and answer, in the presence of the defendant, or after due notice to attend the examination has been served on him, and will be conducted in the same manner as an examination at the trial. His testimony taken, the witness must thereupon be discharged.&nbsp; </p><center><b>BAIL<br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 63.</b> All prisoners shall be bailable before conviction, except those charged with the commission of capital offences when proof of guilt is evident or the presumption of guilt is strong.</p><p> <b>SEC. 64.</b> In case of appeal after judgment, the defendant may be admitted to bail pending on the appeal: (1) As a matter of right if the appeal is from an acquittal or from a judgment imposing a fine only; (2) as a matter of judicial discretion in all other non-capital cases.&nbsp;&nbsp; </p><p><b>SEC. 65.</b> In the offence is bailable, the defendant may be admitted to bail, before conviction, to answer the complaint or information in the court in which it is filed or to which it may be transferred for trial; after appeal, upon application supported by an undertaking of bail that he will surrender himself in execution of such judgment as the appellate court may render, or that, in case the cause is remanded for a new trial, he will appear in the court to which it may be remanded and submit himself to the order and process thereof.&nbsp; </p><p><b>SEC. 66.</b> When admission to bail is a matter of discretion, the court must require that reasonable notice of the hearing of the application for bail be given to the promoter fiscal.</p><p> <b>SEC. 67.</b> All personal bail bonds must be executed by a written undertaking executed by at least two sufficient sureties (with or without the defendant, as the court in its discretion may demand) and duly acknowledged, in substantially the following form:&nbsp; </p><blockquote>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A complaint (or information having been filed on the ……………… day of …………., 19………., in the court of …………....., …………………….., Province of …………………, charging (name of defendant) with the offence of (designating it generally), and he having been admitted to bail in the sum of ………………….. pesos.Now, therefore, we, …………………… and …………….. of …………………. jointly and severally, hereby undertake that the above (naming the defendant), will appear and answer the charge above mentioned in whatever court it may be tried, and will at all time hold himself amendable to the orders and process of the court, and if convicted will appear for judgment, and render himself to the execution thereof; or if he fails to perform any of these conditions, that he will pay to the United States the sum of ……………. pesos (inserting the sum to which the defendant shall be admitted to bail.).</blockquote>&nbsp;<blockquote><blockquote><blockquote><blockquote>(Signed)………………………………………………….…………………………….</blockquote></blockquote></blockquote></blockquote><b>SEC. 68.</b> The necessary qualifications of sureties to a bail bond shall be as follows:<ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Each of them must be a resident, householder or freeholder within the Islands.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Each must be worth the amount specified in the undertaking over and above all just debts, obligations and property exempt from execution; but the court may allow more than two sureties to justify severally in amounts less than expressed in the undertaking, if the entire sum justified to is equivalent to the whole amount of bail demanded.</li></ol> <p><b>SEC. 69.</b> The sureties must in all cases justify by affidavit taken before the magistrate, stating therein that they each possess the qualifications named in the preceding section.&nbsp; </p><p><b>SEC. 70.</b> The court may further examine the sureties upon oath concerning their sufficiency, in such manner as it may deem proper.&nbsp;&nbsp; </p><p><b>SEC. 71.</b> The defendant must be discharged by the court upon acceptance of bail.&nbsp;&nbsp; </p><p><b>SEC. 72.</b>After a defendant shall have been admitted to bail, the court may, upon good cause shown, either increase or reduce the amount of the same. If increased, the defendant may be committed to custody unless he gives bail in the increased amount he is called upon to furnish. A defendant held to answer on a criminal charge but who is released without bail on the filing of a complaint charge but who is released without bail on the filing of a complaint, may, at any subsequent stage of the proceedings whenever it may satisfactorily appear to the court that he is the author of the alleged crime, be required to give bail, or in lieu thereof may be committed to prison.&nbsp;&nbsp; </p><p><b>SEC. 73.</b> Bail upon appeal must conform in all respects as provided for in other cases of bail, except that the undertaking must be conditioned as prescribed in section 65.&nbsp;&nbsp; </p><p><b>SEC. 74.</b> At any time after the amount of bail is fixed by order, the defendant, instead of giving bail, may deposit with the nearest collector of internal revenue the sum mentioned in the order, and upon delivering to the court a proper certificate of the deposit, must be discharged from custody. Money thus deposited shall be applied to the payment of the fine and costs for which judgment may be given, and the surplus, if any be returned to the defendant.&nbsp; </p><p><b>SEC. 75. </b>The sureties to the bail bond may surrender the defendant at any time prior to forfeiture, or he may surrender himself and the bail be thus exonerated. An order of exoneration may be made by the court upon proof of surrender and after due notice to the promoter fiscal of the proposed issuance of the order. For the purpose of surrendering the defendant the bail may arrest him, or on written authority endorsed on a certified copy of the undertaking may cause him to be arrested by any police officer or any other person of suitable age and discretion.&nbsp; </p><p><b>SEC. 76.</b> If without sufficient cause the defendant neglects to appear for arraignment, trial, or judgment, or neglects to appear on any other occasion when his presence may be required in court, or fails to surrender himself in execution of the judgment, the court must direct the fact of his neglect or failure to be entered in the records of the cause, and declare the undertaking or deposit, as the case may be, to be forfeited. But if at any time within thirty days thereafter the defendant or his counsel appears and satisfactorily explains the neglect or failure, the court may direct the forfeiture to be discharged upon such terms as it may consider just. If the forfeiture is not so discharged, the promoter fiscal shall at once proceed by action against the bail upon their undertaking.&nbsp; </p><center><b>WRIT OF HABEAS CORPUS<br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 77.</b> Every person unlawfully imprisoned or restrained of his liberty under any pretence whatever may prosecute a writ of habeas corpus, in order to inquire into the cause of such imprisonment or restraint.&nbsp; </p><p><b>SEC. 78.</b> Application for the writ is made by petition, signed either by the party for whose relief it is intended, or by some person in his behalf, and must specify:</p><ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Application in whose behalf the writ is applied for is imprisoned or restrained of his liberty, the place where and the officer or person by whom he is so confined or restrained, naming all parties of they are known, or describing them as fully as possible if they are unknown.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If the imprisonment is alleged to be illegal, in what the alleged illegibility consists.</li><li>&nbsp;&nbsp;&nbsp; The petition must be verified by the oath or affirmation of the party making the application.</li></ol>&nbsp;<p><b>SEC. 79.</b> The writ of habeas corpus may be granted by a court superior to that of justice of the peace, or a judge thereof, within the limits of the court’s jurisdiction.&nbsp;&nbsp; </p><p><b>SEC. 80.</b> Any court or judge authorized to grant the writ and to whoa petition for the same is presented, must, if it appear that the writ ought to issue, grant the same without delay.&nbsp; </p><p><b>SEC. 81.</b> When the writ is issued by a member of the Supreme Court, it may be made returnable before himself, or the Supreme Court, or before any court immediately inferior, or any judge thereof.</p><p> <b>SEC. 82.</b> When the writ shall be awarded it shall be in form substantially as follows:&nbsp; &nbsp; </p><blockquote>………………………}Province of ………….}&nbsp;&nbsp; To (naming the person having the petitioner in charge):You are hereby commanded to have the body of …………… by you unlawfully detained as alleged, before (the court of …………..or before me, or before ……….., judge of ……………., as the case may be), at ……………….., on the ………………… day of …………….., 19…………. (or forthwith after being served with this writ), to be dealt with according to law; and have you then and there this writ with a return as prescribed by law.</blockquote>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <blockquote><blockquote>(Signed) …………………………</blockquote></blockquote><p><b>SEC. 83.</b> The writ may be served by an officer, or by any other person appointed in writing for that purpose by the court or judge by whom it is issued or allowed. If served by any person other than an officer, he shall possess the same power and is liable to the same penalty for non-performance of duty as though he were an officer.&nbsp; </p><p><b>SEC. 84.</b> Service of the writ shall be made by leaving the original with the person to whom it is directed and preserving a copy on which to make return of service. If that person cannot be found or has not the plaintiff in custody, then the service shall be made on any other person having or exercising such custody.&nbsp; </p><p><b>SEC. 85.</b> If the person to whom the writ is directed conceals himself or refuses admittance to the officer or person charged with the service of the writ, or if he attempts to convey wrongfully the plaintiff or petitioner out of the province after the writ has been served, the officer or other person serving the same may arrest him or any other person or persons resisting his authority, and bring him or them, together with the petitioner, forthwith before the court or judge before whom the writ is returnable.</p><p> <b>SEC. 86.</b> The person whom the writ is served must make return thereto in writing stating therein plainly and unequivocally whether he then has, or at any time has had, the plaintiff under his control and constraint, and if so, the cause thereof, If he has transferred him he must state to whom and the time of transfer, also the reason or authority therefore. The return must be verified. If the plaintiff is detained by virtue of any written authority, a copy thereof must be annexed to the return and the original produced on the hearing.&nbsp; </p><p><b>SEC. 87.</b> The person to whom the writ is directed must produce the body of the person in his custody or under his restraint, according to the command of the writ, except when it appears by affidavit that on account of sickness or infirmity he cannot safely be brought, or where the party in restraint or custody waives the right to be present in writing or by attorney.</p><p> <b>SEC. 88.</b> The court or judge before whom the writ is returned must immediately after return proceed to hear the matter, and shall dispose of the prisoner as justice may determine. The court or judge shall have full power and authority to require and compel witnesses to appear and testify and to perform all other acts necessary to a full and fair hearing of the case.&nbsp; </p><p><b>SEC. 89.</b> If no legal cause is shown for the imprisonment or a continuation of the restraint imposed upon the person, the court or judge must discharge him form the custody or restraint under which he is held.&nbsp; </p><p><b>SEC. 90.</b> In all cases where the imprisonment is for a criminal offence or on criminal charge, although the commitment may have been informally made or without due authority, and although the process may have been executed or the prisoner be held by a person not duly authorized, the court or judge, deciding that there is not sufficient cause for discharge, may make a new commitment or admit to bail if the case is bailable. All material witnesses may be required to enter into bonds to appear at the proper time and place, as in other cases.&nbsp; </p><p><b>SEC. 91</b> No writ of habeas corpus can be disobeyed for effect of form, if it sufficiently appear therefrom in whose custody or under whose restraint the party imprisoned or restrained is held and the court or judge before whom he is to be brought.&nbsp; </p><p><b>SEC. 92.</b> No person who has been discharged by order of a court or judge upon habeas corpus can be again imprisoned, restrained or remanded to custody for the same cause, except in the following:</p><ol><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If he has been discharged from custody based on a criminal complaint, and is afterwards committed for the same offence by legal order or process.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If, after discharge for defect of proof or for any defect of process, warrant or commitment in a criminal case, the prisoner is again arrested on sufficient proof and committed by legal process for the same offence.</li></ol><p><b>SEC. 93.</b> When a court or judge authorized to grant a writ of habeas corpus shall have evidence that any person within the court’s jurisdiction is unjustly imprisoned or restrained of his liberty, it shall be the duty of such court or judge to issue the writ or cause the same to be issued, though no application be made therefore.&nbsp;&nbsp; </p><p><b>SEC. 94.</b> Any judge, whether acting individually or as a member of a court, who shall wrongfully and wilfully refuse to issue such writ, whenever proper application for the same shall have been made, shall forfeit and pay a sum not exceeding five thousand pesos to the party suffering from such neglect – the same to be recovered by action in any court of competent jurisdiction.&nbsp; </p><center><b>SEARCH WARANTS.<br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 95.</b> A search warrant is an order in writing, issued in the name of the United States, signed by a judge or a justice of the peace, and directed to a peace officer, commanding him to search for personal property and bring it before the court.</p><p> <b>SEC. 96.</b> It may issued upon either of the following grounds:</p><ol><li>&nbsp;&nbsp;&nbsp;&nbsp; When the property was stolen or embezzled.</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When it was used or when the intent exists to use it as the means of committing a felony.</li></ol>&nbsp;<p><b>SEC. 97.</b> A search warrant shall not issue except for probable cause and upon application supported by oath particularly describing the place to be searched and the person or thing to be seized.</p><p> <b>SEC. 98.</b> The judge or justice must, before issuing the warrant, examine on oath the complaint and any witnesses be may produce and take their depositions in writing.&nbsp; </p><p><b>SEC. 99.</b> If the judge or justice is thereupon satisfied of the existence of facts upon which the application is based, or that there is probable cause to believe that they exist, he must issue the warrant, which must be substantially in the following form:&nbsp; </p><blockquote>……………………….}Province of…………...}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The United States to any ………..or policeman in the province of ………………&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proof, by affidavit, having this day been made before me by (naming the persons whose affidavits have been taken), that (stating the grounds of the application or, if the affidavit is not positive, that there is probable cause for believing), that (stating the ground of the application in the same manner), you are, therefore, commanded, in the day time (or at any time in the day or night, as the case may be), to make immediate search on the person of ………………………, or in the house situated …………………….(describing it or ant other place to be searched with reasonable particularity, as the case may be) for the following property: (describe it with reasonable certainty); and if you find the same or any part thereof, to bring it forthwith before me at………………………………&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Witness my hand this ………………… day of ………………….., 19……………</blockquote><blockquote><blockquote><blockquote>Signed ……………………………………</blockquote></blockquote></blockquote><p><b>SEC. 100.</b> The officer, if refused admittance to the place of directed search after giving notice of his purpose and authority, may break open any outer or inner door or window of a house or any part of a house or anything therein to execute the warrant or to liberate himself or any person lawfully aiding him when unlawfully detained therein. No search of a vacant house shall be made except in the presence of at least two competent witnesses, residents of the neighborhood.&nbsp;&nbsp; </p><p><b>SEC. 101.</b> The warrant must direct that it be served in the day time, unless the affidavit positively asserts that the property is on the person or in the place ordered to be searched, in which case a direction may be inserted that it be served at any time of the day or night.&nbsp; </p><p><b>SEC. 102.</b> The search warrant shall be valid for ten days from this date. Thereafter it shall be void.&nbsp;&nbsp; </p><p><b>SEC. 103. </b>The officer seizing property under the warrant must give a detailed receipt for the same to the person on whom or in whose possession it was found, or in the absence of any person, must, in the presence of at least two witnesses, leave a receipt in the place in which he found the seized property.</p><p> <b>SEC. 104.</b> The officer must forthwith deliver the property to the court, together with a true inventory thereof duly verified by oath.&nbsp;&nbsp; </p><p><b>SEC. 105.</b> A person charged with a crime may be searched for dangerous weapons or anything which may be used as proof of the commission of the crime.&nbsp;&nbsp; </p><p><b>SEC. 106.</b> Any person who shall procure a search warrant maliciously and without probable cause, and any officer who shall unlawfully exceed his authority or use unnecessary severity in executing the same shall be punished by imprisonment for not more than one year or by a fine of not exceeding 1,000 pesos or by both such fine and imprisonment.&nbsp; </p><center><b>RIGHT OF PERSONS INJURED BY THE OFFENCE.&nbsp; <br>&nbsp; <br></b></center>&nbsp;<b>SEC. 107.</b> The privileges now secured by law to the person claiming to be injured by the commission of an offence to take part in the prosecution of the offence and to recover damages for the injury sustained by reason of the same shall not be held to be abridged by the provisions of this order; but such person may appear and shall be heard either individually or by attorney at all stages of the case, and the court upon conviction of the accused may enter judgment against him for the damages occasioned by his wrongful act. It shall, however, be the duty of the promoter fiscal to direct the prosecution, subject to the right of the person injured to appeal from any decision of the court denying him a legal right.<br><br><center><b>MISCELLANEOUS AND TRANSITORY PROVISIONS.&nbsp; <br>&nbsp; <br></b></center>&nbsp;<p><b>SEC. 108.</b> The criminal jurisdiction of justices of the peace is extended to all offences which the Penal Code designates as punishable by “arresto mayor” in all of its grades.&nbsp;&nbsp; </p><p><b>SEC. 109.</b> From and after the day upon which this order shall go into effect, the ordinary civil and military tribunals, each within its proper limits, shall have exclusive jurisdiction over all crimes and misdemeanors with which any person or persons living or domiciled within the Philippine Islands may be charged.&nbsp; </p><p><b>SEC. 110.</b> All criminal actions, in which, prior to the 15ht day of May, 1900, the defence shall not have been entered upon, shall be commenced anew and thereafter prosecuted as hereinbefore provided; all in which the defense shall have been entered upon prior to that date shall be prosecuted to a conclusion from the stage when reached under the late prevailing rules of procedure, which, however, shall be made to conform as nearly as may be practicable to the provisions of this order.&nbsp; </p><blockquote>BY COMMAND OF MAJOR GENERAL OTIS:</blockquote>&nbsp;&nbsp;<center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; M. BARBER.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Assistant Adjutant General.&nbsp;</center></div></p>
+					  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,899 @@
+"""
+Supreme Court HTML to Markdown Converter (Lawphil Specific Optimized) - Table Fix + No LLM
+
+Converts Lawphil scraped HTML case files to markdown with:
+1. Smart Inline Citations (Resolves "Id.", links G.R. Nos, filters junk).
+2. Targeted Lawphil DOM cleaning (Handling table#lwphl, class="cb", class="jn").
+3. Specific support for <nt> tags used in both text and footnotes.
+4. Preserves Tables (Q&A sections) by not stripping table tags.
+"""
+
+import os
+import json
+import shutil
+import re
+import random
+import time
+from pathlib import Path
+from datetime import datetime
+from bs4 import BeautifulSoup
+from markdownify import markdownify as md
+import argparse
+import hashlib
+from collections import defaultdict
+import concurrent.futures
+import multiprocessing
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Directories - Using getenv with relative defaults for portability
+SC_SCRAPER_DIR = Path(os.getenv("SC_SCRAPER_DIR", "./sc_scraper"))
+DOWNLOADS_DIR = Path(os.getenv("DOWNLOADS_DIR", "./data/lawphil_html"))
+OUTPUT_DIR = Path(os.getenv("OUTPUT_DIR", "./data/MD/lawphil"))
+MANIFEST_FILE = OUTPUT_DIR / "conversion_manifest.json"
+
+class CaseConverter:
+    def __init__(self, output_dir=None):
+        self.output_dir = Path(output_dir) if output_dir else OUTPUT_DIR
+        self.stats = {
+            "processed": 0,
+            "success": 0,
+            "failed": 0,
+            "skipped": 0,
+            "errors": []
+        }
+        self.manifest = []
+        self.processed_cases = set()
+        self.processed_hashes = defaultdict(set)
+        self.processed_paths = set()
+        self.duplicates_dir = None
+
+    def clean_soup_dom(self, soup):
+        """
+        Specific DOM cleaning for Lawphil structure.
+        Target: <table id="lwphl"> -> <blockquote>
+        """
+        if soup.head: 
+            soup.head.decompose()
+
+        # Remove scripts and styles immediately
+        for tag in soup(["script", "style", "link", "meta", "iframe", "img"]):
+            tag.decompose()
+
+        # --- LAWPHIL SPECIFIC UNWRAPPING ---
+        lawphil_table = soup.find('table', id='lwphl')
+        
+        if not lawphil_table:
+            lawphil_table = soup.find('table', attrs={'width': '800'})
+
+        content_block = None
+        if lawphil_table:
+            # Try to use the table itself as the block
+            content_block = lawphil_table
+        
+        if content_block:
+            # Create a new clean body with just the content
+            # Handle case where content_block is not a table (e.g. if fallback found a TD)
+            if content_block.name == 'table':
+                table_str = str(content_block)
+                # Remove starting <table...> tag
+                inner_html = re.sub(r'^<table[^>]*>', '', table_str, count=1, flags=re.IGNORECASE)
+                # Remove ending </table> tag
+                inner_html = re.sub(r'</table>$', '', inner_html, count=1, flags=re.IGNORECASE)
+            else:
+                # If it's a td, div, or blockquote, just get inner HTML directly
+                inner_html = "".join([str(x) for x in content_block.contents])
+                
+            # Re-parse as new body
+            soup = BeautifulSoup(inner_html, 'html.parser')
+
+            # Unwrap structural tags to flatten the layout
+            # 1. unwrapping html/body metadata wrappers if any
+            if soup.html: soup.html.unwrap()
+            if soup.body: soup.body.unwrap()
+
+            # 2. unwrap main table container
+            while True:
+                t = soup.find(['table', 'tbody', 'thead', 'tfoot'], recursive=False)
+                if t:
+                    t.insert_before(soup.new_string('\n'))
+                    t.unwrap()
+                else:
+                    break
+
+            # 3. unwrap all layout rows (TR)
+            for tr in list(soup.find_all('tr', recursive=False)):
+                tr.insert_before(soup.new_string('\n'))
+                tr.unwrap()
+
+            # 4. unwrap all layout cells (TD/TH)
+            for td in list(soup.find_all(['td', 'th'], recursive=False)):
+                td.insert_before(soup.new_string('\n'))
+                td.unwrap()
+
+        # Clean specific Lawphil artifacts
+        for p in soup.find_all('p'):
+            text = p.get_text().strip()
+            # Safety check: Footers are short. If p contains the whole doc due to bad HTML, skip deletion.
+            if len(text) < 300:
+                if "The Lawphil Project" in text or "Arellano Law Foundation" in text:
+                    p.decompose()
+
+        return soup
+
+    def extract_metadata_from_head(self, html_content):
+        """Extracts metadata specifically from Lawphil meta tags before soup cleaning."""
+        soup = BeautifulSoup(html_content, 'html.parser')
+        meta_data = {}
+        
+        # <meta name="subject" content="..."> (Usually Case Title)
+        subject = soup.find('meta', attrs={'name': 'subject'})
+        if subject: meta_data['title'] = subject.get('content')
+        
+        # <title> (Usually G.R. No.)
+        title_tag = soup.find('title')
+        if title_tag: meta_data['case_number'] = title_tag.get_text().strip()
+        
+        return meta_data
+
+    def extract_header_info_from_body(self, soup):
+        """
+        Extracts G.R. No and Date from Lawphil's specific header format:
+        <p class="cb">[ G.R. No. 273136, August 20, 2024 ]</p>
+        """
+        info = {'case_number': None, 'date': None}
+        
+        # Define search strategies in order of reliability
+        search_groups = [
+            soup.find_all('p', class_='cb'), # Standard Lawphil
+            soup.find_all('b'),              # Bold headers
+            soup.find_all('p')[:20]          # First 20 paragraphs fallback
+        ]
+
+        for group in search_groups:
+            # If we already have both, stop
+            if info['case_number'] and info['date']: break
+            
+            if not group: continue
+
+            for tag in group:
+                text = tag.get_text().strip()
+                
+                # Check 1: Full Header Pattern [GR, Date]
+                # Pattern: [ G.R. No. XXXXX, Month DD, YYYY ] (optional brackets)
+                # match = re.search(r'\[?\s*(G\.?R\.?.*?),\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})\s*\]?', text, re.IGNORECASE)
+                
+                # More robust pattern that doesn't require brackets
+                match = re.search(r'(G\.?R\.?.*?),\s*([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})', text, re.IGNORECASE)
+                
+                if match:
+                    if not info['case_number']: info['case_number'] = match.group(1).strip()
+                    if not info['date']: info['date'] = match.group(2).strip()
+                
+                # Check 2: Isolated Date (if not yet found)
+                if not info['date']:
+                    # Strict date pattern: Month DD, YYYY
+                    date_match = re.search(r'([A-Z][a-z]+\s+\d{1,2},?\s*\d{4})', text)
+                    if date_match:
+                         # Extra validation to avoid catching random dates in text logic
+                         # Only accept if the text is short (likely a header) or contains GR/No
+                         if len(text) < 100 or "G.R." in text:
+                            try:
+                                dt_str = date_match.group(1).replace(",", "")
+                                datetime.strptime(dt_str, "%B %d %Y")
+                                info['date'] = date_match.group(1)
+                            except: pass
+                
+                # Check 3: Isolated Case Number (if not yet found)
+                if not info['case_number']:
+                    if "G.R." in text or "No." in text:
+                        clean_no = text.replace("[", "").replace("]", "").strip()
+                        # heuristic to avoid grabbing long sentences
+                        # Must contain G.R. to be safe
+                        if len(clean_no) < 50 and "G.R." in clean_no:
+                            info['case_number'] = clean_no
+
+            # If we found at least the date, we can probably stop being aggressive
+            # But let's keep going if case_number is missing
+            if info['date'] and info['case_number']:
+                break
+
+        return info
+
+    def extract_and_destroy_footnotes(self, soup):
+        """
+        Extracts footnotes specifically for Lawphil <nt> tags inside <p class="jn"> or <dir>.
+        """
+        footnotes = {}
+        nt_tags = soup.find_all('nt')
+        
+        for nt in nt_tags:
+            ref_num = nt.get_text().strip()
+            if not ref_num.isdigit(): continue
+            
+            parent = nt.parent
+            if parent.name == 'p':
+                full_text = parent.get_text().strip()
+                # Heuristic: If the <nt> is at the very start of the paragraph
+                if full_text.startswith(ref_num):
+                    content = full_text[len(ref_num):].strip()
+                    content = re.sub(r'^[\.\,\)\s]+', '', content)
+                    footnotes[ref_num] = content
+                    parent.decompose() 
+        
+        return footnotes
+
+    def clean_and_convert(self, html_content, soup=None):
+        """Consolidated cleaning function."""
+        if not soup:
+            soup = BeautifulSoup(html_content, "html.parser")
+            soup = self.clean_soup_dom(soup)
+        
+        # Step 1: Extract Footnotes
+        extracted_footnotes = self.extract_and_destroy_footnotes(soup)
+
+        # Step 2: Handle Text-Inline <nt> tags
+        remaining_nt = soup.find_all('nt')
+        for tag in remaining_nt:
+            text = tag.get_text().strip()
+            if text.isdigit():
+                tag.replace_with(f"FOOTNOTE_REF_{text}_END")
+            else:
+                tag.decompose()
+
+        # Step 3: Convert to Markdown
+        
+        # --- DEBUG DUMP ---
+        with open("debug_soup_ready.html", "w", encoding="utf-8") as f:
+            f.write(str(soup))
+        # ------------------
+
+        # FIXED: Removed table-related tags from the strip list to preserve Q&A formatting.
+        # Only stripping purely structural/layout tags that break markdown flow.
+        text = md(str(soup), heading_style="ATX", strip=['a', 'img', 'blockquote', 'center', 'dir']) 
+        
+        # Reformat markers: FOOTNOTE_REF_1_END -> [^1]
+        text = re.sub(r'FOOTNOTE[_\\]*REF[_\\]*(\d+)[_\\]*END', r'[^\1]', text)
+
+        # Step 4: Cleaning Artifacts
+        text = self.remove_lawphil_watermarks(text)
+
+        # Step 5: Clean Lines & Headers
+        lines = text.split('\n')
+        cleaned_lines = []
+        
+        start_collecting = False
+        
+        for line in lines:
+            stripped = line.strip()
+            if not stripped: continue
+            
+            # --- TOP TRIMMING LOGIC ---
+            if not start_collecting:
+                header_text = stripped.upper().replace('*', '').strip()
+                if "DIVISION" in header_text or "EN BANC" in header_text:
+                    start_collecting = True
+                else:
+                    continue
+
+            # --- BOTTOM TRIMMING LOGIC ---
+            if stripped.replace('*', '').strip().upper() == "FOOTNOTES":
+                break
+
+            # Fix Headers
+            if re.match(r'^\*\*[^*]+\*\*$', stripped) and len(stripped) < 100:
+                header_text = stripped.replace('*', '').strip()
+                if any(x in header_text.upper() for x in ["DECISION", "RESOLUTION", "EN BANC", "DIVISION", "SEPARATE OPINION"]):
+                    stripped = f"## {header_text}"
+                else:
+                    stripped = f"### {header_text}"
+
+            cleaned_lines.append(stripped)
+
+        if not cleaned_lines:
+            # Fallback if no division header found
+             for line in lines:
+                stripped = line.strip()
+                if not stripped: continue
+                if stripped.replace('*', '').strip().upper() == "FOOTNOTES": break
+                cleaned_lines.append(stripped)
+
+        final_text = '\n\n'.join(cleaned_lines)
+        final_text = re.sub(r'\n{3,}', '\n\n', final_text)
+        
+        # Step 6: Smart Inline Citation Injection
+        final_text = self.process_inline_footnotes(final_text, extracted_footnotes)
+        
+        return final_text.strip()
+
+    def remove_lawphil_watermarks(self, text):
+        watermarks = [
+            r"The Lawphil Project - Arellano Law Foundation",
+            r"\(awÞhi\(", r"\(awÞhi", r"\(aw\w+",
+            r"1a\w+phi1", r"1avvphi1", r"ℒαwρhi৷", r"ℒαwρhi"
+        ]
+        for pattern in watermarks:
+            text = re.sub(pattern, "", text, flags=re.IGNORECASE)
+        return text
+
+    def process_inline_footnotes(self, markdown_text, html_footnotes=None):
+        """Replaces [^N] markers with SMART inline citations and filters junk."""
+        if not html_footnotes: return markdown_text
+        
+        footnotes = html_footnotes.copy()
+
+        def is_citation_junk(content):
+            content = content.strip()
+            if not content: return True
+            
+            # AGGRESSIVE FILTER for "Case Specific Evidence"
+            # We want to exclude:
+            # 1. "Id. at 1" (Refers to Rollo/Records)
+            # 2. "Rollo, pp. 12-13" (Records)
+            # 3. "TSN, ..." (Stenographic Notes)
+            # 4. "Annex ..." (Evidence)
+            # 5. "Note ..." (Generic notes)
+            # 6. "See ..." (Weak signal)
+            # 7. Descriptive text starting with "Id." (e.g. "Id. at 40. The Decision...")
+            
+            junk_regex = [
+                r'^id[\.,\s]',        # Matches "Id.", "Id. at", "Id,"
+                r'^ibid', 
+                r'^supra', 
+                r'rollo',             # MATCH ANYWHERE: "Rollo", "in the rollo", "cited in rollo"
+                r'tsn',               # MATCH ANYWHERE: "TSN", "in the TSN"
+                r'^see', 
+                r'^note', 
+                r'^annex',
+                r'^exhibit',
+                r'^report',
+                r'p\.\s*\d+',         # Page numbers
+                r'pp\.\s*\d+',
+                r'^\d+\s*$',          # Just numbers
+                r'decision\s+dated',  # Descriptions of lower court rulings
+                r'resolution\s+dated'
+            ]
+            
+            # Check if content matches any junk pattern
+            for pattern in junk_regex:
+                if re.search(pattern, content, re.IGNORECASE):
+                    return True
+            
+            # SUBSTANTIVE CHECK (Optional but recommended):
+            # If we really want to be strict, we can require that it looks like a legal citation.
+            # But specific exclusion is safer to avoid deleting valid but weirdly formatted citations.
+            
+            return False
+
+        def replace_marker(match):
+            marker_id = match.group(1)
+            if marker_id in footnotes:
+                content = footnotes[marker_id]
+                
+                if is_citation_junk(content):
+                    return "" # Delete junk citations
+                
+                clean_content = content.replace('\n', ' ').strip()
+                clean_content = re.sub(r'<[^>]+>', '', clean_content)
+
+                # Remove specific text artifacts from within the citation
+                clean_content = re.sub(r'\(\s*Citations?\s+omitted\.?\s*\)', '', clean_content, flags=re.IGNORECASE).strip()
+                
+                # Link logic
+                gr_match = re.search(r"(G\.R\.\s*No[s]?\.?)\s*([L\d\-\s,&]+)", clean_content, re.IGNORECASE)
+                if gr_match:
+                    raw_nums = gr_match.group(2)
+                    clean_num = re.split(r'[&,\s]', raw_nums)[0].strip()
+                    final_output = f"[**{clean_content}**](app://case/GR{clean_num})"
+                else:
+                    final_output = f"**{clean_content}**"
+
+                return f' <span class="smart-citation">({final_output})</span>'
+            return ""
+
+        return re.sub(r'\[\^(\d+)\]', replace_marker, markdown_text)
+
+    def extract_metadata(self, soup, text_content):
+        # VERSION: 1112 (Updated for user feedback)
+        """Extracts detailed metadata for Frontmatter."""
+        meta = {
+            'Case Number': None,
+            'Date': None,
+            'Title': None,
+            'Decided by': None, # Renamed from Division
+            'Ponente': None,
+            'Vote': None,
+            'Opinions': None
+        }
+
+        # Pre-clean text content (Manual strip of >)
+        lines = text_content.splitlines()
+        cleaned_lines = []
+        for line in lines:
+            # Remove > and leading whitespace
+            # handle ' > text' or '> text'
+            clean = line.strip().lstrip('>').strip()
+            if clean:
+                cleaned_lines.append(clean)
+        
+        clean_text_content = "\n".join(cleaned_lines)
+        
+        # 1. Decided by (En Banc or Division)
+        for i in range(min(20, len(cleaned_lines))):
+            line = cleaned_lines[i].upper()
+            if "EN BANC" in line:
+                meta['Decided by'] = "En Banc"
+                break
+            if "DIVISION" in line:
+                cleaned_line = re.sub(r'[^\w\s]', '', line).strip()
+                meta['Decided by'] = cleaned_line.title()
+                break
+        
+        # 2. Case Number & Date
+        header_info = self.extract_header_info_from_body(soup)
+        meta['Case Number'] = header_info.get('case_number')
+        meta['Date'] = header_info.get('date')
+
+        # 3. Short Title (Petitioner v. Respondent)
+        vs_match = re.search(r'(.+?)\s+(?:vs\.?|versus)\s+(.+?)(?:$|\n)', clean_text_content, re.IGNORECASE | re.MULTILINE)
+        if vs_match:
+            petitioner_raw = vs_match.group(1).split('\n')[-1].strip()
+            respondent_raw = vs_match.group(2).split('\n')[0].strip()
+            
+            def clean_party(name):
+                name = re.sub(r'[\*_]', '', name)
+                name = re.sub(r'[\.,]$', '', name) 
+                name = re.sub(r'(?i)\b(Petitioner|Respondent|Plaintiff|Defendant|Accused|Appellee|Appellant)s?\b', '', name)
+                return name.strip().title()
+
+            short_title = f"{clean_party(petitioner_raw)} v. {clean_party(respondent_raw)}"
+            meta['Title'] = short_title
+
+        # 4. Ponente
+        # Strategy: Look for "DECISION" or "RESOLUTION"
+        # Then look at lines immediately following it.
+        start_index = -1
+        for i, line in enumerate(cleaned_lines):
+            if re.match(r'^D\s*E\s*C\s*I\s*S\s*I\s*O\s*N$', line, re.IGNORECASE) or \
+               re.match(r'^R\s*E\s*S\s*O\s*L\s*U\s*T\s*I\s*O\s*N$', line, re.IGNORECASE):
+                start_index = i
+                break
+        
+        if start_index != -1:
+            # Look at next 5 lines
+            for i in range(start_index + 1, min(start_index + 6, len(cleaned_lines))):
+                candidate = cleaned_lines[i]
+                # Regex for: **LOPEZ, J., *J.:*** 
+                # Relaxed: Starts with ** or *, uppercase name, comma, J.
+                ponente_match = re.search(r'(?:\*\*|\*|^)([A-Z\.]+,\s*J\.?[^:\*]*):?(?:\*\*|\*|$)', candidate)
+                if ponente_match:
+                    raw_name = ponente_match.group(1).strip()
+                    # Clean up "LOPEZ, J., *J." -> "Lopez, J."
+                    # Remove inner markdown like *
+                    clean_name = raw_name.replace('*', '').replace('_', '')
+                    # If it ends with J., J., fix it? user just wants Ponente Name usually.
+                    # But "LOPEZ, J." is standard.
+                    meta['Ponente'] = clean_name.title()
+                    break
+        
+        # Fallback Ponente 1: "Penned by..."
+        if not meta['Ponente']:
+             penned_match = re.search(r'Penned by (?:Associate Justice)?\s*([A-Z\.\s]+)', clean_text_content, re.IGNORECASE)
+             if penned_match:
+                 meta['Ponente'] = penned_match.group(1).strip().title()
+
+        # Fallback Ponente 2: End of Text (Signature Block)
+        # Search backwards from end
+        if not meta['Ponente']:
+            for i in range(len(cleaned_lines) - 1, max(0, len(cleaned_lines) - 50), -1):
+                line = cleaned_lines[i].strip()
+                match = re.search(r'^([A-Z\.\s]+),\s*(?:J\.|C\.J\.|Chief Justice|Associate Justice)\.?\s*$', line)
+                if match:
+                    name = match.group(1).strip()
+                    if len(name) > 3 and "CONCUR" not in name and "CERTIFICATION" not in name:
+                        meta['Ponente'] = name.title()
+                        break
+
+        # 5. Opinions
+        opinions = []
+        if re.search(r'SEPARATE\s+OPINION', clean_text_content, re.IGNORECASE):
+            opinions.append("Separate")
+        if re.search(r'CONCURRING\s+OPINION', clean_text_content, re.IGNORECASE):
+            opinions.append("Concurring")
+        if re.search(r'DISSENTING\s+OPINION', clean_text_content, re.IGNORECASE):
+            opinions.append("Dissenting")
+        
+        if opinions:
+            meta['Opinions'] = ", ".join(sorted(list(set(opinions))))
+        else:
+             meta['Opinions'] = "None"
+
+        # 6. Vote Logic
+        # "if the case is not decided by En Banc, then there should be no "vote" metadada"
+        if meta['Decided by'] == "En Banc":
+            # Placeholder for future extraction
+            meta['Vote'] = "" 
+        else:
+            meta['Vote'] = None # Will not be written to frontmatter or written as empty? User said "no 'vote' metadata"
+
+        return meta
+
+    def clean_and_convert(self, html_content, soup):
+        """
+        Cleans specific DOM elements and converts to Markdown.
+        """
+        # Note: html_content and soup are passed from process_file
+        
+        # Get metadata early
+        
+        # Get metadata early
+        # Note: clean_soup_dom might change the structure, but text content remains for extraction
+        # Ideally extract from raw text or pre-cleaned soup? 
+        # Let's extract from the *cleaned* soup text to avoid navigating junk
+        
+        new_body = self.clean_soup_dom(soup)
+        
+        # Convert to Markdown
+        # Strip all headers generally, we will handle them? No, keep H1-H6 if they are structural
+        # But user wants metadata *hidden* from body. 
+        # We need to *remove* the visible title text from the body if we promote it to metadata?
+        # For now, just prepend metadata. User didn't explicitly say "delete the title from body", 
+        # but said "these metadata should not be visible when... viewed full html text"
+        # which usually means "show it in the app bar, not the text scroll".
+        # But removing the title from the body text is risky if we regex it wrong.
+        # I will keep the body text intact for now, just Add Frontmatter.
+        
+        # Strict strip list to remove junk layout
+        md_text = md(str(new_body), heading_style="ATX", 
+                                          strip=['img', 'a', 'table', 'thead', 'tbody', 'th', 'tr', 'td', 'center', 'font', 'span', 'div', 'style', 'script'])
+        
+        # Post-Processing: Clean up whitespace
+        lines = md_text.splitlines()
+        clean_lines = []
+        
+        # Trim from Division/En Banc down to Footnotes
+        capture = False
+        division_pattern = re.compile(r"(EN BANC|.*DIVISION)", re.IGNORECASE)
+        footnotes_pattern = re.compile(r"FOOTNOTES", re.IGNORECASE)
+        
+        for line in lines:
+            line_stripped = line.strip()
+            if not line_stripped:
+                # Keep empty lines if we are capturing, but maybe squeeze them?
+                if capture: clean_lines.append(line)
+                continue
+            
+            # Start Trigger
+            if not capture:
+                if division_pattern.search(line_stripped) and len(line_stripped) < 50:
+                    capture = True
+            
+            # Stop Trigger
+            if capture:
+                if footnotes_pattern.search(line_stripped) and len(line_stripped) < 20:
+                    break
+                clean_lines.append(line)
+
+        # Logic to "smartly" remove inline citations
+        body_text = "\n".join(clean_lines)
+        
+        # Apply Inline Citation Processing (Smart Filters)
+        body_text = self.process_inline_footnotes(body_text)
+        
+        # Extract Metadata (Now that we have cleaned text)
+        meta = self.extract_metadata(soup, body_text)
+        
+        # Build Frontmatter
+        frontmatter = "---\n"
+        frontmatter += f"case_number: \"{meta['Case Number'] or ''}\"\n"
+        frontmatter += f"date: \"{meta['Date'] or ''}\"\n"
+        frontmatter += f"title: \"{meta['Title'] or ''}\"\n"
+        frontmatter += f"decided_by: \"{meta['Decided by'] or ''}\"\n"
+        frontmatter += f"ponente: \"{meta['Ponente'] or ''}\"\n"
+        if meta.get('Vote') is not None:
+            frontmatter += f"vote: \"{meta['Vote']}\"\n"
+        frontmatter += f"opinions: \"{meta['Opinions'] or ''}\"\n"
+        frontmatter += "---\n\n"
+
+        return frontmatter + body_text.strip()
+
+    def remove_lawphil_watermarks(self, text):
+        watermarks = [
+            r"The Lawphil Project - Arellano Law Foundation",
+            r"\(awÞhi\(", r"\(awÞhi", r"\(aw\w+",
+            r"1a\w+phi1", r"1avvphi1", r"ℒαwρhi৷", r"ℒαwρhi"
+        ]
+        for pattern in watermarks:
+            text = re.sub(pattern, "", text, flags=re.IGNORECASE)
+        return text
+
+    def process_inline_footnotes(self, markdown_text, html_footnotes=None):
+        """Replaces [^N] markers with SMART inline citations and filters junk."""
+        if not html_footnotes: return markdown_text
+        
+        footnotes = html_footnotes.copy()
+
+        def is_citation_junk(content):
+            content = content.strip()
+            if not content: return True
+            
+            # AGGRESSIVE FILTER for "Case Specific Evidence"
+            # We want to exclude:
+            # 1. "Id. at 1" (Refers to Rollo/Records)
+            # 2. "Rollo, pp. 12-13" (Records)
+            # 3. "TSN, ..." (Stenographic Notes)
+            # 4. "Annex ..." (Evidence)
+            # 5. "Note ..." (Generic notes)
+            # 6. "See ..." (Weak signal)
+            # 7. Descriptive text starting with "Id." (e.g. "Id. at 40. The Decision...")
+            
+            junk_regex = [
+                r'^id[\.,\s]',        # Matches "Id.", "Id. at", "Id,"
+                r'^ibid', 
+                r'^supra', 
+                r'rollo',             # MATCH ANYWHERE: "Rollo", "in the rollo", "cited in rollo"
+                r'tsn',               # MATCH ANYWHERE: "TSN", "in the TSN"
+                r'^see', 
+                r'^note', 
+                r'^annex',
+                r'^exhibit',
+                r'^report',
+                r'p\.\s*\d+',         # Page numbers
+                r'pp\.\s*\d+',
+                r'^\d+\s*$',          # Just numbers
+                r'decision\s+dated',  # Descriptions of lower court rulings
+                r'resolution\s+dated'
+            ]
+            
+            # Check if content matches any junk pattern
+            for pattern in junk_regex:
+                if re.search(pattern, content, re.IGNORECASE):
+                    return True
+            
+            # SUBSTANTIVE CHECK (Optional but recommended):
+            # If we really want to be strict, we can require that it looks like a legal citation.
+            # But specific exclusion is safer to avoid deleting valid but weirdly formatted citations.
+            
+            return False
+
+        def replace_marker(match):
+            marker_id = match.group(1)
+            if marker_id in footnotes:
+                content = footnotes[marker_id]
+                
+                if is_citation_junk(content):
+                    return "" # Delete junk citations
+                
+                clean_content = content.replace('\n', ' ').strip()
+                clean_content = re.sub(r'<[^>]+>', '', clean_content)
+
+                # Remove specific text artifacts from within the citation
+                clean_content = re.sub(r'\(\s*Citations?\s+omitted\.?\s*\)', '', clean_content, flags=re.IGNORECASE).strip()
+                
+                # Link logic
+                gr_match = re.search(r"(G\.R\.\s*No[s]?\.?)\s*([L\d\-\s,&]+)", clean_content, re.IGNORECASE)
+                if gr_match:
+                    raw_nums = gr_match.group(2)
+                    clean_num = re.split(r'[&,\s]', raw_nums)[0].strip()
+                    final_output = f"[**{clean_content}**](app://case/GR{clean_num})"
+                else:
+                    final_output = f"**{clean_content}**"
+
+                return f' <span class="smart-citation">({final_output})</span>'
+            return ""
+
+        return re.sub(r'\[\^(\d+)\]', replace_marker, markdown_text)
+
+
+
+        
+
+
+        # 3. Short Title (Petitioner v. Respondent)
+        # Strategy: Look for "vs." or "versus", grab lines before and after
+        # This is heuristics-heavy.
+        vs_match = re.search(r'(.+?)\s+(?:vs\.?|versus)\s+(.+?)(?:$|\n)', text_content, re.IGNORECASE | re.MULTILINE)
+        if vs_match:
+            petitioner = vs_match.group(1).split('\n')[-1].strip() # Last line before vs
+            respondent = vs_match.group(2).split('\n')[0].strip() # First line after vs
+            
+            # Clean up names (remove "Petitioner", "Respondent", commas)
+            def clean_party(name):
+                name = re.sub(r'[\.,]$', '', name) # Remove trailing punctuation
+                name = re.sub(r'(?i)\b(Petitioner|Respondent|Plaintiff|Defendant|Accused|Appellee|Appellant)s?\b', '', name)
+                return name.strip().title()
+
+            short_title = f"{clean_party(petitioner)} v. {clean_party(respondent)}"
+            meta['Title'] = short_title
+
+        # 4. Ponente
+        # Look for pattern "**NAME, J.:**" or "**NAME, J:**" usually early in the text body
+        # or "Penned by Associate Justice..."
+        ponente_match = re.search(r'\*\*([A-Z\s\.]+),\s*J\.?:?\*\*', text_content)
+        if ponente_match:
+             meta['Ponente'] = ponente_match.group(1).strip().title()
+        
+        # 5. Opinions (Check for headers)
+        opinions = []
+        if re.search(r'SEPARATE\s+OPINION', text_content, re.IGNORECASE):
+            opinions.append("Separate")
+        if re.search(r'CONCURRING\s+OPINION', text_content, re.IGNORECASE):
+            opinions.append("Concurring")
+        if re.search(r'DISSENTING\s+OPINION', text_content, re.IGNORECASE):
+            opinions.append("Dissenting")
+        
+        if opinions:
+            meta['Opinions'] = ", ".join(sorted(list(set(opinions))))
+        else:
+             meta['Opinions'] = "None"
+
+        # 6. Vote (Hard to extract reliably without specific pattern, leave placeholder)
+        meta['Vote'] = None 
+
+        return meta
+
+
+    def process_file(self, html_path, metadata=None, overwrite=False):
+        try:
+            # Read File
+            with open(html_path, 'r', encoding='utf-8', errors='replace') as f:
+                html_content = f.read()
+
+            # 1. Extract Metadata
+            head_meta = self.extract_metadata_from_head(html_content)
+            soup = BeautifulSoup(html_content, 'html.parser')
+            soup = self.clean_soup_dom(soup)
+            body_info = self.extract_header_info_from_body(soup)
+            
+            case_number = head_meta.get('case_number') or body_info.get('case_number')
+            title = head_meta.get('title') or "Unknown Title"
+            date = body_info.get('date')
+
+            # --- FALLBACKS ---
+            if not date:
+                # Path based fallback
+                path_parts = Path(html_path).parts
+                found_year = None
+                found_month = None
+                for part in reversed(path_parts):
+                    if part.isdigit() and len(part) == 4:
+                        found_year = part
+                    if part.lower() in ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]:
+                        found_month = part.capitalize()
+                
+                if found_year:
+                    date = f"{found_month if found_month else 'January'} 01, {found_year}"
+
+            if not case_number or case_number == "Unknown":
+                base_name = Path(html_path).stem.replace(".pdf", "")
+                prefix_map = {"gr": "G.R. No. ", "am": "A.M. No. ", "ac": "A.C. No. ", "bm": "B.M. No. "}
+                match = re.search(r"^([a-z]+)[_-]([\w-]+)", base_name, re.IGNORECASE)
+                if match and match.group(1).lower() in prefix_map:
+                    case_number = f"{prefix_map[match.group(1).lower()]}{match.group(2).replace('_', '-')}"
+                else:
+                    case_number = "Unknown"
+
+            # Date Normalization
+            try:
+                # Remove comma to handle "August 20, 2024" vs "August 20 2024"
+                clean_date_str = date.replace(",", "")
+                dt = datetime.strptime(clean_date_str, "%B %d %Y")
+                formatted_date = dt.strftime("%Y-%m-%d")
+                file_date = f"{dt.strftime('%B')}_{dt.day:02d}_{dt.year}"
+                year_str = str(dt.year)
+            except:
+                formatted_date = date
+                file_date = "Unknown_Date"
+                year_str = "Unknown"
+
+            # 4. Generate Output Path
+            safe_case_number = re.sub(r'[<>:"/\\|?*]', '_', str(case_number)).strip()
+            filename = f"{safe_case_number}_{file_date}.md"
+            output_path = self.output_dir / year_str / filename
+            
+            if output_path.exists() and not overwrite:
+                return {'status': 'skipped', 'error': 'File exists', 'path': str(html_path)}
+
+            # 5. Convert Content
+            markdown_body = self.clean_and_convert(html_content, soup)
+            
+            # 6. Save
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(markdown_body)
+
+            entry = {
+                "source_html": str(html_path),
+                "case_number": case_number,
+                "date": formatted_date,
+                "title": title,
+                "output_md": str(output_path)
+            }
+            
+            return {
+                'status': 'success',
+                'entry': entry,
+                'case_key': f"{case_number}|{formatted_date}",
+                'content_hash': hashlib.md5(markdown_body.encode()).hexdigest(),
+                'path': str(html_path)
+            }
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return {
+                'status': 'failed',
+                'file_path': html_path,
+                'error': str(e)
+            }
+
+    def run_full_conversion(self, workers=1, clean=False, start_year=None, end_year=None, overwrite=False, file_list=None):
+        if clean and OUTPUT_DIR.exists():
+            shutil.rmtree(OUTPUT_DIR)
+            OUTPUT_DIR.mkdir()
+        
+        html_files = []
+        if file_list:
+            with open(file_list, 'r') as f:
+                 html_files = [Path(line.strip()) for line in f if line.strip()]
+        else:
+            if not DOWNLOADS_DIR.exists():
+                print(f"Error: Source directory {DOWNLOADS_DIR} does not exist.")
+                return
+
+            for root, _, files in os.walk(DOWNLOADS_DIR):
+                path_parts = Path(root).parts
+                year = None
+                for part in path_parts:
+                    if part.isdigit() and len(part) == 4:
+                        year = int(part)
+                        break
+                
+                # Filter by Year
+                if year:
+                    if start_year and year < start_year: continue
+                    if end_year and year > end_year: continue
+
+                for file in files:
+                    if file.endswith(".html"):
+                        html_files.append(Path(root) / file)
+
+        print(f"Queueing {len(html_files)} files...")
+        
+        with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
+            futures = {executor.submit(process_file_wrapper, p, None, overwrite): p for p in html_files}
+            for future in concurrent.futures.as_completed(futures):
+                res = future.result()
+                if res['status'] == 'success':
+                    print(f"✅ {res['entry']['case_number']}")
+                    self.manifest.append(res['entry'])
+                elif res['status'] == 'failed':
+                    print(f"❌ {res['error']}")
+                elif res['status'] == 'skipped':
+                     print(f"⏭️ {Path(res['path']).name}")
+
+        with open(MANIFEST_FILE, 'w', encoding='utf-8') as f:
+            json.dump(self.manifest, f, indent=2)
+
+def process_file_wrapper(html_path, metadata, overwrite, output_dir=None):
+    # Re-instantiate converter per process
+    converter = CaseConverter(output_dir)
+    return converter.process_file(html_path, metadata, overwrite)
+
+if __name__ == "__main__":
+    multiprocessing.freeze_support()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--workers', type=int, default=8)
+    parser.add_argument('--overwrite', action='store_true')
+    parser.add_argument('--start-year', type=int, help='Start year filter')
+    parser.add_argument('--end-year', type=int, help='End year filter')
+    args = parser.parse_args()
+    
+    CaseConverter().run_full_conversion(
+        workers=args.workers, 
+        overwrite=args.overwrite,
+        start_year=args.start_year,
+        end_year=args.end_year
+    )
