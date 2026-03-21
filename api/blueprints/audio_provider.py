@@ -628,9 +628,11 @@ def _generate_audio_gtts(text):
     combined_data = b"".join(all_audio_data)
     return combined_data, 'audio/mpeg', '.mp3'
 
-def _generate_audio_azure(text, voice_name="en-PH-RosaNeural"):
+def _generate_audio_azure(text, voice_name="en-PH-RosaNeural", rate=1.0):
     """Generate MP3 audio using Azure Speech SDK.
     Supports multi-chunk concatenation to bypass 4000 char limit.
+    The `rate` parameter controls speech speed natively via SSML prosody,
+    which produces natural-sounding results (unlike browser-side playbackRate manipulation).
     """
     speech_key = os.environ.get("SPEECH_KEY", "")
     speech_region = os.environ.get("SPEECH_REGION", "japaneast")
@@ -650,6 +652,12 @@ def _generate_audio_azure(text, voice_name="en-PH-RosaNeural"):
     lang_code = "en-PH" if "James" in voice_name or "Rosa" in voice_name else "en-US"
     if "Blessica" in voice_name or "Angelo" in voice_name:
         lang_code = "fil-PH"
+
+    # Clamp rate to a safe range (Azure supports 0.5x - 2.0x natively without artifacts)
+    rate = max(0.5, min(2.0, float(rate)))
+    # Format as a percentage string for SSML (e.g. 0.8 -> "-20%", 1.25 -> "+25%")
+    # Azure SSML prosody rate also accepts plain floats like "0.8" for relative speed
+    rate_str = f"{rate}"
 
     # Chunk text to stay under SSML limits
     chunks = _chunk_text(text, max_len=3000)
@@ -672,7 +680,7 @@ def _generate_audio_azure(text, voice_name="en-PH-RosaNeural"):
         ssml = (
             f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{lang_code}'>"
             f"<voice name='{voice_name}'>"
-            f"<prosody rate='1.0'>{escaped_text.strip()}</prosody>"
+            f"<prosody rate='{rate_str}'>{escaped_text.strip()}</prosody>"
             f"</voice></speak>"
         )
         
@@ -695,6 +703,13 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     content_id = req.route_params.get('content_id')
     code_id = req.params.get('code')  # e.g. 'rpc', 'civ', 'labor'
 
+    # Read playback rate - default to 1.0 if not provided or invalid
+    try:
+        rate = float(req.params.get('rate', '1.0'))
+        rate = max(0.5, min(2.0, rate))  # Clamp to safe range
+    except (ValueError, TypeError):
+        rate = 1.0
+
     if content_type not in ['codal', 'case', 'question']:
         return func.HttpResponse(
             json.dumps({"error": "Invalid content type. Use 'codal', 'case', or 'question'."}),
@@ -706,9 +721,10 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     voice_name = "en-US-JennyMultilingualNeural"
 
     # --- 1b. Check blob cache first ---
-    # Include voice name and cache version in key to ensure fresh/correct audio
+    # Include voice name, rate, and cache version in key to ensure fresh/correct audio
     voice_slug = voice_name.split('-')[-1].replace('Neural', '').lower()
-    cache_key = f"{content_type}_{code_id or ''}_{content_id}_{voice_slug}_{CACHE_VERSION}"
+    rate_slug = str(rate).replace('.', 'p')  # e.g. 0.8 -> "0p8"
+    cache_key = f"{content_type}_{code_id or ''}_{content_id}_{voice_slug}_r{rate_slug}_{CACHE_VERSION}"
     
     cache_status = "MISS"
     for ext in ['.mp3', '.wav']:
@@ -747,8 +763,8 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     audio_data, mime_type, ext = None, None, None
     try:
         if AZURE_SPEECH_AVAILABLE:
-            audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name)
-            logging.info("Audio generated via Azure TTS (MP3)")
+            audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
+            logging.info(f"Audio generated via Azure TTS (MP3) at rate={rate}")
         else:
             return func.HttpResponse("Azure Speech Services not available/configured", status_code=503)
     except Exception as e:

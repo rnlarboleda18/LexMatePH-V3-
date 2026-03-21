@@ -337,10 +337,12 @@ export const LexPlayProvider = ({ children }) => {
 
     // --- Active Queue Logic ---
     // Handle Playback Rate changes
+    // When playbackRate changes, reload the current track so the backend generates
+    // audio at the new speed natively via Azure TTS SSML prosody.
+    // We do NOT set audioRef.current.playbackRate because that causes robotic artifacts.
+    const playbackRateRef = useRef(playbackRate);
     useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.playbackRate = playbackRate;
-        }
+        playbackRateRef.current = playbackRate;
     }, [playbackRate]);
 
 
@@ -361,7 +363,12 @@ export const LexPlayProvider = ({ children }) => {
         }
 
         try {
-            const fetchUrl = `/api/audio/${track.type}/${track.id}${track.code_id ? `?code=${track.code_id}` : ''}`;
+            // Pass rate to backend so Azure TTS synthesizes at the correct speed natively.
+            // This avoids the robotic sound caused by browser-side playbackRate manipulation.
+            const currentRate = playbackRateRef.current || playbackRate;
+            const rateParam = `rate=${currentRate}`;
+            const codeParam = track.code_id ? `code=${track.code_id}&` : '';
+            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}`;
             console.log("LEXPLAY AUDIO: Direct native load from:", fetchUrl);
 
             if (audioRef.current) {
@@ -372,7 +379,7 @@ export const LexPlayProvider = ({ children }) => {
                 // Let the browser natively handle the request. This avoids strict CORS
                 // blocks on Javascript fetch() when following 302 redirects to Azure.
                 audioRef.current.src = fetchUrl;
-                audioRef.current.playbackRate = playbackRate;
+                audioRef.current.playbackRate = 1.0; // Always native speed — rate is baked into the audio by Azure
                 
                 await audioRef.current.play();
                 setIsPlaying(true);
