@@ -2,6 +2,7 @@ import azure.functions as func
 import json
 import os
 import logging
+import traceback
 from db_pool import get_db_connection, put_db_connection
 from utils.clerk_auth import get_authenticated_user_id
 
@@ -24,15 +25,21 @@ def get_playlists(req: func.HttpRequest) -> func.HttpResponse:
         # Fetch item counts
         if playlists:
             playlist_ids = [p["id"] for p in playlists]
-            cur.execute("SELECT playlist_id, count(*) FROM playlist_items WHERE playlist_id = ANY(%s) GROUP BY playlist_id", (playlist_ids,))
+            cur.execute("SELECT playlist_id, count(*) FROM playlist_items WHERE playlist_id::text = ANY(%s) GROUP BY playlist_id", (playlist_ids,))
             counts = dict((str(r[0]), r[1]) for r in cur.fetchall())
             for p in playlists:
                 p["item_count"] = counts.get(p["id"], 0)
                         
         return func.HttpResponse(json.dumps(playlists), mimetype="application/json", status_code=200)
     except Exception as e:
-        logging.error(f"Error fetching playlists: {e}")
+        logging.error(f"Error fetching playlists: {traceback.format_exc()}")
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+    finally:
+        if conn:
+            try:
+                conn.rollback()
+            except Exception:
+                pass
 
 @playlists_bp.route(route="playlists", methods=["POST"])
 def create_playlist(req: func.HttpRequest) -> func.HttpResponse:
