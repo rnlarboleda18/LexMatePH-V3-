@@ -141,14 +141,8 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
              has_list_order = "list_order" in cols
              has_book_code = "book_code" in cols
              
-             # Specific columns to avoid SELECT * overhead
-             cols_to_select = "id, article_num, content_md, part_num, part_title, rule_num, rule_title_full, group_1_num, group_1_title, group_2_title, rule_section_label"
-             if short_name.upper() == 'CONST':
-                 cols_to_select = "id, article_num, article_label, article_title, section_num, content_md"
-             elif short_name.upper() == 'FC':
-                 cols_to_select = "id, article_num, article_label, article_title, section_label, content_md"
-             
-             query = f"SELECT {cols_to_select} FROM {table_name}"
+             # Use SELECT * for maximum compatibility with all codal table schemas
+             query = f"SELECT * FROM {table_name}"
              if has_book_code:
                  query += " WHERE book_code = %s"
                  cur.execute(query, (short_name.upper(),))
