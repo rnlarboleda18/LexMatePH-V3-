@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v1" # Reset - blob cache cleared manually on 2026-03-21
+CACHE_VERSION = "v2" # Incremented to fix FC vs Consti audio mismatch
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
