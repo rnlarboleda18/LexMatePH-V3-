@@ -26,11 +26,7 @@ _local = threading.local()
 def _new_conn():
     conn = psycopg2.connect(
         DB_CONNECTION_STRING,
-        connect_timeout=10,        # Increased from 5s — avoids cold-start failures
-        keepalives=1,              # Enable TCP keepalives to survive Azure firewall idle timeouts
-        keepalives_idle=60,        # Send keepalive after 60s idle
-        keepalives_interval=10,    # Retry keepalive every 10s
-        keepalives_count=5,        # Drop connection after 5 failed keepalives
+        connect_timeout=10
     )
     conn.autocommit = False
     return conn
