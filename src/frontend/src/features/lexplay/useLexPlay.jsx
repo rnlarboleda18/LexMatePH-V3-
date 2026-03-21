@@ -21,7 +21,7 @@ export const LexPlayProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [playbackRate, setPlaybackRate] = useState(1.0);
+    const [playbackRate, setPlaybackRate] = useState(0.8);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const audioRef = useRef(null);
     const playlistRef = useRef([]);
@@ -194,7 +194,30 @@ export const LexPlayProvider = ({ children }) => {
         loadPlaybackState();
     }, [fetchPlaylists, loadPlaybackState]);
 
-    const createPlaylist = async (name) => {
+    const handleStop = useCallback(() => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+            setIsPlaying(false);
+        }
+    }, [audioRef]);
+
+    const loadSavedPlaylist = useCallback(async (playlistId) => {
+        handleStop();
+        try {
+            const headers = await getAuthHeaders();
+            const res = await fetch(`/api/playlists/${playlistId}/items`, { headers });
+            if (res.ok) {
+                const tracks = await res.json();
+                setActivePlaylistId(playlistId);
+                setPlaylist(tracks);
+                if (tracks.length > 0) setCurrentIndex(0);
+                else setCurrentIndex(-1);
+            }
+        } catch (e) { console.error("Load playlist error:", e); }
+    }, [handleStop, getToken]);
+
+    const createPlaylist = useCallback(async (name) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch('/api/playlists', {
@@ -205,6 +228,10 @@ export const LexPlayProvider = ({ children }) => {
             if (res.ok) {
                 const newPlaylist = await res.json();
                 fetchPlaylists();
+                // Auto-select the newly created playlist
+                setActivePlaylistId(newPlaylist.id);
+                setPlaylist([]); // New playlist starts empty
+                setCurrentIndex(-1);
                 return newPlaylist;
             } else {
                 const err = await res.json();
@@ -214,9 +241,9 @@ export const LexPlayProvider = ({ children }) => {
             console.error("Create playlist error:", e);
             throw e;
         }
-    };
+    }, [fetchPlaylists, getToken]);
 
-    const renamePlaylist = async (id, name) => {
+    const renamePlaylist = useCallback(async (id, name) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${id}`, {
@@ -232,9 +259,9 @@ export const LexPlayProvider = ({ children }) => {
             console.error("Rename playlist error:", e);
             throw e;
         }
-    };
+    }, [fetchPlaylists, getToken]);
 
-    const deletePlaylist = async (id) => {
+    const deletePlaylist = useCallback(async (id) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${id}`, { method: 'DELETE', headers });
@@ -249,9 +276,9 @@ export const LexPlayProvider = ({ children }) => {
             console.error("Delete playlist error:", e);
             throw e;
         }
-    };
+    }, [activePlaylistId, fetchPlaylists, getToken]);
 
-    const addToSpecificPlaylist = async (playlistId, track) => {
+    const addToSpecificPlaylist = useCallback(async (playlistId, track) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${playlistId}/items`, {
@@ -266,8 +293,10 @@ export const LexPlayProvider = ({ children }) => {
             });
             if (res.ok) {
                 fetchPlaylists(); // update counts
-                // If it's the currently active playlist, reload it
-                if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
+                // If it's the currently active playlist, reload it OR auto-select if none active
+                if (activePlaylistId === playlistId || !activePlaylistId) {
+                    loadSavedPlaylist(playlistId);
+                }
             } else {
                 const err = await res.json();
                 throw new Error(err.error || "Failed to add item to playlist");
@@ -276,9 +305,9 @@ export const LexPlayProvider = ({ children }) => {
             console.error("Add item error:", e);
             throw e;
         }
-    };
+    }, [activePlaylistId, fetchPlaylists, loadSavedPlaylist, getToken]);
 
-    const addBulkToSpecificPlaylist = async (playlistId, items) => {
+    const addBulkToSpecificPlaylist = useCallback(async (playlistId, items) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${playlistId}/bulk_items`, {
@@ -287,12 +316,15 @@ export const LexPlayProvider = ({ children }) => {
             });
             if (res.ok) {
                 fetchPlaylists();
-                if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
+                // Critical: reload if active, OR if we have no active playlist (auto-select first add)
+                if (activePlaylistId === playlistId || !activePlaylistId) {
+                    loadSavedPlaylist(playlistId);
+                }
             }
         } catch (e) { console.error("Bulk add error:", e); }
-    };
+    }, [activePlaylistId, fetchPlaylists, loadSavedPlaylist, getToken]);
 
-    const removeFromSpecificPlaylist = async (playlistId, itemId) => {
+    const removeFromSpecificPlaylist = useCallback(async (playlistId, itemId) => {
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${playlistId}/items/${itemId}`, { method: 'DELETE', headers });
@@ -301,22 +333,7 @@ export const LexPlayProvider = ({ children }) => {
                 if (activePlaylistId === playlistId) loadSavedPlaylist(playlistId);
             }
         } catch (e) { console.error("Remove item error:", e); }
-    };
-
-    const loadSavedPlaylist = async (playlistId) => {
-        handleStop();
-        try {
-            const headers = await getAuthHeaders();
-            const res = await fetch(`/api/playlists/${playlistId}/items`, { headers });
-            if (res.ok) {
-                const tracks = await res.json();
-                setActivePlaylistId(playlistId);
-                setPlaylist(tracks);
-                if (tracks.length > 0) setCurrentIndex(0);
-                else setCurrentIndex(-1);
-            }
-        } catch (e) { console.error("Load playlist error:", e); }
-    };
+    }, [activePlaylistId, fetchPlaylists, loadSavedPlaylist, getToken]);
 
     // --- Active Queue Logic ---
     // Handle Playback Rate changes
@@ -326,13 +343,6 @@ export const LexPlayProvider = ({ children }) => {
         }
     }, [playbackRate]);
 
-    const handleStop = useCallback(() => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-            setIsPlaying(false);
-        }
-    }, []);
 
     const playTrack = useCallback(async (index, trackOverride = null) => {
         // Use ref to avoid stale closure on playlist

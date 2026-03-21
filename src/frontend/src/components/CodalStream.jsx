@@ -30,6 +30,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         activePlaylistId, 
         savedPlaylists, 
         addBulkToSpecificPlaylist, 
+        loadSavedPlaylist,
         setIsDrawerOpen 
     } = useLexPlay();
 
@@ -266,6 +267,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                             subtitle: a.article_title || mainTitle
                                         }));
                                         await addBulkToSpecificPlaylist(targetId, payloadItems);
+                                        // Force load to ensure state sync even if it was the first add
+                                        await loadSavedPlaylist(targetId);
                                         setIsAddingAll(false);
                                         setIsDrawerOpen(true);
                                     }}

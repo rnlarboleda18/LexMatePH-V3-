@@ -1,5 +1,5 @@
 Write-Host "==========================================" -ForegroundColor Cyan
-Write-Host "   Bar Project V2 - Startup Script" -ForegroundColor Cyan
+Write-Host "   LexMatePH-V3 - Startup Script" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
 # Get Local IP Address

@@ -387,11 +387,33 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     const start = parseInt(parts[0]);
                     const end = parseInt(parts[1]);
                     articles = articles.filter(a => {
-                        const num = parseInt(a.article_number);
+                        // For ROC, only filter by Rule number. Rule 1, Section X => Rule 1
+                        const partToParse = bulkForm.codal === 'ROC' ? String(a.article_number).split(',')[0] : String(a.article_number);
+                        const numStr = partToParse.replace(/^[^\d]*/, '');
+                        const num = parseInt(numStr);
                         return !isNaN(num) && num >= start && num <= end;
                     });
+                } else if (!isNaN(rangeText)) {
+                    // Specific fix for ROC: handle single digit input for whole rule
+                    if (bulkForm.codal === 'ROC') {
+                        const targetRule = parseInt(rangeText);
+                        articles = articles.filter(a => {
+                             const numStr = String(a.article_number).split(',')[0].replace(/^[^\d]*/, '');
+                             return parseInt(numStr) === targetRule;
+                        });
+                    } else {
+                        articles = articles.filter(a => {
+                            const anum = String(a.article_number).toUpperCase();
+                            const rtext = rangeText.toUpperCase();
+                            return anum === rtext || anum.includes(rtext); 
+                        });
+                    }
                 } else {
-                    articles = articles.filter(a => String(a.article_number).toUpperCase() === rangeText.toUpperCase());
+                    articles = articles.filter(a => {
+                        const anum = String(a.article_number).toUpperCase();
+                        const rtext = rangeText.toUpperCase();
+                        return anum === rtext || anum.includes(rtext); // More forgiving exact match
+                    });
                 }
             }
             
@@ -401,13 +423,21 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 return;
             }
             
-            const payloadItems = articles.map(a => ({
-                content_id: String(a.key_id || a.article_num || a.id || a.article_number),
-                content_type: 'codal',
-                code_id: bulkForm.codal,
-                title: `Article ${a.article_number}`,
-                subtitle: a.article_title || data.metadata?.full_name || bulkForm.codal
-            }));
+            const payloadItems = articles.map(a => {
+                const numStr = String(a.article_number);
+                // Don't add "Article" prefix if it's already there, or if it's ROC (which uses Rule)
+                const displayTitle = /^(rule|article|section|preamble)/i.test(numStr)
+                    ? numStr
+                    : (bulkForm.codal === 'ROC' ? `Rule ${numStr}` : `Article ${numStr}`);
+
+                return {
+                    content_id: String(a.key_id || a.article_num || a.id || a.article_number),
+                    content_type: 'codal',
+                    code_id: bulkForm.codal,
+                    title: displayTitle,
+                    subtitle: a.article_title || data.metadata?.full_name || bulkForm.codal
+                };
+            });
             
             await addBulkToSpecificPlaylist(bulkForm.targetPlaylist, payloadItems);
             setShowBulkModal(false);
@@ -693,10 +723,15 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                         <option value="FC" className="bg-[#0f172a]">Family Code</option>
                                         <option value="CONST" className="bg-[#0f172a]">1987 Constitution</option>
                                         <option value="LABOR" className="bg-[#0f172a]">Labor Code</option>
+                                        <option value="ROC" className="bg-[#0f172a]">Rules of Court</option>
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest ml-1">Article Range (Optional)</label>
+                                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest ml-1">
+                                        {bulkForm.codal === 'ROC' ? 'Rule Range (Optional)' : 
+                                         bulkForm.codal === 'CONST' ? 'Article / Section Range (Optional)' : 
+                                         'Article Range (Optional)'}
+                                    </label>
                                     <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl outline-none" />
                                 </div>
                             </div>

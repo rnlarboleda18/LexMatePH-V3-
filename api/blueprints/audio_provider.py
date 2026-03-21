@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v35" # Increment to force-refresh all cached audio
+CACHE_VERSION = "v36" # Increment to force-refresh all cached audio
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
@@ -491,7 +491,15 @@ def _get_text_for_codal(content_id, code_id=None):
                             if art_title and not is_redundant and art_title.lower() not in header.lower():
                                 header += f'. {art_title}'
                 else:
-                    if re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE):
+                    if code_id and code_id.lower() == 'roc':
+                        # ROC Specific: Suppress Rule repetition for sections > 1
+                        # art_num is typically "Rule 1, Section 2"
+                        section_match = re.search(r'Section\s+(\d+)', str(clean_num), re.IGNORECASE)
+                        if section_match and section_match.group(1) != '1':
+                            header = f"Section {section_match.group(1)}"
+                        else:
+                            header = str(clean_num)
+                    elif re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE):
                         header = str(clean_num)
                     else:
                         header = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'

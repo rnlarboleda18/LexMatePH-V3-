@@ -337,9 +337,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             )}
 
             {/* Content Area - Split into Paragraphs/Segments */}
-            <div className={`${((codeId && ['roc', 'rpc'].includes(String(codeId).toLowerCase())) || (article && article.code_id && ['roc', 'rpc'].includes(String(article.code_id).toLowerCase()))) ? "space-y-0" : "space-y-5"} ${isFirstSegSubHeader ? 'mt-0' : 'mt-3'}`}>
+            <div className={`${isFirstSegSubHeader ? 'mt-0' : 'mt-3'}`}>
                 {(() => {
                     const isRoc = (codeId && ['roc', 'rpc'].includes(codeId.toLowerCase())) || (article?.code_id && ['roc', 'rpc'].includes(article.code_id.toLowerCase()));
+                    const isConst = (codeId && codeId.toLowerCase() === 'const') || (article?.code_id && article.code_id.toLowerCase() === 'const');
                     
                     let segments = [];
                     if (isRoc) {
@@ -358,8 +359,14 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             const isTableLine = rLine.trim().startsWith('|');
                             
                             if (isMarkerLine || isHeaderLine) {
-                                if (currentSegment) segments.push(currentSegment);
-                                currentSegment = rLine;
+                                // Special handling for ROC: Don't break if it's just a (n) marker alone,
+                                // as it likely belongs to the previous paragraph as a suffix.
+                                if (stripped.toLowerCase() === '(n)' && currentSegment) {
+                                    currentSegment += " " + stripped;
+                                } else {
+                                    if (currentSegment) segments.push(currentSegment);
+                                    currentSegment = rLine;
+                                }
                             } else if (isTableLine) {
                                 // For tables, preserve newlines and don't merge into text paragraphs
                                 if (currentSegment && !currentSegment.trim().startsWith('|')) {
@@ -386,10 +393,36 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         if (currentSegment) segments.push(currentSegment);
                     } else {
                         segments = contentToDisplay.split(/\n\n+/);
-                        const isConst = (codeId && codeId.toLowerCase() === 'const') || (article?.code_id && article.code_id.toLowerCase() === 'const');
                         if (isConst) {
                             segments = segments.map(s => s.replace(/\n/g, ' '));
                         }
+                    }
+
+                    // --- Post-Processing: ROC specific clean-up ---
+                    if (isRoc) {
+                        const merged = [];
+                        for (let i = 0; i < segments.length; i++) {
+                            const seg = segments[i];
+                            const clean = typeof seg === 'string' ? seg.trim().toLowerCase() : '';
+                            
+                            // 1. Filter out empty spacing segments for ROC to ensure tight packing
+                            if (clean === '') continue;
+
+                            // 2. Merge standalone (n) suffixes into previous paragraph
+                            if (clean === '(n)' && merged.length > 0) {
+                                let targetIdx = merged.length - 1;
+                                // Skip trailing empty spacing segments (should be none now due to filter above)
+                                while (targetIdx >= 0 && typeof merged[targetIdx] === 'string' && merged[targetIdx].trim() === '') {
+                                    targetIdx--;
+                                }
+                                if (targetIdx >= 0) {
+                                    merged[targetIdx] = (merged[targetIdx] + " " + seg.trim()).trim();
+                                    continue;
+                                }
+                            }
+                            merged.push(seg);
+                        }
+                        segments = merged;
                     }
 
                     // Determine if this is an "Added Article" (e.g. "266-A")
@@ -458,15 +491,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             renderSegment = renderSegment.replace(/^(SECTION)\s+(\d+|[IVXLCDM]+)/i, (m) => toTitleCase(m, skipKeywords));
                         }
                         const cleanSeg = typeof renderSegment === 'string' ? renderSegment.trim() : '';
-                        const isConst = (codeId && codeId.toLowerCase() === 'const') || (article?.code_id && article.code_id.toLowerCase() === 'const');
                         const isSubHeader = cleanSeg.length > 2 && 
                                            cleanSeg.length < 120 && 
                                            !cleanSeg.endsWith('.') &&
                                            !cleanSeg.endsWith(':') &&
                                            !cleanSeg.endsWith(';') &&
                                            !/^(SECTION|ARTICLE|PREAMBLE)/i.test(cleanSeg) &&
+                                           !/^(\d+|[a-zA-Z])[\.\)]/i.test(cleanSeg) && // Don't treat markers 1. or a) as headers
                                            !cleanSeg.includes('(') &&
-                                           (isConst || cleanSeg === cleanSeg.toUpperCase());
+                                           (isConst || isRoc || cleanSeg === cleanSeg.toUpperCase());
 
                         // Disable color bands for markdown headers and subheaders
                         if (isSubHeader || (typeof segment === 'string' && segment.trim().startsWith('#'))) {
@@ -476,25 +509,27 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         const indentationLevel = (() => {
                             if (!cleanSeg || isSubHeader) return 0;
                             
-                            // High priority: calculate from leading \u00A0 characters (2 spaces = 1 level)
+                            // High priority: calculate from leading whitespaces (4 spaces = 1 level, OR 3 for ROC)
+                            // Match regular spaces, non-breaking spaces (\u00A0), and zero-width (\u200C)
                             const leadingMatch = segment.match(/^[\u200C\u00A0\s]*/);
-                            const spaceCount = leadingMatch ? (leadingMatch[0].match(/\u00A0/g) || []).length : 0;
-                            if (spaceCount >= 6) return 3;
-                            if (spaceCount >= 4) return 2;
-                            if (spaceCount >= 2) return 1;
+                            const totalSpaces = leadingMatch ? leadingMatch[0].length : 0;
+                            
+                            const step = isRoc ? 3 : 4;
+                            if (totalSpaces >= step * 3) return 3;
+                            if (totalSpaces >= step * 2) return 2;
+                            if (totalSpaces >= step) return 1;
 
                             // Fallback to regex (for documents without explicit space indentation)
-                            // Note: In RPC, we often have decimals (1.) at level 1 and letters ((a)) at level 2.
-                            // Aggressively strip markdown footnote formatting (e.g. `[19](#footnote-19) `) or bracket indicators `[`
                             const textForIndent = cleanSeg.replace(/^(?:\[\d+\]\([^)]+\)\s*)*\[?\s*/, '');
                             
-                            if (/^(\([a-z]\)|[a-z][\.\)])[\s\u00A0]/i.test(textForIndent)) return 1;
-                            if (/^\d+[\.\)][\s\u00A0]/.test(textForIndent)) return 2;
-                            if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\.[\s\u00A0]/i.test(textForIndent)) {
+                            // Updated Regex: marker followed by space/nbsp OR end of string
+                            if (/^(\([a-z]\)|[a-z][\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 1;
+                            if (/^\d+[\.\)]([\s\u00A0]|$)/.test(textForIndent)) return 2;
+                            if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\.([\s\u00A0]|$)/i.test(textForIndent)) {
                                 return lastNumericEnumLevel >= 1 ? 2 : 0;
                             }
-                            if (/^\(\d+\)[\s\u00A0]/.test(textForIndent)) return 3;
-                            if (/^\([ivxl]+\)[\s\u00A0]/i.test(textForIndent)) return 4;
+                            if (/^\(\d+\)([\s\u00A0]|$)/.test(textForIndent)) return 3;
+                            if (/^\([ivxl]+\)([\s\u00A0]|$)/i.test(textForIndent)) return 4;
                             return 0;
                         })();
 
@@ -520,10 +555,19 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         }
 
                         // Simple cascading indentation via Tailwind padding classes
-                        const indentClass = effectiveLevel === 1 ? "ml-4" :
-                                            effectiveLevel === 2 ? "ml-8" :
-                                            effectiveLevel === 3 ? "ml-12" :
-                                            effectiveLevel === 4 ? "ml-16" : "";
+                        // FOR ROC: Use 3-6-9 pattern (tight fit)
+                        // FOR OTHERS: Use 4-8-12 pattern (standard)
+                        const indentClass = isRoc ? (
+                            effectiveLevel === 1 ? "ml-3" :
+                            effectiveLevel === 2 ? "ml-6" :
+                            effectiveLevel === 3 ? "ml-9" :
+                            effectiveLevel === 4 ? "ml-12" : ""
+                        ) : (
+                            effectiveLevel === 1 ? "ml-4" :
+                            effectiveLevel === 2 ? "ml-8" :
+                            effectiveLevel === 3 ? "ml-12" :
+                            effectiveLevel === 4 ? "ml-16" : ""
+                        );
 
                         const paddingClass = hasBands ? "pl-6" : "";
 
@@ -537,8 +581,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             linkCount += article.paragraph_links['-1'];
                         }
 
+                        // Compact margins for enumerated items (Level 1+) vs substantive paragraphs
+                        const marginClass = effectiveLevel > 0 ? "mb-1.5" : "mb-5 text-justify";
+
                         return (
-                            <div key={segIdx} className={`relative ${paddingClass} group/segment mb-3`}>
+                            <div key={segIdx} className={`relative ${paddingClass} group/segment ${marginClass}`}>
                                 {hasBands && (
                                     <div className="absolute left-0 top-0 bottom-0 flex flex-row gap-[2px]">
                                         {activeSources.map((sourceId, idx) => {
