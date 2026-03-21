@@ -264,7 +264,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      content_to_send = "\n\n".join(injections) + "\n\n" + content_to_send
 
                  # Format for prefix Article X
-                 if short_name.upper() in ['LABOR', 'RPC', 'CIV']:
+                 if short_name.upper() in ['LABOR', 'RPC', 'CIV', 'FC']:
                      art_title = r.get('article_title') or ""
                      prefix = f"Article {article_num}."
                      if art_title:
