@@ -66,3 +66,23 @@ def debug_imports(req: func.HttpRequest) -> func.HttpResponse:
 @app.route(route="health", methods=["GET"])
 def health_check(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse("OK", status_code=200)
+
+@app.route(route="health_db", methods=["GET"])
+def health_db(req: func.HttpRequest) -> func.HttpResponse:
+    from db_pool import get_db_connection, put_db_connection
+    conn = None
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT 1")
+        cur.fetchone()
+        cur.close()
+        return func.HttpResponse("Database connection successful.", status_code=200)
+    except Exception as e:
+        import traceback
+        error_msg = f"Database connection failed: {str(e)}\n{traceback.format_exc()}"
+        logging.error(error_msg)
+        return func.HttpResponse(error_msg, status_code=500, mimetype="text/plain")
+    finally:
+        if conn:
+            put_db_connection(conn)
