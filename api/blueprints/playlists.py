@@ -3,6 +3,9 @@ import json
 import os
 import logging
 from db_pool import get_db_connection, put_db_connection
+from utils.clerk_auth import get_authenticated_user_id
+
+playlists_bp = func.Blueprint()
 
 @playlists_bp.route(route="playlists", methods=["GET"])
 def get_playlists(req: func.HttpRequest) -> func.HttpResponse:
