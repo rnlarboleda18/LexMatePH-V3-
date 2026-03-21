@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v37" # Increment to force-refresh all cached audio
+CACHE_VERSION = "v1" # Reset - blob cache cleared manually on 2026-03-21
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
