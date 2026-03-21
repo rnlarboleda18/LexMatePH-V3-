@@ -8,6 +8,15 @@
             }
         }
     },
+    "extensions": {
+        "http": {
+            "routePrefix": "api",
+            "maxOutstandingRequests": 200,
+            "maxConcurrentRequests": 100,
+            "dynamicThrottlesEnabled": true
+        }
+    },
+    "functionTimeout": "00:05:00",
     "extensionBundle": {
         "id": "Microsoft.Azure.Functions.ExtensionBundle",
         "version": "[4.*, 5.0.0)"
@@ -16,7 +25,8 @@
         "allowedOrigins": [
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "http://192.168.1.181:5173"
+            "http://192.168.1.181:5173",
+            "https://salmon-stone-02d831300.azurestaticapps.net"
         ],
         "supportCredentials": false
     }

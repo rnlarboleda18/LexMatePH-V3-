@@ -5,17 +5,16 @@ import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import google.generativeai as genai
+from db_pool import get_db_connection, put_db_connection
 
 ai_processor_bp = func.Blueprint()
 
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or "REDACTED_API_KEY_HIDDEN"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
-def get_db_connection():
-    return psycopg2.connect(DB_CONNECTION_STRING)
+# Using shared get_db_connection from db_pool
 
 def generate_html_clean(raw_text):
     if not raw_text or not raw_text.strip():
@@ -43,6 +42,8 @@ def ai_clean_case(req: func.HttpRequest) -> func.HttpResponse:
     case_id = req.route_params.get('id')
     logging.info(f"AI Cleaning requested for Case ID {case_id}")
 
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -72,6 +73,8 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
     case_id = req.route_params.get('id')
     logging.info(f"AI Digestion requested for Case ID {case_id}")
 
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -300,6 +303,8 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
     case_id = req.route_params.get('id')
     logging.info(f"Mock Exam generation requested for Case ID {case_id}")
 
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)

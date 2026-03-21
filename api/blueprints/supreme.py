@@ -70,23 +70,12 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
                 ponente,
                 subject,
                 main_doctrine,
-                digest_facts,
-                digest_issues,
-                digest_ruling,
-                digest_ratio,
-                digest_significance,
                 significance_category,
                 division,
                 is_doctrinal,
                 document_type,
                 keywords,
-                ai_model,
-                statutes_involved,
-                legal_concepts,
-                flashcards,
-                spoken_script,
-                secondary_rulings,
-                cited_cases
+                ai_model
         """
 
         # FTS Expression (Enhanced to include digest fields)

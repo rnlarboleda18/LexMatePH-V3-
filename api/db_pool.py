@@ -13,16 +13,28 @@ import threading
 import logging
 import psycopg2
 
-# Force Cloud DB connection following user request
-DB_CONNECTION_STRING = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+# Read from environment variable - never hardcode credentials
+DB_CONNECTION_STRING = os.environ.get(
+    "DB_CONNECTION_STRING",
+    # Fallback for local dev only — override via .env or local.settings.json
+    "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+)
 
 _local = threading.local()
 
 
 def _new_conn():
-    conn = psycopg2.connect(DB_CONNECTION_STRING, connect_timeout=5)
+    conn = psycopg2.connect(
+        DB_CONNECTION_STRING,
+        connect_timeout=10,        # Increased from 5s — avoids cold-start failures
+        keepalives=1,              # Enable TCP keepalives to survive Azure firewall idle timeouts
+        keepalives_idle=60,        # Send keepalive after 60s idle
+        keepalives_interval=10,    # Retry keepalive every 10s
+        keepalives_count=5,        # Drop connection after 5 failed keepalives
+    )
     conn.autocommit = False
     return conn
+
 
 
 def get_db_connection():
