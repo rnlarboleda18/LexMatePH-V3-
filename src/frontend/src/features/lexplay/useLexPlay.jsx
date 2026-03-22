@@ -368,7 +368,8 @@ export const LexPlayProvider = ({ children }) => {
             const currentRate = playbackRateRef.current || playbackRate;
             const rateParam = `rate=${currentRate}`;
             const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}`;
+            const timestampParam = `&t=${new Date().getTime()}`;
+            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}${timestampParam}`;
             console.log("LEXPLAY AUDIO: Direct native load from:", fetchUrl);
 
             if (audioRef.current) {
