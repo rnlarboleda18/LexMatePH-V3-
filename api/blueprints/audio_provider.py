@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v2" # Incremented to fix FC vs Consti audio mismatch
+CACHE_VERSION = "v3" # Bumping to invalidate files with artificial Windows CR pauses
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
@@ -448,6 +448,7 @@ def _get_text_for_codal(content_id, code_id=None):
                 art_title = (row.get('article_title') or '').strip()
                 group_header = (row.get('group_header') or '').strip()
                 content = (row.get('content_md') or '').strip()
+                content = content.replace('\r\n', '\n').replace('\r', '\n')
                 
                 # TTS Cleaning: Remove structural MD only, keep punctuation for better flow
                 clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
@@ -533,6 +534,7 @@ def _get_text_for_codal(content_id, code_id=None):
         
         art_num = row.get('article_number', '')
         content = row.get('content', '') or ''
+        content = content.replace('\r\n', '\n').replace('\r', '\n')
         # TTS Cleaning: Remove structural MD only, keep punctuation
         clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
         clean = re.sub(r'\n{3,}', '\n\n', clean).strip()
@@ -567,8 +569,8 @@ def _get_text_for_question(content_id):
 
         year = row.get('year')
         subject = row.get('subject')
-        q_text = row.get('text') or ""
-        a_text = row.get('answer') or ""
+        q_text = (row.get('text') or "").replace('\r\n', '\n').replace('\r', '\n')
+        a_text = (row.get('answer') or "").replace('\r\n', '\n').replace('\r', '\n')
 
         # Format Intro (Restored Year and BAR to intro only)
         intro = f"{year} BAR Question in {subject}."
