@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v6" # Bumping to clear final double newlines on Strategy A
+CACHE_VERSION = "v7" # Bumping to flush corrupted Article 8 audio
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
