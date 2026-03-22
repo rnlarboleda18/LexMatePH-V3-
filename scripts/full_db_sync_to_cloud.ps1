@@ -5,7 +5,7 @@ $LOCAL_DB_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhos
 # The new hostname provided by the user
 $TARGET_HOST = "bar-db-eu-west.postgres.database.azure.com"
 $TARGET_USER = "bar_admin"
-$TARGET_PASS = "RABpass021819!"
+$TARGET_PASS = "[DB_PASSWORD]"
 $TARGET_DB   = "postgres"
 
 $DUMP_FILE = "C:\tmp\full_sync_dump.sql"

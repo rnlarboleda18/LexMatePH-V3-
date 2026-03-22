@@ -48,21 +48,39 @@ const Flashcard = ({ question, onNext, currentIndex, total, onClose }) => {
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-8">
                     {/* Question */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3">Question</h4>
+                    <div className="space-y-4">
+                        <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3 px-1">Question</h4>
                         <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
                             {question.text}
                         </p>
+                        
+                        {/* Render extra sub-questions if available */}
+                        {question.subQuestions && question.subQuestions.map((sub, i) => (
+                          <p key={i} className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap border-t border-gray-100 dark:border-gray-800 pt-4">
+                            {sub.text}
+                          </p>
+                        ))}
                     </div>
 
                     {/* Answer (Conditional) */}
                     {showAnswer && (
-                        <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                            <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
-                            <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
-                                <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-                                    {question.answer || "Answer not available."}
-                                </p>
+                        <div className="animate-in fade-in slide-in-from-bottom-4 duration-300 space-y-6">
+                            <div>
+                                <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor} px-1`}>Suggested Answers</h4>
+                                <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5 space-y-6`}>
+                                    <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                                        {question.answer || "Answer not available."}
+                                    </p>
+                                    
+                                    {/* Render answers for sub-questions if they exist */}
+                                    {question.subQuestions && question.subQuestions.map((sub, i) => (
+                                      <div key={i} className="pt-6 border-t border-black/10 dark:border-white/10">
+                                        <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                                          {sub.answer || "Answer not available."}
+                                        </p>
+                                      </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )}

@@ -1,0 +1,9150 @@
+# AI Extracted Q&A from Quamto 2023 Civil Law.docx
+
+Question (2011 BAR)
+
+Q1:
+
+Congress passed a law imposing taxes on income earned out of a particular activity that was not previously taxed. The law, however, taxed incomes already earned within the fiscal year when the law took effect. Is the law valid?
+
+Suggested Answer
+
+A1:
+
+(d) YES, tax laws are an exception; they can be given retroactive effect. (UPLC Suggested Answers)
+
+Question (2016 BAR)
+
+Q2:
+
+Sec. 1 of P.D. NO. 755 states: Section 1. Declaration of National Policy – It is hereby declared that the policy of the State is to provide readily available credit facilities to the coconut farmers at preferential rates, that this policy can be expeditiously and efficiently realized by the implementation of the “Agreement for the Acquisition of a Commercial Bank for the Benefit of the Coconut Farmers’ executed by the Philippine Coconut Authority, the terms of which ’Agreement’ are hereby incorporated by reference; xxx”
+
+A copy of the Agreement was not attached to the Presidential Decree. P.D. No: 755 was published in the Official Gazette but the text of the Agreement described in Section 1 was not published. Can the Agreement in question be accorded the status of a law? Explain.
+
+Suggested Answer
+
+A2:
+
+NO, the Agreement cannot be accorded the status of a law. Art. 2 of the NCC provides that laws shall take effect after 15 days following the completion of their publication in the Official Gazette unless it is otherwise provided. In Nagkakaisang Maralitav v Military Shrine Services (G.R. Nos. 187587 & 187654, 05 June 2013), the Supreme Court held that the addendum to the Proclamation issued by President Marcos has no force and effect considering that the same was not published in the Official Gazette. Moreover, the Supreme Court in Cojuangco, Jr. v. Republic (G.R. No. 180705, 27 November 2012), which is on all fours with this case, ruled that while the Agreement was incorporated by reference, it was not reproduced or attached as an annex to the law and therefore cannot be accorded to the status of a law. Publication of the full text of the law is indispensable for its effectivity. (UPLC Suggested Answers)
+
+Question (2007 BAR)
+
+Q3:
+
+Write "TRUE' if the statement is true or “FALSE” if the statement is false. If the statement is FALSE, state the reason. Roberta, a Filipino, 17 years of age, without the knowledge of his parents, can acquire a house in Australia because Australian Laws allow aliens to acquire property from the age of 16.
+
+Suggested Answer
+
+A3:
+
+TRUE. Since Australian Law allows aliens to acquire property from the age of 16, Roberta may validly own a house in Australia, following the principle of lex rei sitae enshrined in Art. 16, NCC which states: “Real property as well as personal property is subject to the law of the country where it is situated.” Moreover, even assuming that legal capacity of Roberta in entering the contract in Australia is governed by Philippine law under Art. 15, NCC, the contract of sale is not void but merely voidable under the NCC. Hence, even under Philippine law, she will acquire ownership over the property she bought until the contract is annulled. (UPLC Suggested Answers)
+
+ALTERNATIVE ANSWER:
+
+FALSE. The Civil Code provides that laws relating to family rights and duties, or to the status, condition and legal capacity of persons are binding upon the citizens of the Philippines, even though living abroad. (Art. 15, NCC) The age of majority under Philippine law is 18 years (Rep. Act No. 6809), hence, Roberta, being only 17 years old, has no legal capacity to acquire and own land. (UPLC Suggested Answers)
+
+Question (2009 BAR)
+
+Q4a:
+
+Can the holographic will of Dr. Fuentes be admitted to probate in the Philippines? Why or why not?
+
+Suggested Answer
+
+A4a:
+
+YES, the holographic will of Dr. Fuentes may be admitted to probate in the Philippines because there is no public policy violated by such probate. The only issue at probate is the due execution of the will which includes the formal validity of the will. As regards formal validity, the only issue the court will resolve at probate is whether or not the will was executed in accordance with the form prescribed by the law observed by the testator in the execution of his will. For purposes of probate in the Philippines, an alien testator may observe the law of the place where the will was executed (Art 17), or the formalities of the law of the place where he resides, or according to the formalities of the law of his own country, or in accordance with the Philippine Civil Code. (Art. 816) Since Dr. Fuentes executed his will in accordance with the Philippine law, the Philippine court shall apply the NCC in determining the formal validity of the holographic will. The subsequent change in the citizenship of Dr. Fuentes did not affect the law governing the validity of his will. Under the NCC, which was the law used by Dr. Fuentes, the law enforced at the time of execution of the will shall govern the formal validity of the will. (Art. 795) (UPLC Suggested Answers)
+
+Question (2009 BAR)
+
+Q4b:
+
+Assuming that the will is probated in the Philippines, can Jay validly insist that he be given his legitime? Why or why not?
+
+Suggested Answer
+
+A4b:
+
+NO, Jay cannot insist because under New York law he is not a compulsory heir entitled to a legitime. The national law of the testator determines who his heirs are, the order that they succeed, how much their successional rights are, and whether or not a testamentary disposition in his will is valid. (Art 16, NCC) Since, Dr. Fuentes was a US citizen, the laws of the New York determines who his heirs are. And since the New York law does not recognize the concept of compulsory heirs, Jay is not a compulsory heir of Dr. Fuentes entitled to a legitime. (UPLC Suggested Answers)
+
+Question (2011 BAR)
+
+Q5:
+
+When one exercises a right recognized by law, knowing that he thereby causes an injustice to another, the latter is entitled to recover damages. This is known as the principle of
+
+(a) Res ipsa loquitur 
+(b) Damnum absque injuria 
+(c) Vicarious Liability 
+(d) Abuse of Rights
+
+Suggested Answer
+
+A5:
+
+(d) Abuse of Rights. (UPLC Suggested Answers)
+
+Question (2011 BAR)
+
+Q6:
+
+Janice and Jennifer are sisters. Janice sued Jennifer and Laura, Jennifer’s business partner for recovery of property with damages. The complaint did not allege that Janice exerted earnest efforts to come to a compromise with the defendants and that such efforts failed. The judge dismissed the complaint outright for failure to comply with a condition precedent. Is the dismissal in order?
+
+a. No, since Laura is a stranger to the sisters, Janice has no moral obligation to settle with her. 
+b. Yes, since court should promote amicable settlement among relatives. 
+c. Yes, since members of the same family, as parties to the suit, are required to exert earnest efforts to settle their disputes before coming to court. 
+d. No, the family council, which would ordinarily mediate the dispute, has been eliminated under the Family Code.
+
+Suggested Answer
+
+A6:
+
+a. (UPLC Suggested Answers)
+
+Question (2020-21 BAR)
+
+Q7:
+
+A bride declined to appear on her wedding day. Instead, she sent a note to her prospective groom, saying that she needed to be honest to herself by admitting that the institution of marriage was not her. The bride wrote that she came to this conclusion after contemplating on the tweets of the #LabGuru. She also wrote that to atone for her non-appearance, she would post a glowing recommendation of the prospective groom as a partner on her Facebook, Twitter, Instagram, and Tiktok accounts. The couple had previously dated for almost 8 years. The whole time, the prospective groom had been loyal and caring. It was the bride who covered all the wedding expenses. Heartbroken and embarrassed, the prospective groom sued the prospective bride for moral damages, alleging that she had breached her promise to marry him. Will the suit prosper? Explain briefly.
+
+Suggested Answer
+
+A7:
+
+YES, the suit will prosper. As a rule, breach of promise to marry per se is not an actionable wrong. There must be an act independent of the breach of the promise to marry like expenses incurred, carnal knowledge as a result or moral seduction, or pregnancy to entitle the aggrieved party the award of damages. (Wassmer v. Velez, G.R. No. L-20089, 26 Dec. 1964; Baksh v. Court of Appeals, G.R. No. 97336, 19 Feb. 1993; Hermosisima vs. Court of Appeals, G.R. No. L-14628, 30 Sept. 1960) In one case, the Court ruled that although breach of promise to marry is not actionable, to formally set a wedding and go through all the above-described preparation and publicity, only to walk out of it when the matrimony is about to be solemnized is palpably and unjustifiably contrary to good customs for which the bride must be held answerable in damages in accordance with Art. 21, NCC. (Wassmer v. Velez, G.R. No. L-20089, 26 Dec. 1964) Clearly, the groom is entitled to damages based on Art. 21, NCC which provides that any person who willfully causes loss or injury to another in a manner that is contrary to morals, good customs or public policy shall compensate the latter for the damage. To walk out of the wedding on the day of its solemnization falls under Art. 21, NCC and may justify the award of moral damages. (Bar Q&A by Paguirigan, 2023)
+
+Question (2011 BAR)
+
+Q8:
+
+Six tenants sued X, the landowner, for willfully denying them water for their farms, which water happened to flow from land under X’s control, his intention being to force them to leave his properties. Is X liable for his act and why?
+
+(A) No, because the tenants must be content with waiting for rainfall for their farms. 
+(B) No, since X owns both the land and the water. 
+(C) Yes, because the tenants’ farms have the natural right of access to water wherever it is located. 
+(D) Yes, since X willfully caused injury to his tenants contrary to morals, good customs or public policy.
+
+Suggested Answer
+
+A8:
+
+(D) Yes, since X willfully caused injury to his tenants contrary to morals, good customs or public policy. (Bar Q&A by Paguirigan, 2023)
+
+Question (2022 BAR)
+
+Q9:
+
+Noel is the son of Sps. Marie and Benedict. Benedict has passed away. For Noel’s 7th birthday, his paternal grandparents offered and pay for his birthday party. In coordination with Marie, the grandparents booked the party venue, signed the contacts with the caterer and the entertainers, finalized the guestlist, and paid all amounts due. Marie promised to them to bring Noel to the party. A week before the scheduled birthday party, Marie decided that she would not bring Noel to the party, and that she would instead take him on an out-oftown trip on the day of the party. Marie could never forget that her parents-in-law initially opposed Benedict’s marriage to her because she was a former burlesque dancer. Marie did not notify the grandparents of her plan to skip the birthday party. During the party, the grandparents kept trying to get in touch with her but she ignored all their calls. The grandparents and the guests who went to the party were very dismayed that Noel was not present. When the grandparents asked Marie why she did not bring Noel to the party, she simply replied, “I am his mother, and I decide where he goes!” To which, Noel’s grandmother retorted, “Anak mo lang s’ya! Hindi mo s’ya pag-aari!” The grandparents seek your advice on whether there is legal basis to hold Marie liable for the damages that they have suffered as a result of her acts. What is your advice? Explain briefly.
+
+Suggested Answer
+
+A9:
+
+I will advise the grandparents that they may seek damages from Marie on the basis of the principle in human relations that any person who willfully causes loss or injury to another in a manner that is contrary to morals, good customs, or public policy shall compensate the latter for the damage. (Art. 21, NCC) 
+
+Although Marie has the parental authority over her minor child, her promise to allow Noel to attend the party arranged by his grandparents only to renege on that promise was an act which is contrary to good customs. In addition, the promise given by Marie was the reason why the grandparents made arrangements and entered into contracts with the caterer and entertainers for which they incurred expenses. There was evident bad faith on the part of Marie when she did not notify the grandparents that she would not bring Noel to the party. Hence, there is a cause of action for damages based on Art. 21. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2014 BAR)
+
+Q10:
+
+Sps. Magtanggol managed and operated a gasoline station on a 1,000 sq.m. lot which they leased from Francisco Bigla-awa. The contract was for a period of 3 years. When the contract expired, Francisco asked the spouses to peacefully vacate the premises. The spouses ignored the demand and continued with the operation of the gasoline station. One month after, Francisco, with the aid of a group of armed men, caused the closure of the gasoline station by constructing fences around it. Was the act of Francisco and his men lawful? Why?
+
+Suggested Answer
+
+A10:
+
+No, the act of Francisco was not lawful. Even if the lessee's right to occupy the premises has expired, the lessor cannot physically oust the lessee from the leased premises if the latter refuses to vacate. The lessor must go through the proper channels by filing an appropriate case for unlawful detainer or recovery of possession. Every person has a right' to be respected in his possession and should he be disturbed therein he shall be protected in or restored to said possession by the means established by the laws and the Rules of Court (Article 539, Civil Code). The act of Francisco and his men constitute an abuse of rights because even if he has the right to recover possession of his property, he must act with justice and give the lessees their day in court and observe honesty and good faith (Article 19, Civil Code).
+
+Question (2012 BAR)
+
+Q11:
+
+Which of the following is NOT included in the attributes of juridical capacity? 
+
+(a) Juridical capacity is inherent in every natural person, and therefore it is not acquired. 
+(b) Juridical capacity is lost only through death. 
+(c) Juridical capacity is the fitness to be the subject of legal relations. 
+(d) Juridical capacity cannot exist without capacity to act.
+
+Suggested Answer
+
+A11:
+
+(d) Juridical capacity cannot exist without capacity to act.
+
+Question (2020-21 BAR)
+
+Q12:
+
+A corporation which owns a hospital was sued along with a physician for medical malpractice. The corporation moved to dismiss the case, arguing that it was only the physician, as the natural person, who could be the subject of any kind of suit. In other words, the corporation argued that it was not a legal person. Is the position of the corporation owning the hospital legally tenable? Explain briefly.
+
+Suggested Answer
+
+A12:
+
+NO, the position of the corporation is not tenable. A person may be natural or juridical. A corporation is a juridical person vested with the personality as soon as it is duly constituted in accordance with law. (Art. 44, NCC) As such, it may acquire property and incur obligations and may sue and be sued in its corporate name. (Art. 46, NCC) Moreover, in medical malpractice cases, the duty of providing quality medical service is no longer the sole prerogative and responsibility of the physician based on the vicarious liability of the hospitals under the theories of respondent superior, apparent authority, or agency by estoppel. (Professional Services, Inc. vs. Agana, G.R. No. 126297, 31 Jan. 2007) (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2011 BAR)
+
+Q13:
+
+Because of X’s gross negligence, Y suffered injuries that resulted in the abortion of the fetus she carried. Y sued X for, among other damages, P1,000,000 for the death of a family member. Is Y entitled to indemnity for the death of the fetus she carried? 
+
+(a) Yes, since the fetus is already regarded as a child from conception, though unborn. 
+(b) No, since X’s would not have known that the accident would result in Y’s abortion. 
+(c) No, since birth determines personality, the accident did not result in the death of a person. 
+(d) Yes, since the mother believed in her heart that she lost a child.
+
+Suggested Answer
+
+A13:
+
+(c) No, since birth determines personality, the accident did not result in the death of a person.
+
+Question (2022 BAR)
+
+Q14:
+
+During Remy’s pregnancy, her father Gavin executed a will bequeathing his rest house in Calatagan, Batangas to Remy’s unborn child. While Gavin and Remy, who was then 7 months pregnant, were on their way to Calatagan, they figured in a car accident on 01 Dec. 2021 which resulted in the instantaneous death of Gavin and the premature delivery of Remy on the same day. At 8:30 A.M. on 03 Dec. 2021, the newborn baby died. Is the devise in favor of the baby valid? Explain briefly.
+
+Suggested Answer
+
+A14:
+
+YES, the devise in favor of the baby is valid. Under the law birth determines personality, but the conceived child shall be considered born for all purposes favorable to the child provided it be born under the conditions specified in Art. 41. A fetus is considered born if it is alive at the time it is completely delivered from the mother's womb. However, if the fetus had an intrauterine life of less than 7 months, for it to be considered born and possessed of juridical capacity, it must survive for 24 hours from complete separation from the mother's womb. Based on the facts, Remy was already 7 months pregnant at the time she prematurely gave birth to her baby and that the baby was born alive and only died 2 days later. Hence, the baby acquired juridical capacity entitling it to the devise left by Gavin. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2014, 2003 BAR)
+
+Q15:
+
+If a pregnant woman passenger of a bus were to suffer an abortion following a vehicular accident due to the gross negligence of the bus driver, may she and her husband claim damages from the bus company for the death of their unborn child? Explain.
+
+Suggested Answer
+
+A15:
+
+NO, the spouses cannot recover actual damages in the form of indemnity for the loss of life of the unborn child. This is because the unborn child is not yet considered a person and the law allows indemnity only for loss of life of person. The mother, however, may recover damages for the bodily injury she suffered from the loss of the fetus which is considered part of her internal organ. The parents may also recover damages for injuries that are inflicted directly upon them, e.g., moral damages for mental anguish that attended the loss of the unborn child. Since there is gross negligence, exemplary damages can also be recovered. (Geluz v. Court of Appeals, G.R. No. L-16439, 20 July 1961)
+
+Question (2012 BAR)
+
+Q16:
+
+Ricky donated P1 million to the unborn child of his pregnant girlfriend, which she accepted. After six (6) months of pregnancy, the fetus was born and baptized as Angela. However, Angela died 20 hours after birth. Ricky sought to recover the P1 million. Is Ricky entitled to recover? Explain.
+
+Suggested Answer
+
+A16:
+
+YES, Ricky is entitled to recover the P1 million. The NCC considers a fetus a person for purposes favorable to it provided it is born later. (Art. 40, NCC) While the donation is favorable to the fetus, the donation did not take effect because the fetus was not born in accordance with the NCC. 
+
+To be considered born, the fetus that had an intra-uterine life of less than 7 months should live for 24 hours from its complete delivery from the mother’s womb. Since Angela had an intra-uterine life of less than 7 months but did not live for 24 hours, she was not considered born and, therefore, did not become a person. (Art. 41, NCC) Not being a person, she has no juridical capacity to be a donee, hence, the donation to her did not take effect. The donation not being effective, the amount donated may be recovered. To retain it will be unjust enrichment.
+
+Question (2012, 2008, 1999 BAR)
+
+Q17a:
+
+Can Marian's baby be the beneficiary of the insurance taken on the life of the mother?
+
+Suggested Answer
+
+A17a:
+
+YES, the baby can be the beneficiary of the life insurance of Marian. Art. 40, NCC provides that "birth determines personality; but the conceived child shall be considered born for all purposes that are favorable to it, provided that it be born later with the conditions specified in Art. 41, NCC. Art. 41 states that "for civil purposes, the fetus shall be considered born if it is alive at the time it is completely delivered from the mother's womb. However, if the fetus had an intra-uterine life of less than seven months, it is not deemed born if it dies within twenty-four (24) hours after its complete delivery from the maternal womb. The act of naming the unborn child as sole beneficiary in the insurance is favorable to the conceived child and therefore the fetus acquires presumptive or provisional personality. However, said presumptive personality only becomes conclusive if the child is born alive. The child need not survive for 24 hours as required under Art. 41 of the Code because "Marian was already due to give birth," indicating that the child was more than 7 months old.
+
+Question (2012, 2008, 1999 BAR)
+
+Q17b:
+
+Between Marian and the baby, who is presumed to have died ahead?
+
+Suggested Answer
+
+A17b:
+
+If the baby was not alive when completely delivered from the mother’s womb, it was not born as a person, then the question of who between two persons survived will not be an issue. Since the baby had an intra-uterine life of more than 7 months, it would be considered born if it was alive, at the time of its complete delivery from the mother’s womb. We can gather from the facts that the baby was completely delivered. But whether it was alive or not has to be proven by evidence. 
+
+If the baby was alive when completely delivered from the mother’s womb, then it was born as a person and the question of who survived as between the baby and the mother shall be resolved by the provisions of the Rules of Court on Survivorship. This is because the question has nothing to do with succession. Obviously, the resolution of the question is needed just for the implementation of an insurance contract. Under Rule 113, Sec 3(jj(5)), ROC, as between the baby who was under 15 years old and Marian who was 18 years old, Marian is presumed to have survived. 
+
+In both cases, therefore, the baby never acquired any right under the insurance policy. The proceeds of the insurance will then go to the estate of Marian.
+
+Question (2012, 2008, 1999 BAR)
+
+Q17c:
+
+Will Pietro, as surviving biological father of the baby, be entitled to claim the proceeds of the life insurance on the life of Marian?
+
+Suggested Answer
+
+A17c:
+
+Since the baby did not acquire any right under the insurance contract, there is nothing for Pietro to inherit.
+
+Question (1999 BAR)
+
+Q18:
+
+Elated that her sister who had been married for five (5) years was pregnant for the first time, Alma donated P100,000.00 to the unborn child. Unfortunately, the baby died one hour after delivery. May Alma recover the P100,000.00 that she had donated to said baby before it was born considering that the baby died? Stated otherwise, is the donation valid and binding? Explain.
+
+Suggested Answer
+
+A18:
+
+The donation is valid and binding, being an act favorable to the unborn child, but only if the baby had an intra-uterine life of not less than seven (7) months and provided there was due acceptance of the donation by the proper person representing said child. If the child had less than seven (7) months of intra-uterine life, it is not deemed born since it died less than 24 hours following its delivery, in which case the donation never became effective since the donee never became a person, birth being determinative of personality.
+
+Question (2013, 2008, 2000 BAR)
+
+Q19:
+
+Cristy and her late husband Luis had two (2) children, Rose and Patrick. One summer, her mother-in-law, aged 70, took the two (2) children, then aged 10 and 12, with her on a boat trip to Cebu. Unfortunately, the vessel sank en route, and the bodies of the three (3) were never found. None of the survivors ever saw them on the water. On the settlement of her mother-in-law's estate, Cristy files a claim for a share of her estate on the ground that the same was inherited by her children from their grandmother in representation of their father, and she inherited the same from them. Will her action prosper?
+
+Suggested Answer
+
+A19:
+
+NO, her action will not prosper. Since there was no proof as to who died first, all three (3) are deemed to have died at the same time and there was no transmission of rights from one to another, applying Art. 43, NCC.
+
+Question (1999 BAR)
+
+Q20:
+
+Mr. and Mrs. Cruz, who are childless, met with a serious motor vehicle accident with Mr. Cruz at the wheel and Mrs. Cruz seated beside him, resulting in the instant death of Mr. Cruz. Mrs. Cruz was still alive when help came but she also died on the way to the hospital. The couple acquired properties worth P1,000,000.00 during their marriage, which are being claimed by the parents of both spouses in equal shares. 
+
+Suppose in the preceding question, both Mr. And Mrs. Cruz were already dead when help came, so that nobody could say who died ahead of the other, would your answer be the same to the question as to who are entitled to the properties of the deceased couple?
+
+Suggested Answer
+
+A20:
+
+This being a case of succession, in the absence of proof as to the time of death of each of the spouses, it is presumed they died at the same time and no transmission of rights from one to the other is deemed to have taken place.
+
+Question (1998 BAR)
+
+Q21a:
+
+In the settlement of Jaime’s estate, can Wilma successfully claim that her late husband, Willy had a hereditary share since he was much younger than his father and, therefore, should be presumed to have survived longer?
+
+Suggested Answer
+
+A21a:
+
+NO, Wilma cannot successfully claim that Willy had a hereditary share in his father’s estate. Under Art. 43, NCC two persons “who are called to succeed each other” are presumed to have died at the same time, in the absence of proof as to which of them died first. This presumption of simultaneous death applies in cases involving the question of succession as between the two who died, who in this case are mutual heirs, being father and son.
+
+Question (1998 BAR)
+
+Q21b:
+
+Suppose Jaime had a life insurance policy with his wife, Julia, and his son, Willy, as the beneficiaries. Can Wilma successfully claim that one-half of the proceeds should belong to Willy’s estate?
+
+Suggested Answer
+
+A21b:
+
+YES, Wilma can invoke the presumption of survivorship and claim that one-half of the proceeds should belong to Willy’s estate, under Rule 131 of the ROC, as the dispute does not involve succession. Under this presumption, the person between the ages of 15 and 60 years is deemed to have survived one whose age was over 60 at the time of their deaths. The estate of Willy endowed with juridical personality stands in place and stead of Willy, as beneficiary.
+
+Question (2012 BAR)
+
+Q22:
+
+An illegitimate child may use the surname of his father when his filiation is established in any of the following instances, except: 
+
+(a) Filiation has been recognized by the father through the record of birth appearing in the civil register 
+(b) Admission of filiation by the father in a public document. 
+(c) Private handwritten instrument is made by the father acknowledging his filiation. 
+(d) Affidavit by the mother stating the name of his true father.
+
+Suggested Answer
+
+A22:
+
+(d) Affidavit by the mother stating the name of his true father. (2009-2017 UST FCL Bar Q&A)
+
+Question (2011 BAR)
+
+Q23:
+
+Illegitimate children, those not recognized by their biological fathers, shall use the surname of their 
+
+(a) biological father subject to no condition. 
+(b) mother or biological father, at the mother's discretion 
+(c) mother 
+(d) biological father unless he judicially opposes it.
+
+Suggested Answer
+
+A23:
+
+(b) mother or biological father, at the mother's discretion. (2009-2017 UST FCL Bar Q&A)
+
+Question (2018 BAR)
+
+Q24a:
+
+Is there any legal basis for the court to approve Silverio's petition for correction of entries in his birth certificate?
+
+Suggested Answer
+
+A24a:
+
+NO, there is no legal basis for the court to approve Silverio’s petition. As settled in the case of Silverio v. Republic (G.R. No. 174689, 174689, 22 Oct. 2007), our laws do not sanction change of name and correction of entry in the civil register as to sex on the ground of sex reassignment. Sex reassignment is not one of the grounds for which change of first name may be allowed under R.A. No. 9048. The petition for correction of entry as to sex of the birth certificate of Silverio cannot prosper, because the said document contained no error and it cannot be corrected. Silverio was born a male. The sex of a person is determined at birth. Considering that there is no law legally recognizing sex reassignment, the determination of a person’s sex made at the time of his or her birth, if not attended by error, is immutable.
+
+Question (2018 BAR)
+
+Q24b:
+
+Will your answer be the same in the case of Sharon's petition?
+
+Suggested Answer
+
+A24b:
+
+NO, my answer will not be the same. In the case of Republic v. Cagandahan (G.R. 166676, 12 Sept. 2008), the Supreme Court held that where the person is biologically or naturally intersex the determining factor in his gender classification would be what the individual, having reached the age of majority, with good reason thinks of his/her sex. Sharon is considered an intersex, because he has CAH, which means that she has the biological characteristics of both male and female. Based on that case, Sharon’s petition should be granted since he has simply let nature take its course and has not taken unnatural steps to arrest or interfere with what he was born with. The change of name should also be granted considering that it merely recognizes Sharon’s preferred gender.
+
+Question (2012, 1996 BAR)
+
+Q25:
+
+Honorato filed a petition to adopt his minor illegitimate child Stephanie, alleging that Stephanie's mother is Gemma Astorga Garcia; that Stephanie has been using her mother's middle name and surname; and that he is now a widower and qualified to be her adopting parent. He prayed that Stephanie's middle name be changed from "Astorga" to "Garcia," which is her mother's surname and that her surname "Garcia" be changed to "Catindig," which is his surname. This the trial court denied. Was the trial court correct in denying Hororato's request for Stephanie's use of her mother's surname as her middle name? Explain.
+
+Suggested Answer
+
+A25:
+
+NO, the trial court was not correct. There is no law prohibiting an illegitimate child adopted by his natural father to use as middle name his mother's surname. The law is silent as to what middle name an adoptee may use. In the case of in re: Adoption of Stephanie Nathy Astorga Garcia (G.R. No, 148311, 31 Mar. 2005), the Supreme Court ruled that the adopted child may use the surname of the natural mother as his middle name because there is no prohibition in the law against it. Moreover, it will also be for the benefit of the adopted child who shall preserve his lineage on his mother's side and reinforce his right to inherit from his mother and her family. Lastly, it will make the adopted child conform with the time-honored Filipino tradition of carrying the mother's surname as the person's middle name.
+
+Question (2009 BAR)
+
+Q26:
+
+If Ligaya, a Filipino citizen residing in the United States, files a petition for change of name before the District Court of New York, what law shall apply? Explain.
+
+Suggested Answer
+
+A26:
+
+NEW YORK LAW shall apply. The petition of change of name filed in New York does not concern the legal capacity or status of the petitioner. Moreover, it does not affect the registry of any other country including the country of birth of the petitioner. However, whatever judgment is rendered in that petition will have effect only in New York. The New York court cannot, for instance, order the Civil Registrar in the Philippines to change its records. The judgment of the New York court allowing a change in the name of the petitioner will be limited to the records of the petitioner in New York and the use of her new name in all transactions in New York. Since the records and processes in New York are the only ones affected, the New York court will apply New York law in resolving the petition.
+
+Question (2009 BAR)
+
+Q27:
+
+If Henry, an American citizen residing in the Philippines, files a petition for change of name before a Philippine court, what law shall apply? Explain
+
+Suggested Answer
+
+A27:
+
+PHILIPPINE LAW will apply. The petition for change of name in the Philippines will affect only the records of the petitioner and his transactions in the Philippines. The Philippine court can never acquire jurisdiction over the custodian in the US of the records of the petitioner. Moreover, change of name has nothing to do with the legal capacity or status of the alien. Since Philippine records and transactions are the only ones affected, the Philippine court may effect the change only in accordance with the laws governing those records and transactions. That the law cannot be but Philippine law.
+
+Question (2009 BAR)
+
+Q28:
+
+Rodolfo, married to Sharon, had an illicit affair with his secretary, Nanette, a 19-year-old girl, and begot a baby girl, Rona. Nanette sued Rodolfo for damages: actual, for hospital and other medical expenses in delivering the child by caesarean section; moral, claiming that Rodolfo promised to marry her, representing that he was single when, in fact, he was not; and exemplary, to teach a lesson to like-minded Lotharios. Suppose Rodolfo later on acknowledges Rona and gives her regular support, can he compel her to use his surname? Why or why not?
+
+Suggested Answer
+
+A28:
+
+NO, he has no right to compel Rona to use his surname. The law does not give him that right simply because he gave her support. (R.A. No. 9255) Under the FC, an illegitimate child was required to use only the surname of the mother. Under R.A. No. 9255, otherwise known as the Revilla Law, however, the illegitimate child is given the option to use the surname of the illegitimate father when the latter has recognized the former in accordance with law. Since the choice belongs to the illegitimate child, Rodolfo cannot compel Rona, if already of age, to use his surname against her will. If Rona is still a minor, to use the surname of Rodolfo will require the consent of Rona's mother who has sole parental authority over her. (2009-2017 UST FCL Bar Q&A)
+
+Question (2011 BAR)
+
+Q29:
+
+When can a missing person who left someone to administer his property be declared an absentee by the court? When he has been missing for 
+
+(a) 2 years from the receipt of the last news about him. 
+(b) 7 years from the receipt of the last news about him. 
+(c) 10 years from the receipt of the last news about him. 
+(d) 5 years from the receipt of the last news about him.
+
+Suggested Answer
+
+A29:
+
+(d) 5 years from the receipt of the last news about him.
+
+Question (2013 BAR)
+
+Q30-1:
+
+If Lito is alive, what is the status of his marriage to Lita? 
+
+a) The marriage subsists because the marital bond has not been terminated by death 
+b) The marriage was terminated when Lita married Jaime. 
+c) The marriage subsists because Lita's marriage to Jaime is void. 
+d) The marriage is terminated because Lito is presumed dead after his plane has been missing for more than four (4) years. 
+e) The marriage can be formally declared terminated if Lito would not resurface.
+
+Suggested Answer
+
+A30-1:
+
+(a) The marriage subsists because the marital bond has not been terminated by death — since Lito is still alive, the marital bond has not been severed.
+
+Question (2013 BAR)
+
+Q30-2:
+
+If Lito is alive, what is the status of Lita's marriage to Jaime? 
+
+a) The marriage is valid because Lita's marriage to Lito was terminated upon Lito's disappearance for more than seven (7) years. 
+b) The marriage is valid. After an absence of more than 10 years, Lito is already presumed dead for all purposes. 
+c) The marriage is void. Lito's mere absence, however lengthy, is insufficient to authorize Lita to contract a subsequent marriage. 
+d) The marriage is void. If Lito is indeed alive, his marriage to Lita was never dissolved and they can resume their marital relations at any time.
+
+Suggested Answer
+
+A30-2:
+
+(c) The marriage is void. Lito's mere absence, however lengthy, is insufficient to authorize Lita to contract a subsequent marriage — Lito’s absence did not automatically grant Lita the right to remarry without securing a declaration of presumptive death.
+
+Question (2020-21 BAR)
+
+Q31:
+
+A wife was able to validly obtain a judicial declaration of her husband's presumptive death after he had disappeared for 10 years. She then remarried in accordance with law. To her surprise, a few years after her remarriage, her first husband reappeared. Does the first husband's reappearance automatically, without need of any further act, terminate the second marriage? Explain briefly.
+
+Suggested Answer
+
+A31:
+
+NO, the mere reappearance of the first husband shall not automatically terminate the second marriage contracted by the wife. The law provides that the subsequent marriage is automatically terminated by the recording of the affidavit of reappearance of the absent spouse in the civil registry of the residence of the parties to the subsequent marriage at the instance of any interested person. (Art. 42, FC) Hence, the first husband's reappearance will not suffice to terminate the second marriage. Also, the Court in SSS v. Vda. De Bailon (G.R. No. 165545, 24 Mar. 2006) ruled that if the absentee spouse reappears, but no step is taken to terminate the subsequent marriage, either by affidavit or court action, such absentee's mere reappearance, even if made known to the spouses in the subsequent marriage will not terminate such marriage. (Bar Q&A by Paguirigan, 2022)
+
+Question (2019 BAR)
+
+Q32:
+
+In what instance/s is a judicial declaration of presumptive death necessary? In this case, is the contention of the AFP correct? Explain.
+
+Suggested Answer
+
+A32:
+
+Judicial declaration of presumptive death is only used for the purpose of contracting a subsequent marriage. Art. 41, FC provides that for the purpose of contracting a subsequent marriage contracted by a person who had a well-founded belief that his/her prior spouse who had been absent for four (4) consecutive years was already dead, the spouse present must institute a summary proceeding for the declaration of presumptive death of the absentee. The contention of the AFP is incorrect because the Court has declared that the AFP can decide claims of death benefits of a missing soldier without requiring the claimant to first produce a court declaration of the presumptive death of such soldier and the claimant need only present any “evidence” which shows that the concerned soldier had been missing for such number of years and/or under the circumstances prescribed under Arts. 390 and 391, NCC. Art. 391, NCC provides that a person in the armed forces who has taken part in war and has been missing for four (4) years shall be presumed dead for all purposes. Here, W informed the AFP that her husband had been declared missing since 1995, 23 years before the filing of her claim in 2018. There is, thus, no need for a judicial declaration of presumptive death before the AFP can act on the claim of W.
+
+Question (2015 BAR)
+
+Q33:
+
+Mrs. L was married to a ship captain who worked for an international maritime vessel. For her and her family's support, she would claim monthly allotments from her husband's company. One day, while en route from Hong Kong to Manila, the vessel manned by Captain L encountered a severe typhoon at sea. The captain was able to send radio messages of distress to the head office until all communications were lost. In the weeks that followed, the search operations yielded debris of the lost ship but the bodies of the crew and the passengers were not recovered. The insurance company thereafter paid out the death benefits to all the heirs of the passengers and crew. Mrs. L filed a complaint demanding that her monthly allotments continue for the next 4 years until her husband may be legally presumed dead because of his absence.
+
+If you were the magistrate would how you rule?
+
+Suggested Answer
+
+A33:
+
+I would rule against Mrs. L. There is no merit in her contention that the monthly allotments to her should continue despite the presumptive death of the husband. In case of disappearance where there is danger of death, the person shall be presumed to have died at the beginning of the four (4) year period although his succession will be opened only at the end of the 4-year period. (Art. 391, NCC) Since the husband of Mrs. L is presumed to have died at about the time of disappearance, he is no longer entitled to receive his salary from the day the presumption of death arises.
+
+Question (2008 BAR)
+
+Q34:
+
+Ana Rivera had a husband, a Filipino citizen like her, who was among the passengers on board a commercial jet plane which crashed in the Atlantic Ocean ten (10) years earlier and had never been heard of ever since. Believing that her husband had died, Ana married Adolf Cruz Staedtler, a divorced German national born of a German father and a Filipino mother residing in Stuttgart. To avoid being required to submit the required certificate of capacity to marry from the German Embassy in Manila, Adolf stated in the application for marriage license that he was a Filipino citizen. With the marriage license stating that Adolf was a Filipino, the couple got married in a ceremony officiated by the Parish Priest of Calamba, Laguna in a beach in Nasugbu, Batangas, as the local parish priest refused to solemnize marriages except in his church. Is the marriage valid? Explain fully.
+
+Suggested Answer
+
+A34:
+
+The issue hinges on whether or not the missing husband was dead or alive at the time of the second marriage. If the missing husband was in fact dead at the time the second marriage was celebrated, the second marriage was valid. Actual death of a spouse dissolves the marriage ipso facto whether the surviving spouse had knowledge of such fact. A declaration of presumptive death even if obtained will not make the marriage voidable because presumptive death will not prevail over the fact of death. 
+
+If the missing husband was in fact alive when the second marriage was celebrated, the second marriage was void ab initio because of a prior subsisting marriage. Had Ana obtained a declaration of presumptive death the second marriage would have been voidable. In both cases, the fact that the German misrepresented his citizenship to avoid having to present his Certificate of Legal Capacity, or the holding of ceremony outside the church or beyond the territorial jurisdiction of the solemnizing officer, are all irregularities which do not affect the validity of the marriage.
+
+Question (2009 BAR)
+
+Q35a:
+
+Is the marriage of Michael and Anna valid, voidable, or void? Explain your answer.
+
+Suggested Answer
+
+A35a:
+
+The marriage is void because of the absence of an essential and formal requisite, namely consent of the parties freely given in the presence of the solemnizing officer and a marriage ceremony. (Art. 2, FC)
+
+Question (2009 BAR)
+
+Q35b:
+
+What is the status of the three (3) children of Michael and Anna? Explain your answer.
+
+Suggested Answer
+
+A35b:
+
+The children are illegitimate, having been born outside a valid marriage. (Art. 165, FC)
+
+Question (2020-21 BAR)
+
+Q36:
+
+Two college sweethearts were married inside a Roman Catholic church in the Philippines with a Supreme Court Justice serving as solemnizing officer. A few years following the ceremony, one of the two (2) filed an action for the declaration of nullity of marriage on the ground that the marriage was void ab initio because it was solemnized inside a Roman Catholic church by a Supreme Court Justice, and not by a Roman Catholic priest. Is the position legally tenable? Explain briefly.
+
+Suggested Answer
+
+A36:
+
+NO, the position of the couple is not legally tenable. Under the Family Code, a marriage may be solemnized among others by any incumbent member of the judiciary within the court’s jurisdiction. (Art. 7, FC) It must be mentioned that the authority of a Supreme Court Justice to solemnize marriages is all over the Philippines. Although the law provides that the marriage shall be solemnized publicly in the chambers of the judge or in open court, or in the church, chapel or temple and not elsewhere, (Art. 8, FC) it is submitted that the solemnization of the marriage by a member of the judiciary inside the Roman Catholic church shall not affect the validity of the marriage because the venue of the celebration of the marriage is neither an essential nor a formal requisite of marriage. (Bar Q&A by Paguitigan, 2022)
+
+Question (1999 BAR)
+
+Q37:
+
+What is the status of the following marriages and why?
+
+(a) A marriage between two 19-year-olds without parental consent. 
+
+(b) A marriage between two 21-year-olds without parental advice. 
+
+(c) A marriage between two Filipino first cousins in Spain where such marriage is valid. 
+
+(d) A marriage between two Filipinos in Hongkong before a notary public. 
+
+(e) A marriage solemnized by a town mayor three towns away from his jurisdiction.
+
+Suggested Answer
+
+A37a:
+
+VOIDABLE. The consent of the parties to the marriage was defective. Being below 21 years old, the consent of the parties is not full without the consent of their parents. The consent of the parents of the parties to the marriage is indispensable for its validity. (Art. 16, FC)
+
+A37b:
+
+VALID. Between 21-year-olds, the marriage is valid despite the absence of parental advice, because such absence is merely an irregularity affecting a formal requisite i.e., the marriage license and does not affect the validity of the marriage itself. This is without prejudice to the civil, criminal, or administrative liability of the party responsible therefor. (Art. 4(2), FC)
+
+A37c:
+
+VOID. By reason of public policy, the marriage between Filipino first cousins is void (Art. 38(1), FC), and the fact that it is considered a valid marriage in a foreign country in this case, Spain— does not validate it, being an exception to the general rule in Art. 26 of said Code which accords validity to all marriage solemnized outside the Philippines and valid there as such.
+
+A37d:
+
+IT DEPENDS. Otherwise, the marriage that is invalid in Hongkong will be invalid in the Philippines.
+
+A37e:
+
+VALID. It is jurisprudential that a marriage solemnized by a town mayor outside of his jurisdiction is a mere irregularity and will not invalidate the marriage. Hence, the marriage solemnized by a town mayor three towns away from his jurisdiction is a valid marriage.
+
+Question (2008, 1996 BAR)
+
+Q38a:
+
+Is their marriage valid, void or voidable? Explain.
+
+Suggested Answer
+
+A38a:
+
+The marriage is valid. The irregularity in the issuance of a valid license does not adversely affect the validity of the marriage. The marriage license is valid because it was in fact issued by a Civil Registrar. (Arts. 3 and 4, FC)
+
+Question (2008, 1996 BAR)
+
+Q38b:
+
+Would your answer be the same if it should turn out that the marriage license was spurious? Explain.
+
+Suggested Answer
+
+A38b:
+
+NO, the answer would not be the same. The marriage would be void because of the absence of a formal requisite. In such a case, there was actually no valid marriage license.
+
+Question (1995 BAR)
+
+Q39:
+
+Isidro and Irma... resolve each of the contentions (a to d) raised by the parents of Isidro. Discuss fully.
+
+(a) They had not given their consent to the marriage of their son; 
+
+(b) There was no marriage license; 
+
+(c) The solemnizing officer had no authority to perform the marriage; and 
+
+(d) The solemnizing officer did not file an affidavit of marriage with the proper civil registrar.
+
+Suggested Answer
+
+A39a:
+
+The fact that the parents of Isidro and of Irma did not give their consent to the marriage did not make the marriage void ab initio. The marriage is merely voidable under Art 45, FC.
+
+A39b:
+
+Absence of marriage license did not make the marriage void ab initio. Since the marriage was solemnized in articulo mortis, it was exempt from the license requirement under Art. 31, FC.
+
+A39c:
+
+On the assumption that the assistant pilot was acting for and in behalf of the airplane chief who was under disability, and by reason of the extraordinary and exceptional circumstances of the case, the marriage was solemnized by an authorized officer under Arts. 7(3) and 31, FC.
+
+A39d:
+
+Failure of the solemnizing officer to file the affidavit of marriage did not affect the validity of the marriage. It is merely an irregularity which may subject the solemnizing officer to sanctions. (Art. 4(2), FC)
+
+Question (1994 BAR)
+
+Q40a:
+
+The complete publication of the Family Code was made on 04 Aug. 1987. On 04 Sept. 1987, Junior Cruz and Gemma Reyes were married before a municipal mayor. Was the marriage valid?
+
+Suggested Answer
+
+A40a:
+
+YES, the marriage is valid. The Family Code took effect on 03 Aug. 1988. At the time of the marriage on 04 Sept. 1987, municipal mayors were empowered to solemnize marriages under the Civil Code of 1950.
+
+Question (1994 BAR)
+
+Q40b:
+
+Suppose the couple got married on 01 Sept. 1994 at the Manila Hotel before the Philippine Consul General to Hongkong, who was on vacation in Manila. The couple executed an affidavit consenting to the celebration of the marriage at the Manila Hotel. Is the marriage valid?
+
+Suggested Answer
+
+A40b:
+
+NO, the marriage is not valid. Consuls and vice-consuls are empowered to solemnize marriages between Philippine citizens abroad in the consular office of the foreign country to which they were assigned and have no power to solemnize marriage on Philippine soil. (Art 7(5), FC, in relation to Art. 10, FC)
+
+ALTERNATIVE ANSWER:
+
+A Philippine consul is authorized by law to solemnize marriage abroad between Filipino citizens. (Ibid.) He has no authority to solemnize a marriage in the Philippines. Consequently, the marriage in question is void, unless either or both contracting parties believed in good faith that the consul general had authority to solemnize their marriage in which case the marriage is valid.
+
+Question (2008, 2002 BAR)
+
+Q41:
+
+Roderick and Faye were high school sweethearts. When Roderick was 18 and Faye was 16 years old, they started to live together as husband and wife without the benefit of marriage. When Faye reached 18 years of age, her parents forcibly took her back and arranged for her marriage to Brad. Although Faye lived with Brad after the marriage, Roderick continued to regularly visit Faye while Brad was away at work. During their marriage, Faye gave birth to a baby girl, Laica. When Faye was 25 years old, Brad discovered her continued liaison with Roderick and in one of their heated arguments, Faye shot Brad to death. She lost no time in marrying her true love Roderick, without a marriage license, claiming that they have been continuously cohabiting for more than five (5) years. Was the marriage of Roderick and Faye valid?
+
+Suggested Answer
+
+A41:
+
+NO. The marriage of Roderick and Faye is not valid. Art. 4, FC provides that the absence of any of the essential or formal requisites renders the marriage void ab initio. However, no license shall be necessary for the marriage of a man and a woman who have lived together as husband and wife for at least five (5) years and without any legal impediment to marry each other. In Republic v. Dayot (G.R. No. 175581, 28 Mar. 2008), reiterating the doctrine in Niñal v. Bayadog (G.R. No. 133778, 14 Mar. 2000), this five-year period is characterized by exclusivity and continuity. In the present case, the marriage of Roderick and Faye cannot be considered as a marriage of exceptional character, because there were two (2) legal impediments during their cohabitation: 1) minority on the part of Faye, during the first two years of cohabitation; and 2) lack of legal capacity, since Faye married Brad at the age of 18. Accordingly, the required five-year cohabitation period was not met for not being continuous and exclusive. Thus, the absence of a marriage license made the marriage of Faye and Roderick void ab initio.
+
+Question (2002 BAR)
+
+Q42a:
+
+Is the marriage of Facundo and Quercia valid, despite the absence of a marriage license? Explain.
+
+Suggested Answer
+
+A42a:
+
+YES, the marriage with Quercia is valid. The exemption from the requirement of a marriage license under Art. 34, FC requires that the man and woman must have lived together as husband and wife for at least five (5) years and without any legal impediment to marry each other during those five (5) years. Although the cohabitation of Facundo and Quercia for six (6) years from 01 July 1990 to 01 July 1996 when Petra died was one with a legal impediment, the cohabitation thereafter until the marriage on 01 July 2002 was free from any legal impediment since Facundo’s marriage with Petra has already been extinguished due to the latter’s death. The cohabitation of Facundo and Quercia from the time of death of Petra up to the time of their marriage on 01 July 2002 met the five-year cohabitation requirement therefore making their marriage despite the lack of a marriage license valid.
+
+Question (2002 BAR)
+
+Q42b:
+
+Does Sotero have the personality to seek the declaration of nullity of the marriage, especially now that Facundo is already deceased? Explain.
+
+Suggested Answer
+
+A42b:
+
+YES, a void marriage may be questioned by any interested party in any proceeding where the resolution of the issue is material. Being a compulsory heir, Soterro has the personality to question the validity of the marriage of Facundo and Quercia. Otherwise, his participation in the estate on Facundo would be affected. (Ninãl v. Bayadog, G.R. No. 133778, 14 Mar. 2000)
+
+Question (2022 BAR)
+
+Q43:
+
+Eka, a Filipina, and Du-guil, a Korean, married in the Philippines. Thereafter, they moved to Seoul, South Korea. While there, Du-guil began to ignore Eka. He was always out with his friends and usually came home drunk. When Eka could not take their marital situation anymore, she asked for a divorce. Du-gull agreed on the condition that Eka would be the one to file for divorce, and that the ground should be "no fault", meaning, neither of them is at fault or neither would be accused of any wrongdoing. After the divorce, Eka went back to the Philippines and filed a case to have the judgment of divorce recognized. The RTC denied Eka's petition because she alone filed for divorce, in violation of Art. 26(2) of the Family Code. According to the RTC, Art. 26 requires that either the foreign spouse alone initiates the filing of the divorce or, at the very least, Eka and Duguil should have filed for divorce jointly. Is the RTC correct? Explain briefly.
+
+Suggested Answer
+
+A43:
+
+NO, the RTC is not correct. As ruled by the Court in Republic v. Manalo (G.R. No. 221029, 24 Apr. 2018), it is irrelevant if the foreign or the Filipino spouse initiated the foreign divorce proceeding. Once a divorce decree is issued, the foreign spouse is deemed to have “obtained” a divorce which capacitates him or her to remarry. 
+
+Further in Abel v. Rule, (G.R. No. 234457, 12 May 2021) reiterating Galapon v. Republic (G.R. No. 243722, 22 Jan. 2020), the Court clarified that Art. 26 of the Family applies to mixed marriages where the divorce decree is: 1. obtained by the foreign spouse; 2. obtained jointly by the Filipino and foreign spouse; and 3. obtained solely by the Filipino spouse. 
+
+Thus, the RTC committed an error in denying the petition. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2019 BAR)
+
+Q44:
+
+F, a Filipina, married J, a Japanese, in the Philippines. After three (3) years, they had a falling out and thus, separated. Soon after, F initiated a divorce petition in Japan which was not opposed by J because under Japanese law, a grant of divorce will capacitate him to remarry. F's divorce petition was then granted by the Japanese court with finality. May the legal effects of the divorce decree be recognized in the Philippines, and consequently, capacitate F to remarry here? Explain.
+
+Suggested Answer
+
+A44:
+
+YES, the legal effects of the divorce decree may be recognized in the Philippines, and consequently, capacitate F to remarry. 
+
+In the landmark case of Republic v. Manalo (G.R. No. 221029, 24 Apr. 2018) the Supreme Court held that under Art. 26(2), FC a Filipino citizen has the capacity to remarry under Philippine law after initiating a divorce proceeding abroad and obtaining a favorable judgment against his or her alien spouse who is capacitated to remarry. Here, F initiated a divorce petition in Japan and obtained a favorable judgment which capacitated her Japanese husband to remarry. Applying Art. 26(2), FC as interpreted, the legal effects of the divorce obtained by F may be recognized in the Philippines which may capacitate F to remarry here.
+
+Question (2016 BAR)
+
+Q45:
+
+Romeo and Juliet, both Filipinos, got married. After a few years, Juliet got word from her mother that she can go to the United States for naturalization. Juliet promised she will be back the moment she becomes an American. After some time, Romeo learned from a friend that Juliet already became a U.S. citizen and even divorced him to marry a wealthy American businessman. Romeo filed a petition before the Regional Trial Court praying that an order be issued authorizing him to remarry pursuant to Art. 26, FC. Decide the petition with reasons.
+
+Suggested Answer
+
+A45:
+
+If the time of Juliet’s acquisition of U.S. citizenship preceded the time when she obtained the divorce decree, then the divorce decree can be given effect in the Philippines, and consequently, Romeo will be capacitated to remarry under Philippine law. On the other hand, if Juliet obtained the divorce decree before she acquired U.S. citizenship, then the foreign divorce decree cannot be recognized by Philippine courts. 
+
+Art. 26(2), FC provides that where a marriage between a Filipino citizen and a foreigner is validly celebrated and a divorce is thereafter validly obtained abroad by the alien spouse capacitating him or her to remarry, the Filipino spouse shall have capacity to remarry under Philippine law. In Republic v. Orbecido (G.R. No. 154380, 05 Oct. 2005), the Supreme Court ruled that Art. 26(2), FC should be interpreted to include cases involving parties who, at the time of the celebration of the marriage were Filipino citizens, but later on, one of them becomes naturalized as a foreign citizen and obtains a divorce decree. The reckoning point is not their citizenship at the time of celebration of marriage, but their citizenship at the time the divorce decree is obtained abroad by the alien spouse capacitating him/her to remarry.
+
+Question (2014 BAR)
+
+Q46:
+
+Is it necessary for Ted to file a petition for judicial recognition of the decree of divorce he obtained in Canada before he can contract a second marriage in the Philippines?
+
+Suggested Answer
+
+A46:
+
+YES, a divorce decree even if validly obtained abroad cannot have effect in the Philippines unless it is judicially recognized through an appropriate petition filed before Philippine courts. The foreigner must file a petition under Rule 108, ROC and prove therein the fact of divorce by presenting an official copy attested by the officer having custody of the original. He must also prove that the court which issued the divorce has jurisdiction to issue it and the law of the foreign country on divorce. (Corpuz v. Sto. Tomas, G.R. No. 186571, 11 Aug. 2010)
+
+Question (2012 BAR)
+
+Q47:
+
+Is Cipriano capacitated to re-marry by virtue of the divorce decree obtained by his Filipino spouse who was later naturalized as an American citizen? Explain.
+
+Suggested Answer
+
+A47:
+
+YES, he is capacitated to re-marry. While the Art. 26(2), FC is applicable only to a Filipino who married a foreigner at the time of the marriage, the Supreme Court ruled in the case of Republic v. Orbecido (GR. No. 154380, 05 Oct. 2005) that the said provision equally applies to a Filipino who married another Filipino, at the time of the marriage, but who was already a foreigner when the divorce was obtained.
+
+Question (2010 BAR)
+
+Q48:
+
+True or False. Under Art. 26, FC when a foreign spouse divorces his/her Filipino spouse, the latter may re-marry by proving only that the foreign spouse has obtained a divorce against her or him abroad.
+
+Suggested Answer
+
+A48:
+
+FALSE. In Garcia v. Recio (G.R. No. 138322, 02 Oct. 2001), the SC held that for a Filipino spouse to have capacity to contract a subsequent marriage, it must also be proven that the foreign divorce obtained by the foreigner spouse gives such foreigner spouse capacity to remarry.
+
+Question (2009, 1999, 1996 BAR)
+
+Q49a:
+
+Is the divorce obtained by Wilma from Harry recognized in the Philippines? Explain your answer.
+
+Suggested Answer
+
+A49a:
+
+YES, the divorce obtained by Wilma is recognized as valid in the Philippines. At the time she got the divorce, she was already a foreign national having been naturalized as a citizen of that “small country in Europe.” Based on precedents established by the Supreme Court (Bayot v. Court of Appeals, G.R. No. 155635, 07 Nov. 2008), divorce obtained by a foreigner is recognized in the Philippines if validly obtained in accordance with his or her national law. (See also ruling in Republic v. Manalo, supra)
+
+Question (2009, 1999, 1996 BAR)
+
+Q49b:
+
+If Harry hires you as his lawyer, what legal recourse would you advise him to take? Why?
+
+Suggested Answer
+
+A49b:
+
+I will advise Harry to: 1. Dissolve and liquidate his property relations with Wilma; and 2. If he will remarry, file a petition for the recognition and enforcement of the foreign judgment of divorce. (Rule 39, ROC)
+
+Question (2009, 1999, 1996 BAR)
+
+Q49c:
+
+Harry tells you that he has fallen in love with another woman, Elizabeth, and wants to marry her because, after all, Wilma is already married to Joseph. Can Harry legally marry Elizabeth? Explain.
+
+Suggested Answer
+
+A49c:
+
+YES, he can validly marry Elizabeth, applying the doctrine laid down by the Supreme Court in Republic v. Orbecido (G.R. No. 154380, 05 Oct. 2005). Under Art. 26(2), FC for the Filipino spouse to have capacity to remarry, the law expressly requires the spouse who obtained the divorce to be a foreigner at the time of the marriage. Applying this requirement to the case of Harry, it would seem that he is not given the capacity to remarry. This is because Wilma was a Filipino at the time of her marriage to Harry. 
+
+In Republic v. Orbecido (G.R. No. 154380, 05 Oct. 2005), however, the Supreme Court ruled that a Filipino spouse is given the capacity to remarry even though the spouse who obtained the divorce was a Filipino at the time of the marriage, if the latter was already a foreigner when the divorce was obtained abroad. According to the Court, to rule otherwise will violate the equal protection clause of the Constitution.
+
+Question (2006 BAR)
+
+Q50:
+
+Marvin, a Filipino, and Shelley, an American, both residents of California, decided to get married in their local parish. Two (2) years after their marriage, Shelley obtained a divorce in California. While in Boracay, Marvin met Manel, a Filipina, who was vacationing there. Marvin fell in love with her. After a brief courtship and complying with all the requirements, they got married in Hongkong to avoid publicity, it being Marvin's second marriage. Is his marriage to Manel valid? Explain.
+
+Suggested Answer
+
+A50:
+
+YES, the marriage of Marvin and Manel is valid. While Marvin was previously married to Shelley, the divorce from Marvin obtained by Shelley in California capacitated Marvin to contract the subsequent marriage to Manel under Art. 26(2), FC which provides that where a marriage between a Filipino citizen and a foreigner is validly celebrated and a divorce is thereafter validly obtained abroad by the alien spouse capacitating him or her to remarry, the Filipino spouse shall likewise have the capacity to remarry under Philippine law. (See also ruling in Republic v. Manalo, supra)
+
+Question (2005, 1992 BAR)
+
+Q51a:
+
+Was the marriage of Maris and Johnson valid when celebrated? Is their marriage still validly existing now? Reasons.
+
+Suggested Answer
+
+A51a:
+
+YES, the marriage of Maris and Johnson was valid when celebrated because all marriages solemnized outside the Philippines (Tokyo) in accordance with the laws in force in the country where they are solemnized (Japan), and valid there as such, are also valid in the Philippines. Their marriage no longer validly subsists, because it has been dissolved by the absolute divorce validly obtained by Johnson which capacitated Maris to remarry. (Art. 26, FC)
+
+Question (2005, 1992 BAR)
+
+Q51b:
+
+Was the marriage of Maris and Pedro valid when celebrated? Is their marriage still validly existing now? Reasons.
+
+Suggested Answer
+
+A51b:
+
+The marriage of Maris and Pedro was valid when celebrated because the divorce validly obtained by Johnson in Manila capacitated Maris to marry Pedro. The marriage of Maris and Pedro is still validly existing because the marriage has not been validly dissolved by the Maryland divorce.
+
+Question (2005, 1992 BAR)
+
+Q51c:
+
+Was the marriage of Maris and Vincent valid when celebrated? Is their marriage still validly existing now? Reasons.
+
+Suggested Answer
+
+A51c:
+
+The marriage of Maris and Vincent is void ab initio because it is a bigamous marriage contracted by Maris during the subsistence of her marriage with Pedro. (Arts. 25 and 41, FC) The marriage of Maris and Vincent does not validly exist because Art. 26, FC does not apply. Pedro was not a foreigner at the time of his marriage with Maris and the divorce abroad (in Maryland) was initiated and obtained not by the alien spouse, but by the Filipino spouse. Hence, the Maryland divorce did not capacitate Maris to marry Vincent.
+
+Question (2005, 1992 BAR)
+
+Q51d:
+
+At this point in time, who is the lawful husband of Maris? Reasons.
+
+Suggested Answer
+
+A51d:
+
+At this point in time, Pedro is still the lawful husband of Maris because their valid marriage has not been dissolved by any valid cause. (Art. 26, FC)
+
+Question (2005 BAR)
+
+Q52a:
+
+Discuss the effect of the divorce obtained by Sonny and Lulu in Canada.
+
+Suggested Answer
+
+A52a:
+
+The divorce obtained by Sonny in Canada was not valid because he and his wife were both Filipino citizens. Divorce between a Filipino couple is not valid under Philippine law even though they are living abroad. (Art. 15, NCC)
+
+Question (2005 BAR)
+
+Q52b:
+
+Explain the status of the marriage between Sonny and Auring.
+
+Suggested Answer
+
+A52b:
+
+Since the divorce obtained by Sonny was void, his marriage to Auring is necessarily void ab initio because of his subsisting marriage to Lulu. (Art. 41, FC)
+
+Question (2004 BAR)
+
+Q53:
+
+PH and LV are HK Chinese... they got married although they are first cousins... marriage of first cousins here is considered void from the beginning by reason of public policy... What is your advice?
+
+Suggested Answer
+
+A53:
+
+The civil status of PH and LV will not be adversely affected by Philippine law because they are nationals of Hong Kong and not Filipino citizens. Being foreigners, their status, conditions and legal capacity in the Philippines are governed by the law of Hong Kong, the country of which they are citizens. Since their marriage is valid under Hong Kong law, it shall be valid and respected in the Philippines.
+
+Question (2004 BAR)
+
+Q54:
+
+Boni and Anne met while working overseas... wedding ceremony was officiated by the captain of the Norwegian-registered vessel in a private suite... Anne retains your services to advise her on whether her marriage to Boni is valid under Philippine law? Is there anything else she should do under the circumstances?
+
+Suggested Answer
+
+A54:
+
+If Boni is still a Filipino citizen, his legal capacity is governed by Philippine Law. (Art. 15, NCC) Under Philippine law, his marriage to Anne is void because of a prior existing marriage which was not dissolved by the divorce decreed in Oslo. Divorce obtained abroad by Filipino is not recognized. 
+
+If Boni was no longer a Filipino citizen, the divorce is valid. Hence, his marriage to Anne is valid if celebrated in accordance with the law of the place where it was celebrated. Since the marriage was celebrated aboard a vessel of Norwegian registry, Norwegian law applies. If the Ship Captain has authority to solemnize the marriage aboard his ship, the marriage is valid and shall be recognized in the Philippines. 
+
+As to the second question, if Boni is still a Filipino, Anne can file an action for declaration of nullity of her marriage to him.
+
+Question (2003 BAR)
+
+Q55:
+
+Gene and Jane, Filipinos, met and got married in England... Jane filed an action to annul her marriage to Gene in England on the ground of the latter’s sterility, a ground for annulment of marriage in England. The English court decreed the marriage annulled. Returning to the Philippines, Gene asked you whether or not he would now be free to marry his former girlfriend. What would your legal advice be?
+
+Suggested Answer
+
+A55:
+
+NO. Gene is not free to marry his former girlfriend. His marriage to Jane if valid according to the forms and solemnities of British law, is valid here. (Art. 17(1), NCC) However, since Gene and Jane are still Filipinos, although living in England, the dissolution of their marriage is still governed by Philippine law. (Art. 15, NCC) Since sterility is not one of the grounds for the annulment of marriage under Art. 45, FC the annulment of Gene’s marriage to Jane on that ground is not valid in the Philippines. (Art. 17(1), NCC)
+
+Question (2002 BAR)
+
+Q56a:
+
+Is the divorce secured by Felipe in California recognizable and valid in the Philippines?
+
+Suggested Answer
+
+A56a:
+
+The divorce secured by Felipe in California is recognizable and valid in the Philippines because he was no longer a Filipino at the time he secured it. Aliens may obtain divorces abroad which may be recognized in the Philippines provided that they are valid according to their national law. (Van Dorn v. Romillo, Jr., G.R. No. L-68470, 08 Oct. 1985; Quita v. Court of Appeals, G.R. No. 124862, 22 Dec. 1998; Llorente v. Court of Appeals, G.R. No. 12437, 23 Nov. 2000)
+
+Question (2002 BAR)
+
+Q56b:
+
+How does it affect Felipe’s marriage to Felisa? Explain.
+
+Suggested Answer
+
+A56b:
+
+The divorce decree obtained capacitated both Felipe and Felisa to remarry. In Corpuz v. Sto. Tomas (G.R. No. 186571, 11 Aug. 2010), the Court held that an action based on Art. 26 (2), FC is not limited to the recognition of the foreign divorce decree. If the court finds that the decree capacitated the alien spouse to remarry, the courts can declare that the Filipino spouse is likewise capacitated to contract another marriage. In the same case, the Court also initially clarified that Art. 26 (2), FC applies not only to cases where a foreigner was the one who procured a divorce of his/her marriage to a Filipino spouse, but also to instances where, at the time of the celebration of the marriage, the parties were Filipino citizens, but later on, one of them acquired foreign citizenship by naturalization, initiated a divorce proceeding, and obtained a favorable decree. (Luzviminda dela Cruz v. Ryoji Moriso, G.R. No. 226013, 02 July 2018)
+
+Question (1999 BAR)
+
+Q57:
+
+Ben and Eva were both Filipino citizens at the time of their marriage in 1967... Ben went to a small country in Europe, got himself naturalized there, and then divorced Eva... What advice can you give her?
+
+Suggested Answer
+
+A57:
+
+She may remarry. While a strict interpretation of Art. 26, FC would capacitate a Filipino spouse to remarry only when the other spouse was a foreigner at the time of the marriage, the DOJ has issued an opinion (Opinion 134 s. of 1993) that the same injustice sought to be cured by Art. 26, FC is present in the case of spouses who were both Filipino at the time of the marriage but one became an alien subsequently. Said injustice is the anomaly of Eva remaining married to her husband who is no longer married to her. Hence, said Opinion makes Art. 26, FC applicable to her case and the divorce obtained abroad by her former Filipino husband would capacitate her to remarry. To contract a subsequent marriage, all she needs to do is present to the civil registrar the decree of divorce when she applies for a marriage license under Art. 13, FC. (See also ruling in Republic v. Manalo, supra)
+
+Question (1998 BAR)
+
+Q58:
+
+Juan is a Filipino citizen residing in Tokyo, Japan. State what laws govern his capacity to contract marriage in Japan.
+
+Suggested Answer
+
+A58:
+
+Juan’s capacity to contract marriage is governed by Philippine law pursuant to Art. 15, NCC, which provides that our laws relating to, among others, legal capacity of persons are binding upon citizens of the Philippines even though living abroad.
+
+Question (1997 BAR)
+
+Q59:
+
+In 1977, Mario and Clara... Reno, Nevada, USA... Is the marriage between Mario and Juana valid?
+
+Suggested Answer
+
+A59:
+
+YES. In relation to Art. 15, NCC, Conflict of Laws provides that the recognition of an absolute divorce granted in another State rests on the citizenship of the parties at the time the divorce was granted. (Paras, Phil. Conflict of Laws, p. 259) Applied in this case, the divorce decree issued to Clara and Mario will be recognized as valid here considering that at the time the foreign decree was granted, both Clara and Mario are citizens of the USA, a country which grants/allows absolute divorce. Since the marriage between Mario and Clara has been validly terminated, Mario and Juana can freely marry each other.
+
+Question (1996 BAR)
+
+Q60:
+
+Flor and Virgilio... Canadian citizenship... divorce... Can Virgilio marry again in the Philippines?
+
+Suggested Answer
+
+A60:
+
+YES. In Republic v. Orbecido (GR. No. 154380, 05 Oct. 2005), the Supreme Court ruled that Art. 26(2), FC should be interpreted to include cases involving parties who, at the time of the celebration of the marriage were Filipino citizens, but later on, one of them becomes naturalized as a foreign citizen and obtains a divorce decree. The instant case is one where at the time the marriage was solemnized, the parties were two (2) Filipino citizens, but later on, the wife, Flor, was naturalized as a Canadian citizen and subsequently obtained a divorce granting her capacity to remarry, and indeed remarried a Canadian. Virgilio, the Filipino spouse, should likewise be allowed to remarry as if the other party were a foreigner at the time of the solemnization of the marriage. (See also ruling in Republic v. Manalo, supra)
+
+Question (2020-21 BAR)
+
+Q61:
+
+A Japanese national was able to obtain a divorce decree concerning his marriage with his Filipino wife. The decree capacitated the Japanese national to remarry. Can the Filipino wife now avail of Art. 26 of the Family Code and then remarry? Explain briefly.
+
+Suggested Answer
+
+A61:
+
+YES, the Filipino wife may avail of Article 26 of the Family Code after an appropriate petition for the recognition of the foreign divorce has been granted by the Philippine court. In a mixed marriage, where a valid divorce is obtained abroad which capacitates the alien spouse to remarry, the Filipino spouse shall likewise be capacitated to remarry under Philippine law. However, a mere grant of divorce by a foreign tribunal does not automatically give effect to the divorce until it is recognized before Philippine courts. The starting point in any recognition of a foreign divorce judgment is the acknowledgment that our courts do not take judicial notice of foreign judgments and laws. (Sakai v. Republic, G.R. No. 224015, 23 July 2018) This means that the foreign judgment and its authenticity must be proven as facts under our rules on evidence, together with the alien's applicable national law. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (1993 BAR)
+
+Q62a:
+
+Can Maria now get married legally to another man under Philippine laws after her marriage to Luis was annulled by the church matrimonial court? Explain.
+
+Suggested Answer
+
+A62a:
+
+NO, Maria cannot validly contract a subsequent marriage without a court declaration of nullity of the first marriage. The law does not recognize the church declaration of nullity of a marriage.
+
+Question (1993 BAR)
+
+Q62b:
+
+What must Maria do to enable her to get married lawfully to another man under Philippine laws?
+
+Suggested Answer
+
+A62b:
+
+To enable Maria to get married lawfully to another man, she must obtain a judicial declaration of nullity of the prior marriage under Art. 36, FC.
+
+Question (2012 BAR)
+
+Q63:
+
+A petition for declaration of nullity of a void marriage can only be filed by either the husband or the wife. Do you agree? Explain your answer.
+
+Suggested Answer
+
+A63:
+
+YES, I agree. Under the rules promulgated by the Supreme Court, a direct action for declaration of nullity may only be filed by any of the spouses.
+
+Question (2006 BAR)
+
+Q64:
+
+Art. 36, FC provides that a marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall be void. Choose the spouse listed below who is psychologically incapacitated. Explain.
+
+(A) Nagger 
+(B) Gay or Lesbian 
+(C) Congenital sexual pervert 
+(D) Gambler 
+(E) Alcoholic
+
+Suggested Answer
+
+A64:
+
+(b) Gay or Lesbian. The gay or lesbian is psychologically incapacitated. Being gay or lesbian is a mental disorder which prevents the afflicted person from performing the essential duties of married life. He or she will not be able to perform his duty of sexual consortium with his or her spouse due to his or her sexual preference for a person of the same sex. However, the law requires that the disorder or state of being gay or lesbian incapacitating such person must be existing at the time of the celebration of the marriage.
+
+Question (2002 BAR)
+
+Q65:
+
+Under what conditions may drug addiction be a ground if for a declaration of nullity of marriage
+
+Suggested Answer
+
+A65:
+
+1. The drug addiction must amount to psychological incapacity to comply with the essential obligations of marriage; 
+2. It must be antecedent (existing at the time of marriage), grave and incurable; and 
+3. The case must be filed before 03 Aug. 1988. Because if they got married before 03 Aug. 1998, it must be filed before 03 Aug. 1998.
+
+Question (2002 BAR)
+
+Q66a:
+
+Give a brief definition or explanation of the term “psychological incapacity” as a ground for the declaration of nullity of a marriage.
+
+Suggested Answer
+
+A66a:
+
+Psychological Incapacity is a mental disorder of the most serious type showing the incapability of one or both spouses to comply the essential marital obligations of love, respect, cohabitation, mutual help and support, trust and commitment. It must be characterized by juridical antecedence, gravity and incurability and its root causes must be clinically identified or examined. (Santos v. Court of Appeals, G.R. No. 112019, 04 Jan. 1995)
+
+Question (2002 BAR)
+
+Q66b:
+
+If existing at the inception of marriage, would the state of being of unsound mind or the concealment of drug addiction, habitual alcoholism, homosexuality or lesbianism be considered indicia of psychological incapacity? Explain.
+
+Suggested Answer
+
+A66b:
+
+In the case of Santos v. Court of Appeals (G.R. No. 112019, 04 Jan. 1995), the Supreme Court held that being of unsound mind, drug addiction, habitual alcoholism, lesbianism or homosexuality may be an indicia of psychological incapacity, depending on the degree of severity of the disorder. However, the concealment of drug addiction, habitual alcoholism, lesbianism or homosexuality is a ground of annulment of marriage.
+
+Question (2002 BAR)
+
+Q66c:
+
+If drug addiction, habitual alcoholism, lesbianism or homosexuality should occur only during the marriage, would these constitute grounds for a declaration of nullity or for legal separation, or would they render the marriage voidable?
+
+Suggested Answer
+
+A66c:
+
+In accordance with law, if drug addiction, habitual alcoholism, lesbianism or homosexuality should occur only during the marriage, they: 1. Will not constitute as grounds for declaration of nullity; (Art. 36, FC) 2. Will constitute as grounds for legal separation; (Art. 55, FC) and 3. Will not constitute as grounds to render the marriage voidable. (Arts. 45 and 46, FC)
+
+Question (2016 BAR)
+
+Q67:
+
+Leo married Lina and they begot a son... Lina exhibited unusual behavior and started to neglect her son; she frequently went out with her friends and gambled in casinos. Lina later had extra-marital affairs with several men and eventually abandoned Leo and their son. Leo was able to talk to the psychiatrist of Lina who told him that Lina suffers from dementia praecox... Will a Petition for Declaration of Nullity of Marriage filed with the court prosper? Explain.
+
+Suggested Answer
+
+A67:
+
+NO, the petition for nullity should be denied. Psychological incapacity under Article 36 must be characterized by (a) gravity, (b) juridical antecedence and (c) incurability. The incapacity must be grave or serious such that the party would be incapable of carrying out the ordinary duties required in marriage. It must be rooted in the history of the party antedating the marriage, although the overt manifestations may only emerge after the marriage. It must be incurable or, even if it were otherwise, the cure would be beyond the means of the party involved. (Ligarde v. Patalinghug, G.R. No. 168796, 15 Apr. 2010) In several cases decided by the Supreme Court, a finding of psychological incapacity must be based on an in-depth assessment of the parties by the psychologist or expert, for a conclusive diagnosis of a grave, severe and incurable presence of psychological incapacity (Ngo Te v. Yu-Te, G.R. No. 161793, 13 Feb. 2009; Paz v. Paz G.R. No. 166579 18 Feb. 2010) In this case, the there was no mention that the psychiatrist who examined Lina was ever presented in court. Rather, it was the husband Leo who gave an account of what the psychiatrist told him about Lina's condition. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2022 BAR)
+
+Q68:
+
+Razna and Junsi got married in 2015... Razna observed that although Junsi continued to work from home to support the family, he began to exhibit paranoia [regarding COVID-19]... Razna filed a petition for declaration of nullity of her marriage with Junsi on the ground of psychological incapacity... Should Razna’s petition be granted? Explain briefly.
+
+Suggested Answer
+
+A68:
+
+NO, Razna’s petition should not be granted. Psychological incapacity has been ruled to be a legal concept and not a medical concept. (Tan-Andal v. Andal, G.R. No. 196359, 11 May 2021) Here, the fact that Jusni was suffering from psychotic paranoia does not make him automatically unable to comply with essential marital obligations. Based on the facts, despite his atypical behavior, he still continues to work and support his family. To be considered a ground to declare the marriage void, the psychological incapacity must be shown to be a durable or enduring aspect of a person's personality, called “personality structure,” which manifests itself through clear acts of dysfunctionality that undermines the family. The spouse's personality structure must make it impossible for him or her to understand and, more important, to comply with his or her essential marital obligations. The supposed behavior of Jusni was stressinduced and does not form part of his personality structure. Thus, based on the standards in Tan-Andal, Jusni is not psychologically incapacitated. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2016 BAR)
+
+Q69a:
+
+Brad and Angelina had a secret marriage... there was no marriage license issued to them... Decide the case and explain.
+
+Suggested Answer
+
+A69a:
+
+I will grant the petition for judicial declaration of nullity of Brad and Angelina’s marriage on the ground that there is a lack of marriage license. Art. 3, FC provides that one of the formal requisites of marriage is a valid marriage license and Art. 4 of the same Code states that absence of any of the essential or formal requisites shall render the marriage void ab initio. In Abbas v. Abbas (G.R. No. 183896 30 Jan. 2013), the Supreme Court declared the marriage as void ab initio because there is proof of lack of record of marriage license. The certification by the Civil Registrar of Manila that, after diligent and exhaustive search, the alleged marriage license indicated in the marriage certificate does not appear in the records and cannot be found proves that the marriage of Brad and Angelina was solemnized without the requisite marriage license and is therefore void ab initio. The absence of the marriage license was certified by the local civil registrar who is the official custodian of these documents and who is in the best position to certify the existence of these records. Also, there is a presumption of regularity in the performance of official duty. (Republic v. Court of Appeals and Castro, G.R. No. 103047, 02 Sept. 1994)
+
+Question (2016 BAR)
+
+Q69b:
+
+In case the marriage was solemnized in 1980, before the effectivity of the Family Code (03 Aug. 1988), is it required that a judicial petition be filed to declare the marriage null and void? Explain.
+
+Suggested Answer
+
+A69b:
+
+NO, it is not required that a judicial petition be filed to declare the marriage null and void when said marriage was solemnized before the effectivity of the Family Code. As stated in the cases of People v. Mendoza (G.R. No. L-5877, 28 Sept. 1954) and People v. Aragon (G.R. No. L-10016, 28 Feb. 1957) the old rule is that where a marriage is illegal and void from its performance, no judicial is necessary to establish its invalidity.
+
+ALTERNATIVE ANSWER:
+
+Irrespective of when the marriage took place, other than for purposes of remarriage, no judicial action is necessary to declare a marriage absolute nullity. For other purposes, such as but not limited to determination of heirship, legitimacy or illegitimacy of a child, settlement of estate, dissolution of property regime, or a criminal case for that matter, the court may pass upon the validity of marriage even in a suit not directly instituted to question the same so long as it is essential to the determination of the case. This is without prejudice to any issue that may arise in the case. When such need arises, a final judgment of declaration of nullity is necessary even if the purpose is other than to remarry. The clause on the basis of a final judgment declaring such previous marriage void in Art. 40, FC connotes that such final judgment needs to be obtained only for purpose of remarriage. (Ablaza v. Republic, G.R. No. 158298, 11 Aug. 2010)
+
+Question (2015 BAR)
+
+Q70:
+
+Kardo met Glenda... Kardo would later come to know the true extent of Glenda's unfaithfulness... psychologist testified that Glenda's habitual infidelity was due to her affliction with Histrionic Personality Disorder... How would you decide the appeal?
+
+Suggested Answer
+
+A70:
+
+I will resolve the appeal in favor of the Republic. In the case of Dedel v. Dedel (G.R. No. 151867, 29 Jan. 2004), the Supreme Court refused to declare the marriage of the parties void on the ground of sexual infidelity of the wife Sharon. In the case mentioned, the wife committed infidelity with several men up to the extent of sires two illegitimate children with a foreigner. The Court, however, said that it was not shown that the sexual infidelity was a product of a disordered personality and that it was rooted in the history of the party alleged to be psychologically incapacitated. Also, the finding of psychological incapacity cannot be based on the interviews conducted by the clinical psychologist on the husband or his witnesses and the person alleged to be psychologically incapacitated must be personally examined to arrive at such declaration. (Marcos v. Marcos, G.R. No. 136490, 19 Oct. 2000; Agraviador v. Agraviador, G.R. No. 170729, 08 Dec. 2010)
+
+Question (2014 BAR)
+
+Q71:
+
+Ariz and Paz... church wedding... Paz rapidly climbed the corporate ladder... Ariz became envious... becoming a drunkard... wife-beater... NAMT annulled the union... Paz decided to file a Petition for Declaration of Nullity of Marriage... If you are the judge, will you grant the petition? Explain.
+
+Suggested Answer
+
+A71:
+
+If I were the judge, I will not grant the petition. While the decision of the church tribunal annulling the marriage of the parties may be persuasive, it is not however, binding upon the civil courts. For psychological incapacity to be a ground for nullity, it must be shown that it was rooted in the history of the party alleged to be suffering from it, it must be grave, serious, and incurable such that it renders the person incapacitated to perform the essential marital obligations due to causes psychological in nature. In the case presented, it appears that Ariz fulfilled his marital obligations at the beginning and it was only after feeling envious about the success of Paz that he started exhibiting violent tendencies and refused to comply with marital obligations. Psychological incapacity is not mere refusal but outright incapacity to perform marital obligations which does not appear to be present in the case of Ariz. (Marcos v. Marcos, G.R. No. 136490- October 19, 2000) (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2013, 2012, 2006, 1996 BAR)
+
+Q72:
+
+Maria claims that Neil is psychologically incapacitated... drunkard, a womanizer, a gambler, and a mama's boy... Dr. Chan concluded that Neil is suffering from Narcissistic Personality Disorder... Maria testified on the specific instances... On the basis of the evidence presented, will you grant the petition?
+
+Suggested Answer
+
+A72:
+
+NO. The petition should be denied. The psychological incapacity under Art. 36, FC must be characterized (a) gravity, (b) juridical antecedence, and (c) incurability. It is not enough to prove that the parties failed to meet their responsibilities and duties as married persons; it is essential that they must be shown to be incapable of doing so, due to some psychological (not physical) illness. (Republic v. Court of Appeals and Molina, G.R. No. 108763, 13 Feb. 1997) In this case, the pieces of evidence presented are not sufficient to conclude that indeed Neil is suffering from a psychological incapacity (Narcissistic Personality Disorder) existing already before the marriage, incurable and serious enough to prevent Neil from performing his essential marital obligations. Dr. Chan’s report contains mere conclusions. Being a drunkard, a womanizer, a gambler and a mama’s boy merely shows Neil’s failure to perform his marital obligations. In a number of cases, the Supreme Court did not find the existence of psychological incapacity in cases where the respondents showed habitual drunkenness (Republic v. Melgar, G.R. No. 139676, 31 Mar. 2006), blatant display of infidelity and irresponsibility (Dedel v. Court of Appeals, G.R. No. 151867, 29 Jan. 2004), or being hooked to gambling and drugs. (Republic v. TanyagSan Jose, G.R. No. 168328, 22 Feb. 2007)
+
+Question (2012 BAR)
+
+Q73:
+
+The petitioner filed a petition for declaration of nullity of marriage based allegedly on the psychological incapacity of the respondent, but the psychologist was not able to personally examine the respondent and the psychological report was based only on the narration of the petitioner. Should the annulment be granted? Explain.
+
+Suggested Answer
+
+A73:
+
+NO. No, the annulment must be denied. In petitions for declaration of nullity based on Article 36, jurisprudence instructs that the psychologist must conduct a personal and independent assessment of the person alleged to be psychologically incapacitated. In this case, the psychological report was solely based on petitioner's narration who has an interest on the positive outcome of the case in his favor (Marcos v. Marcos, G.R. No. 136490, 19 Oct. 2000) (Central Bar Q&A by Paguirigan, 2023)
+
+---
+
+Question (2006 BAR)
+
+Q74:
+
+Gemma filed a petition for the declaration of nullity of her marriage with Arnell on the ground of psychological incapacity. She alleged that after two (2) months of their marriage, Arnell showed signs of disinterest in her, neglected her and went abroad. He returned to the Philippines after three (3) years but did not even get in touch with her. Worse, they met several times in social functions, but he snubbed her. When she got sick, he did not visit her even if he knew of her confinement in the hospital. Meanwhile, Arnell met an accident which disabled him from reporting for work and earning a living to support himself. Will Gemma's suit prosper? Explain.
+
+Suggested Answer
+
+A74:
+
+Gemma’s suit will not prosper. The acts of Arnell complained about do not by themselves constitute psychological incapacity. It is not enough to prove the commission of those acts or the existence of his abnormal behavior. It must be shown that those acts or that behavior was manifestation of a serious mental disorder and that it is the root cause why he was not able to perform the essential duties of married life. It must also be shown that such psychological incapacity, as manifested in those acts or that behavior, was existing at the time of the celebration of the marriage. In this case, there was no showing that Arnell was suffering from a manifestation of that disorder, and that such disorder prevented him from complying with his duties as a married person.
+
+
+Question (2017, 2008 BAR)
+
+Q75:
+
+State whether the following marital unions are valid, void, or voidable, and give the corresponding justifications for your answer: Marriage of Zoren and Carmina who did not secure a marriage license prior to their wedding but lived together as husband and wife for 10 years without any legal impediment to marry.
+
+Suggested Answer
+
+A75:
+
+If Zoren and Carmina lived together as husband and wife for 10 years prior to their marriage, then the marriage is valid, despite the absence of the marriage license. An exception to the rule that a marriage shall be void if solemnized without license under Art. 35(3) is that provided for under Art. 34, FC. When a man and a woman have lived together as husband and wife for at least five (5) years and without any legal impediment to marry each other, they may celebrate the marriage without securing a marriage license.
+
+
+Question (2012 BAR)
+
+Q76:
+
+Agay, a Filipino citizen and Topacio, an Australian citizen, got married in the consular office of the Philippines in Australia. According to the laws of Australia, a marriage solemnized by a consular official is valid, provided that such marriage is celebrated in accordance with the laws of such consular official. Under Philippine law, what is the status of the marriage of Agay and Topacio? Choose the best answer. 
+
+A) Void, because the consular official only has authority to solemnize marriages between Filipinos. 
+B) Valid, because according to the laws of Australia, such consular official has authority to celebrate the marriage. 
+C) Voidable, because there is an irregularity in the authority of the consular official to solemnize marriages. 
+D) Valid, because such marriage is recognized as valid in the place where it was celebrated.
+
+Suggested Answer
+
+A76:
+
+A. (UPLC Suggested Answers)
+
+
+Question (2006 BAR)
+
+Q77:
+
+Gigi and Ric, Catholics, got married when they were 18 years old. Their marriage was solemnized on 02 Aug. 1989 by Ric's uncle, a Baptist Minister, in Calamba, Laguna. He overlooked the fact that his license to solemnize marriage expired the month before and that the parties do not belong to his congregation. After five (5) years of married life and blessed with two (2) children, the spouses developed irreconcilable differences, so they parted ways. While separated, Ric fell in love with Juliet, a 16-year-old sophomore in a local college and a Seventh Day Adventist. They decided to get married with the consent of Juliet's parents. She presented to him a birth certificate showing she is 18 years old. Ric never doubted her age much less the authenticity of her birth certificate. They got married in a Catholic church in Manila. A year after, Juliet gave birth to twins, Aissa and Aretha. 
+
+(a) What is the status of the marriage between Gigi and Ric — valid, voidable or void? Explain.
+
+(b) What is the status of the marriage between Ric and Juliet — valid, voidable or void? 
+
+(c) Suppose Ric himself procured the falsified birth certificate to persuade Juliet to marry him despite her minority and assured her that everything is in order. He did not divulge to her his prior marriage with Gigi. What action, if any, can Juliet take against him? Explain.
+
+(d) If you were the counsel for Gigi, what action/s will you take to enforce and protect her interests? Explain.
+
+Suggested Answer
+
+A77:
+
+(a) The marriage between Gigi and Ric is void because a minister has no authority to solemnize a marriage between contracting parties who were both not members of the minister’s religious sect. Under the Family Code, a minister or a priest has authority to solemnize a marriage but only if one or both contracting parties are members of the religious sect of the priest or minister. Since neither Ric nor Gigi was a member of the Baptist Church because both of them were Catholic, the Baptist Minister did not have authority to solemnize their marriage.
+
+(b) The marriage between Ric and Juliet is void because Juliet was below 18 years of age. Under the Family Code, the requisite age for legal capacity to contract marriage is 18 years old and a marriage by a party who is below 18 years old is void under all circumstances. Hence, even though Juliet’s parents have given their consent to the marriage and even though Ric believed in good faith that she was 18 years old, the marriage is void. (Art. 35(1), FC)
+
+(c) Juliet may file an action to declare her marriage to Ric null and void on the ground that she was not of marrying age. She may also file a criminal case against Ric for Bigamy because he contracted the marriage with her without a judicial declaration of nullity of his first marriage to Gigi. She may also file a criminal case for Falsification, Perjury, or Illegal Marriage as the case may be. In case the facts and the evidence will warrant, she may also file a criminal case for Seduction. In all these cases, Juliet may recover damages.
+
+(d) As counsel for Gigi, I will file an action for declaration of nullity of Gigi’s marriage to Ric on the ground of absence of authority of the Baptist minister to solemnize the marriage between Ric and Gigi who were both non-members of the Baptist Church. (Art. 7(2), FC)
+
+
+Question (2007 BAR)
+
+Q78:
+
+TRUE or FALSE. Amor gave birth to Thelma when she was 15 years old. Thereafter, Amor met David and they got married when she was 20 years old. David had a son, Julian, with his ex-girlfriend Sandra. Julian and Thelma can get married.
+
+Suggested Answer
+
+A78:
+
+TRUE. Julian and Thelma can get married. Marriage between stepbrothers and stepsisters are not among the marriages prohibited under the Family Code.
+
+
+Question (2017, 2008 BAR)
+
+Q79:
+
+State whether the following marital unions are valid, void, or voidable, and give the corresponding justifications for your answer: Eli and Fely’s marriage solemnized 7 years after the disappearance of Chona, Eli’s previous spouse, after the plane she had boarded crashed in the West Philippine Sea.
+
+Suggested Answer
+
+A79:
+
+The marriage is void under Art. 35(4) in relation to Art. 41, FC. The requisites of a valid marriage under Art. 41, FC are as follows: 1) the prior spouse had been absent for 4 consecutive years, except when the disappearance is in danger of death which only requires 2 years; 2) the present spouse had a well-founded belief that the absent spouse was already dead; and 3) the spouse present must institute a summary proceeding for declaration of presumptive death. There is nothing in the facts that suggest that Eli instituted a summary proceeding for declaration of presumptive death of her previous spouse and this cannot be presumed. Thus, the exception under Art. 35(4), FC is inapplicable and the subsequent marriage is void.
+
+ALTERNATIVE ANSWER:
+
+If the marriage was celebrated under the NCC, the marriage would be valid, as no declaration of presumptive death is necessary under Art. 391 of the said Code.
+
+
+Question (2008 BAR)
+
+Q80:
+
+Despite several relationships with different women, Andrew remained unmarried. His first relationship with Brenda produced a daughter, Amy, now 30 years old. His second, with Carla, produced two (2) sons: Jon and Ryan. His third, with Elena, bore him no children although Elena has a daughter, Jane, from a previous relationship. His last, with Fe, produced no biological children but they informally adopted without court proceedings, Sandy's now 13 years old, whom they consider as their own. Sandy was orphaned as a baby and was entrusted to them by the midwife who attended to Sandy's birth. All the children, including Amy, now live with Andrew in his house. Can Jon and Jane legally marry?
+
+Suggested Answer
+
+A80:
+
+YES. Jon and Jane can marry each other; Jon is an illegitimate child of Andrew while Jane is a child of Elena from a previous relationship. Thus, their marriage is not one of the prohibited marriages enumerated under Art. 38, FC.
+
+
+Question (2017, 2008 BAR)
+
+Q81:
+
+State whether the marital union is valid, void, or voidable, and give the corresponding justifications for your answer: Carlos’ marriage to Dina which took place after Dina had poisoned her previous husband Edu in order to free herself from any impediment in order to live with Carlos.
+
+Suggested Answer
+
+A81:
+
+The marriage of Carlos to Dina is void for reasons of public policy. Art. 38(9), FC provides that marriage between parties where one, with the intention to marry the other, killed that other person’s spouse or his or her own spouse is void from the beginning for reasons of public policy.
+
+
+Question (2012 BAR)
+
+Q82:
+
+Which of the following marriages is void for reasons of public policy? 
+
+A) Between brothers and sisters, whether of the full or half blood. 
+B) Between step-parents and step children. 
+C) Between parents-in-law and children-in-law. 
+D) b and c
+
+Suggested Answer
+
+A82:
+
+C. (UPLC Suggested Answers)
+
+
+Question (2017, 2008 BAR)
+
+Q83:
+
+State whether the following marital unions are valid, void, or voidable, and give the corresponding justifications for your answer: David who married Lina immediately the day after obtaining a judicial decree annulling his prior marriage to Elisa.
+
+Suggested Answer
+
+A83:
+
+The marriage is valid as there were no facts showing that David and Lina have properties and children, which would render the marriage void under Art. 53, FC, in relation to Art. 52, FC. In addition, David and Lina have no impediment to marry.
+
+ALTERNATIVE ANSWER:
+
+If the spouses have properties and children, the marriage is void under Art. 53, FC, in relation to Art. 52, FC. For a marriage subsequent to a judgment of annulment of a previous marriage to be valid, the properties of the spouses must have been partitioned and distributed, the presumptive legitimes of children, if any, must have been delivered, and the aforementioned facts must be recorded in the civil registry and registries of property. The marriage was entered into the day after obtaining a judicial decree of annulment and it would have been impossible for David to comply with the requirements in such a short time. Therefore, the marriage is void.
+
+
+Question (1993 BAR)
+
+Q84:
+
+A and B, both 18 years old, were sweethearts studying in Manila. On 03 Aug. 1988, while in 1st year college, they eloped. They stayed in the house of a mutual friend in town X, where they were able to obtain a marriage license. On 30 Aug. 1988, their marriage was solemnized by the town mayor of X in his office. Thereafter, they returned to Manila and continued to live separately in their respective boarding houses, concealing from their parents, who were living in the province what they had done. In 1992, after graduation from college, A and B decided to break their relation and parted ways. Both went home to their respective towns to live and work. Can either or both of them contract marriage with another person without committing bigamy? Explain your answer.
+
+Suggested Answer
+
+A84:
+
+Either or both of the parties cannot contract marriage in the Philippines with another person without committing bigamy, unless there is compliance with the requirements of Art. 52, FC namely: there must be a judgment of annulment or absolute nullity of the marriage, partition and distribution of the properties of the spouses and the delivery of their children’s presumptive legitimes, which shall be recorded in the appropriate Civil Registry of Property, otherwise, the same shall not affect third persons and the subsequent marriage shall be null and void. (Arts. 52 and 53, FC)
+
+
+Question (2012 BAR)
+
+Q85:
+
+Ricky and Princess were sweethearts. Princess became pregnant. Knowing that Ricky is preparing for the examinations, Marforth, a lawyer and cousin of Princess, threatened Ricky with the filing of a complaint for immorality in the Supreme Court, thus preventing him from taking examinations unless he marries Princess. As a consequence of the threat, Ricky married Princess. Can the marriage be annulled on the ground of intimidation under Art. 45 of the FC? Choose the best answer. 
+
+A) Yes, because without the threat, Ricky would not have married Princess. 
+B) Yes, because the threat to enforce the claim of Princess vitiates the consent of Ricky in contracting the marriage. 
+C) No, because the threat made by Marforth is just and legal. 
+D) No, because Marforth is not a party to the contract of marriage between Princess and Ricky.
+
+Suggested Answer
+
+A85:
+
+C. (UPLC Suggested Answers)
+
+
+Question (2011 BAR)
+
+Q86:
+
+Rene and Lily got married after a brief courtship. After one month, Lily discovered that while Rene presented himself as a macho man he was actually gay. He would not go to bed with her. He kept obscene magazines of nude men and always sought the company of handsome boys. What legal remedy does Lily have? 
+
+A) She can file an action for annulment of marriage on ground of fraud. 
+B) She can seek a declaration of nullity of the marriage based on Rene’s psychological incapacity. 
+C) She can go abroad and file for divorce in a country that can grant it. 
+D) She has none since she had the opportunity to examine the goods and freely entered into the marriage.
+
+Suggested Answer
+
+A86:
+
+A. (UPLC Suggested Answers)
+
+
+Question (2002, 1997 BAR)
+
+Q87:
+
+Under what conditions may drug addiction be a ground, if for an annulment of the marriage contract?
+
+Suggested Answer
+
+A87:
+
+Annulment of the marriage contract: 
+
+1. The drug addiction must be concealed; 
+2. It must exist at the time of marriage; 
+3. There should be no cohabitation with full knowledge of the drug addiction; and 
+4. The case is filed within 5 years from discovery.
+
+
+Question (1996 BAR)
+
+Q88:
+
+Bert and Baby were married to each other on 23 Dec. 1988. Six (6) months later, she discovered that he was a drug addict. Efforts to have him rehabilitated were unsuccessful. Can Baby ask for annulment of marriage, or legal separation? Explain.
+
+Suggested Answer
+
+A88:
+
+YES. Baby can file for annulment or legal separation. There is no showing in the facts that the action had prescribed. Thus, assuming that Bert’s drug addiction was concealed and existed at the time of the marriage, annulment can still be had because Baby is given 5 years upon discovery to file the same. (Art. 47(3), FC) As for legal separation, Baby is also given a period of 5 years. (Art. 57, FC)
+
+ALTERNATIVE ANSWER:
+
+NO, Baby cannot file for annulment or legal separation, having been ratified by her continuous cohabitation and condonation, respectively. As for annulment, upon discovery of her husband’s addiction, it is stated in the facts that rehabilitation was considered but was unsuccessful. Assuming that Baby continued living with Bert during the rehabilitation of the latter, the fraud under Art. 45(3) in relation to Art. 46(6), FC is ratified by their free cohabitation. As for legal separation, choosing to first rehabilitate her husband before filing for legal separation after it has failed can be deemed as condonation. (Art. 56(1), FC)
+
+
+Question (2011 BAR)
+
+Q89:
+
+Baldo, a rejected suitor, intimidated Judy into marrying him. While she wanted to question the validity of their marriage two years after the intimidation ceased, Judy decided in the meantime to freely cohabit with Baldo. After more than five (5) years following their wedding, Judy wants to file a case for annulment of marriage against Baldo on ground of lack of consent. Will her action prosper? 
+
+(a) Yes, the action for annulment is imprescriptible. 
+(b) No, since the marriage was merely voidable, and Judy ratified it by freely cohabiting with Baldo after the force and intimidation had ceased. 
+(c) No, since the action prescribed 5 years from the date of the celebration of the marriage. 
+(d) Yes, because the marriage was celebrated without Judy's consent freely given.
+
+Suggested Answer
+
+A89:
+
+(b) NO, since the marriage was merely voidable, and Judy ratified it by freely cohabiting with Baldo after the force and intimidation had ceased.
+
+
+Question (2010, 2007 BAR)
+
+Q90:
+
+True or False. The day after John and Marsha got married, John told her that he was impotent. Marsha continued to live with John for two (2) years. Marsha is now estopped from filing an annulment case against John.
+
+Suggested Answer
+
+A90:
+
+FALSE. Marsha is not estopped from filing an annulment case against John on the ground of his impotence, because she learned of his impotence after the celebration of the marriage and not before. Physical incapacity to consummate is a valid ground for the annulment of marriage if such incapacity was existing at the time of the marriage, continues and appears to be incurable. The marriage may be annulled on this ground within five years from its celebration. (Art. 45(5), FC)
+
+
+Question (2009 BAR)
+
+Q91:
+
+Emmanuel and Margarita, American citizens and employees of the U.S. State Department, got married in the African state of Kenya where sterility is a ground for annulment of marriage. Thereafter, the spouses were assigned to the U.S. Embassy in Manila. On the first year of the spouses’ tour of duty in the Philippines, Margarita filed an annulment case against Emmanuel before a Philippine court on the ground of her husband’s sterility at the time of the celebration of the marriage. Assume Emmanuel and Margarita are both Filipinos. After their wedding in Kenya, they come back and take up residence in the Philippines. Can their marriage be annulled on the ground of Emmanuel’s sterility?
+
+Suggested Answer
+
+A91:
+
+NO, the marriage cannot be annulled under Philippine law. Sterility is not a ground for annulment of marriage under Art. 45, FC.
+
+
+Question (2017, 2008 BAR)
+
+Q92:
+
+State whether the marital union is valid, void, or voidable, and give the corresponding justifications for your answer: Ador and Becky’s marriage wherein Ador was afflicted with AIDS prior to the marriage.
+
+Suggested Answer
+
+A92:
+
+The marriage is voidable, because Ador was afflicted with a serious and incurable STD at the time of marriage. For a marriage to be annulled under Art. 45(6), the STD must be: 
+1. Existing at the time of marriage; 
+2. Found to be serious and incurable; and 
+3. Unknown to the other party.
+
+Since Ador was afflicted with AIDS, which is a serious and incurable disease, and the condition existed at the time of marriage, the marriage is voidable, provided that such illness was not known to Becky.
+
+
+Question (1995 BAR)
+
+Q93:
+
+Yvette was found to be positive for HIV virus, considered sexually transmissible, serious and incurable. Her boyfriend Joseph was aware of her condition and yet married her. After two (2) years of cohabiting with Yvette, and in his belief that she would probably never be able to bear him a healthy child, Joseph now wants to have his marriage with Yvette annulled. Yvette opposes the suit contending that Joseph is estopped from seeking annulment of their marriage since he knew even before their marriage that she was afflicted with HIV virus. Can the action of Joseph for annulment of his marriage with Yvette prosper? Discuss fully.
+
+Suggested Answer
+
+A93:
+
+YES, the petition for annulment will prosper. Art. 45(6), FC will apply in this case and not Art. 45(3) in relation to Art. 46(3), FC. Yvette’s condition was not concealed, however, an STD found to be serious and incurable is still a ground for annulment. In this case, estoppel cannot apply against Joseph because the law does not qualify the knowledge of the spouse as regards said ground. Accordingly, Joseph still has 3 years to file for annulment. Thus, the action will prosper.
+
+
+Question (2018 BAR)
+
+Q94:
+
+Sidley and Sol were married with one daughter, Solenn. Sedfrey and Sonia were another couple with one son, Sonny. Sol and Sedfrey both perished in the same plane accident. Sidley and Sonia met when the families of those who died sued the airlines and went through grief-counseling sessions. Years later, Sidley and Sonia got married. At that time, Solenn was 4 years old and Sonny was 5 years old. These two were then brought up in the same household. 15 years later, Solenn and Sonny developed romantic feelings towards each other, and eventually eloped. On their own and against their parents' wishes, they procured a marriage license and got married in church. 
+
+(a) Is the marriage of Solenne and Sonny valid, voidable, or void? 
+
+(b) If the marriage is defective, can the marriage be ratified by free cohabitation of the parties?
+
+Suggested Answer
+
+A94:
+
+(a) The marriage is voidable for lack of parental consent. At the time of their marriage, Solenn and Sonny were only 19 and 20 years old, respectively. Assuming their marriage was under the Art. 14 of the FC provides that parental consent is required where either or both of the parties are between 18 and 21 years old at the time of marriage. In the absence of such parental consent, Art. 45, FC provides that the marriage is voidable. Since the marriage was against their parents’ wishes, their marriage is voidable. Unlike in the NCC, their being step-siblings is immaterial under the Family Code and will not render the marriage void since such is not considered incestuous nor against public policy.
+
+(b) YES, it can be ratified by free cohabitation. Art. 45(1), FC provides that such voidable marriage may be ratified by free cohabitation of the party/ies over 18 years old but below 21 who married without the consent of his/her parents, by living together as husband and wife after attaining the age of 21. Here, Solenn and Sonny freely cohabitated and lived as husband and wife after attaining 21 years, then the marriage is considered ratified, provided that the parents have not filed an action for annulment before the parties reached 21 years old.
+
+
+Question (1990 BAR)
+
+Q95:
+
+B and G, age 20 and 19, respectively, and both single, eloped and got married to each other without parental consent in the case of G, a teenage student of an exclusive college for girls. Three (3) years later, her parents wanted to seek judicial annulment on that ground. You were consulted and asked to prepare the proper complaint. What advice would you give G’s parents? Explain your answer.
+
+Suggested Answer
+
+A95:
+
+I would advise G’s parents that G herself should file the complaint under Art. 45, FC, and no longer the parents, because G is already 22 years of age.
+
+
+Question (2014 BAR)
+
+Q96:
+
+Miko and Dinah started to live together as husband and wife without the benefit of marriage in 1984. 10 years after, they separated. In 1996, they decided to live together again, and in 1998, they got married. On 17 Feb. 2001, Dinah filed a complaint for declaration of nullity of her marriage with Miko on the ground of psychological incapacity under Art. 36, FC The court rendered the following decision: 
+
+1. “Declaring the marriage null and void; 
+2. Dissolving the regime of absolute community of property; and 
+3. Declaring that a decree of absolute nullity of marriage shall only be issued after liquidation, partition and distribution of the parties’ properties under Art. 147, FC. 
+
+Dinah filed a motion for partial reconsideration questioning the portion of the decision on the issuance of a decree of nullity of marriage only after the liquidation, partition and distribution of properties under Art. 147, FC. If you are the judge, how will you decide petitioner’s motion for partial reconsideration? Why?
+
+Suggested Answer
+
+A96:
+
+I will grant partial reconsideration. If the marriage is declared void under Art. 36, FC the provisions of the Family Code on liquidation, partition, and distribution of the properties on absolute community or conjugal partnership will not apply but rather Art. 147 or 148, FC depending on the presence or absence of a legal impediment between them. In Diño v. Diño (G.R. No. 178044, 19 Jan. 2011), the SC ruled that Art. 50, FC and Sec. 19 of the Rules on Declaration of Nullity apply only to marriages that are declared void ab initio or annulled by final judgment under Arts. 40 and 45, FC. In short, Art. 50, FC does not apply to marriages that are declared void ab initio under Art. 36, FC which should be declared void without waiting for the liquidation of the properties of the parties.
+
+
+Question (2003 BAR)
+
+Q97:
+
+Which of the following remedies, i.e., (a) declaration of nullity of marriage, (b) annulment of marriage, (c) legal separation, and/or (d) separation of property, can an aggrieved spouse avail himself/herself of: 
+
+(a) If the wife discovers after the marriage that her husband has AIDS; 
+(b) If the wife goes abroad to work as a nurse and refuses to come home after the expiration of her three-year contract there; 
+(c) If the husband discovers after the marriage that his wife has been a prostitute before they got married; 
+(d) If the husband has a serious affair with his secretary and refuses to stop notwithstanding advice from relatives and friends; 
+(e) If the husband beats up his wife every time he comes home drunk.
+
+Suggested Answer
+
+A97:
+
+(a) Since AIDS is a serious and incurable STD, the wife may file an action for annulment of the marriage on this ground whether such fact was concealed or not from the wife, provided that the disease was present at the time of the marriage. The marriage is voidable even though the husband was not aware that he had the disease at the time of marriage.
+
+(b) If the wife refuses to come home for 3 months from the expiration of her contract, she is presumed to have abandoned the husband and he may file an action for judicial separation of property. If the refusal continues for more than one year from the expiration of her contract, the husband may file an action for legal separation under Art. 55(10), FC on the ground of abandonment of petitioner by respondent without justifiable cause for more than one year. The wife is deemed to have abandoned the husband when she leaves the conjugal dwelling without any intention of returning. (Art. 101, FC) The intention not to return cannot be presumed during the 3-year period of her contract.
+
+(c) If the husband discovers after the marriage that his wife was a prostitute before they got married, he has no remedy. No misrepresentation or deceit as to character, health, rank, fortune or chastity shall constitute fraud as legal ground for an action for the annulment of marriage. (Art. 46, FC)
+
+(d) The wife may file an action for legal separation. The husband’s sexual infidelity is a ground for legal separation. (Art. 55, FC) She may also file an action for judicial separation of property for failure of her husband to comply with his marital duty of fidelity. (Art. 135 (4), in relation to Art. 101, FC) 
+
+(e) The wife may file an action for legal separation on the ground of repeated physical violence on her person. (Art. 55(1), FC) She may also file an action for judicial separation of property for failure of the husband to comply with his marital duty of mutual respect. (Art. 135(4), in relation to Art. 101, FC) She may also file an action for declaration of nullity of the marriage if the husband’s behavior constitutes psychological incapacity existing at the time of the celebration of marriage.
+
+
+Question (1991 BAR)
+
+Q98:
+
+Is there any law which allows the delivery to compulsory heirs of their presumptive legitimes during the lifetime of their parents? If so, in what instances?
+
+Suggested Answer
+
+A98:
+
+YES, under Arts. 51 and 52, FCC in case of legal separation, annulment of marriage, declaration of nullity of marriage and the automatic termination of a subsequent marriage by the reappearance of the absent spouse, the common or community property of the spouses shall be dissolved and liquidated.
+
+
+Question (1990 BAR)
+
+Q99:
+
+The marriage of H and W was annulled by the competent court. Upon finality of the judgment of nullity, H began looking for his prospective second mate. He fell in love with a sexy woman, S, who wanted to be married as soon as possible i.e., after a few months of courtship. As a young lawyer you were consulted by H. 
+
+(a) How soon can H be joined in lawful wedlock to his girlfriend S? Under existing laws, are there certain requisites that must be complied with before he can remarry? What advice would you give H? 
+
+(b) Suppose that children were born from the union of H and W, what would be the status of said children? Explain your answer. 
+
+(c) If the subsequent marriage of H to S was contracted before compliance with the statutory condition for its validity, what are the rights of the children of the first marriage (i.e., of H and W) and of the children of the subsequent marriage (of H and S)?
+
+Suggested Answer
+
+A99:
+
+(a) H or either spouse for that matter, can marry again after complying with the provisions of Art. 52, FC, namely, there must be a partition and distribution of the properties of the spouses, and the delivery of the children’s presumptive legitimes, which should be recorded in the appropriate civil registry and registries of property. H should be so advised.
+
+(b) The children born from the union of H and W would be legitimate children if conceived or born before the decree of annulment of the marriage (Art. 45, FC) has become final and executory. (Art. 54, FC)
+
+(c) The children of the first marriage shall be considered legitimate children if conceived or born before the judgment of annulment of the marriage of H and W has become final and executory. Children conceived or born of the subsequent marriage shall likewise be legitimate even if the marriage of H and S be null and void for failure to comply with the requisites of Art. 52, FC. (Art. 53, FC)
+
+As legitimate children, they have the following rights: 
+1. To bear the surnames of the father and the mother in conformity with the provisions of the NCC on Surnames; 
+2. To receive support from their parents, their ascendants and in proper cases, their brothers and sisters, in conformity with the provisions of this Code on Support; and 
+3. To be entitled to the legitime and other successional rights granted to them by the NCC. (Art. 174, FC)
+
+
+Question (2012 BAR)
+
+Q100:
+
+After they got married, Nikki discovered that Christian was having an affair with another woman. But Nikki decided to give it a try and lived with him for two (2) years. After two (2) years, Nikki filed an action for legal separation on the ground of Christian’s sexual infidelity. Will the action prosper? Explain.
+
+Suggested Answer
+
+A100:
+
+Nikki’s action will not prosper on account at condonation. Although the action for legal separation has not yet prescribed, the prescriptive period being five years, the decision of Nikki to live with Christian after discovering his affair amounts to condonation of such act. However, if such affair is still continuing, Nikki's action would prosper because the action will surely be 5 years from the commission of the latest act of sexual infidelity. Every act or sexual liaison is a ground for legal separation.
+
+
+Question (2011 BAR)
+
+Q101:
+
+The wife filed a case of legal separation against her husband on the ground of sexual infidelity without previously exerting earnest efforts to come to a compromise with him. The judge dismissed the case for having been filed without complying with a condition precedent. Is the dismissal proper? 
+
+(A) No, efforts at a compromise will only deepen the wife’s anguish. 
+(B) No, since legal separation like validity of marriage is not subject to compromise agreement for purposes of filing. 
+(C) Yes, to avoid a family feud that is hurtful to everyone. 
+(D) Yes, since the dispute could have been settled with the parties agreeing to legal separation.
+
+Suggested Answer
+
+A101:
+
+(B) NO, since legal separation like validity of marriage is not subject to compromise agreement for purposes of filing.
+
+
+Question (2011 BAR)
+
+Q102:
+
+No decree of legal separation can be issued 
+
+(A) unless the children’s welfare is attended to first. 
+(B) without prior efforts at reconciliation shown to be futile. 
+(C) unless the court first directs mediation of the parties. 
+(D) without prior investigation conducted by a public prosecutor.
+
+Suggested Answer
+
+A102:
+
+(B) without prior efforts at reconciliation shown to be futile.
+
+
+Question (2007 BAR)
+
+Q103:
+
+TRUE or FALSE. If a man commits several acts of sexual infidelity, particularly in 2002, 2003, 2004, 2005, the prescriptive period to file for legal separation runs from 2002.
+
+Suggested Answer
+
+A103:
+
+FALSE. The 5-year prescriptive period for filing legal separation runs from the occurrence of sexual infidelity committed in 2002 runs from 2002, for the sexual infidelity committed in 2003, the prescriptive period runs from 2003 and so on. The action for legal separation for the last act of sexual infidelity in 2005 will prescribe in 2010.
+
+
+Question (1997, 2002 BAR)
+
+Q104:
+
+Under what conditions may drug addiction be a ground for legal separation between the spouses?
+
+Suggested Answer
+
+A104:
+
+1. There should be no condonation or consent to the drug addiction; 
+2. The action must be filed within 5 years from the occurrence of the cause; and 
+3. Drug addiction arises during the marriage and not at the time of marriage.
+
+
+Question (1994 BAR)
+
+Q105:
+
+Rosa and Ariel were married in the Catholic Church of Tarlac, Tarlac on 05 Jan. 1988. In 1990, Ariel went to Saudi Arabia to work. There, after being converted into Islam, Ariel married Mystica. Rosa learned of the second marriage of Ariel on 01 Jan. 1992 when Ariel returned to the Philippines with Mystica. Rosa filed an action for legal separation on 05 Feb. 1994. 
+
+(a) Does Rosa have legal grounds to ask for legal separation? 
+(b) Has the action prescribed?
+
+Suggested Answer
+
+A105:
+
+(a) YES, the abandonment of Rosa by Ariel for more than one (1) year is a ground for legal separation unless upon returning to the Philippines, Rosa agrees to cohabit with Ariel which is allowed under the Muslim Code. In this case, there is condonation. 
+
+ALTERNATIVE ANSWER: 
+
+YES. The contracting of a subsequent bigamous marriage whether in the Philippines or abroad is a ground for legal separation under Art. 55(7) of the Family Code. Whether the second marriage is valid or not, Ariel having converted into Islam is immaterial.
+
+(b) NO. Under Art. 57, FC the aggrieved spouse must file the action within five (5) years from the occurrence of the cause. The subsequent marriage of Ariel could not have occurred earlier than 1990, the time he went to Saudi Arabia. Hence, Rosa has until 1995 to bring the action under the Family Code.
+
+
+Question (2020-21 BAR)
+
+Q106:
+
+A couple executes a prenuptial agreement which principally provides that their marriage shall be valid for only 5 years but that it can be renewed through mutual consent negotiated at least 6 months before its expiration. Is this contract valid? Explain briefly.
+
+Suggested Answer
+
+A106:
+
+NO, the contract is not valid. A pre-nuptial agreement or marriage settlement is a contract between the future spouses where they agree on the property relationship that would govern them during the marriage. (Arts. 74 & 75, FC) In the problem, the prenuptial agreement contains nothing about the property relationship of the parties and instead provide for the term of the marriage. The stipulation providing for the termination of the marriage based on the will of the contracting parties is void for being contrary to law. A marriage is a special contract of permanent union between a man and a woman and is an inviolable social institution whose nature, consequences, and incidents are governed by law and not subject to stipulation except that marriage settlements may fix the property relations during the marriage within the limits provided by this code. (Art. 1, FC) Thus, the contract is not valid. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (1991 BAR)
+
+Q107:
+
+Bar candidates Patricio Mahigugmaon and Rowena Amor decided to marry each other before the last day of the 1991 Bar Examinations. They agreed to execute a Marriage Settlement. Rowena herself prepared the document in her own handwriting. They agreed on the following: a conjugal partnership of gains; (2) each donates to the other fifty (50) percent of his/her present property; (3) Rowena shall administer the conjugal partnership property; and (4) neither may bring an action for the annulment or declaration of nullity of their marriage. Both signed the agreement in the presence of two witnesses. They did not, however, acknowledge it before a notary public. 
+
+(a) As to form, is the Marriage Settlement valid? May it be registered in the registry of property? If not, what steps must be taken to make it registrable? 
+(b) Are the stipulations valid? 
+(c) If the Marriage Settlement is valid as to form and the above stipulations are likewise valid, does it now follow that said Marriage Settlement is valid and enforceable?
+
+Suggested Answer
+
+A107:
+
+(a) YES, it is valid as to form because it is in writing. However, it cannot be registered in the registry of property because it is not a public document. To make it registrable, it must be reformed and has to be notarized.
+
+(b) Stipulations 1 and 3 are valid because they are not contrary to law. Stipulation 4 is void because it is contrary to law. Stipulation 2 is valid up to 1/5 of their respective present properties by void as to the excess. (Art. 84, FC)
+
+(c) NO, on 15 Sept. 1991, the marriage settlement is not yet valid and enforceable until the celebration of the marriage, to take place before the last day of the 1991 Bar Examinations.
+
+
+Question (2012 BAR)
+
+Q108:
+
+Which of the following is not a requisite for a valid donation propter nuptias? 
+
+A) The donation must be made before the celebration of the marriage. 
+B) The donation shall be automatically revoked in case of non-celebration of the marriage. 
+C) The donation must be made in consideration of the marriage. 
+D) The donation must be made in favor of one or both of the future spouses.
+
+Suggested Answer
+
+A108:
+
+(B) The donation shall be automatically revoked in case of non-celebration of the marriage. (UPLC Suggested Answers)
+
+
+Question (2011 BAR)
+
+Q109:
+
+In gratitude, the groom’s parents made a donation of a property in writing to the bride’s parents shortly before their children’s wedding. The donation was accepted. What is the nature of the donation? 
+
+A) It is an ordinary donation since it was not given to the bride or groom. 
+B) It is donation propter nuptias since it was given with the marriage in mind. 
+C) It is an indirect donation propter nuptias since the bride would eventually inherit the property from her parents. 
+D) It is a remunatory donation.
+
+Suggested Answer
+
+A109:
+
+(A) It is an ordinary donation since it was not given to the bride or groom. (UPLC Suggested Answers)
+
+
+Question (2017 BAR)
+
+Q110:
+
+Danny and Elsa were married in 2002. In 2012, Elsa left the conjugal home and her two minor children with Danny to live with her paramour. In 2015, Danny sold without Elsa's consent a parcel of land registered in his name that he had purchased prior to the marriage. Danny used the proceeds of the sale to pay for his children's tuition fees. Is the sale valid, void or voidable? Explain your answer.
+
+Suggested Answer
+
+A110:
+
+The sale of the parcel of land is void. There is no indication in the facts that Danny and Elsa executed a marriage settlement prior to their marriage. As the marriage was celebrated during the effectivity of the Family Code, absent a marriage settlement, the property regime between the spouses is the ACP. Under the ACP regime, the parcel of land belongs to the community property as the property he had brought into the marriage even if said property were registered in the name of Danny. Therefore, the sale of the property is void because it was executed without the authority of the court or the written consent of the other spouse.
+
+
+Question (2015 BAR)
+
+Q111:
+
+Marco and Gina were married in 1989. 10 years later, or in 1999, Gina left Marco and lived with another man, leaving their two children of school age with Marco. When Marco needed money for their children's education, he sold a parcel of land registered in his name, without Gina's consent, which he purchased before his marriage. Is the sale by Marco valid, void or voidable? Explain with legal basis.
+
+Suggested Answer
+
+A111:
+
+The sale made by Marco is considered void. The parties were married in 1989 and no mention was made whether they executed a marriage settlement. In the absence of a marriage settlement, the parties shall be governed by ACP whereby all the properties owned by the spouses at the time of the celebration of the marriage as well as whatever they may acquire during the marriage shall form part of the absolute community. In ACP, neither spouse can sell or encumber property belonging to the ACP without the consent of the other. Any sale or encumbrance made by one spouse without the consent of the other shall be void although it is considered as a continuing offer on the part of the consenting spouse upon authority of the court or written consent of the other spouse. (Art. 96, FC)
+
+
+Question (2008 BAR)
+
+Q112:
+
+Adam, a building contractor, was engaged by Blas to construct a house on a lot which he (Blas) owns. While digging on the lot in order to lay down the foundation of the house, Adam hit a very hard object. It turned out to be the vault of the old Banco de las Islas Filipinas. Using a detonation device, Adam was able to open the vault containing old notes and coins which were in circulation during the Spanish era. While the notes and coins are no longer legal tender, they were valued at P100 million because of their historical value and the coins silver nickel content. The following filed legal claims over the notes and coins: 
+
+i. Adam, as finder; 
+ii. Blas, as owner of the property where they were found; 
+iii. Bank of the Philippine Islands, as successor-ininterest of the owner of the vault; and 
+iv. The Philippine Government because of their historical value. 
+
+Assuming that either or both Adam and Blas are adjudged as owners, will the notes and coins be deemed part of their absolute community or conjugal partnership of gains with their respective spouses?
+
+Suggested Answer
+
+A112:
+
+YES. The hidden treasure will be part of the absolute community or conjugal property of the respective marriages. (Arts. 91, 93 & 106, FC)
+
+
+Question (1995 BAR)
+
+Q113:
+
+On 10 Sept. 1988 Kevin, a 26-year-old businessman, married Karla, a winsome lass of 18. Without the knowledge of their parents or legal guardians, Kevin and Karla entered into an antenuptial contract the day before their marriage stipulating that conjugal partnership of gains shall govern their marriage. At the time of their marriage Kevin’s estate was worth 50 Million, while Karla’s was valued at 2 Million. A month after their marriage Kevin died in a freak helicopter accident. He left no will, no debts, no obligations. Surviving Kevin, aside from Karla, are his only relatives: his brother Luis and first cousin Lilia. 
+
+What property regime governed the marriage of Kevin and Karla? Explain.
+
+Suggested Answer
+
+A113:
+
+ABSOLUTE COMMUNITY OF PROPERTY. Since the marriage settlement was entered into without the consent and without the participation of the parents (they did not sign the document), the marriage settlement is invalid applying Art. 78, FC which provides that a minor who according to law may contract marriage may also enter into marriage settlements, but they shall be valid only of the person who may give consent to the marriage are made parties to the agreement. (Karla was still a minor at the time the marriage settlement was executed in Sept. 1988 because the law, R.A. No. 6809, reducing the age of majority to 18 years took effect on 18 Dec. 1989). The marriage settlement being void, the property regime governing the marriage is, therefore, absolute community of property, under Art. 75, FC.
+
+
+Question (1994 BAR)
+
+Q114:
+
+Paulita left the conjugal home because of the excessive drinking of her husband, Alberto. Paulita, out of her own endeavor, was able to buy a parcel of land which she was able to register under her name with the addendum “widow.” She also acquired stocks in a listed corporation registered in her name. Paulita sold the parcel of land to Rafael, who first examined the original of the transfer certificate of title. 
+
+(a) Has Alberto the right to share in the shares of stock acquired by Paulita? 
+(b) Can Alberto recover the land from Rafael?
+
+Suggested Answer
+
+A114:
+
+(a) YES. The FC provides that all property acquired during the marriage, whether the acquisition appears to have been made, contracted or registered in the community property unless the contrary is proved. 
+
+ALTERNATIVE ANSWER: 
+
+YES. The shares are presumed to be absolute community property having been acquired during the marriage despite the fact that those shares were registered only in her name. Alberto’s right to claim his share will only arise, however, at dissolution. 
+
+ALTERNATIVE ANSWER: 
+
+The presumption is still that the shares of stock are owned in common. Hence, they will form part of the absolute community or the conjugal partnership depending on what the property regime is. 
+
+ALTERNATIVE ANSWER: 
+
+Since Paulita acquired the shares of stock by onerous title during the marriage, these are part of the conjugal or absolute community property, as the case may be, or after the effectivity of the Family Code. Her physical separation from her husband did not dissolve the community of property. Hence, the husband has a right to share in the shares of stock.
+
+(b) Under a community of property, whether absolute or relative, the disposition of property belonging to such community is void if done by just one spouse without the consent of the other or authority of the proper court. However, the land was registered in the name of Paulita as “widow.” Hence, the buyer has the right to rely upon what appears in the record of the Register of Deeds and should, consequently, be protected. Alberto cannot recover the land from Rafael but would have the right of recourse against his wife. 
+
+ALTERNATIVE ANSWER: 
+
+The parcel of land is absolute community property having been acquired during the marriage and through Paulita’s industry despite the registration being only in the name of Paulita. The land being community property, its sale to Rafael without the consent of Alberto is void. However, since the land is registered in the name of Paulita as widow, there is nothing in the title which would raise a suspicion for Rafael to make inquiry. He, therefore, is an innocent purchaser for value from whom the land may no longer be recovered. 
+
+ALTERNATIVE ANSWER: 
+
+The parcel of land is absolute community property having been acquired during the marriage and through Paulita’s industry despite registration only in the name of Paulita. The land being community property, its sale to Rafael without the consent of Alberto is void.
+
+
+Question (2009 BAR)
+
+Q115:
+
+TRUE or FALSE. Answer TRUE if the statement is true, or FALSE if the statement is false. Explain your answer in not more than two (2) sentences. 
+
+If there is no marriage settlement, the salary of a “spouse” in an adulterous marriage belongs to the conjugal partnership of gains.
+
+Suggested Answer
+
+A115:
+
+FALSE. In an adulterous relationship, the salary of a married partner belongs to the absolute community or conjugal partnership of such married partner with his or her lawful spouse. Under Art. 148, FC, the property relations between married partner and his/her paramour is governed by ordinary co-ownership where the partners become co-owners only when they contributed to the acquisition of the property. The paramour is deemed to have not contributed to the earning of the salary of the married partner.
+
+
+Question (2022 BAR)
+
+Q116:
+
+Before they married in 2000, Nonoy and Daday signed a marriage settlement wherein they agreed that their property relations as husband and wife would be governed by the conjugal partnership of gains. While the marriage was subsisting, they acquired a parcel of land using conjugal funds. The Register of Deeds issued a transfer certificate of title over the said land in the name of “Nonoy, married to Daday”. Nonoy sold the parcel of land to Barby without Daday’s consent. Daday was not aware of the sale and did not sign the contract of sale. A year after Nonoy and Barby signed the contract of sale, Daday died. When the children of Nonoy and Daday learned about the sale to Barby, they questioned its validity since Daday had not consented to the sale. Nonoy’s position is that Daday’s consent was not required because the property was registered in his name. Is the sale to Barby valid? Explain briefly.
+
+Suggested Answer
+
+A116:
+
+NO, the sale to Barby is not valid. There is a presumption that all properties acquired during the marriage belong to the conjugal partnership whether the acquisition appears to have been made, contracted, or registered in the name of only one of the spouses. (Art. 116, FC) The fact that a spouse is identified as the sole vendee in the deed, and registered owner in the certificate of title does not destroy the conjugal nature of the property as the registration is not conclusive evidence of the exclusive ownership of either the husband or the wife. Even if the property appears to be registered solely in the name of either spouse, it has the inherent character of conjugal property if it was acquired for valuable consideration during the marriage. (Cordova v. Ty, G.R. No. 246255, 03 Feb. 2021)
+
+As part of the conjugal property of Nonoy and Daday, any disposition or encumbrance thereof must be made with the consent of both spouses. Hence, when Nonoy sold the land to Barby without the consent of Daday, the disposition is void under Art. 124 of the FC. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2012 BAR)
+
+Q117:
+
+Maria, wife of Pedro, withdrew P 5 Million from their conjugal funds. With this money, she constructed a building on a lot which she inherited from her father. Is the building conjugal or paraphernal? Reasons.
+
+Suggested Answer
+
+A117:
+
+It depends. If the value of the building is more than the value of the land, the building is conjugal and the land becomes conjugal property under Art. 120, FC. This is a case of reverse accession, where the building is considered as the principal and the land, the accessory. If, on the other hand, the value of the land is more than the value of the building, then the ordinary rule of accession applies where the land is the principal and the building, the accessory. In such case, the land remains paraphernal property and the building becomes paraphernal properly.
+
+
+Question (2006 BAR)
+
+Q118:
+
+Sps. Biong and Linda wanted to sell their house. They found a prospective buyer, Ray. Linda negotiated with Ray for the sale of the property. They agreed on a fair price of P2 Million. Ray sent Linda a letter confirming his intention to buy the property. Later, another couple, Bernie and Elena, offered a similar house at a lower price of P1.5 Million. But Ray insisted on buying the house of Biong and Linda for sentimental reasons. Ray prepared a deed of sale to be signed by the couple and a manager's check for P2 Million. After receiving the P2 Million, Biong signed the deed of sale. However, Linda was not able to sign it because she was abroad. On her return, she refused to sign the document saying she changed her mind. Linda filed suit for nullification of the deed of sale and for moral and exemplary damages against Ray. 
+
+(a) Will the suit proper? 
+(b) Does Ray have any cause of action against Biong and Linda? Can he also recover damages from the spouses? Explain.
+
+Suggested Answer
+
+A118:
+
+(a) YES, the suit for nullification of the deed of sale will prosper. Sale of community property requires written consent of both spouses. The failure or refusal of Linda to affix her signature on the deed of sale, coupled with her express declaration of opposing the sale negates any valid consent on her part. The consent of Biong by himself is insufficient to effect a valid sale of community property (Art. 96, FC; Abalos v. Macatangay, G.R. No. 155043, September 30, 2004). However, Linda will not be entitled to damages because Ray is not in any way in bad faith.
+
+(b) YES, Ray has a cause of action against Linda and Biong for the return of the 2 million pesos he paid for the property. He may recover damages from the spouses, if it can be proven that they were in bad faith in backing out from the contract, as this is an act contrary to morals and good customs under Arts. 19 and 21, NCC.
+
+
+Question (2005 BAR)
+
+Q119:
+
+Gabby and Mila got married at Lourdes Church in Quezon City on July 10, 1990. Prior thereto, they executed a marriage settlement whereby they agreed on the regime of conjugal partnership of gains. The marriage settlement was registered in the Register of Deeds of Manila, where Mila is a resident. In 1992, they jointly acquired a residential house and lot, as well as a condominium unit in Makati. In 1995, they decided to change their property relations to the regime of complete separation of property. Mila consented, as she was then engaged in a lucrative business. The spouses then signed a private document dissolving their conjugal partnership and agreeing on a complete separation of property. 
+
+Thereafter, Gabby acquired a mansion in Baguio City, and a 5-hectare agricultural land in Oriental Mindoro, which he registered exclusively in his name. In the year 2000, Mila's business venture failed, and her creditors sued her for P10,000,000.00. After obtaining a favorable judgment, the creditors sought to execute on the spouses' house and lot and condominium unit, as well as Gabby's mansion and agricultural land. 
+
+(a) Discuss the status of the first and the amended marriage settlements. 
+(b) Discuss the effects of the said settlements on the properties acquired by the spouses. 
+(c) What properties may be held answerable for Mila's obligations? Explain.
+
+Suggested Answer
+
+A119:
+
+(a) The marriage settlement between Gabby and Mila adopting the regime of conjugal partnership of gains still subsists. It is not dissolved by the mere agreement of the spouses during the marriage. It is clear from Art. 134 of the FC that in the absence of an express declaration in the marriage settlement, the separation of property between the spouses during the marriage shall not take place except by judicial order. 
+
+ALTERNATIVE ANSWER: 
+
+1) The first marriage settlement was valid because it was in writing, signed by the parties and executed before the celebration of the marriage. 
+
+2) The subsequent agreement of the parties was void as a modification of their marriage settlement. To be valid, the modification must be executed before the celebration of the marriage. The subsequent agreement of the parties did not effect a dissolution of their conjugal partnership and a separation of their properties because it was not approved by the court. To be valid, an agreement by the parties to dissolve their conjugal partnership and to separate their properties during the marriage has to be approved by the court.
+
+(b) The regime of conjugal partnership of gains governs the properties acquired by the spouses. All the properties acquired by the spouses after the marriage belong to the conjugal partnership. Under Art. 116 of the FC, even if Gabby registered the mansion and 5-hectare agricultural land exclusively in his name, still they are presumed to be conjugal properties, unless the contrary is proved. 
+
+ALTERNATIVE ANSWER: 
+
+Since the marriage settlement was binding between the parties, conjugal partnership of gains was the regime of their property relations. Under the regime of conjugal partnership of gains, all properties acquired by the spouses during the marriage, jointly or by either one of them, through their work or industry are conjugal. Therefore, the residential house and lot, and the condominium unit are conjugal having been jointly acquired by the couple during the marriage. Inasmuch as the subsequent agreement on dissolution of the conjugal partnership and separation of property was invalid, conjugal partnership subsisted between the parties. Therefore, the mansion and the agricultural land are also conjugal having been acquired by one of the spouses during the marriage.
+
+(c) Since all the properties are conjugal, they can be held answerable for Mila's obligation if the obligation redounded to the benefit of the family. (Art. 121(3), FC) However, the burden of proof lies with the creditor claiming against the properties. (Ayala Investment v. CA, G.R. No. 118305, 12 Feb. 1998, reiterated in Homeowners Savings & Loan Bank v. Dailo, G.R. No. 153802, 11 Mar. 2005) (UPLC Suggested Answers)
+
+ALTERNATIVE ANSWER: 
+
+Except for the residential house which is the family home, all other properties of Gabby and Mila may be held answerable for Mila's obligation. Since the said properties are conjugal in nature, they can be held liable for debts and obligations contracted during the marriage to the extent that the family was benefited or where the debts were contracted by both spouses, or by one of them, with the consent of the other. 
+
+A family home is a dwelling place of a person and his family. It confers upon a family the right to enjoy such property, which must remain with the person constituting it as a family home and his heirs. It cannot be seized by creditors except in special cases. (Taneo, Jr. v. CA, G.R. No. 108532, 09 Mar. 1999) (UPLC Suggested Answers)
+
+ALTERNATIVE ANSWER: 
+
+The marriage settlement cannot prejudice third parties, such as the creditors, because it was not registered with the local civil registrar where the marriage was recorded. To bind third parties, the FC requires registration of the marriage settlement not only with the proper registers of deeds but also with the local civil registrar where the marriage was recorded. Hence, if the rules on conjugal partnership will prejudice the creditors, the rules on absolute community will be applied instead. However, insofar as debts contracted by one spouse without the consent of the other are concerned, the rule is the same for both conjugal partnership and absolute community. The partnership or community is liable for debts contracted by one spouse but only to the extent that it benefited the family. Therefore, if the debts contracted by Mila redounded to the benefit of the family, all the conjugal partnership properties are liable to pay them but only to the extent the family was benefited. The separate properties of Mila may be held answerable for Mila’s debts and obligations that did not redound to the benefit of the family.
+
+
+Question (1998 BAR)
+
+Q120:
+
+In 1970, Bob and Issa got married without executing a marriage settlement. In 1975, Bob inherited from his father a residential lot upon which, in 1981, he constructed a two-room bungalow with savings from his own earnings. At that time, the lot was worth P800,000.00 while the house, when finished cost P600,000.00. In 1989 Bob died, survived only by his wife, Issa and his mother, Sofia. Assuming that the relative values of both assets remained at the same proportion: 
+
+(a) State whether Sofia can rightfully claim that the house and lot are not conjugal but exclusive property of her deceased son. 
+(b) Will your answer be the same if Bob died before 03 Aug. 1988?
+
+Suggested Answer
+
+A120:
+
+(a) Since Bob and Sofia got married in 1970, then the law that governs is the NCC, in which case, the property relations that should be applied as regards the property of the spouses is the system of relative community or conjugal partnership of gains. (Art. 119, FC) By conjugal partnership of gains, the husband and the wife place in a common fund the fruits of their separate property and the income from their work or industry. (Art. 142, FC) In this instance, the lot inherited by Bob in 1975 is his own separate property, he having acquired the same by lucrative title. (Art. 148(2), FC) However, the house constructed from his own savings in 1981 during the subsistence of his marriage with Issa is conjugal property and not exclusive property in accordance with the principle of "reverse accession" provided for in Art. 158, FC.
+
+(b) YES, the answer would still be the same. Since Bob and Issa contracted their marriage way back in 1970, then the property relations that will govern is still the relative community or conjugal partnership of gains. (Art. 119, NCC) It will not matter if Bob died before or after 03 Aug.1988 (effectivity date of the FC), what matters is the date when the marriage was contracted. As Bob and Issa contracted their marriage way back in 1970, the property relation that governs them is still the CPG. (Art. 158, FC)
+
+
+Question (1995 BAR)
+
+Q121:
+
+Tim came into possession of an old map showing where a purported cache of gold bullion was hidden. Without any authority from the government Tim conducted a relentless search and finally found the treasure buried in a new riverbed formerly part of a parcel of land owned by spouses Tirso and Tessie. The old river which used to cut through the land of Spouses Ursula and Urbito changed its course through natural causes. Suppose Tirso and Tessie were married on 02 Aug. 1988 without executing any antenuptial agreement. One year after their marriage, Tirso while supervising the clearing of Tessie’s inherited land on the latter’s request, accidentally found the treasure not in the new riverbed but on the property of Tessie. To whom shall the treasure belong?
+
+Suggested Answer
+
+A121:
+
+Since Tirso and Tessie were married before the effectivity of the FC, their property relation is governed by CPG. Under Art. 54 of the NCC, the share of the hidden treasure which the law awards to the finder or proprietor belongs to the CPG. The 1/2 share pertaining to Tessie as owner of the land, and the 1/2 share pertaining to Tirso as finder of the treasure, belong to the CPG.
+
+
+Question (2018 BAR)
+
+Q122:
+
+After finding out that his girlfriend Sandy was 4 months pregnant, Sancho married Sandy. Both were single and had never been in any serious relationship in the past. Prior to the marriage, they agreed in a marriage settlement that the regime of conjugal partnership of gains shall govern their property relations during marriage. Shortly after the marriage, their daughter, Shalimar, was born. 
+
+Before they met and got married, Sancho purchased a parcel of land on installment, under a Contract of Sale, with the full purchase price payable in equal annual amortizations over a period of 10 years, with no down payment, and secured by a mortgage on the land. The full purchase price was PhP1 million, with interest at the rate of 6% per annum. After paying the 4th annual installment, Sancho and Sandy got married, and Sancho completed the payments in the subsequent years from his salary as an accountant. The previous payments were also paid out of his salary. During their marriage, Sandy also won PhP1 million in the lottery and used it to purchase jewelry. When things didn't work out for the couple, they filed an action for declaration of nullity of their marriage based on the psychological incapacity of both of them. When the petition was granted, the parcel of land and the jewelry bought by Sandy were found to be the only properties of the couple. 
+
+a. What system of property relationship will be liquidated following the declaration of nullity of their marriage? 
+b. In the liquidation, who should get the parcel of land? The jewelry? 
+c. Is Shalimar entitled to payment of presumptive legitime? If yes, how much should be her share and from where should this be taken?
+
+Suggested Answer
+
+A122:
+
+a. The property regime that will be liquidated is coownership under Article 147 of the Family Code. When a man and a woman who are capacitated to marry each other live exclusively with each other as husband and wife under a void marriage, their wages and salaries shall be owned by them in equal shares and the property acquired by both of them through their work or industry shall be governed by the rules on co-ownership (Article 147, Family Code). Sancho and Sandy were capacitated to marry each other; however, their marriage was declared void under Art. 36. (UPLC Suggested Answers)
+
+b. Sancho should get the parcel of land while Sandy should get the jewelry. According to Article 147 of the Family Code, property acquired through their work or industry by a man and a woman, who are capacitated to marry each other and who cohabited under a void marriage, shall be governed by rules on co-ownership and in the absence of proof to the contrary, properties acquired while they live together shall be presumed to have been obtained by their joint efforts, work or industry. In the given case, Sancho bought the parcel of land and paid for it using his salary while Sandy used her winnings from the lottery to purchase the jewelry. It was not established that Sandy cared for or maintained the family; hence, she should not be deemed to have contributed to the acquisition of the parcel of land. The jewelry was acquired by Sandy using her lottery winnings which she obtained not by work or industry but by chance. (UPLC Suggested Answers)
+
+c. NO, Shalimar is not entitled to presumptive legitime. The liquidation of the co-ownership under Art. 147 did not provide for the obligation to pay the presumptive legitime of the common children. Said obligation applies only to the liquidation of the absolute community or conjugal partnership of gains pursuant to Arts. 50 and 51 of the Family Code, which provisions are inapplicable to a void marriage under Art. 36 of the FC. The rules on co-ownership apply and the properties of the parties should be liquidated in accordance with the Civil Code provisions on co-ownership. (Dino v. Dino, 640 SCRA 178 (2011); Valdes v. RTC, 260 SCRA 221 (1996)). (UPLC Suggested Answers)
+
+
+Question (2016 BAR)
+
+Q123:
+
+Bernard and Dorothy lived together as common-law spouses although they are both capacitated to marry. After one year of cohabitation, Dorothy went abroad to work in Dubai as a hair stylist and regularly sent money to Bernard. With the money, Bernard bought a lot. For a good price, Bernard sold the lot. Dorothy came to know about the acquisition and sale of the lot and filed a suit to nullify the sale because she did not give her consent to the sale. 
+
+(a) Will Dorothy's suit prosper? Decide with reasons. 
+(b) Suppose Dorothy was jobless and did not contribute money to the acquisition of the lot and her efforts consisted mainly in the care and maintenance of the family and household, is her consent to the sale a prerequisite to its validity? Explain.
+
+Suggested Answer
+
+A123:
+
+(a) YES, Dorothy’s suit will prosper, unless the buyer is a buyer in good faith and for value. The rule of co-ownership governs the property relationship in a union without marriage between a man and a woman who are capacitated to marry each other. Art. 147, FC is specifically applicable. Under this article, neither party can encumber or dispose by acts inter vivos of his or her share in the property acquired during cohabitation and owned in common, without the consent of the other, until after the termination of their cohabitation, thus, Bernard may not validly dispose of the lot without the consent of Dorothy as the lot was acquired through their work during their cohabitation.
+
+(b) Yes, if Dorothy was jobless and did not contribute money to the acquisition of the lot, her consent is still a prerequisite to the validity of the sale. Under the same article, a party who did not participate in the acquisition by the other party of any property shall be deemed to have contributed jointly in the acquisition thereof if the former’s efforts consisted in the care and maintenance of the family and the household. In this case, although the money used to buy the lot was solely from Bernard, Dorothy’s care and maintenance of the family and household are deemed contributions in the acquisition of the lot. Art. 147(2), FC is applicable, as the lot is deemed owned in common by the common-law spouses in equal shares as the same was acquired during their cohabitation, without prejudice to the rights of a buyer in good faith and for value.
+
+
+Question (2015 BAR)
+
+Q124:
+
+Bert and Joe, both male and single, lived together as common law spouses and agreed to raise a son of Bert's living brother as their child without legally adopting him. Bert worked while Joe took care of their home and the boy. In their 20 years of cohabitation they were able to acquire real estate assets registered in their names as co-owners. Unfortunately, Bert died of cardiac arrest, leaving no will. Bert was survived by his biological siblings, Joe, and the boy. 
+
+a) Can Art. 147 on co-ownership apply to Bert and Joe, whereby all properties they acquired will be presumed to have been acquired by their joint industry and shall be owned by them in equal shares? 
+b) If Bert and Joe had decided in the early years of their cohabitation to jointly adopt the boy, would they have been legally allowed to do so? Explain with legal basis?
+
+Suggested Answer
+
+A124:
+
+a) NO, Art. 147 of the Family Code is not applicable to the case of Bert and Joe. Art. 147 applies only when a “man and a woman, who are capacitated to marry each other, live exclusively with each other as husband and wife without the benefit of marriage or under a void marriage". In this case, Bert and Joe are both men; they are also incapacitated from marrying each other since in this jurisdiction, marriage may only take place between a man and a woman. (Arts. 1 and 2, FC)
+
+b) NO, because joint adoption is allowed between husband and wife. Even if Bert and Joe are cohabiting with each other, they are not vested with the right to jointly adopt under the Family Code or even under the Domestic Adoption Act. (Sec. 7, R.A. 8552) (Bar Q&A by Paguirigan)
+
+
+Question (2012 BAR)
+
+Q125:
+
+Jambrich, an Austrian, fell in-love and lived together with Descallar and bought their houses and lots at AgroMacro Subdivision. In the Contracts to Sell, Jambrich and Descallar were referred to as the buyers. When the Deed of Absolute Sale was presented for registration before the Register of Deeds, it was refused because Jambrich was an alien and could not acquire alienable lands of the public domain. After Jambrich and Descallar separated, Jambrich purchased an engine and some accessories for his boat from Borromeo. To pay for his debt, he sold his rights and interests in the AgroMacro properties to Borromeo. Borromeo discovered that titles to the 3 lots have been transferred in the name of Descallar. Who is the rightful owner of the properties? Explain.
+
+Suggested Answer
+
+A125:
+
+It depends. On the assumption that the FC is the applicable law, the ownership of the properties depends on whether or not Jambrich and Descallar are capacitated to marry each other during their cohabitation, and whether or not both have contributed funds for the acquisition of the properties. If both of them were capacitated to marry each other, Art. 147 of the FC will apply to their property relations and the properties in question are owned by them in equal shares even though all the funds used in acquiring the properties came only from the salaries or wages or the income of Jambrich from his business or profession. In such a case, while Jambrich is disqualiﬁed to own any part of the properties, his subsequent transfer of all his interest therein to Borromeo, a Filipino, was valid as it removed the disqualification. In such case, the properties are owned by Borromeo and Descallar in equal shares. 
+
+If, on the other hand, Jambrich and Descallar were not capacitated to marry each other, Art. 153, FC governs their property relations. Under this regime, Jambrich and Descallar are owners of the properties but only if both of them contributed in their acquisition. If all the funds used in acquiring the properties in question came from Jambrich, the entire property is his even though he is disqualiﬁed from owning it. His subsequent transfer to Borromeo, however, is valid as it removed the disqualiﬁcation. In such case, all of the properties are owned by Borromeo. If, on the other hand, Descallar contributed to their acquisition, the properties are co-owned by Descallar and Borromeo in proportion to the respective contributions of Descallar and Jambrich.
+
+
+Question (2010 BAR)
+
+Q126:
+
+G and B were married on 03 July 1989. On 04 Mar. 2001, the marriage, which bore no offspring, was declared void ab initio under Art. 36, FC. At the time of the dissolution of the marriage, the couple possessed the following properties: 
+
+1. A house and lot acquired by B on 03 Aug. 1988, 1/3 of the purchase price (representing down payment) of which he paid; 1/3 was paid by G on 14 Feb. 1990 out of a cash gift given to her by her parents on her graduation on 06 Apr. 1989; and the balance was paid out of the spouses’ joint income; and 
+2. An apartment unit donated to B by an uncle on 19 June 1987. 
+
+(a) Who owns the foregoing properties? Explain. 
+(b) If G and B had married on 03 July 1987 and their marriage was dissolved in 2007, who owns the properties? Explain.
+
+Suggested Answer
+
+A126:
+
+(a) Since the marriage was declared void ab initio in 2001, no absolute community or conjugal partnership was ever established between B and G. Their property relation is governed by a “special co-ownership” under Art. 147, FC because they were capacitated to marry each other.
+
+Under Art. 147, FC wages and salaries of the “former spouses” earned during their cohabitation shall be owned by them in equal shares while properties acquired thru their work for industry shall be owned by them in proportion to their respective contributions. Care and maintenance of the family is recognized as a valuable contribution. In the absence of proof as to the value of their respective contributions, they shall share equally.
+
+If ownership of the house and lot was acquired by B on 03 Aug. 1988 at the time he bought it on installment before he got married, he shall remain owner of the house and lot but he must reimburse G for all the amounts she advanced to pay the purchase price and for one-half share in the last payment from their joint income. In such case, the house and lot were not acquired during their cohabitation, hence, are not co-owned by B and G.
+
+But if the ownership of the house and lot was acquired during the cohabitation, the house and lot will be owned as follows: 
+i. 1/3 of the house and lot is owned by B. He is an undivided co-owner to that extent for his contributions in its acquisition in the form of the down payment he made before the celebration of the marriage. The money he used to pay the down payment was not earned during the cohabitation, hence, it is his exclusive property.
+ii. 1/3 of the house and lot is owned by G. She is an undivided co-owner to the extent for her contribution in its acquisition when she paid 1/3 of the purchase price using the gift from her parents. Although the gift was acquired by G during her cohabitation with B, it is her exclusive property. It did not consist of wage or salary or fruit of her work or industry.
+iii. 1/3 of the house is co-owned by B and G because the payment came from their co-owned funds, i.e., their joint income during their cohabitation which is shared by them equally in the absence of any proof to the contrary. After summing up their prospective shares, B and G are undivided co-owners of the house and lot in equal shares. As to the apartment, it is owned exclusive by B because he acquired it before their cohabitation. Even if he acquired it during their cohabitation, it will still be his exclusive property because it did not come from his wage or salary, or from his work or industry. It was acquired gratuitously from his uncle.
+
+(b) The answer is the same as in letter A. Since the parties to the marriage which was later declared void ab initio were capacitated to marry each other, the applicable law under the NCC was Art. 144. This Article is substantially the same as Art. 147, FC. Hence, the determination of ownership will remain the same as in question A. And even assuming that the two provisions are not the same, Art. 147, FC is still the law that will govern the property relations of B and G because under Art. 256, the FC has retroactive effect insofar as it does not prejudice or impair vested or acquired rights under the NCC or other laws. Applying Art. 147, FC retroactively to the case of G and B will not impair any vested right. Until the declaration of nullity of the marriage under the FC, B and G have not yet acquired any vested right over the properties acquired during their cohabitation.
+
+
+Question (2010 BAR)
+
+Q127:
+
+In 1997, B and G started living together without the benefit of marriage. The relationship produced one offspring, Venus. The couple acquired a residential lot in Parañaque. After four (4) years or in 2001, G having completed her 4-year college degree as a full-time student, she and B contracted marriage without a license. 
+
+The marriage of B and G was, two years later, declared null and void due to the absence of a marriage license. If you were the judge who declared the nullity of the marriage, to whom would you award the lot? Explain briefly.
+
+Suggested Answer
+
+A127:
+
+Since the marriage was null and void, no Absolute Community or Conjugal Partnership was established between B and G. Their properties are governed by the “special co-ownership” provision of Art. 147, FC because both B and G were capacitated to marry each other. The said Article provides that when a man and a woman who are capacitated to marry each other, live exclusively with each other as husband and wife without the benefit of marriage, or under a void marriage: (1) their wages and salaries shall be owned by them in equal shares; and (2) property acquired by both of them through their work or industry shall be governed by the rules on co-ownership. In coownership, the parties are co-owners if they contributed something of value in the acquisition of the property. Their share is in proportion to their respective contributions. In an ordinary co-ownership the care and maintenance of the family is not recognized as a valuable contribution for the acquisition of a property. In the Art. 147 “special co-ownership”, however, care and maintenance is recognized as a valuable contribution which will entitle the contributor to half of the property acquired.
+
+Having been acquired during their cohabitation, the residential lot is presumed acquired through their joint work and industry under Art. 147, hence B and G are co-owners of the said property in equal shares.
+
+Art. 147 also provides that when a party to the void marriage was in bad faith, he forfeits his share in the co-ownership in favor of the common children or descendants. In default of children or descendants, the forfeited share shall belong to the innocent party. In the foregoing problem, there is no showing that one party was in bad faith. Hence, both shall be presumed in good faith and no forfeiture shall take place.
+
+
+Question (2009 BAR)
+
+Q128:
+
+In Dec. 2000, Michael and Anna, after obtaining a valid marriage license, went to the Office of the Mayor of Urbano, Bulacan, to get married. The Mayor was not there, but the Mayor’s secretary asked Michael and Anna and their witnesses to fill up and sign the required marriage contract forms. The secretary then told them to wait and went out to look for the Mayor who was attending a wedding in a neighboring municipality. When the secretary caught up with the Mayor at the wedding reception, she showed him the marriage contract forms and told him that the couple and their witnesses were waiting in his office. The Mayor forthwith signed all the copies of the marriage contract, gave them to the secretary who returned to the Mayor’s office. She then gave copies of the marriage contract to the parties and told Michael and Anna that they were already married. Thereafter, the couple lived together as husband and wife, and had three sons. 
+
+What governs the properties acquired by the couple? Explain.
+
+Suggested Answer
+
+A128:
+
+The marriage being void, the property relationship that governed their union is special co-ownership under Art. 147, FC. This is on the assumption that there was no impediment for them to validly marry each other.
+
+
+Question (2000, 1997, 1992 BAR)
+
+Q129:
+
+In 1989, Rico, then a widower, 40 years of age, cohabited with Cora, a widow, 30 years of age. While living together, they acquired from their combined earnings a parcel of rice land. After Rico and Cora separated, Rico lived together with Mabel, a maiden 16 years of age. While living together, Rico was a salaried employee and Mabel kept house for Rico and did fulltime household chores for him. During their cohabitation, a parcel of coconut land was acquired by Rico from his savings. After living together for one (1) year, Rico and Mabel separated. Rico then met and married Letty, a single woman 26 years of age. During the marriage of Rico and Letty, Letty bought a mango orchard out of her own personal earnings. 
+
+(a) Who would own the rice land, and what property relations govern the ownership? Explain. 
+(b) Who would own the coconut land, and what property Relations governs the ownership? Explain. 
+(c) Who would own the mango orchard, and what property relation governs the ownership? Explain.
+
+Suggested Answer
+
+A129:
+
+(a) Rico and Cora are the co-owners of the rice land. The Relations is that of co-ownership. (Art. 147(1), FC) However, after Rico's marriage to Letty, the half interest of Rico in the riceland will then become absolute community property of Rico and Letty. 
+
+(b) Rico is the exclusive owner of the coconut land. The Relations is a sole/single proprietorship. (Art. 148(1), FC, is applicable, and not Art. 147, FC) However, after Rico's marriage to Letty, the coconut land of Rico will then become absolute community property of Rico and Letty.
+
+(c) Rico and Letty are the co-owners. The relation is the Absolute Community of Property. (Arts. 75, 90 & 91, FC)
+
+
+Question (2000 BAR)
+
+Q130:
+
+For 5 years since 1989, Tony, a bank vice-president, and Susan, an entertainer, lived together as husband and wife without the benefit of marriage although they were capacitated to marry each other. Since Tony's salary was more than enough for their needs, Susan stopped working and merely "kept house." During that period, Tony was able to buy a lot and house in a plush subdivision. However, after five years, Tony and Susan decided to separate. 
+
+(a) Who will be entitled to the house and lot? 
+(b) Would it make any difference if Tony could not marry Susan because he was previously married to Alice from whom he is legally separated?
+
+Suggested Answer
+
+A130:
+
+(a) Tony and Susan are entitled to the house and lot as co-owners in equal shares. Under Art. 147, FC, when a man and a woman who are capacitated to marry each other lived exclusively with each other as husband and wife, the property acquired during their cohabitation are presumed to have been obtained by their joint efforts, work or industry and shall be owned by them in equal shares. This is true even though the efforts of one of them consisted merely in his or her care and maintenance of the family and of the household.
+
+(b) YES, it would make a difference. Under Art. 148, FC, when the parties to the cohabitation could not marry each other because of an impediment, only those properties acquired by both of them through their actual joint contribution of money, property, or industry shall be owned by them in common in proportion to their respective contributions. The efforts of one of the parties in maintaining the family and household are not considered adequate contribution in the acquisition of the properties. Since Susan did not contribute to the acquisition of the house and lot, she has no share therein. If Tony cohabited with Susan after his legal separation from Alice, the house and lot is his exclusive property. If he cohabited with Susan before his legal separation from Alice, the house and lot belong to his community or partnership with Alice.
+
+
+Question (1997 BAR)
+
+Q131:
+
+Luis and Rizza, both 26 years of age and single, live exclusively with each other as husband and wife without the benefit of marriage. Luis is gainfully employed. Rizza is not employed, stays at home, and takes charge of the household. After living together for a little over twenty years, Luis was able to save from his salary earnings during that period the amount of P200,000.00 presently deposited in a bank. A house and lot worth P500,000.00 used by the common-law spouses to purchase the property, P200,000.00 had come from the sale of palay harvested from the hacienda owned by Luis and P300,000.00 from the rentals of a building belonging to Rizza. In fine, the sum of P500,000.00 had been part of the fruits received during the period of cohabitation from their separate property. A car worth P100,000.00, being used by the common-law spouses, was donated just months ago to Rizza by her parents. 
+
+Luis and Rizza now decide to terminate their cohabitation, and they ask you to give them your legal advice on the following: 
+
+(a) How, under the law, should the bank deposit of P200,000.00, the house and lot valued at P500,000.00 and the car worth P100,000.00 be allocated to them? 
+(b) What would your answer be (to the above question) had Luis and Rizza been living together all the time, i.e., since 20 years ago, under a valid marriage?
+
+Suggested Answer
+
+A131:
+
+(a) Art. 147, FC provides in part that when a man and a woman who are capacitated to marry each other, live exclusively with each other as husband and wife without the benefit of marriage or under a void marriage, their wages and salaries shall be owned by them through their work or industry shall be governed by the rules of co-ownership. 
+
+In the absence of proof to the contrary, properties acquired while they lived together shall be presumed to have been obtained by their joint efforts, work or industry, and shall be owned by them in equal shares. A party who did not participate in the acquisition by the other party of any property shall be deemed to have contributed jointly in the acquisition thereof if the former’s efforts consisted in the care and maintenance of the family and of the household. 
+
+Thus: 
+1. The wages and salaries of Luis in the amount of P200,000.00 shall be divided equally between Luis and Rizza. 
+2. The house and lot valued at P500,000.00 having been acquired by both of them through work or industry shall be divided between them in proportion to their respective contribution in consonance with the rules on co-ownership. Hence, Luis gets 2/5 while Rizza gets 3/5 of P500,000.00. 
+3. The car worth P100,000.00 shall be exclusively owned by Rizza, the same having been donated to her by her parents.
+
+(b) The property relations between Luis and Rizza, their marriage having been celebrated 20 years ago (during the effectivity of the NCC) shall be governed by the conjugal partnership of gains, under which the husband and wife place in a common fund the proceeds, products, fruits and income from their separate properties and those acquired by either or both spouses through their efforts of by chance, and upon dissolution of the marriage or of the partnership, the net gains or benefits obtained by either or both spouse shall be divided equally between them. (Art. 142, FC) 
+
+Thus: 
+1. The salary of Luis deposited in the bank in the amount of P200,000.00 and the house and lot valued at P500,000.00 shall be divided equally between Luis and Rizza. 
+2. However, the car worth P100,000.00 donated to Rizza by her parents shall be considered to her own paraphernal property, having been acquired by lucrative title. (Art. 148(2), FC)
+
+
+Question (1991 BAR)
+
+Q132:
+
+In June 1985, James married Mary. In Sept. 1988, he also married Ophelia with whom he begot two (2) children, A and B. In July 1989, Mary died. In July 1990, he married Shirley and abandoned Ophelia. During their union, James and Ophelia acquired a residential lot worth P300,000.00. 
+
+Ophelia sues James for bigamy and prays that his marriage with Shirley be declared null and void. James, on the other hand, claims that since his marriage to Ophelia was contracted during the existence of his marriage with Mary, the former is not binding upon him, the same being void ab initio; he further claims that his marriage to Shirley is valid and binding as he was already legally capacitated at the time he married her. What property regime governed the union of James and Ophelia?
+
+Suggested Answer
+
+A132:
+
+The provisions of Art. 148, FC shall govern. In cases of cohabitation not falling under the preceding Article, only the properties acquired by both of the parties through their actual joint contribution of money property, or industry shall be owned by them in common in proportion to their respective contributions. In the absence of proof to the contrary, their contributions and corresponding shares are presumed to be equal. The same rule and presumption shall apply to joint deposits of money and evidence of credit.
+
+
+Question (1998 BAR)
+
+Q133:
+
+In 1973, Mauricio, a Filipino pensioner of the U.S. Government, contracted a bigamous marriage with Erlinda, despite the fact that his first wife, Carol, was still living. In 1975, Mauricio and Erlinda jointly bought a parcel of rice land, with the title being placed jointly in their names. Shortly thereafter, they purchased another property (a house and lot) which was placed in her name alone as the buyer. In 1981, Mauricio died, and Carol promptly filed an action against Erlinda to recover both the Riceland and the house and lot, claiming them to be conjugal property of the first marriage. Erlinda contends that she and the late Mauricio were co-owners of the Riceland; and with respect to the house and lot, she claims she is the exclusive owner. Assuming she fails to prove that she had actually used her own money in either purchase, how do you decide the case?
+
+Suggested Answer
+
+A133:
+
+Under Art. 148, FC, which applies to bigamous marriages, only the properties through their actual joint contribution of money, property or industry shall be owned by them in common in proportion to their respective contributions. Moreover, if one of the parties is validly married to another, his share in the co-ownership shall accrue to the absolute community, conjugal partnership existing in such valid marriage. Thus, in this case, since Erlinda failed to prove that she used her own money to buy the Riceland and house and lot, she cannot claim to be the co-owner of the Riceland nor the exclusive owner of the house and lot. Such properties are Mauricio’s. And since his share accrues to the conjugal partnership with Carol, Carol can validly claim such properties to the exclusion of Erlinda. (Art. 144, NCC)
+
+
+Question (2014 BAR)
+
+Q134:
+
+On 30 Mar. 2000, Mariano died intestate and was survived by his wife, Leonora, and children, Danilo and Carlito. One of the properties he left was a piece of land in Alabang where he built his residential house. After his burial, Leonora and Mariano’s children extrajudicially settled his estate. Thereafter, Leonora and Danilo advised Carlito of their intention to partition the property. Carlito opposed invoking Art. 159 of the FC. Carlito alleged that since his minor child Lucas still resides in the premises, the family home continues until that minor beneficiary becomes of age. Is the contention of Carlito tenable?
+
+Suggested Answer
+
+A134:
+
+NO, the contention of Carlito is not tenable. To qualify as beneficiary of the family home, the person must be among those mentioned in Art. 154, NCC, he/she must be actually living in the family home and must be dependent for legal support upon the head of the family. (Patricio v. Dario, G.R. No. 170829, 20 Nov. 2006) While Lucas, the son of Carlito satisfies the first and second requisites, he cannot however, directly claim legal support from his grandmother, Leonora because the person primarily obliged to give support to Lucas is his father, Carlito. Thus, partition may be successfully claimed by Leonora and Danilo.
+
+
+Question (2015 BAR)
+
+Q135:
+
+Julie had a relationship with a married man who had legitimate children. A son was born out of that illicit relationship in 1981. Although the putative father did not recognize the child in his certificate of birth, he nevertheless provided the with child all the support he needed and spent time regularly with the child and his mother. When the man died in 2000, the child was already 18 years old so he filed a petition to be recognized as an illegitimate child of the putative father and sought to be given a share in his putative father's estate. The legitimate family opposed, saying that under the Family Code his action cannot prosper because he did not bring the action for recognition during the lifetime of his putative father. 
+
+(a) If you were the judge in this case, would how you rule? 
+(b) Wishing to keep the peace, the child during the pendency of the case decides to compromise with his putative father's family by abandoning his petition in exchange for Yi of what he would have received as inheritance if he were recognized as an illegitimate child. As the judge, would you approve such a compromise?
+
+Suggested Answer
+
+A135:
+
+(a) If I were the judge, I will not allow the action for recognition filed after the death of the putative father. Under the Family Code, an illegitimate child who has not been recognized by the father in the record of birth, or in a private handwritten instrument, or in a public document and may prove his filiation based on open and continuous possession of the status of an illegitimate child but pursuant to Article 175, he or she must file the action for recognition during the lifetime of the putative father. The provision of Article 285 of the Civil Code allowing the child to file the action for recognition even after the death of the father will not apply because in the case presented, the child was no longer a minor at the time of death of the putative father.
+
+(b) NO, I will not approve the compromise agreement because filiation is a matter to be decided by law. It is not for the parties to stipulate whether a person is a legitimate or illegitimate child of another. (De Jesus v. Estate of Dizon, G.R. No. 142877, 02 Oct. 2001) In all cases of illegitimate children, their filiation must be duly proved. (Art. 887, NCC) 
+
+ALTERNATIVE ANSWER: 
+
+YES, I would approve the compromise because it is no longer considered future inheritance. What the law prohibits is a compromise with respect to future legitime. In this case, the father is already dead so the compromise is considered valid. (Bar Q&A by Paguirigan, 2015)
+
+
+Question (1999 BAR)
+
+Q136:
+
+Two (2) months after the death of her husband who was shot by unknown criminal elements on his way home from office, Rose married her childhood boyfriend, and 7 months after said marriage, she delivered a baby. In the absence of any evidence from Rose as to who is her child's father, what status does the law give to said child? Explain.
+
+Suggested Answer
+
+A136:
+
+The child is legitimate of the second marriage under Art. 168(2), FC which provides that a “child born after one hundred eighty days following the celebration of the subsequent marriage is considered to have been conceived during such marriage, even though it be born within three hundred days after the termination of the former marriage.”
+
+
+Question (2012 BAR)
+
+Q137:
+
+The husband may impugn the legitimacy of his child but not on the ground that: 
+
+A) the wife is suspected of infidelity. 
+B) the husband had a serious illness that prevented him from engaging in sexual intercourse. 
+C) they were living apart. 
+D) he is physically incapable of sexual intercourse.
+
+Suggested Answer
+
+A137:
+
+A. (UPLC Suggested Answers)
+
+
+Question (2012 BAR)
+
+Q138:
+
+An illegitimate child may use the surname of his father when his filiation is established in any of the following instances, except: 
+
+A) Filiation has been recognized by the father through the record of birth appearing in the civil register 
+B) Admission of filiation by the father in a public document. 
+C) Private handwritten instrument is made by the father acknowledging his filiation. 
+D) Affidavit by the mother stating the name of his true father.
+
+Suggested Answer
+
+A138:
+
+D. (UPLC Suggested Answers)
+
+
+Question (2008 BAR)
+
+Q139:
+
+Roderick and Faye were high school sweethearts. When Roderick was 18 and Faye, 16 years old, they started to live together as husband and wife without the benefit of marriage. When Faye reached 18 years of age, her parents forcibly took her back and arranged for her marriage to Brad. Although Faye lived with Brad after the marriage, Roderick continued to regularly visit Faye while Brad was away at work. During their marriage, Faye gave birth to a baby girl, Laica. When Faye was 25 years old, Brad discovered her continued liaison with Roderick and in one of their heated arguments, Faye shot Brad to death. She lost no time in marrying her true love Roderick, without a marriage license, claiming that they have been continuously cohabiting for more than 5 years. 
+
+(a) What is the filiation status of Laica? 
+(b) Can Laica bring an action to impugn her own status on the ground that based on DNA results, Roderick is her biological father?
+
+Suggested Answer
+
+A139:
+
+(a) Having been born during the marriage of Faye and Brad, she is presumed to be the legitimate child of Faye and Brad. This presumption had become conclusive because the period of time to impugn her filiation had already prescribed. 
+
+(b) NO, she cannot impugn her own filiation. The law does not allow a child to impugn his or her own filiation. In the problem, Laica’s legitimate filiation was accorded to her by operation of law which may be impugned only by Brad, or his heirs in the cases provided by law within the prescriptive period.
+
+
+Question (2009 BAR)
+
+Q140:
+
+Four children, namely: Alberto, Baldomero, Caridad, and Dioscoro, were born to the Sps. Conrado and Clarita de la Costa. The children’s birth certificates were duly signed by Conrado, showing them to be the couple’s legitimate children. Later, one Edilberto de la Cruz executed a notarial document acknowledging Alberto and Baldomero as his illegitimate children with Clarita. Edilberto died leaving substantial properties. In the settlement of his estate, Alberto and Baldomero intervened claiming shares as the deceased’s illegitimate children. The legitimate family of Edilberto opposed the claim. Are Alberto and Baldomero entitled to share in the estate of Edilberto? Explain.
+
+Suggested Answer
+
+A140:
+
+NO, Alberto and Baldomero are not entitled to share in Edilberto’s estate. They are not related at all to Edilberto. They were born during the marriage of Conrado and Clarita, hence, are considered legitimate children of the said spouses. This status is conferred on them at birth by law. Under Philippine law, a person cannot have more than one natural filiation. The legitimate filiation of a person can be changed only if the legitimate father will successfully impugn such status. 
+
+In the problem, therefore, the filiation of Alberto and Baldomero as the legitimate children of Conrado cannot be changed by their recognition by Edilberto as his illegitimate children. Before they can be conferred the status of Edilberto’s illegitimate children, Conrado must first impugn their legitimacy. Since Conrado has not initiated any action to impugn their legitimacy, they continue to be the legitimate children of Conrado. They cannot be the illegitimate children of Edilberto at the same time. Not being the illegitimate children of Edilberto, they have no right to inherit from him.
+
+
+Question (1990 BAR)
+
+Q141:
+
+B and G (college students, both single and not disqualified to marry each other) had a romantic affair. G was seven months in the family way as of the graduation of B. Right after graduation B went home to Cebu City. Unknown to G, B had a commitment to C (his childhood sweetheart) to marry her after getting his college degree. Two weeks after B’s marriage in Cebu City, G gave birth to a son E in Metro Manila. 
+
+After 10 years of married life in Cebu, B became a widower by the sudden death of C in a plane crash. Out of the union of B and C, two children, X and Y, were born. Unknown to C, while on weekend trips to Manila during the last 5 years of their marriage, B invariably visited G and lived at her residence and as a result of which, they renewed their relationship. A baby girl F was born to B and G two years before the death of C. Bringing his family later to Manila, B finally married G. Recently, G died. 
+
+What are the rights of B’s four children: X and Y of his first marriage; and E and F, his children with G? Explain your answer.
+
+Suggested Answer
+
+A141:
+
+Under the facts stated, X and Y are legitimate children of B and G. E is the legitimate children of B and G. E is the legitimated child of B and G. F is the illegitimate child of B and C as legitimate children of B and C, X and Y have the following rights: 1) To bear the surnames of the father and the mother, in conformity with the provisions of the NCC on surnames; 2) To receive support from their parents, their ascendants, and in proper cases, their brothers and sisters, in conformity with the provisions of the FC on Support; and 3) To be entitled to the legitime and other successional rights granted to them by the NCC. (Art. 174, FC) 
+
+E is the legitimated child of B and G. Under Art. 177, FC, only children conceived and born outside of wedlock of parents who, at the time of the conception of the former, were not disqualified by any impediment to marry each other may be legitimated. E will have the same rights as X and Y. 
+
+F is the illegitimate child of B and G. F has the right to use the surname of G, her mother, and is entitled to support as well as the legitime consisting of 1/2 of that of each of X, Y, and E. (Art. 176, FC)
+
+
+Question (2018 BAR)
+
+Q142:
+
+Sinclair and Steffi had an illicit relationship while Sinclair was married to another. The relationship produced a daughter Sabina, who grew up with her mother. For most parts of Sabina’s youth, Steffi spent for her support and education. When Sabina was 21 years old, Sinclair’s wife of many years died. Sinclair and Steffi lost no time in legitimizing their relationship. After the 40-day prayers for Sinclair’s late wife, Sinclair and Steffi got married without a marriage license, claiming that they have been cohabiting for the last 20 years. After graduating from college, Sabina decided to enroll in law school. Sinclair said that he was not willing to pay for her school fees since she was no longer a minor. Sinclair claimed that if Sabina wanted to be a lawyer, she had to work and spend for her law education. 
+
+(a) What is Sabina’s filiation status? 
+(b) Is Sinclair legally required to finance Sabina’s law education?
+
+Suggested Answer
+
+A142:
+
+(a) Sabina is an illegitimate child of Sinclair and Steffi because she was conceived and born outside a valid marriage. (Art. 165, FC) She was not legitimated by the subsequent marriage between Sinclair and Steffi. Only children conceived and born outside of wedlock of parents who, at the time of conception of the former, were not disqualified by any impediment to marry each other may be legitimated. (Art. 177, FC) At the time of Sabina’s conception, her parents were disqualified by an impediment to marry each other, because Sinclair was married to someone else.
+
+(b) YES, he is legally required to finance Sabina’s education. Support comprises everything indispensable for education among other things in keeping with the financial capacity of the family. The education of the person entitled to be supported shall include his schooling or training for some profession even beyond the age of majority. (Art. 194, FC) Parents and their illegitimate children are obliged to support each other. (Art. 195, FC) Considering the foregoing rules, Sinclair is enjoined by law to finance Sabrina’s law education even beyond the age of majority. (UPLC Suggested Answers)
+
+
+Question (2010 BAR)
+
+Q143:
+
+Sps. B and G begot two offsprings. Albeit they had serious personality differences, the spouses continued to live under one roof. B begot a son by another woman. G also begot a daughter by another man. 
+
+(a) If G gives the surname of B to her daughter by another man, what can B do to protect their legitimate children's interests? Explain. 
+(b) If B acquiesces to the use of his surname by G’s daughter by another man, what is/are the consequence/s? Explain.
+
+Suggested Answer
+
+A143:
+
+(a) B can impugn the status of G's daughter by another man as his legitimate daughter on the ground that for biological reason he could not have been the father of the child, a fact that may be proven by the DNA test. Having been born during the marriage between B and G, G's daughter by another man is presumed as the child of B under Art. 164, FC. In the same action to impugn, B can pray for the correction of the status of the said daughter in her record of birth.
+
+(b) If B acquiesces and does not file the action to impugn the legitimacy of the child within the prescriptive period for doing so under Art. 170, FC, G's daughter by another man shall be conclusively presumed as the legitimate daughter of B by G.
+
+
+Question (2006 BAR)
+
+Q144:
+
+Ed and Beth have been married for 20 years without children. Desirous to have a baby, they consulted Dr. Jun Canlas, a, prominent medical specialist on human fertility. He advised Beth to undergo artificial insemination. It was found that Ed’s sperm count was inadequate to induce pregnancy. Hence, the couple looked for a willing donor. Andy the brother of Ed, readily consented to donate his sperm. After a series of test, Andy's sperm was medically introduced into Beth's ovary. She became pregnant and 9 months later, gave birth to a baby boy, named Alvin. 
+
+(a) Who is the Father of Alvin? Explain. 
+(b) What are the requirements, if any, in order for Ed to establish his paternity over Alvin?
+
+Suggested Answer
+
+A144:
+
+(a) Ed is the father of Alvin because Alvin was conceived and born during the marriage of his mother to Ed. Under the law, the child born during the marriage of the mother to her husband is presumed to be the legitimate child of the husband. (Concepcion v. Almonte, G.R. NO. 123450, 31 Aug. 2005) While it is true that there was no written consent by the husband to the artificial insemination, absence of such consent may only give the husband a ground to impugn the legitimacy of the child but will not prevent the child from acquiring the status of legitimate child of the husband at the time of its birth.
+
+(b) To establish Ed’s paternity over Alvin, only two requirements must concur: (1) the fact that Ed and the mother of Alvin are validly married, and (2) the fact that Alvin was conceived or born during the subsistence of such marriage.
+
+
+Question (2005 BAR)
+
+Q145:
+
+In 1985, Sonny and Lulu, both Filipino citizens, were married in the Philippines. In 1987, they separated, and Sonny went to Canada, where he obtained a divorce in the same year. He then married another Filipina, Auring, in Canada on 01 Jan. 1988. They had two sons, James and John. In 1990, after failing to hear from Sonny, Lulu married Tirso, by whom she had a daughter, Verna. In 1991, Sonny visited the Philippines where he succumbed to heart attack. Explain the respective filiation of James, John and Verna.
+
+Suggested Answer
+
+A145:
+
+James and John are the illegitimate children of Sonny and Auring because they were conceived and born outside a valid marriage. Verna is an illegitimate child of Lulu and Tirso having been conceived and born to the invalid marriage of Lulu and Tirso. Verna cannot be presumed as the legitimate child of Sonny because of the supervening marriage that was celebrated between Lulu and Tirso even though such marriage is void ab initio. The case of Liyao v. Liyao (G.R. No. 138961, 07 Mar. 2002) is not applicable because in that case the wife begot a child by another man during her marriage to her estranged husband, but no marriage was celebrated between the wife the father of the child. The child in that case was presumed to be the legitimate child of the estranged husband.
+
+
+Question (2005 BAR)
+
+Q146:
+
+Steve was married to Linda, with whom he had a daughter, Tintin. Steve fathered a son with Dina, his secretary of 20 years, whom Dina named Joey, born on 20 Sept. 1981. Joey’s birth certificate did not indicate the father's name. Steve died on 13 Aug. 1993, while Linda died on 03 Dec. 1993, leaving their legitimate daughter, Tintin, as sole heir. On 16 May 1994, Dina filed a case on behalf of Joey, praying that the latter be declared an acknowledged illegitimate son of Steve and that Joey be given his share in Steve's estate, which is now being solely held by Tintin. Tintin put up the defense that an action for recognition shall only be filed during the lifetime of the presumed parents and that the exceptions under Art. 285 of the NCC do not apply to him since the said article has been repealed by the Family Code. In any case, according to Tintin, Joey's birth certificate does not show that Steve is his father.
+
+Suggested Answer
+
+A146:
+
+Joey can still file an action for recognition even after the death of Steve. While it is true that the Family Code repealed Art. 285 of the NCC, the same may still be applied to Joey’s case as he was born in 1981, which was before the effectivity of the Family Code. Applying the ruling in Bernabe v. Alejo (G.R. No. 142062, 23 Jan. 2002), an illegitimate child who was born under the NCC and who had a right to file an action for recognition under the said Code may still file the same even after the death of the father, within the period of 4 years from the time he reached the age of majority. 
+
+In this case, Joey was born in 1981 and will reach the age of majority in 1999 (under R.A. 6809). He may file the action for recognition even after the death of Steve, provided it is filed before his 22nd birthday. Since the action was filed in 1994, it is well within the period. Steve's name not being on the birth certificate is not an absolute bar, provided his filiation can be proved through other means such as open and continuous possession of the status of an illegitimate child.
+
+---
+
+Question (1999, 1995 BAR)
+
+Q147a:
+
+Abraham died intestate on 07 Jan. 1994 survived by his son Braulio. Abraham's older son Carlos died on 14 Feb. 1990. Danilo who claims to be an adulterous child of Carlos intervenes in the proceedings for the settlement of the estate of Abraham in representation of Carlos. Danilo was legally adopted on 17 Mar. 1970 by Carlos with the consent of the “latter's wife.” Under the Family Code, how may an illegitimate filiation be proved? Explain.
+
+Suggested Answer
+
+A147a:
+
+Under Art. 172, in relation to Art. 173 and Art. 175 of the FC, the filiation of illegitimate children may be established in the same way and by the same evidence as legitimate children. Art. 172 provides that the filiation of legitimate children is established by any of the following: (1) the record of birth appearing in the civil register or a final Judgment; or (2) an admission of legitimate filiation in a public document or a private handwritten instrument and signed by the parent concerned. In the absence of the foregoing evidence, the legitimate filiation shall be proved by: (1) the open and continuous possession of the status of a legitimate child; or (2) any other means allowed by the Rules of Court and special laws.
+
+
+Question (No year provided BAR)
+
+Q148a:
+
+Does Joey have a cause of action against Tintin for recognition and partition? Explain.
+
+Suggested Answer
+
+A148a:
+
+YES, Joey has a cause of action against Tintin. While the FC has repealed the provisions of the NCC on proof of filiation, said repeal did not impair vested rights. Joey was born an illegitimate child in 1981. As an illegitimate child, he had acquired, at birth, the right to prove his filiation in accordance with the provisions of the NCC in force at that time. Under the NCC, an illegitimate child may file an action to compel his recognition even after the death of the putative father when the father died during the minority of the child. While the FC has repealed this provision, it will not operate to prejudice Joey who has already acquired a vested right thereto.
+
+
+Question (No year provided BAR)
+
+Q148b:
+
+Are the defenses set up by Tintin tenable?
+
+Suggested Answer
+
+A148b:
+
+The defenses of Tintin are not tenable. The fact that Joey’s birth certificate does not show that Steve was his father is of no moment. The law does not require such mention. Besides, the NCC provides that when the father did not sign the birth certificate, his name should not be disclosed therein. While it is true that capacity to inherit is determined at the time of the death of the decedent and that filiation is an element of capacity to inherit, filiation is determined not at the time of the death of the decedent but at the time of the birth of the child who is born with a status. Such status may subsequently change such as in legitimation, but legitimation is deemed to retroact to the time of birth. In the same manner, recognition when given voluntarily by the father, or decreed by the court, retroacts to the time of the child’s birth.
+
+
+Question (1999, 1995 BAR)
+
+Q147b:
+
+As lawyer for Danilo, do you have to prove Danilo’s illegitimate filiation? Explain.
+
+Suggested Answer
+
+A147b:
+
+NO. Since Danilo has already been adopted by Carlos, he ceased to be an illegitimate child. An adopted child acquires all the rights of a legitimate child under Art, 189 of the FC.
+
+
+Question (1999 BAR)
+
+Q149:
+
+Nestor is the illegitimate son of Dr. Perez. When Dr. Perez died, Nestor intervened in the settlement of his father's estate, claiming that he is the illegitimate son of said deceased, but the legitimate family of Dr. Perez is denying Nestor's claim. What evidence or pieces of evidence should Nestor present so that he may receive his rightful share in his father's estate?
+
+Suggested Answer
+
+A149:
+
+To be able to inherit, the illegitimate filiation of Nestor must have been admitted by his father in any of the following: 1. The record of birth appearing in the civil register, 2. A final judgment, 3. A public document signed by the father, or 4. A private handwritten document signed by the latter. (Art. 175, in relation to Art. 172, FC)
+
+
+Question (No year provided BAR)
+
+Q148c:
+
+Supposing that Joey died during the pendency of the action, should the action be dismissed? Explain.
+
+Suggested Answer
+
+A148c:
+
+If Joey filed the action and died when the NCC was still in force, his action would be dismissed because the action was not transmissible to the heirs of the illegitimate child. (Conde v. Abaya, G.R. No. 4275, March 23, 1909) But if the action was filed after effectivity of the FC, and Joey died during the pendency of the action for recognition, it should not be dismissed. Under the present FC, an action commenced by a legitimate child to claim his legitimate filiation is not extinguished by his death. The FC makes this provision applicable to the action for recognition filed by an illegitimate child. Joey has the right to invoke this provision because it does not impair any vested rights. (Art. 175, FC)
+
+
+Question (2012, 1996 BAR)
+
+Q150:
+
+Honorato filed a petition to adopt his minor illegitimate child Stephanie, alleging that Stephanie’s mother is Gemma Astorga Garcia; that Stephanie has been using her mother’s middle name and surname; and that he is now a widower and qualified to be her adopting parent. He prayed that Stephanie’s middle name be changed from “Astorga” to “Garcia,” which is her mother’s surname and that her surname “Garcia” be changed to “Catindig,” which is his surname. This the trial court denied. Was the trial court correct in denying Hororato’s request for Stephanie’s use of her mother’s surname as her middle name? Explain.
+
+Suggested Answer
+
+A150:
+
+NO, the trial court was not correct. There is no law prohibiting an illegitimate child adopted by his natural father to use as middle name his mother's surname. The law is silent as to what middle name an adoptee may use. In the case of In re: Adoption of Stephanie Nathy Astorga Garcia (G.R. No, 148311, 31 Mar. 2005), the Supreme Court ruled that the adopted child may use the surname of the natural mother as his middle name because there is no prohibition in the law against it. Moreover, it will also be for the benefit of the adopted child who shall preserve his lineage on his mother’s side and reinforce his right to inherit from his mother and her family. Lastly, it will make the adopted child conform with the time-honored Filipino tradition of carrying the mother’s surname as the person’s middle name.
+
+
+Question (2006 BAR)
+
+Q151:
+
+May an illegitimate child, upon adoption by her natural father, use the surname of her natural mother as the middle name?
+
+Suggested Answer
+
+A151:
+
+YES, an illegitimate child, upon adoption by her natural father, can use the surname of her natural mother as her middle name. The Court has ruled that there is no law prohibiting an illegitimate child adopted by her natural father to use, as middle name, her mother's surname. What is not prohibited is allowed. After all, the use of the maternal name as the middle name is in accord with Filipino culture and customs and adoption is intended for the benefit of the adopted. (In Re: Adoption of Stephanie Nathy Astorga Garcia, G.R. No. 148311, 31 Mar. 2005)
+
+
+Question (2009 BAR)
+
+Q152a:
+
+Rodolfo, married to Sharon, had an illicit affair with his secretary, Nanette, a 19-year-old girl, and begot a baby girl, Rona. Nanette sued Rodolfo for damages: actual, for hospital and other medical expenses in delivering the child by caesarean section; moral, claiming that Rodolfo promised to marry her, representing that he was single when, in fact, he was not; and exemplary, to teach a lesson to like-minded Lotharios.
+
+Suppose Rodolfo later on acknowledges Rona and gives her regular support, can he compel her to use his surname? Why or why not?
+
+Suggested Answer
+
+A152a:
+
+NO. He has no right to compel Rona to use his surname. The law does not give him the right simply because he gave her support. (R.A. No. 9255) Under the FC, an illegitimate child was required to use only the surname of the mother.
+
+Under R.A. No. 9255 (An Act Allowing Illegitimate Children To Use The Surname Of Their Father, Amending For The Purpose Art. 176 Of Executive Order No. 209, Otherwise Known As The “Family Code Of The Philippines”), otherwise known as the Revilla law, however, the illegitimate child is given the option to use the surname of the illegitimate father when the latter has recognized the former in accordance with law. Since the choice belongs to the illegitimate child, Rodolfo cannot compel Rona, if already of age, to use the surname against her will. If Rona is still a minor, to use the surname of Rodolfo will require the consent of Rona's mother who has sole parental authority over her.
+
+
+Question (2009 BAR)
+
+Q152b:
+
+When Rona reaches 7 years old, she tells Rodolfo that she prefers to live with him, because he is better off financially than Nanette. If Rodolfo files and action for the custody of Rona, alleging that he is Rona’s choice as custodial parent, will the court grant Rodolfo’s petition? Why or why not?
+
+Suggested Answer
+
+A152b:
+
+NO, because Rodolfo has no parental authority over Rona. He who has the parental authority has the right to custody. Under the Family Code, the mother alone has parental authority over the illegitimate child. This is true even if the illegitimate father has recognized the child and even though he is giving support for the child. To acquire custody over Rona, Rodolfo should first deprive Nanette of parental authority if there is a ground under the law, and in a proper court proceeding. In the same action, the court may award custody of Rona to Rodolfo if it is for her best interest.
+
+
+Question (2010 BAR)
+
+Q153:
+
+Gigolo entered into an agreement with Majorette for her to carry in her womb his baby via in vitro fertilization. Gigolo undertook to underwrite Majorette’s pre-natal expenses as well as those attendant to her delivery. Gigolo would thereafter pay Majorette P2 million and, in return, she would give custody of the baby to him. After Majorette gives birth and delivers the baby to Gigolo following her receipt of P2 million, she engages your services as her lawyer to regain custody of the baby. Is the child entitled to support and inheritance from Gigolo? Explain.
+
+Suggested Answer
+
+A153:
+
+If Gigolo voluntarily recognized the child as his illegitimate child in accordance with Art. 175 in relation to Art. 172 of the FC, the child is entitled to support and inheritance from Gigolo.
+
+
+Question (2009 BAR)
+
+Q154:
+
+True or False. A dead child can be legitimated.
+
+Suggested Answer
+
+A154:
+
+TRUE. To be legitimated, the law does not require a child to be alive at the same time of the marriage of his or her parents. (Art. 177, FC) Furthermore, Art. 181 of the FC which states that “The legitimation of children who died before the celebration of marriage will benefit their descendants,” does not preclude instances where such legitimation will benefit no one but the child's ascendants, or other relatives.
+
+
+Question (2008 BAR)
+
+Q155:
+
+Roderick and Faye were high school sweethearts. When Roderick was 18 and Faye, 16 years old, they started to live together as husband and wife without the benefit of marriage. When Faye reached 18 years of age, her parents forcibly took her back and arranged for her marriage to Brad. Although Faye lived with Brad after the marriage, Roderick continued to regularly visit Faye while Brad was away at work. During their marriage, Faye gave birth to a baby girl, Laica. When Faye was 25 years old, Brad discovered her continued liaison with Roderick and in one of their heated arguments, Faye shot Brad to death. She lost no time in marrying her true love Roderick, without a marriage license, claiming that they have been continuously cohabiting for more than 5 years.
+
+Can Laica be legitimated by the marriage of her biological parents?
+
+Suggested Answer
+
+A155:
+
+NO, she cannot be legitimated by the marriage of her biological parents. In the first place she is not, under the law, the child of Roderick, in the second place, her biological parents could not have validly married each other at the time she was conceived and born simply because Faye was still married to Roderick at that time. Under Art. 177, FC, only children conceived or born outside of wedlock of parents who, at the time of the conception of the child were not disqualified by any impediment to marry each other, may be legitimated.
+
+
+Question (2008 BAR)
+
+Q156:
+
+Gianna was born to Andy and Aimee, who at the time Gianna's birth were not married to each other. While Andy was single at the time, Aimee was still in the process of securing a judicial declaration of nullity on her marriage to her ex-husband. Gianna's birth certificate, which was signed by both Andy and Aimee, registered the status of Gianna as “legitimate,” her surname carrying that of Andy's and that her parents were married to each other.
+
+Assuming that Aimee is successful in declaring her former marriage void, and Andy and Aimee subsequently married each other, would Gianna be legitimated?
+
+Suggested Answer
+
+A156:
+
+NO, Gianna will not be legitimated. While the court may have declared the marriage void ab initio and therefore, no marriage took place in the eyes of the law, Gianna will still not be legitimated. This is because at the time she was conceived and born her biological parents could not have validly married each other. For their marriage to be valid, the court must first declare the first marriage null and void. In the problem, Gianna was conceived and born before the court has decreed the nullity of her mother’s previous marriage.
+
+
+Question (2004 BAR)
+
+Q157:
+
+RN and DM, without any impediment to marry each other, had been living together without benefit of church blessings. Their common-law union resulted in the birth of ZMN. Two years later, they got married in a civil ceremony. Could ZMN be legitimated? Reason.
+
+Suggested Answer
+
+A157:
+
+ZMN was legitimated by the subsequent marriage of RN and DM because at the time he was conceived, RN and DM could have validly married each other. Under the Family Code children conceived and born outside of wedlock of parents who, at the time of the former's conception, were not disqualified by any impediment to marry each other are legitimated by the subsequent marriage of the parents
+
+
+Question (2001 BAR)
+
+Q158:
+
+A German couple filed a petition for adoption of a minor Filipino child with the RTC of Makati under the provisions of the Child and Youth Welfare Code which allowed alien to adopt. Before the petition could be heard, the Family Code, which repealed the Child and Youth Welfare Code, came into effect. Consequently, the Solicitor General filed a motion to dismiss the petition, on the ground that the Family Code prohibits aliens from adopting. If you were the judge, how will you rule on the motion?
+
+Suggested Answer
+
+A158:
+
+The motion to dismiss the petition for adoption should be denied. The law that should govern the action is the law in force at the time of filing of the petition. At that time, it was the Child and Youth Welfare Code that was in effect, not the FC. Petitioners have already acquired a vested right on their qualification to adopt which cannot be taken away by the Family Code. (Republic v. Miller, G.R. No. 125932, 21 Apr. 1999, citing Republic v. Court of Appeals, G.R. No. 92326, 24 Jan. 1992)
+
+
+Question (2010 BAR)
+
+Q159a:
+
+Sps. Rex and Lea bore two children now aged 14 and 8. During the subsistence of their marriage, Rex begot a child by another woman. He is now 10 years of age. On Lea’s discovery of Rex’s fathering a child by another woman, she filed a petition for legal separation which was granted. Rex now wants to adopt his illegitimate child.
+
+Whose consent is needed for Rex’s adoption of his illegitimate child?
+
+Suggested Answer
+
+A159a:
+
+The consent of the 14-year-old legitimate child, of the 10year-old illegitimate child and of the biological parents of the illegitimate child are needed for the adoption. Under the Domestic Administrative Adoption and Alternative Child Care Act (R.A. No. 11642), the following are necessary to give their consent to the adoption: (1) the adoptee, if 10 years of age or over; (2) the biological parents of the child, if known, or the legal guardian, or the proper government instrumentality which has legal custody of the child, except in the case of a Filipino of legal age if, prior to the adoption, said person has been consistently considered and treated as their own child by the adopters for at least 3 years; (3) The legitimate and adopted children, 10 years of age or over, of the adopters, if any; (4) The illegitimate children, 10 years of age or over, of the adopter if living with said adopter or over whom the adopter exercises parental authority and the latter’s spouse, if any; and (5) The spouse, if any, of the person adopting or to be adopted. (Sec. 23, R.A. 11642)
+
+Since Rex and Lea are legally separated, her consent is no longer necessary. Therefore, only the consent of the 14year-old legitimate child, the 10-year-old illegitimate child and of the biological parents or legal guardian of the illegitimate child are needed for the adoption.
+
+
+Question (2010 BAR)
+
+Q159b:
+
+If there was no legal separation, can Rex still adopt his illegitimate child? Explain.
+
+Suggested Answer
+
+A159b:
+
+YES, he can still adopt his illegitimate child but with the consent of his spouse, of his 14-year-old legitimate child of the illegitimate child, and of the biological mother of the illegitimate child. As a general rule, spouses shall jointly adopt except if the spouses are legally separated from each other. (Sec. 21(e)(4)(c))
+
+
+Question (2005 BAR)
+
+Q160:
+
+Hans Berber, a German national, and his Filipino wife, Rhoda, are permanent residents of Canada. They desire so much to adopt Magno, an 8-year-old orphaned boy and a baptismal godson of Rhoda. Since the accidental death of Magno's parents in 2004, he has been staying with his aunt who, however, could hardly afford to feed her own family. Unfortunately, Hans and Rhoda cannot come to the Philippines to adopt Magno although they possess all the qualifications as adoptive parents.
+
+Is there a possibility for them to adopt Magno? How should they go about it?
+
+Suggested Answer
+
+A160:
+
+Under R.A. No. 8043, the rules for inter-country adoption of Filipino children, the spouses may file an application to adopt a Filipino child with the Inter-Country Adoption Board (ICAB) after they have been determined eligible and fit to adopt by the State Welfare Agency or a licensed adoption agency in Canada. The Canadian agency will forward the required supporting documents to the ICAB for matching with a Filipino child. The spouses, after filing a petition with the ICAB, shall be issued the Placement Authority and when all the travel documents of the child who is declared legally eligible for adoption as determined by the ICAB are ready the adoptive parents or any one of them shall personally fetch the child in the Philippines for adoption in the court of the foreigner’s country.
+
+
+Question (2005, 2003, 2000 BAR)
+
+Q161a:
+
+In 1984, Eva, a Filipina, went to work as a nurse in the USA. There, she met and fell in love with Paul, an American citizen, and they got married in 1985. Eva acquired American citizenship in 1987. During their sojourn in the Philippines in 1990, they filed a joint petition for the adoption of Vicky, a 7-year-old daughter of Eva's sister. The government, through the OSG, opposed the petition on the ground that the petitioners, being both foreigners, are disqualified to adopt Vicky.
+
+Is the government's opposition tenable? Explain.
+
+Suggested Answer
+
+A161a:
+
+YES, the position of the government is tenable. Foreigners are disqualified to adopt unless they fall in any of the exceptions provided for in the law. Eva and Paul are both foreigners. Eva, Falls in one of the exceptions. She is qualified to adopt because she is a former Filipino citizen who wishes to adopt a relative by consanguinity. Unfortunately, Paul is not qualified to adopt because he does not fall in any of the exceptions. Hence, they cannot adopt jointly. When husband and wife are adopting jointly, both of them must be qualified to adopt in their own right Eva cannot, alone by herself, adopt her niece because husband and wife must adopt jointly unless they fall in any of the exceptions provided for in the law. They cannot adopt separately because they do not fall in any of the exceptions. Hence, whether separately or jointly, Eva and Paul cannot adopt Vicky in the Philippines. (Domestic Adoption Law, R.A. No. 8552)
+
+
+Question (2005, 2003, 2000 BAR)
+
+Q161b:
+
+Would your answer be the same if they sought to adopt Eva's illegitimate daughter? Explain.
+
+Suggested Answer
+
+A161b:
+
+NO, my answer would be different. Eva is qualified to adopt her illegitimate daughter, because she falls in one of the exceptions that allow foreigners to adopt. She is a former Filipino citizen adopting her relative by consanguinity. Eva can adopt separately her illegitimate child because her case is also an exception to the rule that husband and wife should adopt jointly.
+
+
+Question (2005, 2003, 2000 BAR)
+
+Q161c:
+
+Supposing that they filed the petition to adopt Vicky in the year 2000, will your answer be the same? Explain.
+
+Suggested Answer
+
+A161c:
+
+YES, my answer will be the same. The new Law on Domestic Adoption allows a foreigner to adopt in the Philippines if he has been residing in the Philippines for at least 3 years prior to the filing of the petition unless the law waives that residency requirement. Paul and Eva have not resided in the Philippines for the last three (3) years. However, Eva will qualify for waiver because she was a former Filipino citizen who wishes to adopt a relative by consanguinity within the fourth degree. Unfortunately, Paul will not qualify to adopt because he does not fall in any of the instances for waiver to apply. They cannot adopt jointly because one of them is not qualified. Neither may Eva adopt alone because she does not fall in any of the exceptions that allow husband and wife to adopt separately.
+
+
+Question (2012 BAR)
+
+Q162:
+
+Under R.A. No. 8043, an adopter is required to be at least ____ years old and ____ years older than the child to be adopted at the time of the application unless the adopter is the parent by nature of the child. 
+a) 30 and 15 
+b) 27 and 16 
+c) 50 and 10 
+d) 18 and 15
+
+Suggested Answer
+
+A162:
+
+B. 27 and 16 
+
+N.B.: Under R.A. No. 11642, the minimum age requirement for the adopter is now at least 25 years of age. and the 16year difference between the age of the adopter and the adoptee may be waived when the adopter is: (1) the biological parent of the adoptee; or (2) the spouse of the adoptee’s parent. (Sec. 21(a), R.A. No. 11642)
+
+
+Question (2003 BAR)
+
+Q163:
+
+Lina, a former Filipina who became an American citizen shortly after her marriage to an American husband, would like to adopt in the Philippines, jointly with her husband, one of her minor brothers. Assuming that all the required consents have been obtained, could the contemplated joint adoption in the Philippine prosper? Explain.
+
+Suggested Answer
+
+A163:
+
+YES, Lina and her American husband can jointly adopt a minor brother of Lina because she and her husband are both qualified to adopt. Lina, as a former Filipino citizen, can adopt her minor brother under Sec. 7(b(i)) of R.A. 8552 (Domestic Adoption Act of 1998).
+
+The alien husband can now adopt under Sec. 7(b) of R.A. No. 8552. The Supreme Court has held in several cases that when husband and wife are required to adopt jointly, each one of them must be qualified to adopt in his or her own right. (Republic v. Toledano, G.R. No. 94147, 08 June 1994) However, the American husband must comply with the requirements of the law including the residency requirement of three (3) years. Otherwise, the adoption will not be allowed.
+
+
+Question (2014 BAR)
+
+Q164:
+
+Sps. Esteban and Maria decided to raise their two (2) nieces, Faith and Hope, both minors, as their own children after the parents of the minors died in a vehicular accident. 10 years after, Esteban died. Maria later on married her boss Daniel, a British national who had been living in the Philippines for 2 years. With the permission of Daniel, Maria filed a petition for the adoption of Faith and Hope. She did not include Daniel as her co-petitioner because for Maria, it was her former husband Esteban who raised the kids. If you are the judge, how will you resolve the petition?
+
+Suggested Answer
+
+A164:
+
+If I were the judge, I would DISMISS THE PETITION for adoption. The rule is that the husband and wife must jointly adopt and there are only three recognized exceptions to joint adoption by the husband and wife: 1) if one spouse seeks to adopt the legitimate child of the other; 2) if one spouse seeks to adopt his or her own illegitimate child; 3) if the spouses are legally separated. The case of Maria and Daniel does not appear to fall under any of the recognized exceptions, accordingly the petition filed by the wife alone should be dismissed. (Bar Q&A by Paguirigan)
+
+
+Question (2010 BAR)
+
+Q165:
+
+18-year-old Filipina Patrice had a daughter out of wedlock whom she named Laurie. At 26, Patrice married American citizen John who brought her to live with him in the United States of America. John at once signified his willingness to adopt Laurie. Can John file the petition for adoption? If yes, what are the requirements? If no, why?
+
+Suggested Answer
+
+A165:
+
+NO, John cannot file the petition to adopt alone. As a general rule one who is married to a Filipino citizen and seeks to adopt jointly with the spouse a relative within the 4th degree of consanguinity or affinity of the Filipino spouse and the spouses shall jointly adopt except (1) if one spouse seeks to adopt the legitimate child of the other; (2) If one spouse seeks to adopt own illegitimate child; or (3) If the spouses are legally separated from each other. (Sec. 21(e), R.A. No. 11642) In this case, John seeks to adopt the illegitimate child of his spouse. However, he does not fall under any of the exceptions. Therefore, John cannot file the petition to adopt alone.
+
+
+Question (2000 BAR)
+
+Q166:
+
+Sometime in 1990, Sarah, born a Filipino but by then a naturalized American citizen, and her American husband Tom, filed a petition in the RTC of Makati, for the adoption of the minor child of her sister, a Filipina. Can the petition be granted?
+
+Suggested Answer
+
+A166:
+
+IT DEPENDS. If Tom and Sarah have been residing in the Philippines for at least 3 years prior to the effectivity of R.A. No. 8552, the petition may be granted because the American husband is not qualified to adopt.
+
+While the petition for adoption was filed in 1990, it was considered refiled upon the effectivity of R.A. No. 8552, the Domestic Adoption Act of 1998. This is the law applicable, the petition being still pending with the lower court.
+
+Under the Act, Sarah and Tom must adopt jointly because they do not fall in any of the exceptions where one of them may adopt alone. When husband and wife must adopt jointly, the Supreme Court has held in a line of cases that both of them must be qualified to adopt. While Sarah, an alien, is qualified to adopt under Sec. 7(b)(1) of the Act for being a former Filipino citizen who seeks to adopt a relative within the fourth degree of consanguinity or affinity, Tom an alien, is not qualified because he is neither a former Filipino citizen, nor married to a Filipino. One of them not being qualified to adopt their petition has to be denied. However, if they have been residents of the Philippines three years prior to the effectivity of the Act and continues to reside here until the decree of adoption is entered, they are qualified to adopt the nephew of Sara under Sec. 7(b) thereof, and the petition may be granted.
+
+
+Question (2009 BAR)
+
+Q167a:
+
+Rafael, a wealthy bachelor, filed a petition for the adoption of Dolly, a one-year-old foundling who had a severe heart ailment. During the pendency of the adoption proceedings, Rafael died of natural causes. The Office of the Solicitor General files a motion to dismiss the petition on the ground that the case can no longer proceed because of the petitioner’s death.
+
+Should the case be dismissed? Explain.
+
+Suggested Answer
+
+A167a:
+
+It depends on the stage of the proceedings when Rafael died. If he died after all the requirements under the law have been complied with and the case is already submitted for resolution, the court may grant the petition and issue a decree of adoption despite the death of the adopter. (Sec. 13, R.A. No. 8552) Otherwise, the death of the petitioner shall have the effect terminating the proceedings.
+
+
+Question (2009 BAR)
+
+Q167b:
+
+Will your answer be the same if it was Dolly who died during the pendency of the adoption proceedings? Explain.
+
+Suggested Answer
+
+A167b:
+
+NO, if it was Dolly who died, the case should be dismissed. Her death terminates the proceedings. (Art. 13, R.A. No. 8552)
+
+
+Question (2012 BAR)
+
+Q168:
+
+Sps. Primo and Monina Lim, childless, were entrusted with the custody of two minor children, the parents of whom were unknown. Eager of having children of their own, the spouses made it appear that they were the children’s parents by naming them Michelle P. Lim and Michael Jude Lim. Subsequently, Monina married Angel Olario after Primo’s death.
+
+She decided to adopt the children by availing the amnesty given under R.A. No. 8552 to those individuals who simulated the birth of a child. She filed separate petitions for the adoption of Michelle, then 25 years old and Michael, 18. Both Michelle and Michael gave consent to the adoption. The trial court dismissed the petition and ruled that Monina should have filed the petition jointly with her new husband. Monina, in a Motion for Reconsideration argues that mere consent of her husband would suffice and that joint adoption is not needed, for the adoptees are already emancipated. Is the trial court correct in dismissing the petitions for adoption? Explain.
+
+Suggested Answer
+
+A168:
+
+YES, the trial court was correct. At the time the positions for adoptions were filed, petitioner had already remarried. Under the law, husband and wife shall adopt jointly, except in cases enumerated in the law. The adoption cases of Michelle and James do not fall in any of the exceptions provided in the law where a spouse is permitted to adopt alone. Hence, Monina should adopt jointly with her husband Angel. (Adoption of Michelle P. Lim, G.R. Nos. 168992-93, 21 May 2009)
+
+
+Question (2008 BAR)
+
+Q169:
+
+Despite several relationships with different women, Andrew remained unmarried. His first relationship with Brenda produced a daughter, Amy, now 30 years old. His second, with Carla, produced two sons: Jon and Ryan. His third, with Elena, bore him no children although Elena has a daughter Jane, from a previous relationship. His last, with Fe, produced no biological children but they informally adopted without court proceedings, Sandy's now 13 years old, whom they consider as their own. Sandy was orphaned as a baby and was entrusted to them by the midwife who attended to Sandy's birth. All the children, including Amy, now live with Andrew in his house.
+
+Is there any legal obstacle to the legal adoption of Amy by Andrew? To the legal adoption of Sandy by Andrew and Elena?
+
+Suggested Answer
+
+A169:
+
+NO, there is no legal obstacle to the legal adoption of Amy by Andrew. While a person of age may not be adopted, Amy falls within two exceptions: (1) she is an illegitimate child and she is being adopted by her illegitimate father to improve her status; and (2) even on the assumption that she is not an illegitimate child of Andrew, she may still be adopted, although of legal age, because she has been consistently considered and treated by the adopter as his own child since minority. In fact, she has been living with him until now.
+
+There is a legal obstacle to the adoption of Sandy by Andrew and Elena. Andrew and Elena cannot adopt jointly because they are not married.
+
+
+Question (2018 BAR)
+
+Q170:
+
+Sofia and Semuel, both unmarried, lived together for many years in the Philippines and begot three children. While Sofia stayed in the Philippines with the children, Semuel went abroad to work and became a naturalized German citizen. He met someone in Germany whom he wanted to marry. Semuel thereafter came home and filed a petition with the RTC for partition of the common properties acquired during his union with Sofia in the Philippines. The properties acquired during the union consisted of a house and lot in Cavite worth P2 million, and some personal properties, including cash in bank amounting to P1 million. All these properties were acquired using Semuel’s salaries and wages since Sofia was a stay-at-home mother. In retaliation, Sofia filed an action, on behalf of their minor children, for support.
+
+Should Semuel be required to support the minor children?
+
+Suggested Answer
+
+A170:
+
+YES, Semuel should be required to support the minor children. Parents and their illegitimate children are obliged to support each other. (Art. 195, FC) Semuel is required to support his illegitimate children with Sofia. The children are illegitimate, because they were conceived and born outside a valid marriage. (Art. 165, FC) (UPLC Suggested Answers)
+
+ALTERNATIVE ANSWER:
+
+Even if the new national law of Samuel does not oblige him to support his minor illegitimate children in the Philippines, the said foreign law cannot be applied in the Philippines for two reasons: (1) the Philippines may refuse to apply said foreign law, because it is contrary to a sound and established policy of the forum; and (2) the Philippine laws which have for their object public policy cannot be rendered ineffective by a foreign law. (Art. 17(3) NCC; Del Soccoro v. Van Wilsem, G.R. No. 193707, 10 Dec. 2014)
+
+
+Question (2010 BAR)
+
+Q171:
+
+G filed on 08 July 2000 a petition for declaration of nullity of her marriage to B. During the pendency of the case, the couple entered into a compromise agreement to dissolve their absolute community of property. B ceded his right to their house and lot and all his shares in two business firms to G and their two children, aged 18 and 19. B also opened a bank account in the amount of P3 million in the name of the two children to answer for their educational expenses until they finish their college degrees. For her part, G undertook to shoulder the day-to-day living expenses and upkeep of the children. The Court approved the spouses’ agreement on 08 Sept. 2000. Suppose the business firms suffered reverses, rendering G unable to support herself and the children. Can G still ask for support pendente lite from B? Explain.
+
+Suggested Answer
+
+A171:
+
+YES, G can still ask for support from B because during the pendency of the action, the marriage between them is considered still subsisting. (Art. 68, FC) Being considered still married to each other, B and G still have the obligation to support each other. The compromise agreement cannot operate to waive future support when needed. (Art. 2035, NCC) After the compromise agreement was approved by the court and the properties of the marriage were distributed, there remained no more common properties of B and G. While Art. 198, FC appears ' to limit the source of support to the common properties of the said marriage in case of the pendency of an action to declare the nullity of marriage, Arts. 94 and 121 indicate otherwise. Under the said Articles, the spouses remain personally and solidarily liable with their separate properties for support even though, for whatever reason, there are no more community or partnership properties left.
+
+The judgment based on the compromise dissolving the property relations of B and G does not bar G from asking support pendente lite. The dissolution of the property relations of the spouses did not terminate the obligation between them to support each other. The declaration of the nullity of their marriage is what terminates the right of G to be supported by B as his spouse.
+
+
+Question (2008 BAR)
+
+Q172a:
+
+In his old age, can Andrew be legally entitled to claim support from Amy, Jon, Ryan, Jane, and Sandy assuming that all of them have the means to support him?
+
+Suggested Answer
+
+A172a:
+
+YES, Andrew can claim support from them all, except from Sandy and Jane, who is not his child, legitimate, illegitimate, or adopted.
+
+
+Question (2008 BAR)
+
+Q172b:
+
+Can Amy, Jon, Ryan, Jane, and Sandy legally claim support from each other?
+
+Suggested Answer
+
+A172b:
+
+YES, Amy, Jon and Ryan, can legally claim support from each other under Art. 196, FC which provides that brothers and sisters not legitimately related, whether of the full or half-blood, are bound to support each other except when the need for support is due to a cause imputable to the claimant’s fault or negligence. Jane and Sandy, however, cannot legally claim support from each other and from Amy, Jon and Ryan because they are not related to any of them.
+
+
+Question (2006 BAR)
+
+Q173a:
+
+Under Art. 213, FC, no child under 7 years of age shall be separated from the mother unless the court finds compelling reasons to order otherwise. Explain the rationale of this provision.
+
+Suggested Answer
+
+A173a:
+
+The rationale of the provision is that a child below 7 years old needs the love and care which only its mother can give. The welfare of the child is given the highest priority and the interest of the child prevails over procedural rules.
+
+
+Question (2006 BAR)
+
+Q173b:
+
+Give at least 3 examples of “compelling reasons” which justify the taking away from the mother’s custody of her child under 7 years of age.
+
+Suggested Answer
+
+A173b:
+
+The following have been considered as “compelling reasons” to deprive a mother of custody:
+
+a. Neglect; 
+b. Abandonment; 
+c. Unemployment; 
+d. Immorality; (Espiritu v. Court of Appeals, G.R. No. 115640, 15 Mar. 1995) 
+e. Alcoholism; 
+f. Drug addiction; 
+g. Maltreatment; 
+h. Insanity; 
+i. Highly communicable serious disease; 
+j. Grave physical handicap; and 
+k. Serious and credible threat by the child to ham himself if separated from his mother. (Luna v. IAC, G.R. No. L-68374, 18 June 1985)
+
+
+Question (2004 BAR)
+
+Q174:
+
+Distinguish briefly but clearly between: Substitute parental authority and special parental authority.
+
+Suggested Answer
+
+A174:
+
+In substitute parental authority, the parents lose their parental authority in favor of the substitute who acquires it to the exclusion of the parents. In special parental authority, the parents or anyone exercising parental authority does not lose parental authority. Those who are charged with special parental authority exercise such authority only during the time that the child is in their custody or supervision. Substitute parental authority displaces parental authority while special parental authority concurs with parental authority.
+
+
+Question (2010 BAR)
+
+Q175a:
+
+On 05 May 1989, 16-year-old Rozanno, who was issued a student permit, drove to school a car, a gift from his parents. On even date, as his class was scheduled to go on a field trip, his teacher requested him to accommodate in his car, as he did, four (4) of his classmates because the van rented by the school was too crowded. On the way to a museum which the students were scheduled to visit, Rozanno made a wrong maneuver, causing a collision with a jeepney. One of his classmates died. He and the three (3) others were badly injured.
+
+Who is liable for the death of Rozanno’s classmate, and the injuries suffered by Rozanno and his 3 other classmates? Explain.
+
+Suggested Answer
+
+A175a:
+
+At the time the incident occurred in May 1989, Rozanno was still a minor. Being a minor, Art. 218, (FC) applies. Pursuant to Art. 218, the school, its administrators and teachers shall be liable for the acts of minor Rozanno because of the special parental authority and responsibility that they exercise over him. The authority applies to all authorized activities, whether inside or outside the premises of the school, entity or institution. The field trip on which occasion Rozanno drove the car, was an authorized activity, and, thus, covered by the provision. Furthermore, the parents of Rozanno are subsidiarily liable pursuant to Art. 219 of the FC, and principally liable under Art. 221 of the FC, if they are negligent.
+
+
+Question (2010 BAR)
+
+Q175b:
+
+Under the same facts, except the date of occurrence of the incident, this time in mid1994, what would be your answer? Explain.
+
+Suggested Answer
+
+A175b:
+
+Since Rozanno was 16 years old in 1989, if the incident happened sometime in the middle of 1994, Rozanno have been 21 years old at the time. Hence, he was already of legal age. The law reducing the age of majority to 18 years took effect in December 1989.
+
+Being of legal age, Arts. 218, 219, and 221, FC are no longer applicable. In such case, only Rozanno will be personally responsible for all the consequences of his act unless his school or his parents were themselves also negligent and such negligence contributed to the happening of the incident. In that event, the school or his parents are not liable under Arts. 218, 218, or 221, FC, but will be liable under general provision of the NCC on quasi-delict.
+
+
+Question (2003 BAR)
+
+Q176:
+
+If during class hours, while the teacher was chatting with other teachers in the school corridor, a 7-year-old male pupil stabs the eye of another boy with a ball pen during a fight, causing permanent blindness to the victim, who could be liable for damages for the boy’s injury: the teacher, the school authorities, or the guilty boy’s parents? Explain.
+
+Suggested Answer
+
+A176:
+
+The school, its administrators, and teachers have special parental authority and responsibility over the minor child while under their supervision, instruction or custody. (Art. 218, FC) They are principally and solidarily liable for the damages caused by the acts or omissions of the unemancipated minor unless they exercised the proper diligence required under the circumstances. (Art. 219, FC) In the problem, the teacher and the school authorities are liable for the blindness of the victim, because the student who causes it was under their special parental authority and they were negligent. They were negligent because they were chatting in the corridor during the class period when the stabbing incident occurred. The incident could have been prevented had the teacher been inside the classroom at that time. The guilty boy’s PARENTS are subsidiarily liable under Art. 219, FC.
+
+
+Question (2010 BAR)
+
+Q177a:
+
+After Majorette gives birth and delivers the baby to Gigolo following her receipt of P2 million, she engages your services as her lawyer to regain custody of the baby. Is the child entitled to support and inheritance from Gigolo? Explain.
+
+Suggested Answer
+
+A177a:
+
+If Gigolo voluntarily recognize the child as his illegitimate child in accordance with Art. 175 in relation to Art. 172 of the FC, the child is entitled to support and inheritance from Gigolo.
+
+
+Question (2010 BAR)
+
+Q177b:
+
+What legal action can you file on behalf of Majorette? Explain.
+
+Suggested Answer
+
+A177b:
+
+As her lawyer, I can file a petition for habeas corpus on behalf Majorette to recover custody of her child. Since she is the mother of the child that was born out of wedlock, she has exclusive parental authority and custody over the child. Gigolo, therefore, has no right to have custody of the child and his refusal to give up custody will constitute illegal detention for which habeas corpus is the proper remedy.
+
+
+Question (2010 BAR)
+
+Q177c:
+
+Can Gigolo demand from Majorette the return of the P2 million if he returns the baby? Explain.
+
+Suggested Answer
+
+A177c:
+
+NO, he cannot. Both he and Majorette are guilty of violating the provision of the Anti-Child Abuse Law (R.A. No. 7610) on child trafficking. Being in pari delicto, the parties shall be left where they are, and Gigolo cannot demand the return of what he paid.
+
+
+Question (2022 BAR)
+
+Q178:
+
+How does the New Civil Code distinguish between immovable and movable properties? Explain briefly and give two examples for each.
+
+Suggested Answer
+
+A178:
+
+An immovable property cannot be transported from place to place whereas movable property can be transported from place to place without impairment of the real property to which they are fixed. Immovable property includes lands, buildings, and construction of all kinds adhered to the soil, and fertilizer actually used on a piece of land. On the other hand, some examples of movable property are forces of nature which are brought under control by science and obligations and actions which have for their object movables or demandable sums. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2007 BAR)
+
+Q179a:
+
+Manila Petroleum Co. owned and operated a petroleum operation facility off the coast of Manila. The facility was located on a floating platform made of wood and metal, upon which was permanently attached the heavy equipment for the petroleum operations and living quarters of the crew. The floating platform likewise contained a garden area, where trees, plants and flowers were planted. The platform was tethered to a ship, the MV 101, which was anchored to the seabed.
+
+Is the platform movable or immovable property?
+
+Suggested Answer
+
+A179a:
+
+The platform is an immovable property under Art. 415(9) NCC, which provides that “docks and structures which, though floating, are intended by their nature and object to remain at a fixed place on a river, lake or coast.” Since the floating platform is a petroleum operation facility, it is intended to remain permanently where it is situated, even if it is tethered to a ship which is anchored to the seabed.
+
+
+Question (2007 BAR)
+
+Q179b:
+
+Are the equipment and living quarters movable or immovable property?
+
+Suggested Answer
+
+A179b:
+
+YES, the equipment and living quarters of the crew are immovable property. Art. 415(3) of the NCC classifies as an immovable “everything attached to an immovable in a fixed manner, in such a way that it cannot be separated therefrom without breaking the material or deterioration of the object.” Both the equipment and the living quarters are permanently attached to the platform which is also an immovable. The equipment can also be classified as an immovable property under Art. 415(5), NCC because such equipment are “machinery, receptacles, instruments or implements intended by the owner of the tenement for an industry or works which may be carried on in a building or on a piece of land and which tend directly to meet the needs of the industry or works.” It is logically assumed that the petroleum industry may be carried on in a building or on a piece of land and the platform is analogous to a building.
+
+
+Question (2007 BAR)
+
+Q179c:
+
+Are the trees, plants and flowers immovable or movable property?
+
+Suggested Answer
+
+A179c:
+
+YES, the trees, plants and flowers planted in the garden area of the platform are immovable property under Art. 415(2) NCC which classifies as an immovable property "trees, plants and growing fruits, while they are attached to the land or form an integral part of an immovable, the petroleum operation facility.
+
+
+Question (1997 BAR)
+
+Q180:
+
+Pedro is the registered owner of a parcel of land situated in Malolos, Bulacan. In 1973, he mortgaged the land to the Philippine National Bank (PNB) to secure a loan of P100,000.00. For Pedro’s failure to pay the loan, the PNB foreclosed on the mortgage in 1980, and the land was sold at public auction to PNB for being the highest bidder. PNB secured the title thereto in 1987. In the meanwhile, Pedro, who was still in possession of the land, constructed a warehouse on the property. In 1988, the PNB sold the land to Pablo. The Deed of Sale was amended in 1989 to include the warehouse.
+
+Pedro, claiming ownership of the warehouse, files a complaint to annul the amended Deed of Sale before the RTC of Quezon City, where he resides, against both the PNB and Pablo. The PNB filed a motion to dismiss the complaint for improper venue contending that the warehouse is real property under Art. 415(1) of the NCC and therefore the action should have instead been filed in Malolos, Bulacan. Pedro claims otherwise. The question arose as to whether the warehouse should be considered as real or personal property.
+
+If consulted, what would your legal advice be?
+
+Suggested Answer
+
+A180:
+
+If I were consulted, I would advice that the warehouse which is a construction adhered to the soil is an immovable by nature under Art. 415(1), NCC, and the proper venue of any case to recover ownership of the same which is what the purpose of the complaint to annul the amended Deed of Sale amounts to, should be the place where the property is located, or the RTC of Bulacan.
+
+
+Question (1995 BAR)
+
+Q181a:
+
+Salvador, a timber concessionaire, built on his lot a warehouse where he processes and stores his timber for shipment. Adjoining the warehouse is a furniture factory owned by NARRAMIX of which Salvador is a majority stockholder. NARRAMIX leased space in the warehouse where it placed its furniture-making machinery.
+
+How would you classify the furniture-making machinery as property under the NCC? Explain.
+
+Suggested Answer
+
+A181a:
+
+The furniture-making machinery is movable property because it was not installed by the owner of the tenement. To become immovable under Art. 415(5) of the NCC, the machinery must be installed by the owner of the tenement.
+
+
+Question (1995 BAR)
+
+Q181b:
+
+Suppose the lease contract between Salvador and NARRAMIX stipulates that at the end of the lease the machinery shall become the property of the lessor, will your answer be the same? Explain.
+
+Suggested Answer
+
+A181b:
+
+It is immovable property. When there is a provision in the lease contract making the lessor, at the end of the lease owner of the machinery installed by the lessee, the said machinery is considered to have been installed by the lessor through the lessee who acted merely as his agent. Having been installed by the owner of the tenement, the machinery became immovable under Art. 415 of the NCC. (Davao Sawmill v. Castillo, G.R. No. L-40411, 07 Aug. 1935)
+
+
+Question (2019 BAR)
+
+Q182:
+
+Mr. E leased a piece of land from Mr. F to be used for his sawmill business for a period of 10 years. Consequently, Mr. E placed heavy machineries thereon to be used for his aforementioned business, with the intention of removing them after the expiration of the lease period. Are Mr. E's heavy machineries considered real properties under the Civil Code? Explain.
+
+Suggested Answer
+
+A182:
+
+NO, they are movables. Machinery which is movable in its nature only becomes immobilized when placed in a plant by the owner thereof in a land or building which is also owned by him, for an industry or works which may be carried on in a tenement and which tend directly to meet the needs of said industry or works, but not when so placed by a tenant, a usufructuary, or any person having only a temporary right, unless such person acted as the agent of the owner, for instance, if the lease contained a stipulation that any useful improvement which the lessee introduces on the leased property shall pertain to the lessor at the termination of the lease. Here, the heavy machineries were placed by Mr. E on a piece of land leased from Mr. F with the intention of removing them after the expiration of the lease period. Being movable in nature, said machineries were not deemed immobilized. (UPLC Suggested Answers)
+
+
+Question (2016 BAR)
+
+Q183:
+
+Joven and Juliana are the owners of a 30-hectare plantation in Cotabato, covered by a title. One day, a group of armed men forcibly entered their house and, at gun point, forced them to sign a Deed of Absolute Sale in favor of Romeo. Romeo got the title from them and they were ejected from the house and threatened not to come back or else they will be killed. The spouses went to Manila and resided there for more than 35 years. They never went back to Cotabato for fear of their lives. Word came to them that peace and order have been restored in their former place of residence and they decided to reclaim their land for the benefit of their grandchildren. Joven and Juliana filed a suit for reconveyance of their property. This was opposed by the grandson of Romeo to whom the title was eventually transferred, on the ground of laches and prescription. Decide the case and rule on the defenses of laches and prescription. Explain your answer.
+
+Suggested Answer
+
+A183:
+
+The right of the registered owners, Joven and Juliana, to file suit to recover their property, is not barred by prescription. Under Sec. 47, P.D. No. 1529, no title to registered land in derogation of the title of the registered owner shall be acquired by prescription or adverse possession.
+
+Proof of possession by the owner in an action for reconveyance is immaterial and inconsequential. The right to recover possession is equally imprescriptible since possession is a mere consequence of ownership. (Republic v. Mendoza, G.R. No. 185091, 08 Aug. 2010) The right of Joven and Juliana to recover is not barred by laches, either. Laches deals with unreasonable delay in filing the action. The owner’s delay, if any, cannot be construed as deliberate and intentional. They were simply coerced out of Cotabato and threatened with death if they returned, and, thus, could not have filed them.
+
+
+Question (2014 BAR)
+
+Q184a:
+
+A congregation for religious women, by way of commodatum, is using the real property owned and registered in the name of Sps. Manuel as a retreat house. Maria, a helper of the congregation discovered a chest in the backyard. When she opened the chest, it contained several pieces of jewelry and money.
+
+Can the chest containing the pieces of jewelry and money be considered as hidden treasure?
+
+Suggested Answer
+
+A184a:
+
+NO, for property to be considered hidden treasure it must consist of money, jewelry or other precious objects, the lawful ownership of which does not appear. In the case at bar, the chest was just lay in the backyard and the real property where it was found belongs to the Sps. Manuel. They are thus presumed the owner of the chest where the jewelry was found.
+
+
+Question (2014 BAR)
+
+Q184b:
+
+Who has the right to claim ownership of it?
+
+Suggested Answer
+
+A184b:
+
+Since it does not come within the purview of hidden treasure, the Sps. Manuel have the right to claim ownership over the chest as well as its contents.
+
+
+Question (2010 BAR)
+
+Q185:
+
+O, owner of Lot A, learning that Japanese soldiers may have buried gold and other treasures at the adjoining vacant Lot B belonging to Sps. X & Y, excavated in Lot B where she succeeded in unearthing gold and precious stones. How will the treasures found by O be divided? 
+(1) 100% to O as finder; 
+(2) 50% to O and 50% to the Sps. X and Y; 
+(3) 50% to O and 50% to the State; 
+(4) None of the above
+
+Suggested Answer
+
+A185:
+
+NONE OF THE ABOVE. The general rule us that the treasure shall belong to the Sps. X and Y, the owners of Lot B. Under Art. 438, NCC, the exception is that when the discovery of a hidden treasure is made on the property of another and by chance, one-half thereof shall belong to the owner of the land and the other one-half is allowed to the finder. In the problem, the finding of the treasure was not by chance because O knew that the treasure was in Lot B. While a trespasser is also not entitled to any share, and there is no indication in the problem whether or not O was a trespasser, O is not entitled to a share because the finding was not “by chance.”
+
+
+Question (2008 BAR)
+
+Q186:
+
+Adam, a building contractor, was engaged by Blas to construct a house on a lot which he (Blas) owns. While digging on the lot in order to lay down the foundation of the house, Adam hit a very hard object. It turned out to be the vault of the old Banco de las Islas Filipinas. Using a detonation device, Adam was able to open the vault containing old notes and coins which were in circulation during the Spanish era. While the notes and coins are no longer legal tender, they were valued at P100 million because of their historical value and the coins silver nickel content. The following filed legal claims over the notes and coins: 
+i. Adam, as finder; 
+ii. Blas, as owner of the property where they were found; 
+iii. Bank of the Philippine Islands (BPI), as successor-in-interest of the owner of the vault; and 
+iv. The Philippine Government because of their historical value. 
+
+Who owns the notes and coins?
+
+Suggested Answer
+
+A186:
+
+Hidden treasure is a money jewelry or other precious objects the ownership of which does not appear. (Art. 439, NCC) The vault of the Banco de las Islas Filipinas has been buried for about a century and the BPI cannot succeed by inheritance to the property of Banco de las Islas Filipinas. The ownership of the vault, together with the notes and coins can now legally be considered as hidden treasure because its ownership is no longer apparent. The contractor, Adam, is not a trespasser and therefore entitled to one-half (1/2) of the hidden treasure and Blas as owner of the property, is entitled to the other half. (Art. 438, NCC) Since the notes and coins have historical value, the government may acquire them at their just price which in turn will be divided equally between Adam and Blas. (Art. 438(3), NCC)
+
+
+Question (2008 BAR)
+
+Q187:
+
+Anthony bought a piece of untitled agricultural land from Bert. Bert, in turn, acquired the property by forging Carlo's signature in a deed of sale over the property. Carlo had been in possession of the property for eight (8) years, declared it for tax purposes, and religiously paid all taxes due on the property. Anthony is not aware of the defect in Bert's title but has been in actual physical possession of the property from the time he bought it from Bert, who had never been in possession of the property for one year.
+
+Can Anthony acquire ownership of the property by acquisitive prescription? How many more years does he have to possess it to acquire ownership?
+
+Suggested Answer
+
+A187:
+
+YES, Anthony can acquire ownership of the property by ordinary prescription which requires just title and good faith. (Art. 1117, NCC) There was just title because a deed of sale was issued in his favor even though it was forged, which in fact he was not aware of. He needs to possess the land in good faith and in the concept of an owner for a total of ten years in order to acquire ownership. Since Anthony possessed the land for only one year, he has not completed the ten-year period. Even if Anthony tacks the 8-year period of possession by Carlo who in the deed of sale is supposed to be his grantor or predecessor in interest (Art. 1138(1), NCC), the period is still short of ten years.
+
+
+Question (1995 BAR)
+
+Q188:
+
+Tim came into possession of an old map showing where a purported cache of gold bullion was hidden. Without any authority from the government Tim conducted a relentless search and finally found the treasure buried in a new riverbed formerly part of a parcel of land owned by Sps. Tirso and Tessie. The old river which used to cut through the land of Sps. Ursula and Urbito changed its course through natural causes. To whom shall the treasure belong? Explain
+
+Suggested Answer
+
+A188:
+
+The treasure was found in a property of public dominion, the new riverbed. Since Tim did not have authority from the government and, therefore, was a trespasser, he is not entitled to the 1/2 share allotted to a finder of hidden treasure. All of it will go to the State. In addition, under Art. 438 of the NCC in order that the finder be entitled to the 1/2 share, the treasure must be found by chance, that is by sheer luck. In this case, since Tim found the treasure not by chance but because he relentlessly searched for it. Thus, he is not entitled to any share in the hidden treasure.
+
+
+Question (1997 BAR)
+
+Q189:
+
+Marcelino, a treasure hunter as just a hobby, has found a map which appears to indicate the location of hidden treasure. He has an idea of the land where the treasure might possibly be found. Upon inquiry, Marcelino learns that the owner of the land, Leopoldo, is a permanent resident of Canada. Nobody, however, could give him Leopoldo's exact address. Ultimately, anyway, he enters the land and conducts a search. He succeeds. Leopoldo learning of Marcelino's “find,” seeks to recover the treasure from Marcelino but the latter is not willing to part with it. Failing to reach an agreement, Leopoldo sues Marcelino for the recovery of the property. Marcelino contests the action. How would you decide the case?
+
+Suggested Answer
+
+A189:
+
+I would decide in favor of Marcelino since he is considered a finder by chance of the hidden treasure, hence, he is entitled to one-half (1/2) of the hidden treasure. While Marcelino may have had the intention to look for the hidden treasure, still he is a finder by chance since it is enough that he tried to look for it. By chance in the law does not mean sheer luck such that the finder should have no intention at all to look for the treasure. By chance means good luck, implying that one who intentionally looks for the treasure is embraced in the provision. The reason is that it is extremely difficult to find hidden treasure without looking for it deliberately.
+
+Marcelino is not a trespasser since there is no prohibition for him to enter the premises, hence, he is entitled to onehalf (1/2) of the treasure.
+
+
+Question (2014 BAR)
+
+Q190:
+
+A delayed accession is: 
+(A) Formation of an island 
+(B) Avulsion 
+(C) Alluvium 
+(D) Change in the course of the riverbed
+
+Suggested Answer
+
+A190:
+
+(B) Avulsion. (Art. 459, NCC)
+
+
+Question (2022 BAR)
+
+Q191a:
+
+Pepe and Pilar are adjoining lot owners. Suppose Pepe’s lot is titled and without his knowledge, it was encroached upon by Pilar whose lot is untitled but who honestly believed that the encroached portion, where she built a small bungalow house, is still within her property. Is Pilar a builder in good faith? Discuss Pepe’s right as against Pilar. Explain briefly.
+
+Suggested Answer
+
+A191a:
+
+YES, Pilar is considered a builder in good faith. To be deemed a builder in good faith, it is essential that a person asserts title to the land on which he builds, i.e., that he be a possessor in the concept of owner, and that he be unaware that there exists in his title or mode of acquisition any flaw which invalidates it. (Department of Education vs. Casibang, G.R. No. 192268, 27 Jan. 2016) Here, the facts clearly state that Pilar honestly believed that the encroached portion was still within her property.
+
+Hence, Pilar is considered a builder in good faith. Since Pilar is considered a builder in good faith, Pedro may exercise the following options available to the landowner if the builder is in good faith, to wit: 1) to appropriate the structure built by Pilar after payment of proper indemnity; 2) to compel Pilar to buy the encroached portion if its value is not considerably higher than the building or the trees. 3) the right to lease the land encroached by Pilar if the value of the land is considerably higher than the value of the bungalow. (Art. 448, NCC; Pleasantville Development Corporation vs. Court of Appeals, G.R. No. 79688, 01 Feb. 1996) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2022 BAR)
+
+Q191b:
+
+Suppose it is Pilar’s lot that is titled and Pepe’s lot is untitled, would Pilar be a builder in good faith? Discuss Pepe’s right as against Pilar. Explain briefly.
+
+Suggested Answer
+
+A191b:
+
+YES, Pilar would still be considered a builder in good faith. The fact that her property is covered by a title does not mean that she knows the exact metes and bounds of her property. In one case decided by the Supreme Court, it ruled that unless one is versed in the science of surveying, "no one can determine the precise extent or location of his property by merely examining his paper title." (Co Tao vs. Chico G.R. No. 49167, 30 Apr. 1949) Since Pilar is in good faith, Pepe can appropriate the encroaching portion of Pilar's bungalow after payment of proper indemnity or compel the latter to buy the portion of his land encroached by the bungalow provided that its value is not considerably higher than the building. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2020-21 BAR)
+
+Q192:
+
+Believing that a parcel of land was a public land, a farmer built a two-story concrete house on it. Five years later, a person showed up bearing an Original Certificate of Title over the lot which had been registered for more than 10 years. The person asked the farmer to vacate the parcel of land. The farmer refused to vacate unless the titled owner pays the market value of the house built on the parcel of land. Does the farmer have legal ground to demand payment for the house before vacating the parcel of land? Explain briefly.
+
+Suggested Answer
+
+A192:
+
+NO, the farmer does not have legal ground to demand payment of the house before vacating the land. The facts state that the farmer was aware right from the start that he has no title whatsoever to the land because he believed it to be a public land. As such, the farmer was a builder in bad faith. A builder in bad faith loses what is built, planted, or sown on the land of another without the right to indemnity. (Art. 449, NCC) The owner of the land may also ask for the demolition of the house to replace things in their former condition at the expense of the farmer without any right on the part of the latter to ask for indemnity. (Art. 450, NCC) (Bar Q&A by Paguirigan, 2022)
+
+
+Question (2019 BAR)
+
+Q193a:
+
+Believing that he owned a certain parcel of land and completely unaware of any defect in his title thereto, Mr. A started to build a house thereon. When Mr. P, the real owner of the land learned of Mr. A's actions, Mr. P immediately demanded Mr. A to leave the premises. However, Mr. A refused to leave, and instead, asserted that as a builder in good faith, Mr. P is obliged to sell the land to him. Is the claim of Mr. A correct? Explain.
+
+Suggested Answer
+
+A193a:
+
+NO, Mr. A is not correct. Mr. A who was completely unaware of any defect in his title, is a builder in good faith. Mr. P who prompted Mr. A’s possession also acted in good faith. Art. 448 applies in this case, which provides that only the owner of the land on which anything has been built, sown or planted in good faith, has the right to appropriate as his own the works, sowing or planting, after payment of the indemnity for necessary expenses and useful expenses where applicable, or to oblige the one who built or planted to pay the price of the land, and the one who sowed, the proper rent; however, the builder or planter cannot be obliged to buy the land if its value is considerably more than that of the building or trees. The law grants said rights to the owner of the land. The builder in good faith, Mr. A in this case, cannot compel Mr. P, the owner of the land, to choose which right to exercise, for the option belongs to the owner alone.
+
+
+Question (2019 BAR)
+
+Q193b:
+
+Assuming that Mr. P all the while, knew but did not object to Mr. A's construction of the house on his property, may Mr. A compel Mr. P to purchase the said improvement due to Mr. P's bad faith? Explain.
+
+Suggested Answer
+
+A193b:
+
+YES, Mr. A may compel Mr. P to purchase the improvements. When the landowner acted in bad faith and the builder, planter or sower proceeded in good faith, the provisions under Art. 447, NCC shall apply. (Art. 454, NCC) There is bad faith on the part of the landowner whenever the act was done with his knowledge and without opposition on his part. (Art. 453, NCC) Art. 447 of the NCC provides that the owner of the land who makes thereon, personally or through another, plantings, constructions or works with the materials of another, shall pay their value; and, if the landowner acted in bad faith, the owner of the materials may remove them in any event, with a right to be indemnified for damages. The landowner, having known and without opposing the construction made by Mr. A is deemed to have acted in bad faith. Art. 447, NCC therefore, applies and Mr. P shall pay the value of the improvement, i.e., the value of the materials, plus damages.
+
+
+Question (2018 BAR)
+
+Q194:
+
+Sammy and Santi are cousins who separately inherited two adjoining lots from their grandfather. Sammy is based overseas but wants to earn income from his inherited land, so he asked a local contractor to build a row of apartments on his property which he could rent out. The contractor sent him the plans and Sammy noticed that the construction encroached on a part of Santi’s land, but he said nothing and gave approval to construct based on the plans submitted by the local contractor. Santi, based locally, and who loved his cousin dearly, did not object even if he knew of the encroachment since he was privy to the plans and visited the property regularly. Later, the cousins had a falling out and Santi demanded that the portion of the apartments that encroached on his land be demolished. Can Santi successfully file legal action to require the demolition?
+
+Suggested Answer
+
+A194:
+
+NO, Santi cannot successfully file a legal action to require the demolition. Since the builder and the landowner both acted in bad faith, their rights shall be the same as though both had acted in good faith. (Art. 453, NCC) Sammy is not a builder in good faith with respect to the portion of the apartment encroaching on Santi’s property, because he knew that he was not the owner of the land when he built the apartment. There is bad faith, likewise, on Santi’s part, because he did not object to the construction although he had knowledge thereof. (Art. 453, NCC)
+
+In cases where both the landowner and the builder acted in good faith, the landowner does not have the option to demand the demolition of the work. (Art. 448, NCC)
+
+
+Question (2017 BAR)
+
+Q195:
+
+Josef owns a piece of land in Pampanga. The National Housing Authority (NHA) sought to expropriate the property for its socialized housing project. The trial court fixed the just compensation for the property at P50 million. The NHA immediately deposited the same at the authorized depository bank and filed a motion for the issuance of a writ of possession with the trial court. Unfortunately, there was delay in the resolution of the motion. Meanwhile, the amount deposited earned interest. When Josef sought the release of the amount deposited NHA argued that Josef should only be entitled to P50 million. Who owns the interest earned?
+
+Suggested Answer
+
+A195:
+
+Josef owns the interest earned. In Republic v. Holy Trinity Realty Development Corp. (GR. No. 172410, 14 Apr. 2008), the Supreme Court has declared that upon deposit by the appropriator of the amount fixed for just compensation, the owner whose property is sought to be expropriated becomes the owner of the deposited amount. Any interest, therefore, that accrues to such deposit belongs to the owner by right of accession. In the case at bar, Josef became the owner of the amount deposited by NHA. Thus, any interest that accrues therefrom pertains to Josef by right of accession.
+
+NOTE: In the case of NPC v. Heirs of Ramoran (GR. No. 193455, 13 June 2016), the Supreme Court ruled that the imposable rate of interest is 12% per annum from the time of the taking until 30 June 2013, and 6% per annum from 01 July 2013 until full payment.
+
+
+Question (2016 BAR)
+
+Q196a:
+
+Pedro bought a parcel of land described as Cadastral Lot No. 123 and the title was issued to his name. Juan also bought a lot in the same place, which is described as Cadastral Lot No. 124. Pedro hired a geodetic engineer to determine the actual location of Lot No. 123 but for some reason, the engineer pointed to Lot No. 124 by mistake. Pedro hired a contractor to construct his house and the latter put up a sign stating the name of the owner of the project and the construction permit number. It took more than a year before the house was constructed. When Pedro was already residing in his house, Juan told him to remove his house because it was built on his (Juan's) lot. Juan filed a Complaint for Recovery of Possession and prayed that the house be removed because Pedro is a builder in bad faith. Pedro filed his Answer with Counterclaim that he is entitled to the payment of the value of the house plus damages because he is a builder in good faith and that Juan is guilty of estoppel and laches. If Pedro is a builder in good faith, what are the rights given to Juan under the law? Explain.
+
+Suggested Answer
+
+A196a:
+
+If Pedro is a builder in good faith and Juan is an owner in good faith, Juan has the right to appropriate as his own the house after payment of indemnity provided for in Arts. 546 and 548 of the NCC, which are the necessary and useful expenses. As to useful expenses, Juan has the option to either refund the amount of the expenses or pay the increase in value which the land may have acquired by reason thereof. Alternatively, under Art. 448 of the NCC, Juan has the right to oblige Pedro to pay the price of the land. However, Pedro cannot be obliged to buy the land if its value is considerably more than that of the house. In such case, he shall pay reasonable rend, if Juan does not choose to appropriate the house after proper indemnity. It is the owner of the land who is authorized to exercise the options under Art. 448 because his right is older and by principle of accession, he is entitled to the ownership of the accessory thing.
+
+If Pedro is a builder in good faith and Juan is an owner in bad faith because Juan knew that Pedro was building on his lot and did not oppose it (Art. 453(2)), and Art. 454, in relation to Art. 447 of the NCC applies. Juan shall pay the value of the house and is also liable for reparation of damage. However, Pedro also has the right to remove or demolish the house and ask for damages.
+
+
+Question (2016 BAR)
+
+Q196b:
+
+If Pedro is a builder in bad faith, what are the rights given to Juan under the law? Explain.
+
+Suggested Answer
+
+A196b:
+
+If Pedro is a builder in bad faith and Juan is an owner in good faith, Juan has three options. He may appropriate the improvements without indemnity under Art. 449 of the NCC or demand the demolition of the house in order to replace things to their former condition at Pedro’s expense under Art. 450 or compel Pedro to pay the price of the land. In addition to these options, Juan is also entitled to damages from Pedro.
+
+If Pedro is a builder in bad faith and Juan is an owner in bad faith, it shall be as if both of them were in good faith. (Art. 453, NCC)
+
+
+Question (2015 BAR)
+
+Q197:
+
+Mr. and Mrs. X migrated to the US with all their children. As they had no intention of coming back, they offered their house and lot for sale to their neighbors, Mr. and Mrs. A (the buyers) who agreed to buy the property for 128 Million. Because Mr. and Mrs. A needed to obtain a loan from a bank first, and since the sellers were in a hurry to migrate, the latter told the buyers that they could already occupy the house, renovate it as it was already in a state of disrepair, and pay only when their loan is approved and released. While waiting for the loan approval, the buyers spent P1 Million in repairing the house. A month later, a person carrying an authenticated special power of attorney from the sellers demanded that the buyers either immediately pay for the property in full now or vacate it and pay damages for having made improvements on the property without a sale having been perfected. What are the buyers' options or legal rights with respect to the expenses they incurred in improving the property under circumstances?
+
+Suggested Answer
+
+A197:
+
+The buyers here may be deemed possessors or builders in good faith because they were made to believe that they were allowed to make repairs or renovation by the sellers themselves. As builders in good faith, they have the right to seek reimbursement for the value of the improvements in case the owner decides to appropriate them. They cannot be asked to remove the improvements because that is not one of the options given by law to the landowner in case the builder is in good faith.
+
+
+Question (2013, 2001, 1992 BAR)
+
+Q198:
+
+Ciriaco Realty Corporation (CRC) sold to the Sps. Dela Cruz a 500-square meter land (Lot A) in Paranaque. The land now has a fair market value of P1,200,000. CRC likewise sold to the Sps. Rodriguez, a 700-square meter land (Lot B) which is adjacent to Lot A. Lot B has a present fair market value of P1,500,000. The Sps. Dela Cruz constructed a house on Lot B, relying on their presentation of the CRC sales agent that it is the property they purchased. Only upon the completion of their house did the Sps. Dela Cruz discover that they had built on Lot B owned by the Sps. Rodriguez, not on Lot A that they purchased. They spent P1,000,000 for the house. As their lawyer, advise the Sps. Dela Cruz on their rights and obligations under the given circumstances, and the recourses and options open to them to protect their interests.
+
+Suggested Answer
+
+A198:
+
+Based on the facts as stated, the Sps. Dela Cruz as builders and the Sps. Rodriguez as landowners, are both in good faith. The Sps. Dela Cruz are builders in good faith because before constructing the house they exercised due diligence by asking the agent of CRC the location of Lot A. and they relied on the information given by the agent who is presumed to know the identity of the lot purchased by the Sps. Dela Cruz. (Pleasantville v. Court of Appeals, G.R. No. 79688, 01 Feb. 1996) On the other hand, there is no showing that the landowners, Sps. Rodriguez, acted in bad faith. The facts do not show that the building was done with their knowledge and without opposition on their part. (Art. 453, NCC) Good faith is always presumed. (Art. 527, NCC) The owner of the land on which anything has been built, sown or planted in good faith shall have the right:
+
+1. to appropriate as his own the works after payment of the indemnity provided for in Arts. 546 and 548, NCC; or 
+2. to oblige the one who built to pay the price of the land.
+
+However, the builder cannot be obliged to buy the land if its value is considerably more than that of the building. In such case, he shall pay reasonable rent if the owner of the land does not choose to appropriate the building or trees after proper indemnity. (Art. 448, NCC) The house constructed by the Sps. Dela Cruz is considered as a useful expense, since it increased the value of the lot. As such, should the Sps. Rodriguez decide to appropriate the house, the Sps. Dela Cruz are entitled to the right of retention pending reimbursement of the expenses they incurred or the increase in value which the thing may have acquired by reason of the improvement. (Art. 546, NCC) Thus, the Sps. Dela Cruz may demand P1,000,000 as payment of the expenses in building the house or increase in value of the land because of the house as a useful improvement, as may be determined by the court front the evidence presented during the trial. (Depra Dumlao, G.R. No. L-57348, 16 May 1985; Technogas Phils. v. Court of Appeals, G.R. No. 108894, 10 Feb. 1997)
+
+
+Question (2013, 1990 BAR)
+
+Q199a:
+
+Anselmo is the registered owner of a land and a house that his friend Boboy occupied for a nominal rental and on the condition that Boboy would vacate the property on demand. With Anselmo's knowledge, Boboy introduced renovations consisting of an additional bedroom, a covered veranda, and a concrete block fence, at his own expense. Subsequently, Anselmo needed the property as his residence and thus asked Boboy to vacate and turn it over to him. Boboy, despite an extension, failed to vacate the property, forcing Anselmo to send him a written demand to vacate. In his own written reply, Boboy signified that he was ready to leave but Anselmo must first reimburse him the value of the improvements he introduced on the property as he is a builder in good faith. Anselmo refused, insisting that Boboy cannot ask for reimbursement as he is a mere lessee. Boboy responded by removing the improvements and leaving the building in its original state. Resolve Boboy's claim that as a builder in good faith, he should be reimbursed the value of the improvements he introduced.
+
+Suggested Answer
+
+A199a:
+
+Boboy’s claim that he is a builder in good faith has no legal basis. A builder in good faith is someone who occupies the property in the concept of an owner. The provisions on builder-planter-sower under the NCC cover cases in which the builder, planter and sower believe themselves to be owners of the land, or at least, to have a claim of title thereto. As Boboy is a lessee of the property, even if he was paying nominal rental, Art. 1678, NCC is applicable. Under this provision, if the lessee makes, in good faith, useful improvements which are suitable to the use for which the lease is intended without altering the form or substance of the property leased, the lessor upon the termination of the lease shall pay the lessee one-half (1/2) of the value of the improvements at that time. Should the lessor refuse to reimburse said amount, the lessee may remove the improvements even though the principal thing may suffer damage thereby.
+
+
+Question (2013, 1990 BAR)
+
+Q199b:
+
+Can Boboy be held liable for damages for removing the improvements over Anselmo's objection?
+
+Suggested Answer
+
+A199b:
+
+NO. Boboy cannot be held liable for damages. The lessor, Anselmo, refused to reimburse 1/2 of the value of the improvements, so the lessee, Boboy, may remove the same, even though the principal thing may suffer damage thereby. If in removing the useful improvements Boboy caused more impairment on the property leased than what is necessary, he will be liable for damages. (Art. 1678, NCC)
+
+
+Question (2001 BAR)
+
+Q200a:
+
+Mike built a house on his lot in Pasay City. Two years later, a survey disclosed that a portion of the building actually stood on the neighboring land of Jose, to the extent of 40 square meters. Jose claims that Mike is a builder in bad faith because he should know the boundaries of his lot and demands that the portion of the house which encroached on his land should be destroyed or removed. Mike replies that he is a builder in good faith and offers to buy the land occupied by the building instead. Is Mike a builder in good faith or bad faith? Why?
+
+Suggested Answer
+
+A200a:
+
+Mike is a builder in good faith. There is no showing that when he built his house, he knew that a portion thereof encroached on Jose's lot. Unless one is versed in the science of surveying, he cannot determine the precise boundaries or location of his property by merely examining his title. In the absence of contrary proof, the law presumes that the encroachment was done in good faith. (Technogas Phils. v. Court of Appeals, G.R. No. 108894, 10 Feb. 1997)
+
+
+Question (2001 BAR)
+
+Q200b:
+
+Whose preference should be followed? Why?
+
+Suggested Answer
+
+A200b:
+
+NONE of the preferences shall be followed. The preference of Mike cannot prevail because under Art. 448 of the NCC, it is the owner of the land who has the option or choice, not the builder. On the other hand, even though the option belongs to Jose, he cannot demand that the portion of the house encroaching on his land be destroyed or removed because this is not one of the options given by law to the owner of the land. The owner may choose between the appropriation of what was built after payment of indemnity, or to compel the builder to pay for the land if the value of the land is not considerably more than that of the building. Otherwise, the builder shall pay rent for the portion of the land encroached.
+
+
+Question (2000 BAR)
+
+Q201:
+
+Felix cultivated a parcel of land and planted it with sugar cane, believing it to be his own. When the crop was 8 months old and harvestable after two more months, a resurvey of the land showed that it really belonged to Fred. What are the options available to Fred?
+
+Suggested Answer
+
+A201:
+
+As to the pending crops planted by Felix in good faith, Fred has the option of allowing Felix to continue the cultivation and to harvest the crops, or to continue the cultivation and harvest the crops himself. In the latter option, however, Felix shall have the right to a part of the expenses of cultivation and to a part of the net harvest, both in proportion to the time of possession. (Art. 545 NCC)
+
+
+Question (2000 BAR)
+
+Q202a:
+
+In good faith, Pedro constructed a five-door commercial building on the land of Pablo who was also in good faith. When Pablo discovered the construction, he opted to appropriate the building by paying Pedro the cost thereof. However, Pedro insists that he should be paid the current market value of the building, which was much higher because of inflation. Who is correct Pedro or Pablo?
+
+Suggested Answer
+
+A202a:
+
+Pablo is correct. Under Art. 448, NCC in relation to Art. 546, NCC, the builder in good faith is entitled to a refund of the necessary and useful expenses incurred by him, or the increase in value which the land may have acquired by reason of the improvement, at the option of the landowner. The builder is entitled to a refund of the expenses he incurred, and not to the market value of the improvement. The case of Pecson v. Court of Appeals (G.R. No. 115814, 26 May 1995) is not applicable to the problem. In the Pecson case, the builder was the owner of the land who later lost the property at a public sale due to non-payment of taxes. The Court ruled that Art. 448, NCC does not apply to the case where the owner of the land is the builder but who later lost the land; not being applicable, the indemnity that should be paid to the buyer must be the fair market value of the building and not just the cost of construction thereof. The Court opined in that case that to do otherwise would unjustly enrich the new owner of the land.
+
+
+Question (2000 BAR)
+
+Q202b:
+
+In the meantime, that Pedro is not yet paid, who is entitled to the rentals of the building, Pedro or Pablo?
+
+Suggested Answer
+
+A202b:
+
+Pablo is entitled to the rentals of the building. As the owner of the land, Pablo is also the owner of the building being an accession thereto. However, Pedro who is entitled to retain the building is also entitled to retain the rentals. He, however, shall apply the rentals to the indemnity payable to him after deducting reasonable cost of repair and maintenance.
+
+
+Question (1999 BAR)
+
+Q203a:
+
+Because of confusion as to the boundaries of the adjoining lots that they bought from the same subdivision company, X constructed a house on the adjoining lot of Y in the honest belief that it is the land that he bought from the subdivision company. What are the respective rights of X and Y with respect to X's house?
+
+Suggested Answer
+
+A203a:
+
+The rights of Y, as owner of the lot, and of X, as builder of a house thereon, are governed by Art. 448 of the NCC which grants to Y the right to choose between two remedies: (a) appropriate the house by indemnifying X for its value plus whatever necessary expenses the latter may have incurred for the preservation of the land, or (b) compel X to buy the land if the price of the land is not considerably more than the value of the house. If it is, then X cannot be obliged to buy the land, but he shall pay reasonable rent, and in case of disagreement, the court shall fix the terms of the lease.
+
+
+Question (1999 BAR)
+
+Q203b:
+
+Suppose X was in good faith but Y knew that X was constructing on his (Y's) land but simply kept quiet about it, thinking perhaps that he could get X's house later. What are the respective rights of the parties over X's house in this case?
+
+Suggested Answer
+
+A203b:
+
+Since the lot owner Y is deemed to be in bad faith (Art. 453, NCC), X as the party in good faith may (a) remove the house and demand indemnification for damages suffered by him, or (b) demand payment of the value of the house plus reparation for damages. (Art. 447, in relation to Art 454, NCC) Y continues as owner of the lot and becomes, under the second option, owner of the house as well, after he pays the sums demanded.
+
+
+Question (1996 BAR)
+
+Q204a:
+
+Bartolome constructed a chapel on the land of Eric. What are his right if he were: A possessor of the land in good faith?
+
+Suggested Answer
+
+A204a:
+
+A chapel is a useful improvement. Bartolome may remove the chapel if it can be removed without damage to the land, unless Eric chooses to acquire the chapel. In the latter case, Bartolome has the right to the reimbursement of the value of the chapel with right of retention until he is reimbursed. (Art. 448, in relation to Art. 546 and 547, NCC)
+
+
+Question (1996 BAR)
+
+Q204b:
+
+A possessor of the land in bad faith?
+
+Suggested Answer
+
+A204b:
+
+Bartolome, under Art. 449 of the NCC, loses whatever he built, without any right to indemnity.
+
+
+Question (1992 BAR)
+
+Q205a:
+
+A owns a parcel of residential land worth P500,000.00. Unknown to A, a residential house costing P100,000.00 is built on the entire parcel by B who claims ownership of the land. Answer based on the premise that B is a builder in good faith and A is a landowner in good faith. May A acquire the house built by B? If so, how?
+
+Suggested Answer
+
+A205a:
+
+YES, A may acquire the house built by B by paying indemnity to B. Art. 448 of the NCC provides that the owner of the land on which anything has been built, sown or planted in good faith, shall have the right to appropriate as his own works, sowing or planting, after payment of the indemnity provided for in Art. 546 of the NCC.
+
+
+Question (1992 BAR)
+
+Q205b:
+
+If the land increased in value to P500,000.00 by reason of the building of the house thereon, what amount should be paid by A in order to acquire the house from B?
+
+Suggested Answer
+
+A205b:
+
+A should pay B the sum of P50,000.00. Art. 548 of the NCC provides that useful expenses shall be refunded to the possessor in good faith with the right of retention, the person who has defeated him in the possession having the option of refunding the amount of the expenses or of paying the increase in value which the thing may have acquired by reason thereof. The increase in value amounts to P50,000.00.
+
+
+Question (1992 BAR)
+
+Q205c:
+
+Assuming that the cost of the house was P900,000.00 and not P100,000.00, may A require B to buy the land?
+
+Suggested Answer
+
+A205c:
+
+YES, A may require B to buy the land. Art. 448 of the NCC provides that the owner of the land on which anything has been built in good faith shall have the right to oblige the one who built to pay the price of the land if its value is not considerably more than that of the building.
+
+
+Question (1992 BAR)
+
+Q205d:
+
+If B voluntarily buys the land as desired by A, under what circumstances may A nevertheless be entitled to have the house removed?
+
+Suggested Answer
+
+A205d:
+
+If B agrees to buy land but fails to pay, A can have the house removed. (Depra Dumlao, G.R. No. L-57348, 16 May 1985; Technogas Phils. v. Court of Appeals, G.R. No. 108894, 10 Feb. 1997)
+
+
+Question (1992 BAR)
+
+Q205e:
+
+In what situation may a “forced lease” arise between A and B, and what terms and conditions would govern the lease?
+
+Suggested Answer
+
+A205e:
+
+Art. 448 of the NCC provides that the builder cannot be obliged to buy the land if its value is considerably more than that of the building. In such case, he shall pay reasonable rent, if the owner of the land does not choose to appropriate the building after proper indemnity. The parties shall agree upon the terms of the lease and in case of disagreement, the court fix the terms thereof.
+
+
+Question (2017 BAR)
+
+Q206a:
+
+Plutarco owned land that borders on a river. After several years the action of the water of the river caused the deposit of soil and increased the area of Plutarco's property by 200 square meters. If Plutarco wants to own the increase in area, what will be his legal basis for doing so? Explain your answer.
+
+Suggested Answer
+
+A206a:
+
+Plutarco's legal basis for owning the increase in area would be by accretion under Art. 457 of the NCC, which says that the accretion of soil which is gradually received from the effects of the current of the waters belongs to the owners of land adjoining the banks of the river. The requisites in order that the riparian owner will own the alluvion deposited through the process of accretion are as follows: (1) the deposit should be gradual and imperceptible, (2) the cause of the accretion is the current of the river and is not artificial or man-made, and (3) the land where the accretion takes place is adjacent to the river bank.
+
+In Plutarco's case, all three requisites are met, as the accretion took place over several years, was caused by the action of the river, and the land he owned borders a riven. Therefore, he owns the increase in area by virtue of accretion.
+
+
+Question (2017 BAR)
+
+Q206b:
+
+On the other hand, if the river dries up, may Plutarco validly claim a right of ownership of the dried-up river bed? Explain your answer.
+
+Suggested Answer
+
+A206b:
+
+Rivers and their natural beds, being of public dominion (Art. 502(1), NCC), are not subject to appropriation or accretion. The dried-up riverbed remains to be of public dominion and Plutarco cannot validly claim a right ownership over it. (Republic v. Santos, G.R. No. 160453, 12 Nov. 2012)
+
+
+Question (2017, 2016 BAR)
+
+Q207:
+
+Benjamin is the owner of a titled lot which is bounded on the north by the Maragondon River. An alluvial deposit of two (2) hectares was added to the registered area. Daniel took possession of the portion formed by accretion and claims that he has been in open, continuous and undisturbed possession of said portion since 1923 as shown by a tax declaration. In 1958, Benjamin filed a Complaint for Quieting of Title and contends that the alluvium belongs to him as the riparian owner and that since the alluvium is, by law, part and parcel of the registered property, the same may be considered as registered property. Decide the case and explain.
+
+Suggested Answer
+
+A207:
+
+I will decide in favor of Daniel and dismiss the action to quite title filed by Benjamin. Under Art. 457 of the NCC, the owner of lands adjoining the banks of rivers belong the accretion which they gradually receive from the effects of the current of the waters. The accretion, however, does not automatically become registered land. It must be brought under the Torrens system of registration by Benjamin, the riparian owner. Since he did not, then the increment, not being registered land, was open to acquisition through prescription by third persons, like Daniel. (Grande v. Court of Appeals, G.R. No. L-17652, 30 June 1962; Cureg v. IAC, G.R. No. 73465, 07 Sept. 1989)
+
+
+Question (2017, 2008 BAR)
+
+Q208a:
+
+The properties of Jessica and Jenny, who are neighbors, lie along the banks of the Marikina River. At certain times of the year, the river would swell and as the water recedes, soil, rocks and other materials are deposited on Jessica's and Jenny's properties. This pattern of the river swelling, receding and depositing soil and other materials being deposited on the neighbors’ properties have gone on for many years. Knowing this pattern, Jessica constructed a concrete barrier about 2 meters from her property line and extending towards the river, so that when the water recedes, soil and other materials are trapped within this barrier. After several years, the area between Jessica's property line to the concrete barrier was completely filled with soil, effectively increasing Jessica's property by two (2) meters. Jenny's property, where no barrier was constructed, also increased by one meter along the side of the river. Can Jessica and Jenny legally claim ownership over the additional two (2) meters and one (1) meter, respectively, of land deposited along their properties?
+
+Suggested Answer
+
+A208a:
+
+Jenny can legally claim ownership of the lands by right of accession (accretion) under Art. 457 of the NCC. The lands came into being over the years through the gradual deposition of soil and silt by the natural action of the waters of the river. Jessica cannot claim the two-meter-wide strip of land added to her land. Jessica constructed the cement barrier two meters in front of her property towards the river not to protect her land from the destructive forces of the water but to trap the alluvium. In order that the riparian owner may be entitled to the alluvium the deposition must occur naturally without the intervention of the riparian owner. (Republic v. Court of Appeals, G.R. No. L-61647, 12 Oct. 1984)
+
+
+Question (2017, 2008 BAR)
+
+Q208b:
+
+If Jessica's and Jenny's properties are registered, will the benefit of such registration extend to the increased area of their properties?
+
+Suggested Answer
+
+A208b:
+
+NO, the registration of Jessica’s and Jenny’s adjoining property does not automatically extend to the accretions. They have to bring their lands under the operation of the Torrens system of land registration following the procedure prescribed in P.D. No. 1529.
+
+
+Question (2017, 2008 BAR)
+
+Q208c:
+
+Assume the two properties are on a cliff adjoining the shore of Laguna Lake. Jessica and Jenny had a hotel built on the properties. They had the earth and rocks excavated from the properties dumped on the adjoining shore, giving rise to a new patch of dry land. Can they validly lay claim to the patch of land?
+
+Suggested Answer
+
+A208c:
+
+NO, Jessica and Jenny cannot validly lay claim to the price of dry land that resulted from the dumping of rocks and earth materials excavated from their properties because it is a reclamation without authority. The land is part of the lakeshore, if not the lakebed, which is inalienable land of the public domain.
+
+
+Question (2009 BAR)
+
+Q209a:
+
+Marciano is the owner of a parcel of land through which a river runs out into the sea. The land had been brought under the Torrens System and is cultivated by Ulpiano and his family as farmworkers therein. Over the years, the river has brought silt and sediment from its sources up in the mountains and forests so that gradually the land owned by Marciano increased in area by three hectares. Ulpiano built three huts on this additional area, where he and his two married children live. On this same area, Ulpiano and his family planted peanuts, monggo beans, and vegetables. Ulpiano also regularly paid taxes on the land, as shown by tax declarations, for over thirty years. When Marciano learned of the increase in the size of the land, he ordered Ulpiano to demolish the huts, and demanded that he be paid his share in the proceeds of the harvest. Marciano claims that under the NCC, the alluvium belongs to him as a registered riparian owner to whose land the accretion attaches, and that his right is enforceable against the whole world. Is Marciano correct? Explain.
+
+Suggested Answer
+
+A209a:
+
+YES, Marciano’s contention is correct. Since that accretion was deposited on his land by the action of the waters of the river and he did not construct any structure to increase the deposition of soil and silt, Marciano automatically owns the accretion. His real right of ownership is enforceable against the whole world including Ulpiano and his two married children. Although Marciano’s land is registered, the three (3) hectares land deposited through accretion was not automatically registered. As an unregistered land, it is subject to acquisitive prescription by third persons.
+
+Although Ulpiano and his children live in the three (3) hectare unregistered land owned by Marciano, they are farm workers; therefore, they are possessors not in the concept of owners but in the concept of mere holders. Even if they possess the land for more than 30 years, they cannot become the owners thereof through extraordinary acquisitive prescription, because the law requires possession in the concept of the owner. Payment of taxes and tax declaration are not enough to make their possession one in the concept of owner. They must repudiate the possession in the concept of holder by executing unequivocal acts of repudiation amounting to ouster of Marciano, known to Marciano and must be proven by clear and convincing evidence. Only then would his possession become adverse.
+
+
+Question (2009 BAR)
+
+Q209b:
+
+What rights, if any, does Ulpiano have against Marciano? Explain.
+
+Suggested Answer
+
+A209b:
+
+Although Ulpiano is a possessor in bad faith because he knew he does not own the land, he will lose the three huts he built in bad faith and make an accounting of the fruits he has gathered, he has the right to deduct from the value of the fruits the expenses for production, gathering and preservation of the fruits. (Art. 443, NCC)
+
+He may also ask for reimbursement of the taxes he has paid, as these are charges on the land owned by Marciano. This obligation is based on a quasi-contract. (Art. 2175, NCC)
+
+
+Question (2003 BAR)
+
+Q210a:
+
+Andres is a riparian owner of a parcel of registered land. His land, however, has gradually diminished in area due to the current of the river, while the registered land of Mario on the opposite bank has gradually increased in area by 200-square meters. Who has the better right over the 200-square meter area that has been added to Mario’s registered land, Mario or Andres?
+
+Suggested Answer
+
+A210a:
+
+Mario has a better right over the 200 square meters increase in area by reason of accretion, applying Art. 457 of the NCC, which provides that “to the owners of lands adjoining the banks of rivers belong the accretion which they gradually received from the effects of the current of the waters.” Andres cannot claim that the increase in Mario’s land is his own, because such is an accretion and not a result of the sudden detachment of a known portion of his land and its attachment to Mario’s land, a process called “avulsion”. He can no longer claim ownership of the portion of his registered land which was gradually and naturally eroded due to the current of the river, because he had lost it by operation of law. That portion of the land has become part of the public domain.
+
+
+Question (2003 BAR)
+
+Q210b:
+
+May a third person acquire said 200- square meter land by prescription?
+
+Suggested Answer
+
+A210b:
+
+YES, a third party may acquire by prescription the 200 square meters, increase in area, because it is not included in the Torrens Title of the riparian owner. Hence, this does not involve the imprescriptibility conferred by Sec. 47, P.D. No. 1529. The fact that the riparian land is registered does not automatically make the accretion thereto a registered land. (Grande v. Court of Appeals, G.R. No. L- 17652, 30 June 1962; Jagualing v. Court of Appeals, G.R. No. 94283, 04 Mar. 1991)
+
+
+Question (2001 BAR)
+
+Q211:
+
+For many years, the Rio Grande river deposited soil along its bank, beside the titled land of Jose. In time, such deposit reached an area of one thousand square meters. With the permission of Jose, Vicente cultivated the said area. Ten years later, a big flood occurred in the river and transferred 1000 square meters to the opposite bank, beside the land of Agustin. The land transferred is now contested by Jose and Agustin as riparian owners, and by Vicente who claims ownership by prescription. Who should prevail? Why?
+
+Suggested Answer
+
+A211:
+
+Jose’s claim should prevail. The disputed area, which is an alluvion, belongs by right of accretion to Jose, the riparian owner. (Art. 457, NCC) When, as given in the problem, the very same area was "transferred" by flood waters to the opposite bank, it became an avulsion and ownership thereof is retained by Jose who has two years to remove it. (Art. 459, NCC) Vicente's claim based on prescription is baseless since his possession was by mere tolerance of Jose and, therefore, did not adversely affect Jose's possession and ownership. (Art. 537, NCC) Inasmuch as his possession is merely that of a holder, he cannot acquire the disputed area by prescription.
+
+
+Question (2012 BAR)
+
+Q212:
+
+Action to recover real property based on ownership. Here, the object is the recovery of the dominion over the property as owner. What action is being referred to? 
+A) Accion publiciana 
+B) Accion reinvindicatoria 
+C) Accion interdictal 
+D) Quieting of Title
+
+Suggested Answer
+
+A212:
+
+B. (UPLC Suggested Answers)
+
+
+Question (2017 BAR)
+
+Q213:
+
+Jacob has owned a farmland in Ramos, Tarlac. In 2012, Liz surreptitiously entered and cultivated the property. In 2014, Jacob discovered Liz’s presence in and cultivation of the property. Due to his being busy attending to his business in Cebu, he tolerated Liz’s cultivation of the property. Subsequently, in December 2016, Jacob wanted to regain possession of the property. Hence, he sent a letter to Liz demanding that she vacate the property. Liz did not vacate despite demand. Jacob comes to enlist your legal assistance to bring an action against Liz to recover the possession of the property. What remedies are available to Jacob to recover possession of his property under the circumstances? Explain your answer.
+
+Suggested Answer
+
+A213:
+
+The remedy available to Jacob is accion publiciana or an action for the recovery of the better right of possession or possession as a real right. It also refers to an ejectment suit filed after the expiration of one year from accrual of the cause of action or from the unlawful withholding of possession of the realty. Since the entry made by Liz is through stealth, Jacob could have filed an action for forcible entry. Ordinarily, the one-year period within which to bring an action for forcible entry is generally counted from the date of actual entry on the land, except that when the entry is through stealth, the one year period is counted from the time the plaintiff learned thereof. Here, since more than one year had elapsed since Jacob learned of the entry made by Liz through stealth, the action that maybe filed by Jacob is no longer forcible entry, but an accion publiciana. (Conks v. Tubil, G.R. No. 184285, 25 Sept. 2009; Valdez v. Court of Appeals, G.R. No. 132424, 04 May 2006).
+
+ALTERNATIVE ANSWER:
+
+Jacob can file an action for unlawful detainer against Liz to regain possession of the property. An action for unlawful detainer is proper when the defendant’s initial right to possession of the property has terminated but he unlawfully withholds possession thereof. It has to be filed within one year from the termination of his right to possession. Although Liz surreptitiously entered in 2012, her possession became lawful when Jacob discovered it and allowed her to continue possession by tolerance in 2014. Liz’s right to possession terminated in December 2016 when Jacob demanded her to vacate the property. Since today is Nov. 2017, it is still within one year from the termination of Liz’s right to possession. Therefore, Jacob can file an action for unlawful detainer.
+
+
+Question (2006 BAR)
+
+Q214:
+
+Alberto and Janine migrated to the United States of America, leaving behind their 4 children, one of whom is Manny. They own a duplex apartment and allowed Manny to live in one of the units. While in the United States, Alberto died. His widow and all his children executed an Extrajudicial Settlement of Alberto's estate wherein the two-door apartment was assigned by all the children to their mother, Janine. Subsequently, she sold the property to George. The latter required Manny to sign a prepared Lease Contract so that he and his family could continue occupying the unit. Manny refused to sign the contract alleging that his parents allowed him and his family to continue occupying the premises. If you were George's counsel, what legal steps will you take? Explain.
+
+Suggested Answer
+
+A214:
+
+As George’s counsel, I will give Manny a written demand to vacate within a definite period, say 15 days. After the lapse of 15-day period, I will file an action for unlawful detainer to recover the possession of the apartment from Manny. Manny’s occupation of the premises was by mere tolerance of his parents. When all the co-heirs/co-owners assigned the two-door apartment to Janine in the extrajudicial partition, Janine became the sole owner of the same. He continued to occupy it under the same familial arrangement. Upon the sale of the property to George, Manny’s lawful occupation of the property was terminated and Manny’s refusal to sign the lease contract and to vacate the premises after the period to vacate lapsed made his occupation unlawful, hence, entitling George to the remedy of unlawful detainer.
+
+
+Question (2011 BAR)
+
+Q215:
+
+Which of the following is an indispensable requirement in an action for "quieting of title" involving real property? The plaintiff must 
+(A) be in actual possession of the property. 
+(B) be the registered owner of the property. 
+(C) have legal or equitable title to the property. 
+(D) be the beneficial owner of the property.
+
+Suggested Answer
+
+A215:
+
+(C) have legal or equitable title to the property.
+
+
+Question (2019 BAR)
+
+Q216a:
+
+Mr. R is the registered owner of a parcel of land located in Cebu City by TCT No. 1234 issued in 1955. Since his acquisition of the lot, Mr. R and his family had been in continuous, open, and peaceful possession thereof. Mr. R died in 1980, resulting in the land being transferred in the names of his heirs, A, B, and C, who became registered owners thereof as per TCT No. 5678. During the entire time, said land had never been encumbered or disposed, and that its possession always remained with them. Sometime in 1999, A, B, and C wanted to build a concrete fence around the parcel of land, but they were opposed by Mrs. X who started claiming ownership over the same property on the strength of a Deed of Absolute Sale purportedly entered by her with Mr. R during the time he was still alive. Aggrieved, A, B, and C intend to file a complaint for quieting of title against Mrs. X. What are the substantive requisites for the action to prosper? Do they obtain in this case? Explain.
+
+Suggested Answer
+
+A216a:
+
+For an action to quiet title to prosper, the following requisites must obtain in the case: (1) the plaintiff or complainant has a legal or an equitable title to or interest in the real property subject of the action; and (2) the instrument, record, claim, encumbrance, or proceeding claimed to be casting cloud on the title must be shown to be in fact invalid or inoperative despite its prima facie appearance of validity or legal efficacy. The requisites for an action to quiet the title obtain in this case, since A, B, and C are the registered owners of the parcel of land. Having inherited the same from their father Mr. R, and the Deed of Absolute Sale, which cast a cloud on their title may be shown to be invalid or inoperative. (Heirs of Delfin v. Heirs of Bacud, G.R. No. 187633, 04 Apr. 2016)
+
+
+Question (2019 BAR)
+
+Q216b:
+
+Within what period should A, B, and C file the complaint for quieting of title? Explain.
+
+Suggested Answer
+
+A216b:
+
+The action for quieting title does not prescribe, because the plaintiffs are in possession of the land. (Heirs of Uberas v. CFI, G.R. No. L-48268, 30 Oct. 1978)
+
+
+Question (2019 BAR)
+
+Q216c:
+
+Assuming that B and C are residing abroad, may A, without the knowledge of B and C, file the complaint for quieting of title on behalf of all the heirs? Explain.
+
+Suggested Answer
+
+A216c:
+
+YES, A may file the complaint if he files the same for the co-ownership. Anyone of the co-owners may bring such an action in ejectment (Art. 87, NCC), even without joining all the other co-owners as co-plaintiffs, because the suit is deemed to be instituted for the benefit of all, assuming A wins the case. Parenthetically, if A loses in the action to quiet the title, it will if not affect B and C, because the Court did not acquire jurisdiction over their persons. The Court further held that if the action is for the benefit of the plaintiff alone, such that he claims the possession for himself and not for the co-ownership, the action will not prosper (Celino v Heirs of Alejo, G.R. No 1618117, 30 July 2004) (UPLC Suggested Answers)
+
+
+Question (2022 BAR)
+
+Q217a:
+
+Thea, Vanessa, and Sophia are siblings who are coowners of a 600-sq. m. parcel of land covered by TCT No. 12345 situated along Bangkal Road, Makati City. Thea decided to sell her share, an undivided 200-sq. m. portion of the property, to Alyssa, a Filipino nurse who has been living in Canada for the last 10 years. Alyssa, without the knowledge of Sophia and Vanessa, built a modest house on the 200-sq. m. portion abutting the road and leased it to Stell for Php 15,000.00 per month. Could Thea legally transfer her share of the property to Alyssa without the consent of Vanessa and Sophia? Explain briefly.
+
+Suggested Answer
+
+A217a:
+
+YES, Thea could legally transfer her share of the property to Alyssa even without the consent of Vanessa and Sophia. Each co-owner shall have full ownership of his part and of the fruits and benefits pertaining thereto, and he may therefore alienate, assign, or mortgage it, and even substitute another person in its enjoyment except when personal rights are involved. (Article 493, Civil Code) However, Thea can only transfer her undivided share or interest in the land since the sale was made prior to the partition of the property. Alyssa obtains by virtue of such sale, the same rights as Thea had as co-owner, in an ideal share equivalent to the consideration given under their transaction. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2022 BAR)
+
+Q217b:
+
+Can Vanessa and Sophia respectively legally demand from Alyssa a onethird share in the rentals? Explain briefly.
+
+Suggested Answer
+
+A217b:
+
+NO, Vanessa and Sophia cannot demand the one-third share in the rentals because the sale made by Thea validly transferred ownership of the undivided portion. By virtue of the valid sale of Thea's share to Alyssa, the latter steps into the shoes of the vendor as a co-owner (Torres v. Lapinid, G.R. No. 187987, November 26, 2014) and is therefore entitled to the fruits or rentals obtained from the property. (Central Bar Q&A by Paguirigan, 2023)
+
+---
+
+Question (2020-21 BAR)
+
+Q218:
+
+Four siblings co-own a two-hectare, commercially viable property located next to a major road. The siblings have equal shares but none of them have exerted any efforts to partition the property. A large retail conglomerate then offered to purchase the entire property. Three of the siblings were willing to sell, but one refused, wanting to hold on to the land in memory of their departed parents. The three willing siblings proceeded to sell their respective shares in the property to the large retail conglomerate, after the sale, the conglomerate filed a case in court to partition the property. Should the court allow the partition? Explain briefly.
+
+Suggested Answer
+
+A218:
+
+YES, the court should allow the partition of the property. As a rule, no co-owner shall be obliged to remain in the coownership. Each co-owner may demand at any time the partition of the thing owned in common, insofar as his share is concerned. (Art. 494, NCC) Also, each co-owner shall have the full ownership of their part and of the fruits and benefits pertaining thereto, and they may therefore alienate, assign, or mortgage it, and even substitute another person in its enjoyment, except when personal rights are involved. But the effect of the alienation or the mortgage, with respect to the co-owners, shall be limited to the portion which may be allotted to him in the division upon the termination of the co-ownership. (Art. 493, NCC) The retail conglomerate who bought the undivided shares of the three siblings stepped into the shoes of the latter and may therefore ask for partition of the property. (Bar Q&A by Paguirigan, 2022)
+
+
+Question (2015 BAR)
+
+Q219:
+
+X, Y, and Z are siblings who inherited a 10-story building from their parents. They agreed in writing to maintain it as a co-owned property for leasing out and to divide the net profits among themselves equally for a period of 20 years. On the 8th year, X wanted to get out of the co-ownership so he could get his 1/3 share in the property. Y and Z refused, saying X is bound by their agreement to keep the co-ownership for 20 years. Are Y and Z correct? Explain. 
+
+Suggested Answer
+
+A219:
+
+Y and Z are partly correct. The law provides that none of the co-owners shall be obliged to remain in the coownership and it is the right of a co-owner to ask for partition of the co- ownership anytime. One exception to the rule is if the co-owners agree to keep the thing undivided which period shall not exceed 10 years. In this case, the agreement to keep the thing undivided shall be valid at the most for ten years. (Art. 494, NCC)
+
+
+Question (2018 BAR)
+
+Q220:
+
+Sofia and Semuel, both unmarried, lived together for many years in the Philippines and begot three children. While Sofia stayed in the Philippines with the children, Semuel went abroad to work and became a naturalized German citizen. He met someone in Germany whom he wanted to marry. Semuel thereafter came home and filed a petition with the RTC for partition of the common properties acquired during his union with Sofia in the Philippines. The properties acquired during the union consisted of a house and lot in Cavite worth P2 million, and some personal properties, including cash in bank amounting to P1 million. All these properties were acquired using Semuel’s salaries and wages since Sofia was a stay-at-home mother. In retaliation, Sofia filed an action, on behalf of their minor children, for support. How should the properties be partitioned? 
+
+Suggested Answer
+
+A220:
+
+The properties should be divided equally between Sofia and Semuel. The property relations of Sofia and Semuel is governed by Art. 147, FC because they lived exclusively with each other as husband and wife, and they were capacitated to marry each other. Under the said provision, the wages and salaries of Sofia and Semuel shall be owned by them in equal shares; hence, the cash in the bank from Semuel’s salaries and wages is co-owned by Semuel and Sofia in equal shares. Art. 147, FC also provides that the property acquired by the partners through their work or industry shall be governed by the rules on co-ownership and in the absence of proof to the contrary, properties acquired during the cohabitation shall be presumed to have been obtained by their joint efforts, work or industry and shall be owned by them in equal shares. Art. 147, FC provides further that if the efforts of one of the parties consisted in the care and maintenance of the family and of the household, he or she is deemed to have contributed jointly in the acquisition of the property even if he or she did not participate in the acquisition by the other party of the said property. Sofia, as a stay-at-home mother, cared for and maintained the family, consequently, she is deemed to have contributed in the acquisition of the house and lot. As co-owner, Sofia is entitled to one half of the property.
+
+
+Question (2002 BAR)
+
+Q221:
+
+Antonio, Bart, and Carlos are brothers. They purchased from their parents specific portions of a parcel of land as evidenced by three separate deeds of sale, each deed referring to a particular lot in metes and bounds. When the deeds were presented for registration, the Register of Deeds could not issue separate certificates of title due to the absence of a subdivision plan. The new title had to be issued, therefore, in the names of the brothers as co-owners of the entire property. The situation has not change up to now, but each of the brothers has been receiving rentals exclusively from the lot actually purchased by him. Antonio sells his lot to a third person, with notice to his brothers. To enable the buyer to secure a new title in his name, the deed of sale was made to refer to an undivided interest in the property of the seller (Antonio), with the metes and bound for the lot sold being stated. Bart and Carlos reacted by signifying their exercise of their right redemption as co-owners. Antonio, in his behalf and in behalf of his buyer, contend that they are no longer co-owners, although the title covering the property has remained in their names as such. May Bart and Carlos still redeem the lot sold by Antonio? Explain.
+
+Suggested Answer
+
+A221:
+
+NO, they may not redeem because there was no coownership among Antonio, Bart, and Carlos to start with. Their parents already partitioned the land in selling separate portions to them. (Si v. Court of Appeals, G.R. No. 122047, 12 Oct. 2000)
+
+
+Question (2002, 2000 BAR)
+
+Q222:
+
+Senen and Peter are brothers. Senen migrated to Canada early while still a teenager. Peter stayed in Bulacan to take care of their widowed mother and continued to work on the Family farm even after her death. Returning to the country some thirty years after he had left, Senen seeks a partition of the farm to get his share as the only co-heir of Peter. Peter interposes his opposition, contending that acquisitive prescription has already set in and that estoppel lies to bar the action for partition, citing his continuous possession of the property for at least 10 years, for almost 30 years in fact. It is undisputed that Peter has never openly claimed sole ownership of the property. If he ever had the intention to do so, Senen was completely ignorant of it. Will Senen’s action prosper? Explain.
+
+Suggested Answer
+
+A222:
+
+YES, Senen’s action will prosper. Art. 494 of the NCC provides that “no prescription shall run in favor of a coowner or co-heir against his co-owners or co-heirs so long as he expressly or impliedly recognizes the co-ownership nor notified Senen of his having repudiated the same.”
+
+
+Question (2000 BAR)
+
+Q223:
+
+In 1955, Ramon and his sister Rosario inherited a parcel of land in Albay from their parents. Since Rosario was gainfully employed in Manila, she left Ramon alone to process and cultivate the land. However, Ramon never shared the harvest with Rosario and was even able to sell one- half of the land in 1985 by claiming to be the sole heir of his parents. Having reached retirement age in 1990, Rosario returned to the province and upon learning what had transpired, demanded that the remaining half of the land be given to her as her share. Ramon opposed, asserting that he has already acquired ownership of the land by prescription, and that Rosario is barred by laches from demanding partition and reconveyance. Decide the conflicting claims.
+
+Suggested Answer
+
+A223:
+
+Ramon is wrong on both counts: prescription and laches. His possession as co-owner did not give rise to acquisitive prescription. Possession by a co-owner is deemed not adverse to the other co-owners but is, on the contrary, deemed beneficial to them. (Pangan v. Court of Appeals, G.R. No. L-39299, 18 Oct. 1988) Ramon’s possession will become adverse only when he has repudiated the co-ownership and such repudiation was made known to Rosario. Assuming that the sale in 1985 where Ramon claimed he was the sole heir of his parents amounted to repudiation of the coownership; the prescriptive period began to run only from that time. Not more than 30 years having lapsed since then, the claim of Rosario has not yet prescribed. The claim of laches is not also meritorious. Until the repudiation of the co-ownership was made known to the other co- owners, no right has been violated for the said co-owners, no right has been violated for the said co-owners to vindicate. Mere delay in vindicating the right, standing alone, does not constitute laches.
+
+
+Question (2000, 1993 BAR)
+
+Q224:
+
+Ambrosio died, leaving his three daughters, Belen, Rosario and Sylvia a hacienda which was mortgaged to the Philippine National Bank due to the failure of the daughters to pay the bank, the latter foreclosed the mortgage, and the hacienda was sold to it as the highest bidder. Six (6) months later, Sylvia won the grand prize at the lotto and used part of it to redeem the hacienda from the bank. Thereafter, she took possession of the hacienda and refused to share its fruits with her sisters, contending that it was owned exclusively by her, having bought it from the bank with her own money. Is she correct or not?
+
+Suggested Answer
+
+A224:
+
+Sylvia is not correct. The three (3) daughters are the coowners of the hacienda being the only heirs of Ambrosio. When the property was foreclosed, the right of redemption belongs also to the three daughters. When Sylvia redeemed the entire property before the lapse of the redemption period, she also exercised the right of redemption of her coowners on their behalf. As such, she is holding the shares of her two sisters in the property and all the fruits corresponding thereto, in trust for them. Redemption by one co-owner inures to the benefit of all. (Adille v. Court of Appeals, G.R. No. L-44546, 29 Jan. 1988) Sylvia, however, is entitled to be reimbursed the shares of her two sisters in the redemption price.
+
+
+Question (1998 BAR)
+
+Q225:
+
+Juan and his sister Juana inherited from their mother two parcels of farmland with exactly the same areas. For convenience, the Torrens certificates of title covering both lots were placed in Juan’s name alone. In 1996, Juan sold to an innocent purchaser one parcel in its entirety without the knowledge and consent of Juana, and wrongfully kept for himself the entire price paid. Since the two lots have the same area, suppose Juana files a complaint to have herself declared sole owner of the entire remaining second lot, contending that her brother had forfeited his share thereof by wrongfully disposing of her undivided share in the first lot, will the suit prosper?
+
+Suggested Answer
+
+A225:
+
+Juana’s suit to have herself declared as sole owner of the entire remaining area will not prosper because while Juan’s act in selling the other lot was wrongful, it did not have the legal effect of forfeiting his share in the remaining lot. However, Juana can file an action against Juan for partition or termination of the co-ownership with a prayer that the lot sold be adjudicated to Juan, and the remaining lot be adjudicated and reconveyed to her.
+
+
+Question (1992 BAR)
+
+Q226:
+
+A, B, and C are the co-owners in equal shares of a residential house and lot. During their co-ownership, the following acts were respectively done by the coowners: 
+1. A undertook the repair of the foundation of the house, then tilting to one side, to prevent the house from collapsing. 
+2. B and C mortgaged the house and lot to secure a loan. 
+3. B engaged a contractor to build a concrete fence all around the lot. 
+4. C built a beautiful grotto in the garden. 
+5. A and C sold the land to X for a very good price. 
+
+(a) Is A’s sole decision to repair the foundation of the house binding on B and C? May A require B and C to contribute their 2/3 share of the expense? Reasons.
+
+(b) What is the legal effect of the mortgage contract executed by B and C? Reasons.
+
+(c) Is B’s sole decision to build the fence binding upon A and C? May B require A and C to contribute their 2/3 share of the expense? Reasons.
+
+(d) Is C’s sole decision to build the grotto binding upon A and B? May C require A and B to contribute their 2/3 share of the expense? Reasons.
+
+(e) What are the legal effects of the contract of sale executed by A, C and X? Reasons.
+
+Suggested Answer
+
+A226:
+
+(a) YES. A’s sole decision to repair the foundation is binding upon B and C. B and C must contribute 2/3 of the expense. Each co-owner has the right to compel the other co-owners to contribute to the expense of preservation of the thing (the house) owned in common in proportion to their respective interests. (Arts. 485 and 488, NCC)
+
+(b) The mortgage shall not bind the 1/3 right and interest of A and shall be deemed to cover only the rights and interests of B and C in the house and lot. The mortgage shall be limited to the portion (2/3) which may be allotted to B and C in the partition. (Art. 493, NCC)
+
+(c) B’s sole decision to build the concrete fence is not binding upon A and C. Expenses to improve the thing owned in common must be decided upon by a majority of the coowners who represent the controlling interest. (Arts. 489 and 492, NCC)
+
+(d) C’s sole decision to build the grotto is not binding upon A and B who cannot be required to contribute to the expenses for the embellishment of the thing owned in common if not decided upon by the majority of the co-owners who represent the controlling interest. (Arts. 489 and 492, NCC)
+
+(e) The sale to X shall not bind the 1/3 share of B and shall be deemed to cover only the 2/3 share of A and C in the land. (Art. 493, NCC) B shall have the right to redeem the 2/3 share sold to X by A and C since X is a third person. (Art. 1620, NCC)
+
+
+Question (2007, 1997 BAR)
+
+Q227:
+
+Distinguish between possession and occupation as these terms are commonly used in Book II and Book III of the NCC.
+
+Suggested Answer
+
+A227:
+
+Occupation is a mode of acquiring dominion by the seizure of corporeal things which have no owner, with the intention of acquiring the ownership thereof. It is an original mode of acquiring ownership upon seizure of a res nullius by the occupant who has the intention to become the owner thereof.
+
+Possession, on the other hand, is the holding of a thing or the enjoyment of a right. Possession may be the real right of possession or jus possessionis or it can be merely the right to possess or jus possidendi, which are among the basic rights of ownership. If the real right of possession is possession in the concept of owner, but subject to certain limitations, it may ripen into full ownership of the thing or property right through acquisitive prescription depending on whether it is a case of ordinary or extraordinary prescription and whether the property is movable or immovable.
+
+
+Question (2012 BAR)
+
+Q228:
+
+Which of the following statements is wrong?
+
+A) The possessor in bad faith shall reimburse the fruits received and those which the legitimate possessor could have received. 
+B) The possessor in bad faith has right of reimbursement for necessary expenses and those for the production, gathering and preservation of the fruits. 
+C) The possessor in bad faith is not entitled to a refund of ornamental expenses. 
+D) The possessor in bad faith is entitled to a refund of useful expenses.
+
+Suggested Answer
+
+A228:
+
+D. (UPLC Suggested Answers)
+
+
+Question (2013 BAR)
+
+Q229:
+
+Betty entrusted to her agent, Aida, several pieces of jewelry to be sold on commission with the express obligation to turn over to Betty the proceeds of the sale, or to return the jewelries if not sold in a month's time. Instead of selling the jewelries, Aida pawned them with the Tambunting Pawnshop, and used the money for herself. Aida failed to redeem the pawned jewelries and after a month, Betty discovered what Aida had done. Betty brought criminal charges which resulted in Aida's conviction for estafa. Betty thereafter filed an action against Tambunting Pawnshop for the recovery of the jewelries. Tambunting raised the defense of ownership, additionally arguing that it is duly licensed to engage in the pawnshop and lending business, and that it accepted the mortgage of the jewelry in good faith and in the regular course of its business. If you were the judge, how will you decide the case? 
+
+(A) I will rule in favor of Betty. My ruling is based on the Civil Code provision that one who has lost any movable or has been unlawfully deprived thereof may recover it from the person in possession of the same. Tam bunting's claim of good faith is inconsequential. 
+(B) I will rule in favor of Betty. Tambunting's claim of good faith pales into insignificance in light of the unlawful deprivation of the jewelries. However, equity dictates that Tambunting must be reimbursed for the pawn value of the jewelries. 
+(C) I will rule in favor of Tambunting. Its good faith takes precedence over the right of Betty to recover the jewelries. 
+(D) I will rule in favor of Tambunting. Good faith is always presumed. Tambunting's lawful acquisition in the ordinary course of business coupled with good faith gives it legal right over the jewelries.
+
+Suggested Answer
+
+A229:
+
+A. (UPLC Suggested Answers)
+
+
+Question (2017 BAR)
+
+Q230:
+
+TRUE OR FALSE. Possession of a movable property is lost when the location of the said movable is unknown to the owner.
+
+Suggested Answer
+
+A230:
+
+FALSE. Article 556 of the Civil Code provides that the possession of movables is not deemed lost so long as they remain under the control of the possessor, even though for the time being he may not know their whereabouts. Possession of a movable, therefore, is lost only when possessor loses control over it. (UPLC Suggested Answers)
+
+
+Question (2017 BAR)
+
+Q231:
+
+Distinguish antichresis from usufruct.
+
+Suggested Answer
+
+A231:
+
+1. Antichresis is a real security transaction wherein the creditor acquires the right to receive the fruits of an immovable of his debtor, and the obligation to apply them to the payment of the interest, if owing, and thereafter to the principal of his credit. (Art. 2132, NCC) On the other hand, a usufruct is a real right which authorizes its holder to enjoy the property of another with the obligation of preserving its form and substance, unless otherwise provided.
+
+2. Antichresis is always created by contract, while usufruct need not arise from contract, because it may also be constituted by law or by other acts inter vivos, such as donation, or in a last will and testament, or by prescription.
+
+3. The subject matter of antichresis is always a real property while the subject matter of usufruct may either be real property or personal property.
+
+4. Both create real rights, but antichresis is an accessory contract, while usufruct when created by contract is a principal contract.
+
+5. During the usufruct, the fruits belong to the usufructuary not the naked owner, while the antichretic creditor has the right to receive the fruits with the obligation to apply the fruits to the interest, if owing, and thereafter to the principal of the credit. (Art. 2132, NCC)
+
+6. In antichresis, the amount of the principal and the interest charge must be in writing in order to be valid (Art. 2134, NCC) while there is no particular form required to constitute a valid usufruct.
+
+
+Question (1998 BAR)
+
+Q232:
+
+Distinguish usufruct from commodatum and state whether these may be constituted over consumable goods. 
+
+Suggested Answer
+
+A232:
+
+Usufruct is a right given to a person (usufructuary) to enjoy the property of another with the obligation of preserving its form and substance. (Art. 562, NCC) On the other hand, commodatum is a contract by which one of the parties (bailor) delivers to another (bailee) something not consumable so that the latter may use it for a certain time and return it.
+
+In usufruct, the usufructuary gets the right to the use and to the fruits of the same, while in commodatum, the bailee only acquires the use of the thing loaned but not its fruits. Usufruct may be constituted on the whole or a part of the fruits of the thing. (Art. 564, NCC) It may even be constituted over consumables like money. (Estate of the deceased Rosendo Hernaez v. Veloso, G.R. No. L-29158, 29 Dec. 1928) Whereas, in commodatum, consumable goods may be subject thereof only when the purpose of the contract is not the consumption of the object, as when it is merely for exhibition. (Art. 1936, NCC)
+
+
+Question (2019 BAR)
+
+Q233:
+
+Ms. U is a usufructuary of a piece of land owned by Mr. L. During the existence of the usufruct, Ms. U introduced various useful improvements on the land. Upon termination of the usufruct, Mr. L requested Ms. U to remove the said improvements, but Ms. U refused, demanding instead that Mr. L reimburse her the value of the same. Is Ms. U’s demand proper? Explain.
+
+Suggested Answer
+
+A233:
+
+NO, the demand is not proper. The NCC provides that the usufructuary may make on the property held in usufruct any useful improvements, or expenses for mere pleasure, which they may deem proper, provided they do not alter its form or substance; but they shall have no right to be indemnified therefor. They may, however, remove such improvements should it be possible to do so without injury to the property. (Art. 579, NCC)
+
+Ms. U, thus, has no right to be indemnified for any improvements which might have made on the land held in usufruct. She may only remove them should it be possible to do so without injury to the property.
+
+
+Question (1996 BAR)
+
+Q234:
+
+Bartolome constructed a chapel on the land of Eric. What are Bartolome’s rights if he was a usufructuary of the land?
+
+Suggested Answer
+
+A234:
+
+Bartolome has the right to remove the improvement if it is possible to do so without causing damage to the property. (Art. 579, NCC) He may also set-off the improvement against any damages which the property held in usufruct suffered because of his act or the acts of his assignee. (Art. 580, NCC)
+
+
+Question (2018 BAR)
+
+Q235:
+
+Sofronio was a married father of two when he had a brief fling with Sabrina, resulting in her pregnancy and the birth of their son Sinforoso. Though his wife knew nothing of the affair, Sofronio regretted it but secretly provided child support for Sinforoso. Unfortunately, when Sinforoso was 10 years old, Sofronio died. Only Sofronio's father, Salumbides, knew of Sabrina and Sinforoso. For the purpose of providing support to Sinforoso, Salumbides gave Sabrina usufructuary rights over one of his properties - a house and lot - to last until Sinforoso reaches the age of majority. Sabrina was given possession of the property on the basis of caucion juratoria. Two (2) years after the creation of the usufruct, the house accidentally burned down, and three (3) years thereafter, Sinforoso died before he could reach the age of 18. 
+
+(a) Will the usufruct continue after the house has burned down? 
+
+(b) If yes, will it continue after Sinforoso's death? 
+
+Suggested Answer
+
+A235:
+
+(a) YES, the usufruct will continue after the house was burned. If the usufruct is constituted on immovable property of which a building forms part, and the latter should be destroyed in any manner whatsoever, the usufructuary shall have a right to make use of the land and the materials. (Art. 607, NCC) The usufruct over the land and the materials continues. The thing was lost only in part, the right continues on the remaining parts. (Art. 604, NCC)
+
+(b) NO, it will be extinguished after Sinforoso’s death. A usufruct granted for the time that may elapse before a third person attains a certain age, shall subsist for the number of years specified, even if the third person should die before the period expires, unless such usufruct has been expressly granted only in consideration of the existence of such person or contrary intention clearly appears. (Arts. 603 & 606, NCC) The circumstances given show that the usufruct was established by Salumbides in consideration of the existence of Sinfroso. It was meant for his support; hence, his death extinguished the usufruct even though he died before reaching the age of majority.
+
+
+Question (1997 BAR)
+
+Q236:
+
+On 01 Jan. 1980, Minerva, the owner of a building, granted Petronila a usufruct over the property until 01 June 1998 when Manuel, a son of Petronila, would have reached his 30th birthday. Manuel, however, died on 01 June 1990 when he was only 26 years old. Minerva notified Petronila that the usufruct had been extinguished by the death of Manuel and demanded that the latter vacate the premises and deliver the same to the former. Petronila refused to vacate the place on the ground that the usufruct in her favor would expire only on 01 June 1998 when Manuel would have reached his 30th birthday and that the death of Manuel before his 30th birthday did not extinguish the usufruct. Whose contention should be accepted?
+
+Suggested Answer
+
+A236:
+
+Petronila's contention is correct. Under Art. 606 of the NCC, a usufruct granted for the time that may elapse before a third person reaches a certain age shall subsist for the number of years specified even if the third person should die unless there is an express stipulation in the contract that states otherwise. In the case at bar, there is no express stipulation that the consideration for the usufruct is the existence of Petronila's son. Thus, the general rule and not the exception should apply in this case.
+
+
+Question (1995 BAR)
+
+Q237:
+
+What is easement? Distinguish easement from usufruct. Can there be: 
+(a) An easement over a usufruct?
+(b) A usufruct over an easement?
+(c) An easement over another easement?
+
+Suggested Answer
+
+A237:
+
+An easement or servitude is an encumbrance imposed upon an immovable for the benefit of another immovable belonging to a different owner. (Art. 613, NCC) Usufruct gives a right to enjoy the property of another with the obligation of preserving its form and substance, unless the title constituting it or the law otherwise provides. (Art. 562 NCC)
+
+(a) There can be no easement over a usufruct. Since an easement may be constituted only on a corporeal immovable property, no easement may be constituted on a usufruct which is not a corporeal right. 
+
+(b) There can be no usufruct over an easement. While a usufruct may be created over a right, such right must have an existence of its own independent of the property. A servitude cannot be the object of a usufruct because it has no existence independent of the property to which it attaches.
+
+(c) There can be no easement over another easement for the same reason as in (a). An easement, although it is a real right over an immovable, is not a corporeal right. There is a Roman maxim which says that: there can be no servitude over another servitude.
+
+
+Question (2014 BAR)
+
+Q238:
+
+An easement that can be acquired by prescription: 
+
+(A) Right of way 
+(B) Watering of an animal 
+(C) Lateral and subjacent support 
+(D) Light and view 
+
+Suggested Answer
+
+A238:
+
+(D) Light and view. Only continuous and apparent easements maybe acquired by prescription.
+
+
+Question (1998 BAR)
+
+Q239:
+
+Distinguish between: 
+(a) Continuous and discontinuous easements;
+(b) Apparent and non-apparent easements; and 
+(c) Positive and negative easements.
+
+Suggested Answer
+
+A239:
+
+(a) Continuous easements are those the use of which is or may be incessant, without the intervention of any act of man, while discontinuous easements are those which are used at intervals and depend upon the acts of man. (Art. 615, NCC)
+
+(b) Apparent easements are those which are made known and are continually kept in view by external signs that reveal the use and enjoyment of the same, while nonapparent easements are those which show no external indication of their existence. (Art. 615, NCC)
+
+(c) Positive easements are those which impose upon the owner of the servient estate the obligation of allowing something to be done or of doing it themselves, while negative easements are those which prohibit the owner of the servient estate from doing something which they could lawfully do if the easement did not exist. (Art. 615, NCC)
+
+
+Question (2022 BAR)
+
+Q240:
+
+With the intent to develop a subdivision, Oliver bought a parcel of land adjacent to a subdivision owned by Phil. Oliver’s land had no direct access to the highway, as it was blocked by a kamote plantation owned by Josh. Phil’s subdivision, on the other hand, already had a direct access to the highway. To facilitate the release of the license from the Department of Human Settlements and Urban Development, Oliver presented a contract to sell between him and Josh over the kamote plantation, on the representation that he would construct an access road thereon. Pending approval of the license, Oliver sought the consent of Phil to connect the road that would be built by him with the main road of Phil’s subdivision. Phil allowed him to do this pending their negotiation on the compensation to be paid. With the eventual grant of the license, Oliver began the development of his subdivision. To protect the right of way over Phil’s subdivision, Oliver was able to cause an annotation of adverse claim on Phil’s property.
+
+However, when Oliver’s subdivision was already completed, and with the adverse claim annotated, Oliver believed that he no longer needed to buy the kamote plantation and accordingly rescinded the contract to sell with Josh. When Oliver and Phil failed to arrive at an agreement on the consideration for the easement, Phil built a wall blocking the road constructed by Oliver that connected Oliver’s subdivision with his. Oliver filed a complaint seeking the establishment of an easement of right of way through Phil’s subdivision which Oliver claimed to be the most adequate and convenient access to the highway. On the other hand, Phil filed a petition to have the adverse claim cancelled. 
+
+a. Is Oliver entitled to a right of way through Phil’s subdivision? Explain briefly.
+b. Is there basis to have the adverse claim cancelled? Explain briefly.
+
+Suggested Answer
+
+A240:
+
+a. NO, Oliver is not entitled to a right of way over Phil's property. To be entitled to the right of way the dominant estate must prove that it is surrounded by other immovables without adequate outlet to a public highway; there must be payment of proper indemnity, the isolation was not due to the proprietor's own acts, and the easement is established at a point least prejudicial to the servient estate where the distance from the dominant estate to the public highway may be the shortest. Oliver has not proven the concurrence of these requisites for him to be entitled to the right of way over Phil's estate. (Central Bar Q&A by Paguirigan, 2023) 
+
+b. YES, there is a basis to cancel the adverse claim annotated by Oliver. Under the law, an annotation of adverse claim is proper if one claims any part or interest in registered land adverse to the registered owner arising subsequent to the date of the original registration. (Sec. 70, P.D. 1529). (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2017 BAR)
+
+Q241:
+
+Tyler owns a lot that is enclosed by the lots of Riley to the North and East, of Dylan to the South, and of Reece to the West. The current route to the public highway is a kilometer’s walk through the northern lot of Riley, but the route is a rough road that gets muddy during the rainy season and is inconvenient because it is only 2.5 meters wide. Tyler’s nearest access to the public highway would be through the southern lot of Dylan. May Dylan be legally required to afford to Tyler a right of way through his property? Explain your answer. 
+
+Suggested Answer
+
+A241:
+
+Dylan may not be legally required to afford Tyler a right of way through his property, because Tyler already has an adequate outlet to the public highway through his Riley’s lot. One of the requisites for a compulsory grant of right of way is that the estate of the claimant of a right of way must be isolated and without adequate outlet to a public highway. The true standard for the grant of compulsory right of way is “adequacy” of outlet going to a public highway and not the convenience of the dominant estate. In the case at bar, there is already an existing adequate outlet from the dominant estate to a public highway. Even if said outlet be inconvenient, the need to open up another legal easement or servitude is entirely unjustified. (Art. 649, NCC; Dichoso Jr. v. Marcos, G.R. No. 180282, 11 Apr. 2011; Costabella Corp. v. Court of Appeals, G.R. No. 80511, 25 Jan. 1991)
+
+
+Question (2013, 1996 BAR)
+
+Q242:
+
+In 2005, Andres built a residential house on a lot whose only access to the national highway was a pathway crossing Brando's property. Andres and others have been using this pathway (pathway A) since 1980. In 2006, Brando fenced off his property, thereby blocking Andres' access to the national highway. Andres demanded that part of the fence be removed to maintain his old access route to the highway (pathway A), but Brando refused, claiming that there was another available pathway (pathway B) for ingress and egress to the highway. Andres countered that pathway B has defects, is circuitous, and is extremely inconvenient to use. To settle their dispute, Andres and Brando hired Damian, a geodetic and civil engineer, to survey and examine the two pathways and the surrounding areas, and to determine the shortest and the least prejudicial way through the servient estates. After the survey, the engineer concluded that pathway B is the longer route and will need improvements and repairs but will not significantly affect the use of Brando's property. On the other hand, pathway A that had long been in place, is the shorter route but would significantly affect the use of Brando's property. In light of the engineer's findings and the circumstances of the case, resolve the parties' right of way dispute. 
+
+Suggested Answer
+
+A242:
+
+I will rule in favor of Brando. The easement of right of way should be established at a point least prejudicial to the servient estate where the distance from the dominant estate to the public highway may be the shortest. (Art. 650, NCC) If these two conditions do not concur in one estate, the criterion of least prejudice prevails over shortest distance. (Quimen v. Court of Appeals, G.R. No. 112331, 29 May 1996)
+
+In this case, to establish the easement on the property of Brando would significantly affect his use of his property whereas while Pathway B may prove to be the longer route, it will cause least prejudice to Brando. Andres’ argument that Pathway B is circuitous and inconvenient to use should not be given weight because the true test of the establishment of an easement is adequacy. Convenience of the dominant estate has never been the gauge for the establishment of the easement. (Costabella Corporation v. Court of Appeals, G.R. No. 80511, 25 Jan. 1991; Cristobal vs. Ledesma, G.R. No. 125339, 22 June 1998)
+
+
+Question (2010 BAR)
+
+Q243:
+
+Franz was the owner of Lot E which was surrounded by four (4) lots one of which – Lot C – he also owned. He promised Ava that if she bought Lot E, he would give her a right of way in Lot C. Convinced, Ava bought Lot E and, as promised, Franz gave her a right of way in Lot C. Ava cultivated Lot E and used the right of way granted by Franz. Ava later found gainful employment abroad. On her return after more than 10 years, the right of way was no longer available to her because Franz had in the meantime sold Lot C to Julia who had it fenced. 
+
+(a) Does Ava have a right to demand from Julia the activation of her right of way? Explain. 
+
+(b) Assuming Ava opts to demand a right of way from any of the owners of Lots A, B, and D, can she do that? Explain.
+
+Suggested Answer
+
+A243:
+
+(a) YES. Ava has the right to demand from Julia the activation of the right of way, for the following reasons: 1. The easement of the right of way is a real right which attaches to, and is inseparable from, the estate to which it belongs. 2. The sale of the property includes the easement or servitude, even if the deed of sale is silent on the matter. 3. The vendee of the property in which a servitude or easement exists cannot close or put obstructions thereon to prevent the dominant estate from using it. 4. Ava’s working abroad for more than 10 years should not be construed as non-user, because it cannot be implied from the fact that she or those she left behind to cultivate the lot no longer use the right of way. 5. Renunciation or waiver of an easement must be specific, clear, express and made in a public instrument in accordance of Art. 1358 of the NCC.
+
+(b) YES. Ava has the option to demand a right of way on any of the remaining lots of Franz more so after Franz sold lot C to Julia. The essential elements of a legal right of way under Arts. 649 and 650 of the NCC are complied with.
+
+
+Question (2005 BAR)
+
+Q244:
+
+Don was the owner of an agricultural land with no access to a public road. He had been passing through the land of Ernie with the latter's acquiescence for over 20 years. Subsequently, Don subdivided his property into 20 residential lots and sold them to different persons. Ernie blocked the pathway and refused to let the buyers pass through his land. 
+
+(a) Did Don acquire an easement of right of way? Explain. 
+
+(b) What are the rights of the lot buyers, if any? Explain.
+
+Suggested Answer
+
+A244:
+
+(a) Don did not acquire an easement of right of way. His passage through Ernie’s land was by mere acquiescence or tolerance. He cannot claim to have acquired the easement of right of way by prescription, because this easement is discontinuous although apparent. Only continuous and apparent easements can be acquired by prescription of 10 years of uninterrupted use and enjoyment.
+
+(b) Prior to the grant of an easement, the buyers of the dominant estate have no other right than to compel grant of easement of right of way. Since the properties of the buyers are surrounded by other immovable and has no adequate outlet to a public highway and the isolation is not due to their acts, buyers may demand an easement of a right of way provided proper indemnity is paid and the right of way demanded is the shortest and least prejudicial to Ernie.
+
+
+Question (1996 BAR)
+
+Q245:
+
+David is the owner of the subdivision in Sta. Rosa, Laguna, without an access to the highway. When he applied for a license to establish the subdivision, David represented that he will purchase a rice field located between his land and the highway, and develop it into an access road. But when the license was already granted, he did not bother to buy the rice field, which remains unutilized until the present. Instead, he chose to connect his subdivision with the neighboring subdivision of Nestor, which has access to the highway. Nestor allowed him to do this, pending negotiations on the compensation to be paid. When they failed to arrive at an agreement, Nestor built a wall across the road connecting with David's subdivision. David filed a complaint in court, for the establishment of an easement of right of way through the subdivision of Nestor which he claims to be the most adequate and practical outlet to the highway. 
+
+(a) What are the requisites for the establishment of a compulsory easement of a right of way?
+
+(b) Is David entitled to a right of way in this case? Why or why not?
+
+Suggested Answer
+
+A245:
+
+(a) The requisites for a compulsory easement of right of way are: (a) the dominant estate is surrounded by other immovables and is without an adequate outlet to a public street or highway; (b) proper indemnity must be paid; (c) the isolation must not be due to the acts of the owner of the dominant estate; and (d) the right of way claimed is at a point least prejudicial to the servient estate and, insofar as is consistent with this rule, where the distance to the street or highway is shortest. (Art. 650, NCC)
+
+(b) NO, David is not entitled to the right of way being claimed. The isolation of his subdivision was due to his own act or omission because he did not develop into an access road the rice field which he was supposed to purchase according to his own representation when he applied for a license to establish the subdivision. (Floro v. Llenado, G.R. No. 75723. 02 June 1995)
+
+
+Question (2022 BAR)
+
+Q246:
+
+The Sps. Santos are the registered owners of Lot 2 located in Umaga Subdivision, Caramoan, Camarines Sur, covered by TCT No. 1369. Lot 2, which has been occupied by the Sps. Santos for about 11 years, has a one-storey residential house which was already erected thereon when Lot 2 was purchased by them from the Sps. Cruz in 2005. At the time of the acquisition of Lot 2, the adjoining lot, Lot 1, which was also owned by the Sps. Cruz, was an idle land without any improvements. Lot 1 remained empty until the spouses Cruz started the construction of a two-storey residential house thereon in 2018. The house constructed on Lot 1 being taller than the Sps. Santos’ one-storey residential house, the Sps. Cruz’s two-storey residential house obstructed the light, air, and view of the Sps. Santos’ residential house. The Sps. Santos bemoaned how, prior to the construction on Lot 1, they received enough bright and natural light from their windows. The construction rendered their house dark such that they are unable to do their normal activities in their house without switching on their lights. Have the Sps. Santos acquired an easement of light and view with respect to Lot 1 owned by the spouses Cruz? Explain briefly.
+
+Suggested Answer
+
+A246:
+
+YES, the Sps. Santos have acquired an easement of light and view with respect to Lot 1 owned by Sps. Cruz. As a general rule, a negative easement of light and view cannot be acquired by prescription except where a sufficient time of possession has elapsed after the owner of the dominant estate, by a formal act, has prohibited the owner of the servient estate from doing something which would be lawful but for the easement. However, under Art. 624, the existence of an apparent sign of easement between two estates, established or maintained by the owner of both, shall be considered, should either of them be alienated, as a title in order that the easement may continue actively and passively, unless, at the time the ownership of the two estates is divided, the contrary should be provided in the title of conveyance of either of them, or the sign aforesaid should be removed before the execution of the deed. Hence, in accordance with Art. 624 of the NCC, from the time the Sps. Cruz transferred the subject property to the Sps. Santos, there arose by title an easement of light and view, placing a burden on the servient estate, Lot 1, to allow the Sps. Santos' residence unobstructed access to light and view. (Spouses Garcia vs. Santos and Tan, G.R. No. 228334, 17 June 2019) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2018 BAR)
+
+Q247:
+
+Socorro is the registered owner of Lot A while Segunda is the registered owner of the adjoining Lot B. Lot A is located at an elevated plateau of about 15 feet above the level of Lot B. Since Socorro was allegedly removing portions of the land and cement that supported the adjoining property, Segunda caused the annotation of an adverse claim against 50 sq. m. on Lot A's TCT, asserting the existence of a legal easement. Does a legal easement in fact exist? If so, what kind? 
+
+Suggested Answer
+
+A247:
+
+YES, there exists a legal easement of lateral and subjacent support in favor of Segunda. Under the Civil Code which provides that no proprietor shall make such excavations upon his land as to deprive any adjacent land or building of sufficient lateral or subjacent support. (Art. 684, NCC) Although an owner of a parcel of land is the owner of its surface and everything under it and may make excavations on his land (Art. 437, NCC), this right is subject to the limitation that he shall not deprive any adjacent land or building of sufficient lateral or subjacent support. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2017 BAR)
+
+Q248:
+
+TRUE or FALSE: Continuous non-apparent easements can be acquired either through title or by prescription.
+
+Suggested Answer
+
+A248:
+
+FALSE. Art. 620 of the NCC provides that continuous and apparent easement are acquired either by virtue of a title or by prescription of ten years. Continuous non-apparent easements and discontinuous ones, whether apparent or not, maybe acquired only by virtue of a title. (Art. 622, NCC) An easement must be both continuous and apparent to be subject to acquisition by prescription. (UPLC Suggested Answers)
+
+
+Question (2001 BAR)
+
+Q249:
+
+Emma bought a parcel of land from Equitable-PCI Bank, which acquired the same from Felisa, the original owner. Thereafter, Emma discovered that Felisa had granted a right of way over the land in favor of the land of Georgina, which had no outlet to a public highway, but the easement was not annotated when the servient estate was registered under the Torrens system. Emma then filed a complaint for cancellation of the right of way, on the ground that it had been extinguished by such failure to annotate. How would you decide the controversy? 
+
+Suggested Answer
+
+A249:
+
+The complaint for cancellation of easement of right of way must fail. The failure to annotate the easement upon the title of the servient estate is not among the grounds for extinguishing an easement under Art. 631 of the NCC. Under Art. 617 of the NCC, easements are inseparable from the estate to which they actively or passively belong. Once it attaches, it can only be extinguished under Art. 631, and they exist even if they are not stated or annotated as an encumbrance on the Torrens title of the servient estate. (Tolentino, 1987)
+
+
+Question (2011 BAR)
+
+Q250:
+
+X bought a land from Y, paying him cash. Since they were friends, they did not execute any document of sale. After 7 years, the heirs of X asked Y to execute a deed of absolute sale to formalize the verbal sale to their father. Unwilling to do so, X’s heirs filed an action for specific performance against Y. Will their action prosper?
+
+(A) No, after more than 6 years, the action to enforce the verbal agreement has already elapsed. 
+(B) No, since the sale cannot under the Statute of Frauds be enforced. 
+(C) Yes, since X bought the land and paid Y for it. 
+(D) Yes, after full payment, the action became imprescriptible.
+
+Suggested Answer
+
+A250:
+
+(A) No, after more than 6 years, the action to enforce the verbal agreement has already elapsed.
+
+
+Question (2003 BAR)
+
+Q251:
+
+May a person donate something that does not belong to him? Explain.
+
+Suggested Answer
+
+A251:
+
+As a general rule, a person cannot donate something which he cannot dispose of at the time of the donation. (Art. 751, NCC)
+
+
+Question (2011 BAR)
+
+Q252:
+
+In gratitude, the groom’s parents made a donation of a property in writing to the bride’s parents shortly before their children’s wedding. The donation was accepted. What is the nature of the donation?
+
+A. It is an ordinary donation since it was not given to the bride or groom. 
+B. It is donation propter nuptias since it was given with the marriage in mind. 
+C. It is an indirect donation propter nuptias since the bride would eventually inherit the property from her parents. 
+D. It is a remunatory donation.
+
+Suggested Answer
+
+A252:
+
+A. (UPLC Suggested Answers)
+
+
+Question (2020-21 BAR)
+
+Q253:
+
+X and Y were in a live-in relationship for the longest time, and were already blessed with a child, Z. They finally decided to get married on March 15, 2020. When X's parents found about the news, they were thrilled and thus, donated in favor of Z, the family heirloom, particularly, a gold ring valued at ₱250,000.00, which X and Y orally accepted on behalf of their minor child. One day, X and Y got into a serious quarrel, which resulted in them setting aside their marriage plans. 
+
+a. Is the donation to Z valid? Explain.
+b. Assuming that the donation to Z is valid, may X's parents revoke the donation on the ground that the marriage of X with Y did not push through? Explain.
+
+Suggested Answer
+
+A253:
+
+a. No, it is a void donation. This is an ordinary donation inter vivos, not a donation proper nuptias. The Civil Code provides that if the value of the personal property donated exceeds five thousand pesos, the donation and the acceptance shall be made in writing; otherwise, the donation shall be void. A piece of jewelry like the family heirloom here which is a gold ring, valued at P250,000.00, is a personal property. Here, the acceptance was made orally; therefore, the donation is void. (UPLC Suggested Answers)
+
+b. NO, because it is an ordinary donation, not a donation propter nuptias. The ground that the marriage did not push through may only be raised to revoke donations by reason of marriage which is defined by Art. 126 of the FC, as those which are made before its celebration, in consideration of the same and in favor of one or both of the future spouses. Here, the donation was not made in favor of one or both of the future spouses, but in favor of their child. X’s parents, therefore, cannot revoke the donation on the ground that the marriage of X with Y did not push through. (UPLC Suggested Answers)
+
+
+Question (2007 BAR)
+
+Q254:
+
+Illegal and impossible conditions in a simple donation vs. Illegal and impossible conditions in an onerous donation
+
+Suggested Answer
+
+A254:
+
+Illegal and impossible conditions in a simple donation are considered as not written. Such conditions shall, therefore, be disregarded but the donation remains valid. (Art. 727, NCC) On the other hand, illegal and impossible conditions imposed in an onerous donation shall annul the donation. (Art. 1183, NCC) This is so because onerous donations are governed by the law on contracts. (Art. 733, NCC)
+
+
+Question (1997 BAR)
+
+Q255:
+
+Are the effects of illegal and immoral conditions on simple donations the same as those effects that would follow when such conditions are imposed on donations con causa onerosa?
+
+Suggested Answer
+
+A255:
+
+No, they don't have the same effect. Illegal or impossible conditions in simple and remuneratory donations shall be considered as not imposed. Hence the donation is valid. The donation will be considered as simple or pure. The condition or mode is merely an accessory disposition, and its nullity does not affect the donation, unless it clearly appears that the donor would not have made the donation without the mode or condition.
+
+Donations con causa onerosa is governed by law on obligations and contracts, under which an impossible or Illicit condition annuls the obligation dependent upon the condition where the condition is positive and suspensive. If the impossible or illicit condition is negative, it is simply considered as not written, and the obligation is converted into a pure and simple one. However, in order that an illegal condition may annul a contract, the impossibility must exist at the time of the creation of the obligation; a supervening impossibility does not affect the existence of the obligation. (UPLC Suggested Answers)
+
+ALTERNATIVE ANSWER:
+
+A: NO. In simple or pure donation, only the illegal or impossible condition is considered not written but the donation remains valid and becomes free from conditions. The condition or mode being a mere accessory disposition. Its nullity does not affect the donation unless it clearly appears that the donor would not have made the donation without the mode or condition. On the other hand, onerous donation is governed by the rules on contracts. Under Art. 1183, Impossible or illegal conditions shall annul the obligation which depends upon them. In these cases, both the obligation and the condition are void. (UPLC Suggested Answers)
+
+
+Question (2009 BAR)
+
+Q256:
+
+True or False. A person can dispose of his corpse through an act inter vivos.
+
+Suggested Answer
+
+A256:
+
+FALSE. A person cannot dispose of his corpse through an act inter vivos, i.e., an act to take effect during his lifetime. Before his death there is no corpse to dispose. But he is allowed to do so through an act mortis causa, i.e., an act to take effect upon his death.
+
+
+Question (2013 BAR)
+
+Q257:
+
+Josefa executed a deed of donation covering a one-hectare rice land in favor of her daughter, Jennifer. The deed specifically provides that:
+
+"For and in consideration of the love and service Jennifer has shown and given to me, I hereby freely, voluntarily and irrevocably donate to her my one-hectare rice land covered by TCT No. 11550, located in San Fernando, Pampanga. This donation shall take effect upon my death."
+
+The deed also contained Jennifer's signed acceptance, and an attached notarized declaration by Josefa and Jennifer that the land will remain in Josefa's possession and cannot be alienated, encumbered, sold or disposed of while Josefa is still alive. Advise Jennifer on whether the deed is a donation inter vivos or mortis causa and explain the reasons supporting your advice. 
+
+Suggested Answer
+
+A257:
+
+The donation is a donation inter vivos. When the donor intends that the donation shall take effect during the lifetime of the donor, though the property shall not be delivered till after the donor’s death, this shall be a donation inter vivos. (Art. 729, NCC) The NCC prefers inter vivos transmissions. Moreover, mortis causa donations should follow the formalities of a will. (Art. 728, NCC) Here, there is no showing that such formalities were followed. Thus, it is favorable to Jennifer that the deed is a donation inter vivos.
+
+Furthermore, what is most significant in determining the type of donation is the absence of stipulation that the donor could revoke the donation. On the contrary, the deeds expressly declare them to be “irrevocable,” a quality absolutely incompatible with the idea of conveyances mortis causa where revocability is the essence of the act, to the extent that a testator cannot lawfully waive or restrict his right of revocation. The provisions of the deed of donation which state that the same will only take effect upon the death of the donor and that there is a prohibition to alienate, encumber, dispose, or sell the same should be harmonized with its express irrevocability. (Austria-Magat v. Court of Appeals, G.R. No. 106755, 01 Feb. 2002)
+
+
+Question (2015 BAR)
+
+Q258:
+
+Jose, single, donated a house and lot to his only niece, Maria, who was of legal age and who accepted the donation. The donation and Maria's acceptance thereof were evidenced by a Deed of Donation. Maria then lived in the house and lot donated to her, religiously paying real estate taxes thereon. Twelve years later, when Jose had already passed away, a woman claiming to be an illegitimate daughter of Jose filed a complaint against Maria. Claiming rights as an heir, the woman prayed that Maria be ordered to reconvey the house and lot to Jose's estate. In her complaint she alleged that the notary public who notarized the Deed of Donation had an expired notarial commission when the Deed of Donation was executed by Jose. Can Maria be made to reconvey the property? What can she put up as a defense?
+
+Suggested Answer
+
+A258:
+
+NO, Maria cannot be compelled to reconvey the property. The Deed of Donation was void because it was not considered a public document. However, a void donation can trigger acquisitive prescription. (Solis v. CA, G.R. No. L-46753-54, 25 Aug. 1989; Doliendo v. Biarnesa, G.R. No. L-2765, 27 Dec. 1906) The void donation has a quality of titulo colorado enough for acquisitive prescription especially since 12 years had lapsed from the deed of donation. (UST Bar Q&A Suggested Answers, 2015)
+
+ALTERNATIVE ANSWER:
+
+YES, Maria can be made to reconvey the property. The law provides that no person may give or receive by way of donation more than what he may give or receive by will. On the assumption that the property donated to Maria is the only property of Jose, the legitime of his illegitimate child would be impaired if Maria would be allowed to keep the entire property. After taking into account the value of the property, Maria can be made to reconvey the property to the extent necessary to satisfy the legitime of Jose’s illegitimate daughter provided that the woman claiming to be Jose’s child can prove her filiation to the deceased. Maria can set up the defense that the action has prescribed. An action for revocation of the donation on the ground that it impaired the legitime of a compulsory heir may only be filed within 10 years from the time the cause of action accrues which is at the time of the death of Jose. The facts are not clear as to when Jose died but on the assumption that he died ten years prior to the filing of the action, the same has clearly prescribed. (UST Bar Q&A Suggested Answers, 2015)
+
+
+Question (2014 BAR)
+
+Q259:
+
+The Roman Catholic Church accepted a donation of a real property located in Lipa City. A deed of donation was executed, signed by the donor, Don Mariano, and the donee, the Church, as represented by Fr. Damian. Before the deed could be notarized, Don Mariano died. Is the donation valid?
+
+Suggested Answer
+
+A259:
+
+The donation is void. The donation of an immovable property must be in a public instrument in order for it to be valid. In this case, the donor died even before the notarization of the deed of donation. Hence, it does not satisfy the requirement of being in a public instrument for the donation to be valid.
+
+
+Question (2007 BAR)
+
+Q260:
+
+In 1986, Jennifer and Brad were madly in love. In 1989, because a certain Picasso painting reminded Brad of her, Jennifer acquired it and placed it in his bedroom. In 1990, Brad and Jennifer broke up. While Brad was mending his broken heart, he met Angie and fell in love. Because the Picasso painting reminded Angie of him, Brad in his will bequeathed the painting to Angie. Brad died in 1995. Saddened by Brad's death, Jennifer asked for the Picasso painting as a remembrance of him. Angie refused and claimed that Brad, in his will, bequeathed the painting to her. Is Angie correct? Why or why not?
+
+Suggested Answer
+
+A260:
+
+NO, Angie is not correct. The Picasso painting is not given or donated by Jennifer to Brad. She merely “placed it in his bedroom.” Hence, she is still the owner of the painting. Not being the owner of the Picasso painting, Brad cannot validly bequeath the same to Angie. (Art. 930, NCC) Even assuming that the painting was impliedly given or donated by Jennifer to Brad, the donation is nevertheless void for not being in writing. The Picasso painting must be worth more than 5,000 pesos. Under Art. 748, NCC, the donation and acceptance of a movable worth more than 5,000 pesos must be in writing, otherwise the donation is void, Jennifer remained the owner of the Picasso painting and Brad could not have validly disposed of said painting in favor of Angie in his will.
+
+
+Question (2000 BAR)
+
+Q261:
+
+Anastacia purchased a house and lot on installments at a housing project in Quezon City. Subsequently, she was employed in California and a year later, she executed a deed of donation, duly authenticated by the Philippine Consulate in Los Angeles, California, donating the house and lot to her friend Amanda. The latter brought the deed of donation to the owner of the project and discovered that Anastacia left unpaid installments and real estate taxes. Amanda paid these so that the donation in her favor can be registered in the project owner's office. Two months later, Anastacia died, leaving her mother Rosa as her sole heir. Rosa filed an action to annul the donation on the ground that Amanda did not give her consent in the deed of donation or in a separate public instrument. Amanda replied that the donation was an onerous one because she had to pay unpaid installments and taxes; hence her acceptance may be implied. Who is correct?
+
+Suggested Answer
+
+A261:
+
+Rosa is correct because the donation is void. The property donated was an immovable. For such donation to be valid, Art. 749 of the NCC requires both the donation and the acceptance to be in a public instrument. There being no showing that Amanda's acceptance was made in a public instrument, the donation is void. The contention that the donation is onerous and therefore, need not comply with Art. 749 for validity is without merit. The donation is not onerous because it did not impose on Amanda the obligation to pay the balance on the purchase price or the arrears in real estate taxes. Amanda took it upon herself to pay those amounts voluntarily. For a donation to be onerous, the burden must be imposed by the donor on the donee. In the problem, there is no such burden imposed by the donor on the donee. The donation not being onerous, it must comply with the formalities of Art. 749, NCC.
+
+
+Question (1998, 1990 BAR)
+
+Q262:
+
+Ernesto donated in a public instrument a parcel of land to Demetrio, who accepted it in the same document. It is there declared that the donation shall take effect immediately, with the donee having the right to take possession of the land and receive its fruits but not to dispose of the land while Ernesto is alive as well as for ten years following his death. Moreover, Ernesto also reserved in the same deed his right to sell the property should he decide to dispose of it at any time a right which he did not exercise at all. After his death, Ernesto's heirs seasonably brought an action to recover the property, alleging that the donation was void as it did not comply with the formalities of a will. Will the suit prosper?
+
+Suggested Answer
+
+A262:
+
+YES, the suit will prosper as the donation did not comply with the formalities of a will. In this instance, the fact that the donor did not intend to transfer ownership or possession of the donated property to the donee until the donor's death, would result in a donation mortis causa and in this kind of disposition, the formalities of a will should be complied with, otherwise, the donation is void. In this Instance, donation mortis causa embodied only in a public instrument without the formalities of a will could not have transferred ownership of disputed property to another.
+
+
+Question (1998, 1993 BAR)
+
+Q263:
+
+On 21 Jan. 1986, A executed a deed of donation inter vivos of a parcel of land to Dr. B who had earlier constructed thereon a building in which research on the dreaded disease AIDS were being conducted. The deed, acknowledged before a notary public, was handed over by A to Dr. B who received it. A few days after, A flew to Davao City. Unfortunately, the airplane he was riding crashed on landing killing him. Two days after the unfortunate accident. Dr. B, upon advice of a lawyer, executed a deed acknowledged before a notary public accepting the donation. Is the donation effective? Explain your answer.
+
+Suggested Answer
+
+A263:
+
+NO, the donation is not effective. The law requires that the separate acceptance of the donee of an immovable must be done in a public document during the lifetime of the donor. (Arts. 746 & 749, NCC) In this case, B executed the deed of acceptance before a notary public after the donor had already died.
+
+
+Question (1998 BAR)
+
+Q264:
+
+On 27 July 1997, Pedro mailed in Manila a letter to his brother Jose, a resident of Iloilo City, offering to donate a vintage sports car which the latter had long been wanting to buy from the former. On 05 Aug. 1997, Jose called Pedro by cellular phone to thank him for his generosity and to inform him that he was sending by mail for his letter of acceptance. Pedro never received that letter because it was never mailed. On 14 Aug. 1997, Pedro received a telegram from Iloilo informing him that Jose had been killed in a road accident the day before (13 Aug. 1997). 
+
+(a) Is there a perfected donation?
+
+(b) Will your answer be the same if Jose did mail his acceptance letter, but it was received by Pedro in Manila days after Jose’s death?
+
+Suggested Answer
+
+A264:
+
+(a) NONE. There is no perfected donation. Under Art. 748 of the NCC, the donation of a movable may be made orally or in writing. If the value of the personal property donated exceeds five thousand pesos, the donation and the acceptance shall be made in writing. Assuming that the value of the thing donated, a vintage sports car, exceeds P5,000.00, then the donation and the acceptance must be in writing. In this instance, the acceptance of Jose was not in writing, therefore, the donation is void. Upon the other hand, assuming that the sports car costs less than P5,000.00, the donation may be oral, but still, the simultaneous delivery of the car is needed and there being none, the donation was never perfected.
+
+(b) YES, the answer is the same. If Jose’s mail containing his acceptance of the donation was received by Pedro after the former’s death, then the donation is still void because under Art. 734 of the NCC, the donation is perfected the moment the donor knows of the acceptance by the done. The death of Jose before Pedro could receive the acceptance indicates that the donation was never perfected. Under Art. 746 of the NCC, acceptance must be made during the lifetime of both the donor and the done.
+
+
+Question (2011 BAR)
+
+Q265:
+
+When the donor gives donations without reserving sufficient funds for his support or for the support of his dependents, his donations are 
+
+(A) Rescissible, since it results in economic lesion of more than 25% of the value of his properties. 
+(B) Voidable, since his consent to the donation is vitiated by mindless kindness. 
+(C) Void, since it amounts to wanton expenditure beyond his means. 
+(D) Reducible to the extent that the donations impaired the support due to himself and his dependents 
+
+Suggested Answer
+
+A265:
+
+(D) Reducible to the extent that the donations impaired the support due to himself and his dependents
+
+
+Question (2011 BAR)
+
+Q266:
+
+What is the prescriptive period for filing an action for revocation of a donation based on acts of ingratitude of the donee? 
+
+(A) 5 years from the perfection of the donation. 
+(B) 1 year from the perfection of the donation. 
+(C) 4 years from the perfection of the donation. 
+(D) Such action does not prescribe.
+
+Suggested Answer
+
+A266:
+
+(B) 1 year from the perfection of the donation.
+
+
+Question (2022 BAR)
+
+Q267:
+
+In 2014, a wealthy young couple, the spouses Tan, moved by the spirit of generosity and love for their hometown in Siquijor, decided to donate a one-hectare lot in favor of the province of Siquijor. The Deed of Donation pertinently provides:
+
+“The herein DONORS hereby voluntarily and freely give, transfer and convey, by way of unconditional donation, unto said DONEE, all of the rights, title and interest which the aforesaid DONORS have or which pertain to them and which they owned exclusively in the above-described real property over a one hectare portion of the same, solely for hospital site only and for no other purpose, where a provincial government hospital shall be constructed.” 
+
+The donation was recorded in the Registry of Deeds, and a certificate of title to the property was transferred to the province of Siquijor. In accordance with the Deed of Donation, the construction of a hospital building was started in the following year. However, for reasons unknown, only the foundation of the hospital building has, to this day, been completed. Do the spouses Tan have valid grounds to revoke the donation? Explain briefly. 
+
+Suggested Answer
+
+A267:
+
+YES, there is a ground to revoke the donation. As stated in the facts, the donation to the province is a donation subject to a condition - the condition being the construction of a government hospital and the use of the subject property solely for hospital purposes. When the donor imposed that condition, it can be inferred that the intention was to have a completed and fully functioning government hospital. Certainly, the construction of the foundation is far from compliance with the condition imposed by the donor. 
+
+Upon the non-fulfillment of the condition, the donation may be revoked, and all the rights already acquired by the donee shall be deemed lost and extinguished. This is a resolutory condition because it is demandable at once by the donee but the non-fulfillment of the condition gives the donor the right to revoke the donation. (Clemente v. Republic of the Philippines, G.R. No. 220008, 20 Feb. 2019) Thus, the Spouses Tan have valid grounds to revoke the donation. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2006, 2003 BAR)
+
+Q268:
+
+In 1950, Dr. Alba donated a parcel of land to Central University on condition that the latter must establish a medical college on the land to be named after him. In the year 2000, the heirs of Dr. Alba filed an action to annul the donation and for the reconveyance of the property donated to them for the failure, after 50 years, of the University to establish on the property a medical school named after their father. The University opposed the action on the ground of prescription and also because it had not used the property for some purpose other than that stated in the donation. Should the opposition of the University to the action of Dr. Alba’s heirs be sustained? Explain. 
+
+Suggested Answer
+
+A268:
+
+The donation may be revoked. The non-establishment of the medical college on the donated property was a resolutory condition imposed on the donation by the donor. Although the Deed of Donation did not fix the time for the establishment of the medical college, the failure of the donee to establish the medical college after fifty (50) years from the making of the donation should be considered as occurrence of the resolutory condition, and the donation may now be revoked. While the general rule is that in case the period is not fixed in the agreement of the parties, the period must be fixed first by the court before the obligation may be demanded, the period of fifty (50) years was more than enough time for the done to comply with the condition. Hence, in this case, there is no more need for the court to fix the period because such procedure with the condition. (Central Philippine University v. Court of Appeals, G.R. No. 112127, 17 July 1995)
+
+
+Question (2006 BAR)
+
+Q269:
+
+Sps. Alfredo and Racquel were active members of a religious congregation. They donated a parcel of land in favour of that congregation in a duly notarized Deed of Donation, subject to the condition that the Minister shall construct thereon a place of worship within one (1) year from the acceptance of the donation. In an affidavit he executed on behalf of the congregation, the Minister accepted the donation. The Deed of Donation was not registered with the Registry of Deeds. However, instead of constructing a place of worship, the Minister constructed a bungalow on the property he used as his residence. Disappointed with the Minister, the Sps. revoked the donation and demanded that he vacate the premises immediately. But the Minister refused to leave, claiming that aside from using the bungalow as his residence, he is also using it as a place for worship on special occasions. Under the circumstances, can Alfredo and Racquel evict the Minister and recover possession of the property? If you were the couple's counsel, what action you take to protect the interest of your clients?
+
+Suggested Answer
+
+A269:
+
+As counsel for the couple, I may file an action for reconveyance of the property on the ground that the donation was not perfected. It was not perfected because although it was made in a public document, the donee failed to notify the donor of such acceptance in an authentic form before the donation was revoked under Art. 749 of the NCC. Such notification was necessary for the donation to become valid and binding.
+
+
+Question (1991 BAR)
+
+Q270:
+
+Sps. Michael and Linda donated a three-hectare residential land to the City of Baguio on the condition that the city government would build thereon a public park with a boxing arena, the construction of which shall commence within six (6) months from the date the parties ratify the donation. The donee accepted the donation and the title to the property was transferred in its name. Five (5) years elapsed but the public park with the boxing arena was never started. Considering the failure of the donee to comply with the condition of the donation, the donor-spouses sold the property to Ferdinand who then sued to recover the land from the government. Will the suit prosper?
+
+Suggested Answer
+
+A270:
+
+Ferdinand has no right to recover the land. It is true that the donation was revocable because of breach of the conditions. But until and unless the donation was revoked, it remained valid. Hence, Sps. Michael and Linda had no right to sell the land to Ferdinand. One cannot give what he does not have. What the donors should have done first was to have the donation annulled or revoked. And after that was done, they could validly have disposed of the land in favor of Ferdinand.
+
+
+Question (1990 BAR)
+
+Q271:
+
+B donated to M a parcel of land in 1980. B made the deed of donation, entitled “Donation Inter Vivos”, in a public instrument and M accepted the donation in the land same document. It was provided in the deed that the land donated shall be immediately delivered to M and that M shall have the right to enjoy the fruits fully. The deed also provided that B was reserving the right to dispose of the land during his (B’s) lifetime, and that M shall not register the deed of donation until after B’s death. Upon B’s death, W, B’s widow, and sole heir, filed an action for the recovery of the donated land, contending that the donation made by B is a donation mortis causa and not a donation inter vivos. Will said action prosper? Explain your answer.
+
+Suggested Answer
+
+A271:
+
+YES, the action will prosper. The donation is a donation mortis causa because the reservation is to dispose of all the property donated and, therefore, the donation is revocable at will. Accordingly, the donation requires the execution of a valid will, whether notarial or holographic. (Arts. 755 & 728, NCC)
+
+
+Question (2011 BAR)
+
+Q272:
+
+An action for reconveyance of a registered piece of land may be brought against the owner appearing on the title based on a claim that the latter merely holds such title in trust for the plaintiff. The action prescribes, however, within 10 years from the registration of the deed or the date of the issuance of the certificate of title of the property as long as the trust had not been repudiated. What is the exception to this 10-year prescriptive period? 
+
+(A) When the plaintiff had no notice of the deed or the issuance of the certificate of title. 
+(B) When the title holder concealed the matter from the plaintiff. 
+(C) When fortuitous circumstances prevented the plaintiff from filing the case sooner. 
+(D) When the plaintiff is in possession of the property.
+
+Suggested Answer
+
+A272:
+
+(D) When the plaintiff is in possession of the property.
+
+
+Question (1998 BAR)
+
+Q273:
+
+In 1965, Renren bought from Robyn a parcel of registered land evidenced by a duly executed deed of sale. The owner presented the deed of sale and the owner's certificate of title to the Register of Deeds. The entry was made in the daybook and corresponding fees were paid as evidenced by official receipt. However, no transfer of certificate of title was issued to Renren because the original certificate of title in Robyn's name was temporarily misplaced after fire partly gutted the Office of the Register of Deeds. Meanwhile, the land had been possessed by Robyn's distant cousin, Mikaelo, openly, adversely and continuously in the concept of owner since 1960. It was only in April 1998 that Renren sued Mikaelo to recover possession. Mikaelo invoked: (a) acquisitive prescription and (b) laches, asking that he be declared owner of the land. Decide the case by evaluating these defenses. 
+
+Suggested Answer
+
+A273:
+
+(a) Renren's action to recover possession of the land will prosper. In 1965, after buying the land from Robyn, he submitted the Deed of Sale to the Registry of Deeds for registration together with the owner's duplicate copy of the title and paid the corresponding registration fees. Under Sec. 56 of PD 1529, the Deed of Sale to Renren is considered registered from the time the sale was entered in the Day Book (now called the Primary Entry Book). For all legal intents and purposes, Renren is considered the registered owner of the land. After all, it was not his fault that the Registry of Deeds could not issue the corresponding transfer certificate of title. Mikaelo's defense of prescription cannot be sustained. A Torrens title is imprescriptible. No title to registered land in derogation of the title of the registered owner shall be acquired by prescription or adverse possession. (Sec. 47, PD 1529) The right to recover possession of registered land likewise does not prescribe because possession is just a necessary incident of ownership.
+
+(b) Mikaelo's defense of laches, however, appears to be more sustainable. Renren bought the land and had the sale registered way back in 1965. From the facts, it appears that it was only in 1998 or after an inexplicable delay of 33 years that he took the first step asserting his right to the land. It was not even an action to recover ownership but only possession of the land. By ordinary standards, 33 years of neglect or inaction is too long and may be considered unreasonable. As often held by the Supreme Court, the principle of imprescriptibly sometimes has to yield to the equitable principle of laches which can convert even a registered landowner's claim into a stale demand. Mikaelo's claim of laches, however, is weak insofar as the element of equity is concerned, there being no showing in the facts how he entered into the ownership and possession of the land.
+
+
+Question (1992 BAR)
+
+Q274:
+
+A owned a parcel of unregistered land located on the Tarlac side of the boundary between Tarlac and Pangasinan. His brother B owned the adjoining parcel of unregistered land on the Pangasinan side. A sold the Tarlac parcel to X in a deed of sale executed as a public instrument by A and X. After X paid in full the price of the sale, X took possession of the Pangasinan parcel in the belief that it was the Tarlac parcel covered by the deed of sale executed by A and X. After 12 years, a controversy arose between B and X on the issue of the ownership of the Pangasinan parcel, B claims a vested right of ownership over the Pangasinan parcel because B never sold that parcel to X or to anyone else. On the other hand, X claims a vested right of ownership over the Pangasinan parcel by acquisitive prescription, because X possessed this parcel for over 10 years under claim of ownership. Decide on these claims, giving your reasons.
+
+Suggested Answer
+
+A274:
+
+At this point in time, X cannot claim the right of vested ownership over the Pangasinan parcel by acquisitive prescription. In addition to the requisites common to ordinary and extraordinary acquisitive prescription consisting of uninterrupted, peaceful, public, adverse, and actual possession in the concept of owner, ordinary acquisitive prescription for 10 years requires (1) possession in good faith and just title. "Just title" means that the adverse claimant came into possession of the property through one of the modes recognized by law for the acquisition of ownership, but the grantor was not the owner or could not transmit any right. (Art.1129) In this case, there is no “just title” and no “mode” that can be invoked by X for the acquisition of the Pangasinan parcel. There was no constructive delivery of the Pangasinan parcel because it was not the subject-matter of the deed of sale. Hence, B retains ownership of the Pangasinan parcel of land. 
+
+
+Question (2002 BAR)
+
+Q275:
+
+Way back in 1948, Winda’s husband sold in favor of Verde Sports Center Corp. (Verde) a 10-hectare property belonging to their conjugal partnership. The sale was made without Winda’s knowledge, much less consent. In 1950, Winda learned of the sale, when she discovered the deed of sale among the documents in her husband’s vault after his demise. Soon after, she noticed that the construction of the sports complex had started. Upon completion of the construction in 1952, she tried but failed to get free membership privileges in Verde. Winda now files a suit against Verde for the annulment of the sale on the ground that she did not consent to the sale. In answer, Verde contends that, in accordance with the Spanish Civil Code which was then in force, the sale in 1948 of the property did not need her concurrence. Verde contends that in any case the action has prescribed or is barred by laches. Winda rejoins that her Torrens title covering the property is indefeasible, and imprescriptible.
+
+(a) Define or explain the term “laches”. 
+
+(b) Decide the case, stating your reasons for your decision. 
+
+Suggested Answer
+
+A275:
+
+(a) Laches means failure or neglect, for an unreasonable and unexplained length of time, to do what, by exercising due diligence, could or should have been done earlier. It is negligence or omission to assert a right within a reasonable time. (De Vera v. Court of Appeals, G.R. No. 97761, 14 Apr. 1999) 
+
+(b) While Art. 1413 of the Spanish Civil Code did not require the consent of the wife for the validity of the sale, an alienation by the husband in fraud of the wife is void as held in Uy Coque v. Navas (G.R. No. L-20392, 20 Nov. 1923). Assuming that the alienation in 1948 was in fraud of Winda and, therefore, makes the sale to Verde void, the action to set aside the sale, nonetheless, is already barred by prescription and laches. More than 52 years have already elapsed from her discovery of the sale in 1950. 
+
+
+Question (2000 BAR)
+
+Q276:
+
+In an action brought to collect a sum of money based on a surety agreement, the defense of laches was raised as the claim was filed more than seven years from the maturity of the obligation. However, the action was brought within the ten-year prescriptive period provided by law wherein actions based on written contracts can be instituted. 
+
+(a) Will the defense prosper? Reason. 
+
+(b) What are the essential elements of laches? 
+
+Suggested Answer
+
+A276:
+
+(a) NO, the defense will not prosper. The problem did not give facts from which laches may be inferred. Mere delay in filing an action, standing alone, does not constitute laches. (Agra v. PNB, G.R. No. 133317, 29 June 1999) 
+
+(b) The four basic elements of laches are: 1. Conduct on the part of the defendant or of one under whom they claim, giving rise to the situation of which complainant seeks a remedy; 2. Delay in asserting the complainant’s rights, the complainant having had knowledge or notice of the defendant’s conduct and having been afforded an opportunity to institute suit; 3. Lack of knowledge on the part of the defendant that the complainant would assert the right on which he bases his suit; and 4. Injury or prejudice to the defendant in the event relief is accorded to the complainant, or the suit is not held to be barred.
+
+
+Question (1994 BAR)
+
+Q277:
+
+Distinguish the Torrens system of land registration from the system of recording of evidence of title.
+
+Suggested Answer
+
+A277:
+
+The Torrens system of land registration is a system for the registration of title to the land. Thus, under this system what is entered in the Registry of Deeds, is a record of the owner's estate or interest in the land, unlike the system under the Spanish Mortgage Law or the system under Sec. 194 of the Revised Administrative Code as amended by Act 3344 where only the evidence of such title is recorded. In the latter system, what is recorded is the deed of conveyance from hence the owner's title emanated and not the title itself.
+
+Torrens system of land registration is that which is prescribed in Act 496 (now PD 1529), which is either Judicial or quasi- judicial. System or recording of evidence of title is merely the registration of evidence of acquisitions of land with the Register of Deeds, who annotates the same on the existing title, cancels the old one and issues a new title based on the document presented for registration.
+
+
+Question (2005 BAR)
+
+Q278:
+
+In an ejectment case filed by Don against Cesar, can the latter ask for the cancellation of Don's title considering that he (Cesar) is the rightful owner of the lot? Explain.
+
+Suggested Answer
+
+A278:
+
+NO, Cesar cannot ask for the cancellation of Don's title in the ejectment case filed by Don against him. Under Sec. 48 of PD 1529, the Property Registration Decree, a Torrents title shall not be subject to collateral attack. It cannot be altered, modified or cancelled except in a direct proceeding in accordance with law. The ejectment proceeding does not provide the proper forum for the cancellation of Don’s title. While Cesar’s counterclaim for cancellation of Don’s title may be considered a direct attack, the same should nevertheless be denied on procedural grounds because an MTC or MeTC is without jurisdiction to cancel a Torrens title.
+
+
+Question (2017 BAR)
+
+Q279:
+
+Krystal owns a parcel of land covered by TCT No. 12345 in Angeles City, Due to severe financial constraints, Krystal was forced to sell the property to RBP Corporation, a foreign corporation based in South Korea. Subsequently, RBP Corporation sold the property to Gloria, one of its most valued clients. Wanting her property back, Krystal, learning of the transfer of the property froth RBP Corporation to Gloria, sued both of them in the RTC for annulment of sale and for reconveyance. She alleged that the sale by RBP Corporation to Gloria was void because ADP Corporation was a foreign corporation prohibited by the Constitution from acquiring and owning lands in the Philippines. Will Krystal's suit for annulment of sale and reconveyance prosper? Explain your answer.
+
+Suggested Answer
+
+A279:
+
+NO, Krystal's suit will not prosper. The Supreme Court, in Borromeo v. Descallar (G.R. No. 159310, 24 Feb. 2009), reiterated the consistent ruling that if land is invalidly transferred to an alien who subsequently becomes a Filipino citizen or transfers it to a Filipino, the flaw in the original transaction is considered cured and the title of the transferee is rendered valid. In this case, RBP, being a foreign corporation is prohibited from acquiring private land, making the sale of Krystal to RBP void ab However, the subsequent transfer to a Filipino citizen cured the defect, making Gloria's title valid and defeating Krystal's action for annulment and reconveyance.
+
+
+Question (2022 BAR)
+
+Q280:
+
+This case involves two competing titles: TCT No. 23456 in the name of Flor and TCT No. 65432 in the name of de Luna. Flor’s title was derived from Rodrigo. Rodrigo’s title was originally obtained through a judicial confirmation of title in 1950 based on a survey plan approved in 1931. On the other hand, de Luna derived her TCT No. 65432 from Diaz who obtained an original title 6 of 7 through judicial confirmation of title at a much later date, in 1970, on the basis of a survey plan approved in 1921. It turned out that Flor’s TCT No. 23456, although titled prior in time, was based on a survey plan that was marred with numerous blatant, obvious and serious defects, to the point that the trial court found it dubious, irregularly approved and was therefore fake. 
+
+a. Discuss the principle of “qui prior est tempore, potior est jure” in the torrens system of land registration.
+
+b. As between Flor and de Luna, whose title should be declared valid and whose title should be voided? Explain briefly.
+
+Suggested Answer
+
+A280:
+
+a. The principle of "qui prior est tempore, potior est jure" literally means he who is before in time is better in right. (Benavides vs. Salvador, G.R. No. 173331, 11 Dec. 2013). Under the Torrens System of land registration, it means that in case of conflict between two certificates of title purporting to cover the same land, the earlier in date will prevail. (Yu vs. Ayala Land, Inc., G.R. No. 173120, 10 Apr. 2019) (Central Bar Q&A by Paguirigan, 2023)
+
+b. It is submitted that de Luna's title should be declared valid while Flor's title should be declared void. In a similar case decided by the Supreme Court, it ruled that in case of conflict between two certificates of title purporting to cover the same land, the later certificate of title should prevail and be declared valid if the earlier title was sourced from a void survey. In the case presented, while Flor's certificate of title was issued earlier, the facts clearly state that it was sourced from a void survey since such survey was marred by numerous and serious defects and which turned out to be fake. Thus, when the technical description appearing in the title is clearly erroneous, the courts have no other recourse but to order its cancellation. Hence, de Luna's title should be declared valid and must prevail over Flor's title even if it was issued much later than the latter's title. (Yu v. Ayala Land, Inc., G.R. No. 173120, 10 Apr. 2019) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2022 BAR)
+
+Q281:
+
+Being an overseas worker, Salvador issued to Ronaldo a duly notarized Special Power of Attorney (SPA) authorizing the latter to enter into a contract of lease over Salvador's property covered by TCT No. 122433 for a period of three years with SISI Corp. Salvador entrusted to Ronaldo the owner's duplicate of the TCT in case SISI Corp. needed to verify the same. Hearing rumors that the subject property was sold, Salvador went to the Register of Deeds and was shocked to find out that TCT No. 122433 had been cancelled and TCT No. 334388 had been issued in Eduardo’s name. To vindicate his property rights, Salvador filed a complaint for cancellation of title and reconveyance. Salvador was able to prove that he was out of the country when the purported sale was executed. On the other hand, Eduardo claims to be an innocent purchase for value, stating that he paid the fair market value to Ronaldo and that he relied on the fact that Ronaldo presented the original owner’s duplicate of Salvador’s TCT. He likewise inspected the property and determined that Salvador was indeed the owner. If you were the judge, decide. Explain briefly. 
+
+Suggested Answer
+
+A281:
+
+If I were the Judge, I would rule in favor of Salvador. While it is true that Eduardo inspected the property prior to his purchase of the same, he cannot be considered an innocent purchaser for value. The facts are clear that the property was still registered in the name of Salvador at the time Ronaldo sold the same to Eduardo. A prudent man who buys registered property from a person other than the registered owner should have inquired as to authority of the seller to convey the property. (Bautista vs. Court of Appeals, G.R. No. 106042, 28 Feb. 1994)
+
+In addition, while Ronaldo was given a Special Power of Attorney by Salvador to lease the land, such power does not include the power to sell the land. In fact, if the sale of a piece of land is made through an agent, the authority of the agent must be in writing, otherwise the sale is void. (Art. 1874, NCC) Hence, I will declare that the sale made by Ronaldo in favor of Eduardo is void. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2022 BAR)
+
+Q282:
+
+Atoy is one of the five children of Jawo. Jawo was the registered owner of a 4-hectare parcel of land in Sta. Cruz, Laguna covered by TCT No. 77347. When Jawo died, the owner’s duplicate of the TCT was kept by Jawo’s daughter, Akiko (sister of Atoy), who resided in the said property. Wanting to have the said 4-hectare property registered under his name, Atoy got in touch with Franz who had special connections with the Register of Deeds of Sta. Cruz, Laguna. TCT No. 77347 was then cancelled and TCT No. 84660 was issued in Atoy’s name on 29 Jan. 2013. Atoy immediately mortgaged the property to the Rural Bank of Sta. Cruz (RBSC). Upon default and after being declared the winning bidder in the extrajudicial foreclosure sale, RBSC consolidated ownership with the issuance of TCT No. 94477 in its name. How will Akiko and the other heirs of Jawo be able to successfully argue that RBSC is not an innocent purchaser for value? Explain briefly. 
+
+Suggested Answer
+
+A282:
+
+Akiko and the other heirs of Jawo may argue that the bank is not an innocent purchaser for value based on the following: While it is true that a forged instrument may be the root of a valid title in favor of an innocent purchaser for value, the doctrine does not apply if the owner still holds a valid and existing title over the land in which case the earlier certificate of title prevails over the latter one. (Torres vs. Court of Appeals, G.R. No. L-63046, 21 June 1990) Moreover, the bank should have exercised a greater degree of diligence in ascertaining the status of the property. The bank should have conducted an ocular inspection and they would have discovered that Akiko was the one in possession of the property. If the land purchased is in the possession of a person other than the vendor, the purchaser must be wary and must investigate the rights of the actual possessor. (Santiago v. Villamor, G.R. No. 168499, 26 Nov. 2012) Without such inquiry, the purchaser cannot be said to be in good faith and cannot have any right over the property. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2019 BAR)
+
+Q283:
+
+In 2015, O, the original registered owner of a 300square meter property covered by OCT No. 0-1234, appointed F as its caretaker. A year after, while O was abroad, F surreptitiously broke open O's safe and stole the duplicate copy of the said OCT. F then forged a Deed of Absolute Sale and made it appear that O sold the property to him. Consequently, F was able to have OCT No. 0-1234 cancelled and in lieu thereof, a new title, TCT No. T-4321, was issued in his name. A few months after, F offered the property for sale to X. After conducting the required due diligence to verify the title of F and finding no occupant in the property during ocular inspection, X signed the contract of sale, and thereupon, fully paid the purchase price. A few days later, X was able to obtain TCT No. T-5678 under his name. When O discovered F's fraudulent acts upon his return in 2017, O immediately filed a complaint for reconveyance against F and X, principally pointing out that F merely forged his signature in the Deed of Absolute Sale purportedly made in F's favor and thus, F could not have validly transferred the title thereof to X. Consequently, he sought the return of the subject property to him. Will the prayer of O for the return of the subject property prosper? Explain. 
+
+Suggested Answer
+
+A283:
+
+NO, the case filed by O will not prosper. X acted in good faith when he purchased the land from F because before entering into the contract of sale with the latter, X verified the title property and conducted an ocular inspection thereof. Since F is the registered owner of the land and was also the one in possession thereof, X had the right to rely on what is written on the certificate of title naming F as the owner. A forged or fraudulent document may become the root of a valid title if the property has already been transferred from the name of the owner to that of the forger. (Fule v. Legare G.R. No. L-17951, 28 Feb. 1963) Thus, a person who deals with registered property in good faith will acquire good title from a forger and be absolutely protected by a Torrens title. (Erasusta vs. Court of Appeals, G.R. No. 149231 17 July 2006) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2017, 1999 BAR)
+
+Q284:
+
+Sps. X and Y mortgaged a piece of registered land to A, delivering as well the OCT to the latter, but they continued to possess and cultivate the land, giving 1/2 of each harvest to A in partial payment of their loan to the latter, A, however, without the knowledge of X and Y, forged a deed of sale of the aforesaid land in favor of himself, got a TCT in his name, and then sold the land to B, who bought the land relying on A's title, and who thereafter also got a TCT in his name. It was only then that the Sps. X and Y learned that their land had been titled in B's name. May said spouses file an action for reconveyance of the land in question against b? Reason.
+
+Suggested Answer
+
+A284:
+
+The action of X and Y against B for reconveyance of the land will not prosper because B has acquired a clean title to the property being an innocent purchaser for value. A forged deed is an absolute nullity and conveys no title. The fact that the forged deed was registered, and a certificate of title was issued in his name, did not operate to vest upon an ownership over the property of X and Y. The registration of the forged deed will not cure the infirmity.
+
+However, once the title to the land is registered in the name of the forger and title to the land thereafter falls into the hands of an innocent purchaser for value, the latter acquires a clean title thereto. A buyer of a registered land is not required to explore beyond what the record in the registry indicates on its face inquest for any hidden defector inchoate right which may subsequently defeat his right thereto. This is the "mirror principle” of the Torrens system which makes it possible for a forged deed to be the root of a good title. Besides, it appears that Sps. X and Y are guilty of contributory negligence when they delivered this OCT to the mortgagee without annotating the mortgage thereon. Between them and the innocent purchaser for value, they should bear the loss. 
+
+
+Question (2009 BAR)
+
+Q285:
+
+Before migrating to Canada in 1992, the Sps. Teodoro and Anita entrusted all their legal papers and documents to their nephew, Atty. Tan. Taking advantage of the situation, Atty. Tan forged a deed of sale, making it appear that he had bought the couple’s property in Quezon City. In 2000, he succeeded in obtaining a TCT over the property in his name. Subsequently, Atty. Tan sold the same property to Luis, who built an auto repair shop on the property. In 2004, Luis registered the deed of conveyance, and title over the property was transferred in his name. In 2006, the Sps. Teodoro and Anita came to the Philippines for a visit and discovered what had happened to their property. They immediately hire you as lawyer. What action or actions will you institute to vindicate their rights? Explain fully. 
+
+Suggested Answer
+
+A285:
+
+In view of the good faith of the buyer Luis, no action can be taken by the spouses Teodoro and Anita against him since at the time of the purchase, the title has already been transferred in the name of Atty. Tan. Luis had the right to rely on what is written on the certificate of title in the absence of any circumstance which would incite his suspicion as to the defect in the title of the transferor. 
+
+Thus, as lawyer for the spouses, I will advise Anita and Teodoro that they can proceed against Atty. Tan and file civil, criminal, and administrative cases against him for his fraudulent deed. A civil action for recovery of damages may be filed to enable the spouses to recover not only the value of their land but also damages against Atty. Tan. I will also advise my clients to initiate a criminal action for forgery or falsification against Atty. Tan and if they may be minded to, they may also institute a complaint for disbarment against him before the Supreme Court for the imposition of appropriate disciplinary sanctions for violation of his oath as a lawyer and the Code of Professional Responsibility. (Central Bar Q&A by Paguirigan, 2023) 
+
+
+Question (2008 BAR)
+
+Q286:
+
+Juliet offered to sell her house and lot, together with all the furniture and appliances therein to Dehlma. Before agreeing to purchase the property, Dehlma went to the Register of Deeds to verify Juliet's title. She discovered that while the property was registered in Juliet's name under the Land Registration Act, as amended by the Property Registration Decree, its property, Dehlma told Juliet to redeem the property from Elaine, and gave her an advance payment to be used for purposes of releasing the mortgage on the property. When the mortgage was released, Juliet executed a Deed of Absolute Sale over the property which was duly registered with the Registry of Deeds, and a new TCT was issued in Dehlma's name. Dehlma immediately took possession over the house and lot and the movables therein. Thereafter, Dehlma went to the Assessor's Office to get a new tax declaration under her name. She was surprised to find out that the property was already declared for tax purposes in the name of XYZ Bank which had foreclosed the mortgage on the property before it was sold to her. XYZ Bank was also the purchaser in the foreclosure sale of the property. At that time, the property was still unregistered, but XYZ Bank registered the Sheriff's Deed of Conveyance in the daybook of the Register of Deeds under Act. 3344 and obtained a tax declaration in its name. 
+
+(a) Was Dehlma a purchaser in good faith? 
+
+(b) Who as between Dehlma and XYZ Bank has a better right to the house and lot?
+
+Suggested Answer
+
+A286:
+
+(a) YES, Dehlma is a purchaser in good faith. She learned about the XYZ tax declaration and foreclosure sale only after the sale to her was registered. She relied on the certificate of title of her predecessor-in-interest. Under the Torrens system, a buyer of registered lands is not required by law to inquire further than what the Torrens certificate indicates on its face. If a person proceeds to buy it relying on the title, that person is considered as buyer in good faith. The “priority in time” rule could not be invoked by XYZ Bank because the foreclosure sale of the land in favor of the bank was recorded under Act No. 3344, the law governing transaction affecting unregistered land, and thus, does not bind the land.
+
+(b) Between Dehlma and the bank, the former has a better right to the house and lot.
+
+
+Question (2005, 1991 BAR)
+
+Q287:
+
+Rod, the owner of an FX taxi, found in his vehicle an envelope containing TCT No. 65432 over a lot registered in Cesar's name. Posing as Cesar, Rod forged Cesar's signature on a Deed of Sale in Rod's favor. Rod registered the said document with the Register of Deeds and obtained a new title in his name. After a year, he sold the lot to Don, a buyer in good faith and for value, who also registered the lot in his name. 
+
+(a) Did Rod acquire title to the land? Explain. 
+
+(b) Discuss the rights of Don, if any, over the property. 
+
+Suggested Answer
+
+A287:
+
+(a) NO, Rod did not acquire title to the land. The inscription in the registry, to be effective, must be made in good faith. The defense of indefeasibility of a Torrens Title does not extend to a transferee who takes the certificate of title with notice of a flaw. A holder in bad faith of a certificate of title is not entitled to the protection of the law, for the law cannot be used as a shield for frauds. (Samonte v. Court of Appeals, G.R. No. 104223, 12 July 2001) In the case at bar, Rod only forged Cesar's signature on the Deed of Sale. It is very apparent that there was bad faith on the part of Rod from the very beginning. As such, he is not entitled to the protection of the Land Registration Act.
+
+(b) It is a well-known rule in this jurisdiction that persons dealing with registered land have the legal right to rely on the face of the Torrens Certificate of Title and to dispense with the need to inquire further, except when the party concerned has actual knowledge of facts and circumstances that would impel a reasonably cautious man to make such inquiry. (Naawan Community Rural Bank v. Court of Appeals, G.R. No. 128573, 13 Jan. 2003) In the given problem, the property was already registered in the name of Rod when he bought the same from the latter. Thus, Don could be considered as a buyer in good faith and for value. However, since Rod did not actually sell any property to him, Don has no right to retain ownership over the property. He has only the right to recover the purchase price plus damages.
+
+
+Question (2003 BAR)
+
+Q288:
+
+Louie, before leaving the country to train as a chef in a five-star hotel in New York, U.S.A., entrusted to his first-degree cousin Dewey an application for registration, under the Land Registration Act, of a parcel of land located in Bacolod City. A year later, Louie returned to the Philippines and discovered that Dewey registered the land and obtained an Original Certificate of Title over the property in his Dewey’s name. Compounding the matter, Dewey sold the land to Huey, an innocent purchaser for value. Louie promptly filed an action for reconveyance of the parcel of land against Huey. 
+
+(a) Is the action pursued by Louie the proper remedy? 
+
+(b) Suppose the government agency concerned joined C in filing the said action against the defendants, would that change the result of the litigation? Explain.
+
+Suggested Answer
+
+A288:
+
+(a) An action for reconveyance against Huey is not the proper remedy, because Huey is an innocent purchaser for value. The proper recourse is for Louie to go after Dewey for damages by reason of the fraudulent registration and subsequent sale of the land. If Dewey is insolvent, Louie may file a claim against the Assurance Fund. (Heirs of Pedro Lopez v. De Castro, G.R. No. 112905, 03 Feb. 2000 citing Sps. Eduarte v. Court of Appeals, G.R. No. 105944, 09 Feb. 1996) 
+
+(b) Even if the government joins C, this will not alter the outcome of the case so much because of estoppel as an express provision in Sec. 45 of Act 496 and Sec. 31 of PD 1529 that a decree of registration and the certificate of title issued in pursuance thereof “shall be conclusive upon and against all persons, including the national government and all branches thereof, whether mentioned by name in the application or not.”
+
+
+Question (2004, 2001 BAR)
+
+Q289:
+
+JV, owner of a parcel of land, sold it to PP. But the deed of sale was not registered. One year later, JV sold the parcel again to RR, who succeeded to register the deed and to obtain a transfer certificate of title over the property in his own name. Who has a better right over the parcel of land, RR or PP? Why? Explain the legal basis for your answer. 
+
+Suggested Answer
+
+A289:
+
+It depends on whether or not RR is an innocent purchaser for value. Under the Torrens System, a deed or instrument operated only as a contract between the parties and as evidence of authority to the Register of Deeds to make the registration. It is the registration of the deed or the instrument that is the operative act that conveys or affects the land. (Sec. 51, P.D. No. 1529)
+
+In cases of double sale of titled land, it is a well-settled rule that the buyer who first registers the sale in good faith acquires a better right to the land. (Art. 1544) Persons dealing with property covered by Torrens title are not required to go beyond what appears on its face. (Orquiola v. Court of Appels, G.R. No. 141463, 06 Aug. 2002; Sps. Domingo v. Races, G.R. No. 147468, 09 Apr. 2003) Thus, absent any showing that RR knew about, or ought to have known the prior sale of the land to PP or that he acted in bad faith, and being first to register the sale, RR acquired a good and a clean title to the property as against PP.
+
+
+Question (2001 BAR)
+
+Q290:
+
+Cesar bought a residential condominium unit from High Rise Co. and paid the price in full. He moved into the unit, but somehow, he was not given the Condominium Certificate of Title covering the property. Unknown to him, High Rise Co. subsequently mortgaged the entire condominium building to Metrobank as security for a loan of P500 million. High Rise Co. failed to pay the loan and the bank foreclosed the mortgage. At the foreclosure sale, the bank acquired the building, being the highest bidder. When Cesar learned about this, he filed an action to annul the foreclosure sale insofar as his unit was concerned. The bank put up the defense that it relied on the condominium certificates of title presented by High Rise Co., which were clean. Hence, it was a mortgagee and buyer in good faith. Is this defense tenable or not? Why? 
+
+Suggested Answer
+
+A290:
+
+NO, Metrobank's defense is untenable. As a rule, an innocent purchaser for value acquires a good and a clean title to the property. However, it is settled that one who closes his eyes to facts that should put a reasonable man on guard is not an innocent purchaser for value. In the present problem the bank is expected, as a matter of standard operating procedure, to have conducted an ocular inspection, of the promises before granting any loan. Apparently, Metrobank did not follow this procedure. Otherwise, it should have discovered that the condominium unit in question was occupied by Cesar and that fact should have led it to make further inquiry. Under the circumstances, Metrobank cannot be considered a mortgagee and buyer in good faith.
+
+
+Question (2000 BAR)
+
+Q291:
+
+In 1979, Nestor applied for and was granted a Free Patent over a parcel of agricultural land with an area of 30 hectares, located in General Santos City. He presented the Free Patent to the Register of Deeds, and he was issued a corresponding OCT No. 375, Subsequently, Nestor sold the land to Eddie. The deed of sale was submitted to the Register of Deeds and on the basis thereof, OCT No. 375 was cancelled, and TCT No. 4576 was issued in the name of Eddie. In 1986, the Director of Lands filed a complaint for annulment of OCT No. 375 and TCT No. 4576 on the ground that Nestor obtained the Free Patent through fraud. Eddie filed a motion to dismiss on the ground that he was an innocent purchaser for value and in good faith and as such, he has acquired a title to the property, which is valid, unassailable, and indefeasible. Decide the motion. 
+
+Suggested Answer
+
+A291:
+
+The motion of Nestor to dismiss the complaint for annulment of OCT No. 375 and TCT No. 4576 should be denied for the following reasons: 
+
+1. The government can seek annulment of the original and transfer certificates of title and the reversion of the land to the state. Eddie's defense is untenable. The protection afforded by the Torrens System to an innocent purchaser for value can be availed of only if the land has been titled through judicial proceedings where the issue of fraud becomes academic after the lapse of 1 year from the issuance of the decree of registration. In public land grants, the action of the government to annul a title fraudulently obtained does not prescribe such action and will not be barred by the transfer of the title to an innocent purchaser for value.
+
+Eddie cannot claim protection as an innocent purchaser for value nor can he interpose the defense of indefeasibility of his title, because his TCT is rooted on a void title. Under Sec. 91 of CA No. 141, as amended, otherwise known as the Public Land Act, statements of material facts in the applications for public land must be under oath. Sec. 91 of the same act provides that such statements shall be considered as essential conditions and parts of the concession, title, or permit issued any false statement therein, or omission of facts shall ipso facto produce the cancellation of the concession. The patent issued to Nestor in this case is void ab initio not only because it was obtained by fraud but also because it covers 30 hectares which is far beyond the maximum of 24 hectares provided by the free patent law.
+
+
+Question (1995 BAR)
+
+Q292:
+
+Rommel was issued a certificate of title over a parcel of land in Quezon City. One year later Rachelle, the legitimate owner of the land, discovered the fraudulent registration obtained by Rommel. She filed a complaint against Rommel for reconveyance and caused the annotation of a notice of lis pendens on the certificate of title issued to Rommel. Rommel now invokes the indefeasibility of his title considering that one year has already elapsed from its issuance. He also seeks the cancellation of the notice of lis pendens. Will Rachelle's suit for reconveyance prosper? Explain. 
+
+Suggested Answer
+
+A292:
+
+YES, Rachelle's suit will prosper because all elements for an action for reconveyance are present, namely: 
+a. Rachelle is claiming dominical rights over the same land. 
+b. Rommel procured his title to the land by fraud. 
+c. The action was brought within the statutory period of four (4) years from discovery of the fraud and not later than ten (10) years from the date of registration of Rommel's title. 
+d. Title to the land has not passed into the hands of an innocent purchaser for value.
+
+Rommel could invoke the indefeasibility of his title if Rachelle had filed a petition to reopen or review the decree of registration. But Rachelle instead filed an ordinary action in personam for reconveyance. In the latter action, indefeasibility is not a valid defense because, in filing such action, Rachelle is not seeking to nullify nor to impugn the indefeasibility of Rommel's title. She is only asking the court to compel Rommel to reconvey the title to her as the legitimate owner of the land.
+
+
+Question (1990 BAR)
+
+Q293:
+
+In 1950's, the Government acquired a big landed estate in Central Luzon from the registered owner for subdivision into small farms and redistribution of bona fide occupants, F was a former lessee of a parcel of land, 5 hectares in area. After completion of the resurvey and subdivision, F applied to buy the said land in accordance with the guidelines of the implementing agency. Upon full payment of the price in 1957, the corresponding deed of absolute sale was executed in his favor and was registered, and in 1961, a new title was issued in his name. In 1963, F sold the said land to X; and in 1965 X sold it to Y, new titles were successively issued in the names of the said purchasers. In 1977, C filed an action to annul the deeds of sale to F, X and Y and their titles, on the ground that he had been in actual physical possession of the land, and that the sale to F and the subsequent sales should be set aside on the ground of fraud. Upon motion of defendants, the trial court dismissed the complaint, upholding their defenses of their being innocent purchasers for value, prescription, and laches. Plaintiff appealed. 
+
+(a) Is the said appeal meritorious? Explain your answer. 
+
+Suggested Answer
+
+A293:
+
+NO, the appeal is not meritorious. The trial court ruled correctly in granting defendant's motion to dismiss for the following reasons: 1. Rommel could invoke the indefeasibility of his title if Rachelle had filed a petition to reopen or review the decree of registration. But Rachelle instead filed an ordinary action in personam for reconveyance. In the latter action, indefeasibility is not a valid defense because, in filing such action, Rachelle is not seeking to nullify nor to impugn the indefeasibility of Rommel's title. She is only asking the court to compel Rommel to reconvey the title to her as the legitimate owner of the land.
+
+---
+
+Question (2017 BAR)
+
+Q294:
+
+In 1960, Rigor and Mike occupied two separate but adjacent tracts of land-in Mindoro. Rigor's tract was classified as timber land while Mike's was classified as agricultural land. Each of them fenced and cultivated his own tract continuously for 30 years. In 1991, the Government declared the land occupied by Mike as alienable and disposable, and the one cultivated by Rigor as no longer intended for public use or public service. Rigor and Mike now come to you today for legal advice in asserting their right of ownership of their respective lands based on their long possession and occupation since 1960.
+
+(a) What are the legal consequences of the 1991 declarations of the Government respecting the lands? Explain your answer.
+
+(b) Given that, according to Sec. 48(b) of CA 141, in relation to Sec. 14(1) of PD No. 1529, the open, continuous, exclusive, and notorious possession and occupation of alienable and disposable lands of the public domain as basis for judicial confirmation of imperfect title must be from June 12, 1945, or earlier, may Mike nevertheless validly base his assertion of the right of ownership on prescription under the Civil Code? Explain your answer.
+
+(c) Does Rigor have legal basis for his application for judicial confirmation of imperfect title based on prescription as defined by the Civil Code given that, like Mike, his open, continuous, exclusive, and notorious possession and occupation was not since 12 June 1945, or earlier, and his tract of land was timber land until the declaration in 1991. Explain your answer.
+
+Suggested Answer
+
+A294:
+
+(a) As to the land occupied by Mike, the same remains a property of the public dominion. According to jurisprudence, the classification of the property as alienable and disposable land of the public domain does not change its status as property of the public dominion. There must be an express declaration by the State that the public dominion property is no longer intended for public service or the development of the national wealth or that the property, has been converted into patrimonial. Without such express declaration, the property, even if classified as alienable or disposable, remains property of the public dominion (Heirs of Mario Malabanan v. Republic, G.R. No. 179987, April 29, 2009 and September 3,2013).
+
+As to the land occupied by Rigor, the declaration that it is no longer intended for public use or public service converted the same into patrimonial property provided that such express declaration was in the form of a law duly enacted by Congress or in a Presidential Proclamation in cases where the President was duly authorized by law. According to jurisprudence, when public land is no longer intended for public use, public service or for the development of the national wealth it is thereby effectively removed from the ambit of public dominion and converted into patrimonial provided that the declaration of such conversion must be made in the form of a law duly enacted by Congress or by a Presidential proclamation in cases where the President is duly authorized by law to that effect (Heirs of Mario Malabanan v. Republic, G.R. No. 179987, April 29, 2009 and 03 Sept. 2013).
+
+As to the land occupied by Rigor, it can be said that the declaration that it is no longer intended for public use or public service is superfluous to consider the land as patrimonial. The need for an express government manifestation confirming that the property in question is "no longer retained" by the State for public use, public service, or the development of national wealth, stems from the principle that abandonment of property of public dominion under Article 420 cannot be inferred solely from non-use. In turn, the determination of whether property has in fact been abandoned by the State is necessary only in cases where there has been prior state-use. (Republic v. Pasig Rizal Co., Inc., G.R. No. 213207, 15 Feb. 2022)
+
+(b) NO because the land remains property of public dominion and, therefore, not susceptible to acquisition by prescription. According to jurisprudence, the classification of the subject property as alienable and disposable land of the public domain does not change its status as property of the public dominion. In order to convert the property into patrimonial, there must be an express declaration by the State that the public dominion property is no longer intended for public service or the development of the national wealth or that the property has been converted into patrimonial. Without such express declaration, the property, even if classified as alienable or disposable, remains property of the public dominion, and thus incapable of acquisition by prescription (Heirs of Mario Malabanan v. Republic, G.R. No. 179987, April 29, 2009 and September 3,2013). Here, the declaration of the property into alienable and disposable land of the public domain in 1991 did not convert the property into patrimonial in the absence of an express declaration of such conversion into patrimonial in the form of a law duly enacted by Congress or by a Presidential proclamation in cases where the President is duly authorized by law to that effect.
+
+N.B.: Yes, pursuant to the Court’s ruling in Republic v. Pasig Rizal (G.R. No. 213207, 15 Feb. 2022), Mike can base his assertion on of the right of ownership under R.A. No. 11573, which requires only “open, continuous, exclusive, and notorious possession and occupation of alienable and disposable agricultural lands of the public domain, under a bona fide claim of ownership, for at least 20 years immediately preceding the filing of the application for confirmation of title except when prevented by war or force majeure.” (Emphasis supplied) The shortened 20-year period under the new Sec. 14(1) grants possessors the right to seek registration without having to comply with the longer period of 30 years possession required for acquisitive prescription under the Civil Code. It is but logical for those who have been in adverse possession of alienable and disposable land for at least 20 years to resort to the immediate filing of an application for registration on the basis of the new Sec. 14 (1) without waiting for prescription to set in years later. Therefore, as to the land occupied by Mike, the declaration of the Government that the same is alienable and disposable “immediately places it within the commerce of man, and renders it susceptible to private acquisition through adverse possession.”
+
+(c) NONE, because Rigor's possession was short of the period required by the Civil Code for purposes of acquisitive prescription which requires 10 years of continuous possession, if possession was in good faith and with a just title, or thirty years, in any event. While property may be considered converted into patrimonial because of the 1991 declaration that it is no longer intended for public use or public service (provided that the declaration be in the form of a law duly enacted by Congress or by a Presidential proclamation in cases where the President is duly authorized by law to that effect), Rigor failed to complete the 30-year period required by law in case of extraordinary prescription. Since the property was converted into patrimonial only in 1991, the period of prescription commenced to run beginning that year only. Rigor's possession prior to the conversion of the property into patrimonial cannot be counted for the purpose of completing the prescriptive period because prescription did not operate against the State at that time, the property then being public dominion property. (Heirs of Mario Malabanan v. Republic, G.R. No.179987 April 29, 2009 and 03 Sept. 2013). Rigor may not likewise acquire ownership by virtue of the shorter 10-year ordinary prescription because his possession was not in good faith and without just title.
+
+N.B.: R.A. No. 11573 requires “open, continuous, exclusive, and notorious possession and occupation of alienable and disposable agricultural lands of the public domain, under a bona fide claim of ownership, for at least 20 years immediately preceding the filing of the application for confirmation of title except when prevented by war or force majeure.” Therefore, provided that Rigor has completed the required 20-year period required by R.A. No. 11573, then he is entitled to judicial confirmation of imperfect title under the amendatory law.
+
+Question (2000 BAR)
+
+Q295:
+
+Regina has been leasing foreshore land from the Bureau of Fisheries and Aquatic Resources for the past 15 years. Recently, she learned that Jorge was able to obtain a free patent from the Bureau of Agriculture, covering the same land, based on a certification by the District Forester that the same is already "alienable and disposable". Moreover, Jorge had already registered the patent with the Register of Deeds of the province, and he was issued an OCT for the same. Regina filed an action for annulment of Jorge's title on the ground that it was obtained fraudulently. Will the action prosper?
+
+Suggested Answer
+
+A295:
+
+An action for the annulment of Jorge's OCT will prosper on the following grounds:
+
+1. Under C.A., No. 141, otherwise known as the Public Land Act (PLA), foreshore lands are disposable for residential, commercial, industrial, or similar productive purposes, and only by lease when not needed by the government for public service.
+
+2. If the land is suited or used for fishpond or aquaculture purposes, it comes under the Jurisdiction of the Bureau of Fisheries and Aquatic Resources (BFAR) and can only be acquired by lease. (P.D. 705)
+
+3. Free Patent is a mode of concession under Sec. 41, Chapter VII of CA 141, which is applicable only for agricultural lands.
+
+4. The certificate of the district forester that the land is already “alienable and disposable” simply means that the land is no longer needed for forest purposes, but the Bureau of Lands could no longer dispose of it by free patent because it is already covered by a lease contract between BFAR and Regina. That contract must be respected.
+
+5. The free patent of Jorge is highly irregular and void ab initio, not only because the Bureau has no statutory authority to issue a free patent over a foreshore area, but also because of the false statements made in his sworn application that he has occupied and cultivated the land since 04 July 1945, as required by the free patent law. Under Sec. 91 of the CA 141, any patent concession or title obtained thru false representation is void ab initio. In cases of this nature, it is the government that shall institute annulment proceedings considering that the suit carries with it a prayer for the reversion of the land to the estate. However, Regina is a party in interest and the case will prosper because she has a lease contract for the same land with the government.
+
+Question (1992 BAR)
+
+Q296:
+
+What are the essential requisites or elements for the allowance of the reopening or review of a decree of registration?
+
+Suggested Answer
+
+A296:
+
+The essential elements are: (1) that the petitioner has a real or dominical right; (2) that he has been deprived thereof through fraud; (3) that the petition is filed within one (1) year from the issuance of the decree; and (4) that the property has not yet been transferred to an innocent purchaser. (Rublico v. Orellana, G.R. No. L-26582, 28 Nov. 1969; Libudan v. Palma Gil, G.R. No. L-21163, 17 May 1972)
+
+ALTERNATIVE ANSWER:
+
+Petition for review of the Decree of Registration. A remedy expressly provided in Sec. 32 of PD 1529 (formerly Sec. 38, Act 496), that has the following elements: 
+a. The petition must be filed by a person claiming dominical or other real rights to the land registered in the name of respondent.
+b. The registration of the land in the name of respondent was procured by means of actual, (not just constructive) fraud, which must be extrinsic. Fraud is actual if the registration was made through deceit or any other intentional act of downright dishonesty to enrich oneself at the expense of another. It is extrinsic when it is something that was not raised, litigated, and passed upon in the main proceedings.
+c. The petition must be filed within one (1) year from the date of the issuance of the decree.
+d. Title to the land has not passed to an innocent purchaser for value. (Libudan vs. Gil, G.R. No. L21163, 17 May 1972; Rublico vs. Orrelana, G.R. No. L26582, 28 Nov. 1969; Republic v. Court of Appeals, G.R. No. 40402, 16 Mar. 1987)
+
+Question (2015 BAR)
+
+Q297:
+
+Mr. and Mrs. Roman and Mr. and Mrs. Cruz filed an application for registration of a parcel of land which after due proceedings was granted by the RTC acting registration as land court. However, before the decree of registration could be issued, the Sps. Roman and the Sps. Cruz sold the lot to Juan. In the notarized deed of sale, the sellers expressly undertook to submit the deed of sale to the land registration court so that the title to the property would be directly issued in Juan's name.
+
+(a) Is such a stipulation valid?
+
+(b) Distinguish a direct attack from a collateral attack on a title.
+
+(c) If the title is issued in the names of the original sellers, would a motion filed by Juan in the same case to correct or amend the title to reflect his name as owner considered be collateral attack?
+
+Suggested Answer
+
+A297:
+
+(a) YES, because when one who is not the owner of the property sells or alienates it and later the seller or grantor acquires title, such title passes by operation of law to the buyer or grantee. (Art. 1434, NCC)
+
+(b) A direct attack on a title is one where the action filed is precisely for the purpose of pointing out the defects in the title with a prayer that it be declared void. A collateral attack is one where the action is not instituted for the purpose of attacking the title, but the nullity of the title is raised as a defense in a different action.
+
+(c) NO, because Juan is not attacking the title but merely invoking his right as transferee. Hence, it does not involve a collateral attack on the title.
+
+Question (2022 BAR)
+
+Q298:
+
+Ely borrows Php 2,000,000.00 from Mia and mortgages a parcel of land to secure the loan. The mortgage provides for a 5% monthly interest, a 5-year maturity period, a default provision in case of nonpayment of interest or principal, and an extrajudicial foreclosure provision. On the fourth year, Ely fails to pay interest for three consecutive months. After sending a demand letter, Mia declares Ely in default and extrajudicially forecloses the mortgage. Mia is the highest bidder in the foreclosure sale and consolidates ownership upon the lapse of the redemption period. Can Ely have the foreclosure annulled and recover the property? Explain briefly.
+
+Suggested Answer
+
+A298:
+
+YES, Ely can have the foreclosure sale annulled and recover the property. Here, Ely was not given an opportunity to settle his debt, at the correct amount and without the iniquitous interest imposed. A judgment ordering a foreclosure sale is conditioned upon a finding on the correct amount of the unpaid obligation and the failure of the debtor to pay the said amount. (Heirs of Espiritu v. Landrito, G.R. No. 169617, 03 Apr. 2007) A foreclosure of a real estate mortgage which serves a security for a loan is void where the mortgage amount included an exorbitant interest rate. (Land Bank v. David, 22 Aug. 2008) The interest rate of 5% per month or 60% per annum is clearly exorbitant and unconscionable as it is ten times the legal rate of interest for loans or forbearance of money. Thus, the foreclosure of the mortgage is void. Hence, Ely can have the foreclosure sale annulled and recover the property. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2018 BAR)
+
+Q299:
+
+Socorro is the registered owner of Lot A while Segunda is the registered owner of the adjoining Lot B. Lot A is located at an elevated plateau of about 15 feet above the level of Lot B. Since Socorro was allegedly removing portions of the land and cement that supported the adjoining property, Segunda caused the annotation of an adverse claim against 50 sq. m. on Lot A's TCT, asserting the existence of a legal easement.
+
+If a legal easement does in fact exist, is an annotation of an adverse claim on the title of the servient estate proper?
+
+Suggested Answer
+
+A299:
+
+NO, the annotation of an adverse claim on the title of the servient estate is not proper and would be unnecessary. An adverse claim over registered land necessitates that the registrant must have a claim on the title of the disputed land adverse to that of the registered owner arising subsequent to the date of the original registration. (Sec. 70, PD 1529) Annotation is done only to apprise third persons that there is a controversy over the ownership of the land and to preserve and protect the right of the adverse claimant during the pendency of the controversy. (Castro vs. Monsod G.R. No. 183719, 02 Feb. 2011) In the case presented, Segunda does not have a claim on the title of Socorro but is merely asserting the existence of the easement, hence, the annotation was improper. In addition, since what is involved here is a legal easement of lateral and subjacent support, it exists even without the annotation on the title of the servient estate. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2016 BAR)
+
+Q300:
+
+Macario bought a titled lot from Ramon, got the title, and took possession of the lot. Since Macario did not have the money to pay the taxes, fees, and registration expenses, he was not able to register the Deed of Absolute Sale. Upon advice, he merely executed an Affidavit of Adverse Claim and had it annotated at the back of the title. A few years after, he received a Notice of Levy on Attachment and Writ of Execution in favor of Alex. The notice, writ and certificate of sale were annotated at the back of the title still in Ramon's name. Alex contends that since the Affidavit of Adverse Claim is effective only for 30 days from the date of its registration, then its validity has expired. Macario posits that the annotation of his adverse claim is notice to the whole world of his purchase of the lot in question. Who has the superior right over the disputed property, Macario or Alex? Explain.
+
+Suggested Answer
+
+A300:
+
+Macario is preferred since the registration of his adverse claim was made ahead of the notice of levy and writ of execution in favor of Alex. Macario’s adverse claim, coupled with the fact that he was in possession of the disputed property, are circumstances which should have put Alex on constructive notice that the property being offered to him had already been sold to another. (Ching v. Enrile, G.R. No. 156076, 17 Sept. 2008) The contention that the adverse claim is effective only for 30 years is puerile. In Sajonas v. Court of Appeals (G.R. No. 102377 05 July 1996), the Court held that the adverse claim does not ipso facto lose its validity since an independent action is still necessary to render it ineffective. Until then, the adverse claim shall continue as a prior lien on the property.
+
+Question (2002, 1995 BAR)
+
+Q301:
+
+Sancho and Pacifico are co-owners of a parcel of land. Sancho sold the property to Bart. Pacifico sued Sancho and Bart for annulment of the sale and reconveyance of the property based on the fact that the sale included his one-half pro indiviso share. Pacifico had a notice of lis pendens annotated on the title covering the property and ordered the cancellation of the notice of lis pendens. The notice of lis pendens could not be cancelled immediately because the title over the property was with a bank to which the property had been mortgaged by Bart. Pacifico appealed the case. While the appeal was pending and with the notice of lis pendens still uncancelled, Bart sold the property to Carlos, who immediately caused the cancellation of the notice of lis pendens, as well as the issuance of a new title in his name. Is Carlos (a) a purchaser in good faith, or (b) a transferee pendente lite?
+
+If your answer is (a), how can the right of Pacifico as coowner be protected? Explain.
+
+Suggested Answer
+
+A301:
+
+Carlos is a buyer in bad faith. The notice of lis pendens was still annotated at the back of the title at the time he bought the land from Bart. The uncancelled notice of lis pendens operates as constructive notice of its contents as well as interests, legal or equitable, included therein. All persons are charged with the knowledge of what it contains. In an earlier case, it was held that a notice of an adverse claim remains effective and binding notwithstanding the lapse of the 30 days from its inscription in the registry. This ruling is even more applicable in a lis pendens. Carlos is a transferee pendente lite insofar as Sancho’s share in the coownership in the land is concerned because the land was transferred to him during the pendency of the appeal.
+
+Pacifico can protect his right as a co-owner by pursuing his appeal; asking the Court of Appeals to order the reannotation of the lis pendens on the title of Carlos; and by invoking his right of redemption of Bart’s share under Art. 1620, NCC.
+
+Question (2001 BAR)
+
+Q302:
+
+Mario sold his house and lot to Carmen for P1 million payable in five (5) equal annual installments. The sale was registered, and title was issued in Carmen's name. Carmen failed to pay the last three installments and Mario filed an action for collection, damages, and attorney’s fees against her. Upon filing of the complaint, he caused a notice of lis pendens to be annotated on Carmen's title. Is the notice of lis pendens proper or not? Why?
+
+Suggested Answer
+
+A302:
+
+The notice of lis pendens is not proper for the reason that the case filed by Mario against Carmen is only for collection, damages, and attorney's fees. Annotation of a lis pendens can only be done in cases involving recovery of possession of real property, or to quiet title or to remove cloud thereon, or for partition or any other proceeding affecting title to the land or the use or occupation thereof. The action filed by Mario does not fall on anyone of these.
+
+Question (1998 BAR)
+
+Q303:
+
+Sec. 70 of PD 1529, concerning adverse claims on registered land, provides a 30-day period of effectivity of an adverse claim, counted from the date of its registration. Suppose a notice of adverse claim based upon a contract to sell was registered on 01 Mar. 1997 at the instance of the BUYER, but on 01 June 1997, or after the lapse of the 30-day period, a notice of levy on execution in favor of a JUDGMENT CREDITOR was also registered to enforce a final judgment for money against the registered owner. Then, on 15 June 1997 there having been no formal cancellation of his notice of adverse claim, the BUYER pays to the seller-owner the agreed purchase price in full and registers the corresponding deed of sale. Because the annotation of the notice of levy is carried over to the new title in his name, the BUYER brings an action against the JUDGMENT CREDITOR to cancel such annotation, but the latter claims that his lien is superior because it was annotated after the adverse claim of the BUYER had ipso facto ceased to be effective. Will the suit prosper?
+
+Suggested Answer
+
+A303:
+
+YES, the suit will prosper. While an adverse claim duly annotated at the back of a title under Sec. 70 of PD 1529 is good only for 30 days, cancellation thereof is still necessary to render it ineffective, otherwise, the inscription thereof will remain annotated as a lien on the property. While the life of adverse claim is 30 days under PD 1529, it continuous to be effective until it is cancelled by formal petition filed with the Register of Deeds. The cancellation of the notice of levy is justified under Sec. 108 of PD 1529 considering that the levy on execution cannot be enforced against the buyer whose adverse claim against the registered owner was recorded ahead of the notice of levy on execution.
+
+Question (1995 BAR)
+
+Q304:
+
+Rommel was issued a certificate of title over a parcel of land in Quezon City. One year later Rachelle, the legitimate owner of the land, discovered the fraudulent registration obtained by Rommel. She filed a complaint against Rommel for reconveyance and caused the annotation of a notice of lis pendens on the certificate of title issued to Rommel. Rommel now invokes the indefeasibility of his title considering that one year has already elapsed from its issuance. He also seeks the cancellation of the notice of lis pendens. May the court cancel the notice of lis pendens even before final judgment is rendered? Explain.
+
+Suggested Answer
+
+A304:
+
+A Notice of Lis Pendens may be cancelled even before final Judgment upon proper showing that the notice is for the purpose of molesting or harassing the adverse party or that the notice of lis pendens is not necessary to protect the right of the party who caused it to be registered. (Sec. 77, PD 1529) In this case, it is given that Rachelle is the legitimate owner of the land in question. It can be said, therefore, that when she filed her notice of lis pendens her purpose was to protect her interest in the land and not just to molest Rommel. It is necessary to record the lis pendens to protect her interest because if she did not do it, there is a possibility that the land will fall into the hands of an innocent purchaser for value and in that event, the court loses control over the land making any favorable judgment thereon moot and academic. For these reasons, the notice of lis pendens may not be cancelled.
+
+Question (2007 BAR)
+
+Q305:
+
+Bedrock Land & Property Development Corp. is a development company engaged in developing and selling subdivisions, condominium units and industrial estates. In order to replenish its inventories, it embarked on an aggressive land banking program. It employed "scouts" who roam all over the Philippines to look for and conduct investigations on prospective sites for acquisition and development, whether developed, semi-developed or raw land. The management of Bedrock asks you as the company counsel to prepare a manual containing a summary of the pertinent laws and regulations relating to land registration and acquisition of title to land. The manual should include the following items:
+
+(a) What is the governing law?
+
+(b) What properties are not registrable?
+
+Suggested Answer
+
+A305:
+
+(a) The governing law is the Land Registration Act as amended by Property Registration Decree. (Act 496, as amended by PD 1529)
+
+(b) The following properties are not registrable: 
+a. Properties of the Public Dominion; 
+b. Properties for public use or public service; 
+c. Inalienable lands of the public domain; 
+d. Military installations, civil and quasi-public lands; and 
+e. All lands not classified as alienable and disposable.
+
+Question (2000 BAR)
+
+Q306:
+
+R.A. No. 1899 authorizes municipalities and chartered cities to reclaim foreshore lands bordering them and to construct thereon adequate docking and harbor facilities. Pursuant thereto, the City of Cavite entered into an agreement with the Fil-Estate Realty Company, authorizing the latter to reclaim 300 hectares of land from the sea bordering the city, with 30% of the land to be reclaimed to be owned by FilEstate as compensation for its services. The Solicitor General questioned the validity of the agreement on the ground that it will mean reclaiming land under the sea which is beyond the commerce of man. The City replies that this is authorized by R.A. No. 1899 because it authorizes the construction of docks and harbors. Who is correct?
+
+Suggested Answer
+
+A306:
+
+The Solicitor General is correct. The authority of the City of Cavite under R.A. No. 1899 to reclaim land is limited to foreshore lands. The Act did not authorize it to reclaim land from the sea. The reclamation being unauthorized, the City of Cavite did not acquire ownership over the reclaimed land. Not being the owner, it could not have conveyed any portion thereof to the contractor.
+
+Question (2009 BAR)
+
+Q307:
+
+Marciano is the owner of a parcel of land through which a river runs out into the sea. The land had been brought under the Torrens System and is cultivated by Ulpiano and his family as farmworkers therein. Over the years, the river brought silt and sediment from its source up in the mountains and forests so that gradually the land owned by Marciano increased in area by three hectares. Ulpiano built three huts on this additional area, where he and his two married children live. On this same area. Ulpiano and his family planted peanuts, mongo, beans, and vegetables. Ulpiano also regular paid taxes on the land, as shown by tax declarations, for over thirty years. When Marciano learned of the increase in the size of the land, he ordered Ulpiano to demolish the huts, and demanded that he be paid his share in the proceeds of the harvest. Marciano claims that under the NCC, the alluvium belongs to him as a registered riparian owner to whose land the accretion attaches, and that his right is enforceable against the whole world. Is Marciano correct? Explain.
+
+Suggested Answer
+
+A307:
+
+Marciano's contention is correct. Since the accretion was deposited on his land by the action of the waters of the river and he did not construct any structure to increase the deposition of soil ad silt, Marciano automatically owns the accretion. His real right of ownership is enforceable against the whole word including Ulpiano and his two married children. Although Marciano's land is registered the three-hectare land deposited through accretion was not automatically registered.
+
+As unregistered land, it is subject to acquisitive prescription by third persons. Although Ulpiano and his children live in the three-hectare unregistered land owned by Marciano, they are farmworkers; therefore, they are possessors not in the concept of owners but in the concept of more holders. Even if they possessed the land for more than 30 years, they cannot become the owners thereof through extraordinary acquisitive prescription, because the law requires possession in the concept of owner.
+
+Payment of taxes and tax declaration are not enough to make their possession one in the concept of owner. They must repudiate the possession in the concept of holder by executing unequivocal acts of repudiation amounting to ouster of Marciano, known to Marciano and must be proven by clear and convincing evidence. Only then would his possession become adverse. (2009-2017 UST FCL Bar Q&A)
+
+Question (2019 BAR)
+
+Q308:
+
+In 2015, O, the original registered owner of a 300-square meter property covered by OCT No. 0-1234, appointed F as its caretaker. A year after, while O was abroad, F surreptitiously broke open O's safe and stole the duplicate copy of the said OCT. F then forged a Deed of Absolute Sale and made it appear that O sold the property to him. Consequently, F was able to have OCT No. 0-1234 cancelled and in lieu thereof, a new title, TCT No. T-4321, was issued in his name.
+
+A few months after, F offered the property for sale to X. After conducting the required due diligence to verify the title of F and finding no occupant in the property during ocular inspection, X signed the contract of sale, and thereupon, fully paid the purchase price. A few days later, X was able to obtain TCT No. T-5678 under his name.
+
+When O discovered F's fraudulent acts upon his return in 2017, O immediately filed a complaint for reconveyance against F and X, principally pointing out that F merely forged his signature in the Deed of Absolute Sale purportedly made in F's favor and thus, F could not have validly transferred the title thereof to X. Consequently, he sought the return of the subject property to him.
+
+Assuming that O could no longer recover the subject property in view of X's registration thereof in his name, may a claim against the Assurance Fund pursuant to the provisions of the Property Registration Decree be instituted? Explain.
+
+Suggested Answer
+
+A308:
+
+YES, O may recover under the Assurance Fund because under the provisions of the Property Registration Decree (Sec. 95, P.D. 1529), if a person who is not guilty of negligence sustains loss or damage or is deprived of land or any estate in consequence of the bringing of the land under the operation of the Torrens system arising after original registration of land, through fraud or in consequence of any error, omission, mistake or misdescription in any certificate of title or in any entry or memorandum in the registration book, and is barred or precluded from bringing an action for recovery of such land may bring an action in any court of competent jurisdiction for the recovery of damages to be paid out of the Assurance Fund. In the case presented, the property is already registered in the name of an innocent purchaser for value and O may no longer recover the land from the purchaser, an action for recovery against the Assurance Fund is warranted. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2022 BAR)
+
+Q309:
+
+In 2008, a fire razed the Register of Deeds of San Fernando, Pampanga (RD). Several titles on file were burned. Long before the fire, Tito, Vic, and Joey had been living In a 350-sq.m. lot covered by TCT No. 49933, which they inherited from their parents. The original of TCT No. 49933 on file with the RD was among the titles which were burned. To effect the partition agreed among them, the siblings filed a verified petition for reconstitution of the TCT before your court. To support the petition, the siblings presented: (i) a notarized affidavit of loss duly recorded and registered with the RD; (ii) a photocopy of TCT No. 479 49933; (iii) real property tax declarations and receipts to evidence payment of real property taxes, together with the sketch and subdivision plan; (iv) a Land Registration Authority (LRA) Report which states that the survey and subdivision plans and the technical description of the property may be used as a basis for inscription of the technical description of the reconstituted property; (v) a microfilm copy of the plans and technical description on file with the LRA; and (vi) the Extrajudlcial Settlement of Estate executed among them. The public prosecutor, duly deputized by the OSG, prays for the denial of the petition, and argues that the foregoing documents are insufficient for reconstitution of TCT No. 49933.
+
+Should the petition for reconstitution be granted? Explain briefly.
+
+Suggested Answer
+
+A309:
+
+NO, the petition for reconstitution should not be granted. In a petition for reconstitution, the quantum of evidence needed to grant it is clear and convincing evidence. Evidence is clear and convincing if it produces in the mind of the trier of fact a firm belief or conviction as to the allegation sought to be established. (Dela Paz vs. Republic, G.R. No. 195726, 20 Nov. 2017, 845 SCRA 34)
+
+As such, the public officer who issued the document, such as the LRA Report pertaining to the survey and subdivision plan must testify in court otherwise the report would be hearsay and bereft of any probative value. At best, they may be considered only as prima facie evidence of their due execution and date of issuance but do not constitute prima facie evidence of the facts stated therein. (Republic v. Manansala, G.R. No. 241890, 03 May 2021) Based on the facts, the siblings merely presented the LRA Report but the public officer who issued it was not called upon to testify and be examined about the contents of the report. Thus, the LRA Report which is vital to the reconstitution petition has no probative value. Hence, the petition for reconstitution should not be granted. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (1996 BAR)
+
+Q310:
+
+In 1989, the heirs of Gavino, who died on 10 Aug. 1987, filed a petition for reconstitution of his lost or destroyed Torrens Title to a parcel of land in Ermita, Manila. This was opposed by Marilou who claimed ownership of the said land by a series of sales. She claimed that Gavino had sold the property to Bernardo way back in 1941 and as evidence thereof, she presented a Tax Declaration in 1948 in the name of Bernardo, which cancelled the previous Tax Declaration in the name of Gavino. Then she presented two deeds of sale duly registered with the Register of Deeds, the first one executed by Bernardo in 1954 selling the same property to Carlos, and the second one executed by Carlos in 1963, selling the same property to her. She also claimed that she and her predecessors in interest have been in possession of the property since 1948.
+
+If you were the judge, how will you decide the petition? Explain.
+
+Suggested Answer
+
+A310:
+
+If I were the judge, I will give due course to the petition of the heirs of Gavino despite the opposition of Marilou for the following reasons: 
+
+a) Judicial reconstitution of a certificate of title under R.A. No. 26 partakes of a land registration proceeding and is perforce a proceeding in rem. It denotes restoration of an existing instrument which has been lost or destroyed in its original form and condition. The purpose of reconstitution of title or any document is to have the same reproduced, after proceedings. In the same form they were when the loss or destruction occurred.
+
+b) If the Court goes beyond that purpose, it acts without or in excess of jurisdiction. Thus, where the Torrens Title sought to be reconstituted is in the name of Gavino, the court cannot receive evidence proving that Marilou is the owner of the land. Marilou’s dominical claim to the land should be ventilated in a separate civil action before the RTC in its capacity as a court of general jurisdiction.
+
+Question (1996 BAR)
+
+Q311:
+
+Alfonso, a bachelor without any descendant or ascendant, wrote a last will and testament in which he devised." all the properties of which I may be possessed at the time of my death" to his favorite brother Manuel. At the time he wrote the will, he owned only one parcel of land. But by the time he died, he owned twenty parcels of land. His other brothers and sisters insist that his will should pass only the parcel of land he owned at the time it was written, and did not cover his properties acquired, which should be by intestate succession. Manuel claims otherwise. Who is correct? Explain.
+
+Suggested Answer
+
+A311:
+
+Manuel is correct because property acquired after the making of a will shall only pass thereby, as if the testator had possessed it at the time of making the will, should it expressly appear by the will that such was his intention. (Art. 793, NCC) Since Alfonso's intention to devise all properties he owned at the time of his death expressly appears on the will, then all the 20 parcels of land are included in the devise.
+
+Question (2015 BAR)
+
+Q312:
+
+Alden and Stela were both former Filipino citizens. They were married in the Philippines, but they later migrated to the United States where they were naturalized as American citizens. In their union they were able to accumulate several real properties both in the US and in the Philippines. Unfortunately, they were not blessed with children. In the US, they executed a joint will instituting as their common heirs to divide their combined estate in equal shares, the five siblings of Alden and the seven siblings of Stela. Alden passed away in 2013 and a year later, Stela also died. The siblings of Alden who were all citizens of the US instituted probate proceedings in a US court impleading the siblings of Stela who were all in the Philippines.
+
+(a) Was the joint will executed by Alden and Stela who were both former Filipinos valid? Explain with legal basis.
+
+(b) Can the joint produce legal effect in the Philippines with respect to the properties of Alden and Stela found here? If so, how?
+
+Suggested Answer
+
+A312:
+
+(a) YES, the joint will of Alden and Stela is valid. Being no longer Filipino citizens at the time they executed their joint will, the prohibition under our Civil Code on joint wills will no longer apply to Alden and Stela. For as long as their will was executed in accordance with the law of the place where they reside, or the law of the country of which they are citizens or even in accordance with the NCC, a will executed by an alien is considered valid in the Philippines. (Art. 816, NCC)
+
+(b) YES, the joint will of Alden and Stela can take effect even with respect to the properties located in the Philippines because what governs the distribution of their estate is no longer Philippine law but their national law at the time of their demise. Hence, the joint will produces legal effect even with respect to the properties situated in the Philippines.
+
+Question (2011 BAR)
+
+Q313:
+
+Ric and Josie, Filipinos, have been sweethearts for 5 years. While working in a European country where the execution of joint wills are allowed, the two of them executed a joint holographic will where they named each other as sole heir of the other in case either of them dies. Unfortunately, Ric died a year later.
+
+Can Josie have the joint will successfully probated in the Philippines?
+
+(A) Yes, in the highest interest of comity of nations and to honor the wishes of the deceased. 
+(B) No, since Philippine law prohibits the execution of joint wills and such law is binding on Ric and Josie even abroad. 
+(C) Yes, since they executed their joint will out of mutual love and care, values that the generally accepted principles of international law accepts. 
+(D) Yes, since it is valid in the country where it was executed, applying the principle of "lex loci celebrationis."
+
+Suggested Answer
+
+A313:
+
+(B) No, since Philippine law prohibits the execution of joint wills and such law is binding on Ric and Josie even abroad. (UPLC Suggested Answers)
+
+Question (2014 BAR)
+
+Q314:
+
+Crispin died testate and was survived by Alex and Josine, his children from his first wife; Rene and Ruby, his children from his second wife; and Allan, Bea, and Cheska, his children from his third wife. One important provision in his will reads as follows:
+
+"Ang lupa at bahay sa Lungsod ng Maynila ay ililipat at ilalagay sa pangalan nila Alex at Rene hindi bilang pamana ko sa kanila kundi upang pamahalaan at pangalagaan lamang nila at nang ang sinuman sa aking mga anak, sampu ng aking mga apo at kaapuapuhan ko sa habang panahon, ay may tutuluyan kung magnanais na mag-aral sa Maynila o sa kalapit na mga lungsod."
+
+Is the provision valid?
+
+Suggested Answer
+
+A314:
+
+NO, the provision imposing the division of the property “habang panahon” is invalid. In Santiago v. Santiago (G.R. No. 179859, 09 Aug. 2010), a similar provision appears in the will. However, Art. 1083 of the NCC provides that the period of indivision imposed by the testator shall not exceed 20 years. Hence, the provision leaving the administration of the house and lot to Alex and Rene is valid but the provision “habang buhay” is invalid as to the excess beyond 20 years.
+
+Question (2000 BAR)
+
+Q315:
+
+Manuel, a Filipino, and his American wife Eleanor, executed a Joint Will in Boston, Massachusetts when they were residing in said city. The law of Massachusetts allows the execution of joint wills. Shortly thereafter, Eleanor died. Can the said Will be probated in the Philippines for the settlement of her estate?
+
+Suggested Answer
+
+A315:
+
+YES, the will may be probated in the Philippines insofar as the estate of Eleanor is concerned. While the NCC prohibits the execution of joint wills here and abroad, such prohibition applies only to Filipinos. Hence, the joint will which is valid where executed is valid in the Philippines but only with respect to Eleanor. It is void with respect to Manuel whose joint will remains void in the Philippines despite being valid where executed. (Art. 819, NCC)
+
+Question (2008 BAR)
+
+Q316:
+
+Stevie was born blind. He went to school for the blind, and learned to read in Braille Language. He Speaks English fluently. Can he:
+
+(a) Make a will?
+
+(b) Act as a witness to a will?
+
+(c) In either of the above instances, must the will be read to him?
+
+Suggested Answer
+
+A316:
+
+(a) YES. Assuming that he is of legal age (Art. 797, NCC) and of sound mind at the time of execution of the will (Art. 798, NCC), Stevie, a blind person, can make a notarial will, subject to compliance with the “two-reading rule” (Art. 808, NCC) and the provisions of Arts. 804 and 806 of the NCC.
+
+(b) NO, Stevie cannot be a witness to a will. Art. 820 of the NCC provides that “any person of sound mind and of age of eighteen years or more, and not blind, deaf or dumb, and able to read and write, may be a witness to the execution of a will.”
+
+(c) YES. The will must be read to him twice, once by one of the subscribing witnesses, and again, by the notary public before whom the will is acknowledged. (Art. 808, NCC)
+
+Question (2022 BAR)
+
+Q317:
+
+Miguel, who died single and childless, was survived by his two legitimate brothers Romy and Rolly, and his nephews Arno and Pabs, the legitimate sons of his predeceased legitimate brother Edgar. Before his death, Miguel executed a one-page notarial will, inclusive of an attestation clause and a notarial acknowledgment, with only one testamentary disposition bequeathing his entire estate to Romy and Rolly. The will was not paginated and was attested by four witnesses: Uno, Dos, Tres, and Quatro. It was the eve of Quatro’s 17 th birthday when the will was executed. The will was written in the Ilocano dialect which Miguel knew and understood, but the witnesses did not. Miguel and the witnesses signed at the end of the testamentary disposition. The attestation was also written in the Ilocano dialect which, when translated to the English language, reads as follows:
+
+“This will of Miguel was written in ONE page. We, the attesting witnesses, signed at the end of the will and at the bottom of this attestation in the presence of Miguel and of each of us.”
+
+Each of the four witnesses signed below the attestation clause. Because none of the witnesses knew and understood the Ilocano dialect, the attestation was interpreted to them by Miguel’s lawyer who was present to notarize the will.
+
+a. Does the fact that the will was written in a dialect known only to Miguel invalidate the will? What about the absence of the marginal signatures of the testator and the witnesses? Explain briefly.
+
+b. May the will nonetheless be admitted to probate? Explain briefly.
+
+Suggested Answer
+
+A317:
+
+a. NO. The law requires that the will must be written in a language or dialect known to the testator (Art. 804, NCC), but it does not require that the language of the will be known to the attesting witnesses. On the other hand, the lack of marginal signatures will not invalidate the will because the will was contained in only one page and since the testator and the witnesses signed at the bottom of the instrument, it would be superfluous to still require that they marginally sign the one page will. (Central Bar Q&A by Paguirigan, 2023)
+
+b. NO, the will may not be admitted to probate because of the defective attestation clause. The attestation clause must state the number of pages used in the will and the fact that the testator signed the will in the presence of the attesting witnesses and that the witnesses signed the will not only in the presence of one another but also in the presence of the testator. The attestation clause in Miguel's will failed to state that the attesting witnesses signed the will in the presence of the testator. Thus, the attestation clause is fatally defective which renders the will void. (Caneda v. Court of Appeals, G.R. No. 103554, 28 May 1993) (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2008 BAR)
+
+Q318:
+
+Arthur executed a will which contained only: (i) a provision disinheriting his daughter Bernica for running off with a married man, and (ii) a provision disposing of his share in the family house and lot in favor of his other children Connie and Dora. He did not make any provisions in favor of his wife Erica, because as the will stated, she would anyway get ½ of the house and lot as her conjugal share. The will was very brief and straight forward and both the above provisions were contained in page 1, which Arthur and his instrumental witness, signed at the bottom. Page 2 contained the attestation clause and the signatures, at the bottom thereof, of the 3 instrumental witnesses which included Lambert, the driver of Arthur; Yoly, the family cook, and Attorney Zorba, the lawyer who prepared the will. There was a 3 rd page, but this only contained the notarial acknowledgement.
+
+The attestation clause stated the will was sighed on the same occasion by Arthur and his instrumental witnesses who all signed in the presence of each other, and the notary public who notarized the will. There are no marginal signatures or pagination appearing on any of the 3 pages. Upon his death, it was discovered that apart from the house and lot, he has a P1 million account deposited with ABC back.
+
+What other defects of the will, if any, can cause denial of probate?
+
+Suggested Answer
+
+A318:
+
+The other defects of the will that can cause its denial are as follows: (a) Atty. Zorba, the one who prepared the will was one of the three witnesses, violating the three-witnesses rule; (b) no marginal signature at the last page; (c) the attestation did not state the number of pages upon which the will is written; and, (d) no pagination appearing correctively in letters on the upper part of the three pages. (Azuela v. Court of Appeals, G.R. No. 122880, 12 Apr. 2006; Arts. 805 and 806)
+
+Question (2012, 1996 BAR)
+
+Q319:
+
+Natividad’s holographic will, which had only one (1) substantial provision, as first written, named Rosa as her sole heir. However, when Gregorio presented it for probate, it already contained an alteration, naming Gregorio, instead of Rosa, as sole heir, but without authentication by Natividad’s signature. Rosa opposes the probate alleging such lack of proper authentication. She claims that the unaltered form of the will should be given effect. Whose claim should be granted? Explain.
+
+Suggested Answer
+
+A319:
+
+It depends. If the cancellation of Rosa's name in the will was done by the testator himself, Rosa's claim that the holographic will in its original tenor should be given effect must be denied. The said cancellation has revoked the entire will as nothing remains of the will after the name of Rosa was cancelled. Such cancellation is valid revocation of the will and does not require authentication by the full signature of the testator to be effective. However, if the cancellation of Rosa's name was not done by the testator himself, such cancellation shall not be effective and the will in its original tenor shall remain valid. The efﬁcacy of a holographic will cannot be left to the mercy of unscrupulous third parties. The writing of Gregorio‘s name as sole heir was ineffective, even though written by the testator himself, because such is an alteration that requires the authentication by the full signature of the testator to be valid and effective. Not having been authenticated. The designation of Gregorio as an heir was ineffective. (Kalaw v. Relova, G.R. No. L-40207, 28 Sept. 1984)
+
+Question (2007, 1994 BAR)
+
+Q320:
+
+Clara, thinking of her mortality, drafted a will and asked Roberta, Hannah, Luisa and Benjamin to be witnesses. During the day of signing of her will, Clara fell down the stairs and broke her arms. Coming from the hospital, Clara insisted on signing her will by thumb mark and said that she can sign her full name later. While the will was being signed, Roberta experienced a stomachache and kept going to the restroom for long periods of time. Hannah, while waiting for her turn to sign the will, was reading the 7th Harry Potter book on the couch, beside the table on which everyone was signing. Benjamin, aside from witnessing the will, also offered to notarize it. A week after, Clara was run over by a drunk driver while crossing the street in Greenbelt. May the will of Clara be admitted to probate? Give your reasons briefly.
+
+Suggested Answer
+
+A320:
+
+NO, the probate should be denied. The requirement that the testator and at least three witnesses must sign all in the “presence” of one another was not complied with. Benjamin who notarized the will is disqualified as a witness, hence he cannot be counted as one of the three witnesses. (Cruz v. Villasor, G.R. No. L-32213, 26 Nov. 1973) The testatrix and the other witnesses signed the will not in the presence of Roberta because she was in the restroom for extended periods of time. Inside the restroom, Roberta could not have possibly seen the testatrix and the other witnesses sign the will by merely casting her eyes in the proper direction. (Jaboneta v. Gustilo, G.R. No. 1641, 19 Jan. 1906; Nera v. Rimando, G.R. No. L-5971, 27 Feb. 1911) Therefore, the testatrix signed the will in the presence of only two witnesses, and only two witnesses signed the will in the presence of the testatrix and of one another.
+
+It is to be noted, however, that the thumb mark intended by the testator to be his signature in executing his last will and testament is valid. (Payad v. Tolentino, G.R. No. 42258, 05 Sept. 1936; Matias v. Salud, G.R. No. L-10751, 23 June 1958) The problem, however, states that Clara “said that she can sign her full name later;” Hence, she did not consider her thumb mark as her “complete” signature, and intended further action on her part. The testatrix and the other witness signed the will in the presence of Hannah, because she was aware of her function and role as witness and was in a position to see the testatrix and the other witnesses sign by merely casting her eyes in the proper direction.
+
+Question (2022 BAR)
+
+Q321:
+
+In 2013, Agaton, then 70 years old, executed a will wherein he bequeathed his entire estate to his acknowledged illegitimate son Karl. Agaton entrusted the original copy of the 2013 will to Karl. In 2014, Karl joined a group of mercenaries to fight in Crimea alongside the Russians. After Russia’s annexation of Crimea, Karl did not return to the Philippines and was never heard of. Five years later, in 2019, Agaton executed a codicil which provided the following: “Because of the death of Karl, I revoke my 2013 will. I hereby recognize Gian as my other illegitimate son, and hereby bequeath to him my entire estate.” Agaton died in 2020. During the probate of Agaton’s 2019 codicil, Karl appeared in court, presented the 2013 will, contested the validity of its revocation, opposed the probate of the 2019 codicil, and sought the probate of the 2013 will. Both the 2013 will and 2019 codicil were immaculate as to form.
+
+(a) Did the 2019 codicil revoke the 2013 will? Explain briefly.
+
+(b) Distribute the estate of Agaton. Explain briefly.
+
+Suggested Answer
+
+A321:
+
+(a) NO, the 2019 Codicil did not revoke the 2013 will. The revocation of a will based on a false cause, or an illegal cause is null and void. (Art. 833, NCC). In addition, the statement of a false cause for the institution of an heir shall be considered as not written, unless it appears from the will that the testator would not have made such institution if he had known the falsity of such cause. (Art. 850, NCC) Based on the facts presented, Agaton revoked the 2013 will and executed the 2019 will on the mistaken belief that Karl is already dead. This is evident in the words of the will itself which states that "Because of the death of Karl, I revoke my 2013 will." Hence, the revocation is not valid. (Central Bar Q&A by Paguirigan, 2023)
+
+(b) The estate of Agaton shall be distributed in accordance with the rules on intestacy. Hence, Karl and Gian will get equal shares. Despite the invalidity of the revocation of the 2013 will, the preterition of Gian in the 2013 will shall annul the institution of Karl because Gian is also a compulsory heir in the direct line, and he was totally omitted in the 2013 will of Agaton. Hence, with the preterition of Gian, the 2013 will is intrinsically void and intestacy shall govern the distribution of Agaton's estate. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (2014 BAR)
+
+Q322:
+
+Mario executed his last will and testament where he acknowledges the child being conceived by his live-in partner Josie as his own child; and that his house and lot in Baguio City be given to his unborn conceived child. Are the acknowledgment and the donation mortis causa valid? Why?
+
+Suggested Answer
+
+A322:
+
+YES, the acknowledgment is considered valid because a will (although not required to be filed by the notary public) may still constitute a document, which contains an admission of illegitimate filiation. The recognition of an illegitimate child does not lose its legal effect even though the will wherein it was made should be revoked. (Art. 834, NCC) This provision by itself warrants a conclusion that a will may be considered as proof of filiation. The donation mortis causa may be considered valid because although unborn, a fetus has a presumptive personality for all purposes favorable to it provided it be born under the conditions specified in Art. 41, NCC.
+
+Question (2018 BAR)
+
+Q323:
+
+Sydney, during her lifetime, was a successful lawyer. By her own choice, she remained unmarried and devoted all her time to taking care of her nephew and two (2) nieces: Socrates, Saffinia, and Sophia. She wrote a will giving all her properties remaining upon her death to the three (3) of them. The will was admitted to probate during her lifetime. Later, she decided to make a new will giving all her remaining properties only to the two (2) girls, Saffinia and Sophia. She then tore up the previously probated will. The second will was presented for probate only after her death. However, the probate court found the second will to be void for failure to comply with formal requirements.
+
+(a) Will the doctrine of dependent relative revocation apply?
+
+(b) Will your answer be the same if the second will was found to be valid but both Saffinia and Sophia renounced their inheritance?
+
+Suggested Answer
+
+A323:
+
+(a) NO, the said doctrine will not apply. In the case of Molo v. Molo (G.R. No. L-2538, 21 Sept. 1951), the court stated that the doctrine of relative revocation is a rule where revocation of the old will is a suspensive condition or depends upon the efficacy of the new disposition, and if the new will intended as a substitute is inoperative, the revocation fails and the original will remains in force. This was applied based on the fact that the original will appears to be lost; hence, the second will was executed with a revocatory clause, but in both instances, the wife was instituted as the universal heir. In this case, however, the revocation of the original was not through the execution of a subsequent will with a revocatory clause, but through destruction with intent to do so. It does not appear either that the revocation of the old will operates as a suspensive condition to the efficacy of the subsequent will, because the testator revoked the 1st original will, as she does not wish to institute the same heirs, unlike in Molo v. Molo where the wife was the heir in both wills.
+
+ALTERNATIVE ANSWER:
+
+YES. The doctrine of revocation will apply. In Diaz v. De Leon (G.R. No. L-17714, May 31, 1922), it was ruled that there was no revocation either by subsequent will (for same was invalid) or an overt act (since the act of destruction or tearing the first will was prompted by the false belief that the second will had been validly executed). In this case, it is presumed that Sydney never intended to die intestate. Thus, the revocation of the first will depended on the finding of validity of the 2nd will. The latter being found invalid, 1st will stands.
+
+(b) YES, my answer will be the same. The doctrine of dependent relative revocation does not apply where the new will is rendered ineffective due to the renunciation of the heirs instituted therein. Renunciation has nothing to do with the validity of the will, but only pertains to whether or not the heirs accept their share in the inheritance. Since the new will is still valid, the doctrine does not apply. (Art. 832, NCC)
+
+ALTERNATIVE ANSWER:
+
+NO. My answer will not be the same. According to the law, dependent relative revocation only applies if the new will is void. Here the second will is valid, regardless of the fact that the same was renounced.
+
+Question (2003 BAR)
+
+Q324:
+
+Mr. Reyes executed a will completely valid as to form. A week later, however, he executed another will which expressly revoked his first will, which he tore his first will to pieces. Upon the death of Mr. Reyes, his second will was presented for probate by his heirs, but it was denied probate due to formal defects. Assuming that a copy of the first will is available, may it now be admitted to probate and given effect? Why?
+
+Suggested Answer
+
+A324:
+
+YES, the first will may be admitted to probate and given effect. When the testator tore first will, he was under the mistaken belief that the second will was perfectly valid and he would not have destroyed the first will had he known that the second will is not valid. The revocation by destruction therefore is dependent on the validity of the second will. Since it turned out that the second will was invalid, the tearing of the first will did not produce the effect of revocation. This is known as the doctrine of dependent relative revocation. (Molo v. Molo, G.R. No. L-2538, 21 Sept. 1951)
+
+Question (1997 BAR)
+
+Q325:
+
+Johnny, with no known living relatives, executed a notarial will giving all his estate to his sweetheart. One day, he had a serious altercation with his sweetheart. A few days later, he was introduced to a charming lady who later became a dear friend. Soon after, he executed a holographic will expressly revoking the notarial will and so designating his new friend as sole heir. One day when he was clearing up his desk, Johnny mistakenly burned, along with other papers, the only copy of his holographic will. His business associate, Eduardo knew well the contents of the will which was shown to him by Johnny the day it was executed. A few days after the burning incident, Johnny died. Both wills were sought to be probated in two separate petitions.
+
+Will either or both petitions prosper?
+
+Suggested Answer
+
+A325:
+
+The probate of the notarial will shall prosper. The holographic will cannot be admitted to probate because a holographic will can only be probated upon evidence of the will itself unless there is a photographic copy. But since the holographic will was lost and there was no other copy, it cannot be probated. Therefore, the notarial will shall be admitted to probate because there is no revoking will.
+
+In the case of Gan vs. Yap (G.R. No. L-12190, 30 Aug. 1958), the execution and the contents of a lost or destroyed holographic will may not be proved by the bare testimony of witnesses who have seen or read such will. The will itself must be presented otherwise it shall produce no effect. The law regards the document itself as material proof of authenticity.
+
+Question (2017 BAR)
+
+Q326:
+
+Pedro had worked for 15 years in Saudi Arabia when he finally decided to engage in farming in his home province where his 10-hectare farmland valued at ₱2,000,000.00 was located. He had already ₱3,000,000.00 savings from his long stint in Saudi Arabia. Eagerly awaiting Pedro's arrival at the NAIA were his aging parents Modesto and Jacinta, his common-law spouse Veneranda, their three children, and Alex, his child by Carol, his departed legal wife. Sadly, for all of them, Pedro suffered a stroke because of his overexcitement just as the plane was about to land, and died without seeing any of them. The farmland and the savings were all the properties he left.
+
+(a) State who are Pedro's legal heirs, and the shares of each legal heir to the estate? Explain your answer.
+
+(b) Assuming that Pedro's will is discovered soon after his funeral. In the will, he disposed of half of his estate in favor of Veneranda, and the other half in favor of his children and his parents in equal shares. Assuming also that the will is admitted to probate by the proper court. Are the testamentary dispositions valid and effective under the law on succession? Explain your answer.
+
+Suggested Answer
+
+A326:
+
+(a) The shares to Pedro’s estate are as follows: Alex shall inherit 1/2 of the estate of Pedro while the other 3 children to Veneranda is entitled to 1/6 each of the estate because they are illegitimate children. Under the NCC, a legitimate child shall inherit 1/2 of the estate while under our family code, illegitimate children are only entitled to half of the share of the legitimate child. While Veneranda is not an heir since she is not the legal spouse of Pedro while Modesto and Jacinta are excluded because Pedro has children. Under the NCC, parents are excluded from the shares of their child when the child has legal descendants.
+
+(b) NO, the testamentary disposition are not valid and effective because such testamentary disposition must not impair the legitimes of the testator’s compulsory heirs. Under the NCC, for the testamentary dispositions be effective, the legitimes of the respective compulsory heirs must not be impaired by such testamentary dispositions.
+
+In this case, the dispositions impair the legitimes of Pedro’s children, which are as follows:(i) 1/2 of the estate to Alex; (ii) 1/4 of the estate each to the three illegitimate children, which shall be proportionally reduced since the legitimes already exceed the balance of the estate. Hence, the testamentary dispositions are not valid and effective.
+
+Question (2012 BAR)
+
+Q327:
+
+Ricky and Ricky and Arlene are married. They begot Franco during their marriage. Franco had an illicit relationship with Audrey and out of which, they begot Arnel. Franco predeceased Ricky, Arlene and Arnel. Before Ricky died, he executed a will which when submitted to probate was opposed by Arnel on the ground that he should be given the share of his father, Franco. Is the opposition of Arnel correct? Why?
+
+Suggested Answer
+
+A327:
+
+NO, his opposition is not correct. Arnel cannot inherit from Ricky in representation of his father, Franco. The representative must not only be a legal heir of the person he is representing but he must also be a legal heir of the decedent he seeks to inherit from.
+
+While Arnel is a legal heir of Franco, he is not a legal heir of Ricky because an illegitimate child has no right to inherit ab intestato from the legitimate children and relatives of his father or mother. (Art. 992, NCC) Arnel is disqualified to Inherit from Ricky because Arnel is an illegitimate child of Franco and Ricky is a legitimate relative of Franco.
+
+Question (1990 BAR)
+
+Q328:
+
+H died leaving a last will and testament wherein it is stated that he was legally married to W by whom he had two legitimate children A and B. H devised to his said forced heirs the entire estate except the free portion which he gave to X who was living with him at the time of his death. In said will, he explained that he had been estranged from his wife W for more than 20 years and he has been living with X as man and wife since his separation from his legitimate family. In the probate proceedings, X asked for the issuance of letters testamentary in accordance with the will wherein she is named sole executor. This was opposed by W and her children.
+
+(a) Should the will be admitted in said probate proceedings?
+
+(b) Is the said devise to X valid?
+
+(c) Was it proper for the trial court to consider the intrinsic validity of the provisions of said will? Explain your answers.
+
+Suggested Answer
+
+A328:
+
+(a) YES, the will may be probated if executed according to the formalities prescribed by law.
+
+(b) NO, the institution giving X the free portion is not valid, because the prohibitions under Art. 739 of the NCC on donations also apply to testamentary dispositions (Art. 1028, NCC), among donations which are considered void are those made between persons who were guilty of adultery or concubinage at the time of the donation.
+
+(c) As a general rule, the will should be admitted in probate proceedings if all the necessary requirements for its extrinsic validity have been met and the court should not consider the intrinsic validity of the provisions of said will. However, the exception arises when the will in effect contains only one testamentary disposition. In effect, the only testamentary disposition under the will is the giving of the free portion to X, since legitimes are provided by law. Hence, the trial court may consider the intrinsic validity of the provisions of said will. (Nuguid v. Nuguid, G.R. No. L23445, 23 June 1966; Nepomuceno v. Court of Appeals, G.R. L62952, 09 Oct. 1985)
+
+Question (2002 BAR)
+
+Q329:
+
+Distinguish between simple and fideicommissary substitution of heirs.
+
+Suggested Answer
+
+A329:
+
+In a simple substitution of heirs, the testator designates one or more persons to substitute the heirs instituted in case such heir or heirs should die before him or should not wish or should be incapacitated to accept the inheritance.
+
+In a fideicommissary substitution, the testator institutes a first heir and charges him to preserve and transmit the whole or part of the inheritance to a second heir. In a simple substitution, only one heir inherits. In a fideicommissary substitution, both the first and second heirs inherit. (Art. 859 & 869, NCC)
+
+Question (2019 BAR)
+
+Q330:
+
+M. single, named his sister N in his will, as a devisce over a certain parcel of land that he owned, with the obligation of preserving the land and transferring it, upon N’s death, to her illegitimate daughter O. who was then only a year old. Is the condition imposed on N to preserve the land and to transmit it upon her death to a valid case of fideicommissary substitution? Explain.
+
+Suggested Answer
+
+A330:
+
+YES, this is a valid case of fideicommissary substitution. Art. 863 of the NCC provides that a fideicommissary substitution by virtue of which the fiduciary or first heir instituted is entrusted with the obligation to preserve and to transmit to a second heir the whole or part of the inheritance, shall be valid and shall take effect, provided such substitution does not go beyond one degree from the heir originally instituted. First, there is the absolute obligation imposed upon the fiduciary N to preserve and to transmit to the fideicommissary the part of the inheritance. Second, O, the fideicommissary, as the fiduciary’s illegitimate daughter is one degree from the fiduciary. Furthermore, O’s illegitimate status is of no moment, because Art. 863, referring to the “heir” does not distinguish between legitimate from illegitimate relationships. (UPLC Suggested Answers)
+
+Question (2012 BAR)
+
+Q331:
+
+How can RJP distribute his estate by will, if his heirs are JCP, his wife; HBR and RVC, his parents; and an illegitimate child, SGO?
+
+Suggested Answer
+
+A331:
+
+Testator may dispose of by will the free portion of his estate. Since the legitime of JCP is 1/8 of the estate, SGO is 1/4 of the estate and that of HBR and RVC is 1/2 of the hereditary estate under Art. 889, NCC, the remaining 1/8 of the estate is the free portion which the testator may dispose of by will.
+
+Question (2006 BAR)
+
+Q332:
+
+Don died after executing a Last Will and Testament leaving his estate valued at P12 Million to his commonlaw wife Roshelle. He is survived by his brother Ronie and his half-sister Michelle.
+
+(a) Was Don's testamentary disposition of his estate in accordance with the law on succession? Whether you agree or not, explain your answer. Explain.
+
+(b) If Don failed to execute a will during his lifetime, as his lawyer, how will you distribute his estate? Explain.
+
+Suggested Answer
+
+A332:
+
+(a) YES, Don's testamentary disposition of his estate is in accordance with the law on succession. Don has no compulsory heirs not having ascendants, descendants nor a spouse. (Art. 887, NCC) Brothers and sisters are not compulsory heirs. Thus, he can bequeath his entire estate to anyone who is not otherwise incapacitated to inherit from him. A common-law wife is not incapacitated under the law, as Don is not married to anyone.
+
+(b) After paying the legal obligations of the estate, I will give Ronie, as full-blood brother of Don, 2/3 of the net estate, twice the share of Michelle, the half-sister who shall receive 1/3. Roshelle will not receive anything as she is not a legal heir. (Art. 1006, NCC)
+
+Question (1999 BAR)
+
+Q333:
+
+What do you understand by "presumptive legitime", in what case or cases must the parent deliver such legitime to the children, and what are the legal effects in each case if the parent fails to do so?
+
+Suggested Answer
+
+A333:
+
+Presumptive legitime is not defined in the law. Its definition must have been taken from Act 2710, the Old Divorce Law, which required the delivery to the legitimate children of “the equivalent of what would have been due to them as their legal portion if said spouse had died intestate immediately after the dissolution of the community of property.” As used in the Family Code, presumptive legitime is understood as the equivalent of the legitimate children’s legitimes assuming that the spouses have died immediately after the dissolution of the community of property.
+
+Presumptive legitime is required to be delivered to the common children of the spouses when the marriage is annulled or declared void ab initio and possibly, when the conjugal partnership or absolute community is dissolved as in the case of legal separation. Failure of the parents to deliver the presumptive legitime will make their subsequent marriage null and void under Art. 53, FC.
+
+Question (2001 BAR)
+
+Q334:
+
+Because her eldest son Juan had been pestering her for capital to start a business, Josefa gave him P100,000. Five years later, Josefa died, leaving a last will and testament in which she instituted only her four younger children as her sole heirs. At the time of her death, her only properly left was P900,000.00 in a bank. Juan opposed the will on the ground of preterition. How should Josefa's estate be divided among her heirs? State briefly the reason(s) for your answer.
+
+Suggested Answer
+
+A334:
+
+There was no preterition of the oldest son because the testatrix donated P100,000 to him. This donation is considered an advance on the son's inheritance. There being no preterition, the institutions in the will shall be respected but the legitime of the oldest son has to be completed if he received less. After collating the donation of P100,000 to the remaining property of P900,000, the estate of the testatrix is P1,000,000. Of this amount, one-half or P500,000, is the legitime of the legitimate children and it follows that the legitime of one legitimate child is P100,000. The legitime, therefore, of the oldest son is P100,000. However, since the donation given him was P100,000, he has already received in full his legitime and he will not receive anything anymore from the decedent. The remaining P900,000, therefore, shall go to the four younger children by institution in the will, to be divided equally among them. Each will receive P225,000.
+
+Question (1999 BAR)
+
+Q335:
+
+Mr. Cruz, widower, has three legitimate children, A, B and C. He executed a Will instituting as his heirs to his estate of P1,000,000.00 his two children A and B, and his friend F.
+
+(a) Upon his death, how should Mr. Cruz's estate be divided? Explain.
+
+(b) In the preceding question, suppose Mr. Cruz instituted his two children A and B as his heirs in his Will, but gave a legacy of P 100,000.00 to his friend F. How should the estate of Mr. Cruz be divided upon his death? Explain.
+
+Suggested Answer
+
+A335:
+
+(a) Assuming that the institution of A, B and F were to the entire estate, there was preterition of C since C is a compulsory heir in the direct line. The preterition will result in the total annulment of the institution of heirs. Therefore, the institution of A, B and F will be set aside and Mr. Cruz’s estate will be divided, as in intestacy, equally among A, B and C as follows: A - P333,333.33; B - P333.333.33; and C P333,333.33.
+
+(b) On the same assumption as letter (a), there was preterition of C. Therefore, the institution of A and B is annulled but the legacy of P100.000.00 to F shall be respected for not being inofficious. Therefore, the remainder of P900.000.00 will be divided equally among A, B, and C.
+
+Question (2002 BAR)
+
+Q336:
+
+Distinguish between modal institution and substitution of heirs.
+
+Suggested Answer
+
+A336:
+
+A modal institution is the institution of an heir made for a certain purpose or cause. (Arts. 871 & 882, NCC) Substitution is the appointment of another heir so that he may enter into the inheritance in default of the heir originality instituted. (Art. 857, NCC)
+
+Question (2002 BAR)
+
+Q337:
+
+By virtue of a Codicil appended to his will, Theodore devised to Divino a tract of sugar land, with the obligation on the part of Divino or his heirs to deliver to Betina a specified volume of sugar per harvest during Betina’s lifetime. It is also stated in the Codicil that in the event the obligation is not fulfilled, Betina should immediately seize the property from Divino or latter’s heirs and turn it over to Theodore’s compulsory heirs. Divino failed to fulfill the obligation under the Codicil. Betina brings suit against Divino for the reversion of the tract of land. Does Betina have a cause of action against Divino? Explain.
+
+Suggested Answer
+
+A337:
+
+YES, Betina has a cause of action against Divino. This is a case of a testamentary disposition subject to a mode and the will itself provides for the consequence if the mode is not complied with. To enforce the mode, the will itself gives Betina the right to compel the return of the property to the heirs of Theodore. (Rabadilla v. CA, G.R. No. 113725, 29 June 2000)
+
+Question (2012 BAR)
+
+Q338:
+
+Ramon, a Filipino, executed a will in Manila, where he left his house and located in BP Homes Parañaque in favor of his Filipino son, Ramgen. Ramon’s other children RJ and Ramona, both Turkish nationals, are disputing the bequest to Ramgen. They plotted to kill Ramgen. Ramon learned of the plot, so he tore his will in two pieces out of anger. Which statement is most accurate?
+
+(a) The mere act of Ramon Sr. is immaterial because the will is still readable. 
+(b) The mere act of tearing the will amounts to revocation. 
+(c) The tearing of the will may amount to revocation if coupled with intent of revoking it. 
+(d) The act of tearing the will is material.
+
+Suggested Answer
+
+A338:
+
+(c) The tearing of the will may amount to revocation if coupled with intent of revoking it. (UPLC Suggested Answers)
+
+Question (2010 BAR)
+
+Q339:
+
+True or False. X, a widower, died leaving a will stating that the house and lot where he lived cannot be partitioned for as long as the youngest of his four children desires to stay there. As coheirs and coowners, the other three may demand partition anytime.
+
+Suggested Answer
+
+A339:
+
+FALSE. The other three co–heirs may not anytime demand the partition of the house and lot since it was expressly provided by the decedent in his will that the same cannot be partitioned while his youngest child desires to stay there. A decedent to prohibit, by will, the partition of a property and his estate for a period not longer than 20 years no matter what his reason maybe. (Art. 1083, NCC) Hence, the three co-heir can demand its partition only after 20 years from the death of their father. Even if the deceased parent did not leave a will, if the house and lot constituted their family home, partition is prohibited for a period of 10 years, or for as long as there is a minor beneficiary living in the family home. (Art. 159, FC)
+
+Question (2000 BAR)
+
+Q340:
+
+John Sagun and Maria Carla Camua, British citizens at birth, acquired Philippine citizenship by naturalization after their marriage. During their marriage, the couple acquired substantial landholdings in London and in Makati. Maria begot three (3) children, Jorge, Luisito, and Joshur. In one of their trips to London, the couple executed a joint will appointing each other as their heirs and providing that upon the death of the survivor between them, the entire estate would go to Jorge and Luisito only but the two (2) could not dispose of nor divide the London estate as long as they live. John and Maria died tragically in the London subway terrorist attack in 2005. Jorge and Luisito filed a petition for probate of their parents’ will before a Makati RTC. Joshur vehemently objected because he was preterited.
+
+(a) Should the will be admitted to probate? Explain.
+
+(b) Are the testamentary dispositions valid? Explain.
+
+(c) Is the testamentary prohibition against the division of the London estate valid? Explain.
+
+Suggested Answer
+
+A340:
+
+(a) NO, the will should not be admitted to probate since the couple are both Filipino citizens. Arts. 818 and 819 of the NCC shall apply. Said Articles prohibit the execution of joint wills and make them void, even though authorized by the laws of the country where they were executed.
+
+(b) NO. Since the joint will is void, all the testamentary dispositions written therein are also void. However, if the will is valid, the institutions of heirs shall be annulled because Joshur was preterited. He was preterited because he will receive nothing from the will, will receive nothing by intestacy, and the facts do not show that he received anything as an advance on his inheritance. He was totally excluded from the inheritance of his parents.
+
+(c) Assuming the will of John and Maria is valid, the testamentary prohibition on the division of the London estate shall be valid but only for 20 years. A testamentary disposition of the testator cannot forbid the partition of all or part of his estate for a period longer than twenty (20) years. (Arts. 1083 & 494, NCC)
+
+Question (2000 BAR)
+
+Q341:
+
+In his last will and testament, Lamberto 1) disinherits his daughter Wilma because "she is disrespectful towards me and raises her voice talking to me", 2) omits entirely his spouse Elvira, 3) leaves a legacy of P100,000.00 to his mistress Rosa and P50,000.00 to his driver Ernie and 4) institutes his son Baldo as his sole heir.
+
+How will you distribute his estate of P1,000,000.00?
+
+Suggested Answer
+
+A341:
+
+The disinheritance of Wilma was ineffective because the ground relied upon by the testator does not constitute maltreatment under Art. 919(6), NCC. Hence, the testamentary provisions in the will shall be annulled but only to the extent that her legitime was impaired. The total omission of Elvira does not constitute preterition because she is not a compulsory heir in the direct line. Only compulsory heirs in the direct line may be the subject of preterition. Not having been preterited, she will be entitled only to her legitime. The legacy in favor of Rosa is void under Art. 1028 for being in consideration of her adulterous relation with the testator. She is, therefore, disqualified to receive the legacy of 100,000 pesos. The legacy of 50,000 pesos in favor of Ernie is not inofficious not having exceeded the free portion. Hence, he shall be entitled to receive it. The institution of Baldo, which applies only to the free portion, shall be respected. In sum, the estate of Lamberto will be distributed as follows:
+
+Baldo — 450,000 
+Wilma — 250,000 
+Elvira — 250,000 
+Ernie — 50,000 
+TOTAL — 1,000,000
+
+Question (2000, 1999 BAR)
+
+Q342:
+
+Mr. Palma, widower, has three daughters D, D-1 and D-2. He executes a Will disinheriting D because she married a man he did not like, and instituting daughters D-1 and D-2 as his heirs to his entire estate of P 1,000,000.00. Upon Mr. Palma's death, how should his estate be divided? Explain.
+
+Suggested Answer
+
+A342:
+
+This is a case of ineffective disinheritance because marrying a man that the father did not approve of is not a ground for disinheriting D. Therefore, the institution of D-1 and D-2 shall be annulled insofar as it prejudices the legitime of D, and the institution of D-1 and D- 2 shall only apply on the free portion in the amount of P500,000.00. Therefore, D, D-1 and D-2 will get their legitimes of P500, 000.00 divided into three equal parts and D-1 and D- 2 will get a reduced testamentary disposition of P250,000.00 each. Hence, the shares will be: 
+
+D — P166,666.66 
+D-1 — P166,666.66 + P250,000.00 
+D-2 — P166,666.66 + P250.000.00
+
+Question (2019 BAR)
+
+Q343:
+
+Prior to his death, H, married to W. with children X. Y. and Z, executed a holographic will entirely written, dated, and signed by him. In his will, H instituted W, X, and Y as bis heirs, and consequently, made testamentary dispositions in their favor. H. however, expressly disinherited Z on the ground that the latter once filed a civil case against him in order to collect a particular sum of money he previously owed Z.
+
+(a) Was the disinheritance of Z proper? Explain.
+
+(b) Assuming that the disinheritance of Z was improper, how will it affect the institution of heirs and testamentary dispositions made in II’s will? Explain.
+
+Suggested Answer
+
+A343:
+
+(a) NO, it is not a proper ground to disinherit. Art. 916 of the NCC provides that disinheritance can be effected only through a will wherein the legal cause therefor shall be specified. Art. 919 of NCC provides that the following shall be sufficient causes for the disinheritance of children and descendants, legitimate as well as illegitimate. That Z once filed a civil case against him in order to collect a particular sum of money he previously owed is not one of the grounds for a valid disinheritance.
+
+(b) Art. 918 of the NCC provides that disinheritance for a cause which is not one of those set forth in this Code, shall annul the institution of heirs insofar as it may prejudice the person disinherited; but the devises and legacies and other testamentary dispositions shall be valid to such extent as will not impair the legitime. (UPLC Suggested Answers)
+
+Question (2008 BAR)
+
+Q344:
+
+Raymond, single, named his sister Ruffa in his will as a devisee of a parcel of land which he owned. The will imposed upon Ruffa the obligation of preserving the land and transferring it, upon her death, to her illegitimate daughter Scarlet who was then only one year old. Raymond later died, leaving behind his widowed mother, Ruffa and Scarlet.
+
+(a) Is the condition imposed upon Ruffa, to preserve the property and to transmit it upon her death to Scarlet, valid?
+
+(b) If Scarlet predeceases Ruffa, who inherits the property?
+
+(c) If Ruffa predeceases Raymond, can Scarlet inherit the property directly from Raymond?
+
+Suggested Answer
+
+A344:
+
+(a) YES. When an obligation to preserve and transmit the property to Scarlet was imposed on Ruffa, the testator Raymond intended to create a fideicommissary substitution where Ruffa is the fiduciary and Scarlet is the fideicommissary. Having complied with the requirements of Arts. 863 and 869, NCC, the fideicommissary substitution is valid.
+
+(b) If Scarlet predeceases Ruffa, the fideicommissary substitution is rendered null or ineffective under Art. 863, the fideicommissary clause is disregarded without prejudice to the validity of the institution of the fiduciary. In such case, Ruffa shall inherit the devise free from the condition.
+
+(c) NO. In a fideicommissary substitution, the intention of the testator is to make the second heir his ultimate heir. The right of the second heir is simply postponed by the delivery of the inheritance to the first heir for him to enjoy the usufruct over the inheritance. Hence, when the first heir predeceased the testator, the first heir did not qualify to inherit and the right of the second heir to receive the inheritance will no longer be delayed provided the second heir is qualified to inherit at the time of the testator’s death. In fideicommissary substitution, the first and the second heirs inherit from the testator, hence, both should be qualified to inherit from the testator at the time of his death. In the problem, when Ruffa predeceased Raymond, she did not qualify to receive the inheritance to enjoy its usufruct, hence, the right of Scarlet to receive the inheritance upon the death of the testator will no longer be delayed. However, Scarlet is not qualified to inherit from Raymond because she is barred by Art. 992 of the NCC being an illegitimate child of Raymond’s legitimate father. The devise will therefore be ineffective, and the property will be disposed of by intestacy.
+
+Question (2007 BAR)
+
+Q345:
+
+In 1986, Jennifer and Brad were madly in love. In 1989, because a certain Picasso painting reminded Brad of her, Jennifer acquired it and placed it in his bedroom. In 1990, Brad and Jennifer broke up. While Brad was mending his broken heart, he met Angie and fell in love. Because the Picasso painting reminded Angie of him, Brad, in his will, bequeathed the painting to Angie. Brad died in 1995. Saddened by Brad's death, Jennifer asked for the Picasso painting as a remembrance of him. Angie refused and claimed that Brad, in his will, bequeathed the painting to her. Is Angie correct? Why or why not?
+
+Suggested Answer
+
+A345:
+
+NO, Angie is not correct. The Picasso painting is not given or donated by Jennifer to Brad. She merely “placed it in his bedroom.” Hence, she is still the owner of the painting. Not being the owner of the Picasso painting, Brad cannot validly bequeath the same to Angie. (Art. 930, NCC) Even assuming that the painting was impliedly given or donated by Jennifer to Brad, the donation is nevertheless void for not being in writing. The Picasso painting must be worth more than 5,000 pesos. Under Art. 748 of the NCC, the donation and acceptance of a movable worth more than 5,000 pesos must be in writing, otherwise the donation is void. Jennifer remained the owner of the Picasso painting and Brad could not have validly disposed of said painting in favor of Angie in his will.
+
+Question (2019 BAR)
+
+Q346:
+
+D, an Overseas Filipino Worker, was on his way home to the Philippines after working for so many years in the Middle East. He had saved ₱100,000.00 in his local savings account which he intended to use to start up a business in his home country. On his flight home, tragedy struck as a suicide bomber blew up the plane. All the passengers, including D, died. He left behind his widowed mother M; his common-law wife, W, who is the mother of his twin sons, T and S; and his brother, B. He left no will, no debts, no other relatives, and no other properties except the money in his savings account.
+
+Who are the heirs entitled to inherit from D and how much should each receive? Explain.
+
+Suggested Answer
+
+A346:
+
+D’s heirs entitled to inherit from him are: 
+
+M (his mother) – P50,000 and T and S (his twin sons) – P25,000 each. 
+
+D died intestate and his heirs are the mother (legitimate ascendant) and his twin sons (illegitimate). The mother gets one-half of his estate and his two illegitimate sons get the other half. (Art. 991, NCC)
+
+W, the common-law wife, is not an heir ab intestato because she is not a legal spouse. She is merely a partner in a nonmarital union.
+
+Question (2006 BAR)
+
+Q347:
+
+Don died after executing a Last Will and Testament leaving his estate valued at P12 Million to his commonlaw wife Roshelle. He is survived by his brother Ronie and his half-sister Michelle.
+
+(a) Assuming he died intestate survived by his brother Ronie, his half-sister Michelle, and his legitimate son Jayson, how will you distribute his estate? Explain.
+
+(b) Assuming further he died intestate, survived by his father Juan, his brother Ronie, his half-sister Michelle, and his legitimate son Jayson, how will you distribute his estate? Explain.
+
+Suggested Answer
+
+A347:
+
+(a) Jayson will be entitled to the entire P12 Million as the brother and sister will be excluded by a legitimate son of the decedent. This follows the principle of proximity, where "the nearer excludes the farther."
+
+(b) Jayson will still be entitled to the entire P12 Million as the father, brother and sister will be excluded by a legitimate son of the decedent. (Art. 887, NCC) This follows the principle that the descendants exclude the ascendants from inheritance.
+
+Question (2010 BAR)
+
+Q348:
+
+The Sps. Peter and Paula had three children. Paula later obtained a judgment of nullity of marriage. Their absolute community of property having been dissolved, they delivered P1 million to each of their three children as their presumptive legitimes. Peter later re-married and had two children by his second wife Marie. Peter and Marie, having successfully engaged in business, acquired real properties. Peter later died intestate.
+
+(a) Who are Peter’s legal heirs and how will his estate be divided among them?
+
+(b) What is the effect of the receipt by Peter’s 3 children by his first marriage of their presumptive legitimes on their right to inherit following Peter’s death?
+
+Suggested Answer
+
+A348:
+
+(a) The legal heirs of Peter are his children by the first and second marriages and his surviving second wife. Their shares in the estate of Peter will depend, however, on the cause of the nullity of the first marriage. If the nullity of the first marriage was psychological incapacity of one or both spouses, the three children of that void marriage are legitimate and all of the legal heirs shall share the estate of Peter in equal shares. If the judgment of nullity was for other causes, the three children are illegitimate and the estate shall be distributed such that an illegitimate child of the first marriage shall receive half of the share of a legitimate child of the second marriage, and the second wife will inherit a share equal to that of a legitimate child. In no case may the two legitimate children of the second marriage receive a share less than one-half of the estate which is their legitime. When the estate is not sufficient to pay all the legitimes of the compulsory heirs, the legitime of the spouse is preferred and the illegitimate children suffer the reduction.
+
+(b) In the distribution of Peter’s estate, 1/2 of the presumptive legitime received by the 3 children of the first marriage shall be collated to Peter’s estate and shall be imputed as an advance of their respective inheritance from Peter. Only half of the presumptive legitime is collated to the estate of Peter because the other half shall be collated to the estate of his first wife.
+
+Question (2008, 1998 BAR)
+
+Q349:
+
+F had three (3) legitimate children: A, B, and C. B has one (1) legitimate child X. C has two (2) legitimate children: Y and Z. F and A rode together in a car and perished together at the same time in a vehicular accident, F and A died, each of them leaving substantial estates in intestacy.
+
+(a) Who are the intestate heirs of F? What are their respective fractional shares?
+
+(b) Who are the intestate heirs of A? What are their respective fractional shares?
+
+(c) If B and C both predeceased F, who are F’s intestate heirs? What are their respective fractional shares? Do they inherit in their own right or by representation? Explain your answer.
+
+(d) If B and C both repudiated their shares in the estate of F who are F's intestate heirs? What are their respective fractional shares? Do they inherit in their own right or by representation? Explain your answer.
+
+Suggested Answer
+
+A349:
+
+(a) B = 1/2 ; C= 1/2
+
+(b) Under Art. 1005, NCC, should brothers and sisters survive together with nephews and nieces, who are the children of the decedent’s brothers and sisters of the full blood, the former shall inherit per capita, and the latter per stripes. B and C should inherit both ½ of the whole estate.
+
+(c) Under Art. 982, NCC, the grandchildren and other descendants shall inherit by right of representation, and if any one of them should have died, leaving several heirs, the portion pertaining to him shall be divided among the latter in equal portions. X should inherit 1/2 share by representation of B. Y and Z should inherit 1/4 share each by representation of C.
+
+(d) X inherits 1/3 in his own right; Y inherits 1/3 in his own right; Z inherits 1/3 in his own right; Art. 977 provides that heirs who repudiate their share cannot be represented.
+
+Question (2007 BAR)
+
+Q350:
+
+For purpose of this question, assume all formalities and procedural requirements have been complied with. In 1970, Ramon and Dessa got married. Prior to their marriage, Ramon had a child, Anna. In 1971 and 1972, Ramon and Dessa legally adopted Cherry and Michelle respectively. In 1973, Dessa died while giving birth to Larry Anna had a child, Lia. Anna never married. Cherry, on the other hand, legally adopted Shelly. Larry had twins, Hans and Gretel, with his girlfriend, Fiona. In 2005, Anna, Larry and Cherry died in a car accident. In 2007, Ramon died. Who may inherit from Ramon and who may not? Give your reason briefly.
+
+Suggested Answer
+
+A350:
+
+The following may inherit from Ramon:
+
+1. Michelle, as an adopted child of Ramon, will inherit as a legitimate child of Ramon. As an adopted child, Michelle has all the rights of a legitimate child. (Sec 18, Domestic Adoption Law) 
+
+2. Lia will inherit in representation of Anna. Although Lia is an illegitimate child, she is not barred by Art. 992, NCC because her mother Anna is an illegitimate herself. She will represent Anna as regards Anna's legitime under Art. 902, NCC and as regards Anna's intestate share under Art. 990, NCC.
+
+The following may not inherit from Ramon: 
+
+1. Shelly, being an adopted child, she cannot represent Cherry. This is because adoption creates a personal legal relation only between the adopter and the adopted. The law on representation requires the representative to be a legal heir of the person he is representing and also of the person from whom the person being represented was supposed to inherit. While Shelly is a legal heir of Cherry, Shelly is not a legal heir of Ramon. Adoption created a purely personal legal relation only between Cherry and Shelly.
+
+2. Hans and Gretel are barred from inheriting from Ramon under Art. 992, NCC. Being illegitimate children, they cannot inherit ab intestato from Ramon.
+
+ALTERNATIVE ANSWER:
+
+The problem expressly mentioned the dates of the adoption of Cherry and Michelle as 1971 and 1972. During that time, adoption was governed by the New Civil Code. Under the New Civil Code, husband and wife were allowed to adopt separately or not jointly with the other spouse. And since the problem does not specifically and categorically state, it is possible to construe the use of the word "respectively" in the problem as indicative of the situation that Cherry was adopted by Ramon alone and Michelle was adopted by Dessa alone.
+
+In such case of separate adoption the alternative answer to the problem will be as follows: Only Lia will inherit from Ramon in representation of Ramon's illegitimate daughter Anna. Although Lia is an illegitimate child, she is not barred from inheriting from Ramon because her mother is herself illegitimate. Shelly cannot inherit in representation of Cherry because Shelly is just an adopted child of Cherry.
+
+In representation, the representative must not only be a legal heir of the person he is representing but also of the decedent from whom the represented person is supposed to inherit. In the case of Shelly, while she is a legal heir of Cherry by virtue of adoption, she is not a legal heir of Ramon.
+
+Adoption creates a personal legal relation only between the adopting parent and the adopted child. (Teotico v. Del Val, G.R. No. L-18753, 26 Mar. 1965) Michelle cannot inherit from Ramon, because she was adopted not by Ramon but by Dessa. In the eyes of the law, she is not related to Ramon at all. Hence, she is not a legal heir of Ramon. Hans and Gretel are not entitled to inherit from Ramon, because they are barred by Art. 992 NCC. Being illegitimate children of Larry, they cannot inherit from the legitimate relatives of their father Larry. Ramon is a legitimate relative of Larry who is the legitimate father. (UPLC Suggested Answers)
+
+Question (1993 BAR)
+
+Q351:
+
+A is the acknowledged natural child of B who died when A was already 22 years old. When B's full blood brother, C, died, he (C) was survived by his widow and four children of his other brother D. Claiming that he is entitled to inherit from his father's brother C. A brought suit to obtain his share in the estate of C. Will his action prosper?
+
+Suggested Answer
+
+A351:
+
+NO, the action of A will not prosper. On the premise that B, C and D are legitimate brothers, as an illegitimate child of B, A cannot inherit in intestacy from C who is a legitimate brother of B. Only the wife of C in her own right and the legitimate relatives of C (i.e., the children of D as C's legitimate nephews inheriting as collateral relatives) can inherit in intestacy. (Arts. 992, 1001, 1005, 975, NCC)
+
+Question (2022 BAR)
+
+Q352:
+
+Joey was the legitimate son of Ron and May. Joey died intestate and was survived by his wife Kathy and their two legitimate children, Luis and Clarisse. Several months after Joey died, Ron also died intestate. Ron was survived by his wife May, daughter Mercy (full-sibling of Joey), and the children of Joey (Luis and Clarisse). Distribute the estate of Ron. Explain briefly.
+
+Suggested Answer
+
+A352:
+
+Under the rules on intestate succession, if a widow or widower and legitimate children or descendants are left, the surviving spouse has in the succession the same share as that of each of the children. (Art. 996, NCC). Also under Art. 982, grandchildren and other descendants shall inherit by right of representation. Here, Ron's surviving wife May, his daughter Mercy, and the children of his predeceased son Joey, shall divide the estate in three equal portions. The grandchildren Luis and Clarisse shall inherit by right of representation and will only get the portion pertaining to Joey. (Central Bar Q&A by Paguirigan, 2023)
+
+Question (1996 BAR)
+
+Q353:
+
+Cristina the illegitimate daughter of Jose and Maria, died intestate, without any descendant or ascendant. Her valuable estate is being claimed by Ana, the legitimate daughter of Jose, and Eduardo, the legitimate son of Maria. Is either, both, or neither of them entitled to inherit? Explain.
+
+Suggested Answer
+
+A353:
+
+Neither Ana nor Eduardo is entitled to inherit of ab intestato from Cristina. Both are legitimate relatives of Cristina's illegitimate parents and therefore they fall under the prohibition prescribed by Art. 992. (Manuel v. Ferrer, G.R. No. 117246, 21 Aug. 1995; Diaz v. IAC, G.R. No. L-66574, 21 Feb. 1990)
+
+---
+
+Question (2003, 1998, 1997 BAR)
+
+Q354:
+
+Enrique died, leaving a net hereditary estate of P1.2 million. He is survived by his widow, three legitimate children, two legitimate grandchildren sired by a legitimate child who predeceased him, and two recognized illegitimate children. (a) If Ramon is survived by his wife, three fullblood brothers, two half-brothers, and one nephew (the son of a deceased full-blood brother)? Explain. Distribute the estate in intestacy.
+
+Suggested Answer
+
+A354:
+
+Under the theory of concurrence, the shares are as follows: Having died intestate, the estate of Ramon shall be inherited by his wife and his full and half-blood siblings or their respective representatives. In intestacy, if the wife concurs with no one but the siblings of the husband, all of them are the intestate heirs of the deceased husband. The wife will receive half of the intestate estate, while the siblings or their respective representatives, will inherit the other half to be divided among them equally. If some siblings are of the full-blood and the other of the half blood, a half blood sibling will receive half the share of a full-blood sibling.
+
+The wife of Ramon will, therefore, receive 1/2 of the estate or the amount of P5,000,000.00.
+
+Legitimate child (LC) P200,000 
+Legitimate child P200,000 
+Legitimate child P200,000 
+Legitimate child P0 (predeceased) 
+Legitimate child of D P100,000 (by right of representation) 
+Legitimate child of D P100,000 (by right of representation) 
+Illegitimate child P100,000 (1/2 share of the LC) 
+Illegitimate child P100,000 (1/2 share of the LC) 
+Widow P200,000 (same share as LC)
+
+
+Question (2003 BAR)
+
+Q355:
+
+Luis was survived by two legitimate children, two illegitimate children, his parents, and two brothers. He left an estate of P1 million. Luis died intestate. Who are his intestate heirs, and how much is the share of each in his estate?
+
+Suggested Answer
+
+A355:
+
+The intestate heirs are the two (2) legitimate children and the two (2) illegitimate children. In intestacy the estate of the decedent is divided among the legitimate and illegitimate children such that the share of each illegitimate child is one -half the share of each legitimate child. Their share are: For each legitimate child – P333,333.33 For each illegitimate child – P166, 666.66. (Art. 983, NCC; Art. 176, FC)
+
+
+Question (1999, 1995 BAR)
+
+Q356:
+
+Isidro and Irma, Filipinos, both 18 years of age, were passengers of Flight No. 317 of Oriental Airlines. The plane they boarded was of Philippine registry. While en route from Manila to Greece some passengers hijacked the plane, held the chief pilot hostage at the cockpit and ordered him to fly instead to Libya. During the hijacking Isidro suffered a heart attack and was on the verge of death. Since Irma was already eight months pregnant by Isidro, she pleaded to the hijackers to allow the assistant pilot to solemnize her marriage with Isidro. Soon after the marriage, Isidro expired. As the plane landed in Libya Irma gave birth. However, the baby died a few minutes after complete delivery. Back in the Philippines, Irma Immediately filed a claim for inheritance.
+
+The parents of Isidro opposed her claim contending that the marriage between her and Isidro was void ab initio on the following grounds: (a) they had not given their consent to the marriage of their son; (b) there was no marriage license; (c) the solemnizing officer had no authority to perform the marriage; and, (d) the solemnizing officer did not file an affidavit of marriage with the proper civil registrar. Does Irma have any successional rights at all? Discuss fully.
+
+Suggested Answer
+
+A356:
+
+YES. Irma succeeded to the estate of Isidro as his surviving spouse to the estate of her legitimate child. When Isidro died, he was succeeded by his surviving wife Irma, and his legitimate unborn child. They divided the estate equally between them, the child excluding the parents of Isidro. An unborn child is considered born for all purposes favorable to it provided it is born later. The child was considered born because, having an intra-uterine life of more than seven months, it lived for a few minutes after its complete delivery. It was legitimate because it was born within the valid marriage of the parents. Succession is favorable to it. When the child died, Irma inherited the share of the child.
+
+ALTERNATIVE ANSWER:
+
+If the marriage is void. Irma has no successional rights with respect to Isidro but she would have successional rights with respect to the child. (UPLC Suggested Answers)
+
+
+Question (2004 BAR)
+
+Q357:
+
+Mr. XT and Mrs. YT have been married for 20 years. Suppose the wife, YT, died childless, survived only by her husband, XT. What would be the share of XT from her estate as inheritance? Why? Explain.
+
+Suggested Answer
+
+A357:
+
+Under the NCC, the widow or widower is a legal and compulsory heir of the deceased spouse. If the widow is the only surviving heir, there being no legitimate ascendants, descendants, brothers, and sisters, nephews and nieces, she gets the entire estate. (Art. 995, NCC)
+
+
+Question (1998 BAR)
+
+Q358:
+
+Tessie died survived by her husband Mario, and two nieces, Michelle and Jorelle, who are the legitimate children of an elder sister who had predeceased her. The only property she left behind was a house and lot worth two million pesos, which Tessie and her husband had acquired with the use of Mario's savings from his income as a doctor. How much of the property or its value, if any, may Michelle and Jorelle claim as their hereditary shares?
+
+Suggested Answer
+
+A358:
+
+Art. 1001 of the NCC provides, "Should brothers and sisters or their children survive with the widow or widower, the latter shall be entitled to one-half of the inheritance and the brothers and sisters or their children to the other half." Tessie's gross estate consists of a house and lot acquired during her marriage, making it part of the community property. Thus, one-half of the said property would have to be set aside as Mario's conjugal share from the community property. The other half, amounting to one million pesos, is her conjugal share (net estate), and should be distributed to her intestate heirs. Applying the above provision of law, Michelle and Jorelle, Tessie's nieces, are entitled to one-half of her conjugal share worth one million pesos, or 500,000 pesos, while the other one-half amounting to P500,000 will go to Mario, Tessie's surviving spouse. Michelle and Jorelle are then entitled to P250,000 pesos each as their hereditary share.
+
+
+Question (2004 BAR)
+
+Q359:
+
+A Filipino couple, Mr. and Mrs. BM, Jr., decided to adopt YV, an orphan from St. Claire’s orphanage in New York City. They loved and treated her like a legitimate child for they have none of their very own. However, BM, Jr., died in an accident at sea, followed to the grave a year later by his sick father, BM, Sr. Each left a sizable estate consisting of bank deposits, lands, and buildings in Manila. May the adopted child, YV, inherit from BM, Jr.? May she also inherit from BM, Sr.? Is there a difference? Why? Explain.
+
+Suggested Answer
+
+A359:
+
+YES, YV can inherit from BM, Jr. The succession to the estate of BM, Jr. is governed by Philippine law because he was a Filipino when he died. (Art. 16, NCC) Under Art. 1039 of the NCC, the capacity of the heir to succeed is governed by the national law of the decedent and not by the national law of the heir. Hence, whether or not YV can inherit from BM, Jr. is determined by Philippine law. Under Philippine law, the adopted inherits from the adopter as a legitimate child of the adopter.
+
+YV, however, cannot inherit, in his own right, from the father of the adopter, BM, Sr., because he is not a legal heir of BM, Sr. The legal fiction of adoption exists only between the adopted and the adopter. (Teotico v. Del Val, G.R. No. L18753, 26 Mar. 1965) Neither may he inherit from BM, Sr. by representing BM, Jr. because in representation, the representative must be a legal heir not only of the person he is representing but also of the decedent from whom the represented was supposed to inherit. (Art. 973, NCC)
+
+
+Question (2009 BAR)
+
+Q360:
+
+Four children, namely: Alberto, Baldomero, Caridad, and Dioscoro, were born to the spouses Conrado and Clarita de la Costa. The children’s birth certificates were duly signed by Conrado, showing them to be the couple’s legitimate children. Later, one Edilberto de la Cruz executed a notarial document acknowledging Alberto and Baldomero as his illegitimate children with Clarita. Edilberto died leaving substantial properties. In the settlement of his estate, Alberto and Baldomero intervened claiming shares as the deceased’s illegitimate children. The legitimate family of Edilberto opposed the claim. Are Alberto and Baldomero entitled to share in the estate of Edilberto? Explain.
+
+Suggested Answer
+
+A360:
+
+NO, Alberto and Baldomero are not entitled to share in Edilberto’s estate. They are not related at all to Edilberto. They were born during the marriage of Conrado and Clarita, hence, are considered legitimate children of the said spouses. This status is conferred on them at birth by law. Under Philippine law, a person cannot have more than one natural filiation. The legitimate filiation of a person can be changed only if the legitimate father will successfully impugn such status.
+
+In the problem, therefore, the filiation of Alberto and Baldomero as the legitimate children of Conrado cannot be changed by their recognition by Edilberto as his illegitimate children. Before they can be conferred the status of Edilberto’s illegitimate children, Conrado must first impugn their legitimacy. Since Conrado has not initiated any action to impugn their legitimacy, they continue to be the legitimate children of Conrado. They cannot be the illegitimate children of Edilberto at the same time. Not being the illegitimate children of Edilberto, they have no right to inherit from him.
+
+
+Question (1993 BAR)
+
+Q361:
+
+Maria, to spite her husband Jorge, whom she suspected was having an affair with another woman, executed a will, unknown to him, bequeathing all the properties she inherited from her parents to her sister Miguela. Upon her death, the will was presented for probate. Jorge opposed probate of the will on the ground that the will was executed by his wife without his knowledge, much less consent, and that it deprived him of his legitime. After all, he had given her no cause for disinheritance, added Jorge in his opposition. How will you rule on Jorge's opposition to the probate of Maria's will. If you were the Judge?
+
+Suggested Answer
+
+A361:
+
+As Judge, I shall rule as follows: Jorge's opposition should be sustained in part and denied in part. Jorge's omission as spouse of Maria is not preterition of a compulsory heir in the direct line. Hence, Art. 854 of the NCC does not apply, and the institution of Miguela as heir is valid, but only to the extent of the free portion of one-half. Jorge is still entitled to one-half of the estate as his legitime. (Art. 1001, NCC)
+
+
+Question (2012 BAR)
+
+Q362:
+
+It is a conduct that may consist of giving, doing, or not doing something. 
+A) Obligation 
+B) Juridical necessity 
+C) Prestation 
+D) Contract
+
+Suggested Answer
+
+A362:
+
+(C) Prestation
+
+
+Question (2012 BAR)
+
+Q363:
+
+It is a juridical relation arising from lawful, voluntary and unilateral acts based on the principle that no one should unjustly enrich himself at the expense of another. 
+(a) Quasi-contract 
+(b) Quasi-delict 
+(c) Contract 
+(d) Delict
+
+Suggested Answer
+
+A363:
+
+(a) Quasi-contract.
+
+
+Question (2007 BAR)
+
+Q364:
+
+What are obligations without an agreement”? Give five examples of situations giving rise to this type of obligation.
+
+Suggested Answer
+
+A364:
+
+“Obligations without an agreement” refer to the juridical relation of quasi-contract to the end that no one shall be unjustly enriched or benefited at the expense of another. (Art. 2142, NCC)
+
+First example, is a case of negotiorum gestio, whereby one who voluntarily takes charge of the agency or management of the business or property of another, without any power from the latter, is obliged to continue the same until the termination of the affair and its incidents, or to require the person concerned to substitute him, if the owner is in a position to do so (Art. 2144, NCC).
+
+Second example, a case of solutio indebiti may also give rise to an obligation without an agreement. This refers to the obligation to return which arises when something is received when there is no right to demand it, and it was unduly delivered through mistake. (Art. 2154, NCC)
+
+Third example, is when without the knowledge of the person obliged to give support, it is given by a stranger, the latter shall have a right to claim the same from the former, unless it appears that he gave it out of piety and without intention of being repaid. (Art. 2164, NCC)
+
+Fourth example, is when through an accident or other cause a person is injured or becomes seriously ill, and he is treated or helped while he is not in a condition to give consent to a contract, he shall be liable to pay for the services of the physician or other person aiding him, unless the service has been rendered out or pure generosity. (Art. 2167, NCC)
+
+Fifth instance of an obligation without an agreement is when the person obliged to support an orphan or an insane or other indigent person unjustly refuses to give support to the latter, any third person may furnish support to the needy individual, with right of reimbursement from the person obliged to give support. The provisions of this article apply when the father or mother of a child under 18 years of age unjustly refuses to support him. (Art. 2166, NCC) (UPLC Suggested Answers)
+
+
+Question (2012 BAR)
+
+Q365:
+
+The creditor has the right to the fruits of the thing from the time: 
+(a) the thing is delivered. 
+(b) the obligation to deliver the things arises. 
+(c) the contract is perfected. 
+(d) the fruits are delivered.
+
+Suggested Answer
+
+A365:
+
+(b) the obligation to deliver the things arises.
+
+
+Question (2012 BAR)
+
+Q366:
+
+A debtor is liable for damages in case of delay if he is guilty of any of the following, except: 
+(a) default (mora) 
+(b) mistake 
+(c) negligence (culpa) 
+(d) breach through contravention of the tenor thereof.
+
+Suggested Answer
+
+A366:
+
+(b) mistake.
+
+
+Question (2012 BAR)
+
+Q367:
+
+This term refers to a delay on the part of both the debtor and creditor in reciprocal obligations. 
+(a) Mora accipiendi 
+(b) Mora solvendi 
+(c) Compensatio morae 
+(d) Solutio indebiti.
+
+Suggested Answer
+
+A367:
+
+(c) Compensatio morae
+
+
+Question (2012 BAR)
+
+Q368:
+
+The following are the requisites of mora solvendi, except: 
+(a) Obligation pertains to the debtor and is determinate, due, demandable, and liquidated. 
+(b) Obligation was performed on its maturity date. 
+(c) There is judicial or extrajudicial demand by the creditor. 
+(d) Failure of the debtor to comply with such demand.
+
+Suggested Answer
+
+A368:
+
+(b) Obligation was performed on its maturity date.
+
+
+Question (2012 BAR)
+
+Q369:
+
+It is an intentional evasion of the faithful performance of the obligation. 
+(a) Negligence 
+(b) Fraud 
+(c) Delay 
+(d) Mistake.
+
+Suggested Answer
+
+A369:
+
+(b) Fraud
+
+
+Question (2020-21 BAR)
+
+Q370:
+
+A seller posted an online advertisement for a “fourvolume set of Tolentino’s Commentaries and Jurisprudence on the Civil Code of the Philippines, 100 pesos only.” A bar candidate excitedly ordered it and paid through GCash. However, when the set was delivered, tears started to well in the Bar candidate’s eyes. Much to the Bar candidate’s bewilderment, the author was not Arturo Tolentino, the legal luminary as the candidate was made to expect, but Lorna Tolentino, the noted actor. The Bar candidate believes that the contract of sale should be rescinded and that damages are also proper. Is the Bar candidate's position legally sound? Explain briefly.
+
+Suggested Answer
+
+A370:
+
+NO, the Bar candidate’s position is not legally sound. Rescission or resolution under Art. 1191 of the NCC is a principal remedy in case of breach of a reciprocal obligation. In the case presented, no breach was committed by the seller by posting an online advertisement for the sale of the four-volume set of Tolentino’s book. It was the Bar candidate who assumed that the author of the book was the legal luminary Arturo Tolentino without any representation whatsoever from the online seller. The seller complied with the obligation to deliver the books in accordance with the order of the Bar candidate. To entitle a party to rescind, there must be a substantial breach committed by the other party that goes into the very essence of the contract between them.
+
+Neither could the claim for rescission be grounded on Art. 1381 because it is not based on lesion or economic prejudice, or one entered into in fraud of creditors. The claim for damages is not also sound because to entitle one to damages, there must be a right of action for a legal wrong committed against the claimant. It was incumbent upon the Bar candidate to verify or inquire and not to assume that the book’s author is the legal luminary. (Bar Q&A by Paguirigan, 2023)
+
+
+Question (1991 BAR)
+
+Q371:
+
+Roland, a basketball star, was under contract for one year to play-for-play exclusively for Lady Love, Inc. However, even before the basketball season could open, he was offered a more attractive pay plus fringes benefits by Sweet Taste, Inc. Roland accepted the offer and transferred to Sweet Taste. Lady Love sues Roland and Sweet Taste for breach of contract. Defendants claim that the restriction to play for Lady Love alone is void, hence, unenforceable, as it constitutes an undue interference with the right of Roland to enter into contracts and the impairment of his freedom to play and enjoy basketball. Can Roland be bound by the contract he entered into with Lady Love or can he disregard the same? Is he liable at all? How about Sweet Taste? Is it liable to Lady Love?
+
+Suggested Answer
+
+A371:
+
+YES, Roland is liable under the contract as far as Lady Love is concerned. He is liable for damages under Art. 1170 of the NCC since he contravened the tenor of his obligation. Not being a contracting party, Sweet Taste is not bound by the contract, but it can be held liable under Art. 1314, NCC. The basis of its liability is not prescribed by contract but is founded on quasi-delict, assuming that Sweet Taste knew of the contract. Art. 1314 of the NCC provides that any third person who induces another to violate his contract shall be liable for damages to the other contracting party.
+
+
+Question (1998 BAR)
+
+Q372:
+
+In a 20-year lease contract over a building, the lessee is expressly granted a right of first refusal should the lessor decide to sell both the land and building. However, the lessor sold the property to a third person who knew about the lease and in fact agreed to respect it. Consequently, the lessee brings an action against both the lessor-seller and the buyer (a) to rescind the sale and (b) to compel specific performance of his right of first refusal in the sense that the lessor should be ordered to execute a deed of absolute sale in favor of the lessee at the same price. The defendants contend that the plaintiff can neither seek rescission of the sale nor compel specific performance of a “mere” right of first refusal. Decide the case.
+
+Suggested Answer
+
+A372:
+
+The action filed by the lessee, for both rescission of the offending sale and specific performance of the right of first refusal which was violated, should prosper. The ruling in Equatorial Realty Development, Inc. v. Mayfair Theater, Inc. (G.R. No. 106063, 21 Nov. 1996), a case with similar facts, sustains both rights of action because the buyer in the subsequent sale knew the existence of right of first refusal, hence in bad faith.
+
+
+Question (1996 BAR)
+
+Q373:
+
+In December 1985, Salvador and the Star Semiconductor Company (SSC) executed a Deed of Conditional Sale wherein the former agreed to sell his 2,000 square meter lot in Cainta, Rizal, to the latter for the price of P1,000,000.00, payable P100,000.00 down, and the balance 60 days after the squatters in the property have been removed. If the squatters are not removed within six months, the P100,000.00 down payment shall be returned by the vendor to the vendee.
+
+Salvador filed ejectment suits against the squatters, but in spite of the decisions in his favor, the squatters still would not leave. In August 1986, Salvador offered to return the P100,000.00 down payment to the vendee, on the ground that he is unable to remove the squatters on the property. SSC refused to accept the money and demands that Salvador executed a deed of absolute sale of the property in its favor at which time it will pay the balance of the price. Incidentally, the value of the land had doubled by that time.
+
+Salvador consigned the P100,000.00 in court, and filed an action for rescission of the deed of conditional sale, plus damages. Will the action prosper? Explain.
+
+Suggested Answer
+
+A373:
+
+NO, the action will not prosper. The action for rescission may be brought only by the aggrieved party to the contract. Since it was Salvador who failed to comply with his conditional obligation, he is not the aggrieved party who may file the action for rescission but the SSC. The company, however, is not opting to rescind the contract but has chosen to waive Salvador’s compliance with the condition which it can do under Art. 1545, NCC.
+
+
+Question (1991 BAR)
+
+Q374:
+
+In a deed of sale of realty, it was stipulated that the buyer would construct a commercial building on the lot while the seller would construct a private passageway bordering the lot. The building was eventually finished but the seller failed to complete the passageway as some of the squatters, who were already known to be there at the time they entered into the contract, refused to vacate the premises. In fact, prior to its execution, the seller filed ejectment cases against the squatters. The buyer now sues the seller for specific performance with damages. The defense is that the obligation to construct the passageway should be with a period which, incidentally, had not been fixed by them, hence, the need for fixing a judicial period. Will the action for specific performance of the buyer against the seller prosper?
+
+Suggested Answer
+
+A374:
+
+NO, the action for specific performance filed by the buyer is premature under Art. 1197 of the NCC. If a period has not been fixed although contemplated by the parties, the parties themselves should fix that period, failing in which, the Court may be asked to fix it taking into consideration the probable contemplation of the parties. Before the period is fixed, an action for specific performance is premature.
+
+
+Question (2017, 2012 BAR)
+
+Q375:
+
+Zeny and Nolan were best friends for a long time already. Zeny borrowed P10,000.00 from Nolan, evidenced by a promissory note whereby Zeny promised to pay the loan “once his means permit.” Two months later, they had a quarrel that broke their longstanding friendship. Nolan seeks your advice on how to collect from Zeny despite the tenor of the promissory note. What will your advice be? Explain your answer.
+
+Suggested Answer
+
+A375:
+
+The remedy of Nolan is to go to court and ask that a period be fixed for the payment of debt. Art. 1180 of the NCC provides that when a debtor binds himself to pay when his means permit him to do so, the obligation shall be deemed to be one with a period (suspensive). Art. 1197 of the NCC provides that the courts may fix a period if such was intended from the nature of the obligation and may also fix the duration of the period when such depends on the will of the debtor.
+
+
+Question (2017, 2001, 1998 BAR)
+
+Q376:
+
+Joey, Jovy and Jojo are solidary debtors under a loan obligation of P300,000.00 which has fallen due. The creditor has, however, condoned Jojo's entire share in the debt. Since Jovy has become insolvent, the creditor makes a demand on Joey to pay the debt. (a) How much, if any, may Joey be compelled to pay? (b) To what extent, if at all, can Jojo be compelled by Joey to contribute to such payment?
+
+Suggested Answer
+
+A376:
+
+(a) Joey can be compelled to pay only the remaining balance of P200.000, in view of the remission of Jojo's share by the creditor. (Art. 1219, NCC)
+
+(b) Jojo can be compelled by Joey to contribute P50.000. Art. 1217(3) of the NCC provides. "When one of the solidary debtors cannot, because of his insolvency, reimburse his share to the debtor paying the obligation, such share shall be borne by all his co-debtors, in proportion to the debt of each."
+
+Since the insolvent debtor's share which Joey paid was P100,000, and there are only two remaining debtors namely Joey and Jojo- these two shall share equally the burden of reimbursement. Jojo may thus be compelled by Joey to contribute P50,000.00.
+
+
+Question (2015 BAR)
+
+Q377:
+
+Juancho, Don and Pedro borrowed P150,000.00 from their friend Cita to put up an internet cafe orally promising to pay her the full amount after one year. Because of their lack of business know-how, their business collapsed. Juancho and Don ended up penniless, but Pedro was able to borrow money and put up a restaurant which did well. Can Cita demand that Pedro pay the entire obligation since he, together with the two others, promised to pay the amount in full after one year? Defend your answer.
+
+Suggested Answer
+
+A377:
+
+NO, Cita cannot demand that Pedro pay the entire obligation because the obligation in this case is presumed to be joint. The concurrence of two or more creditors or of two or more debtors in one and the same obligation does not imply that each one of the former has a right to demand, or that each one of the latter is bound to render, entire compliance with the prestation. (Art. 1207, NCC) In a joint obligation, there is no mutual agency among the joint debtors such that if one of them is insolvent the others shall not be liable for his share.
+
+
+Question (2003 BAR)
+
+Q378:
+
+A, B, C, D and E made themselves solidarily indebted to X for the amount of P50,000.00. When X demanded payment from A, the latter refused to pay on the following grounds: 
+a) B is only 16 years old. 
+b) C has already been condoned by X. 
+c) D is insolvent. 
+d) E was given by X an extension of 6 months without the consent of the other four codebtors. 
+State the effect of each of the above defenses put up by A on his obligation to pay X, if such defenses are found to be true.
+
+Suggested Answer
+
+A378:
+
+(a) B is only 16 years old. A may avail the minority of B as a defense, but only for B’s share of P 10,000.00. A solidary debtor may avail himself of any defense which personally belongs to a solidary codebtor, but only as to the share of that co-debtor.
+
+(b) C has already been condoned by X. A may avail of the condonation by X of C’s share of P 10,000.00. A solidary debtor may, in actions filed by the creditor, avail himself of all defenses which are derived from the nature of the obligation and of those which are personal to him or pertain to his own share. With respect to those which personally belong to others, he may avail himself thereof only as regards that part of the debt for which the latter are responsible. (Art. 1222, NCC)
+
+(c) D is insolvent. A may not interpose the defense of insolvency of D as a defense. Applying the principle of mutual guaranty among solidary debtors, A guaranteed the payment of D’s share and of all the other co-debtors. Hence, A cannot avail of the defense of D’s insolvency.
+
+(d) E was given by X an extension of 6 months without the consent of the other four codebtors. The extension of six (6) months given by X to E may be availed of by A as a partial defense but only for the share of E, there is no novation of the obligation but only an act of liberality granted to E alone.
+
+
+Question (2003 BAR)
+
+Q379:
+
+Are the following obligations valid, why, and if they are valid, when is the obligation demandable in each case? 
+(a) If the debtor promises to pay as soon as he has the means to pay; 
+(b) If the debtor promises to pay when he likes; 
+(c) If the debtor promises to pay when he becomes a lawyer; and 
+(d) If the debtor promises to pay if his son, who is sick with cancer, does not die within one year.
+
+Suggested Answer
+
+A379:
+
+(a) YES, The obligation is valid. It is an obligation subject to an indefinite period because the debtor binds himself to pay when his means permit him to do so. (Art. 1180, NCC) When the creditor knows that the debtor already has the means to pay, he must file an action in court to fix the period, and when the definite period as set by the court arrives, the obligation to pay becomes demandable. (Art. 1197, NCC)
+
+(b) NO. The obligation to pay when he likes is a suspensive condition the fulfillment of which is subject to the sole will of the debtor and therefore the conditional obligation is void. (Art. 1182, NCC)
+
+(c) YES, the obligation is valid. It is subject to a suspensive condition, i.e., the future and uncertain event of his becoming a lawyer. The performance of this obligation does not depend solely on the will of the debtor but also on other factors outside the debtor’s control.
+
+(d) YES, the obligation is valid. The death of the son of cancer within one year is made a negative suspensive condition to his making the payment. The obligation is demandable if the son does not die within one year. (Art. 1185, NCC)
+
+
+Question (2001 BAR)
+
+Q380:
+
+Four foreign medical students rented the apartment of Thelma for a period of one year. After one semester, three of them returned to their home country and the fourth transferred to a boarding house. Thelma discovered that they left unpaid telephone bills in the total amount of P80,000.00. The lease contract provided that the lessees shall pay for the telephone services in the leased premises. Thelma demanded that the fourth student pay the entire amount of the unpaid telephone bills, but the latter is willing to pay only one fourth of it. Who is correct? Why?
+
+Suggested Answer
+
+A380:
+
+The fourth student is correct. His liability is only joint, hence, pro rata. There is solidary liability only when the obligation expressly so states or when the law or nature of the obligation requires solidarity. (Art. 1207, NCC) The contract of lease in the problem does not, in any way, stipulate solidarity.
+
+
+Question (2000 BAR)
+
+Q381:
+
+Pedro promised to give his grandson a car if the latter will pass the bar examinations. When his grandson passed the said examinations, Pedro refused to give the car on the ground that the condition was a purely potestative one. Is he correct or not?
+
+Suggested Answer
+
+A381:
+
+NO, he is not correct. First of all, the condition is not purely potestative, because it does not depend on the sole will of one of the parties. Secondly, even if it were, it would be valid because it depends on the sole will of the creditor (the donee) and not of the debtor (the donor).
+
+
+Question (1999 BAR)
+
+Q382:
+
+In 1997, Manuel bound himself to sell Eva a house and lot which is being rented by another person, if Eva passes the 1998 bar examinations. Luckily for Eva, she passed said examinations. (a) Suppose Manuel had sold the same house and lot to another before Eva passed the 1998 bar examinations, is such sale valid? Why? (b) Assuming that it is Eva who is entitled to buy said house and lot, is she entitled to the rentals collected by Manuel before she passed the 1998 bar examinations? Why?
+
+Suggested Answer
+
+A382:
+
+(a) YES, the sale to the other person is valid. However, the buyer acquired the property subject to a resolutory condition of Eva passing the 1998 Bar Examinations. Hence, upon Eva's passing the Bar, the rights of the other buyer terminated, and Eva acquired ownership of the property.
+
+ALTERNATIVE ANSWER: 
+
+YES, the sale to the other person is valid, as the contract between Manuel and Eva is a mere promise to sell and Eva has not acquired a real right over the land assuming that there is a price stipulated in the contract for the contract to be considered a sale and there was delivery or tradition of the thing sold.
+
+(b) NO, she is not entitled to the rentals collected by Manuel because at the time they accrued and were collected, Eva was not yet the owner of the property.
+
+
+Question (1997 BAR)
+
+Q383:
+
+In two separate documents signed by him, Juan Valentino "obligated" himself each to Maria and to Perla, thus – 'To Maria, my true love, I obligate myself to give you my one and only horse when I feel like It." - and – 'To Perla, my true sweetheart, I obligate myself to pay you the P500.00 I owe you when I feel like it."
+
+Months passed but Juan never bothered to make good his promises. Maria and Perla came to consult you on whether or not they could recover on the basis of the foregoing settings. What would your legal advice be?
+
+Suggested Answer
+
+A383:
+
+I would advise Maria not to bother running after Juan for the latter to make good his promise. This is because a promise is not an actionable wrong that allows a party to recover especially when she has not suffered damages resulting from such promise. A promise does not create an obligation on the part of Juan because it is not something which arises from a contract, law, quasi-contracts or quasidelicts. (Art, 1157, NCC) Under Art. 1182, NCC, Juan's promise to Maria is void because a conditional obligation depends upon the sole will of the obligor. As regards Perla, the document is an express acknowledgment of a debt, and the promise to pay what he owes her when he feels like it is equivalent to a promise to pay when his means permits him to do so, and is deemed to be one with an indefinite period under Art. 1180, NCC. Hence the amount is recoverable after Perla asks the court to set the period as provided by Art. 1197(2), NCC.
+
+
+Question (1992 BAR)
+
+Q384:
+
+In June 1988, X obtained a loan from A and executed with Y as solidary co-maker a promissory note in favor of A for the sum of P200,000.00. The loan was payable at P20,000.00 with interest monthly within the first week of each month beginning July 1988 until maturity in April 1989. To secure the payment of the loan, X put up as security a chattel mortgage on his car, a Toyota Corolla sedan. Because of failure of X and Y to pay the principal amount of the loan, the car was extrajudicially foreclosed. A acquired the car at A’s highest bid of P120,000.00 during the auction sale. After several fruitless letters of demand against X and Y, A sued Y for the discovery of P80,000.00 constituting the deficiency. Y resisted the suit raising the following defenses: Decide the defense with reasons. (a) That Y should not be liable at all because X was not sued together with Y. (b) That the obligation has been paid completely by A’s acquisition of the car through “dacion en pago” or payment by cession. (c) That Y should not be held liable for the deficiency of P80,000.00 because he was not a co-mortgagor in the chattel mortgage of the car, which contract was executed by X alone as owner and mortgagor. (d) That assuming he is liable, he should only pay the proportionate sum of P40,000.00.
+
+Suggested Answer
+
+A384:
+
+(a) The first defense of Y is untenable. Y is still liable as solidary debtor. The creditor may proceed against any one of the solidary debtors. The demand against one does not preclude further demand against the others so long as the debt is not fully paid.
+
+(b) The second defense of Y is untenable. Y is still liable. The chattel mortgage is only given as security and not as payment for the debt in case of failure to pay. Y as a solidary co-maker is not relieved of further liability on the promissory note as a result of the foreclosure of the chattel mortgage.
+
+(c) The third defense of Y is untenable. Y is a surety of X and the extrajudicial demand against the principal debtor is not inconsistent with a judicial demand against the surety. A suretyship may co-exist with a mortgage.
+
+(d) The fourth defense is untenable. Y is liable for the entire prestation since Y incurred a solidary obligation with X.
+
+
+Question (2013 BAR)
+
+Q385:
+
+Gary is a tobacco trader and also a lending investor. He sold tobacco leaves to Homer for delivery within a month, although the period for delivery was not guaranteed. Despite Gary's efforts to deliver on time, transportation problems and government red tape hindered his efforts and he could only deliver after 30 days. Homer refused to accept the late delivery and to pay on the ground that the agreed term had not been complied with.
+
+As lending investor, Gary granted a P1,000,000 loan to Isaac to be paid within two years from execution of the contract. As security for the loan, Isaac promised to deliver to Gary his Toyota Innova within seven (7) days, but Isaac failed to do so. Gary was thus compelled to demand payment for the loan before the end of the agreed two-year term.
+
+1. Was Homer justified in refusing to accept the tobacco leaves? 
+(A) Yes. Homer was justified in refusing to accept the tobacco leaves. The delivery was to be made within a month. Gary's promise of delivery on a "best effort" basis made the delivery uncertain. The term, therefore, was ambiguous. 
+(B) No. Homer was not justified in refusing to accept the tobacco leaves. He consented to the terms and conditions of the sale and must abide by it. Obligations arising from contract have the force of law between the contracting parties. 
+(C) Yes. Homer was justified in his refusal to accept the delivery. The contract contemplates an obligation with a term. Since the delivery was made after 30 days, contrary to the terms agreed upon, Gary could not insist that Homer accept the tobacco leaves. 
+(D) No. Homer was not justified in refusing to accept the tobacco leaves. There was no term in the contract but a mixed condition. The fulfillment of the condition did not depend purely on Gary's will but on other factors, e.g., the shipping company and the government. Homer should comply with his obligation.
+
+2. Can Gary compel Isaac to pay his loan even before the end of the two-year period? 
+(A) Yes, Gary can compel Isaac to immediately pay the loan. Non-compliance with the promised guaranty or security renders the obligation immediately demandable. Isaac lost his right to make use of the period. 
+(B) Yes, Gary can compel Isaac to immediately pay the loan. The delivery of the Toyota Innova is a condition for the loan. Isaac's failure to deliver the car violated the condition upon which the loan was granted. It is but fair for Gary to demand immediate payment. 
+(C) No, Gary cannot compel Isaac to immediately pay the loan. The delivery of the car as security for the loan is an accessory contract; the principal contract is still the P 1,000,000 loan. Thus, Isaac can still make use of the period. 
+(D) No, Gary cannot compel Isaac to immediately pay the loan. Equity dictates that Gary should have granted a reasonable extension of time for Isaac to deliver his Toyota Innova. It would be unfair and burdensome for Isaac to pay the P1,000,000 simply because the promised security was not delivered.
+
+Suggested Answer
+
+A385:
+
+1. (B) (obligations arising from contracts have the force of law) or (D) (the obligation is not with the term but with a mixed condition – although the facts are not clear enough if it was stated in the contract that the other factors like transportation or government regulations would be a factor)
+
+2. (A) - Art. 1198, NCC. Isaac lost his right to make use of the period because he failed to furnish the guaranty or security in consideration of which Gary agreed to the period.
+
+
+Question (2018 BAR)
+
+Q386:
+
+Samantha sold all her business interest in a sole proprietorship to Sergio for the amount of Php 1 million. Under the sale agreement, Samantha was supposed to pay for all prior unpaid utility bills incurred by the sole proprietorship. A month after the Contract to Sell was executed, Samantha still had not paid the PhP50,000 electricity bills incurred prior to the sale. Since Sergio could not operate the business without electricity and the utility company refused to restore electricity services unless the unpaid bills were settled in full, Sergio had to pay the unpaid electricity bills. When the date for payment arrived, Sergio only tendered Php 950,000 representing the full purchase price, less the amount he paid for the unpaid utility bills. Samantha refused to accept the tender on the ground that she was the one supposed to pay the bills and Sergio did not have authorization to pay on her behalf.
+
+(a) What is the effect of payment made by Sergio without the knowledge and consent of Samantha. (b) Is Samantha guilty of mora accipiendi?
+
+Suggested Answer
+
+A386:
+
+(a) The payment by Sergio resulted in the extinguishment of the obligation of Samantha to the utility company and Sergio was legal subrogated to the utility company’s credit. Sergio, thus, became Samantha’s new creditor. Under Art. 1302(3), NCC, it is presumed that there is legal subrogation when, even without the knowledge of the debtor, a person interested in the fulfillment of the obligation pays, without prejudice to the effects of confusion as to the latter's share. A person interested in the fulfillment is one who will benefit from the extinguishment of the obligation. Here, Sergio is an interested person since he was the business successor-ininterest of the Samantha and he cannot conduct his business without paying the debtor of Samantha. Since there is legal subrogation, Sergio stepped into the shoes of the utility company as the new creditor to the P50,000 credit; thus, there can be valid legal compensation of the two credits between him and Samantha who are principally debtors and creditors of each other up to the concurrent amount of P50,000. (Art. 1279, NCC)
+
+(b) YES, Samantha is guilty of mora accipiendi. The requisites for mora accipiendi are: (i) offer of performance by the debtor; (ii) offer must be to comply with prestation as it should be performed; and (iii) the creditor refuses to accept the performance without just cause. Here, Sergio validly made an offer to comply with the prestation of payment, albeit for P950,000 only. Sergio’s offer is justified based on the concept of partial legal compensation up to the amount of P50,000, since Sergio and Samantha are in their own right principal debtors and creditors of each other. Samantha’s refusal was without just cause as she cannot be permitted to benefit or use as a defense her own failure to fulfill her part of the obligation to pay the electricity bills.
+
+
+Question (2016 BAR)
+
+Q387:
+
+Butch got a loan from Hagibis Corporation (Hagibis) but he defaulted in the payment. A case for collection of a sum of money was filed against him. As a defense, Butch claims that there was already an arrangement with Hagibis on the payment of the loan. To implement the same, Butch already surrendered 5 service utility vehicles (SUVs) to the company for it to sell and the proceeds to be credited to the loan as payment. Was the obligation of Butch extinguished by reason of dacion en pago upon the surrender of the SUVs? Decide and explain.
+
+Suggested Answer
+
+A387:
+
+NO, the obligation of Butch to Hagibis was not extinguished by the mere surrender of the SUV’s to the latter. Dation in payment, whereby property is alienated to the creditor in satisfaction of a debt in money, shall be governed by the law on sales. (Art. 1245, NCC) In dacion en pago, as a special mode of payment, the debtor offers another thing to the creditor who accepts it as equivalent of payment of an outstanding debt. The undertaking really partakes in one sense of the nature of sale, that is, the creditor is really buying the thing or property of the debtor, payment for which is to be charged against the debtor’s debt. As such, the essential elements of a contract of sale, namely, consent, object certain, and cause or consideration must be present. In dacion en pago, there is in reality an objective novation of the obligation where the thing offered as an accepted equivalent of the performance of an obligation is considered as the object of the contract of sale, while the debt is considered as the purchase price. In any case, common consent is an essential pre-requisite, be it sale or innovation to have the effect of totally extinguishing the debt or obligation. (Filinvest Credit Corporation v. Philippine Acetylene Company, G.R. No. L-50449, 30 Jan. 1982) There being no mention in the facts that Hagibis has given its consent to accept the SUCs as equivalent payment, the obligation of Butch is not thereby extinguished be mere delivery of the SUVs.
+
+
+Question (2011 BAR)
+
+Q388:
+
+Allan bought Billy’s property through Carlos, an agent empowered with a special power of attorney (SPA) to sell the same. When Allan was ready to pay as scheduled, Billy called, directing Allan to pay directly to him. On learning of this, Carlos, Billy's agent, told Allan to pay through him as his SPA provided and to protect his commission. Faced with two claimants, Allan consigned the payment in court. Billy protested, contending that the consignation is ineffective since no tender of payment was made to him. Is he correct? 
+(A) No, since consignation without tender of payment is allowed in the face of the conflicting claims on the plaintiff. 
+(B) Yes, as owner of the property sold, Billy can demand payment directly to himself. 
+(C) Yes, since Allan made no announcement of the tender. 
+(D) Yes, a tender of payment is required for a valid consignation.
+
+Suggested Answer
+
+A388:
+
+(A) No, since consignation without tender of payment is allowed in the face of the conflicting claims on the plaintiff.
+
+
+Question (2015 BAR)
+
+Q389:
+
+X, a dressmaker, accepted clothing materials from Karla to make two dresses for her day. On the X was supposed to deliver Karla's dresses, X called up Karla to say that she had an urgent matter to attend to and will deliver them the next day. That night, however, a robber broke into her shop and took everything including Karla's two dresses. X claims she is not liable to deliver Karla's dresses or to pay for the clothing materials considering she herself was a victim of the robbery which was a fortuitous event and over which she had no control. Do you agree? Why?
+
+Suggested Answer
+
+A389:
+
+NO, I do not agree with the contention of X. The law provides that except when it is otherwise declared by stipulation or when the law provides or the nature of the obligation requires the assumption of risk, no person shall be liable for those events which could not be foreseen or which though foreseen were inevitable. (Art. 1174, NCC) In the case presented, X cannot invoke fortuitous event as a defense because she had already incurred in delay at the time of the occurrence of the loss. (Art. 1165, NCC)
+
+
+Question (2008 BAR)
+
+Q390:
+
+AB Corp. entered into a contract with XY Corp. whereby the former agreed to construct the research and laboratory facilities of the latter. Under the terms of the contract, AB Corp. agreed to complete the facility in 18 months, at the total contract price of P10 million. XY Corp. paid 50% of the total contract price, the balance to be paid upon completion of the work. The work started immediately, but AB Corp. later experienced work slippage because of labor unrest in his company. AB Corp.’s employees claimed that they are not being paid on time; hence, the work slowdown. As of the 17th month, work was only 45% completed. AB Corp. asked for extension of time, claiming that its labor problems is a case of fortuitous event, but this was denied by XY Corp. When it became certain that the construction could not be finished on time, XY Corp. sent written notice canceling the contract, and requiring AB Corp. to immediately vacate the premises. 
+a) Can the labor unrest be considered a fortuitous event? 
+b) Must AB Corp. return the 50% down payment?
+
+Suggested Answer
+
+A390:
+
+a) NO, Labor unrest is not a fortuitous event that will excuse AB Corp. from complying with its obligation of constructing the research and laboratory facilities of XY Corporation. The labor unrest, which may even be attributed in large part to AB Corporation itself, is not the direct cause of noncompliance by AB Corporation. It is independent of its obligation. It is similar to the failure of a DBP borrower to pay her loan just because her plantation suffered losses due to the cadang-cadang disease. It does not excuse compliance with the obligation. (DBP v. Vda. de Moll, G.R. No. L- 25802, 31 Jan. 1972)
+
+b) NO, under the principle of quantum meruit, AC Corp. has the right to retain payment corresponding to his percentage of accomplishment less the amount of damages suffered by XY Corp. because of the delay or default.
+
+
+Question (2002 BAR)
+
+Q391:
+
+A van owned by Orlando and driven by Diego, while negotiating a downhill slope of a city road, suddenly gained speed, obviously beyond the authorized limit in the area, and bumped a car in front of it, causing severe damage to the care and serious injuries to its passengers. Orlando was not in the car at the time of the incident. The car owner and the injured passengers sued Orlando and Diego for damages caused by Diego’s negligence. In their defense, Diego claims that the downhill slope caused the van to gain speed and that, as he stepped on the brakes to check the acceleration, the brakes locked, causing the van to go even faster and eventually to hit the car in front of it. Orlando and Diego contend that the sudden malfunction of the van’s brake system is a fortuitous even and that, therefore, they are exempt from any liability. Is this contention tenable? Explain.
+
+Suggested Answer
+
+A391:
+
+NO. Mechanical defects of a motor vehicle do not constitute fortuitous event, since the presence of such defects would have been readily detected by diligent maintenance check. The failure to maintain the vehicle in safe running condition constitutes negligence.
+
+
+Question (2000 BAR)
+
+Q392:
+
+Arturo borrowed P500,000.00 from his father. After he had paid P300,000.00, his father died. When the administrator of his father's estate requested payment of the balance of P200,000.00. Arturo replied that the same had been condoned by his father as evidenced by a notation at the back of his check payment for the P300,000.00 reading: “In full payment of the loan.” Will this be a valid defense in an action for collection?
+
+Suggested Answer
+
+A392:
+
+It depends. If the notation "in full payment of the loan" was written by Arturo's father, there was an implied condonation of the balance that discharges the obligation. In such case, the notation is an act of the father from which condonation may be inferred. The condonation being implied, it need not comply with the formalities of a donation to be effective. The defense of full payment will, therefore, be valid. When, however, the notation was written by Arturo himself. It merely proves his intention in making that payment but in no way does it bind his father. (Yam v. Court of Appeals, G.R No. 104726, 11 Feb. 1999) In such case, the notation was not the act of his father from which condonation may be inferred. There being no condonation at all, the defense of full payment will not be valid.
+
+
+Question (2019 BAR)
+
+Q393:
+
+In light of a new business venture, Mr. A entered into a lease contract with Mr. B involving one of the latter's warehouses. One day, Mr. B, who was then encountering financial difficulties, approached Mr. A and sought for a loan, which Mr. A readily granted to him. In order to secure the loan obligation, Mr. B mortgaged the leased warehouse in favor of Mr. A. In addition, Mr. B executed a promissory note in favor of A, wherein prior demand was waived by him.
+
+When Mr. B defaulted on his loan obligation, Mr. A simply stopped paying rentals due to Mr. B on the ground that legal compensation had already set in up to the concurrent amount. Furthermore, since there was still a balance due on the promissory note, Mr. A foreclosed the real estate mortgage over Mr. B's property, without any prior demand furnished to Mr. B.
+
+Aggrieved, Mr. B opposed the foreclosure due to the lack of prior demand, contending that the waiver of prior demand was stipulated in the promissory note and not in the mortgage instrument. Mr. B likewise argued that when Mr. A invoked legal compensation between the unpaid rentals and the loan arrearages, it amounted to a novation that resulted in the extinguishment of the loan contract between them. As such, the real estate mortgage, being a mere accessory contract to the principal loan, was necessarily extinguished. 
+a. May Mr. A validly claim legal compensation? Explain. 
+b. May Mr. A validly foreclose on the real estate mortgage even without prior demand to Mr. B? Explain. 
+c. Is Mr. B's claim of novation correct? Explain.
+
+Suggested Answer
+
+A393:
+
+a. YES, A may validly claim partial legal compensation against B with respect to the unpaid rentals and the sum due from B under the promissory note. The law provides that when all the requisites for legal compensation are present, it takes place by operation of law and extinguishes both debts to the concurrent amount, even if the creditor and debtor are not aware of the compensation. (Arts 1279 & 1290, NCC) Here, A and B are mutual creditor and debtor of each other; both debts consists in the payment of money; both debts are due, liquidated and demandable; and there is no retention or controversy commenced by third persons and communicated in due time to either A or B. Thus, all the requisites of legal compensation are present. (Central Bar Q&A by Paguirigan, 2023)
+
+b. YES, A may validly foreclose without the need of prior demand. The general rule is that there must be a demand to put the debtor in default. However, one of the recognized exceptions to the necessity of demand before default may set in is if the obligation or law expressly so states that demand is not necessary. (Art. 1169, NCC) Based on the promissory note executed by B, he expressly waived need of demand. Thus, when B failed to pay the amounts due under the note, A has the right to foreclose the mortgage without prior demand. (Cabanting v. BPI, G.R. No. 201927, 17 Feb. 2016) (Central Bar Q&A by Paguirigan, 2023)
+
+c. NO, B's claim of novation is not correct. Novation requires the following requisites: (1) a previous valid obligation; (2) the agreement of all the parties to the new contract; (3) the extinguishment of the old contract; and (4) validity of the new one. There must be consent of all the parties to the substitution, resulting in the extinction of the old obligation and the creation of a valid new one. (CCC Insurance Corporation vs. Kawasaki Steel Corporation and Manacop, G.R. No. 156162, 22 June 2015) There was no new contract entered into between A and B which precludes the occurrence of novation. Instead, what occurred here is partial compensation. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2009 BAR)
+
+Q394:
+
+Sarah had a deposit in a savings account with Filipino Universal Bank in the amount of P5,000,000.00. To buy a new car, she obtained a loan from the same bank in the amount of P1,200,000.00, payable in 12 monthly installments. Sarah issued in favor of the bank postdated checks, each in the amount of P100,000.00, to cover the 12 monthly installment payments. On the third, fourth and fifth months, the corresponding checks bounced. The bank then declared the whole obligation due, and proceeded to deduct the amount of P1,000,000.00 from Sarah’s deposit after notice to her that this is a form of compensation allowed by law. Is the bank correct? Explain.
+
+Suggested Answer
+
+A394:
+
+NO, the bank is not correct. While the Bank is correct about the applicability of compensation, it was not correct as to the amount compensated. A bank deposit is a contract of loan, where the depositor is the creditor and the bank the debtor. Since Sarah is also the debtor of the bank with respect to the loan, both are mutually principal debtors and creditors of each other. Both obligations are due, demandable and liquidated but only up to the extent of P300,000.00 (covering the unpaid third, fourth and fifth monthly installments). The entire 1 million was not yet due because the loan has no acceleration clause in case of default. And since there is no retention or controversy commenced by third person and communicated in due time to the debtor, then all the requisites of legal compensation are present but only up to the amount of P300,000.00. The bank, therefore, may deduct P300,000.00 from Sarah’s bank deposit by way of compensation.
+
+
+Question (2002, 1998 BAR)
+
+Q395:
+
+Stockton is a stockholder of Core Corp. He desires to sell his shares in Core Corp. In view of a court suit that Core Corp. has filed against him for damages in the amount of P10 million, plus attorney’s fees of P1 million, as a result of statements published by Stockton which are allegedly defamatory because it was calculated to injure and damage the corporation’s reputation and goodwill. The articles of incorporation of Core Corp. provide for a right of first refusal in favor of the corporation. Accordingly, Stockton gave written notice to the corporation of his offer to sell his shares of P10 million. The response of Core corp. was an acceptance of the offer in the exercise of its rights of first refusal, offering for the purpose payment in form of compensation or set-off against the amount of damages it is claiming against him, exclusive of the claim for attorney’s fees. Stockton rejected the offer of the corporation, arguing that compensation between the value of the shares and the amount of damages demanded by the corporation cannot legally take effect. Is Stockton correct? Give reason for your answer.
+
+Suggested Answer
+
+A395:
+
+Stockton is correct. There is no right of compensation between his price of P10 million and Core Corp.’s unliquidated claim for damages. In order that compensation may be proper, the two debts must be liquidated and demandable. The case for the P10 million damages being still pending in court, the corporation has as yet no claim which is due and demandable against Stockton.
+
+
+Question (1998 BAR)
+
+Q396:
+
+X, who has a savings deposit with Y Bank in the sum of P1,000,000.00, incurs a loan obligation with the said Bank in the sum of P800,000.00 which has become due. When X tries to withdraw his deposit, Y Bank allows only P200,000.00 to be withdrawn, less service charges, claiming that compensation has extinguished its obligation under the savings account to the concurrent amount of X’s debt. X contends that compensation is improper when one of the debts, as here, arises from a contract of deposit. Assuming that the promissory note signed by X to evidence the loan does not provide for compensation between said loan and his savings deposit, who is correct?
+
+Suggested Answer
+
+A396:
+
+Y bank is correct. Art. 1287, NCC, does not apply. All the requisites of Art. 1279, NCC are present. In the case of Gullas vs. PNB (G.R. No. L-43191, 13 Nov. 1935), the Supreme Court held: “The Civil Code contains provisions regarding compensation (set off) and deposit. These portions of Philippine law provide that compensation shall take place when two persons are reciprocally creditor and debtor of each other. In this connection, it has been held that the relation existing between a depositor and a bank is that of creditor and debtor. xxx As a general rule, a bank has a right of set off of the deposits in its hands for the payment of any indebtedness to it on the part of a depositor.” Hence, compensation took place between the mutual obligations of X and Y bank.
+
+
+Question (2016 BAR)
+
+Q397:
+
+Jerico, the project owner, entered into a Construction Contract with Ivan for the latter to construct his house. Jojo executed a Surety undertaking to guarantee the performance of the work by Ivan. Jerico and Ivan later entered into a Memorandum of Agreement (MOA) revising the work schedule of Ivan and the subcontractors. The MOA stated that all the stipulations of the original contract not in conflict with said agreement shall remain valid and legally effective. Jojo filed a suit to declare him relieved of his undertaking as a result of the MOA because of the change in the work schedule. Jerico claims there is no novation of the Construction Contract. Decide the case and explain.
+
+Suggested Answer
+
+A397:
+
+I will decide in favor of Jerico as there is no novation of the Construction Contract. Novation is never presumed and may only take place when the following are present: (1) a previous valid obligation; (2) the agreement of all the parties to the new contract; (3) the extinguishment of the old contract; (4) validity of the new one. There must be consent of all the parties to the substitution, resulting in the extinction of the old obligation and the creation of a new valid one. In this case, the revision of the work schedule of Ivan and the subcontractors is not shown to be so substantial as to extinguish the old contract, and there was also no irreconcilable incompatibility between the old and new obligations. It has also been held in jurisprudence that a surety may only be relieved of his undertaking if there is a material change in the principal contract and such would make the obligation of the surety onerous. The principal contract subject of the surety agreement still exists, and Jojo is still bound as a surety.
+
+ALTERNATIVE ANSWER:
+
+I will decide against Jerico. The provisions of the NCC on Guarantee, other than the benefit of excussion (Art. 2059, NCC), are applicable and available to the surety because a surety is a guarantor who binds himself solidarily. (Art. 2047(2), NCC) The Supreme Court has held that there is no reason why the provisions of Art. 2079 would not apply to a surety. (Autocorp Group v. Intra Strata Assurance Corporation, G.R. No. 166662, 27 June 2008) Art. 2079 of the NCC provides that an extension granted to the debtor by the creditor without the consent of the guarantor extinguishes the guaranty. The changes in the work schedule amount to an extension granted the debtor without the consent of the surety. Hence, Jojo’s obligation as a surety is extinguished.
+
+
+Question (1994 BAR)
+
+Q398:
+
+In 1978, Bobby borrowed P1,000,000.00 form Chito payable in 2 years. The loan, which was evidenced by a promissory note, was secured by a mortgage on real property. No action was filed by Chito to collect the loan or to foreclose the mortgage. But in 1991, Bobby, without receiving any amount from Chito, executed another promissory note, except for the date thereof, which was the date of its execution. (a) Can Chito demand payment on the 1991 promissory note in 1994? (b) Can Chito foreclose the real estate mortgage if Bobby fails to make good his obligation under the 1991 promissory note?
+
+Suggested Answer
+
+A398:
+
+(a) YES, Chito can demand payment on the 1991 promissory note in 1994. Although the 1978 promissory note for P1 million payable two years later or in 1980 became a natural obligation after the lapse of 10 years, such natural obligation can be a valid consideration of a novated promissory note dated in 1991 and payable two years later, or in 1993. All the elements of an implied real novation are present: a) An old valid obligation; b) A new valid obligation; c) Capacity of the parties; d) Animus novandi or intention to novate; and e) The old and the new obligation should be incompatible with each other on all material points. (Art. 1292) The two promissory notes cannot stand together, hence, the period of prescription of 10 years has not yet lapsed.
+
+(b) NO. The mortgage being an accessory contract prescribed with the loan. The novation of the loan, however, did not expressly include the mortgage, hence, the mortgage is extinguished under Art. 1296 of the NCC. The contract has been extinguished by the novation or extinction of the principal obligation insofar as third parties are concerned.
+
+
+Question (2014 BAR)
+
+Q399:
+
+J.C. Construction bought steel bars from Matibay Steel Industries (MSI) which is owned by Buddy Batungbacal. J.C. failed to pay the purchased materials worth P500,000.00 on due date. J.C. persuaded its client Amoroso with whom it had receivables to pay its obligation to MSI. Amoroso agreed and paid MSI the amount of P50,000.00. After two (2) other payments, Amoroso stopped making further payments. Buddy filed a complaint for collection of the balance of the obligation and damages against J.C. J.C. denied any liability claiming that its obligation was extinguished by reason of novation which took place when MSI accepted partial payments from Amoroso on its behalf. Was the obligation of J.C. Construction to MSI extinguished by novation? Why?
+
+Suggested Answer
+
+A399:
+
+NO, the obligation of JC was not extinguished by novation. Novation may either be objective or subjective. Subjective novation takes place by the substitution of debtor or subrogation of a third person to the rights of the creditor. Novation by substituting a new debtor may take place even without the knowledge or against the will of the original debtor but not without the consent of the creditor. Moreover, novation must be expressed and it cannot be implied and there must be an agreement that the old obligation is extinguished. In the case of JC, it does not appear that MSI had agreed to release JC from the obligation. Hence, the obligation of JC was not extinguished.
+
+
+Question (2001 BAR)
+
+Q400:
+
+The sugar cane planters of Batangas entered into a long-term milling contract with the Central Azucarera de Don Pedro Inc. 10 years later, the Central assigned its rights to the said milling contract to a Taiwanese group which would take over the operations of the sugar mill. The planters filed an action to annul the said assignment on the ground that the Taiwanese group was not registered with the Board of Investments. Will the action prosper or not? Explain briefly.
+
+Suggested Answer
+
+A400:
+
+The action will prosper not on the ground invoked but on the ground that the farmers have not given their consent to the assignment. The milling contract imposes reciprocal obligations on the parties. The sugar central has the obligation to mill the sugar cane of the farmers while the latter have the obligation to deliver their sugar cane to the sugar central. As to the obligation to mill the sugar cane, the sugar central is a debtor of the farmers. In assigning its rights under the contract, the sugar central will also transfer to the Taiwanese its obligation to mill the sugar cane of the farmers. This will amount to a novation of the contract by substituting the debtor with a third party. Under Art. 1293 of the NCC, such substitution cannot take effect without the consent of the creditor. The former, who are creditors as far as the obligation to mill their sugar cane is concerned, may annul such assignment for not having given their consent thereto.
+
+
+Question (1996 BAR)
+
+Q401:
+
+Baldomero leased his house with a telephone to Jose. The lease contract provided that Jose shall pay for all electricity, water and telephone services in the leased premises during the period of the lease. Six months later, Jose surreptitiously vacated the premises. He left behind unpaid telephone bills for overseas telephone calls amounting to over P20,000.00. Baldomero refused to pay the said bills on the ground that Jose had already substituted him as the customer of the telephone company. The latter maintained that Baldomero remained as his customer as far as their service contract was concerned, notwithstanding the lease contract between Baldomero and Jose. Who is correct, Baldomero or the telephone company? Explain.
+
+Suggested Answer
+
+A401:
+
+The telephone company is correct because as far as it is concerned, the only person it contracted with was Baldomero. The telephone company has no contract with Jose. Baldomero cannot substitute Jose in his stead without the consent of the telephone company. (Art. 1293, NCC) Baldomero is, therefore, liable under the contract.
+
+
+Question (2022 BAR)
+
+Q402:
+
+Gio, single, joined a marathon organized by Takbo Co. For lack of alternative routes, the marathon course included a public road which was not blocked-off from vehicles. Takbo Co. solicited the sponsorship of Kotse Corp. for added financial support. Gio was hit by a jeepney driven by JD on the public road and died. The parents of Gio sued Takbo Co. and Kotse Corp. for damages. The court ruled that Kotse Corp. is solidarily liable for damages with Takbo Co. for being one of the principal movers of the event due to its sponsorship. Is the court correct? Explain briefly.
+
+Suggested Answer
+
+A402:
+
+NO, PIC is not correct. PIC here is claiming the right which Anj originally had against the person causing the damage and such cause of action is based on a quasi-delict. Actions based on a quasi- delict must be instituted within a period of four years which must be reckoned from the time of the commission of the tort. (Art. 1146, NCC) On the other hand, subrogation transfers to the person subrogated the credit with all the rights thereto appertaining, either against the debtor or against third persons. (Art. 1303, Civil Code) Following the principles of subrogation, PIC, as the insurer, only steps into the shoes of the insured Anj and therefore, for purposes of prescription, inherits only the remaining period within which the insured may file an action against the wrongdoer. The indemnification of the insured by the insurer only allows it to be subrogated to the former's rights and does not create a new reckoning point for the cause of action that the insured originally has against the wrongdoer. (Henson vs. UCPB General Insurance, G.R. No. 223134, 14 Aug. 2019) Thus, since the quasi-delict was committed in 2014, PIC's action against Leon should have been filed within four years and the action filed in 2022 was filed out of time. (Central Bar Q&A by Paguirigan, 2022)
+
+
+Question (2012 BAR)
+
+Q403:
+
+Briefly explain whether the following contracts are valid, rescissible, unenforceable, or void: (a) A contract of sale between Lana and Andy wherein 16-year old Lana agreed to sell her grand piano for P5, 000.00. (b) A contract of lease of the Philippine Sea entered by and between Mitoy and Elsa.
+
+Suggested Answer
+
+A403:
+
+(a) The contract of sale is voidable, because Lana is a minor, and is thus incapable of giving consent to a contract.
+
+(b) The contract of sale is void, because its object, the Philippine Sea, is outside the commerce of men.
+
+ALTERNATIVE ANSWER: 
+
+The contract of sale is void under Art. 1306, NCC because it is against public policy.
+
+ALTERNATIVE ANSWER: 
+
+The contract of sale is void as it is prohibited by a treaty, which is considered binding law in the Philippines.
+
+
+Question (2012 BAR)
+
+Q404:
+
+Michael Fermin, without the authority of Pascual Lacas, owner of a car, sold the same car in the name of Mr. Lacas to Atty. Buko. The contract between Atty. Buko and Mr. Lacas is ______ 
+A) void because of the absence of consent from the owner, Mr. Lacas. 
+B) valid because all of the essential requisites of a contract are present. 
+C) unenforceable because Michael Fermin had no authority but he sold the car in the name of Mr. Lacas, the owner. 
+D) rescissible because the contract caused lesion to Atty. Buko.
+
+Suggested Answer
+
+A404:
+
+(C) unenforceable because Michael Fermin had no authority but he sold the car in the name of Mr. Lacas, the owner.
+
+
+Question (2015 BAR)
+
+Q405:
+
+Jackie, 16, inherited a townhouse. Because she wanted to study in an exclusive school, she sold her townhouse by signing a Deed of Sale and turning over possession of the same to the buyer. When the buyer discovered that she was still a minor, she promised to execute another Deed of Sale when she turns 18. When Jackie turned 25 and was already working, she wanted to annul the sale and return the buyer’s money to recover her townhouse. Was the sale contract void, voidable, or valid? Can Jackie still recover the property? Explain.
+
+Suggested Answer
+
+A405:
+
+The contract is voidable. Where one of the parties is incapable of giving consent to a contract, the contract is voidable. (Art. 1390, NCC) It appears that only Jackie was incapacitated by virtue of her minority.
+
+Jackie cannot recover the property. First, since the contract voidable, Jackie only had four (4) years from the time she attained the age of majority to bring an action for annulment of contract. (Art. 1391, NCC) In this case, Jackie should have brought the action for annulment of the contract within 4 years after turning 18 years old, or up until the age of 22. Since she is already 25 years old, the period for the bring the action has prescribed. Second, Jackie may be considered to have actively misrepresented as to her age. Thus, she will be bound to the contract under the principle of estoppel. (UPLC Suggested Answers)
+
+
+Question (1996 BAR)
+
+Q406:
+
+Sometime in 1955, Tomas donated a parcel of land to his stepdaughter Irene, subject to the condition that she may not sell, transfer or cede the same for 20 years. Shortly thereafter, he died. In 1965, because she needed money for medical expenses, Irene sold the land to Conrado. The following year, Irene died, leaving as her sole heir a son by the name of Armando. When Armando learned that the land which he expected to inherit had been sold by Irene to Conrado, he filed an action against the latter for annulment of the sale, on the ground that it violated the restriction imposed by Tomas. Conrado filed a motion to dismiss, on the ground that Armando did not have the legal capacity to sue. If you were the judge, how will you rule on this motion to dismiss? Explain.
+
+Suggested Answer
+
+A406:
+
+As judge, I will grant the motion to dismiss. Armando has no personality to bring the action for annulment of the sale to Conrado. Only an aggrieved party to the contract may bring the action for annulment thereof. (Art. 1397, NCC) While Armando is heir and successor-in-interest of his mother (Art. 1311, NCC), he, standing in place of his mother, has no personality to annul the contract. Both are not aggrieved parties on account of their own violation of the condition of, or restriction on, their ownership imposed by the donation. Only the donor or his heirs would have the personality to bring an action to revoke a donation for violation of a condition thereof or a restriction thereon. (Garrido v. Court of Appeals, G.R. No. 101262, 14 Sept. 1994) Consequently, while the donor or his heirs were not parties to the sale, they have the right to annul the contract of sale because their rights are prejudiced by one of the contracting parties thereof. (DBP v. Court of Appeals, G.R. No. L-28774, 28 Feb. 1980; Teves v. PHHC, G.R. No. L-21498, 27 June 1968) Since Armando is neither the donor nor heir of the donor, he has no personality to bring the action for annulment.
+
+
+Question (1990 BAR)
+
+Q407:
+
+X was the owner of a 10,000 square meter property. X married Y and out of their union, A, B and C were born. After the death of Y, X married Z and they begot as children, D, E and F. After the death of X, the children of the first and second marriages executed an extrajudicial partition of the aforestated property on 01 May 1970. D, E and F were given a 1,000 square meter portion of the property. They were minors at the time of the execution of the document. D was 17 years old, E was 14, and F was 12; and they were made to believe by A, B and C that unless they sign the document they will not get any share. Z was not present then. In January 1974, D, E, and F filed an action in court to nullify the suit alleging they discovered the fraud only in 1973. (a) Can the minority of D, E, and F be a basis to nullify the partition? Explain your answer (b) How about fraud? Explain your answer.
+
+Suggested Answer
+
+A407:
+
+(a) YES. minority can be a basis to nullify the partition because D, E, and F were not properly represented by their parents or guardians at the time they contracted the extrajudicial partition. (Arts. 1327 & 1391, NCC)
+
+(b) In the case of fraud, when through insidious words or machinations of one of the other is induced to enter into the contract without which he would not have agreed to, the action still prosper because under Art. 1391, NCC, in case of fraud, the action for annulment may be brought within 4 years from the discovery of the fraud.
+
+
+Question (2022 BAR)
+
+Q408:
+
+In 2017, Alma orally sold a parcel of unregistered land to the spouses Ray and Shane for Php 500,000.00. Upon receipt of the initial payment of Php 350,000.00, Alma delivered possession of the land to the spouses. Shortly thereafter, Alma died. To formalize the sale, Ray and Shane convinced Josie, one of Alma’s children, to sign a notarized deed of confirmation of sale. In consideration thereof, Josie received Php 150,000.00 representing the balance of the purchase price. On the strength of the notarized confirmation of sale, the spouses were able to transfer the tax declaration of the property in their names. Later, Josie died. In 2020, the surviving children of Alma discovered the oral sale of the land to Ray and Shane. They demanded the return of the property on the following grounds: (i) the oral contract of sale is void because it does not appear in a public instrument; and (ii) assuming the sale is not void, it is unenforceable under the Statute of Frauds. Ray and Shane insisted that the sale of the land to them was both valid and enforceable. Are the contentions of the heirs of Alma tenable? Explain briefly.
+
+Suggested Answer
+
+A408:
+
+NO, the contentions of the heirs of Alma are untenable. First, an oral contract of sale is considered valid and binding between the contracting parties for as long as the essential requisites of consent, object, and cause or consideration are present. Thus, even if the contract of sale was not reduced into writing, it does not render it void because contracts shall be obligatory in whatever form they may have been entered into provided all the essential requisites for their validity are present. (Art. 1356, NCC).
+
+As to the contention that the contract is unenforceable, the same is likewise untenable. Although under the Statute of Frauds, the sale of real property or any interest therein must be evidenced by some note or memorandum, the rule has been settled that the Statute of Frauds only applies to executory contracts. In the case presented, the price has actually been fully paid and the possession of the property has been delivered, thus the contract has been fully performed rendering the Statute of Frauds inapplicable. (Heirs of Villeza v. Aliangan, G.R. No. 244667-69, 02 Dec. 2020) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2019 BAR)
+
+Q409:
+
+Mr. P offered to sell his Manila Polo Club shares to Ms. Q for P2,500,000.00. Ms. Q accepted on the condition that their agreement will not take effect until after 1 year. Mr. P then acceded and both of them shook hands. Excited about the prospect of acquiring Mr. P’s shares, Ms. Q approached the former and offered to pay him an earnest money equivalent to 1% of the purchase price, which Mr. P accepted. After 1 year, Ms. Q approached Mr. P seeking the enforcement of their agreement for Mr. P to sell his shares to her. Mr. P refused to honor their agreement, claiming that the same was covered by the Statute of Frauds because it was no reduced into writing and hence, unenforceable. Is the position of Mr. P correct? Explain
+
+Suggested Answer
+
+A409:
+
+NO, the position of P is incorrect. The Statute of Frauds only applies to purely executory contracts; partial performance removes the contract from the ambit of the Statute of Frauds and not to partially or completely executed contracts. Art. 1482, NCC provides that whenever earnest money is given in a contract of sale, it shall be considered as part of the price and as proof of the perfection of the contract. The payment of earnest money, such as in this case, is tantamount to partial execution of the contract which precludes that application of the Statute of Frauds. The contract has been partially performed and a benefit was already accepted when the seller accepted earnest money from the buyer. (Art. 1403(2(d), NCC); Averia v. Averia, G.R. No. 141877, 13 Aug. 2004; Mactan-Cebu International Airport Authority v. Tudtud, G.R. No. 174012, 14 Nov. 2008)
+
+
+Question (1999 BAR)
+
+Q410:
+
+In 1950, the Bureau of Lands issued a Homestead patent to A. Three years later, A sold the homestead to B. A died in 1990, and his heirs filed an action to recover the homestead from B on the ground that its sale by their father to the latter is void under Sec. 118 of the Public Land Act (PLA). B contends, however, that the heirs of A cannot recover the homestead from him anymore because their action has prescribed and that furthermore, A was in pari delicto. Decide.
+
+Suggested Answer
+
+A410:
+
+The sale of the land by A to B three (3) years after issuance of the homestead patent, being in violation of Sec. 118 of the PLA, is void from its inception. The action filed by the heirs of B to declare the nullity or inexistence of the contract and to recover the land should be given due course.
+
+B’s defense of prescription is untenable because an action which seeks to declare the nullity or inexistence of a contract does not prescribe. (Art. 1410, NCC; Banga v. Soler, G.R. No. L-15717, 30 June 1961) On the other hand, B’s defense of pari delicto is equally untenable. While as a rule, parties who are in pari delicto have no recourse against each other on the principle that a transgressor cannot profit from his own wrongdoing, such rule does not apply to violations of Sec. 118 of the PLA because of the underlying public policy in the said Act “to conserve the land which a homesteader has acquired by gratuitous grant from the government for himself and his family”. In keeping with this policy, it has been held that one who purchases a homestead within the five-year prohibitory period can only recover the price which he has paid by filing a claim against the estate of the deceased seller. (Labrador vs. Delos Santos, G.R. No. L-4094, 29 Nov. 1951) under the principle that no one shall enrich himself at the expense of another. Applying the pari delicto rule to violations of Sec. 118 of the PLA, the CA has ruled that “the homesteader suffers the loss of the fruits realized by the vendee who in turn forfeits the improvement that they have introduced into the land”. (Obot vs. Sandadlillas, 62 OG, 25 Apr. 1966)
+
+
+Question (1991 BAR)
+
+Q411:
+
+Maria Enriquez failed to pay the realty taxes on her unregistered agricultural land located in Magdugo, Toledo City. In 1989, to satisfy the taxes due, the City sold it at public auction to Juan Miranda, an employee at the Treasurer’s Office of said City, whose bid at P10,000.00 was the highest. In due time, a final bill of sale was executed in his favor. Maria refused to turn-over the possession of the property to Juan alleging that (1) she had been, in the meantime, granted a free patent and on the basis thereof an Original Certificate of Title (OCT) was issued to her, and (2) the sale in favor of Juan is void from the beginning in view of the provision in the Administrative Code of 1987 which prohibits officers and employees of the government from purchasing directly or indirectly any property sold by the government for non-payment of any tax, fee or other public charge. (a) If the sale is void, may Juan recover the P10,000.00? If not, why not? (b) If the sale is void, did it not nevertheless, operate to divest Maria of her ownership? If it did, who then is the owner of the property?
+
+Suggested Answer
+
+A411:
+
+(a) YES, Juan may recover because he was not a party to the violation of the law.
+
+(b) NO, the sale did not divest Maria of her title precisely because the sale is void. It is as good as if no sale ever took place. In tax sales, the owner is divested of his land initially upon award and issuance of a Certificate of Sale, and finally after the lapse of the one-year period from date of registration, to redeem, upon execution by the treasurer of an instrument sufficient in form and effects to convey the property. Maria remained owner of the land until another tax sale is to be performed in favor of a qualified buyer.
+
+
+Question (2022 BAR)
+
+Q412:
+
+Brenda saw the online advertisement of Evelyn, who sells limited edition sneakers. Through an exchange of text messages, Evelyn and Brenda agreed that: (i) Evelyn will sell to Brenda a pair of brand-new sneakers for Php 25,000.00; (ii) Brenda will deposit the purchase price in Evelyn’s bank account; and (iii) Evelyn will deliver the sneakers within 10 days from deposit. Brenda deposited the purchase price and Evelyn acknowledged receipt thereof. Before the delivery of the sneakers, Evelyn received an offer from Rosela to buy the same sneakers for Php 35,000.00. Evelyn candidly tells Brenda that she is selling the sneakers at a higher price to another buyer, and sends this text message to Brenda: “Sizt, may iba pala akong buyer na mas malaki yung offer, sorry! Balik ko nalang bayad mo, keri?” Evelyn claims that since the sneakers have not yet been delivered to Brenda, she can still withdraw the offer. Is Evelyn’s contention tenable? Explain briefly.
+
+Suggested Answer
+
+A412:
+
+NO, Evelyn's contention is untenable. A contract of sale is a consensual contract as it is perfected by mere consent. Consent is manifested by the meeting of the offer and the acceptance upon the thing and the cause which are to constitute the contract. (Art. 1319, NCC) In the case presented, upon Brenda's acceptance of the Evelyn's offer to sell the sneakers and the communication of such acceptance to Evelyn, the contract of sale is already perfected. Upon perfection of the contract the parties are bound not only to the fulfilment of what has been expressly stipulated but also to all the consequences which, according to their nature, may be in keeping with good faith, usage, and law. (Article 1315, Civil Code) In this case, Brenda has already paid the price which Evelyn accepted. Hence, Evelyn's contention that she can still withdraw the offer is without merit. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2017 BAR)
+
+Q413:
+
+Alice agreed to sell a parcel of land with an area of 500 square meters registered in her name and covered by TCT No. 12345 in favor of Bernadette for the amount of ₱900,000.00. Their agreement dated 15 Oct. 2015, reads as follows:
+
+I, Bernadette, agree to buy the lot owned by Alice covered by TCT No. 12345 for the amount of ₱900,000.00 subject to the following schedule of payment: 
+Upon signing of agreement – ₱100,000.00 
+15 Nov. 2015– ₱200,000.00 
+15 Dec. 2015 - ₱200,000.00 
+15 Jan 2016 - ₱200,000.00 
+15 Feb. 2016 - ₱200,000.00 
+Title to the property shall be transferred upon full payment of ₱900,000.00 on or before 15 Feb. 2016.
+
+After making the initial payment of ₱100,000.00 on 15 Oct. 2015, and the second instalment of ₱200,000.00 on 15 Nov. 2015, Bernadette defaulted despite repeated demands from Alice. In December 2016, Bernadette offered to pay her balance, but Alice refused and told her that the land was no longer for sale. Due to the refusal, Bernadette caused the annotation of her adverse claim upon TCT No. 12345 on 19 Dec. 2016. Later on, Bernadette discovered that Alice had sold the property to Chona on 05 Feb. 2016, and that TCT No. 12345 had been cancelled and another one issued (TCT No. 67891) in favor of Chona as the new owner. Bernadette sued Alice and Chona for specific performance, annulment of sale and cancellation of TCT No. 67891. Bernadette insisted that she had entered into a contract of sale with Alice; and that because Alice had engaged in double sale, TCT No. 67891 should be cancelled and another title be issued in Bernadette's favor. Did Alice and Bernadette enter into a contract of sale of the lot covered by TCT No. 12345? Explain your answer.
+
+Suggested Answer
+
+A413:
+
+YES, they entered into a contract of sale which is a conditional sale. Article 1458(2) of the NCC provides that a contract of sale may be absolute or conditional. In a contract of conditional sale, the buyer automatically acquires title to the property upon full payment of the purchase price. This transfer of title is “by operation of law without any further act having to be performed by the seller. In a contract to sell, transfer of title to the prospective buy is not automatic. The prospective buyer must convey title to the property through a deed of conditional sale.” (Olivia Realty Corporation v. Castillo, G.R. No. 196251, 09 July 2014)
+
+ALTERNATIVE ANSWER: 
+
+NO, Alice and Bernadette did not enter into a contract of sale over the lot covered by TCT No. 12345. In a contract of sale, the ownership passes to the vendee upon delivery of the thing sold; in a contract to sell, ownership is, by agreement, reserved in the vendor and is not to pass to the vendee until full payment of the purchase price. (Saberon v. Ventanilla, Jr., G.R. No. 192669, April 21, 2014). Here, the title passes only upon full payment of the purchase price, which is a hallmark of a contract to sell. Hence, Alice and Bernadette entered a contract to sell and not a contract of sale. (UPLC Suggested Answers)
+
+
+Question (2022 BAR)
+
+Q414:
+
+Aida, for the consideration of Php 5,000,000.00, sold her parcel of land to Lorna, as evidenced by a notarized Deed of Sale. Lorna, however, failed to deliver the amount in full, paying only Php 500,000.00 as down payment. Because of the nonpayment of the balance, Aida simply sold the same parcel of land to Fe with the intention of returning to Lorna the Php 500,000.00 down payment. Who among Aida, Lorna, and Fe owns the property? Explain briefly.
+
+Suggested Answer
+
+A414:
+
+As among Aida, Lorna, and Fe, it is Lorna who owns the property. A contract of sale coupled with delivery to the buyer transfers the ownership of the thing sold to the buyer. (Art. 1496, NCC) Under the law on Sales, delivery may be actual or constructive. When the sale is made through a public instrument, the execution thereof shall be equivalent to the delivery of the thing which is the object of the contract, if from the deed the contrary does not appear or cannot clearly be inferred. (Art. 1498, NCC) Here, the contract of sale between Aida and Lorna was coupled with constructive delivery of the land to Lorna since the sale was executed in a public instrument. Thus, ownership was already transferred to Loma. The nonpayment of the full purchase price is irrelevant since it is not required for the transfer of ownership to the buyer in an absolute sale. Aida, being no longer the owner after the sale and delivery to Lorna, could not transfer ownership to Fe. Hence, it is Lorna who owns the property. (Central Bar Q&A by Paguirigan, 2023)
+
+ALTERNATIVE ANSWER: 
+
+The case appears to be one of double sale. The owner of the property will be the buyer who first registered the sale in the Registry of Property. Under the rules on double sale, if the same immovable property be sold to different vendees, the ownership shall belong to the person acquiring it who in good faith first recorded it in the Registry of Property. If there is no registration, the ownership shall pertain to the person who in good faith was first in possession; and in the absence thereof to the person who presents the oldest title provided there is good faith. (Art. 1544, NCC) Based on the facts, there are two sales transactions pertaining to the same subject matter effected by the same vendor. The facts do not state however whether there was registration or whether either of the buyers took possession of the land. Hence, based on the rules on double sale, ownership shall pertain to the buyer who first registered the sale in good faith. (Central Bar Q&A by Paguirigan, 2023)
+
+---
+
+Question (2012 BAR)
+
+Q415:
+
+A contract to sell is the same as a conditional contract of sale. Do you agree? Explain your answer.
+
+Suggested Answer
+
+A415:
+
+NO. A contract to sell is specie of conditional sale. The contract to sell does not sell a thing or property; it sells the right to buy the property. A conditional sale is a sale subject to the happening or performance of a condition, such as payment of the full purchase price, or the performance of other prestation to give, to do, or not to do. Compliance with the condition automatically gives the right to the vendee to
+
+
+Question (1999 BAR)
+
+Q416:
+
+A granted B the exclusive right to sell his brand of Maong pants in Isabela, the price for his merchandise payable within 60 days from delivery, and promising B a commission of 20% on all sales. After the delivery of the merchandise to B but before he could sell any of them, B’s store in Isabela was completely burned without his fault, together will all of A’s pants. Must B pay A for his lost pants? Why?
+
+Suggested Answer
+
+A416:
+
+YES, B must pay A. The contract between A and B is a sale not an agency to sell because the price is payable by B upon 60 days from delivery even if B is unable to resell it. If B were an agent, he is not bound to pay the price if he is unable to resell it. As a buyer, ownership passed to B upon delivery and, under Art. 1504, NCC, the thing perishes for the owner. Hence, B must still pay the price.
+
+
+Question (2016 BAR)
+
+Q417:
+
+Peter and Paul entered into a Contract to Sell whereby Peter, the lot owner, agreed to sell to Paul his lot on 06 Nov. 2016 for the price of P1,000,000.00 to be paid at the residence of Peter in Makati City at 1 :00 p.m. If the full price is paid in cash at the specified time and place, then Peter will execute a Deed of Absolute Sale and deliver the title to Paul. On 06 Nov. 2016, Paul did not show up and was not heard of from that date on. In view of the nonperformance by Paul of his obligation, Peter sent a letter to Paul that he is expressly and extra-judicially declaring the Contract to Sell rescinded and of no legal and binding effect. Peter further stated that failure on the part of Paul to contest the rescission within thirty (30) days from receipt of said letter shall mean that the latter agreed to the rescission. Paul did not reply to this letter for five (5) years. Thus, Peter decided to sell his lot to Henry in 2021. After hearing that Henry bought the lot, Paul now questions the sale of the lot to Henry and files a complaint for nullification of the sale.
+
+(a) Is the exercise by Peter of his power to rescind extra-judicially the Contract to Sell the proper and legal way of rescinding said contract? Explain.
+
+(b) In case Paul made a down payment pursuant to a stipulation in the Contract to Sell, what is the legal remedy of Peter?
+
+Suggested Answer
+
+A417a:
+
+YES, Peter validly rescinded the contract to sell his lot to Paul for the latter’s failure to comply with the prestation to pay P1,000,000 on 06 Nov. 2016 at 1:00pm at the residence of Peter so that Peter will execute the Deed of Absolute Sale. The recission is actually the resolution of the reciprocal obligation.
+
+A417b:
+
+If Paul made a down payment, Peter may still cancel the contract because in a contract to sell, the seller does not yet agree to transfer ownership to the buyer. The non-payment of the price in a contract to sell is not a breach for which the remedy of rescission may be availed of, but rather it is considered as a failure to comply with a positive suspensive condition which will prevent the obligation of the seller to convey title from acquiring obligatory force. (Ursal v. Court of Appeals, GR No. 142411, 14 Oct. 2005)
+
+
+Question (2002, 1993 BAR)
+
+Q418:
+
+Bert offers to buy Simeon’s property under the following terms and conditions: P1 million purchase price, 10% option money, the balance payable in cash upon the clearance of the property of all illegal occupants. The option money is promptly paid, and Simeon clears the property of illegal occupants in no time at all. However, when Bert tenders payment of the balance and ask Simeon for the deed for absolute sale, Simeon suddenly has a change of heart, claiming that the deal is disadvantageous to him as he has found out that the property can fetch three time the agreed purchase price. Bert seeks specific performance but Simeon contends that he has merely given Bert an option to buy and nothing more, and offers to return the option money which Bert refuses to accept.
+
+(a) Will Bert’s action for specific performance prosper? Explain.
+
+(b) May Simeon justify his refusal to proceed with the sale by the fact that the deal is financially disadvantageous to him? Explain.
+
+Suggested Answer
+
+A418a:
+
+Bert’s action for specific performance will prosper because there was a binding agreement of sale, not just an option contract. The sale was perfected upon acceptance by Simeon of 10% of the agreed price. This amount is in really earnest money which, under Art. 1482, NCC “shall be considered as part of the price and as proof of the perfection of the contract”. (Topacio v. Court of Appeals, G.R. No. 102606, 03 July 1992; Villongco Realty v. Bormaheco, G.R. No. L-26872, 25 July 1975)
+
+A418b:
+
+Simeon cannot justify his refusal to proceed with the sale by the fact that the deal is financially disadvantageous to him. Having made a bad bargain is not a legal ground for pulling out a binding contract of sale, in the absence of some actionable wrong by the other party (Vales v. Villa, G.R. No. 10028, 16 Dec. 1916) and no such wrong has been committed by Bert.
+
+
+Question (2014 BAR)
+
+Q419:
+
+Tess leased her 1,500 sq.m. lot in Antipolo City to Ruth for a period of three (3) years from January 2010 to February 2013. On 09 Mar. 2011, Tess sent a letter to Ruth, part of which reads as follows: “I am offering you to buy the property you are presently leasing at P5,000,00 per sq.m. or for a total P7,500,000.00. You can pay the contract price by installment for two (2) years without interest. I will give you a period of one (1) year from receipt of this letter to decide whether you will buy the property.” After the expiration of the lease contract, Tess sold the property to her niece for a total consideration of P4,000,000.00. Ruth filed a complaint for the annulment of the sale, reconveyance, and damages against Tess and her niece. Ruth alleged that the sale of the leased property violated her right to buy under the principle of right of first refusal. Is the allegation of Ruth tenable?
+
+Suggested Answer
+
+A419:
+
+The allegation of Ruth is untenable. There was no right of first refusal offered to her. The wording of the letter can at most be considered a mere offer to sell or lease with an option to buy. In Sanchez v. Rigos (G.R. No. L-25494, 14 June 1972), the Court held that in order that a unilateral promise to buy or to sell may be binding upon the promisor. Article 1479 of the NCC requires that the said promise be supported by a consideration distinct from the price. The promisor cannot be compelled to comply with the promise, unless the existence of a consideration distinct from the price is established. In the present case, there was no valuable or independent consideration, thus, it cannot be classified as a unilateral promise to sell, but only a mere offer to sell. Since there was no valuable or independent consideration, it was not an option contract but a mere option to buy, which may be withdrawn at any time.
+
+
+Question (1993 BAR)
+
+Q420:
+
+LT applied with BPI to purchase a house and lot in Quezon City, one of its acquired assets. The amount offered was P1,000,000.00 payable, as follows: P200,000.00 down payment, the balance of P800,000.00 payable within 90 days from 01 June 1985. BPI accepted the offer, whereupon LT drew a check for P200,000.00 in favor of BPI which the latter thereafter deposited in its account. On 05 Sept. 1985, LT wrote BPI requesting extension until 10 Oct. 1985, within which to pay the balance, to which BPI agreed. On 05 Oct. 1985, due to the expected delay in the remittance of the needed amount by his financier from the United States, LT wrote BPI requesting a last extension until 30 Oct. 1985, within which to pay the balance. BPI denied LT’s request because another had offered to buy the same property for P1,500,000.00, cancelled its agreement with LT and offered to return to him the amount of P200,000.00 that LT had paid to it. On 20 Oct. 1985, upon receipt of the amount of P800,000.00 from his US financier, LT offered to pay the amount by tendering a cashier’s check therefor, but which BPI refused to accept. LT then filed a complaint against BPI in the RTC for specific performance and deposited in court the amount of P800,000.00. Is BPI legally correct in cancelling its contract with LT?
+
+Suggested Answer
+
+A420:
+
+BPI is not correct in cancelling the contract with LT. In Lina Topacio v. Court of Appeals and BPI Investment (G.R. No. 102606, 03 July 1992), the Court held that the earnest money is part of the purchase price and is proof of the perfection of the contract. Secondly, notarial or judicial rescission under Arts. 1592 and 1991, NCC is necessary. (Taguba v. De Leon, G.R. No. L-59980, 23 Oct. 1984)
+
+
+Question (2001 BAR)
+
+Q421:
+
+On 15 June 1995, Jesus sold a parcel of registered land to Jaime. On 30 June 1995, he sold the same land to Jose. Who has a better right if:
+
+(a) The first sale is registered ahead of the second sale, with knowledge of the latter. Why?
+
+(b) The second sale is registered ahead of the first sale, with knowledge of the latter? Why?
+
+Suggested Answer
+
+A421a:
+
+The first buyer has the better right if his sale was first to be registered, even though the first buyer knew of the second sale. The fact that he knew of the second sale at the time of his registration does not make him as acting in bad faith because the sale to him was ahead in time, hence, has a priority in right. What creates bad faith in the case of double sale of land is knowledge of a previous sale.
+
+A421b:
+
+The first buyer is still to be preferred, where the second sale is registered ahead of the first sale but with knowledge of the latter. This is because the second buyer, who at the time he registered his sale knew that the property had already been sold to someone else, acted in bad faith. (Art. 1544, NCC)
+
+
+Question (1990 BAR)
+
+Q422:
+
+D sold a second-hand car to E for P150,000.00. The agreement between D and E was that half of the purchase price or P75,000.00 shall be paid in five equal monthly instalments of P15,000.00 each. That car was delivered to E, and E paid the amount of P75,000.00 to D. Less than one month thereafter, the car was stolen from E’s garage with no fault on E’s part and was never recovered. Is E legally bound to pay the said unpaid balance of P75,000.00? Explain your answer.
+
+Suggested Answer
+
+A422:
+
+YES, E is legally bound to pay the balance of P75,000.00. The ownership of the car sold was acquired by E from the moment it was delivered to him. Having acquired ownership. E bears the risk of the loss under the doctrine of res perit domino. (Arts. 1496 & 1497, NCC)
+
+
+Question (2003 BAR)
+
+Q423:
+
+X sold a parcel of land to Y on 01 Jan. 2002, payment and delivery to be made on 01 Feb. 2002. It was stipulated that if payment were not to be made by Y on 01 Feb. 2002, the sale between the parties would automatically be rescinded. Y failed to pay on 01 Feb. 2002, but offered to pay three days later, which payment X refused to accept, claiming that their contract of sale had already been rescinded. Is X’s contention correct? Why?
+
+Suggested Answer
+
+A423:
+
+NO, X is not correct. In the sale of immovable property, even though it may have been stipulated, as in this case, that upon failure to pay the price at the time agreed upon the rescission of the contract shall of right take place, the vendee may pay, even after the expiration of the period, as long as no demand for rescission of the contract has been made upon him either judicially or by a notarial act. (Art. 1592, NCC) Since no demand for rescission was made on Y, either judicially or by a notarial act, X cannot refuse to accept the payment offered by Y three (3) days after the expiration of the period.
+
+
+Question (1991, 1990 BAR)
+
+Q424:
+
+Pablo sold his car to Alfonso who issued a postdated check in full payment therefore. Before the maturity of the check, Alfonso sold the car to Gregorio who later sold it to Gabriel. When presented for payment, the check issued by Alfonso was dishonored by the drawee bank for the reason that he, Alfonso, had already closed his account even before he issued his check. Pablo sued to recover the car from Gabriel alleging that he had been unlawfully deprived of it by reason of Alfonso's deception. Will the suit prosper?
+
+Suggested Answer
+
+A424:
+
+NO. The suit will not prosper because Pablo was not unlawfully deprived of the car although he was unlawfully deprived of the price. The perfection of the sale and the delivery of the car was enough to allow Alfonso to have a right of ownership over the car, which can be lawfully transferred to Gregorio. Art. 559 applies only to a person who is in possession in good faith of the property, and not to the owner thereof. Alfonso, in the problem, was the owner, and, hence, Gabriel acquired the title to the car. Nonpayment of the price in a contract of sale does not render ineffective the obligation to deliver. The obligation to deliver a thing is different from the obligation to pay its price. (EDCA Publishing Co. v. Sps. Santos, G.R. No. 80298, 26 Apr. 1990)
+
+
+Question (2018 BAR)
+
+Q425:
+
+Sonny Inc., (SI) purchased several heavy machineries from Single Equipment Philippines, Inc. (SEP) for PhP 10 million, payable in 36 monthly installments. A chattel mortgage was constituted on the same machineries as security for the amount. As additional security, the President of SI, Stan Smith, mortgaged his personal house and lot. SI failed to pay the 16th and succeeding monthly installments. SEP then commenced a collection suit against SI, and in the course of the proceedings, a writ of attachment was issued against SI’s properties, including the mortgaged machineries. The attached properties were subsequently sold at public action, but the proceeds thereof were insufficient to satisfy the judgment credit.
+
+(a) Can SEP legally recover the deficiency?
+
+(b) Instead of collecting the deficiency, can SEP commence extrajudicial proceedings to foreclose the mortgage on Stan’s house and lot in order to recover the deficiency?
+
+Suggested Answer
+
+A425a:
+
+YES, SEP can legally recover the deficiency. The prohibition against further collection under Art. 1484 or the Recto Law, only applies if the seller chooses to foreclose the chattel mortgage and not when the seller opts to exact the fulfillment of the obligation. (Tajanlangit v. Southern Motors, G.R. 10789, 28 May 1957) SEP chose to exact the fulfillment of the obligation by commencing a collection suit against SI. SEP did not opt to foreclose the chattel mortgage over the equipment. The machineries were sold in an execution sale and not in a foreclosure sale; hence, the prohibition against further collection does not apply.
+
+A425b:
+
+YES, SEP can commence extrajudicial proceedings to foreclose the mortgage. SEP may choose to foreclose the mortgage on Stan’s house and lot. What SEP is prohibited to do, based on the case Cruz v. Filipinas Investment & Finance Corporation (G.R. No. L-24772, 27 May 1968), is to extrajudicially foreclose the mortgage after it has extrajudicially foreclosed the chattel mortgage on the machineries sold on instalment, because if such is allowed, the protection given by Art. 1484 would be indirectly subverted, and public policy overturned. In this case, SEP has not foreclosed the chattel mortgage over the machineries.
+
+ALTERNATIVE ANSWER:
+
+NO, because when SEP commenced the collection suit, it thereby waived its mortgage lien. (Caltex Philippines, Inc. v. IAC, G.R. No. 74730 25 Aug. 1989) The remedies of an ordinary action to collect the debt and foreclosure of the real estate mortgage are alternative remedies and not cumulative. An election of one remedy operates as a waiver of the other. The mere act of filing a collection suit for the recovery of a debt secured by a mortgage constitutes waiver of the other remedy of foreclosure. (Art. 1484(3), NCC)
+
+
+Question (1999 BAR)
+
+Q426:
+
+What are the so-called "Maceda" and "Recto" laws in connection with sales on installments? Give the most important features of each law.
+
+Suggested Answer
+
+A426:
+
+The Maceda Law (R.A. No. 6552) is applicable to sales of immovable property on installments. The most important features are (Rillo v. Court of Appeals, G.R. No. 125347, 19 June 1997):
+
+1. After having paid installments for at least two years, the buyer is entitled to a mandatory grace period of one month for every year of installment payments made, to pay the unpaid installments without interest. If the contract is cancelled, the seller shall refund to the buyer the cash surrender value equivalent to fifty percent (50%) of the total payments made, and after five years of installments, an additional five percent (5%) every year but not to exceed ninety percent (90%) of the total payments made.
+
+2. In case the installments paid were less than 2 years, the seller shall give the buyer a grace period of not less than 60 days. If the buyer fails to pay the installments due at the expiration of the grace period, the seller may cancel the contract after 30 days from receipt by the buyer of the notice of cancellation or demand for rescission by notarial act.
+
+The Recto Law (Art. 1484, NCC) refers to sale of movables payable in installments and limiting the right of seller, in case of default by the buyer, to one of three remedies:
+
+1. Exact fulfillment;
+
+2. Cancel the sale if two or more installments have not been paid; or
+
+3. Foreclose the chattel mortgage on the things sold, also in case of default of two or more installments, with no further action against the purchaser.
+
+
+Question (2014, 2010 BAR)
+
+Q427:
+
+Priscilla purchased a condominium unit in Makati City from the Citiland Corporation for a price of P10 Million, payable P3 Million down and the balance with interest thereon at 14% per annum payable in 60 equal monthly installments of P198,333.33. They executed a Deed of Conditional Sale in which it is stipulated that should the vendee fail to pay three (3) successive installments, the sale shall be deemed automatically rescinded without the necessity of judicial action and all payments made by the vendee shall be forfeited in favor of the vendor by way of rental for the use and occupancy of the unit and as liquidated damages. For 46 months, Priscilla paid the monthly installments religiously, but on the 47th and 48th months, she failed to pay. On the 49th month, she tried to pay the installments due, but the vendor refused to receive the payments tendered by her. The following month, the vendor sent her a notice that it was rescinding the Deed of Conditional Sale pursuant to the stipulation for automatic rescission, and demanded that she vacate the premises. She replied that the contract cannot be rescinded without judicial demand or notarial act pursuant to Art. 1592, NCC.
+
+a) Is Art. 1592 applicable?
+
+b) Can the vendor rescind the contract?
+
+Suggested Answer
+
+A427a:
+
+Art. 1592, NCC does not apply to a conditional sale. In Valarao v. Court of Appeals (G.R. No. 130347, 03 Mar. 1999), the Court held that Art. 1592 applies only to a contract of sale and not to a Deed of Conditional Sale where the seller has reserved title to the property until full payment of the purchase price. The law applicable is the Maceda Law.
+
+A427b:
+
+NO, the vendor cannot rescind the contract under the circumstances. Under the Maceda Law, which is the law applicable, the seller on installment may not rescind the contract until after the lapse of the mandatory grace period of 30 days for every one year of installment payments, and only after 30 days from notice of cancellation or demand for rescission by a notarial act. In this case, the refusal of the seller to accept payment from the buyer on the 49th month was not justified because the buyer was entitled to 60 days grace period and the payment was tendered within that period. Moreover, the notice of rescission served by the seller on the buyer was not effective because the notice was not by a notarial act. Besides, the seller may still pay within 30 days from such notarial notice before rescission may be effected. All these requirements for a valid rescission were not complied with by the seller. Hence, the rescission is invalid.
+
+
+Question (2014 BAR)
+
+Q428:
+
+Sps. Macario and Bonifacia Dakila entered into a contract to sell with Honorio Cruz over a parcel of industrial land in Valenzuela, Bulacan for a price of P3,500,000.00. The spouses would give a down payment of P500,000.00 upon the signing of the contract, while the balance would be paid for the next three (3) consecutive months in the amount of P1,000,000.00 per month. The spouses paid the first two (2) installments but not the last installment. After one (1) year, the spouses offered to pay the unpaid balance which Honorio refused to accept. The spouses filed a complaint for specific performance against Honorio invoking the application of the Maceda Law. If you were the judge, how will you decide the case?
+
+Suggested Answer
+
+A428:
+
+I will dismiss the complaint. The invocation of the Maceda Law by the spouses is misplaced. Sec. 3 of R.A. 6552 (Maceda Law) provides that it is applicable in all transactions or contracts involving the sale or financing of real estate on instalment payments, including residential condominium apartments but excluding industrial lots, commercial buildings and sales to tenants. Since the subject of the case is an industrial land, Maceda Law is not applicable.
+
+
+Question (2016 BAR)
+
+Q429:
+
+On 13 Mar. 2008, Ariel entered into a Deed of Absolute Sale (DAS) with Noel where the former sold his titled lot in Quezon City with an area of 300 square meters to the latter for the price of P300,000.00. The prevailing market value of the lot was P3,000.00 per square meter. On 20 Mar. 2008, they executed another "Agreement To Buy Back/Redeem Property" where Ariel was given an option to repurchase the property on or before 20 Mar. 2012 for the same price. Ariel, however, remained in actual possession of the lot. Since Noel did not pay the taxes, Ariel paid the real property taxes to avoid a delinquency sale.
+
+On 21 Mar. 2012, Ariel sent a letter to Noel, attaching thereto a manager's check for P300,000.00 manifesting that he is redeeming the property. Noel rejected the redemption claiming that the DAS was a true and valid sale representing the true intent of the parties. Ariel filed a suit for the nullification of the DAS or the reformation of said agreement to that of a Loan with Real Estate Mortgage. He claims the DAS and the redemption agreement constitute an equitable mortgage. Noel however claims it is a valid sale with pacto de retro and Ariel clearly failed to redeem the property. As the RTC judge, decide the case with reasons.
+
+Suggested Answer
+
+A429:
+
+I will decide in favor of Ariel and allow the reformation of the agreement. The DAS and the redemption agreement constitute an equitable mortgage and Ariel may ask for the reformation of the agreement to that of a Loan with Real Estate Mortgage as allowed by Art. 1605, NCC. The circumstances clearly show that the agreement is an equitable mortgage, such as the: a) price of the lot was inadequate since it was only sold at P300,000.00 when the prevailing market value of such was P900,000.00; b) the vendor, Ariel, remained in the actual possession of the property after the purported sale; and c) Ariel was the one who paid the real property taxes. Under the circumstances, a presumption arises under Art. 1602, NCC that what was really executed was an equitable mortgage. Moreover, Art. 1603, NCC provides that in case of doubt, a contract purporting to be a sale with right to repurchase shall be construed as an equitable mortgage.
+
+
+Question (2012 BAR)
+
+Q430:
+
+Eulalia was engaged in the business of buying and selling large cattle. To secure the financial capital, she advanced for her employees (biyaheros). She required them to surrender TCT of their properties and to execute the corresponding Deeds of Sale in her favor. Domeng Bandong was not required to post any security but when Eulalia discovered that he incurred shortage in cattle procurement operation, he was required to execute a Deed of Sale over a parcel of land in favor of Eulalia. She sold the property to her grandniece Jocelyn who thereafter instituted an action for ejectment against the Sps. Bandong. To assert their right, Sps. Bandong filed an action for annulment of sale against Eulalia and Jocelyn alleging that there was no sale intended but only equitable mortgage for the purpose of securing the shortage incurred by Domeng in the amount of P 70, 000.00 while employed as "biyahero" by Eulalia. Was the Deed of Sale between Domeng and Eulalia a contract of sale or an equitable mortgage? Explain.
+
+Suggested Answer
+
+A430:
+
+The contract between Domeng Bandong and Eulalia was an equitable mortgage rather than a contract of sale. The purported deed of sale was actually intended to merely secure the payment of the shortage incurred by Domeng in the conduct of the cattlebuying operations. Under Art. 1602, the contract shall be presumed to be an equitable mortgage when it may be fairly inferred that the real intention of the parties is simply to secure the payment of a debt or the performance of any other obligation. The present transaction was clearly intended to just secure the shortage incurred by Eulalia because Bandong remained in possession of the property despite the execution of the sale.
+
+
+Question (2005 BAR)
+
+Q431:
+
+On 14 July 2004, Pedro executed in favor of Juan a Deed of Absolute Sale over a parcel of land covered by TCT No. 6245. It appears in the Deed of Sale that Pedro received from Juan P120,000.00 as purchase price. However, Pedro retained the owner's duplicate of said title. Thereafter, Juan, as lessor, and Pedro, as lessee, executed a contract of lease over the property for a period of one (1) year with a monthly rental of P1,000.00. Pedro, as lessee, was also obligated to pay the realty taxes on the property during the period of lease. Subsequently, Pedro filed a complaint against Juan for the reformation of the Deed of Absolute Sale, alleging that the transaction covered by the deed was an equitable mortgage. In his verified answer to the complaint, Juan alleged that the property was sold to him under the Deed of Absolute Sale, and interposed counterclaims to recover possession of the property and to compel Pedro to turn over to him the owner's duplicate of title. Resolve the case with reasons.
+
+Suggested Answer
+
+A431:
+
+An equitable mortgage arises from a transaction, regardless of its form, which results into a security, or an offer or attempt to pledge land as security for a debt or liability. Its essence is the intent of the parties to create a mortgage, lien or charge on the property sufficiently described or identified to secure an obligation, which intent must be clearly established in order that such a mortgage may exist.
+
+Defendant’s defense that he acquired the land through an Absolute Deed of Sale and not through pacto de retro is untenable. The presumption of equitable mortgage under Art. 1602 of the NCC equally applies to a contract purporting to be an absolute sale. (Art. 1604, NCC) The facts and circumstances that Pedro retained possession of the Owner’s Duplicate Copy of the Certificate of Title; that he remained in possession of the land as lessee; that he bound himself to pay the realty taxes during the period of lease, are matters collectively and strongly indicating that the Deed of Absolute Sale is an equitable mortgage. In case of doubt, the Deed of Absolute Sale should be considered as a loan with mortgage, because this juridical relation involves a lesser transmission of rights and interests.
+
+If the transaction is proven to be an equitable mortgage, Pedro’s prayer for reformation of the instrument should be granted in accordance with Art. 1605, NCC. Thus, in case of non-payment, he may foreclose the mortgage and consolidate his ownership of the land. In that event, Juan’s counterclaim to recover possession of the land and to compel Pedro to surrender the Owner’s Duplicate Copy of the title becomes a consequential right.
+
+
+Question (2001 BAR)
+
+Q432:
+
+Betty and Lydia were co-owners of a parcel of land. Last 31 Jan. 2001, when she paid her real estate tax, Betty discovered that Lydia had sold her share to Emma on 10 Nov. 2000. The following day, Betty offered to redeem her share from Emma, but the latter replied that Betty's right to redeem has already prescribed. Is Emma correct or not? Why?
+
+Suggested Answer
+
+A432:
+
+NO, Emma, the buyer, is not correct. Betty can still enforce her right of legal redemption as a co-owner. Art. 1623, NCC gives a co-owner 30 days from written notice of the sale by the vendor to exercise his right of legal redemption. In the present problem, the 30- day period for the exercise by Betty of her right of redemption had not even begun to run because no notice in writing of the sale appears to have been given to her by Lydia.
+
+
+Question (1991 BAR)
+
+Q433:
+
+On 20 Dec. 1970, Juliet, a widow, borrowed from Romeo P4,000.00 and, as security therefore, she executed a deed of mortgage over one of her two (2) registered lots which has a market value of P15,000.00. The document and the certificate of title of the property were delivered to Romeo. On 02 June 1971, Juliet obtained an additional sum of P3,000.00 from Romeo. On this date, however, Romeo caused the preparation of a deed of absolute sale of the above property, to which Juliet affixed her signature without first reading the document. The consideration indicated is P7,000.00 She thought that this document was similar to the first she signed. When she reached home, her son X, after reading the duplicate copy of the deed, informed her that what she signed was not a mortgage but a deed of absolute sale. On the following day, 03 June 1971, Juliet accompanied by X, went back to Romeo and demanded the reformation. Romeo prepared and signed a document wherein, as vendee in the deed of sale abovementioned, he obligated and bound himself to resell the land to Juliet or her heirs and successors for the same consideration as reflected in the deed of sale (P7,000.00) within a period of two (2) years, or until 03 June 1973. It is further stated therein that should the Vendor (Juliet) fail to exercise her right to redeem within the said period, the conveyance shall be deemed absolute and irrevocable. Romeo did not take possession of the property. He did not pay the taxes thereon.
+
+Juliet died in January 1973 without having repurchased the property. Her only surviving heir, her son X, failed to repurchase the property on or before 03 June 1973. In 1975, Romeo sold the property to Y for P50,000.00. Upon learning of the sale, X filed an action for the nullification of the sale and for the recovery of the property on the ground that the so-called deed of absolute sale executed by his mother was merely an equitable mortgage, taking into account the inadequacy of the price and the failure of Romeo to take possession of the property and to pay the taxes thereon. Romeo and Y maintain that there was a valid absolute sale and that the document signed by the former on 03 June 1973 was merely a promise to sell.
+
+(a) If you were the Judge, would you uphold the theory of X?
+
+(b) If you decide in favor of Romeo and Y, would you uphold the validity of the promise to sell?
+
+Suggested Answer
+
+A433a:
+
+If I were the Judge, I will not uphold the theory of X for the nullification of the sale and for the recovery of the property on the ground that the so-called sale was only an equitable mortgage. An equitable mortgage may arise only if, in truth, the sale was one with the right of repurchase. The facts of the case state that the right to repurchase was granted after the absolute deed of sale was executed. Following the rule in Vda. de Cruzo v. Carriaga Jr. (G.R. Nos. 75109-10 28 June 1989), a deed of repurchase executed independently of the deed of sale where the two stipulations are found in two instruments instead of one document, the right of repurchase would amount only to one option granted by the buyer to the seller. Since the contract cannot be upheld as a contract of sale with the right to repurchase, Art. 1602, NCC on equitable mortgage will not apply. The rule could have been different if both deeds were executed on the same occasion or date, in which case, under the ruling in Sps. Claravall v. Court of Appeals (G.R. No. L-47120, 15 Oct. 1990), the contract may still be sustained as an equitable mortgage, given the circumstances expressed in Art. 1602, NCC. The reserved right to repurchase is then deemed an original intention.
+
+A433b:
+
+If I were to decide in favor of Romeo and Y, I would not uphold the validity of the promise to sell, so as to enforce it by an action for specific performance. The promise to sell would only amount to a mere offer and, therefore, it is not enforceable unless it was sought to be exercised before a withdrawal or denial thereof. Even assuming the facts given at the end of the case there would have been no separate consideration for such promise to sell. The contract would at most amount to an option which again may not be the basis for an action for specific performance.
+
+
+Question (1993 BAR)
+
+Q434:
+
+On 02 Jan. 1980, A and B entered into a contract whereby A sold to B a parcel of land for and in consideration of P10,000.00, A reserving to himself the right to repurchase the same. Because they were friends, no period was agreed upon for the repurchase of the property.
+
+(a) Until when must A exercise his right of repurchase?
+
+(b) If A fails to redeem the property within the allowable period, what would you advise B to do for his better protection?
+
+Suggested Answer
+
+A434a:
+
+A can exercise his right of repurchase within four (4) years from the date of the contract. (Art. 1606, NCC)
+
+A434b:
+
+I would advise B to file an action for consolidation of title and obtain a judicial order of consolidation which must be recorded in the Registry of Property. (Art. 1607, NCC)
+
+
+Question (2022 BAR)
+
+Q435:
+
+Jungkook, who owns a building, leases the same to Gel with the following terms: (i) the lease is for a period of ten years; (ii) the yearly rental is Php 1,200,000.00 payable within the first ten days of the current year; and (iii) in case of breach of any of the provisions of the lease, Gel is liable to pay Jungkook five monthly rentals and attorney’s fees. Five years into the lease, Gel sends a notice to terminate the lease and offers to pay five monthly rentals. Despite Jungkook’s objections, Gel vacates the premises. Jungkook sues Gel for the rentals due for the remaining five years of the lease. Gel takes the position that her liability should only be limited to five monthly rentals and attorney’s fees.
+
+(a) Is there a penalty clause in the lease agreement? Explain briefly.
+
+(b) As between Jungkook and Gel, who is correct? Explain briefly.
+
+Suggested Answer
+
+A435a:
+
+YES, there is a penalty clause in the lease agreement. The penalty clause here consists of the liability of Gel to pay Jungkook five monthly rentals and attorney's fees in case of breach of the terms of the lease. This is clearly a penalty clause as it is intended to substitute the indemnity for damages and the payment of interests in case of noncompliance with the obligation. (Art. 1226, NCC) (Central Bar Q&A by Paguirigan, 2023)
+
+A435b:
+
+GEL is correct. Generally, if the lessor or the lessee should not comply with their obligations, the aggrieved party may ask for either the rescission of the contract and indemnification for damages, or only the latter, allowing the contract to remain in force. Since the parties have already provided for the penalty clause that should be paid by the lessee in case of non-compliance, the penalty clause shall be the measure of the indemnity to be paid to the lessor in case the lessee commits a breach of the terms of the lease. (D.M. Ragasa Enterprises vs. Banco de Oro, G.R. No. 190512, 20 June 2018) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (1999 BAR)
+
+Q436:
+
+Under what circumstances would an implied new lease or a tacita reconduccion arise?
+
+Suggested Answer
+
+A436:
+
+An implied new lease or tacita reconduccion arises if at the end of the contract the lessee should continue enjoying the thing leased for 15 days with the acquiescence of the lessor, and unless a notice to the contrary by either party has previously been given. (Art. 1670, NCC) In short, in order that there may be tacita reconduccion there must be expiration of the contract; there must be continuation of possession for 15 days or more; and there must be no prior demand to vacate.
+
+
+Question (2005 BAR)
+
+Q437:
+
+Under a written contract dated 01 Dec. 1989, Victor leased his land to Joel for a period of five (5) years at a monthly rental of P1,000.00, to be increased to P1,200.00 and P1,500.00 on the third and fifth year, respectively. On 01 Jan. 1991, Joel subleased the land to Conrad for a period of two (2) years at a monthly rental of P1,500.00. On 31 Dec. 1992, Joel assigned the lease to his compadre, Ernie, who acted on the belief that Joel was the rightful owner and possessor of the said lot. Joel has been faithfully paying the stipulated rentals to Victor. When Victor learned on 18 May 1992 about the sublease and assignment, he sued Joel, Conrad and Ernie for rescission of the contract of lease and for damages.
+
+(a) Will the action prosper? If so, against whom? Explain.
+
+(b) In case of rescission, discuss the rights and obligations of the parties.
+
+Suggested Answer
+
+A437a:
+
+YES, the action for rescission of the lease will prosper because Joel cannot assign the lease to Ernie without the consent of Victor. (Art. 1649, NCC) But Joel may sublet to Conrad because there is no express prohibition. (Art. 1650, NCC; Alipio v. Court of Appeals, G.R. No. 134100. 29 Sept. 2000) Victor can rescind the contract of lease with Joel, and the assignment of the lease to Ernie, on the ground of violation of law and of contract. The sub-lease to Conrad remained valid for two (2) years from 01 Jan. 1991 and had not yet lapsed when the action was filed on 15 May 1992.
+
+A437b:
+
+In case of rescission, the rights and obligations of the parties should be as follows: At the time that Victor filed suit on 15 May 1992, the assignment had not yet lapsed. It would lapse on 01 Dec. 1994, the very same date that the 50-year basic lease would expire. Since the assignment is void, Victor can get the property back because of the violation of the lease. Both Joel and Ernie have to surrender possession and are liable for damages. But Conrad has not yet incurred any liability on the sublease which still subsisted at the time of the filing of the action on 15 May 1992. Ernie can file a crossclaim against Joel for damages on account of the rescission of the contract of assignment. Conrad can file a counterclaim against Victor for damages for lack of cause of action at the time of the filing of the suit.
+
+
+Question (2010 BAR)
+
+Q438:
+
+A had a 4-storey building which was constructed by Engineer B. After five 5 years, the building developed cracks and its stairway eventually gave way and collapsed, resulting to injuries to some lessees. Who should the lessees sue for damages?
+
+Suggested Answer
+
+A438:
+
+The lessees may proceed against A for breach of contract, and against B for tort or statutory liability. Under Art. 1654(2), NCC, the lessor is obliged to make all the necessary repairs in order to keep the leased property suitable for the use to which it has been devoted. Consequently, under Art. 1659, NCC, the proprietor of a building or structure is responsible for the damages resulting from its total or partial collapse, if it is due to the lack of necessary repairs.
+
+Under Art. 1723, NCC, the engineer or architect who drew up the plans and specifications for a building is liable for damages if within 15 years from the completion of the structure, the same should collapse by reason of a defect in those plans and specifications, or due to the defects in the ground. This liability may be enforced against the architect or engineer even by a third party who has no privity of contract with the architect or engineer under Art. 2192, NCC.
+
+
+Question (1994 BAR)
+
+Q439:
+
+In Jan. 1993, Four-Gives Corporation leased the entire twelve floors of the GQS Towers Complex, for a period of ten (10) years at a monthly rental of P3,000,000.00. There is a provision in the contract that the monthly rentals should be paid within the first five days of the month. For the month of March, May, June, Oct. and Dec. 1993, the rentals were not paid on time with some rentals being delayed up to ten days. The delay was due to the heavy paperwork involved in processing the checks. Four-Gives Corporation also subleased five of the twelve floors to wholly-owned subsidiaries. The lease contract expressly prohibits the assignment of the lease contract or any portion thereof. The rental value of the building has increased by 50% since its lease to Four-Gives Corporation.
+
+(a) Can the building owner eject Four-Gives Corporation on grounds of the repeated delays in the payment of the rent?
+
+(b) Can the building owner ask for the cancellation of the contract for violation of the provision against assignment?
+
+Suggested Answer
+
+A439a:
+
+NO, the building owner cannot eject Four-Gives Corporation on the ground of repeated delays in the payment of rentals. The delay in the payment of the rentals is minimal and cannot be made the basis of an ejectment suit. The delay was due to the heavy paperwork involved in processing the checks. It would be otherwise if the lease contract stated that in the payment of rentals within the first five days of the month, time is of the essence or that the lessee will be in delay if he falls to pay within the agreed period without need of demand. In this case he can judicially eject the tenant on the ground of lack of payment of the price stipulated after a demand to vacate. (Art. 1673(2), NCC)
+
+A439b:
+
+NO. The lessor cannot have the lease cancelled for alleged violation of the provision against assignment. The lessee did not assign the lease, or any portion thereof, to the subsidiaries. It merely subleased some floors to its subsidiaries. Since the problem does not state that the contract of lease contains a prohibition against sublease, the sublease is lawful, the rule being that in the absence of an express prohibition a lessee may sublet the thing leased, in whole or in part, without prejudice to his/its responsibility to the lessor for the performance of the contract.
+
+
+Question (1990 BAR)
+
+Q440:
+
+A vacant lot several blocks from the center of the town was leased by its owner to a young businessman B, for a term of 15 years renewal upon agreement of the parties. After taking possession of the lot, the lessee built thereon a building of mixed materials and a store. As the years passed, he expanded his business, earning more profits. By the 10th year of his possession, he was able to build a three-story building worth at least P300,000.00. Before the end of the term of the lease, B negotiated with the landowner for its renewal, but despite their attempts to do so, they could not agree on the new conditions for the renewal. Upon the expiration of the term of the lease, the landowner asked B to vacate the premises and remove his building and other improvements. B refused unless he was reimbursed for necessary and useful expenses. B claimed that he was a possessor and builder in good faith, with right of retention. This issue is now before the court for resolution in a pending litigation.
+
+(a) What are the rights of B?
+
+(b) What are the rights of the landowner?
+
+Suggested Answer
+
+A440a:
+
+B has the right to remove the building and other improvements unless the landowner decides to retain the building at the time of the termination of the lease and pay the lessee one-half of the value of the improvements at that time. The lessee may remove the building even though the principal thing may suffer damage, but B should not cause any more impairment upon the property leased than is necessary. The claim of B that he was a possessor and builder in good faith with the right of retention is not tenable. B is not a builder in good faith, because as lessee he does not claim ownership over the property leased.
+
+A440b:
+
+The landowner/lessor may refuse to reimburse one-half (1/2) of the value of the improvements and require the lessee to remove the improvements. (Art. 1678, NCC)
+
+
+Question (2019 BAR)
+
+Q441:
+
+Mr. A entered into a lease contract covering one of his commercial buildings with XYZ Company, a partnership composed of X, Y, and Z, as lessee, for use as an office space. Upon failure to receive the rental payments when they fell due, Mr. A immediately sought payment of the same from X, Y, and Z, asserting that the individual partners are solidarily liable together with the partnership for its debts. X, Y, and Z disagreed with Mr. A's contention, arguing further that in any event, rentals should not be paid up until Mr. A makes the necessary arrangements for the repair of the defective electrical wirings in the office that caused power outages and hence, made it difficult, if not impossible, for them to conduct their usual business operations. Rule on the parties' respective arguments.
+
+Suggested Answer
+
+A441:
+
+The contention of Mr. A is not correct because under Article 1816, all partners including industrial ones, shall be liable pro rata with all their property only after all the partnership assets have been exhausted, for the contracts which may be entered into in the name and for the account of the partnership. The liability will not attach to the individual partners until after the partnership assets have been exhausted. Such liability is only pro rata and not solidary except if the obligation falls under Article 1822 and 1823.
+
+Neither is the contention of X, Y, and Z tenable. The lessor is under obligation to make all the necessary repairs on the property leased in order to keep it suitable for the use to which it has been devoted, unless there is a stipulation to the contrary. If the lessor fails to comply with this obligation, the lessee may ask for rescission of the contract with damages or he may opt to continue with the lease and ask only for damages from the lessor. (Arts. 1654 & 1659, NCC) (Central Bar Q&A by Paguirigan, 2023)
+
+ALTERNATIVE ANSWER:
+
+X, Y, and Z may suspend the payment of rentals if they opt to continue with the lease if the lessor fails to make the necessary repairs on the property leased. (Art. 1658, NCC) (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2018 BAR)
+
+Q442:
+
+Simon owned a townhouse that he rented out to Shannon, a flight attendant with Soleil Philippine Airlines (SPA). They had no written contract but merely agreed on a 3-year lease. Shannon had been using the townhouse as her base in Manila and had been paying rentals for more than a year when she accepted a better job offer from Sing Airlines. This meant that Singapore was going to be her new base and so she decided, without informing Simon, to sublease the townhouse to Sylvia, an office clerk in SPA. Does the sublease without Simon’s knowledge and consent constitute a ground for terminating the lease?
+
+Suggested Answer
+
+A442:
+
+NO, it does not constitute a ground for terminating the lease. In the contract of lease of things, if there is no express prohibition, the lessee may sublet the thing leased (Article 1650, NCC). In this contract, there appears to be no prohibition regarding subleasing; thus, there is no violation of the contract which can be used as a ground for terminating the contract. The act of a lessee in subleasing the thing without notifying the lessor leased is not one of the causes for which the lessor may terminate the lease and judicially eject the lessee (Article 1673, NCC).
+
+
+Question (2004 BAR)
+
+Q443:
+
+TX filed a suit for ejectment against BD for nonpayment of condominium rentals amounting to P150,000. During the pendency of the case, BD offered and TX accepted the full amount due as rentals from BD, who then filed a motion to dismiss the ejectment suit on the ground that the action is already extinguished. Is BD’s contention correct? Why or why not? Reason.
+
+Suggested Answer
+
+A443:
+
+NO, BD's contention is not correct. TX can still maintain the suit for ejectment. The acceptance by the lessor of the payment by the lessee of the rentals in arrears even during the pendency of the ejectment case does not constitute a waiver or abandonment of the ejectment case. (Sps. Clutario v. Court of Appeals, G.R. No. 76656, 11 Dec. 1992)
+
+
+Question (2001 BAR)
+
+Q444:
+
+On 01 Jan. 1980, Nestor leased the fishpond of Mario for a period of three years at a monthly rental of P1,000.00, with an option to purchase the same during the period of the lease for the price of P500,000.00. After the expiration of the three-year period, Mario allowed Nestor to remain in the leased premises at the same rental rate. On 15 June 1983, Nestor tendered the amount of P500,000.00 to Mario and demanded that the latter execute a deed of absolute sale of the fishpond in his favor. Mario refused, on the ground that Nestor no longer had an option to buy the fishpond. Nestor filed an action for specific performance. Will the action prosper or not? Why?
+
+Suggested Answer
+
+A444:
+
+NO, the action will not prosper. The implied renewal of the lease on a month-to-month basis did not have the effect of extending the life of the option to purchase which expired at the end of the original lease period. The lessor is correct in refusing to sell on the ground that the option had expired.
+
+
+Question (2000 BAR)
+
+Q445:
+
+A leased his house to B with a condition that the leased premises shall be used for residential purposes only. B subleased the house to C who used it as a warehouse for fabrics. Upon learning this, A demanded that C stop using the house as a warehouse, but C ignored the demand, A then filed an action for ejectment against C, who raised the defense that there is no privity of contract between him and A, and that he has not been remiss in the payment of rent. Will the action prosper?
+
+Suggested Answer
+
+A445:
+
+YES, the action will prosper. Under Art. 1651, NCC, the sublessee is bound to the lessor for all acts which refer to the use and preservation of the thing leased in the manner stipulated between the lessor and the lessee.
+
+
+Question (1999 BAR)
+
+Q446:
+
+May a lessee sublease the property leased without the consent of the lessor, and what are the respective liabilities of the lessee and sub-lessee to the lessor in case of such sublease?
+
+Suggested Answer
+
+A446:
+
+YES, provided that there is no express prohibition against subleasing. Under the law, when in the contract of lease of things there is no express prohibition, the lessee may sublet the thing leased without prejudice to his responsibility for the performance of the contract toward the lessor. (Art. 1650, NCC)
+
+In case there is a sublease of the premises being leased, the sublessee is bound to the lessor for all the acts which refer to the use and preservation of the thing leased in the manner stipulated between the lessor and the lessee. (Art. 1651, NCC) The sublessee is subsidiarily liable to the lessor for any rent due from the lessee. However, the sublessee shall not be responsible beyond the amount of the rent due from them. (Art. 1652, NCC)
+
+As to the lessee, the latter shall still be responsible to the lessor for the rents; bring to the knowledge of the lessor every usurpation or untoward act which any third person may have committed or may be openly preparing to carry out upon the thing leased; advise the owner the need for all repairs; to return the thing leased upon the termination of the lease just as he received it, save what has been lost or impaired by the lapse of time or by ordinary wear and tear or from an inevitable cause; responsible for the deterioration or loss of the thing leased, unless they prove that it took place without their fault.
+
+
+Question (1996 BAR)
+
+Q447:
+
+Bartolome constructed a chapel on the land of Eric. What are Bartolome’s rights if he were a lessee of the land?
+
+Suggested Answer
+
+A447:
+
+The owner of the land, as lessor, can acquire the improvement by paying for one-half of its value. Should the lessor refuse to reimburse said amount, the lessee may remove the improvement, even though the principal thing may suffer damage thereby. (Art. 1678, NCC)
+
+
+Question (1990 BAR)
+
+Q448:
+
+A leased a parcel of land to B for a period of two years. The lease contract did not contain any express prohibition against the assignment of the leasehold or the subleasing of the leased premises. During the third year of the lease, B subleased the land to C. In turn, C, without A's consent, assigned the sublease to D. A then filed an action for the rescission of the contract of lease on the ground that B has violated the terms and conditions of the lease agreement. If you were the judge, how would you decide the case, particularly with respect to the validity of:
+
+(a) B’s sublease to C?
+
+(b) C’s assignment of the sublease to D?
+
+Explain your answers.
+
+Suggested Answer
+
+A448a:
+
+B's sublease to C is valid. Although the original period of two years for the lease contract has expired, the lease continued with the acquiescence of the lessor during the third year. Hence, there has been an implied renewal of the contract of lease. Under Art. 1650 of the NCC, the lessee may sublet the thing leased, in whole or in part, when the contract of lease does not contain any express prohibition. (Arts. 1650 & 1670, NCC) A's action for rescission should not prosper on this ground.
+
+A448b:
+
+C's assignment of the sublease to D is not valid. Under Art. 1649 of the NCC the lessee cannot assign the lease without the consent of the lessor, unless there is a stipulation to the contrary. There is no such stipulation in the contract. If the law prohibits assignment of the lease without the consent of the lessor, all the more would the assignment of a sublease be prohibited without such consent. This is a violation of the contract and is a valid ground for rescission by A.
+
+
+Question (2003 BAR)
+
+Q449:
+
+Jo-Ann asked her close friend, Aissa, to buy some groceries for her in the supermarket. Was there a nominate contract entered into between Jo-Ann and Aissa? In the affirmative, what was it? Explain.
+
+Suggested Answer
+
+A449:
+
+YES, there was a nominate contract. On the assumption that Aissa accepted the request of her close friend Jo-Ann to buy some groceries for her in the supermarket, what they entered into was the nominate contract of Agency. Art. 1898, NCC provides that by the contract of agency a person binds themselves to render some service or to do something in representation or on behalf of another, with the consent or authority of the latter.
+
+ALTERNATIVE ANSWER:
+
+YES, they entered into a nominate contract of lease to service in the absence of a relation of principal and agent between them. (Art. 1644, NCC)
+
+
+Question (2000 BAR)
+
+Q450:
+
+A foreign manufacturer of computers and a Philippine distributor entered into a contract whereby the distributor agreed to order 1,000 units of the manufacturer’s computers every month and to resell them in the Philippines at the manufacturer’s suggested prices plus 10%. All unsold units at the end of the year shall be bought back by the manufacturer at the same price they were ordered. The manufacturer shall hold the distributor free and harmless from any claim for defects in the units. Is the agreement one for sale or agency?
+
+Suggested Answer
+
+A450:
+
+The contract is one of agency, not sale. The notion of sale is negated by the following indicia: (1) the price is fixed by the manufacturer with the 10% markup constituting the commission; (2) the manufacturer reacquires the unsold units at exactly the same price; and (3) warranty for the units was borne by the manufacturer. The foregoing indicia negate sale because they indicate that ownership over the units was never intended to transfer to the distributor.
+
+
+Question (2004 BAR)
+
+Q451:
+
+CX executed a special power of attorney (SPA) authorizing DY to secure a loan from any bank and to mortgage his property covered by the owner’s certificate of title. In securing a loan from MBank, DY did not specify that he was acting for CX in the transaction with said bank. Is CX liable for the bank loan? Why or why not? Justify your answer.
+
+Suggested Answer
+
+A451:
+
+YES, CX is liable for the bank loan because he authorized the mortgage on his property to secure the loan contracted by DY. If DY later defaults and fails to pay the loan, CX is liable to pay. However, his liability is limited to the extent of the value of the said property.
+
+ALTERNATIVE ANSWER:
+
+CX is not personally liable to the bank loan because it was contracted by DY in his personal capacity. Only the property of CX is liable. Hence, while CX has authorized the mortgage on his property to secure the loan of DY, the bank cannot sue CX to collect the loan in case DY defaults thereon. The bank can only foreclose the property of CX.
+
+ALTERNATIVE ANSWER:
+
+While as a general rule the principal is not liable for the contract entered into by his agent in case the agent acted in his own name without disclosing his principal, such rule does not apply if the contract involves a thing belonging to the principal. In such case, the principal is liable under Article 1883 of the Civil Code. The contract is deemed made on his behalf. (Sy-juco v. Sy-juco, G.R. No. L-13471, 12 Jan. 1920)
+
+
+Question (1992 BAR)
+
+Q452:
+
+A as principal appointed B as his agent granting him general and unlimited management over A's properties, stating that A withholds no power from B and that the agent may execute such acts as he may consider appropriate. Accordingly, B leased A's parcel of land in Manila to C for four (4) years at P60,000.00 per year, payable annually in advance. B leased another parcel of land of A in Caloocan City to D without a fixed term at P3,000.00 per month payable monthly. B sold to E a third parcel of land belonging to A located in Quezon City for three (3) times the price that was listed in the inventory by A to B. All those contracts were executed by B while A was confined due to illness in the Makati Medical Center. Rule on the validity and binding effect of each of the above contracts upon A the principal. Explain your answers.
+
+Suggested Answer
+
+A452:
+
+The agency couched in general terms comprised only acts of administration. (Art. 1877, NCC) The lease contract on the Manila parcel is not valid, not enforceable and not binding upon A. For B to lease the property to C, for more than one (1) year, A must provide B with a special power of attorney. (Art.1877, NCC) The lease of the Caloocan City property to D is valid and binding upon A. Since the lease is without a fixed term, it is understood to be from month to month since the rental is payable monthly. (Art. 1687, NCC)
+
+The sale of the Quezon City parcel to E is not valid and not binding upon A. B needed a special power of attorney to validly sell the land. (Arts. 1877 & 1878, NCC) The sale of the land at a very good price does not cure the defect of the contract arising from lack of authority.
+
+
+Question (2017, 1998, 1997, 1996 BAR)
+
+Q453:
+
+In the province, a farmer couple borrowed money from the local merchant. To guarantee payment, they left the Torrens Title of their land with the merchant, for him to hold until they pay the loan. Is there a a) Contract of pledge; b) Contract of mortgage; c) Contract of antichresis; or d) None of the above? Explain.
+
+Suggested Answer
+
+A453:
+
+NONE OF THE ABOVE. There is no pledge because only movable property may be pledged. (Art. 2094, NCC) At all, there was a pledge of the paper or document constituting the Torrens Title, as a movable by itself, but not of the land which the title represents. There is no mortgage because no deed or contract was executed in the manner required by law for a mortgage. (Arts. 2085 to 2092 & Arts. 2124 to 2131, NCC) There is no contract of antichresis because no right to the fruits of the property was given to the creditor. (Art. 2132, NCC)
+
+A contract of simple loan was entered into with security arrangement agreed upon by the parties which is not one of those mentioned above.
+
+
+Question (2004 BAR)
+
+Q454:
+
+Distinguish briefly but clearly between mutuum and commodatum.
+
+Suggested Answer
+
+A454:
+
+In mutuum, the object borrowed must be a consumable thing the ownership of which is transferred to the borrower who incurs the obligation to return the same consumable to the lender in an equal amount, and of the same kind and quality. Whereas, in commodatum, the object borrowed is usually a non-consumable thing the ownership of which is not transferred to the borrower who incurs the obligation to return the very thing to the lender.
+
+
+Question (2018 BAR)
+
+Q455:
+
+Saachi opened a savings bank account with Shanghainese Bank. He made an initial deposit of Php 100,000.00. Part of the bank opening forms that he was required to sign when he opened the account was a Holdout Agreement which provided that should he incur any liability or obligations to the bank, the bank shall have the right to immediately and automatically take over his savings account deposit. After he opened his deposit account, the Shanghainese Bank discovered a scam wherein the funds in the account of another depositor in the bank was withdrawn by an impostor. Shanghainese Bank suspected Saachi to be the impostor and filed a criminal case of estafa against him. While the case was still pending with the prosecutor’s office, the bank took over Saachi’s savings deposit on the basis of the Holdout Agreement.
+
+(a) What kind of contract is created when a depositor opens a deposit account with a bank?
+
+(b) In this case, did the bank have the right to take over Saachi’s bank deposit?
+
+Suggested Answer
+
+A455a:
+
+A contract of simple loan is created when a depositor opens a deposit account with a bank. Fixed, savings and current deposits of money in banks and similar institutions shall be governed by the provisions concerning simple loan. (Art. 1980, NCC) The creditor is the depositor, while the debtor is the bank.
+
+A455b:
+
+NO, the bank did not have the right to take over Saachi’s bank deposit. In the case of Metropolitan Bank & Trust Co. v. Rosales (G.R. No. 183204, 13 Jan. 2014), it was held that the “Hold Out” clause, which was similar to the Holdout Agreement in the instant case, can be invoked only if there was a valid and existing obligation arising from any of the sources of obligation enumerated in Art. 1157, NCC, to wit: law, contracts, quasi-contracts, delict, and quasi-delict. The only possible source of obligation of Saachi to Shanghainese Bank based on the given facts is delict. As the criminal case filed by the bank against Saachi was still pending and no final judgment of conviction has been rendered, Saachi had no valid and existing obligation to the bank; thus, the bank had no right to take over the deposits to Saachi. (UPLC Suggested Answers)
+
+
+Question (2005 BAR)
+
+Q456:
+
+Before he left for Riyadh to work as a mechanic, Pedro left his Adventure van with Tito, with the understanding that the latter could use it for one year for his personal or family use while Pedro works in Riyadh. He did not tell Tito that the brakes of the van were faulty. Tito had the van tuned up and the brakes repaired. He spent a total amount of P15,000.00. After using the vehicle for two weeks, Tito discovered that it consumed too much fuel. To make up for the expenses, he leased it to Annabelle. Two months later, Pedro returned to the Philippines and asked Tito to return the van. Unfortunately, while being driven by Tito, the van was accidentally damaged by a cargo truck without his fault.
+
+(a) Who shall bear the P15,000.00 spent for the repair of the van? Explain.
+
+(b) Who shall bear the costs for the van's fuel, oil and other materials while it was with Tito? Explain.
+
+(c) Does Pedro have the right to retrieve the van even before the lapse of one year? Explain.
+
+(d) Who shall bear the expenses for the accidental damage caused by the cargo truck, granting that the truck driver and truck owner are insolvent? Explain.
+
+Suggested Answer
+
+A456a:
+
+The contract between Pedro and Tito is one of commadatum. Of the P15,000.00 spent, Pedro, the bailor, shall bear the expenses for the repair of the faulty brakes, they being extraordinary expenses incurred due to the nondisclosure by the bailor of the defect or fault; Tito, on the other hand, shall shoulder that part of the P15,000.00 spent for the tune-up, said expense being ordinary for the use and preservation of the van.
+
+A456b:
+
+Tito, the bailee, shall bear the costs for the fuel and other materials as they are considered ordinary expenses for the use and preservation of the thing loaned. (Art. 1941, NCC)
+
+A456c:
+
+NO, Pedro cannot demand the return of the van until after the expiration of the one- year period stipulated. However, if in the meantime he should have urgent need of the van, he may demand its return or temporary use.
+
+A456d:
+
+Both Tito and Pedro shall bear equally the costs of the extraordinary expenses, having been incurred on the occasion of actual use of the van by Tito, the bailee, even though he acted without fault.
+
+
+Question (1993 BAR)
+
+Q457:
+
+A, upon request, loaned his passenger jeepney to B to enable B to bring his sick wife from Paniqui, Tarlac to the Philippine General Hospital (PGH) in Manila for treatment. On the way back to Paniqui, after leaving his wife at the hospital, people stopped the passenger jeepney. B stopped for them and allowed them to ride on board, accepting payment from them just as in the case of ordinary passenger jeepneys plying their route. As B was crossing Bamban, there was an onrush of lahar from Mt. Pinatubo. The jeep that was loaned to him was wrecked.
+
+(a) What do you call the contract that was entered into by A and B with respect to the passenger jeepney that was loaned by A to B to transport the latter’s sick wife to Manila?
+
+(b) Is B obliged to pay A for the use of the passenger jeepney?
+
+(c) Is B liable to A for the loss of the jeepney?
+
+Suggested Answer
+
+A457a:
+
+The contract is called “commodatum”. (Art. 1933, NCC)
+
+A457b:
+
+NO, B is not obliged to pay A for the use of the passenger jeepney because commodatum is essentially gratuitous. (Art. 1933, NCC)
+
+A457c:
+
+YES, because B devoted the thing to a purpose different from that for which it has been loaned. (Art. 1942(2), NCC)
+
+
+Question (2016 BAR)
+
+Q458:
+
+With regard to an award of interest in the concept of actual and compensatory damages, please state the guidelines regarding the manner of computing legal interest in the following situations:
+
+Consider the issuance of BSP-MB Circular No. 799, which became effective on 01 July 2013.
+
+(a) When the obligation is breached and it consists in the payment of a sum of money like a loan or forbearance of money; and
+
+(b) When the obligation does not constitute a loan or forbearance of money.
+
+Suggested Answer
+
+A458a:
+
+When the obligation is breached and it consists in the payment of sum of money like a loan or forbearance of money, in the absence of stipulation, the rate of interest shall be the legal rate of 6% per annum, (Art. 2209, NCC) which was increased to 12% per NB Circular No. 905, series of 1982 to be computed from default. The 12% per annum legal interest shall apply only until 30 June 2013. From 01 July 2013, the new rate of 6% per annum shall be the prevailing rate of interest when applicable. (Nacar v. Gallery Frames, G.R. No. 189871, 13 Aug. 2013, applying BSP-MB Circular No. 799)
+
+A458b:
+
+The interest on the amount of damages awarded may be imposed at the discretion of the court at the rate of 6% per annum. No interest, however, shall be adjudged on unliquidated claims or damages, except when or until the demand can be established with reasonable uncertainty. Accordingly, where the demand is established with reasonable certainty, the interest shall begin to run from the time the claim is made judicially or extra- judicially, but when such certainty cannot be so reasonably established at the time the demand is made, the interest shall begin to run only from the date the judgment of the court is made (at which time the quantification of damages may be deemed to have been reasonably ascertained). The actual base for the computation of legal interest shall, in any case, be on the amount finally adjudged. (Nacar v. Gallery Frames, G.R. No. 189871, 13 Aug. 2013)
+
+
+Question (2022 BAR)
+
+Q459:
+
+Laica and Jessica, who are best friends, are both engaged in moneylending at predatory interest rates. Running out of funds, Laica borrows Php 2,000,000.00 from Jessica for two months at a monthly interest rate of 10%. Jessica releases the borrowed amount after Laica signs a promissory note. Laica then relends to Monica the borrowed amount of Php 2,000,000.00 for two months, at an interest rate of 30%. After two months, Laica fails to pay Jessica, prompting Jessica to file a collection suit against the former, for the Php 2,000,000.00 principal and 10% interest per month pursuant to their agreement. Laica counters that the monthly interest rate of 10% is exorbitant and should be reduced to the legal rate of interest at 6% per annum. Which between the positions of Laica and Jessica is tenable? Explain briefly.
+
+Suggested Answer
+
+A459:
+
+LAICA’S position is tenable. The imposition of an unconscionable rate of interest on a money debt, even if knowingly and voluntarily assumed, is immoral and unjust. Interest rates must be viewed merely as compensation to the creditor for money lent to another which he or she could have otherwise used for his or her own purposes at the time it was lent. As such, the interest rates must be reasonable and should not be a means for predatory gain. (Megalopolis Properties Inc. v. D'Nhew Lending Corporation, G.R. No. 243891, 07 May 2021)
+
+The interest rate of 10% per month imposed by Laica which translates to 120% per annum or 20 times the legal rate of interest is clearly excessive and unconscionable and while it may not be contrary to law, it is contrary to morals. Thus, Laica should be held liable for legal interest from the date of default. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (1998 BAR)
+
+Q460:
+
+X, who has a savings deposit with Y Bank in the sum of P1,000,000.00 incurs a loan obligation with the said Bank in the sum of P800,000.00 which has become due. When X tries to withdraw his deposit, Y Bank allows only P200,000.00 to be withdrawn, less service charges, claiming that compensation has extinguished its obligation under the savings account to the concurrent amount of X’s debt. X contends that compensation is improper when one of the debts, as here, arises from a contract of deposit. Assuming that the promissory note signed by X to evidence the loan does not provide for compensation between said loan and his savings deposit, who is correct?
+
+Suggested Answer
+
+A460:
+
+Y Bank is correct. Art. 1287, NCC does not apply. All the requisites of Art. 1279, NCC are present. In the case of Gullas v. PNB (G.R. No. L-43191, 13 Nov. 1935), the Court held: “The Civil Code contains provisions regarding compensation (set off) and deposit. These portions of Philippine Law provide that compensation shall take place when two persons are reciprocally creditor and debtor of each other. In this connection, it has been held that the relation existing between a depositor and a bank is that of creditor and debtor… As a general rule, a bank has a right of set off of the deposits in its hands for the payment of any indebtedness to it on the part of a depositor.” Hence, compensation took place between the mutual obligations of X and Y Bank.
+
+
+Question (1997 BAR)
+
+Q461:
+
+In order to secure a bank loan, XYZ Corporation surrendered its deposit certificate, with a maturity date of 01 Sept. 1997 to the bank. The corporation defaulted on the due repayment of the loan, prompting the bank to encash the deposit certificate. XYZ Corporation questioned the above action taken by the bank as being a case of pactum commissorium. The bank disagrees. What is your opinion?
+
+Suggested Answer
+
+A461:
+
+There is no pactum commissorium here. Deposits of money in banks and similar institutions are governed by the provisions on simple loans. (Art. 1980, NCC) The relationship between the depositor and a bank is one of creditor and debtor. Basically, this is a matter of compensation as all the elements of compensation are present in this case. (BPI v. Court of Appeals, G.R. No. 104612, 10 May 1994)
+
+
+Question (2010 BAR)
+
+Q462:
+
+What is the difference between "guaranty" and "suretyship"?
+
+Suggested Answer
+
+A462:
+
+Guaranty and Suretyship distinguished:
+
+1. The obligation in guaranty is secondary; whereas, in suretyship, it is primary.
+
+2. In guaranty, the undertaking is to pay if the principal debtor cannot pay; whereas, in suretyship, the undertaking is to pay if the principal debtor does not pay.
+
+3. In guaranty, the guarantor is entitled to the benefit of excussion; whereas, in suretyship the surety is not entitled.
+
+4. Liability in guaranty depends upon an independent agreement to pay the obligations of the principal if they fail to do so; whereas, in suretyship, the surety assumes liability as a regular party.
+
+5. The guarantor insures the solvency of the principal debtor; whereas, the surety insures the debt.
+
+6. In a guaranty, the guarantor is subsidiarily liable; whereas, in a suretyship, the surety binds himself solidarity with the principal debtor. (Art. 2047, NCC)
+
+
+Question (2013 BAR)
+
+Q463:
+
+Amador obtained a loan of P300,000 from Basilio payable on 25 Mar. 2012. As security for the payment of his loan, Amador constituted a mortgage on his residential house and lot in Basilio's favor. Cacho, a good friend of Amador, guaranteed and obligated himself to pay Basilio, in case Amador fails to pay his loan at maturity.
+
+1) If Amador fails to pay Basilio his loan on 25 Mar. 2012, can Basilio compel Cacho to pay?
+
+(A) No, Basilio cannot compel Cacho to pay because as guarantor, Cacho can invoke the principle of excussion, i.e., all the assets of Basilio must first be exhausted.
+
+(B) No, Basilio cannot compel Cacho to pay because Basilio has not exhausted the available remedies against Amador.
+
+(C) Yes, Basilio can compel Cacho to pay because the nature of Cacho's undertaking indicates that he has bound himself solidarily with Amador.
+
+(D) Yes, Basilio can compel Cacho who bound himself to unconditionally pay in case Amador fails to pay; thus the benefit of excussion will not apply.
+
+2) If Amador sells his residential house and lot to Diego, can Basilio foreclose the real estate mortgage?
+
+(A) Yes, Basilio can foreclose the real estate mortgage because real estate mortgage creates a real right that attaches to the property.
+
+(B) Yes, Basilio can foreclose the real estate mortgage. It is binding upon Diego as the mortgage is embodied in a public instrument.
+
+(C) No, Basilio cannot foreclose the real estate mortgage. The sale confers ownership on the buyer, Diego, who must therefore consent.
+
+(D) No, Basilio cannot foreclose the real estate mortgage. To deprive the new owner of ownership and possession is unjust and inequitable.
+
+Suggested Answer
+
+A463a:
+
+(B) Basilio has in his favor a Real Estate mortgage and he should exhaust his legal remedies against Amador. (Art. 2058, NCC)
+
+A463b:
+
+(A) Art. 2126, NCC. The mortgage directly and immediately subjects the property upon which it is imposed, whoever the possessor may be to the fulfillment of the obligation for whose security it was constituted.
+
+
+Question (2019 BAR)
+
+Q464:
+
+C Corp. entered into a contract with D Inc. for the construction of the latter’s production warehouse. In consideration thereof, D Inc. was obliged to pay C Corp. the amount of P50,000,000.00 within a period of one (1) month from the time of the project’s completion. To secure the payment of the said sum, D. Inc entered into a surety agreement with S Company. After more than a month from the completion date of the project, C Corp. remained unpaid. Claiming that it was suffering from serious financial reverses, D Inc, asked C Corp. for an extension of three (3) months to pay the P50,000,000.00 it still owed to which C Corp. agreed. However, after more than (3) months, D Inc. still refused to pay. Hence, C Corp. proceeded to collect the above sum from the surety, S Company. For its part, S Company refused the claim and raised the defense that the extension of time granted by C Corp. to D Inc. without its consent released it from liability.
+
+a. Will the defense of S Company against the claim hold water? Explain.
+
+b. Assuming that S Company instead refused the claim on the ground that C Corp. has yet to exhaust D Inc.’s property to satisfy the claim before proceeding against it, will this defense prosper? Explain.
+
+Suggested Answer
+
+A464a:
+
+YES, the defense is tenable. As a rule, an extension granted by the creditor to the debtor without the knowledge and consent of the guarantor extinguishes the guaranty. (Art. 2079, Civil Code.) This provision of the law has been held to be applicable to a surety. (Autocorp Group v. Intra Strata Assurance Corporation, G.R. No. 166662, 27 June 2008 citing Manila Surety and Fidelity Co., Inc. vs. Batu Corporation and Company, G.R. No. L-9353, 21 May 1957) An essential alteration in the terms of the loan agreement without the consent of the surety extinguishes the latter's obligation. Thus, any agreement between the creditor and the principal debtor which essentially varies the terms of the principal contract, without the consent of the surety, will release the surety from liability. (Security Bank and Trust Co. vs. Cuenca G.R. No. 138544, 03 Oct. 2000) By agreeing to extend the term of the loan D without the knowledge of S, the latter is released from liability. (Central Bar Q&A by Paguirigan, 2023)
+
+A464b:
+
+NO, the defense of S company will not prosper. The liability of a surety is different from that of a guarantor because while the latter is entitled to the benefit of excussion, the former is not. Hence, the creditor may proceed directly against the surety without the need of going against the principal debtor. Under the law, if a person binds himself solidarily with the principal debtor, the contract is one of suretyship and as such the provisions of the Code on solidary obligations shall apply. In a solidary obligation, the creditor may proceed against anyone of the solidary debtors or some or all of them simultaneously. (Art. 1216, NCC). Thus, there is no need for C to exhaust the properties of D before proceeding against S. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2018 BAR)
+
+Q465:
+
+Sebastian, who has a pending assessment from the Bureau of Internal Revenue (BIR), was required to post a bond. He entered into an agreement with Solid Surety Company (SSC) for SSC to issue a bond in favor of the BIR to secure payment of his taxes, if found to be due. In consideration of the insurance of the bond, he executed and Indemnity Agreement with SSC whereby he agreed to indemnify the latter in the event that he was found liable to pay the tax. The BIR eventually decided against Sebastian, and judicially commenced an action against both Sebastian and SSC to recover Sebastian’s unpaid taxes. Simultaneously, BIR also initiated action to foreclose on the bond. Even before paying the BIR, SSC sought indemnity from Sebastian on the basis of the Indemnity Agreement. Sebastian refused to pay since SSC had not paid the BIR anything yet, and alleged that the provision in the Indemnity Agreement which allowed SSC to recover from him, by mere demand, even if SSC had not yet paid the creditor, was void for being contrary to law and public policy. Can Sebastian legally refuse to pay?
+
+Suggested Answer
+
+A465:
+
+NO, Sebastian cannot legally refuse to pay. A stipulation in an indemnity agreement providing that the indemnitor shall pay the surety as soon as the latter becomes liable to make payment to the creditor under the terms of the bond, regardless of whether the surety has made payment actually or not, is valid and enforceable; in accordance therewith, the surety may demand from the indemnitor even before the creditor has paid. (Security Bank and Trust Co., Inc. v. Globe Assurance Co., Inc., 58 OG 3708, 30 Apr. 1962) Under the terms of the contract, Sebastian’s obligation to indemnify became due and demandable from the moment he has incurred liability and not from the moment of payment. (UPLC Suggested Answers)
+
+
+Question (1997 BAR)
+
+Q466:
+
+AB sold to CD a motor vehicle for and in consideration of P120,000, to be paid in twelve monthly equal instalments of P10,000.00, each instalment being due and payable on the 15th day of each month starting Jan. 1997. To secure the promissory note, CD (a) executed a chattel mortgage on the subject motor vehicle, and (b) furnished a surety bond issued by Philamlife. CD failed to pay more than two (2) instalments. AB went after the surety but he was only able to obtain three-fourths (3/4) of the total amount still due and owing from CD. AB seeks your advice on how he might, if at all recover the deficiency. How would you counsel AB?
+
+Suggested Answer
+
+A466:
+
+YES, he can recover the deficiency. The action of AB to go after the surety bond cannot be taken to mean a waiver of his right to demand payment for the whole debt. The amount received from the surety is only payment pro tanto, and an action may be maintained for a deficiency debt.
+
+
+Question (2011 BAR)
+
+Q467:
+
+The right of a mortgagor in a judicial foreclosure to redeem the mortgaged property after his default in the performance of the conditions of the mortgage but before the sale of the mortgaged property or confirmation of the sale by the court, is known as
+
+(A) accion publiciana.
+(B) equity of redemption.
+(C) pacto de retro.
+(D) right of redemption.
+
+Suggested Answer
+
+A467:
+
+(B) equity of redemption.
+
+
+Question (2013 BAR)
+
+Q468:
+
+Lito obtained a loan of P1,000,000 from Ferdie, payable within one year. To secure payment, Lito executed a chattel mortgage on a Toyota Avanza and a real estate mortgage on a 200-square meter piece of property.
+
+(a) Would it be legally significant - from the point of view of validity and enforceability - if the loan and the mortgages were in public or private instruments?
+
+(b) Lito's failure to pay led to the extra-judicial foreclosure of the mortgaged real property. Within a year from foreclosure, Lito tendered a manager's check to Ferdie to redeem the property. Ferdie refused to accept payment on the ground that he wanted payment in cash: the check does not qualify as legal tender and does not include the interest payment. Is Ferdie's refusal justified?
+
+Suggested Answer
+
+A468a:
+
+From the point of view of validity and enforceability, there would be legal significance if the mortgage was in public or private instrument. As for the loan, there is no legal significance except if interest were charged on the loan, in which case the charging of interest must be in writing. A contract of loan is a real contract and is perfected upon the delivery of the object of the obligation (Art. 1914, NCC). Thus, a contract of loan is valid and enforceable even if it is neither in a private nor in a public document. As a rule, contracts shall he obligatory in whatever form they may have been entered into provided all the essential requisites for their validity are present. With regard to its enforceability, a contract of loan is not among those enumerated under Art. 1403(2), NCC, which are covered by the Statute of Frauds. It is important to note that under Art. 1358, NCC, all other contracts where the amount involved exceeds five hundred pesos must appear in writing, even a private one. However, the requirement is not for the validity of the contract, but only for its greater efficacy.
+
+With regard the chattel mortgage, Act No. 1508, the Chattel Mortgage Law, requires an affidavit of good faith stating that the chattel mortgage is supposed to stand as security for the loan; thus, for validity of the chattel mortgage, it must be in a public document and recorded in the Chattel Mortgage Register in the Registry of Deeds. A real estate mortgage under the provisions of Art. 2125, NCC requires that in order that a mortgage may be validly constituted the document in which it appears be recorded. If the instrument is not recorded, the mortgage is nevertheless valid and binding between the parties. Hence, for validity of both chattel and real estate mortgages, they must appear in a public instrument. But for purposes of enforceability, it is submitted that the form of the contract, whether in a public or private document, would be immaterial (Mobil Oil v. Diocares, G.R. No. L-26371, 30 Sept. 1969). Also, under Art. 1358, NCC, acts and contracts which have for their object the creation or transmission of real rights over immovable property must be in a public document fur greater efficacy, and a real estate mortgage is a real right over immovable property.
+
+A468b:
+
+Ferdie’s refusal is justified. A check, whether a manager’s check or ordinary check, is not legal tender, and an offer of a check in payment of a debt is not a valid tender if payment and may be refused receipt by the obligee or creditors. (Philippine Airlines v. Court of Appeals, GR. No. L49188, 30 Jan. 1990) Mere delivery of checks does not discharge the obligation under a judgment. A check shall produce the effect of payment only when they have been cashed or when through the fault of the creditor, they have been impaired. (Art. 1249, NCC)
+
+However, it is not necessary that the right of redemption be exercised by delivery of legal tender. A check may be used for the exercise of right of redemption, the same being a right and not an obligation. The tender of a check is sufficient to compel redemption but is not in itself a payment that relieves the redemptioner from his liability to pay the redemption price. (Bianca v. Gimenez, G.R. No. 132768, 09 Sept. 2005) Redemption within the period allowed by law is not a matter of intent but a question of payment of valid tender of full redemption price within the said period. Whether the redemption is being made under Act 3135 or under the General Banking Law, the mortgagor or his assignee is required to tender payment to make said redemption valid. (Heirs of Quisumbing v. PNB, GR. No. 178242, 20 Jan. 2009) Moreover, Ferdie's refusal was justified on the ground that the amount tendered does not include interest. In order to effect the redemption of the foreclosed property, the payment to the purchaser must include the following sums: (a) the bid price; (b) the interest on the bid price, computed at 1% per month; and (c) the assessments or taxes, if any, paid by the purchaser, with the same rate of interest (Sec. 28, Rules of Court). Unless there is an express stipulation to that effect, the creditor cannot be compelled to receive partial payment of the prestation. (Art. 1248, NCC)
+
+
+Question (2004 BAR)
+
+Q469:
+
+DPO went to a store to buy a pack of cigarettes worth P225.00 only. He gave the vendor, RRA, a P500-peso bill. The vendor gave him the pack plus P375.00 change. Was there a discount, an oversight, or an error in the amount given? What would be DPO’s duty, if any, in case of an excess in the amount of change given by the vendor? How is this situational relationship between DPO and RRA denominated? Explain.
+
+Suggested Answer
+
+A469:
+
+There was error in the amount of change given by RRA. This is a case of solutio indebiti in that DPO received something that is not due them. They have the obligation to return the P100.00; otherwise, they will unjustly enrich themselves at the expense of RRA. (Art. 2154, NCC)
+
+DPO has the duty to return to RRA the excess P100 as trustee under Art. 1456, NCC which provides: If property is acquired through mistake or fraud, the person obtaining it is, by force of law, considered a trustee of an implied trust for the benefit of the person from whom the property comes. There is, in this case, an implied or constructive trust in favor of RRA.
+
+
+Question (1995 BAR)
+
+Q470:
+
+Armando owns a row of residential apartments in San Juan, Metro Manila, which he rents out to tenants. On 01 Apr. 1991 he left for the United States without appointing any administrator to manage his apartments such that uncollected rentals accumulated for three (3) years. Amparo, a niece of Armando, concerned with the interest of her uncle, took it upon herself to administer the property. As a consequence, she incurred expenses in collecting the rents and in some instances even spent for necessary repairs to preserve the property.
+
+(a) What juridical relation between Amparo and Armando, if any, has resulted from Amparo’s unilateral act of assuming the administration of Armando’s apartments? Explain.
+
+(b) What rights and obligations, if any, does Amparo have under the circumstances? Explain.
+
+Suggested Answer
+
+A470a:
+
+A quasi-contract of negotiorum gestio existed between Amparo and Armando. She voluntarily took charge of the agency or management of the business or property of her uncle without any power from her uncle whose property was neglected. She is called the gestor negotiorum or officious manager. (Art. 2144, NCC)
+
+A470b:
+
+The following provisions state the rights and obligations of Amparo:
+
+Art. 2145. The officious manager shall perform his duties with all the diligence of a good father of a family, and pay the damages which through his fault or negligence may be suffered by the owner of the property or business under management.
+
+The courts may, however, increase or moderate the indemnity according to the circumstances of each case.
+
+Art. 2146. If the officious manager delegates to another person all or some of his duties, he shall be liable for the acts of the delegate, without prejudice to the direct obligation of the latter toward the owner of the business. The responsibility of two or more officious managers shall be solidary, unless management was assumed to save the thing or business from imminent danger.
+
+Art. 2147. The officious manager shall be liable for any fortuitous event: 1. If he undertakes risky operations which the owner was not accustomed to embark upon; 2. If he has preferred his own interest to that of the owner; 3. If he fails to return the property or business after demand by the owner; 4. If he assumed the management in bad faith.
+
+Art. 2148. Except when the management was assumed to save the property or business from imminent danger, the officious manager shall be liable for fortuitous events: (1) If he is manifestly unfit to carry on the management; (2) If by his intervention he prevented a more competent person from taking up the management.
+
+Art. 2149. The ratification of the management by the owner of the business produces the effects of an express agency, even if the business may not have been successful. 
+
+Art. 2150. Although the officious management may not have been expressly ratified, the owner of the property or business who enjoys the advantages of the same shall be liable for obligations incurred in his interest, and shall reimburse the officious manager for the necessary and useful expenses and for the damages which the latter may have suffered in the performance of his duties. The same obligation shall be incumbent upon him when the management had for its purpose the prevention of an imminent and manifest loss, although no benefit may have been derived.
+
+Art. 2151. Even though the owner did not derive any benefit and there has been no imminent and manifest danger to the property or business, the owner is liable as under the first paragraph of the preceding article, provided: 1. The officious manager has acted in good faith, and 2. The property or business is intact, ready to be returned to the owner.
+
+Art. 2152. The officious manager is personally liable for contracts which he has entered into with third persons, even though he acted in the name of the owner, and there shall be no right of action between the owner and third persons. These provisions shall not apply: 1. If the owner has expressly or tacitly ratified the management; or 2. When the contract refers to things pertaining to the owner of the business.
+
+
+Question (1993 BAR)
+
+Q471:
+
+In Sept. 1972, upon declaration of martial rule in the Philippines, A, together with his wife and children disappeared from his residence along A. Mabini Street. Ermita, Manila. B, his immediate neighbor, noticing that mysterious disappearance of A and his family, closed the doors and windows of his house to prevent it from being burglarized. Years passed without B hearing from A and his family, B continued taking care of A's house, even causing minor repairs to be done at his house to preserve it. In 1976, when business began to perk up in the area, an enterprising man, C, approached B and proposed that they build stores at the ground floor of the house and convert its second floor into a pension house. B agreed to C’s proposal and together they spent for the construction of stores at the ground floor and the conversion of the second floor into a pension house. While construction was going on, fire occurred at a nearby house. The houses at the entire block, including A's were burned. After the EDSA revolution in February 1986, A and his family returned from the United States where they took refuge in 1972. Upon learning of what happened to his house. A sued B for damages, B pleaded as a defense that he merely took charge of his house under the principle of negotiorum gestio. He was not liable as the burning of the house is a fortuitous event. Is B liable to A for damages under the foregoing circumstances?
+
+Suggested Answer
+
+A471:
+
+YES, he would be liable under Art. 2147 (1), NCC because he used the property for an operation which the operator is not accustomed to, and in so doing, he exposed them house to increased risk, namely the operation of a pension house on the second floor and stores on the first floor.
+
+
+Question (1992 BAR)
+
+Q472:
+
+In fear of reprisals from lawless elements besieging his barangay, X abandoned his fishpond, fled to Manila and left for Europe. Seeking that the fish in the fishpond were ready for harvest, Y, who is in the business of managing fishponds on a commission basis, took possession of the property, harvested the fish and sold the entire harvest to Z. Thereafter, Y borrowed money from W and used the money to buy new supplies of fish fry and to prepare the fishpond for the next crop.
+
+(a) What is the Juridical relation between X and Y during X's absence?
+
+(b) Upon the return of X to the barangay, what are the obligations of Y to X as regards the contract with Z?
+
+(c) Upon X's return, what are the obligations of X as regards Y's contract with W?
+
+(d) What legal effects will result if X expressly ratifies Y's management and what would be the obligations of X in favor of Y?
+
+Suggested Answer
+
+A472a:
+
+The juridical relation between X and Y is that of the quasicontract of “negotiorum gestio”. Y is the “gestor” or "officious manager" and X is the “owner.” (Art. 2144, NCC)
+
+A472b:
+
+Y must render an account of his operations and deliver to X the price he received for the sale of the harvested fish. (Art. 2145, NCC)
+
+A472c:
+
+X must pay the loan obtained by Y from W because X must answer for obligations contracted with third persons in the interest of the owner. (Art. 2150, NCC)
+
+A472d:
+
+Express ratification by X provides the effects of an express agency and X is liable to pay the commissions habitually received by the gestor as manager. (Art. 2149, NCC)
+
+
+Question (2012 BAR)
+
+Q473:
+
+Roberto was in Nikko Hotel when he bumped into a friend who was then on her way to a wedding reception being held in said hotel. Roberto alleged that he was then invited by his friend to join her at the wedding reception and carried the basket full of fruits which she was bringing to the affair. At the reception, the wedding coordinator of the hotel noticed him and asked him, allegedly in a loud voice, to leave as he was not in the guest list. He retorted that he had been invited to the affair by his friend, who however denied doing so. Deeply embarrassed by the incident, Roberto then sued the hotel for damages under Arts. 19 and 21 of the NCC. Will Roberto’s action prosper? Explain.
+
+Suggested Answer
+
+A473:
+
+It depends. While the hotel has the right to exclude an uninvited guest from the wedding reception, that does not give the hotel the license to humiliate Roberto. If the wedding coordinator of the hotel acted wrongfully e.g., with abuse of right, unfairly, or in a manner that exposed Roberto to unnecessary ridicule or shame, his action will pro-per. Otherwise, Roberto’s action will prosper. The hotel is liable for the wrongful acts of its employees.
+
+
+Question (2014 BAR)
+
+Q474:
+
+Mabuhay Elementary School organized a fieldtrip for its Grade VI students in Fort Santiago, Manila Zoo, and Star City. To be able to join, the parents of the students had to sign a piece of paper that reads as follows:
+
+"I allow my child (name of student), Grade – Section, to join the school’s field trip on 14 Feb. 2014. I will not file any claim against the school, administrator or teacher in case something happens to my child during the trip."
+
+Joey, a 7-year-old student of Mabuhay Elementary School was bitten by a snake while the group was touring Manila Zoo. The parents of Joey sued the school for damages. The school, as a defense, presented the waiver signed by Joey’s parents. Was there a valid waiver of right to sue the school? Why?
+
+Suggested Answer
+
+A474:
+
+NO, there was no valid waiver of the right to sue the school. A waiver to be valid must have three requisites 1) existence of the right; 2) legal capacity of the person waiving the right and 3) the waiver must not be contrary to law, morals, good customs, public order or public policy or prejudicial to a third person with a right recognized by law. In the case presented, the waiver may be considered contrary to public policy as it exonerates the school from liability for future negligence. The waiver in effect allows the school to not exercise even ordinary diligence.
+
+
+Question (2015 BAR)
+
+Q475:
+
+A driver of a bus owned by company Z ran over a boy who died instantly. A criminal case for reckless imprudence resulting in homicide was filed against the driver. He was convicted and was ordered to pay P2 Million in actual and moral damages to the parents of the boy who was an honor student and had a bright future. Without even trying to find out if the driver had assets or means to pay the award of damages, the parents of the boy filed a civil action against the bus company to make it directly liable for the damages.
+
+a. Will their action prosper?
+
+b. If the parents of the boy do not wish to file a separate civil action against the bus company, can they still make the bus company liable if the driver cannot' pay the award for damages? If so, what is the nature of the employer's liability and how may civil damages be satisfied?
+
+Suggested Answer
+
+A475a:
+
+YES, the action will prosper. The liability of the employer in this case may be based on quasi-delict and is included within the coverage of independent civil action. It is not necessary to enforce the civil liability based on culpa aquiliana that the driver or employee be proven to be insolvent since the liability of the employer for the quasi-delicts committed by their employees is direct and primary subject to the defense of due diligence on their part. (Arts. 2176 & 2180, NCC)
+
+A475b:
+
+YES, the parents of the boy can enforce the subsidiary liability of the employer in the criminal case against the driver. The conviction of the driver is a condition sine qua non for the subsidiary liability of the employer to attach. Proof must be shown that the driver is insolvent. (Art. 103, RPC)
+
+
+Question (2010 BAR)
+
+Q476:
+
+On 05 May 1989, 16-year-old Rozanno, who was issued a student permit, drove to school a car, a gift from his parents. On even date, as his class was scheduled to go on a field trip, his teacher requested him to accommodate in his car, as he did, four (4) of his classmates because the van rented by the school was too crowded. On the way to a museum which the students were scheduled to visit, Rozanno made a wrong maneuver, causing a collision with a jeepney. One of his classmates died. He and the three (3) others were badly injured.
+
+(a) Who is liable for the death of Rozanno’s classmate, and the injuries suffered by Rozanno and his 3 other classmates? Explain.
+
+(b) How about the damage to the jeepney? Explain.
+
+(c) Under the same facts, except the date of occurrence of the incident, this time in mid-1994, what would be your answer? Explain.
+
+Suggested Answer
+
+A476a:
+
+At the time the incident occurred in May 1989, Rozanno was still a minor. Being a minor, Art. 218, FC applies. Pursuant to Art. 218, FC, the school, its administrators, and teachers shall be liable for the acts of minor Rozanno because of the special parental authority and responsibility that they exercise over him. The authority applies to all authorized activities, whether inside or outside the premises of the school, entity, or institution. The field trip on which occasion Rozanno drove the car, was an authorized activity, and, thus, covered by the provision. Furthermore, the parents of Rozanno are subsidiarily liable pursuant to Art. 219, FC, and principally liable under Art. 221, FC if they are negligent.
+
+A476b:
+
+With respect to the damages caused to the jeepney, only Rozanno should be held liable because his negligence or tortuous act was the sole, proximate and immediate cause thereof.
+
+A476c:
+
+Since Rozanno was 16 years old in 1989, if the incident happened sometime in the middle of 1994, Rozanno have been 21 years old at the time. Hence, he was already of legal age. The law reducing the age of majority to 18 years took effect in December 1989. Being of legal age, Arts. 218, 219, and 221, FC, are no longer applicable. In such case, only Rozanno will be personally responsible for all the consequences of his act unless his school, or his parents were themselves also negligent and such negligence contributed to the happening of the incident. In that event, the school or his parents are not liable under Arts. 218, 218 or 221, FC, but will be liable under general provision on the NCC on quasi-delict.
+
+
+Question (2010 BAR)
+
+Q477:
+
+Primo owns a pet iguana which he keeps in a manmade pond enclosed by a fence situated in his residential lot. A typhoon knocked down the fence of the pond and the iguana crawled out of the gate of Primo’s residence. N, a neighbor who was passing by, started throwing stones at the iguana, drawing the iguana to move toward him. N panicked and ran but tripped on something and suffered a broken leg. Is anyone liable for N’s injuries? Explain.
+
+Suggested Answer
+
+A477:
+
+No one is liable. The possessor of an animal or whoever may make use of the same is responsible for the damage it may cause, although it may escape or be lost. This responsibility shall cease only in case the damage should come from force majeure or from the fault of the person who has suffered damage. (Art. 2183, NCC)
+
+
+Question (2006 BAR)
+
+Q478:
+
+Arturo sold his Pajero to Benjamin for P1 Million. Benjamin took the vehicle but did not register the sale with the LTO. He allowed his son Carlos, a minor who did not have a driver's license, to drive the car to buy pan de sal in a bakery. On the way, Carlos driving in a reckless manner, sideswiped Dennis, then riding a bicycle. As a result, he suffered serious physical injuries. Dennis filed a criminal complaint against Carlos for reckless imprudence resulting in serious physical injuries.
+
+(a) Can Dennis file an independent civil action against Carlos and his father Benjamin for damages based on quasi-delict? Explain.
+
+(b) Assuming Dennis' action is tenable, can Benjamin raise the defense that he is not liable because the vehicle is not registered in his name? Explain.
+
+Suggested Answer
+
+A478a:
+
+YES, Dennis can file an independent civil action against Carlos and his father for damages based on quasi-delict there being an act or omission causing damage to another without contractual obligation. Under Sec. 1 of Rule 111 of the 2000 Rules on Criminal Procedure, what is deemed instituted with the criminal action is only the action to recover civil liability arising from the act or omission punished by law. An action based on quasi-delict is no longer deemed instituted and may be filed separately. (Sec. 3, Rule 111, 2000 Rules of Criminal Procedure)
+
+A478b:
+
+NO, Benjamin cannot raise the defense that the vehicle is not registered in his name. His liability, vicarious in character, is based on Art. 2180 because he is the father of a minor who caused damage due to negligence. While the suit will prosper against the registered owner, it is the actual owner of the private vehicle who is ultimately liable. (Duavit v. Court of Appeals, G.R. No. L-29759, 18 May 1989) The purpose of car registration is to reduce difficulty in identifying the party liable in case of accidents. (Villanueva v. Domingo, G.R. No. 144274, 14 Sept. 2004)
+
+
+Question (2006 BAR)
+
+Q479:
+
+Tony bought a Ford Expedition from a car dealer in Muntinlupa City. As payment, Tony issued a check drawn against his current account with Premium Bank. Since he has a good reputation, the car dealer allowed him to immediately drive home the vehicle merely on his assurance that his check is sufficiently funded. When the car dealer deposited the check, it was dishonored on the ground of “Account Closed.” After an investigation, it was found that an employee of the bank misplaced Tony's account ledger. Thus, the bank erroneously assumed that his account no longer exists. Later it turned out that Tony's account has more than sufficient funds to cover the check. The dealer however, immediately filed an action for recovery of possession of the vehicle against Tony for which he was terribly humiliated and embarrassed. Does Tony have a cause of action against Premium Bank? Explain.
+
+Suggested Answer
+
+A479:
+
+YES, Tony may file an action against Premium Bank for damages under Art. 2176, NCC. Even if there exists a contractual relationship between Tony and Premium Bank, an action for quasi-delict may nonetheless prosper. The Supreme Court has consistently ruled that the act that breaks the contract may also be a tort. There is a fiduciary relationship between the bank and the depositor, imposing utmost diligence in managing the accounts of the depositor. The dishonor of the check adversely affected the credit standing of Tony; hence, he is entitled to damages. (Singson v. BPI, G.R. No. L-24932, 27 June 1968; American Express International, Inc. v. IAC, G.R. No. 72383, 09 Nov. 1988; Consolidated Bank and Trust v. Court of Appeals, G.R. No. L70766 09 Nov. 1998)
+
+
+Question (2005 BAR)
+
+Q480:
+
+Under the law on quasi-delict, aside from the persons who caused injury to persons, who else are liable under the following circumstances:
+
+(a) When a 7-year-old boy injures his playmate while playing with his father's rifle. Explain.
+
+(b) When a domestic helper, while haggling for a lower price with a fish vendor while buying foodstuffs for her employer's family, slaps the fish vendor, causing her to fall and sustain injuries. Explain.
+
+(c) A carpenter in a construction company accidentally hits the right foot of his coworker with a hammer. Explain.
+
+(d) A 15-year-old high school student stabs his classmate who is his rival for a girl while they were going out of the classroom after their last class. Explain.
+
+(e) What defense, if any, is available to them?
+
+Suggested Answer
+
+A480a:
+
+The parents of the 7-year-old boy who caused injury to his playmate are liable under Art. 219, FC, in relation to Art. 2180, NCC, since they exercise parental authority over the person of the boy. (Tamargo v. Court of Appeals, G.R. No. 85044, 03 June 1992; Elcano v. Hill, G.R. No. L-24803, 26 May 1977)
+
+A480b:
+
+Employer of the domestic helper who slapped a fish vendor. Under Art. 2180(5), NCC, "employers shall be liable for the damages caused by their employees and household helpers acting within the scope of their assigned tasks, even though the former is not engaged in any business or industry."
+
+A480c:
+
+The owner of the construction company. Art. 2180(4) states that "the owners and managers of an establishment or enterprise are likewise responsible for damages caused by their employees in the service of the branches in which the latter are employed or on the occasion of their functions."
+
+A480d:
+
+The school, teacher, and administrator as they exercise special parental authority. (Art. 2180(7), NCC, in relation to Arts. 218 & 219, FC)
+
+A480e:
+
+The defense that might be available to them is the observance of a good father of the family to prevent the damage. (Art. 2180(8), NCC)
+
+
+Question (2004 BAR)
+
+Q481:
+
+OJ was employed as professional driver of MM Transit bus owned by Mr. BT. In the course of his work, OJ hit a pedestrian who was seriously injured and later died in the hospital because of the accident. The victim’s heirs sued the driver and the owner of the bus for damages. Is there a presumption in this case that Mr. BT, the owner, had been negligent? If so, is the presumption absolute or not? Explain.
+
+Suggested Answer
+
+A481:
+
+YES, there is a presumption of negligence on the part of the employer. However, such presumption is rebuttable. The liability of the employer shall cease when they prove that they observed the diligence of a good father of a family to prevent damage. (Art. 2180, NCC) When the employee causes damage due to his own negligence while performing his own duties, there arises the juris tantum presumption that the employer is negligent, rebuttable only by proof of observance of the diligence of a good father of a family. (Metro Manila Transit v. Court of Appeals, G.R. No. 104408, 21 June 1993; Delsan Transport Lines v. C&A Construction, G.R. No. 156034, 01 Oct. 2003) Likewise, if the driver is charged and convicted in a criminal case for criminal negligence, BT is subsidiarily liable for the damages arising from the criminal act.
+
+
+Question (2003, 1997, 1992 BAR)
+
+Q482:
+
+As a result of a collision between the taxicab owned by A and another taxicab owned by B, X, a passenger of the first taxicab, was seriously injured. X later filed a criminal action against both drivers.
+
+(a) May both taxicab owners raise the defense of due diligence in the selection and supervision of their drivers to be absolved from liability for damages to X? Reason.
+
+(b) Is it necessary for X to reserve his right to institute a civil action for damages against both taxicab owners before he can file a civil action for damages against them? Why?
+
+Suggested Answer
+
+A482a:
+
+It depends. If the civil action is based on a quasi-delict the taxicab owners may raise the defense of diligence of a good father of a family in the selection and supervision of the driver; if the action against is based on culpa contractual or civil liability arising from a crime, they cannot raise the defense.
+
+A482b:
+
+It depends. If the separate civil action is to recover damages arising from the criminal act, reservation is necessary. If the civil action against the taxicab owners is based on culpa contractual, or on quasi-delict, there is no need for reservation.
+
+
+Question (2002, 1998, 1996 BAR)
+
+Q483:
+
+A Gallant driven by John and owned by Art, and a Corolla driven by its owner, Gina, collided somewhere along Adriatico Street. As a result of the accident, Gina had a concussion. Subsequently, Gina brought an action for damages against John and Art. There is no doubt that the collision is due to John's negligence. Can Art, who was in the vehicle at the time of the accident, be held solidarily liable with his driver, John?
+
+Suggested Answer
+
+A483:
+
+YES. Art may be held solidarily liable with John, if it was proven that he could have prevented the misfortune with the use of due diligence. Art. 2184, NCC provides: "In motor vehicle mishaps, the owner is solidarily liable with his driver, if the former, who was in the vehicle, could have, by the use of the due diligence, prevented the misfortune." (Chapman v. Underwood, G.R. No. L-9010, 28 Mar. 1914; Caedo v. Yu Khe Thai, G.R. No. L-20392, 18 Dec. 1968)
+
+---
+
+Question (1991 BAR)
+
+Q484:
+
+Romano was bumped by a minivan owned by the Solomon School of Practical Arts (SSPA). The minivan was driven by Peter, a student assistant whose assignment was to clean the school passageways daily one hour before and one hour after regular classes, in exchange for free tuition. Peter was able to drive the school vehicle after persuading the regular driver, Paul, to turn over the wheel to him (Peter). Romano suffered serious physical injuries. The accident happened at night when only one headlight of the vehicle was functioning, and Peter only had a student driver's permit. Consequently, Peter was convicted in the criminal case. Thereafter, Romano sued for damages against Peter and SSPA.
+
+(a) Will the action for damages against Peter and SSPA prosper? 
+
+(b) Will your answer be the same if, Paul, the regular driver, was impleaded as party defendant for allowing Peter to drive the minivan without a regular driver's license? 
+
+(c) Is the exercise of due diligence in the selection and supervision of Peter and Paul a material issue to be resolved in this case?
+
+Suggested Answer
+
+A484:
+
+(a) YES, the action will prosper because at the time he drove the vehicle, he was not performing his assigned tasks as provided for by Art. 2180, NCC. With respect to SSPA, it is not liable for the acts of Peter because the latter was not an employee as held by Supreme Court in Filamer Christian Institute v. Court of Appeals (G.R. No. 75112, 17 Aug. 1991). Peter belongs to a special category of students who render service to the school in exchange for free tuition fees.
+
+The defenses available include: a. That the defendant was not negligent or that he exercised due diligence; (Art. 2176, NCC) b. That although the defendant is negligent his negligence is not the proximate cause of the injury; (Art. 2179, NCC) c. That the plaintiff's own negligence was the immediate and proximate cause of his injury; (Art. 2179, NCC) d. That the person vicariously liable has observed all the diligence of a good father of a family to prevent damage; (Art. 2180, NCC) e. That the cause of action has prescribed after the lapses; and f. The fact that the plaintiff had committed contributory negligence is a partial defense. (Art. 2179, NCC)
+
+(b) I would maintain the same answer because the incident did not occur while the employee was in the performance of his duty as such employee. The incident occurred at nighttime, and in any case, there was no indication in the problem that he was performing his duties as a driver. 
+
+(c) In the case of Peter, if he were to be considered as employee, the exercise of due diligence in the selection and supervision of peter would not be a material issue since the conviction of Peter would result in a subsidiary liability where the defense would not be available by the employer. In the case of Paul, since the basis of subsidiary liability is the pater familias rule under Art. 2180, NCC, the defense of selection and supervision of the employee would be a valid defense.
+
+NOTE: It is recommended that the examiner exercise leniency and liberality in grading the answers given to this question. The term quasi-tort is not a part of legal developments in civil law. In Philippine legal tradition, quasi-delict has been treated as the closest civil law equivalent of the common law tort. In fact, in a number of Supreme Court decisions, the two terms have been considered synonymous. In reality, however, the common law tort is much broader in scope than the civil law quasidelict.
+
+In recent developments in common law, the concept of “quasi-torts” can be considered as the closest common law equivalent of the civil law concept of quasi-delict. This is because it is argued that the growing recognition of quasitorts as a source of obligation is hinged on the acceptance at common law of the civil law principles of quasi-delict.
+
+
+Question (2001 BAR)
+
+Q485:
+
+After working overtime up to midnight, Alberto, an executive of an insurance company drove a company vehicle to a favorite Videoke bar where he had some drinks and sang some songs with friends to "unwind". At 2:00 a.m., he drove home, but in doing so, he bumped a tricycle, resulting in the death of its driver. May the insurance company be held liable for the negligent act of Alberto? Why?
+
+Suggested Answer
+
+A485:
+
+YES. Art may be held solidary liable with John, if it was proven that the former could have prevented the misfortune with the use of due diligence. In motor mishaps, the owner is solidary liable with his driver, if the former, who was in the vehicle, could have, by the use of due diligence, prevented the misfortune. (Art. 2184, NCC)
+
+
+Question (2012 BAR)
+
+Q486:
+
+The following are the elements of quasi-delict, except: 
+
+(a) Act or omission 
+(b) Fault/negligence 
+(c) Damage/injury 
+(d) Pre-existing contract.
+
+Suggested Answer
+
+A486:
+
+(d) Pre-existing contract.
+
+
+Question (2010 BAR)
+
+Q487:
+
+Define quasi tort. Who are the persons liable under quasi torts and what are the defenses available to them?
+
+Suggested Answer
+
+A487:
+
+Quasi-tort is considered as the equivalent of quasi-delict. Hence, the rules of the latter pertaining to persons who can be held liable and their defenses would also apply.
+
+a. Those liable for quasi-delict include: 
+1. Those tortfeasors or the person causing damage to another through fault or negligence (Art. 2176, NCC); and 
+2. Persons vicariously liable under Art. 2180, NCC.
+
+
+Question (2019 BAR)
+
+Q488:
+
+In Jan. 2018, Mrs. A, a married woman on her 6th month of pregnancy, was crossing a street when she was suddenly hit by a car being recklessly driven by Mr. X. As a result, Mrs. A sustained serious injuries and further, suffered an unintentional abortion. Mrs. A was hospitalized for 2 months, during which she incurred ₱400,000.00 in medical fees. Her expenses were all duly substantiated by official receipts. During the two (2)-month period of her confinement, she was unable to report for work and earn any salary, which was established at the rate of ₱50,000.00 per month. Mrs. A then filed a civil case for damages against Mr. X.
+
+a. Based on the case filed by Mrs. A, what is the source of Mr. X's obligation to her as a result of his acts? Explain.
+
+b. May Mrs. A claim actual damages from Mr. X? If so, how much can Mrs. A claim? Explain. 
+
+c. May Mrs. A claim damages on behalf of her unborn baby? Explain.
+
+d. What must Mrs. A prove if she wants to recover moral damages from Mr. X?
+
+Suggested Answer
+
+A488:
+
+a. The source of obligation is quasi-delict because there were no pre-existing contractual relations between Mrs. A and Mr. X who are strangers and there was damage done. For Quasi-Delict to become a source of an obligation these elements should concur (1) there was damage to the plaintiff, (2) there is negligence by act or omission of which defendant or some person for whose acts he must respond was guilty, (3) in connection of cause and effect between such negligence and damage, and (4) there must be no preexisting contract. In this case there was a claim for quasidelict because all the elements mentioned above concur.
+
+b. YES, Mrs. A can claim actual damages amounting to P500,000. Under Art. 2199 of the NCC it provides that except as provided by law or by stipulation, one is entitled to actual or compensatory damages only for such pecuniary loss suffered by him as he has duly proved. The medical fees totaling P400,000 were duly substantiated by official receipts, Art. 2200 of the NCC also provides that indemnification for damages shall comprehend not only the value of the loss suffered, but also that of the profits which the obligee failed to obtain. The rate of her salary was established at P50,000 per month; thus, her inability to report for work and earn salary for two months entitled her to a total of P100,000. Mrs. A, therefore, can claim her expenses for medical fees and two months’ worth of salary the total of which is P500.000. 
+
+c. NO, Mrs. A cannot claim damages on behalf of her unborn baby. Birth determines personality. The Court has held that an action for pecuniary damages on account of personal injury or death pertains primarily to the one injured, and if no action for such damages could be instituted on behalf of the unborn child on account of the injuries it received, no such right of action could derivatively accrue to its parents or heirs.
+
+ALTERNATIVE ANSWER:
+
+YES, Mrs. A can claim damages on behalf of her unborn baby. The Court has held that a conceived child, although yet unborn, is given by law provisional personality of its own for all purposes favorable to it, as explicitly provided in Art. 40 of the NCC, which includes being a recipient of donations under Art. 742 of the NCC, as well as support. A claim for damages in favor of the unborn should also prosper.
+
+d. Mrs. A must prove the following: (1) that she suffered physical injuries; (2) that Mr. X committed a culpable act or omission; (3) that the wrongful act or omission of Mr. X is the proximate cause of the damages she sustained; and (4) that X’s act or omission is either a criminal offense resulting to physical injuries or a quasi-delict causing physical injuries. (Mendoza v. Gomez, G.R. No. 160110, 18 June 2014)
+
+
+Question (2017 BAR)
+
+Q489:
+
+Jovencio operated a school bus to ferry his two sons and five of their schoolmates from their houses to their school, and back. The parents of the five schoolmates paid for the service. One morning, Porfirio, the driver, took a short cut on the way to school because he was running late, and drove across an unmanned railway crossing. At the time, Porfirio was wearing earphones because he loved to hear loud music while driving. As he crossed the railway tracks, a speeding PNR train loudly blared its horn to warn Porfirio, but the latter did not hear the horn because of the loud music. The train inevitably rammed into the school bus. The strong impact of the collision between the school bus and the train resulted in the instant death of one of the classmates of Jovencio’s younger son.
+
+The parents of the fatality sued Jovencio for damages based on culpa contractual alleging that Jovencio was a common carrier; Porfirio for being negligent; and the PNR for damages based on culpa aquiliana. Jovencio denied being a common carrier. He insisted that he had exercised the diligence of a good father of a family in supervising Porfirio, claiming that the latter had had no history of negligence or recklessness before the fatal accident.
+
+A) Did his operation of the school bus service for a limited clientele render Jovencio a common carrier? Explain your answer.
+
+B) In accordance with your answer to the preceding question, state the degree of diligence to be observed by Jovencio, and the consequences thereof. Explain your answer. (Negligence, Standard of Care)
+
+C) Assuming that the fatality was a minor of only 15 years of age who had no earning capacityat the time of his death because he was still a student in high school, and the trial court is minded to award indemnity, what may possibly be the legal and factual justifications for the award of loss of earning capacity? Explain your answer. (In case of Death)
+
+Suggested Answer
+
+A489:
+
+A: Yes. Jovencio is a common carrier. The true test for a common carrier is not the quantity or extent of the business actually transacted, or the number and character of the conveyances used in the activity, but whether the undertaking is a part of the activity engaged in by the carrier that he has held out to the general public as his business or occupation.
+
+Jovencio operated the school bus as a business and not just as a casual occupation; he undertook to carry the students in established routes to and from the school; and he transported the students for a fee, Jovencio was a common carrier notwithstanding the limited clientele. 
+
+B: Jovencio, as a common carrier, must observe extraordinary diligence in the vigilance over the goods and for the safety of the passengers transported by them, according to all the circumstances of each case. A common carrier should “carry the passengers safely as far as human care and foresight can provide, using the utmost diligence of very cautious persons, with a due regard for all the circumstances.”
+
+C: If it can be shown that the deceased student was enrolled in a reputable institution and was able-bodied prior to his death, the basis for award of loss of earning capacity is the prevailing minimum wage at the time of the child’s death. The computation of the child’s life expectancy must be reckoned from the age of 21 years, which is the age when the child would have graduated from college and would have begun to work.
+
+
+Question (2022 BAR)
+
+Q490:
+
+Gio, single, joined a marathon organized by Takbo Co. For lack of alternative routes, the marathon course included a public road which was not blocked-off from vehicles. Takbo Co. solicited the sponsorship of Kotse Corp. for added financial support. Gio was hit by a jeepney driven by JD on the public road and died. The parents of Gio sued Takbo Co. and Kotse Corp. for damages. The court ruled that Kotse Corp. is solidarily liable for damages with Takbo Co. for being one of the principal movers of the event due to its sponsorship. Is the court correct? Explain briefly.
+
+Suggested Answer
+
+A490:
+
+NO, the court is not correct. To be liable for damages, the act or omission of the defendant must be the proximate cause of the resulting injury to the plaintiff. There must be proof of negligence and that the damage caused was the consequence of the negligence of the defendant. In this case, Kotse Corporation merely sponsored the event. Kotse Corporation's mere sponsorship of the marathon was, legally speaking, too remote to be the efficient and proximate cause of the injurious consequences. (Abrogar vs. Cosmos Bottling Corp., G.R. No. 164749, 15 Mar. 2017) There was no statement in the facts of the case that Kotse Corporation was involved in the actual conduct of the race or that it was guilty of negligence. Thus, it cannot be held liable for the resulting death of Gio. The liability for the death may be attributed solely to the organizer Takbo Co. for its negligence in failing to put up measures to ensure the safety of the participants in the marathon. (Central Bar Q&A by Paguirigan, 2023)
+
+
+Question (2018 BAR)
+
+Q491:
+
+Newlyweds Sam and Sienna had contracted with Sangria Hotel for their wedding reception. The couple was so unhappy with the service, claiming, among other things, that there was an unreasonable delay in the service of dinner and that certain items promised were unavailable. The hotel claims that, while there was a delay in the service of the meals, the same was occasioned by the sudden increase of guests to 450 from the guaranteed expected number of 350, as stated in the Banquet and Meeting Services Contract.
+
+In the action for damages for breach of contract instituted by the couple, they claimed that the Banquet and Meeting Services Contract was a contract of adhesion since they only provided the number of guests and chose the menu. On the other hand, the hotel’s defense was that the proximate cause of the complainant’s injury was the unexpected increase in their guests, and this was what set the chain of events that resulted in the alleged inconveniences.
+
+Does the doctrine of proximate cause apply in this case?
+
+Suggested Answer
+
+A491:
+
+NO, the doctrine does not apply. In the case of Sps. Guanio v. Makati Shangri-la Hotel (G.R. No. 190601, 07 Sept. 2011), the doctrine of proximate cause, is applicable only in actions for quasi-delicts, not in actions involving breach of contract. The doctrine is a device for imputing liability to a person where there is no relation between him and another party. Where, however, there is a pre-existing contractual relation between the parties, it is the parties themselves who make law between them. Here, there is a contract, the terms and conditions of such contract will govern the rights and obligations between the contracting parties in case of breach thereof, not the doctrine of proximate cause. (UPLC Suggested Answers)
+
+
+Question (2020-21 BAR)
+
+Q492:
+
+A 12-year-old seventh grade student living in the company of their parents brough a gun owned by the father to school. With it, the student shot a classmate who had been a bully. The student missed, sparing the bully. The bully’s parent, incensed by the event, sued the parents of the 12-year-old seventh grade student for damages. The defendant parents moved to dismiss the suit, claiming that they could never be held liable for damages since they did not shoot the bully themselves. Should the motion to dismiss be granted on this ground? Explain briefly.
+
+Suggested Answer
+
+A492:
+
+NO, the motion to dismiss filed by the parents should not be granted. The argument that no liability attached to them because they were not the ones who shot the bully does not hold water. Under the Family Code, parents and other persons exercising parental authority shall be civilly liable for the injuries and damages caused by the acts or omissions of their unemancipated children living in their company and under their parental authority subject to the appropriate defenses provided by the law. (Art. 221, FC) The NCC on quasi-delict provides that the obligation imposed by Art. 2176 is demandable not only for one’s own acts or missions but also for those persons for whom one is responsible. However, since the shooting happened inside the school, the child was under the special parental authority of the school (Art. 218, FC), it could be argued that the liability of the school is primary while that of the parents is subsidiary. (Art. 219, FC) (Bar Q&A by Paguirigan, 2022)
+
+
+Question (2016 BAR)
+
+Q493:
+
+Dr. Jack, a surgeon, holds clinic at the St. Vincent's Hospital and pays rent to the hospital. The fees of Dr. Jack are paid directly to him by the patient or through the cashier of the hospital. The hospital publicly displays in the lobby the names and specializations of the doctors associated or accredited by it, including that of Dr. Jack. Marta engaged the services of Dr. Jack because of recurring stomach pain. It was diagnosed that she is suffering from cancer and had to be operated on. Before the operation, she was asked to sign a "consent for hospital care," which reads:
+
+"Permission is hereby given to the medical, nursing and laboratory staff of the St. Vincent's Hospital to perform such procedures and to administer such medications and treatments as may be deemed necessary or advisable by the physicians of this hospital for and during the confinement."
+
+After the surgery, the attending nurses reported that two (2) sponges were missing. Later, Marta died due to complications brought about by the sponges that were left in her stomach. The husband of Marta sued the hospital and Dr. Jack for damages arising from negligence in the medical procedure. The hospital raised the defense that Dr. Jack is not its employee as it did not hire Dr. Jack nor pay him any salary or compensation. It has absolutely no control over the medical services and treatment being provided by Dr. Jack. Dr. Jack even signed an agreement that he holds the hospital free and harmless from any liability arising from his medical practice in the hospital.
+
+Is St. Vincent's Hospital liable for the negligence of Dr. Jack? Explain your answer.
+
+Suggested Answer
+
+A493:
+
+YES, St. Vincent’s Hospital is liable. In the case of Professional Services v. Agana (G.R. No. 126297 31 Jan. 2007), the Supreme Court held that the hospital is liable to the Aganas, not under the principle of respondent superior for lack of evidence of an employer-employee relationship with Dr. Ampil but under the principle of ostensible agency for the negligence of Dr. Ampil, pro hac vice, under the principle of corporate negligence for its failure to perform its duties as a hospital.
+
+While it is true that there was insufficient evidence that St. Vincent’s Hospital exercised the power of control or wielded such power over the means and the details of the specific process by which Dr. Jack applied his skills in Maria’s treatment, there is ample evidence that St. Vincent’s Hospital held out to the patient, Marta, that Dr. Jack was its agent (principle of ostensible agency). The two factor that determine apparent authority are present: (1) the hospital’s implied manifestation to the patient which led the latter to conclude that the doctor was the hospital’s agent; and (2) the patient’s reliance upon the conduct of the hospital and the doctor, consisted with ordinary care and prudence.
+
+The corporate negligence ascribed to St. Vincent’s Hospital is different from the medical negligence attributed to Dr. Jack. The duties of the hospital are distinct from those of the doctor-consultant practicing within its premises in relation to the patient; hence, the failure of St. Vincent’s Hospital to fulfill its duties as a hospital corporation gave rise to a direct liability to Marta distinct from that of Dr. Jack.
+
+
+Question (2002 BAR)
+
+Q494:
+
+Explain the concept of vicarious liability in quasidelicts.
+
+Suggested Answer
+
+A494:
+
+The doctrine of vicarious liability is that which renders a person liable for the negligence of others for whose acts or omission the law makes them responsible on the theory that they are under their control and supervision.
+
+
+Question (2007 BAR)
+
+Q495:
+
+Explain the following concepts and doctrines and give an example of each: 
+
+(a) Concept of trust de son tort (constructive trust); and 
+
+(b) Doctrine of discovered peril (last clear chance).
+
+Suggested Answer
+
+A495:
+
+(a) A constructive trust is a trust not created by any word or phrase, either expressly or impliedly, evincing a direct intention to create a trust, but is one that arises to satisfy the demands of justice. It does not come about by agreement or intention but mainly operation of law and construed as a trust against one who, by fraud, duress, or abuse of confidence, obtains or holds the legal right to property which he ought not, in equity and good conscience to hold. (Heirs of Lorenzo Yap v. Court of Appeals, G.R. No. 133047, 07 Aug. 1990)
+
+(b) The doctrine of last clear chance states that where the plaintiff was guilty of prior or antecedent negligence, but the defendant, who had the ultimate opportunity to avoid the impending harm failed to do so, it is the defendant who is liable for all the consequences of the accident notwithstanding the prior negligence of the plaintiff. An example is where a person was riding a pony on a bridge and improperly pulled the pony to the wrong side when he saw a car coming. The driver of the car did not stop or change direction, and nearly hit the horse, and the frightened animal jumped to its death. The driver of the car is guilty of negligence because he had a fair opportunity to avoid the accident and failed to avail himself of that opportunity. He is liable under the doctrine of last clear chance. (Picart v. Smith, G.R. No. L-12219, 15 Mar. 1918)
+
+
+Question (1990 BAR)
+
+Q496:
+
+Mr. and Mrs. R own a burned-out building, the firewall of which collapsed and destroyed the shop occupied by the family of Mr. and Mrs. S, which resulted in injuries to said couple and the death of their daughter. Mr. and Mrs. S had been warned by Mr. & Mrs. R to vacate the shop in view of its proximity to the weakened wall but the former failed to do so. Mr. & Mrs. S filed against Mr. and Mrs. R an action for recovery of damages the former suffered as a result of the collapse of the firewall. In defense, Mr. and Mrs. R rely on the doctrine of last clear chance alleging that Mr. and Mrs. S had the last clear chance to avoid the accident if only they heeded the former’s warning to vacate the shop, and therefore Mr. and Mrs. R’s prior negligence should be disregarded. If you were the judge, how would you decide the case? State your reasons.
+
+Suggested Answer
+
+A496:
+
+I would decide in favor of Mr. & Mrs. S. The proprietor of a building or structure is responsible for the damages resulting from its total or partial collapse, if it should be due to the lack of necessary repairs. (Art. 2190, NCC) As regards the defense of “last clear chance,” the same is not tenable because according to the SC the doctrine of last clear chance is not applicable to instances covered by Art 2190 of the NCC. (De Roy v. Court of Appeals, G.R. L-80718, 29 Jan. 1988) The role of the common law “last clear chance” doctrine in relation to Art. 2179, NCC is merely to mitigate damages within the context of contributory negligence. (Phoenix Construction, Inc. v. IAC, G.R. No. L-65295, 10 Mar. 1987)
+
+
+Question (2020-21 BAR)
+
+Q497:
+
+A 100-year-old tree inside a university was uprooted by strong winds cause by a super typhoon. This was despite the university’s prior efforts to maintain the strength of the tree’s roots. The tree was blown away until it hit a nearby fast-food restaurant where a Bar candidate was reviewing for the bar examinations. The bar candidate, who was then the only person dining inside the fast-food restaurant, suffered physical injuries. The super typhoon was enabled by climate change. Can the university be held liable for the physical injuries suffered by the Bar candidate? Explain briefly.
+
+Suggested Answer
+
+A497:
+
+NO, the university cannot be held liable for the physical injuries suffered by the Bar candidate. The facts clearly state that despite the efforts of the university to maintain the strength of the roots of the trees, it was still blown away due entirely to the occurrence of a fortuitous event which is the super typhoon. Under the law no person shall be liable for those events which could not be foreseen or even if foreseen were inevitable. (Art. 1174, NCC) The event which cause damage to the bar candidate was entirely independent of human will and neither was there participation of the university in the aggravation of the injury. To be liable for the damages caused, there must be fault or negligence concurring with the fortuitous event which is absent in this case.
+
+
+Question (2016 BAR)
+
+Q498:
+
+Dr. Jack, a surgeon, holds clinic at the St. Vincent’s Hospital and pays rent to the hospital. The fees of Dr. Jack are paid directly to him by the patient or through the cashier of the hospital. The hospital publicly displays in the lobby the names and specializations of the doctors associated or accredited by it, including that of Dr. Jack. Marta engaged the services of Dr. Jack because of recurring stomach pain. It was diagnosed that she is suffering from cancer and had to be operated on. Before the operation, she was asked to sign a “consent for hospital care,” which reads.
+
+“Permission is hereby given to the medical, nursing and laboratory staff of the St. Vincent’s Hospital to perform such procedures and to administer such medications and treatments as may be deemed necessary or advisable by the physicians of this hospital for and during the confinement.”
+
+After the surgery, the attending nurses reported that two (2) sponges were missing. Later, Marta died due to complications brought about by the sponges that were left in her stomach. The husband of Marta sued the hospital and Dr. Jack for damages arising from negligence in the medical procedure. The hospital raised the defense that Dr. Jack is not its employee as it did not hire Dr. Jack nor pay him any salary or compensation. It has absolutely no control over the medical services and treatment being provided by Dr. Jack. Dr. Jack even signed an agreement that he holds the hospital free and harmless from any liability arising from his medical practice in the hospital.
+
+Is St. Vincent’s Hospital liable for the negligence of Dr. Jack? Explain your answer.
+
+Suggested Answer
+
+A498:
+
+Yes, St. Vincent’s Hospital is liable. (Professional Services v. Agana, G.R. No.126297, January 31, 2007, 513 SCRA 478). While it is true that there was insufficient evidence that St. Vincent’s Hospital exercised the power of control over the means and the details of the specific process used by Dr. Jack in Marta’s treatment, there is ample evidence that St. Vincent’s Hospital held out to the patient that Dr. Jack was its agent (principle of ostensible agency). The two factors that determine apparent authority are present: (1) the hospital’s implied manifestation to the patient which led the latter to conclude that the doctor was the hospital’s agent; and (2) the patient’s reliance upon the conduct of the hospital and the doctor, consistent with ordinary care and prudence.
+
+The corporate negligence ascribed to St. Vincent’s Hospital is different from the medical negligence attributed to Dr. Jack. The duties of the hospital are distinct from those of the doctor-consultant practicing within its premises in relation to the patient; hence, the failure of St. Vincent’s Hospital to fulfill its duties as a hospital corporation gave rise to a direct liability to Marta distinct from that of Dr. Jack.
+
+
+Question (2012 BAR)
+
+Q499:
+
+Liwayway Vinzons-Chato was then the Commissioner of Internal Revenue while Fortune Tobacco Corporation is an entity engaged in the manufacture of different brands of cigarettes, among which are "Champion," "Hope," and "More" cigarettes. Fortune filed a complaint against Vinzons-Chato to recover damages for the alleged violation of its constitutional rights arising from Vinzons-Chato’s issuance of Revenue Memorandum Circular No. 37-934 (which re-classified Fortune cigarettes as locally manufactured with foreign brands and thereby imposed higher taxes), which the Supreme Court later declared invalid.
+
+Vinzons-Chato filed a Motion to dismiss arguing that she cannot be held liable for damages for acts she performed while in the discharge of her duties as BIR Commissioner. Is she correct? Explain.
+
+Suggested Answer
+
+A499:
+
+YES. As a general rule, a public officer is not liable for acts performed in the discharge of his duties. The exceptions are when he acted with malice, bad faith, or gross negligence in the performance of his duty, or when his act is in violation of the constitutionally guaranteed rights and liberties of a person under Art. 32.
+
+
+Question (2002 BAR)
+
+Q500:
+
+A van owned by Orlando and driven by Diego, while negotiating a downhill slope of a city road, suddenly gained speed, obviously beyond the authorized limit in the area, and bumped a car in front of it, causing severe damage to the care and serious injuries to its passengers. Orlando was not in the car at the time of the incident. The car owner and the injured passengers sued Orlando and Diego for damages caused by Diego’s negligence. In their defense, Diego claims that the downhill slope caused the van to gain speed and that, as he stepped on the brakes to check the acceleration, the brakes locked, causing the van to go even faster and eventually to hit the car in front of it. Orlando and Diego contend that the sudden malfunction of the van’s brake system is a fortuitous even and that, therefore, they are exempt from any liability. Is this contention tenable? Explain.
+
+Suggested Answer
+
+A500:
+
+NO. Mechanical defects of a motor vehicle do not constitute fortuitous event, since the presence of such defects would have been readily detected by diligent maintenance check. The failure to maintain the vehicle in safe running condition constitutes negligence.
+
+
+Question (2013, 2002, 1994 BAR)
+
+Q501:
+
+A collision occurred at an intersection involving a bicycle and a taxicab. Both the bicycle rider (a businessman then doing his morning exercise) and the taxi driver claimed that the other was at fault. Based on the police report, the bicycle crossed the intersection first but the taxicab, crossing at a fast clip from the bicycle's left, could not brake in time and hit the bicycle's rear wheel, toppling it and throwing the bicycle rider into the sidewalk five meters away.
+
+The bicycle rider suffered a fractured right knee, sustained when he fell on his right side on the concrete sidewalk. He was hospitalized and was subsequently operated on, rendering him immobile for three (3) weeks and requiring physical rehabilitation for another (3) months. In his complaint for damages, the rider prayed for the award of P1,000,000 actual damages, P200,000 moral damages, P200,000 exemplary damages, P100,000 nominal damages and P50,000 attorney's fees.
+
+Assuming the police report to be correct and as the lawyer for the bicycle rider, what evidence (documentary and testimonial) and legal arguments will you present in court to justify the damages that your client claims?
+
+Suggested Answer
+
+A501:
+
+As lawyer for the bicycle rider, I will present in addition to the police report, the medical abstracts to the injuries sustained by my client as well as copies of receipts of expenses incurred in connection with the treatment of his injuries. I will also present the testimony of my client and perhaps a bystander who witnessed the incident as to the circumstances surrounding the accident.
+
+As for the legal argument, I will rebut the claim of negligence on my client’s part by presenting evidence that my client has crossed the intersection ahead of the taxicab and it was the taxicab driver who rapidly cut the path of the bicycle which caused the collision. Also, even assuming that there was contributory negligence on the part of my client, I will argue that it will not preclude the recovery of damages but may only mitigate the damages to which he is entitled.
+
+
+Question (2020-21 BAR)
+
+Q502:
+
+A 100-year-old tree inside a university was uprooted by strong winds caused by a super typhoon. This was despite the university’s prior efforts to maintain the strength of the tree’s roots. The tree was blown away until it hit a nearby fast-food where a Bar candidate was reviewing for the Bar Examinations. The Bar candidate, who was then the only person dining inside the fastfood restaurant, suffered physical injuries. The super typhoon was enabled by climate change.
+
+Can the university be held liable for the physical injuries suffered by the Bar candidate? Explain briefly.
+
+Suggested Answer
+
+A502:
+
+NO, the university cannot be held liable for the injuries suffered by the bar candidate. The facts clearly state that despite the efforts of the university to maintain the strength of the roots of the tree, it was still blown away due entirely to the occurrence of a fortuitous event which is the super typhoon. Under the law, no person shall be liable for those events which could not be foreseen or even if foreseen were inevitable. (Art. 1174, NCC) The event which caused damage to the bar candidate was entirely independent of human will and neither was their participation of the university in the aggravation of the injury. To be liable for the damages caused, there must be fault or negligence concurring with the fortuitous event which is absent in this case. (Bar Q&A by Paguirigan, 2022)
+
+
+Question (2009, 1994 BAR)
+
+Q503:
+
+Rommel’s private car, while being driven by the regular family driver, Amado, hits a pedestrian causing the latter’s death. Rommel is not in the car when the incident happened.
+
+(a) Is Rommel liable for damages to the heirs of the deceased? Explain.
+
+(b) Would your answer be the same if Rommel was in the car at the time of the accident? Explain.
+
+Suggested Answer
+
+A503:
+
+(a) YES, Rommel may be held liable for damages if he fails to prove that he exercised the diligence of a good father of a family (Art. 2180(5), NCC) in selecting and supervising his family driver. The owner is presumed liable unless he proves the defense of diligence. If the driver was performing his assigned task when the accident happened, Rommel shall be solidarily liable with the driver.
+
+In case the driver is convicted of reckless imprudence and cannot pay the civil liability, Rommel is subsidiarily liable for the damage awarded against the driver and the defense of diligence is not available.
+
+(b) YES, my answer would be the same. Rommel, who was in the car, shall be liable for damages if he could have prevented the misfortune by the use of due diligence in supervising his driver but failed to exercise it. (Art. 2184, NCC) In such case, his liability is solidary with his driver.
+
+
+Question (2005, 2004 BAR)
+
+Q504:
+
+Dr. and Mrs. Almeda are prominent citizens of the country and are frequent travelers abroad. In 1996, they booked round-trip business class tickets for the Manila-Hong Kong-Manila route of the Pinoy Airlines, where they are holders of Gold Mabalos Class Frequent Flier cards. On their return flight, Pinoy Airlines upgraded their tickets to first class without their consent and, in spite of their protestations to be allowed to remain in the business class so that they could be with their friends, they were told that the business class was already fully booked, and that they were given priority in upgrading because they are elite members/holders of Gold Mabalos Class cards.
+
+Since they were embarrassed at the discussions with the flight attendants, they were forced to take the flight at the first-class section apart from their friends who were in the business class. Upon their return to Manila, they demanded a written apology from Pinoy Airlines. When it went unheeded, the couple sued Pinoy Airlines for breach of contract claiming moral and exemplary damages, as well as attorney's fees. Will the action prosper? Give reasons.
+
+Suggested Answer
+
+A504:
+
+YES, the action will prosper. Art. 2201 entitles the person to recover damages which may be attributed to nonperformance of an obligation. In Alitalia Airways v. Court of Appeals (G.R. No. 77011, 24 July 1990), when an airline issues ticket to a passenger confirmed on a particular flight, a contract of carriage arises and the passenger expects that he would fly on that day. When the airline deliberately overbooked, it took the risk of having to deprive some passengers of their seat in case all of them would show up. For the indignity and inconvenience of being refused the confirmed seat, said passenger is entitled to moral damages. In the given problem, Sps. Almeda had a booked roundtrip business class ticket with Pinoy Airlines. When their tickets were upgraded to first class without their consent, Pinoy Airlines breached the contract. As ruled in Zulueta v. Pan American (G.R. No. L-28589, 08 Jan. 1973), in case of overbooking, airline is in bad faith. Therefore, Sps. Almeda are entitled to damages.
+
+
+Question (2004 BAR)
+
+Q505:
+
+DT and MT were prominent members of the frequent travelers’ club of FX Airlines. In Hongkong, the couple were assigned seats in Business Class for which they had bought tickets. On checking in, however, they were told they were upgraded by computer to First Class for the flight to Manila because the Business Section was overbooked. Both refused to transfer despite better seats, food, beverage and other services in First Class. They said they had guests in Business Class they should attend to. They felt humiliated, embarrassed and vexed, however, when the stewardess allegedly threatened to offload them if they did not avail of the upgrade. Thus, they gave in, but during the transfer of luggage DT suffered pain in his arm and wrist. After arrival in Manila, they demanded an apology from FX’s management as well as indemnity payment. When none was forthcoming, they sued the airline for a million pesos in damages. Is the airline liable for actual and moral damages? Why or why not? Explain briefly.
+
+Suggested Answer
+
+A505:
+
+FX Airlines committed breach of contract when it upgraded DT and MT, over their objections, to First Class because they had contracted for Business Class passage. However, although there is a breach of contract, DT and MT are entitled to actual damages only for such pecuniary losses suffered by them because of such breach. There seems to be no showing that they incurred such pecuniary loss. There is no showing that the pain in DT's arm and wrist resulted directly from the carrier's acts complained of. Hence, they are not entitled to actual damages. Moreover, DT could have avoided the alleged injury by requesting the airline staff to do the luggage transfer as a matter of duty on their part. There is also no basis to award moral damages for such breach of contract because the facts of the problem do not show bad faith or fraud on the part of the airline. (Cathay Pacific v. Vazquez, G.R. No. 150843, 14 Mar. 2003) However, they may recover moral damages if the cause of action is based on Art. 21, NCC for the humiliation and embarrassment they felt when the stewardess threatened to offload them if they did not avail of the upgrade.
+
+
+Question (2018 BAR)
+
+Q506:
+
+Shasha purchased an airline ticket from Sea Airlines (SAL) covering Manila-Bangkok-Hanoi-Manila. The ticket was exclusively endorsable to Siam Airlines (SMA). The contract of air transportation was between Shasha and SAL, with the latter endorsing to SMA the Hanoi-Manila segment of the journey. All her flights were confirmed by SAL before she left Manila. Shasha took the flight from Manila to Bangkok on board SAL using the ticket. When she arrived in Bangkok, she went to the SAL ticket counter and confirmed her return trip from Hanoi to Manila on board SMA Flight No. SA 888. On the date of her return trip, she checked in for SMA Flight No. SA 888, boarded the plane, and before she could even settle in on her assigned seat, she was offloaded and treated rudely by the crew. She lost her luggage and missed an important business meeting. She thereafter filed a complaint solely against SAL and argued that it was solidarily liable with SMA for the damages she suffered since the latter was only an agent of the former.
+
+Should either, or both, SAL and SMA be held liable for damages that Shasha suffered?
+
+Suggested Answer
+
+A506:
+
+Only SAL should be held liable for damages. This case has the same factual milieu with that of China Airlines v. Daniel Chiok (G.R. No. 152122, 30 July 2003), where the court cited British Airways v. Court of Appeals (G.R. No. 121824, 29 Jan. 1998), ruling that as the principal in the contract of carriage, the petitioner was held liable even when the breach of contract had occurred, not on its own flight, but on that of another airline. It also cited Lufthansa German Airlines v. Court of Appeals (G.R. No. 83612, 24 Nov. 1994), in which the Court held that the obligation of the ticket-issuing airline remained and did not cease, although another airline had undertaken to carry the passengers to one of their destinations. In this case, since the contract of air transportation is between Shasha and SAL, the latter as principal remains liable as the principal even though the breach occurred in SMA. SMA cannot be held liable in this case because the court has no jurisdiction over it. It is imperative and in accordance with due process and fair play that SMA should have been impleaded as a party in the present proceedings before this Court can make a final ruling on this matter.
+
+ALTERNATIVE ANSWER:
+
+SAL and SMA may be held solidarily liable to Sasha. SAL is liable to Sasha for breach of the contract of carriage because it failed to bring Sasha to the latter’s destination as agreed upon in the contract. SAM, on the other hand, is liable to Sasha for tort under the provisions of Art. 2176, in relation to Art. 2180 of the NCC. While SAM is an independent contractor, and not an agent of SAL, both SAL and SAM are solidarily liable to Sasha, because a contractual obligation can be breached by tort and when the same act or omission causes the injury, one resulting in culpa contractual and the other in culpa aquiliana, Art. 2194 of the NCC can well apply. In fine, a liability for tort may arise even under a contract, where tort is that which breaches the contract. Stated differently, when an act which constitutes a breach of contract would have itself constituted the source of a quasidelictual liability had no contract existed between the parties, the contract can be said to have been breached by tort, thereby allowing the rules on tort to apply. (LRTA v. Navidad, G.R. No. 145804, 06 Feb. 2003)
+
+ALTERNATIVE ANSWER:
+
+SAL and SMA are jointly liable. In KLM v. Court of Appeals (G.R. L-31150, 22 July 1915), the Supreme Court held that the ticket-issuing carrier assumes full responsibility for the entire trip and shall be held accountable for the breach of guaranty. Damages may also be exacted from SMA, because their acts fall under quasi-delict.
+
+ALTERNATIVE ANSWER:
+
+Only SMA is liable. Under the Warsaw Convention, the ticket-issuing airline subcontracts the contract of carriage to other airlines, as in this instance, there is no agency created and the subsequent carrier is liable for the damages it has incurred. (UPLC Suggested Answers)
+
+
+Question (2018 BAR)
+
+Q507:
+
+Simeon was returning to Manila after spending a weekend with his parents in Sariaya, Quezon. He boarded a bus operated by the Sabbit Bus Line (SBL) on 30 Aug. 2013. In the middle of the journey, the bus collided with a truck coming from the opposite direction, which was overtaking the vehicle in front of the truck. Though the driver of the SBL bus tried to avoid the truck, a mishap occurred as the truck hit the left side of the bus. As a result of the accident, Simeon suffered a fractured leg and was unable to report for work for one week. He sued SBL for actual and moral damages. SBL raised the defense that it was the driver of the truck who was at fault, and that it exercised the diligence of a good father of a family in the selection and supervision of its driver. Is SBL liable for actual damages? Moral damages?
+
+Suggested Answer
+
+A507:
+
+It depends on what the source of obligation the action is based. If based on contract, SBL will be liable for actual damages, but not moral damages. As a common carrier, SBL is required to observe extraordinary diligence, and the law expressly provides that its liability does not cease upon proof that it exercised the diligence of a good father of a family in selecting and supervising its driver. It is not liable, however, for moral damages as Art. 2220, NCC requires it to have acted fraudulently or in bad faith, which is not provided by the facts. If the action, however, is anchored under quasi-delict, SBL will be liable for actual and moral damages. As a common carrier, it is required to exercise extraordinary diligence. Moral damages also may be awarded under Art. 2219, NCC if the plaintiff suffered physical injuries because of a quasi-delictual act.
+
+ALTERNATIVE ANSWER:
+
+In a contract of carriage, the carrier is required to exercise extraordinary diligence and is liable whenever a passenger suffers injury before he reaches his destination. In an action to recover damages arising from breach of contract of carriage, the passenger needs only to prove the existence of the contract and the failure of the carrier to safely bring him to his destination. Moral damages may not however be recovered from the carrier unless: (a) the passenger dies, or (b) the carrier is guilty of bad faith or gross negligence. Neither applies in this case. (Estrada v. Philippine Rabbit Bus Co., G.R. No. 203902, 19 July 2017) (UPLC Suggested Answers)
+
+
+Question (2016 BAR)
+
+Q508:
+
+Peter, a resident of Cebu City, sent through Reliable Pera Padala (RPP) the amount of P20,000.00 to his daughter, Paula, for the payment of her tuition fee. Paula went to an RPP branch but was informed that there was no money remitted to her name. Peter inquired from RPP and was informed that there was a computer glitch, and the money was credited to another person. Peter and Paula sued RPP for actual damages, moral damages, and exemplary damages.
+
+The trial court ruled that there was no proof of pecuniary loss to the plaintiffs but awarded moral damages of P20,000.00 and exemplary damages of P5,000.00. On appeal, RPP questioned the award of moral and exemplary damages.
+
+Is the trial court correct in awarding moral and exemplary damages? Explain.
+
+Suggested Answer
+
+A508:
+
+NO, the trial court is not correct in awarding moral and exemplary damages. The damages in this case are prayed for based on the breach of contract committed by RPP in failing to deliver the sum of money to Paula. Under the provisions of the NCC, in breach of contract, moral damages may be recovered when the defendant acted in bad faith or was guilty of gross negligence (amounting to bad faith) or in wanton disregard of his contractual obligation. In the same fashion, to warrant the award of exemplary damages, the wrongful act must be accomplished by bad faith, and an award of damages would be allowed only if the guilty party acted in a wanton, fraudulent, reckless, or malevolent manner. (Art. 2232, NCC)
+
+Bad faith does not simply connote bad judgment or negligence. It imports a dishonest purpose or some moral obliquity and conscious doing of a wrong, a breach of known duty through some motive or interest or ill will that partake of the nature of fraud. In this case, however, RPP’s breach was due to a computer glitch which at most can be considered as negligence on its part but does not constitute bad faith or fraud as would warrant the award of moral and exemplary damages.
+
+
+Question (2014, 2003 BAR)
+
+Q509:
+
+If a pregnant woman passenger of a bus were to suffer an abortion following a vehicular accident due to the gross negligence of the bus driver, may she and her husband claim damages from the bus company for the death of their unborn child? Explain.
+
+Suggested Answer
+
+A509:
+
+NO, the spouses cannot recover actual damages in the form of indemnity for the loss of life of the unborn child. This is because the unborn child is not yet considered a person and the law allows indemnity only for loss of life of person. The mother, however may recover damages for the bodily injury she suffered from the loss of the fetus which is considered part of her internal organ. The parents may also recover damages for injuries that are inflicted directly upon them, e.g., moral damages for mental anguish that attended the loss of the unborn child. Since there is gross negligence, exemplary damages can also be recovered. (Geluz v. Court of Appeals, G.R. No. L-16439, 20 July 1961)
+
+
+Question (1991 BAR)
+
+Q510:
+
+On her third month of pregnancy, Rosemarie married to Boy. For reasons known only to her, and without informing Boy, went to the clinic of X, a known abortionist, who for a fee, removed and expelled the fetus from her womb, Boy learned of the abortion 6 months later. Availing of that portion of Sec. 12 of Article II of the 1987 Constitution which reads:
+
+The State… shall equally protect the life of the mother and the life of the unborn from conception, xxx which he claims confers a civil personality on the unborn from the moment of conception. Boy filed a case for damages against the abortionist, praying therein that the latter be ordered to pay him: (a) P30,000.00 as indemnity for the death of the fetus, (b) P100, 000.00 as moral damages for the mental anguish and anxiety he suffered, (c) P50,000.00 as exemplary damages, (d) P20,000.00 as nominal damages, and (e) P25,000.00 as attorney's fees. May actual damages be also recovered? If so, what facts should be alleged and proved?
+
+Suggested Answer
+
+A510:
+
+YES, provided that the pecuniary loss suffered should be substantiated and duly proved.
+
+
+Question (2002 BAR)
+
+Q511:
+
+Ortillo contracts Fabricato, Inc. to supply and install tile materials in a building he is donating to his province. Ortillo pays 50% of the contract price as per agreement. It is also agreed that the balance would be payable periodically after every 10% performance until completed. After performing about 93% of the contract, for which it has been paid an additional 40% as per agreement, Fabricato, Inc. did not complete the project due to its sudden cessation of operations. Instead, Fabricato, Inc. demands payment of the last 10% of the contract despite its non-completion of the project. Ortillo refuses to pay, invoking the stipulation that payment of the last amount 10% shall be upon completion.
+
+Fabricato, Inc. sues for the entire 10% plus damages. Ortillo counters with claims for (a) moral damages for Fabricato, Inc.’s unfounded suit which has damaged his reputation as a philanthropist and respect businessman in his community, and (b) attorney’s fees.
+
+(a) Does Ortillo have a legal basis for his claim for moral damages?
+
+(b) How about his claim for attorney’s fees, having hired a lawyer to defend him?
+
+Suggested Answer
+
+A511:
+
+(a) There is no legal basis to Ortillo’s claim for moral damages. It does not fall under the coverage of Art. 2219, NCC. 
+
+(b) Ortillo is entitled to attorney’s fees because Fabricato’s complaint is a case of malicious prosecution or a clearly unfounded civil action. (Art. 2208(4)(11), NCC)
+
+
+Question (1996 BAR)
+
+Q512:
+
+Rodolfo, married to Sharon, had an illicit affair with his secretary, Nanette, a 19-year-old girl, and begot a baby girl, Rona. Nanette sued Rodolfo for damages: actual, for hospital and other medical expenses in delivering the child by caesarean section; moral, claiming that Rodolfo promised to marry her, representing that he was single when, in fact, he was not; and exemplary, to teach a lesson to like-minded Lotharios.
+
+If you were the judge, would you award all the claims of Nanette? Explain.
+
+Suggested Answer
+
+A512:
+
+If Rodolfo's marriage could not have been possibly known to Nanette or there is no gross negligence on the part of Nanette, Rodolfo could be held liable for moral damages. If there is gross negligence in a suit for quasi-delict, exemplary damages could be awarded.
+
+
+Question (1996 BAR)
+
+Q513:
+
+Rosa was leasing an apartment in the city. Because of the Rent Control Law, her landlord could not increase the rental as much as he wanted to, nor terminate her lease as long as she was paying her rent. To force her to leave the premises, the landlord stopped making repairs on the apartment, and caused the water and electricity services to be disconnected. The difficulty of living without electricity and running water resulted in Rosa's suffering a nervous breakdown. She sued the landlord for actual and moral damages. Will the action prosper? Explain.
+
+Suggested Answer
+
+A513:
+
+YES, based on quasi-delict under the human relations provisions of the NCC (Arts. 19 to 21) because the act committed by the lessor is contrary to morals. Moral damages are recoverable under Art. 2219(10), NCC in relation to Art. 21, NCC. Although the action is based on quasi-delict and not on contract, actual damages may be recovered if the lessee is able to prove the losses and expenses she suffered. 
+
+ALTERNATIVE ANSWER:
+
+YES, based on breach of contract. The lessor has the obligation to undertake repairs to make the apartment habitable and to maintain the lessee in the peaceful and adequate enjoyment of the lease for the entire duration of the contract. (Art. 1654. NCC) Since there was willful breach of contract by the lessor, the lessee is entitled to moral damages under Art. 3220, NCC. She is also entitled to actual damages, e.g., loss of income, medical expenses, etc., which she can prove at the trial.
+
+ALTERNATIVE ANSWER:
+
+YES, based on contract and/or on tort. The lessor willfully breached his obligations under Art. 1654, NCC. Hence, he is liable for breach of contract. For such breach, the lessee may recover moral damages under Art. 2220 of the NCC, and actual damages that she may have suffered on account thereof. And since the conduct of the lessor was contrary to morals, he may also be held liable for quasi- delict. The lessee may recover moral damages under Art. 2219(10), NCC in relation to Art. 21, NCC, and all actual damages which she may have suffered by reason of such conduct under Arts. 9, 20 and 21, NCC.
+
+ALTERNATIVE ANSWER:
+
+YES, the action should prosper for both actual and moral damages. In fact, even exemplary damages and attorney’s fees can be claimed by Rosa, on the authority of Magbanua v. IAC (G.R. Nos. L-66870-72, 29 June 1985), considering that, as given, the lessor’s willful and illegal act of disconnecting the water and electric services resulted in Rosa’s suffering a nervous breakdown. Arts. 20 and 21, NCC authorize the award of damages for such willful and illegal conduct.
+
+
+Question (2012 BAR)
+
+Q514:
+
+Liwayway Vinzons-Chato was then the Commissioner of Internal Revenue while Fortune Tobacco Corporation is an entity engaged in the manufacture of different brands of cigarettes, among which are "Champion," "Hope," and "More" cigarettes. Fortune filed a complaint against Vinzons-Chato to recover damages for the alleged violation of its constitutional rights arising from Vinzons-Chato’s issuance of Revenue Memorandum Circular No. 37-934 (which reclassified Fortune cigarettes as locally manufactured with foreign brands and thereby imposed higher taxes), which the Supreme Court later declared invalid.
+
+Vinzons-Chato filed a Motion to dismiss arguing that she cannot be held liable for damages for acts she performed while in the discharge of her duties as BIR Commissioner. Is she correct? Explain.
+
+Suggested Answer
+
+A514:
+
+YES. As a general rule, a public officer is not liable for acts performed in the discharge of their duties. The exceptions are when they acted with malice, bad faith, or gross negligence in the performance of their duty, or when their act is in violation of the constitutionally guaranteed rights and liberties of a person under Art. 32, NCC.
+
+The public officer is not automatically considered to have violated the rights or liberties of a person simply because the rule the public officer issued was declared invalid by the Court. The complainant must still allege and prove the particular injury or prejudice they have suffered from the violation of his constitutional right by the issuance of the invalidated rule.
+
+The problem does not state any fact from which any malice, bad faith or gross negligence on the part of Vinzons-Chato may be inferred, or the particular injury or prejudice the complainant may have suffered as a result of the violation of his constitutional rights. Hence, she cannot be held liable. The facts presented are similar to the facts of the case of Vinzons-Chato v. Fortune (G.R. No. 141309, 23 Dec. 2008).
+
+---
+

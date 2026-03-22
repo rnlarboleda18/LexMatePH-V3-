@@ -6,7 +6,7 @@ import re
 import psycopg2
 import os
 
-DB_CONNECTION = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+DB_CONNECTION = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 BASE_DIR = r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2"
 MD_FILE_PATH = os.path.join(BASE_DIR, "CodexPhil", "Codals", "md", "1987_Philippine_Constitution.md")
 

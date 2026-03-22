@@ -15,7 +15,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
         # Parse query params
         year = req.params.get('year')
         subject = req.params.get('subject')
-        limit = req.params.get('limit', '100')
+        limit = req.params.get('limit', '10000')
         
         query = "SELECT id, year, subject, text, source_label, (SELECT text FROM answers a WHERE a.question_id = questions.id LIMIT 1) as answer FROM questions WHERE 1=1"
         params = []

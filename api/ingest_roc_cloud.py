@@ -5,7 +5,7 @@ import os
 from psycopg2.extras import execute_batch
 
 # Cloud connection string
-CLOUD_DB = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+CLOUD_DB = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def parse_roc_combined(filepath):
     if not os.path.exists(filepath):

@@ -71,35 +71,6 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                             <span className="hidden md:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        {/* Browse / Flashcard Toggle */}
-                        <button
-                            onClick={onToggleMode}
-                            title={mode === 'browse' ? 'Switch to Flashcard Mode' : 'Switch to Browse Mode'}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-lg font-medium transition-all duration-200
-                                ${isDarkMode
-                                    ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20 border border-transparent hover:border-amber-800/40'
-                                    : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50 border border-transparent hover:border-amber-200'
-                                }`}
-                        >
-                            {mode === 'browse' ? <BookOpen size={20} className="text-indigo-500" /> : <LayoutGrid size={20} className="text-emerald-500" />}
-                            <span className="hidden md:inline">{mode === 'browse' ? 'Flashcards' : 'Browse'}</span>
-                        </button>
-
-                        {/* Take the Bar */}
-                        <button
-                            onClick={onToggleQuiz}
-                            title="Take the Bar (Mock Test)"
-                            className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-lg font-semibold transition-all duration-200
-                                ${mode === 'quiz'
-                                    ? 'bg-amber-600 text-white shadow-md shadow-amber-900/30'
-                                    : isDarkMode
-                                        ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20 border border-transparent hover:border-amber-800/40'
-                                        : 'text-gray-600 hover:text-amber-700 hover:bg-amber-50 border border-transparent hover:border-amber-200'
-                                }`}
-                        >
-                            <Brain size={20} className={mode === 'quiz' ? 'text-white' : 'text-rose-500'} />
-                            <span>Take the Bar</span>
-                        </button>
 
                         {/* Divider */}
                         <div className={`hidden sm:block w-px h-6 mx-1 ${isDarkMode ? 'bg-gray-700' : 'bg-stone-200'}`} />

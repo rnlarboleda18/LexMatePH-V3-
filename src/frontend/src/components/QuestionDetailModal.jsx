@@ -1,10 +1,18 @@
 import React, { useState, useCallback } from 'react';
-import { X, Headphones, ListMusic, Plus } from 'lucide-react';
+import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
 
-const QuestionDetailModal = ({ question, onClose, searchQuery }) => {
+const QuestionDetailModal = ({ 
+    question, 
+    onClose, 
+    onNext, 
+    onPrev, 
+    hasNext, 
+    hasPrev, 
+    searchQuery 
+}) => {
     if (!question) return null;
 
     const colorClass = getSubjectColor(question.subject);
@@ -63,11 +71,61 @@ const QuestionDetailModal = ({ question, onClose, searchQuery }) => {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+            className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[5vh] bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-            <div className="bg-white dark:bg-dark-card rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 relative">
+            <div className="bg-white dark:bg-dark-card rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 relative">
                 
+                {/* Header */}
+                <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
+                    <div className="flex-1">
+                        <span className={`inline-block mb-2 text-sm font-bold uppercase tracking-wider ${textColor}`}>
+                            {question.subject}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-1">
+                            {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && `(${question.source_label})`}
+                        </h3>
+                        <button
+                            onClick={() => setShowPlaylistSelector(true)}
+                            className="flex items-center gap-2 px-3 py-1 mt-2 rounded-full shadow-sm border transition-all bg-purple-50 border-purple-200 text-purple-600 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                            title="Add Question Audio to LexPlay queue"
+                        >
+                            <Headphones className="w-3.5 h-3.5" />
+                            <span className="font-bold text-[10px] uppercase tracking-tight">
+                                Add to LexPlay Playlist
+                            </span>
+                        </button>
+                    </div>
+
+                    {/* Navigation and Close Buttons */}
+                    <div className="flex items-center gap-2 ml-4">
+                        <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+                            <button
+                                onClick={onPrev}
+                                disabled={!hasPrev}
+                                className="p-2 rounded-md hover:bg-white dark:hover:bg-gray-700 text-gray-500 hover:text-primary transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                title="Previous Question"
+                            >
+                                <ChevronLeft size={20} />
+                            </button>
+                            <button
+                                onClick={onNext}
+                                disabled={!hasNext}
+                                className="p-2 rounded-md hover:bg-white dark:hover:bg-gray-700 text-gray-500 hover:text-primary transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                title="Next Question"
+                            >
+                                <ChevronRight size={20} />
+                            </button>
+                        </div>
+                        <button
+                            onClick={onClose}
+                            className="p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-500 hover:text-red-500 transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                    </div>
+                </div>
+
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
                     <div className="absolute inset-x-0 top-0 z-[60] bg-white dark:bg-dark-card border-b border-gray-100 dark:border-gray-800 shadow-2xl animate-in slide-in-from-top duration-300 p-6">
@@ -127,51 +185,24 @@ const QuestionDetailModal = ({ question, onClose, searchQuery }) => {
                         </div>
                     </div>
                 )}
-                {/* Header */}
-                <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
-                    <div>
-                        <span className={`inline-block mb-2 text-sm font-bold uppercase tracking-wider ${textColor}`}>
-                            {question.subject}
-                        </span>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-1">
-                            {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && `(${question.source_label})`}
-                        </h3>
-                        <button
-                            onClick={() => setShowPlaylistSelector(true)}
-                            className="flex items-center gap-2 px-3 py-1 mt-2 rounded-full shadow-sm border transition-all bg-purple-50 border-purple-200 text-purple-600 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30"
-                            title="Add Question Audio to LexPlay queue"
-                        >
-                            <Headphones className="w-3.5 h-3.5" />
-                            <span className="font-bold text-[10px] uppercase tracking-tight">
-                                Add to LexPlay Playlist
-                            </span>
-                        </button>
-                    </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors"
-                    >
-                        <X size={24} />
-                    </button>
-                </div>
 
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-8">
                     {/* Question */}
                     <div>
                         <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3">Question</h4>
-                        <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                        <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
                             <HighlightText text={question.text} query={searchQuery} />
-                        </p>
+                        </div>
                     </div>
 
                     {/* Answer */}
                     <div>
                         <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
                         <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
-                            <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                            <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
                                 <HighlightText text={question.answer} query={searchQuery} />
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>

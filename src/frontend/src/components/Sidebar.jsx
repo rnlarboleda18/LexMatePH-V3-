@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { getSubjectColor } from '../utils/colors';
-import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus, Brain } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
 const subjects = [
@@ -25,10 +25,9 @@ const codexSubjects = [
     { title: "Special Laws", id: "special", icon: Book, color: "text-violet-500", disabled: true }
 ];
 
-const Sidebar = ({ currentSubject, onSelectSubject, onToggleQuiz, onToggleMode, onToggleAbout, onToggleHistory, onToggleDoctrinal, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay }) => {
+const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard }) => {
     const [openSection, setOpenSection] = useState(() => {
         if (mode === 'codex') return 'codex';
-        if (mode === 'browse' || currentSubject) return 'questions';
         return null;
     });
     const timeoutRef = useRef(null);
@@ -90,20 +89,6 @@ const Sidebar = ({ currentSubject, onSelectSubject, onToggleQuiz, onToggleMode, 
                     </SignedOut>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
-                    <button
-                        onClick={onToggleQuiz}
-                        className={`py-3 rounded-xl text-sm font-bold border transition-all duration-200 shadow-sm ${mode === 'quiz' ? 'bg-amber-700 text-white border-amber-700' : 'text-amber-700 dark:text-amber-500 bg-white dark:bg-gray-900 border-amber-600/30 hover:bg-amber-50'}`}
-                    >
-                        Take the Bar
-                    </button>
-                    <button
-                        onClick={onToggleMode}
-                        className="py-3 rounded-xl text-sm font-bold border border-amber-600/30 text-amber-700 dark:text-amber-500 bg-white dark:bg-gray-900 hover:bg-amber-50 transition-all duration-200 shadow-sm"
-                    >
-                        {mode === 'browse' ? 'Flashcards' : 'Browse'}
-                    </button>
-                </div>
                 <div className="h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
             </div>
 
@@ -123,6 +108,38 @@ const Sidebar = ({ currentSubject, onSelectSubject, onToggleQuiz, onToggleMode, 
             >
                 <Info size={20} className={`${mode === 'about' ? 'text-sky-700 dark:text-sky-400' : 'text-sky-600 dark:text-sky-400'} group-hover:scale-110 transition-all duration-200`} />
                 About
+            </button>
+
+            {/* Lexify Button */}
+            <button
+                onClick={() => {
+                    onToggleQuiz();
+                    setOpenSection(null);
+                }}
+                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                ${mode === 'quiz'
+                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
+                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                    }`}
+            >
+                <Brain size={20} className={`${mode === 'quiz' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
+                Lexify
+            </button>
+
+            {/* Flashcards Button */}
+            <button
+                onClick={() => {
+                    if (onToggleFlashcard) onToggleFlashcard();
+                    setOpenSection(null);
+                }}
+                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                ${mode === 'flashcard'
+                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
+                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                    }`}
+            >
+                <BookOpen size={20} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
+                Flashcards
             </button>
 
             {/* LexPlay Button */}
@@ -215,59 +232,6 @@ const Sidebar = ({ currentSubject, onSelectSubject, onToggleQuiz, onToggleMode, 
 
 
             {/* Bar Questions Collapsible Section */}
-            <div
-                onMouseEnter={() => handleMouseEnter('questions')}
-            >
-                <button
-                    onClick={() => toggleSection('questions')}
-                    className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center justify-between group
-                    ${mode === 'browse'
-                            ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                            : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
-                        }`}
-                >
-                    <span className="flex items-center gap-3">
-                        <BookOpen size={20} className={`${mode === 'browse' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
-                        Bar Questions
-                    </span>
-                    {openSection === 'questions' ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
-                </button>
-
-                {openSection === 'questions' && (
-                    <div className="animate-in slide-in-from-top-2 duration-200">
-                        <button
-                            onClick={() => onSelectSubject(null)}
-                            className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px]
-                  ${!currentSubject
-                                    ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                                    : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                                }`}
-                        >
-                            All Subjects
-                        </button>
-
-                        {subjects.map((subject) => {
-                            const colorClass = getSubjectColor(subject);
-                            // Extract just the text color part for the label
-                            const textColor = colorClass.split(' ').find(c => c.startsWith('text-'));
-
-                            return (
-                                <button
-                                    key={subject}
-                                    onClick={() => onSelectSubject(subject, 'questions')}
-                                    className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px]
-                      ${currentSubject === subject && mode === 'browse'
-                                            ? `bg-gray-50 dark:bg-gray-800/50 ${colorClass}`
-                                            : `border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 ${textColor} opacity-70 hover:opacity-100`
-                                        }`}
-                                >
-                                    {subject}
-                                </button>
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
 
 
 

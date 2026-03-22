@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 LOCAL_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
-CLOUD_URL = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+CLOUD_URL = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def main():
     print("Comparing Rule 128, Section 1 titles...")

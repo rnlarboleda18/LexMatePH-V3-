@@ -1,7 +1,7 @@
 import psycopg2
 
 # Cloud connection string
-CLOUD_DB = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+CLOUD_DB = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def migrate_schema():
     print("Connecting to CLOUD DB for migration...")

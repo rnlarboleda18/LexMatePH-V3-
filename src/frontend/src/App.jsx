@@ -5,7 +5,7 @@ import ControlBar from './components/ControlBar';
 import QuestionCard from './components/QuestionCard';
 import Flashcard from './components/Flashcard';
 import FlashcardSetup from './components/FlashcardSetup';
-import MockTest from './components/MockTest';
+import LexifyApp from './features/lexify/LexifyApp';
 import QuestionDetailModal from './components/QuestionDetailModal';
 
 import About from './components/About';
@@ -63,20 +63,47 @@ function App() {
     const fetchQuestions = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/questions?limit=100');
+        const response = await fetch('/api/questions?limit=5000');
         if (!response.ok) throw new Error('Failed to fetch questions');
         const data = await response.json();
 
+        // Group sub-questions (e.g., (b), (c)) with their parent question (a)
+        const groupedData = [];
+        let currentParent = null;
+
+        // Sort by ID to ensure sequential adjacency from the ingestion
+        const sortedRaw = [...data].sort((a, b) => a.id - b.id);
+
+        for (const q of sortedRaw) {
+          // Detect if this is likely a sub-question (starts with (b), (c), etc., or Q#b:, etc.)
+          const textLower = q.text.trim().toLowerCase();
+          const isSub = /^(\([b-z]\)|q\d+[b-z]:|\d+\.\d+)/.test(textLower);
+
+          if (isSub && currentParent && q.year === currentParent.year && q.subject === currentParent.subject) {
+            // Attach to the current parent group
+            if (!currentParent.subQuestions) currentParent.subQuestions = [];
+            currentParent.subQuestions.push(q);
+          } else {
+            // This is a new "parent" question
+            const newQ = { ...q, subQuestions: [] };
+            groupedData.push(newQ);
+            currentParent = newQ;
+          }
+        }
+
         // Balanced Shuffle: Group by subject, then interleave
         const subjects = {};
-        data.forEach(q => {
+        groupedData.forEach(q => {
           if (!subjects[q.subject]) subjects[q.subject] = [];
           subjects[q.subject].push(q);
         });
 
-        // Sort each subject's questions by year (descending)
+        // Shuffle each subject's questions to mix years and avoid chronological clustering
         Object.keys(subjects).forEach(key => {
-          subjects[key].sort((a, b) => (b.year || 0) - (a.year || 0));
+          for (let i = subjects[key].length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [subjects[key][i], subjects[key][j]] = [subjects[key][j], subjects[key][i]];
+          }
         });
 
         const balancedQuestions = [];
@@ -117,59 +144,13 @@ function App() {
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   // --- Derived State (Filtering) ---
-  const filteredQuestions = useMemo(() => {
-    return questions.filter(q => {
-      // If searching, ignore subject filter. Otherwise, respect it.
-      const matchesSubject = searchTerm
-        ? true
-        : (currentSubject ? q.subject === currentSubject : true);
-
-      const matchesYear = selectedYear ? q.year === parseInt(selectedYear) : true;
-
-      const lowerSearch = searchTerm ? searchTerm.toLowerCase() : '';
-      const matchesSearch = searchTerm
-        ? q.text.toLowerCase().includes(lowerSearch) ||
-        (q.answer && q.answer.toLowerCase().includes(lowerSearch))
-        : true;
-
-      return matchesSubject && matchesYear && matchesSearch;
-    });
-  }, [questions, currentSubject, selectedYear, searchTerm]);
 
 
 
   // --- Pagination ---
-  // --- Pagination ---
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const itemsPerPage = 8;
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  // Reset page when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [currentSubject, selectedYear, searchTerm]);
-
-  const totalPages = Math.ceil(filteredQuestions.length / itemsPerPage);
-  const paginatedQuestions = filteredQuestions.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
 
 
-  const handleToggleMode = () => {
-    if (mode === 'browse') {
-      setMode('flashcard');
-      setFlashcardState('setup');
-    } else {
-      setMode('browse');
-    }
-  };
 
   const handleToggleAbout = () => {
     setMode('about');
@@ -177,7 +158,7 @@ function App() {
 
   const handleStartFlashcard = (subject) => {
     if (subject === 'CANCEL') {
-      setMode('browse');
+      setMode('supreme_decisions');
       return;
     }
 
@@ -203,6 +184,19 @@ function App() {
   const handleToggleQuiz = () => {
     setMode('quiz');
     setFlashcardIndex(0);
+  };
+
+  const handleNextFlashcard = () => {
+    if (flashcardIndex < flashcardQuestions.length - 1) {
+      setFlashcardIndex(prev => prev + 1);
+    } else {
+      setMode('supreme_decisions');
+    }
+  };
+
+  const handleToggleFlashcard = () => {
+    setMode('flashcard');
+    setFlashcardState('setup');
   };
 
   // Handle Native Fullscreen
@@ -251,22 +245,15 @@ function App() {
       toggleTheme={toggleTheme}
       mode={mode}
       isFullscreen={isFullscreen}
-      onToggleMode={handleToggleMode}
       onToggleQuiz={handleToggleQuiz}
       user={user}
       sidebarContent={
         <Sidebar
-          currentSubject={currentSubject}
-          onSelectSubject={(subject, type = 'questions') => {
-            setCurrentSubject(subject);
-            setMode('browse');
-          }}
           onToggleQuiz={handleToggleQuiz}
-          onToggleMode={handleToggleMode}
           onToggleAbout={handleToggleAbout}
-          onToggleHistory={() => setMode('history')}
           onToggleUpdates={() => setMode('updates')}
           onToggleSupremeDecisions={() => setMode('supreme_decisions')}
+          onToggleFlashcard={handleToggleFlashcard}
           onToggleLexPlay={() => {
             setPreviousMode(mode);
             setMode('lexplay');
@@ -294,7 +281,7 @@ function App() {
         return (
           <>
             {/* Control Bar Visibility */}
-            {effectiveMode !== 'quiz' && effectiveMode !== 'about' && !isLexPlayerFull && effectiveMode !== 'login' && effectiveMode !== 'register' && effectiveMode !== 'updates' && effectiveMode !== 'supreme_decisions' && effectiveMode !== 'codex' && (
+            {false && (
               <ControlBar
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
@@ -331,46 +318,6 @@ function App() {
                       onToggleFullscreen={handleToggleFullscreen}
                     />
                   )}
-                  {effectiveMode === 'browse' && filteredQuestions.length === 0 ? (
-                    <div className="text-center py-20 text-gray-500 dark:text-gray-400">
-                      <p className="text-xl font-medium">No questions found.</p>
-                      <p className="mt-2">Try adjusting your filters.</p>
-                    </div>
-                  ) : effectiveMode === 'browse' && (
-                    <>
-                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-                        {paginatedQuestions.map(q => (
-                          <QuestionCard
-                            key={q.id}
-                            question={q}
-                            searchQuery={searchTerm}
-                            onClick={() => setSelectedQuestion(q)}
-                          />
-                        ))}
-                      </div>
-                      {totalPages > 1 && (
-                        <div className="flex justify-center items-center gap-4 pb-6">
-                          <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm"
-                          >
-                            Previous
-                          </button>
-                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            Page {currentPage} of {totalPages}
-                          </span>
-                          <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                            className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 disabled:opacity-50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm"
-                          >
-                            Next
-                          </button>
-                        </div>
-                      )}
-                    </>
-                  )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
                     <FlashcardSetup onStart={handleStartFlashcard} />
                   )}
@@ -380,13 +327,13 @@ function App() {
                       total={flashcardQuestions.length}
                       currentIndex={flashcardIndex}
                       onNext={handleNextFlashcard}
-                      onClose={() => setMode('browse')}
+                      onClose={() => setMode('supreme_decisions')}
                     />
                   )}
                   {effectiveMode === 'quiz' && (
-                    <MockTest
+                    <LexifyApp
                       questions={questions}
-                      onFinish={() => setMode('browse')}
+                      onClose={() => setMode('supreme_decisions')}
                     />
                   )}
                 </>
@@ -408,14 +355,6 @@ function App() {
         );
       })()}
 
-      {/* Question Detail Modal */}
-      {selectedQuestion && (
-        <QuestionDetailModal
-          question={selectedQuestion}
-          onClose={() => setSelectedQuestion(null)}
-          searchQuery={searchTerm}
-        />
-      )}
 
       {/* Doctrinal Detail Modal */}
 

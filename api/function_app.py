@@ -18,7 +18,7 @@ import_error = None
 
 try:
     from blueprints.questions import questions_bp
-    from blueprints.grading import grading_bp
+    from blueprints.lexify import lexify_bp
     from blueprints.schedule import schedule_bp
     from blueprints.user import user_bp
     from blueprints.auth_custom import auth_custom_bp
@@ -36,7 +36,7 @@ try:
     from blueprints.roc import roc_bp
 
     app.register_functions(questions_bp)
-    app.register_functions(grading_bp)
+    app.register_functions(lexify_bp)
     app.register_functions(schedule_bp)
     app.register_functions(user_bp)
     app.register_functions(auth_custom_bp)

@@ -5,7 +5,7 @@ import json
 import time
 import sys
 
-DB_URL = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+DB_URL = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 API_KEY = "REDACTED_API_KEY_HIDDEN"
 
 genai.configure(api_key=API_KEY)

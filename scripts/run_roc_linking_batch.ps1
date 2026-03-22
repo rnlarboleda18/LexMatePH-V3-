@@ -4,7 +4,7 @@
 $startYear = 2014
 $endYear = 1997
 $workers = 10
-$env:DB_CONNECTION_STRING = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+$env:DB_CONNECTION_STRING = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 Write-Host "Starting ROC Batch Linking from $startYear to $endYear with $workers workers..." -ForegroundColor Cyan
 

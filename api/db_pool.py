@@ -17,7 +17,7 @@ import psycopg2
 DB_CONNECTION_STRING = os.environ.get(
     "DB_CONNECTION_STRING",
     # Fallback for local dev only — override via .env or local.settings.json
-    "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+    "postgresql://user:password@localhost:5432/lexmateph-ea-db"
 )
 
 _local = threading.local()
