@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v4" # Bumping to eliminate all hard newline pauses
+CACHE_VERSION = "v6" # Bumping to clear final double newlines on Strategy A
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
@@ -451,8 +451,9 @@ def _get_text_for_codal(content_id, code_id=None):
                 content = (row.get('content_md') or '').strip()
                 content = content.replace('\r\n', '\n').replace('\r', '\n')
                 
-                # TTS Cleaning: Remove structural MD only, keep punctuation for better flow
+                # TTS Cleaning: Remove structural MD only, replace harsh stops with commas
                 clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
+                clean = re.sub(r'[:;]', ',', clean)
                 # Replace all newlines and excessive whitespace with a single space
                 clean = re.sub(r'\s+', ' ', clean).strip()
                 
@@ -514,7 +515,7 @@ def _get_text_for_codal(content_id, code_id=None):
                 clean_header = (header or '').lower().rstrip('.')
                 if header and (clean.lower().startswith(header_bare) or clean.lower().startswith(clean_header)):
                     header = ""
-                full_text = f"{header}.\n\n{clean}" if header else clean
+                full_text = f"{header}. {clean}" if header else clean
                 full_text = _apply_custom_pronunciations(full_text)
                 return full_text, None
 
@@ -535,8 +536,9 @@ def _get_text_for_codal(content_id, code_id=None):
         art_num = row.get('article_number', '')
         content = row.get('content', '') or ''
         content = content.replace('\r\n', '\n').replace('\r', '\n')
-        # TTS Cleaning: Remove structural MD only, keep punctuation
+        # TTS Cleaning: Remove structural MD, soften colons/semicolons
         clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
+        clean = re.sub(r'[:;]', ',', clean)
         clean = re.sub(r'\s+', ' ', clean).strip()
 
         # Strip currency repetitions like (₱40,000) or (P200,000)
@@ -546,7 +548,7 @@ def _get_text_for_codal(content_id, code_id=None):
         clean = re.sub(r'\(\d+[a-z]?\)\s*$', '', clean.strip())
 
         header = 'Preliminary Article' if str(art_num) == '0' else f'Article {art_num}'
-        full_text = f"{header}.\n\n{clean}"
+        full_text = f"{header}. {clean}" if header else clean
         full_text = _apply_custom_pronunciations(full_text)
         return full_text, None
     finally:
@@ -594,10 +596,11 @@ def _get_text_for_question(content_id):
         if not a_clean.lower().startswith("answer:"):
             a_clean = f"Suggested Answer: {a_clean}"
             
-        full_text = f"{intro}\n\n{q_clean}\n\n{a_clean}"
+        full_text = f"{intro} {q_clean} {a_clean}"
         
         # Basic cleanup
         full_text = re.sub(r'[#*`_\[\]]', ' ', full_text)
+        full_text = re.sub(r'[:;]', ',', full_text)
         full_text = re.sub(r'\s+', ' ', full_text).strip()
         
         # Apply custom pronunciations (Latin, Names, etc.)
