@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v3" # Bumping to invalidate files with artificial Windows CR pauses
+CACHE_VERSION = "v4" # Bumping to eliminate all hard newline pauses
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
@@ -360,7 +360,8 @@ def _get_text_for_case(content_id):
         # Clean all parts: Remove structural MD only, keep punctuation
         final_text = "\n\n".join(parts)
         final_text = re.sub(r'[#*`_\[\]]', ' ', final_text)
-        final_text = re.sub(r'\n{3,}', '\n\n', final_text).strip()
+        # Replace all newlines with spaces for smoothTTS flow
+        final_text = re.sub(r'\s+', ' ', final_text).strip()
 
         # Apply central custom pronunciations (Latin, PHP, Mayor, etc.)
         final_text = _apply_custom_pronunciations(final_text)
@@ -452,9 +453,8 @@ def _get_text_for_codal(content_id, code_id=None):
                 
                 # TTS Cleaning: Remove structural MD only, keep punctuation for better flow
                 clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
-                clean = re.sub(r'\n{3,}', '\n\n', clean).strip()
-                # Replace single newlines with spaces to prevent artificial pauses inside sentences
-                clean = re.sub(r'(?<!\n)\n(?!\n)', ' ', clean)
+                # Replace all newlines and excessive whitespace with a single space
+                clean = re.sub(r'\s+', ' ', clean).strip()
                 
                 # Strip currency repetitions like (₱40,000) or (P200,000)
                 clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
@@ -537,7 +537,7 @@ def _get_text_for_codal(content_id, code_id=None):
         content = content.replace('\r\n', '\n').replace('\r', '\n')
         # TTS Cleaning: Remove structural MD only, keep punctuation
         clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
-        clean = re.sub(r'\n{3,}', '\n\n', clean).strip()
+        clean = re.sub(r'\s+', ' ', clean).strip()
 
         # Strip currency repetitions like (₱40,000) or (P200,000)
         clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
@@ -598,7 +598,7 @@ def _get_text_for_question(content_id):
         
         # Basic cleanup
         full_text = re.sub(r'[#*`_\[\]]', ' ', full_text)
-        full_text = re.sub(r'\n{3,}', '\n\n', full_text).strip()
+        full_text = re.sub(r'\s+', ' ', full_text).strip()
         
         # Apply custom pronunciations (Latin, Names, etc.)
         full_text = _apply_custom_pronunciations(full_text)
