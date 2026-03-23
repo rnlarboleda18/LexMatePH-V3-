@@ -15,6 +15,7 @@ import CodexViewer from './components/CodexViewer';
 import CaseDecisionModal from './components/CaseDecisionModal';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
+import { getSubjectColor } from './utils/colors';
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
@@ -67,38 +68,46 @@ function App() {
         if (!response.ok) throw new Error('Failed to fetch questions');
         const data = await response.json();
 
-        // Group sub-questions (e.g., (b), (c)) with their parent question (a)
+        // Group questions by base identifier (e.g., Q19, Q19b) to detect sub-parts correctly
         const groupedData = [];
-        let currentParent = null;
+        const groupsByBase = {}; // Map of "YEAR-SUBJ-BASEQ" to parents
 
-        // Sort by ID to ensure sequential adjacency from the ingestion
+        // Sort by ID to keep logical flow
         const sortedRaw = [...data].sort((a, b) => a.id - b.id);
 
         for (const q of sortedRaw) {
-          // Detect if this is likely a sub-question (starts with (b), (c), etc., or Q#b:, etc.)
           const textLower = q.text.trim().toLowerCase();
+          
+          // Identify if this is a sub-part (e.g. Q19b, Q19c, (b), (c))
           const isSub = /^(\([b-z]\)|q\d+[b-z]:|\d+\.\d+)/.test(textLower);
+          
+          // Extract base Q identifier if possible (e.g. Q19 from Q19b)
+          const baseMatch = q.source_label?.match(/Q(\d+)/i);
+          const baseNum = baseMatch ? baseMatch[1] : null;
+          const groupKey = `${q.year}-${q.subject}-${baseNum || 'none'}`;
 
-          if (isSub && currentParent && q.year === currentParent.year && q.subject === currentParent.subject) {
-            // Attach to the current parent group
-            if (!currentParent.subQuestions) currentParent.subQuestions = [];
-            currentParent.subQuestions.push(q);
+          if (isSub && groupsByBase[groupKey]) {
+            // Attach to the existing parent in this group
+            const parent = groupsByBase[groupKey];
+            if (!parent.subQuestions) parent.subQuestions = [];
+            parent.subQuestions.push(q);
           } else {
-            // This is a new "parent" question
+            // New parent question
             const newQ = { ...q, subQuestions: [] };
             groupedData.push(newQ);
-            currentParent = newQ;
+            groupsByBase[groupKey] = newQ;
           }
         }
 
-        // Balanced Shuffle: Group by subject, then interleave
+        // Shuffle within groups if needed? No, just shuffle the groupedData.
+        // Actually, more important: shuffle the final list within subjects.
         const subjects = {};
         groupedData.forEach(q => {
           if (!subjects[q.subject]) subjects[q.subject] = [];
           subjects[q.subject].push(q);
         });
 
-        // Shuffle each subject's questions to mix years and avoid chronological clustering
+        // Ensure complete randomness within each subject
         Object.keys(subjects).forEach(key => {
           for (let i = subjects[key].length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -106,6 +115,7 @@ function App() {
           }
         });
 
+        // Finally interleave to balance subjects
         const balancedQuestions = [];
         const subjectKeys = Object.keys(subjects);
         let maxCount = 0;
@@ -113,9 +123,7 @@ function App() {
 
         for (let i = 0; i < maxCount; i++) {
           subjectKeys.forEach(key => {
-            if (subjects[key][i]) {
-              balancedQuestions.push(subjects[key][i]);
-            }
+            if (subjects[key][i]) balancedQuestions.push(subjects[key][i]);
           });
         }
 
@@ -156,6 +164,12 @@ function App() {
     setMode('about');
   };
 
+  const handleSelectSubject = (subject) => {
+    setCurrentSubject(subject === 'All Subjects' ? null : subject);
+    setSearchTerm(''); // Clear search when picking a subject
+    setMode('browse_bar');
+  };
+
   const handleStartFlashcard = (subject) => {
     if (subject === 'CANCEL') {
       setMode('supreme_decisions');
@@ -173,8 +187,7 @@ function App() {
       selected = [...questions];
     }
 
-    // Sort by year (descending)
-    selected.sort((a, b) => (b.year || 0) - (a.year || 0));
+    // Preserve the randomized order from the fetch shuffle
 
     setFlashcardQuestions(selected);
     setFlashcardIndex(0);
@@ -250,6 +263,7 @@ function App() {
       sidebarContent={
         <Sidebar
           onToggleQuiz={handleToggleQuiz}
+          onSelectSubject={handleSelectSubject}
           onToggleAbout={handleToggleAbout}
           onToggleUpdates={() => setMode('updates')}
           onToggleSupremeDecisions={() => setMode('supreme_decisions')}
@@ -336,6 +350,36 @@ function App() {
                       onClose={() => setMode('supreme_decisions')}
                     />
                   )}
+                  {effectiveMode === 'browse_bar' && (
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-8">
+                        <div>
+                          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                             {currentSubject || 'All Subjects'}
+                          </h1>
+                          <p className="text-gray-600 dark:text-gray-400">
+                             Browse individual bar exam questions and answers.
+                          </p>
+                        </div>
+                        <div className="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-bold border border-amber-200 dark:border-amber-800">
+                          {questions.filter(q => !currentSubject || q.subject === currentSubject).length} Questions
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {questions
+                          .filter(q => !currentSubject || q.subject === currentSubject)
+                          .map((q) => (
+                            <QuestionCard
+                              key={q.id}
+                              question={q}
+                              onSelect={() => setSelectedQuestion(q)}
+                              subjectColor={getSubjectColor(q.subject)}
+                            />
+                          ))}
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </div>
@@ -379,6 +423,27 @@ function App() {
         />
       )}
 
+      {/* Question Detail Modal */}
+      {selectedQuestion && (
+        <QuestionDetailModal
+          question={selectedQuestion}
+          onClose={() => setSelectedQuestion(null)}
+          onNext={() => {
+            const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
+            const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
+            if (idx < currentList.length - 1) {
+              setSelectedQuestion(currentList[idx + 1]);
+            }
+          }}
+          onPrev={() => {
+            const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
+            const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
+            if (idx > 0) {
+              setSelectedQuestion(currentList[idx - 1]);
+            }
+          }}
+        />
+      )}
     </Layout>
   );
 }

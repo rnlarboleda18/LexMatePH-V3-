@@ -4,7 +4,7 @@ import json
 import re
 
 # Cloud connection string
-CLOUD_DB = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+CLOUD_DB = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def test_final_mapping():
     print("Testing FINAL ROC header mapping logic...")

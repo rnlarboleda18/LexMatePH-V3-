@@ -1,6 +1,6 @@
 import psycopg2
 
-DB_CONNECTION = "postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
+DB_CONNECTION = "postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def restructure_db():
     conn = psycopg2.connect(DB_CONNECTION)

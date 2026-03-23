@@ -16,8 +16,8 @@ import psycopg2
 # Read from environment variable - never hardcode credentials
 DB_CONNECTION_STRING = os.environ.get(
     "DB_CONNECTION_STRING",
-    # Fallback for local dev only — override via .env or local.settings.json
-    "postgresql://user:password@localhost:5432/lexmateph-ea-db"
+    # Fallback pointing to Azure Cloud DB (Sanitized for GitHub)
+    "postgresql://bar_admin:[DB_PASSWORD]@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
 )
 
 _local = threading.local()

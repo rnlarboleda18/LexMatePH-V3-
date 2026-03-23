@@ -25,9 +25,9 @@ const codexSubjects = [
     { title: "Special Laws", id: "special", icon: Book, color: "text-violet-500", disabled: true }
 ];
 
-const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard }) => {
+const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
     const [openSection, setOpenSection] = useState(() => {
-        if (mode === 'codex') return 'codex';
+        if (mode === 'codex' || mode === 'browse_bar') return mode === 'codex' ? 'codex' : 'bar';
         return null;
     });
     const timeoutRef = useRef(null);
@@ -232,6 +232,44 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
 
             {/* Bar Questions Collapsible Section */}
+            <div>
+                <button
+                    onClick={() => toggleSection('bar')}
+                    className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center justify-between group
+                    ${mode === 'browse_bar' && openSection === 'bar'
+                            ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
+                            : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        }`}
+                >
+                    <span className="flex items-center gap-3">
+                        <Book size={20} className={`${openSection === 'bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
+                        Bar Questions
+                    </span>
+                    {openSection === 'bar' ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
+                </button>
+
+                {openSection === 'bar' && (
+                    <div className="animate-in slide-in-from-top-2 duration-200">
+                        {subjects.map((subject) => (
+                            <button
+                                key={subject}
+                                onClick={() => onSelectSubject && onSelectSubject(subject)}
+                                className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] hover:bg-amber-50 dark:hover:bg-amber-900/10 border-transparent text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400 group/item`}
+                            >
+                                <span className={`w-2 h-2 rounded-full mr-2 ${getSubjectColor(subject)} opacity-70 group-hover/item:opacity-100 transition-all`} />
+                                {subject}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => onSelectSubject && onSelectSubject('All Subjects')}
+                            className="w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] hover:bg-amber-50 dark:hover:bg-amber-900/10 border-transparent text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400 group/item"
+                        >
+                            <span className="w-2 h-2 rounded-full mr-2 bg-gray-400 dark:bg-gray-500 opacity-70 group-hover/item:opacity-100 transition-all" />
+                            All Subjects
+                        </button>
+                    </div>
+                )}
+            </div>
 
 
 

@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
 
-conn = psycopg2.connect('postgresql://bar_admin:RABpass021819!@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require')
+conn = psycopg2.connect('postgresql://bar_admin:[DB_PASSWORD]@bar-db-eu-west.postgres.database.azure.com:5432/postgres?sslmode=require')
 cur = conn.cursor(cursor_factory=RealDictCursor)
 
 sections_to_check = [
