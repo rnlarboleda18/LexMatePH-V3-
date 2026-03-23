@@ -20,14 +20,23 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
     }, []);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'dark bg-[#121212] text-dark-text' : 'bg-stone-200 text-slate-900'}`}>
+        <div className={`min-h-screen transition-colors duration-300 relative overflow-hidden ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-50 text-slate-900'}`}>
+            {/* Global Glassmorphism Background Orbs */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+                <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-float ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`}></div>
+                <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-float ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`} style={{animationDelay: '1s'}}></div>
+                <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-float ${isDarkMode ? 'bg-blue-900' : 'bg-blue-200'}`} style={{animationDelay: '2s'}}></div>
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05]"></div>
+            </div>
+            
+            <div className="relative z-10 flex flex-col min-h-screen">
 
             {/* Header */}
             {!isFullscreen && (
                 <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 transition-all duration-300
                     ${isDarkMode
-                        ? 'h-24 bg-[#111111]/95 backdrop-blur-md border-b border-amber-900/30 shadow-[0_1px_0_0_rgba(217,119,6,0.15),0_4px_24px_rgba(0,0,0,0.4)]'
-                        : 'h-24 bg-white/96 backdrop-blur-md border-b border-stone-200 shadow-[0_1px_0_0_rgba(217,119,6,0.1),0_4px_16px_rgba(0,0,0,0.06)]'
+                        ? 'h-24 bg-slate-900/40 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
+                        : 'h-24 bg-white/40 backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30px_rgba(0,0,0,0.05)]'
                     }`}>
 
                     {/* LEFT — Brand */}
@@ -115,7 +124,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             {!isFullscreen && (
                 <aside
                     className={`fixed top-28 left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto
-            ${isDarkMode ? 'bg-[#1a1a1a] border-r border-gray-800' : 'bg-white border-r border-stone-400 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.15)]'}
+            ${isDarkMode ? 'bg-slate-900/40 border-r border-white/10 backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white/40 border-r border-white/40 backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
                 >
@@ -141,7 +150,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                     {children}
                 </div>
             </main>
-
+            </div>
         </div>
     );
 };
