@@ -460,11 +460,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-            <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl shadow-xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 border border-gray-200 dark:border-gray-800 relative">
+            <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-2xl shadow-xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 border border-white/40 dark:border-white/10 relative">
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
-                    <div className="absolute inset-x-0 top-0 z-[60] bg-white dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-gray-800 shadow-2xl animate-in slide-in-from-top duration-300 p-6">
+                    <div className="absolute inset-x-0 top-0 z-[60] glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b border-white/30 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-[16px] font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 <ListMusic className="text-purple-500" />
@@ -523,7 +523,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 )}
 
                 {/* HEADER */}
-                <div className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
+                <div className="border-b border-white/20 dark:border-white/5 mb-0 pb-0">
                     {/* Always-visible title row */}
                     <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3">
                         <h2 className="text-[15px] sm:text-[16px] font-bold text-gray-900 dark:text-white leading-snug line-clamp-1 flex-1">
@@ -573,7 +573,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="flex-grow overflow-y-auto p-6 custom-scrollbar bg-white dark:bg-[#1a1a1a]">
+                <div className="flex-grow overflow-y-auto p-6 custom-scrollbar bg-white/40 dark:bg-slate-900/20 backdrop-blur-md">
 
                     {viewMode === 'digest' ? (
                         <>
@@ -681,7 +681,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* FOOTER ACTIONS */}
-                <div className="p-4 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30 flex justify-end gap-3">
+                <div className="p-4 border-t border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30 flex justify-end gap-3 backdrop-blur-sm">
                     <button
                         onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
                         className="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"

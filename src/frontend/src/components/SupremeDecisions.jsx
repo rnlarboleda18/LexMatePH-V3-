@@ -840,9 +840,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-[#121212] text-gray-900 dark:text-gray-100 font-sans">
+        <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
             {/* Header */}
-            <header className="bg-white dark:bg-[#1a1a1a] shadow-sm sticky top-0 z-10 border-b dark:border-gray-800">
+            <header className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm sticky top-0 z-10 border-b border-white/20 dark:border-white/10">
                 <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         <Gavel className="h-8 w-8 text-blue-600 dark:text-blue-400" />
@@ -855,7 +855,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
             <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 {/* Search & Filter Section */}
-                <div className="bg-white dark:bg-[#1a1a1a] rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-6 mb-8 border border-stone-400 dark:border-gray-800">
+                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-6 mb-8 border border-white/40 dark:border-white/10">
                     <div className="space-y-4">
                         {/* Main Search Input */}
                         <div className="relative">
@@ -894,7 +894,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         <div className="md:hidden">
                             <button
                                 onClick={() => setShowMobileFilters(!showMobileFilters)}
-                                className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-stone-400 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-[#202020] hover:bg-gray-50 dark:hover:bg-[#2a2a2a] transition-colors shadow-sm"
+                                className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-white/40 dark:border-white/10 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 glass bg-white/40 dark:bg-slate-800/40 hover:bg-white/60 dark:hover:bg-slate-700/60 transition-colors shadow-sm"
                             >
                                 <Filter className="h-4 w-4" />
                                 {showMobileFilters ? "Hide Filters" : "Filter Results"}
@@ -1010,7 +1010,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         <div
                             key={decision.id}
                             onClick={() => handleCaseClick(decision)}
-                            className="bg-white dark:bg-[#1a1a1a] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-stone-300 dark:border-gray-800 p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 group relative"
+                            className="glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-white/40 dark:border-white/10 p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 hover:bg-white/80 dark:hover:bg-slate-700/60 group relative"
                         >
                             <div className="flex justify-between items-start gap-4 mb-4">
                                 <div className="flex-grow">
@@ -1200,7 +1200,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage === 1 || loading}
-                                className="px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -1214,7 +1214,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage * ITEMS_PER_PAGE >= totalCount || loading}
-                                className="px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                             >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
