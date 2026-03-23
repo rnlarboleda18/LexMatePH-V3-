@@ -465,37 +465,60 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
     if (isMinimized) {
         return (
-            <div 
-                className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg px-4 py-2 flex items-center justify-between transition-all duration-300 cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95"
-                onClick={onExpand}
-            >
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <div className="h-9 w-9 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
-                        <Headphones size={18} />
-                    </div>
-                    <div className="flex flex-col truncate pr-4">
-                        <span className="text-sm font-bold text-gray-900 dark:text-white truncate">
-                            {currentTrack ? currentTrack.title : "LexPlay - Nothing queued"}
-                        </span>
-                        {error ? (
-                            <div className="flex items-center gap-2 mt-0.5">
-                                <span className="text-[10px] text-red-500 dark:text-red-400 truncate font-medium">⚠ {error}</span>
-                                <button 
-                                    onClick={(e) => { e.stopPropagation(); retryCurrentTrack(); }}
-                                    className="px-2 py-0.5 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 text-[8px] font-extrabold uppercase tracking-widest border border-red-500/20 transition-colors"
-                                >
-                                    Retry
-                                </button>
+            <>
+                <style dangerouslySetInnerHTML={{__html: `
+                    @keyframes marquee {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-100%); }
+                    }
+                    .animate-marquee {
+                        display: inline-block;
+                        white-space: nowrap;
+                        animation: marquee 15s linear infinite;
+                        padding-left: 100%; /* Start from the right edge */
+                        width: max-content;
+                    }
+                    .marquee-container {
+                        overflow: hidden;
+                        width: 100%;
+                        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                    }
+                `}} />
+                <div 
+                    className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg px-4 py-2 flex items-center justify-between transition-all duration-300 cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95"
+                    onClick={onExpand}
+                >
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <div className="h-9 w-9 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
+                            <Headphones size={18} />
+                        </div>
+                        <div className="flex flex-col flex-1 min-w-0 pr-2 overflow-hidden">
+                            <div className="marquee-container">
+                                <span className={`text-sm font-bold text-gray-900 dark:text-white ${currentTrack?.title?.length > 25 ? 'animate-marquee' : 'truncate block'}`}>
+                                    {currentTrack ? currentTrack.title : "LexPlay - Nothing queued"}
+                                </span>
                             </div>
-                        ) : isLoading ? (
-                            <span className="text-[10px] text-purple-500 dark:text-purple-400 truncate animate-pulse">Generating audio...</span>
-                        ) : (
-                            <span className="text-[10px] text-gray-500 dark:text-gray-400 truncate">
-                                {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add a Codal or Case Digest"}
-                            </span>
-                        )}
+                            {error ? (
+                                <div className="flex items-center gap-2 mt-0.5">
+                                    <span className="text-[10px] text-red-500 dark:text-red-400 truncate font-medium">⚠ {error}</span>
+                                    <button 
+                                        onClick={(e) => { e.stopPropagation(); retryCurrentTrack(); }}
+                                        className="px-2 py-0.5 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 text-[8px] font-extrabold uppercase tracking-widest border border-red-500/20 transition-colors"
+                                    >
+                                        Retry
+                                    </button>
+                                </div>
+                            ) : isLoading ? (
+                                <span className="text-[10px] text-purple-500 dark:text-purple-400 truncate animate-pulse">Generating audio...</span>
+                            ) : (
+                                <div className="marquee-container">
+                                    <span className={`text-[10px] text-gray-500 dark:text-gray-400 ${currentTrack?.subtitle?.length > 35 ? 'animate-marquee' : 'truncate block'}`}>
+                                        {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add a Codal or Case Digest"}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
 
                 <div className="flex flex-col items-center shrink-0 px-2 sm:px-4 flex-1 justify-center max-w-md gap-0.5">
                     <div className="flex items-center gap-3 sm:gap-4">
@@ -531,8 +554,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     </button>
                 </div>
             </div>
-        );
-    }
+        </>
+    );
+}
 
     // Full Screen Mode
     return (
