@@ -25,7 +25,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v8" # Flushing cached gTTS robotic audio to force Azure Speech
+CACHE_VERSION = "v9" # Strip SSML tokens from gTTS fallback path
 AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
 
 # ----- Custom Pronunciation Rules -----
@@ -610,12 +610,25 @@ def _get_text_for_question(content_id):
     finally:
         put_db_connection(conn)
 
+def _strip_ssml_tokens(text):
+    """Remove internal SSML placeholder tokens that are only meaningful for Azure TTS.
+    If passed to gTTS they get read aloud literally as underscores."""
+    text = text.replace("__ES_START__", "").replace("__ES_END__", "")
+    text = text.replace("__PH_START__", "").replace("__PH_END__", "")
+    text = text.replace("__LATIN_START__", "").replace("__LATIN_END__", "")
+    # Clean up any double spaces left behind
+    text = re.sub(r'  +', ' ', text)
+    return text.strip()
+
 # ----- Audio generation -----
 def _generate_audio_gtts(text):
     """Generate MP3 audio bytes using gTTS (free, needs internet).
     Supports multi-chunk concatenation.
     """
     from gtts import gTTS
+    
+    # Strip SSML tokens that are only for Azure - gTTS will read them literally as underscores
+    text = _strip_ssml_tokens(text)
     
     # Use 2000 as safe chunk size for gTTS
     chunks = _chunk_text(text, max_len=2000)
