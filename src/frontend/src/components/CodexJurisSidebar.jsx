@@ -65,9 +65,9 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
     if (!articleNum) return null;
 
     return (
-        <div className="h-full min-h-0 flex flex-col bg-white dark:bg-[#1a1a1a] transition-all duration-300">
+        <div className="h-full min-h-0 flex flex-col bg-transparent transition-all duration-300">
             {/* Header */}
-            <div className="p-3 bg-white dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-gray-800 flex justify-between items-center sticky top-0 z-10">
+            <div className="p-3 bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm border-b border-white/20 dark:border-white/5 flex justify-between items-center sticky top-0 z-10">
                 <div>
                     <h3 className="text-[16px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Jurisprudence</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Atomic Ratios for Art. {articleNum}</p>
@@ -108,12 +108,12 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                     return (
                         <div
                             key={group.caseId}
-                            className="bg-white dark:bg-[#202020] rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow group overflow-hidden"
+                            className="glass bg-white/60 dark:bg-slate-800/40 rounded-lg border border-white/40 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow group overflow-hidden"
                         >
                             {/* Card Header: Case Info (Clickable for whole Digest) */}
                             <div
                                 onClick={() => onSelectRatio && onSelectRatio(group.caseId, firstLink.ratio_index)}
-                                className="p-3 bg-gray-50 dark:bg-[#252525] border-b border-gray-100 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#2d2d2d] transition-colors"
+                                className="p-3 bg-white/40 dark:bg-slate-800/60 border-b border-white/20 dark:border-white/5 cursor-pointer hover:bg-white/60 dark:hover:bg-slate-700/60 transition-colors"
                             >
                                 <div className="flex justify-between items-start mb-1">
                                     <h4 className="font-semibold text-indigo-700 dark:text-indigo-400 text-[16px] leading-tight group-hover:underline">
@@ -132,7 +132,7 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                             </div>
 
                             {/* List of Atomic Ratios */}
-                            <div className="p-2 space-y-3 bg-white dark:bg-[#202020]">
+                            <div className="p-2 space-y-3 bg-transparent">
                                 {group.ratios.map((ratio, idx) => (
                                     <div
                                         key={ratio.link_id}
