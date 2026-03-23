@@ -59,7 +59,7 @@ Any person who shall defraud another by means of false pretenses or fraudulent a
 
 def fix_article_315():
     try:
-        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
 
         print("Updating Article 315 content...")

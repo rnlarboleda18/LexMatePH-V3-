@@ -6,7 +6,7 @@ import re
 import os
 
 # Use env var or default
-CONN_STR = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+CONN_STR = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def split_paragraphs(text):
     if not text:

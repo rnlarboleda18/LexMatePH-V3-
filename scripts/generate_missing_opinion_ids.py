@@ -1,7 +1,7 @@
 import psycopg2
 
 def run():
-    conn_str = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+    conn_str = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     conn = psycopg2.connect(conn_str)
     cur = conn.cursor()
     

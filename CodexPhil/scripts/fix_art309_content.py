@@ -29,7 +29,7 @@ CORRECT_CONTENT = """Article 309. Penalties. - Any person guilty of theft shall 
 
 def fix_article_309():
     try:
-        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
 
         print("Updating Article 309 content...")

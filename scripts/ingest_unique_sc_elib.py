@@ -4,7 +4,7 @@ import psycopg2
 from datetime import datetime
 
 # DB Connection
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 MD_DIR = "data/sc_elib_md (missing from lawphil)"
 
 def normalize_caseno(cn):

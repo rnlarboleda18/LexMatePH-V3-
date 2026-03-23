@@ -10,7 +10,7 @@ from psycopg2.extras import RealDictCursor, register_default_jsonb, Json
 # Configuration
 # Default to XAI API Key if present, otherwise use generic or fail
 API_KEY = os.getenv("XAI_API_KEY") 
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 # Client Configuration
 # Initialize with default, can be overridden in main

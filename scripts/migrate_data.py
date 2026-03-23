@@ -13,7 +13,7 @@ LOCAL_HOST = "localhost"
 LOCAL_PORT = "5432"
 LOCAL_USER = "postgres"
 LOCAL_PASS = "postgres"
-LOCAL_DB = "bar_reviewer_local"
+LOCAL_DB = "lexmateph-ea-db"
 
 DUMP_FILE = "bar_reviewer_backup.sql"
 

@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor, register_default_jsonb, Json
 
 # Configuration
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 # Fallback to local.settings.json
 if not OPENAI_API_KEY:

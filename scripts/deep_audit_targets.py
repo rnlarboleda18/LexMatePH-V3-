@@ -2,7 +2,7 @@ import psycopg2
 import re
 from datetime import datetime, timedelta
 
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def deep_audit():
     try:

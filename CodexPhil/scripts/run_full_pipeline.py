@@ -21,7 +21,7 @@ def get_db_connection():
                 return psycopg2.connect(settings['Values']['DB_CONNECTION_STRING'])
     except:
         pass
-    return psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@127.0.0.1:5432/bar_reviewer_local")
+    return psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@127.0.0.1:5432/lexmateph-ea-db")
 
 def get_applied_amendments():
     """Fetch all amendment IDs that exist in the database"""

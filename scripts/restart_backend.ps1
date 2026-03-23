@@ -1,4 +1,4 @@
-$env:DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+$env:DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 $env:GOOGLE_API_KEY = "REDACTED_API_KEY_HIDDEN"
 $env:PYTHONPATH = "."
 

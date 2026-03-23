@@ -13,7 +13,7 @@ CORRECT_CONTENT = """Article 313. Altering boundaries or landmarks. - Any person
 
 def fix_article_313():
     try:
-        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
 
         print("Updating Article 313 content...")

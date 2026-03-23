@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-$LOCAL_DB_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+$LOCAL_DB_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 $AZURE_DB_URL = $env:AZURE_DB_CONNECTION_STRING
 if (-not $AZURE_DB_URL) {
     $AZURE_DB_URL = Read-Host "Please enter the Azure Database Connection String (e.g. postgres://user:pass@host:port/db?sslmode=require)"

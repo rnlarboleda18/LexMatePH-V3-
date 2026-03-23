@@ -3,7 +3,7 @@ import re
 import argparse
 import logging
 
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 

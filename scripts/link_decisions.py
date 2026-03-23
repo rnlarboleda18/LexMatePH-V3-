@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 HOST = "localhost"
 USER = "postgres"
 PASS = "b66398241bfe483ba5b20ca5356a87be"
-DB = "bar_reviewer_local"
+DB = "lexmateph-ea-db"
 
 def link_opinions():
     conn = None

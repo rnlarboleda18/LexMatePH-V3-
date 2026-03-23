@@ -3,7 +3,7 @@ from psycopg2.extras import RealDictCursor
 
 def main():
     try:
-        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor(cursor_factory=RealDictCursor)
         
         cur.execute("SELECT content_md, article_num FROM roc_codal WHERE article_num = 'Rule 10, Section 1'")

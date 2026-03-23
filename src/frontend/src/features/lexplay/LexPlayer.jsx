@@ -465,69 +465,70 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
     if (isMinimized) {
         return (
-            <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg transition-all duration-300">
-                {/* Top row: Now Playing info + Close button */}
-                <div className="flex items-center justify-between px-4 pt-2 pb-1 gap-3">
-                    <div
-                        className="flex items-center gap-2.5 flex-1 min-w-0 cursor-pointer"
-                        onClick={onExpand}
-                    >
-                        <div className="h-8 w-8 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
-                            <Headphones size={16} />
-                        </div>
-                        <div className="flex flex-col min-w-0">
-                            <span className="text-[9px] font-extrabold uppercase tracking-widest text-purple-500 dark:text-purple-400">Now Playing</span>
-                            <span className="text-sm font-bold text-gray-900 dark:text-white truncate leading-tight">
-                                {currentTrack ? currentTrack.title : 'Nothing queued'}
-                            </span>
-                            {error ? (
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[10px] text-red-500 truncate">⚠ {error}</span>
-                                    <button 
-                                        onClick={(e) => { e.stopPropagation(); retryCurrentTrack(); }}
-                                        className="px-2 py-0.5 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 text-[8px] font-extrabold uppercase tracking-widest border border-red-500/20 transition-colors"
-                                    >
-                                        Retry
-                                    </button>
-                                </div>
-                            ) : isLoading ? (
-                                <span className="text-[10px] text-purple-400 animate-pulse">Generating audio...</span>
-                            ) : currentTrack ? (
-                                <span className="text-[10px] text-gray-400 truncate">{activePlaylistName ? `${activePlaylistName} · ` : ''}{currentTrack.subtitle}</span>
-                            ) : null}
-                        </div>
+            <div 
+                className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-lg px-4 py-2 flex items-center justify-between transition-all duration-300 cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95"
+                onClick={onExpand}
+            >
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="h-9 w-9 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
+                        <Headphones size={18} />
                     </div>
-                    <button
-                        onClick={(e) => { e.stopPropagation(); handleCloseInternal(); }}
-                        className="p-1.5 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 active:scale-90 flex items-center justify-center shadow-sm shrink-0"
-                        title="Close Player"
-                    >
-                        <X size={15} strokeWidth={2.5} />
-                    </button>
+                    <div className="flex flex-col truncate pr-4">
+                        <span className="text-sm font-bold text-gray-900 dark:text-white truncate">
+                            {currentTrack ? currentTrack.title : "LexPlay - Nothing queued"}
+                        </span>
+                        {error ? (
+                            <div className="flex items-center gap-2 mt-0.5">
+                                <span className="text-[10px] text-red-500 dark:text-red-400 truncate font-medium">⚠ {error}</span>
+                                <button 
+                                    onClick={(e) => { e.stopPropagation(); retryCurrentTrack(); }}
+                                    className="px-2 py-0.5 rounded bg-red-500/10 text-red-500 hover:bg-red-500/20 text-[8px] font-extrabold uppercase tracking-widest border border-red-500/20 transition-colors"
+                                >
+                                    Retry
+                                </button>
+                            </div>
+                        ) : isLoading ? (
+                            <span className="text-[10px] text-purple-500 dark:text-purple-400 truncate animate-pulse">Generating audio...</span>
+                        ) : (
+                            <span className="text-[10px] text-gray-500 dark:text-gray-400 truncate">
+                                {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add a Codal or Case Digest"}
+                            </span>
+                        )}
+                    </div>
                 </div>
 
-                {/* Bottom row: controls + progress */}
-                <div className="flex flex-col items-center px-4 pb-2 gap-0.5" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center gap-4">
+                <div className="flex flex-col items-center shrink-0 px-2 sm:px-4 flex-1 justify-center max-w-md gap-0.5">
+                    <div className="flex items-center gap-3 sm:gap-4">
                         <button onClick={(e) => { e.stopPropagation(); handlePrevious(); }} className="p-1.5 text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors" disabled={playlist.length === 0}>
                             <SkipBack size={18} />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                             disabled={playlist.length === 0}
-                            className="h-9 w-9 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50"
+                            className="p-1.5 text-gray-900 hover:text-purple-600 dark:text-white dark:hover:text-purple-400 transition-transform hover:scale-110 disabled:opacity-50"
                         >
                             {isLoading ? (
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            ) : isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-0.5" />}
+                                <div className="w-5 h-5 border-2 border-purple-600/30 border-t-purple-600 dark:border-white/30 dark:border-t-white rounded-full animate-spin" />
+                            ) : isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
                         </button>
                         <button onClick={(e) => { e.stopPropagation(); handleNext(); }} className="p-1.5 text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors" disabled={playlist.length === 0}>
                             <SkipForward size={18} />
                         </button>
                     </div>
-                    <div className="w-full">
+
+                    <div className="w-full" onClick={(e) => e.stopPropagation()}>
                         <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={true} />
                     </div>
+                </div>
+
+                <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end shrink-0 pl-2">
+                    <button
+                        onClick={(e) => { e.stopPropagation(); handleCloseInternal(); }}
+                        className="p-1.5 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 active:scale-90 flex items-center justify-center shadow-sm"
+                        title="Close Player"
+                    >
+                        <X size={16} strokeWidth={2.5} />
+                    </button>
                 </div>
             </div>
         );

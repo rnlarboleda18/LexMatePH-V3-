@@ -16,7 +16,7 @@ def get_db_connection():
                 return psycopg2.connect(settings['Values']['DB_CONNECTION_STRING'])
     except:
         pass
-    return psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+    return psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
 
 def assess():
     print("--- ASSESSING RPC CONTENT & LINKS ---")

@@ -6,7 +6,7 @@ import time
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 API_KEY = os.environ.get("GOOGLE_API_KEY") or "REDACTED_API_KEY_HIDDEN"
 
 client = genai.Client(api_key=API_KEY)

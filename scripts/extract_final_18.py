@@ -1,7 +1,7 @@
 import psycopg2
 import re
 
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def extract_final_18():
     # Read previous target IDs (the 40)

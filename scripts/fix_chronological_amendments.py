@@ -5,7 +5,7 @@ from datetime import date
 
 # Configuration
 CODE_SHORT_NAME = "RPC"
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def get_db_connection():
     return psycopg2.connect(DB_CONNECTION_STRING)

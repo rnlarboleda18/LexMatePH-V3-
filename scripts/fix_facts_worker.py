@@ -10,7 +10,7 @@ import argparse
 
 # Configuration
 API_KEY = "REDACTED_API_KEY_HIDDEN"  # Standardized Key
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 # Logging Setup
 logging.basicConfig(

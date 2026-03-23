@@ -13,7 +13,7 @@ CORRECT_CONTENT = """Article 311. Theft of the property of the National Library 
 
 def fix_article_311():
     try:
-        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
 
         print("Updating Article 311 content...")

@@ -19,7 +19,7 @@ def get_db_connection():
     except Exception:
         pass
     
-    return "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@127.0.0.1:5432/bar_reviewer_local"
+    return "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@127.0.0.1:5432/lexmateph-ea-db"
 
 def check_updates():
     db_conn_string = get_db_connection()

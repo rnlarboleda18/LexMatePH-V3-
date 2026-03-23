@@ -18,7 +18,7 @@ from rich.console import Console
 #    or that we just want a total count of that model.
 #    This avoids sending 37k IDs over the wire every second.
 QUERY_OPTIMIZED = "SELECT count(*) FROM sc_decided_cases WHERE ai_model = 'grok-4-1-fast-reasoning'"
-DB_CONN_STR = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONN_STR = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 HISTORY_LEN = 60  
 
 def get_db_connection():

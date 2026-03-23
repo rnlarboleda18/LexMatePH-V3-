@@ -19,7 +19,7 @@ from google import genai
 import argparse
 
 # --- CONFIG ---
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 MODEL_NAME = "gemini-3-flash-preview"
 API_KEY = "REDACTED_API_KEY_HIDDEN"
 

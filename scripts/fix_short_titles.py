@@ -2,7 +2,7 @@ import psycopg2
 import re
 import csv
 
-DB_CONN = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONN = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def get_db():
     return psycopg2.connect(DB_CONN)

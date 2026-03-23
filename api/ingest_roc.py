@@ -10,7 +10,7 @@ def get_db_connection():
             settings = json.load(f)
             conn_str = settings['Values']['DB_CONNECTION_STRING']
     except Exception:
-        conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+        conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
 
 def parse_roc_file(filepath, book_label):

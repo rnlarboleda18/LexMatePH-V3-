@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 # Configuration
-$LOCAL_DB_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+$LOCAL_DB_URL = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 # The new hostname provided by the user
 $TARGET_HOST = "bar-db-eu-west.postgres.database.azure.com"
 $TARGET_USER = "bar_admin"
@@ -20,7 +20,7 @@ if (-not (Test-Path "C:\tmp")) {
 }
 
 # 2. Dump Local
-Write-Host "`n[1/3] Dumping local database: bar_reviewer_local..." -ForegroundColor Yellow
+Write-Host "`n[1/3] Dumping local database: lexmateph-ea-db..." -ForegroundColor Yellow
 $env:PGPASSWORD = "b66398241bfe483ba5b20ca5356a87be"
 & pg_dump --no-owner --no-privileges --clean --if-exists --dbname=$LOCAL_DB_URL --file=$DUMP_FILE
 if ($LASTEXITCODE -ne 0) { throw "Local dump failed" }

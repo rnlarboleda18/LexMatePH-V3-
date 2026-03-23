@@ -8,7 +8,7 @@ import concurrent.futures
 
 # Configuration
 API_KEY = os.getenv("GOOGLE_API_KEY", "REDACTED_API_KEY_HIDDEN")
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 client = genai.Client(api_key=API_KEY)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')

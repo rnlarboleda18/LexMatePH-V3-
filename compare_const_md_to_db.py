@@ -2,7 +2,7 @@ import re
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-DB_CONNECTION = "dbname=bar_reviewer_local user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
+DB_CONNECTION = "dbname=lexmateph-ea-db user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
 
 def parse_md(md_path):
     with open(md_path, 'r', encoding='utf-8') as f:

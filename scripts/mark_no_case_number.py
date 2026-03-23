@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 IDS_TO_UPDATE = [
     3114, 3115, 4418, 4619, 4620, 4621, 4622, 4623, 4743, 4964, 4965, 4966, 4967, 4968, 5125, 5127,

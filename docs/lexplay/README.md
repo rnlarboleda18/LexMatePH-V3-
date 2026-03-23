@@ -317,7 +317,7 @@ Set in `api/local.settings.json` for local development:
 ```json
 {
   "Values": {
-    "DB_CONNECTION_STRING": "postgresql://user:pass@localhost:5432/bar_reviewer_local",
+    "DB_CONNECTION_STRING": "postgresql://user:pass@localhost:5432/lexmateph-ea-db",
     "AZURE_STORAGE_CONNECTION_STRING": "UseDevelopmentStorage=true",
     "SPEECH_KEY": "<your-azure-speech-key-here>",
     "SPEECH_REGION": "japaneast"

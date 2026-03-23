@@ -2,7 +2,7 @@ import psycopg2
 
 def main():
     try:
-        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
         
         cur.execute("SELECT DISTINCT target_paragraph_index FROM codal_case_links WHERE statute_id = 'ROC'")

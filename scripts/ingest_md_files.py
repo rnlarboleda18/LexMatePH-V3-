@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 HOST = "localhost"
 USER = "postgres"
 PASS = "b66398241bfe483ba5b20ca5356a87be"
-DB = "bar_reviewer_local"
+DB = "lexmateph-ea-db"
 MD_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\data\lawphil_md"
 
 def ingest_files():

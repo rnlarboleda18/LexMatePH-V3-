@@ -6,7 +6,7 @@ import codecs
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 def get_db_connection():
-    conn_str = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+    conn_str = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
 
 def check_missing_amendments():

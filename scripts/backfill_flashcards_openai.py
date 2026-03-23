@@ -8,7 +8,7 @@ import time
 from psycopg2 import pool
 
 # Config
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 OPENAI_API_KEY = "REDACTED_OPENAI_KEY"
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')

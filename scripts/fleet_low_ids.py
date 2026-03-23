@@ -9,7 +9,7 @@ import time
 from psycopg2 import pool
 
 # Config
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 API_KEY = os.environ.get("GOOGLE_API_KEY", "REDACTED_API_KEY_HIDDEN")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [LOW-ID] %(message)s')

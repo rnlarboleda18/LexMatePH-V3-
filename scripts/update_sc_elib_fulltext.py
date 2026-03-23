@@ -8,7 +8,7 @@ from datetime import datetime
 # Configuration
 CSV_PATH = r"analysis/sc_elib_clean_metadata.csv"
 MD_DIR = r"data/sc_elib_md"
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 REPORT_CSV = r"analysis/sc_elib_update_report.csv"
 
 def normalize_caseno(cn):

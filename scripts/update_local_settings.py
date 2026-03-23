@@ -13,7 +13,7 @@ def update_settings():
             data = json.load(f)
         
         # Add new settings
-        data['Values']['LOCAL_DB_CONNECTION_STRING'] = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+        data['Values']['LOCAL_DB_CONNECTION_STRING'] = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
         data['Values']['ENVIRONMENT'] = "local"
         data['Values']['REDIS_ENABLED'] = "true"
         

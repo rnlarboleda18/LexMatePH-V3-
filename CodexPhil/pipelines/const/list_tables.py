@@ -1,5 +1,5 @@
 import psycopg2
-conn_str = "dbname=bar_reviewer_local user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
+conn_str = "dbname=lexmateph-ea-db user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
 conn = psycopg2.connect(conn_str)
 cur = conn.cursor()
 cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public' ORDER BY table_name;")

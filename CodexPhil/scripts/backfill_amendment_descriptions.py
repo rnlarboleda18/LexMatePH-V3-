@@ -20,7 +20,7 @@ except:
 client = genai.Client(api_key=API_KEY)
 
 def get_db_connection():
-    conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+    conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
 
 def generate_description(current_text, old_text, amendment_id, prior_amendment_id, prior_date):

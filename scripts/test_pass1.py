@@ -17,7 +17,7 @@ PASS1_SCHEMA = """
 
 def main():
     try:
-        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
         cur.execute("SELECT short_title, main_doctrine, digest_ratio, digest_ruling FROM sc_decided_cases WHERE (statutes_involved::text ILIKE '%%Rules of Court%%' OR statutes_involved::text ILIKE '%%ROC%%') OFFSET 3 LIMIT 1")
         row = cur.fetchone()

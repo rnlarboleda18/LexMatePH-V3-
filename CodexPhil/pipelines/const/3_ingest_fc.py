@@ -9,7 +9,7 @@ import psycopg2
 import os
 import uuid
 
-DB_CONNECTION = "dbname=bar_reviewer_local user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
+DB_CONNECTION = "dbname=lexmateph-ea-db user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
 BASE_DIR = r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2"
 MD_FILE  = os.path.join(BASE_DIR, "CodexPhil", "Codals", "md", "FC_structured.md")
 CODE     = "FC"

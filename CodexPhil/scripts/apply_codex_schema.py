@@ -9,7 +9,7 @@ def get_db_connection():
             conn_str = settings['Values']['DB_CONNECTION_STRING']
     except Exception as e:
         print(f"Warning: Could not read local.settings.json: {e}")
-        conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+        conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
 
 def apply_schema():

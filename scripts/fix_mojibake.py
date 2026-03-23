@@ -4,7 +4,7 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
-conn=psycopg2.connect('postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local')
+conn=psycopg2.connect('postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db')
 cur=conn.cursor()
 
 # Target titles with the Mojibake starter marks

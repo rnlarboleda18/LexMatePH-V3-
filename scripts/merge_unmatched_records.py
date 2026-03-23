@@ -9,7 +9,7 @@ csv.field_size_limit(100000000)
 CLEAN_METADATA_CSV = r"analysis/sc_elib_clean_metadata.csv"
 UPDATE_REPORT_CSV = r"analysis/sc_elib_update_report.csv"
 MD_DIR = r"data/sc_elib_md"
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
 def normalize_caseno(cn):
     if not cn: return ""

@@ -1,5 +1,5 @@
 import psycopg2
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 conn = psycopg2.connect(DB_CONNECTION_STRING)
 cur = conn.cursor()
 

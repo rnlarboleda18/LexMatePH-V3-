@@ -24,7 +24,7 @@ def get_db_connection():
     except:
         pass
     # Fallback to dev default
-    return psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+    return psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
 
 def parse_metadata_light(filepath):
     filename = os.path.basename(filepath)

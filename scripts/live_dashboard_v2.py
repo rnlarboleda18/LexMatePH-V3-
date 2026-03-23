@@ -14,7 +14,7 @@ from rich.console import Console
 
 # --- Configuration ---
 TARGET_FILE = 'grok_phase3_ids.txt'
-DB_CONN_STR = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+DB_CONN_STR = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 HISTORY_LEN = 40  # How many data points for the graph
 
 def get_db_connection():

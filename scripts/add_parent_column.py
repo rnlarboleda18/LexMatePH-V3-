@@ -3,7 +3,7 @@ import psycopg2
 HOST = "localhost"
 USER = "postgres"
 PASS = "b66398241bfe483ba5b20ca5356a87be"
-DB = "bar_reviewer_local"
+DB = "lexmateph-ea-db"
 
 def add_parent_column():
     try:

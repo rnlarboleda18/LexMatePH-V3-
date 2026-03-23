@@ -3,7 +3,7 @@ import psycopg2
 import os
 
 # Configuration
-DB_CONNECTION = "dbname=bar_reviewer_local user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
+DB_CONNECTION = "dbname=lexmateph-ea-db user=postgres password=b66398241bfe483ba5b20ca5356a87be host=localhost port=5432"
 MD_FILE_PATH = r"c:/Users/rnlar/.gemini/antigravity/scratch/bar_project_v2/data/CodexPhil/Codals/md/RPC_Verbatim_AI.md"
 
 def get_db_connection():

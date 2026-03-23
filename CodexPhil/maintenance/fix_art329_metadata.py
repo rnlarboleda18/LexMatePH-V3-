@@ -4,7 +4,7 @@ import os
 
 def get_db_connection():
     # Use environment variable or fallback for local dev
-    conn_str = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+    conn_str = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
 
 def fix_article_329():

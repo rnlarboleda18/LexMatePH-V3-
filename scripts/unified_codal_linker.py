@@ -35,7 +35,7 @@ from google import genai
 # ---------------------------------------------------------------------------
 DB_URL = (
     os.environ.get("DB_CONNECTION_STRING")
-    or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local"
+    or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 )
 MODEL_NAME = "gemini-2.0-flash"
 API_KEY = "REDACTED_API_KEY_HIDDEN"

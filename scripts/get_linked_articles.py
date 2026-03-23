@@ -2,7 +2,7 @@ import psycopg2
 
 def main():
     try:
-        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/bar_reviewer_local")
+        conn = psycopg2.connect("postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db")
         cur = conn.cursor()
         
         # Get distinct provision_ids which HAVE links (where value is not -1 is better as well)
