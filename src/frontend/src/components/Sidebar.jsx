@@ -25,7 +25,7 @@ const codexSubjects = [
     { title: "Special Laws", id: "special", icon: Book, color: "text-violet-500", disabled: true }
 ];
 
-const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
+const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject, currentSubject }) => {
     const [openSection, setOpenSection] = useState(() => {
         if (mode === 'codex' || mode === 'browse_bar') return mode === 'codex' ? 'codex' : 'bar';
         return null;
@@ -110,6 +110,22 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                 About
             </button>
 
+            {/* Updates Button */}
+            <button
+                onClick={() => {
+                    onToggleUpdates();
+                    setOpenSection(null);
+                }}
+                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                ${mode === 'updates'
+                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
+                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                    }`}
+            >
+                <Newspaper size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'updates' ? 'text-emerald-700 dark:text-emerald-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
+                Updates
+            </button>
+
             {/* Lexify Button */}
             <button
                 onClick={() => {
@@ -155,22 +171,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             </button>
 
 
-            {/* Updates Button */}
-            <button
-                onClick={() => {
-                    onToggleUpdates();
-                    setOpenSection(null);
-                }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
-                ${mode === 'updates'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
-                    }`}
-            >
-                <Newspaper size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'updates' ? 'text-emerald-700 dark:text-emerald-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
-                Updates
-            </button>
-
             {/* SC Decisions Button */}
             <button
                 onClick={() => {
@@ -199,7 +199,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                 >
                     <span className="flex items-center gap-3">
                         <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
-                        CodexPhil
+                        LexCode
                     </span>
                     {openSection === 'codex' ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
                 </button>
@@ -212,14 +212,13 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                                 disabled={item.disabled}
                                 onClick={() => !item.disabled && onSelectCodal && onSelectCodal(item.id)}
                                 className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] flex items-center gap-3 group/item
-                                ${mode === 'codex' && selectedCodalCode === item.id && !item.disabled
+                                 ${mode === 'codex' && selectedCodalCode === item.id && !item.disabled
                                         ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
                                         : item.disabled
                                             ? 'border-transparent text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
                                             : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
                                     }`}
                             >
-                                <item.icon size={16} className={`${item.color} ${mode === 'codex' && selectedCodalCode === item.id && !item.disabled ? 'opacity-100 scale-110' : 'opacity-90'} ${item.disabled ? '' : 'group-hover/item:opacity-100 group-hover/item:scale-110 transition-all'}`} />
                                 {item.title} {item.disabled && <span className="text-xs ml-auto border rounded px-1 py-0.5 text-gray-500 dark:border-gray-600 not-italic no-underline">Soon</span>}
                             </button>
                         ))}
@@ -250,23 +249,31 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
                 {openSection === 'bar' && (
                     <div className="animate-in slide-in-from-top-2 duration-200">
+                        <button
+                            onClick={() => onSelectSubject && onSelectSubject('All Subjects')}
+                            className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] group/item
+                                ${mode === 'browse_bar' && (currentSubject === null || currentSubject === 'All Subjects')
+                                    ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
+                                    : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
+                                }`}
+                        >
+                            <span className="w-2 h-2 rounded-full mr-2 bg-gray-400 dark:bg-gray-500 opacity-70 group-hover/item:opacity-100 transition-all" />
+                            All Subjects
+                        </button>
                         {subjects.map((subject) => (
                             <button
                                 key={subject}
                                 onClick={() => onSelectSubject && onSelectSubject(subject)}
-                                className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] hover:bg-amber-50 dark:hover:bg-amber-900/10 border-transparent text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400 group/item`}
+                                className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] group/item
+                                    ${mode === 'browse_bar' && currentSubject === subject
+                                        ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
+                                        : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
+                                    }`}
                             >
                                 <span className={`w-2 h-2 rounded-full mr-2 ${getSubjectColor(subject)} opacity-70 group-hover/item:opacity-100 transition-all`} />
                                 {subject}
                             </button>
                         ))}
-                        <button
-                            onClick={() => onSelectSubject && onSelectSubject('All Subjects')}
-                            className="w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] hover:bg-amber-50 dark:hover:bg-amber-900/10 border-transparent text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400 group/item"
-                        >
-                            <span className="w-2 h-2 rounded-full mr-2 bg-gray-400 dark:bg-gray-500 opacity-70 group-hover/item:opacity-100 transition-all" />
-                            All Subjects
-                        </button>
                     </div>
                 )}
             </div>

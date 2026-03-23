@@ -15,6 +15,7 @@ import CodexViewer from './components/CodexViewer';
 import CaseDecisionModal from './components/CaseDecisionModal';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
+import { ChevronRight } from 'lucide-react';
 import { getSubjectColor } from './utils/colors';
 
 function App() {
@@ -68,34 +69,37 @@ function App() {
         if (!response.ok) throw new Error('Failed to fetch questions');
         const data = await response.json();
 
-        // Group questions by base identifier (e.g., Q19, Q19b) to detect sub-parts correctly
+        // --- Greedy Grouping Logic ---
         const groupedData = [];
-        const groupsByBase = {}; // Map of "YEAR-SUBJ-BASEQ" to parents
+        let currentParent = null;
 
-        // Sort by ID to keep logical flow
+        // Sort by ID to keep logical flow (consecutive rows usually belong together)
         const sortedRaw = [...data].sort((a, b) => a.id - b.id);
 
         for (const q of sortedRaw) {
-          const textLower = q.text.trim().toLowerCase();
+          const qText = q.text.trim();
+          const aText = (q.answer || "").trim();
           
-          // Identify if this is a sub-part (e.g. Q19b, Q19c, (b), (c))
-          const isSub = /^(\([b-z]\)|q\d+[b-z]:|\d+\.\d+)/.test(textLower);
+          // Expanded Regex to identify sub-parts reliably
+          // 1. (a), a., 1a., (1a), a)
+          // 2. Q1a., A1a., Q1b, A1b
+          // 3. (i), (ii), i., ii. (Roman numerals)
+          const subPartRegex = /^([\(]?([a-z]|[0-9]+[a-z]|[ivx]+)[\.\)]|[QA]\d+[a-z][:.]?)/i;
           
-          // Extract base Q identifier if possible (e.g. Q19 from Q19b)
-          const baseMatch = q.source_label?.match(/Q(\d+)/i);
-          const baseNum = baseMatch ? baseMatch[1] : null;
-          const groupKey = `${q.year}-${q.subject}-${baseNum || 'none'}`;
+          // Check BOTH question text and answer text for these markers
+          const isSub = subPartRegex.test(qText) || subPartRegex.test(aText);
 
-          if (isSub && groupsByBase[groupKey]) {
-            // Attach to the existing parent in this group
-            const parent = groupsByBase[groupKey];
-            if (!parent.subQuestions) parent.subQuestions = [];
-            parent.subQuestions.push(q);
+          const canGroup = currentParent && 
+                           currentParent.year === q.year && 
+                           currentParent.subject === q.subject;
+
+          if (isSub && canGroup) {
+            if (!currentParent.subQuestions) currentParent.subQuestions = [];
+            currentParent.subQuestions.push(q);
           } else {
-            // New parent question
-            const newQ = { ...q, subQuestions: [] };
-            groupedData.push(newQ);
-            groupsByBase[groupKey] = newQ;
+            // New parent/stem question
+            currentParent = { ...q, subQuestions: [] };
+            groupedData.push(currentParent);
           }
         }
 
@@ -259,6 +263,12 @@ function App() {
       mode={mode}
       isFullscreen={isFullscreen}
       onToggleQuiz={handleToggleQuiz}
+      onToggleMode={(newMode) => {
+        setMode(newMode);
+        if (newMode === 'supreme_decisions' || newMode === 'browse_bar') {
+          setCurrentSubject(null);
+        }
+      }}
       user={user}
       sidebarContent={
         <Sidebar
@@ -280,6 +290,7 @@ function App() {
           selectedCodalCode={selectedCodalCode}
           mode={mode}
           isFullscreen={isFullscreen}
+          currentSubject={currentSubject}
         />
       }
     >
@@ -354,11 +365,18 @@ function App() {
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-8">
                         <div>
-                          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                             {currentSubject || 'All Subjects'}
-                          </h1>
+                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                        <button 
+                          onClick={() => setCurrentSubject(null)}
+                          className="hover:text-amber-600 dark:hover:text-amber-500 transition-colors"
+                        >
+                          Bar Questions
+                        </button>
+                        <ChevronRight size={14} />
+                        <span className="text-amber-600 dark:text-amber-500 font-medium">{currentSubject || 'All Subjects'}</span>
+                      </div>
                           <p className="text-gray-600 dark:text-gray-400">
-                             Browse individual bar exam questions and answers.
+    Browse individual bar exam questions and answers.
                           </p>
                         </div>
                         <div className="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-bold border border-amber-200 dark:border-amber-800">
@@ -373,7 +391,7 @@ function App() {
                             <QuestionCard
                               key={q.id}
                               question={q}
-                              onSelect={() => setSelectedQuestion(q)}
+                              onClick={() => setSelectedQuestion(q)}
                               subjectColor={getSubjectColor(q.subject)}
                             />
                           ))}
@@ -424,26 +442,28 @@ function App() {
       )}
 
       {/* Question Detail Modal */}
-      {selectedQuestion && (
-        <QuestionDetailModal
-          question={selectedQuestion}
-          onClose={() => setSelectedQuestion(null)}
-          onNext={() => {
-            const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
-            const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
-            if (idx < currentList.length - 1) {
-              setSelectedQuestion(currentList[idx + 1]);
-            }
-          }}
-          onPrev={() => {
-            const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
-            const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
-            if (idx > 0) {
-              setSelectedQuestion(currentList[idx - 1]);
-            }
-          }}
-        />
-      )}
+      {selectedQuestion && (() => {
+        const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
+        const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
+        return (
+          <QuestionDetailModal
+            question={selectedQuestion}
+            onClose={() => setSelectedQuestion(null)}
+            hasNext={idx < currentList.length - 1}
+            hasPrev={idx > 0}
+            onNext={() => {
+              if (idx < currentList.length - 1) {
+                setSelectedQuestion(currentList[idx + 1]);
+              }
+            }}
+            onPrev={() => {
+              if (idx > 0) {
+                setSelectedQuestion(currentList[idx - 1]);
+              }
+            }}
+          />
+        );
+      })()}
     </Layout>
   );
 }

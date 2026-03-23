@@ -42,15 +42,21 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                         </button>
 
                         {/* Brand block */}
-                        <div className="flex flex-col justify-center">
+                        <div className="flex flex-col items-start justify-center">
                             {/* Brand name */}
-                            <span className="text-2xl sm:text-3xl font-black tracking-widest select-none leading-none mb-0.5">
+                            <div className="text-2xl sm:text-3xl font-black tracking-widest select-none leading-none mb-0.5 pointer-events-none">
                                 <span className={isDarkMode ? 'text-stone-100' : 'text-slate-800'}>LexMate</span><span className="text-blue-500">P</span><span className="text-red-500">H</span>
-                            </span>
+                            </div>
                             {/* Tag line — desktop only */}
-                            <span className={`hidden lg:block text-lg font-semibold tracking-wide mt-1.5 ${isDarkMode ? 'text-amber-600/80' : 'text-amber-700/70'}`}>
-                                Bar Questions&ensp;·&ensp;SC Decisions&ensp;·&ensp;Case Digests&ensp;·&ensp;Codals
-                            </span>
+                            <div className={`hidden lg:flex items-center gap-4 text-lg font-semibold tracking-wide mt-2 ${isDarkMode ? 'text-amber-600/80' : 'text-amber-700/70'}`}>
+                                <span className="cursor-default">Bar Questions</span>
+                                <span>·</span>
+                                <span className="cursor-default">SC Decisions</span>
+                                <span>·</span>
+                                <span className="cursor-default">Case Digests</span>
+                                <span>·</span>
+                                <span className="cursor-default">Codals</span>
+                            </div>
                         </div>
                     </div>
 

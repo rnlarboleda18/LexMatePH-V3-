@@ -188,23 +188,47 @@ const QuestionDetailModal = ({
 
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-8">
-                    {/* Question */}
+                    {/* Main/Parent Question */}
                     <div>
-                        <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3">Question</h4>
+                        <h4 className="text-sm font-semibold text-gray-400 uppercase mb-3">
+                            {question.subQuestions && question.subQuestions.length > 0 ? "Problem Stem" : "Question"}
+                        </h4>
                         <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
                             <HighlightText text={question.text} query={searchQuery} />
                         </div>
                     </div>
 
-                    {/* Answer */}
-                    <div>
-                        <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
-                        <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
-                            <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-                                <HighlightText text={question.answer} query={searchQuery} />
+                    {/* Main/Parent Answer (Only if it exists or if no subs) */}
+                    {((!question.subQuestions || question.subQuestions.length === 0) || (question.answer && question.answer.trim())) && (
+                        <div>
+                            <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
+                            <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
+                                <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                                    <HighlightText text={question.answer} query={searchQuery} />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
+
+                    {/* Sub-questions loop */}
+                    {question.subQuestions && question.subQuestions.map((sub, sIdx) => (
+                        <div key={sub.id} className="pt-8 border-t border-gray-100 dark:border-gray-800/50 space-y-6">
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-400 uppercase mb-3">Sub-Question {sIdx + 1}</h4>
+                                <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                    <HighlightText text={sub.text} query={searchQuery} />
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
+                                <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
+                                    <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
+                                        <HighlightText text={sub.answer} query={searchQuery} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 {/* Footer */}
