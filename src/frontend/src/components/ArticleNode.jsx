@@ -491,7 +491,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             renderSegment = renderSegment.replace(/^(SECTION)\s+(\d+|[IVXLCDM]+)/i, (m) => toTitleCase(m, skipKeywords));
                         }
                         const cleanSeg = typeof renderSegment === 'string' ? renderSegment.trim() : '';
-                        const isSubHeader = cleanSeg.length > 2 && 
+                        const isSubHeader = String(article_num) !== '0' &&
+                                           cleanSeg.length > 2 && 
                                            cleanSeg.length < 120 && 
                                            !cleanSeg.endsWith('.') &&
                                            !cleanSeg.endsWith(':') &&

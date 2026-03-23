@@ -242,7 +242,7 @@ def _get_from_cache(blob_name):
                 account_key=client.credential.account_key,
                 permission=BlobSasPermissions(read=True),
                 start=datetime.utcnow() - timedelta(minutes=15),
-                expiry=datetime.utcnow() + timedelta(hours=24)
+                expiry=datetime.utcnow() + timedelta(days=3) # Long-lived cache redirect (72h)
             )
             return f"{client.url}?{sas}"
     except Exception as e:
@@ -764,16 +764,21 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     if not text or not text.strip():
         return func.HttpResponse("No text content to synthesize", status_code=404)
 
-    # --- 3. Generate audio via Azure Speech (Required) ---
+    # --- 3. Generate audio via Azure Speech (Preferred) ---
     audio_data, mime_type, ext = None, None, None
     try:
         if AZURE_SPEECH_AVAILABLE:
-            audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
-            logging.info(f"Audio generated via Azure TTS (MP3) at rate={rate}")
+            try:
+                audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
+                logging.info(f"Audio generated via Azure TTS (MP3) at rate={rate}")
+            except Exception as e:
+                logging.warning(f"Azure TTS failed, falling back to gTTS: {e}")
+                audio_data, mime_type, ext = _generate_audio_gtts(text)
         else:
-            return func.HttpResponse("Azure Speech Services not available/configured", status_code=503)
+            logging.warning("Azure Speech not available, falling back to gTTS")
+            audio_data, mime_type, ext = _generate_audio_gtts(text)
     except Exception as e:
-        logging.error(f"Azure TTS failed: {e}")
+        logging.error(f"TTS fallback failed: {e}")
         return func.HttpResponse(f"Audio generation failed: {e}", status_code=500)
 
     # --- 4. Upload to Azure Blob and Redirect ---

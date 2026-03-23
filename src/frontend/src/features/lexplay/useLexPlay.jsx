@@ -26,6 +26,8 @@ export const LexPlayProvider = ({ children }) => {
     const audioRef = useRef(null);
     const playlistRef = useRef([]);
     const currentIndexRef = useRef(-1);
+    const retryCountRef = useRef(0);
+    const MAX_RETRIES = 3;
 
     // Keep refs in sync with state
     useEffect(() => { playlistRef.current = playlist; }, [playlist]);
@@ -346,7 +348,7 @@ export const LexPlayProvider = ({ children }) => {
     }, [playbackRate]);
 
 
-    const playTrack = useCallback(async (index, trackOverride = null) => {
+    const playTrack = useCallback(async (index, trackOverride = null, attempt = 1) => {
         // Use ref to avoid stale closure on playlist
         const latestPlaylist = playlistRef.current;
         const track = trackOverride || latestPlaylist[index];
@@ -356,6 +358,7 @@ export const LexPlayProvider = ({ children }) => {
         setIsLoading(true);
         setIsPlaying(false);
         setError(null);
+        retryCountRef.current = attempt;
 
         // Revoke previous object URL to free memory
         if (audioRef.current?.src?.startsWith('blob:')) {
@@ -364,39 +367,65 @@ export const LexPlayProvider = ({ children }) => {
 
         try {
             // Pass rate to backend so Azure TTS synthesizes at the correct speed natively.
-            // This avoids the robotic sound caused by browser-side playbackRate manipulation.
             const currentRate = playbackRateRef.current || playbackRate;
             const rateParam = `rate=${currentRate}`;
             const codeParam = track.code_id ? `code=${track.code_id}&` : '';
             const timestampParam = `&t=${new Date().getTime()}`;
             const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}${timestampParam}`;
-            console.log("LEXPLAY AUDIO: Direct native load from:", fetchUrl);
+            console.log(`LEXPLAY AUDIO: Load attempt ${attempt}/${MAX_RETRIES}:`, fetchUrl);
 
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current.removeAttribute('src');
                 audioRef.current.load(); // Reset previous errors
 
-                // Let the browser natively handle the request. This avoids strict CORS
-                // blocks on Javascript fetch() when following 302 redirects to Azure.
                 audioRef.current.src = fetchUrl;
                 audioRef.current.playbackRate = 1.0; // Always native speed — rate is baked into the audio by Azure
-                
-                await audioRef.current.play();
+
+                // Listen for load errors before play() resolves
+                const loadErrorPromise = new Promise((_, reject) => {
+                    const onError = (e) => {
+                        audioRef.current?.removeEventListener('error', onError);
+                        const code = audioRef.current?.error?.code;
+                        const msgs = {
+                            1: 'Playback aborted.',
+                            2: 'Network error while loading audio.',
+                            3: 'Audio decoding failed.',
+                            4: 'Audio format not supported or source unavailable.',
+                        };
+                        reject(new Error(msgs[code] || 'Audio failed to load.'));
+                    };
+                    audioRef.current?.addEventListener('error', onError, { once: true });
+                });
+
+                await Promise.race([
+                    audioRef.current.play(),
+                    loadErrorPromise
+                ]);
                 setIsPlaying(true);
                 updateMediaSession(track);
             }
         } catch (error) {
-            // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted by pause() or unmounted.
-            // We gently sweep this under the rug so it doesn't terrify the user with a giant red banner.
+            // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted.
             if (error.name === 'AbortError' || error.name === 'NotAllowedError' || error.message?.includes('interrupted')) {
-                console.warn("LexPlay playback interrupted:", error.message);
+                console.warn(`LexPlay playback interrupted (attempt ${attempt}):`, error.message);
+                setIsLoading(false);
                 return;
             }
-            console.error("Error playing track:", error);
-            setError(error.message || 'Failed to load audio.');
+
+            console.error(`Error playing track (attempt ${attempt}/${MAX_RETRIES}):`, error);
+
+            // Auto-retry with exponential backoff
+            if (attempt < MAX_RETRIES) {
+                const delay = Math.pow(2, attempt) * 800; // 1.6s, 3.2s
+                console.log(`Retrying in ${delay}ms...`);
+                setError(`Audio load failed. Retrying... (${attempt}/${MAX_RETRIES})`);
+                await new Promise(r => setTimeout(r, delay));
+                return playTrack(index, trackOverride, attempt + 1);
+            }
+
+            setError(`Failed to load audio after ${MAX_RETRIES} attempts. Tap retry to try again.`);
             setIsPlaying(false);
-        } finally {
             setIsLoading(false);
         }
     }, [playbackRate]);
@@ -502,6 +531,14 @@ export const LexPlayProvider = ({ children }) => {
         });
     }, [currentIndex]);
 
+    const retryCurrentTrack = useCallback(() => {
+        const idx = currentIndexRef.current;
+        const list = playlistRef.current;
+        if (idx >= 0 && list[idx]) {
+            playTrack(idx, null, 1);
+        }
+    }, [playTrack]);
+
     const playNow = useCallback((item) => {
         setActivePlaylistId(null);
         // Clear queue and add this item
@@ -553,6 +590,7 @@ export const LexPlayProvider = ({ children }) => {
         handleStop,
         setPlaybackRate,
         audioRef,
+        retryCurrentTrack,
         
         // Playlist API Context
         savedPlaylists,
@@ -584,6 +622,7 @@ export const LexPlayProvider = ({ children }) => {
         handleNext,
         handlePrevious,
         handleStop,
+        retryCurrentTrack,
         fetchPlaylists,
         createPlaylist,
         renamePlaylist,
@@ -603,6 +642,7 @@ export const LexPlayProvider = ({ children }) => {
         handlePrevious,
         handleStop,
         setPlaybackRate,
+        retryCurrentTrack,
         fetchPlaylists,
         createPlaylist,
         renamePlaylist,
@@ -621,6 +661,7 @@ export const LexPlayProvider = ({ children }) => {
         handlePrevious,
         handleStop,
         setPlaybackRate,
+        retryCurrentTrack,
         fetchPlaylists,
         createPlaylist,
         renamePlaylist,

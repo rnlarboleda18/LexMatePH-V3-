@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { jsPDF } from "jspdf";
-import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus } from 'lucide-react';
+import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { getSubjectColor } from '../utils/colors';
@@ -335,6 +335,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
+    const [headerCollapsed, setHeaderCollapsed] = useState(true); // collapsed by default on mobile
     const ratioRef = useRef(null);
 
     const { 
@@ -521,43 +522,54 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
                 )}
 
-                {/* HEADERS */}
-                <div className="p-6 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30 flex justify-between items-start">
-                    <div className="flex-1 pr-8">
-                        <div className="flex items-center gap-3 mb-2 flex-wrap">
-                            <h2 className="text-[16px] font-bold text-gray-900 dark:text-white leading-snug">
-                                {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                            </h2>
+                {/* HEADER */}
+                <div className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
+                    {/* Always-visible title row */}
+                    <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3">
+                        <h2 className="text-[15px] sm:text-[16px] font-bold text-gray-900 dark:text-white leading-snug line-clamp-1 flex-1">
+                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                        </h2>
+                        <div className="flex items-center gap-2 shrink-0">
+                            {/* Collapse toggle — mobile only */}
+                            <button
+                                className="sm:hidden p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+                                onClick={() => setHeaderCollapsed(v => !v)}
+                                title={headerCollapsed ? 'Show details' : 'Hide details'}
+                            >
+                                <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
+                            </button>
+                            <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 transition-colors">
+                                <X size={22} />
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Collapsible details — hidden by default on mobile, always shown on sm+ */}
+                    <div className={`px-4 pb-3 sm:px-6 sm:pb-4 sm:block ${headerCollapsed ? 'hidden' : 'block'}`}>
+                        <div className="flex flex-wrap items-center gap-2">
                             {fullDecision.significance_category && (
                                 <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded shadow-sm border ${getCategoryColor(fullDecision.significance_category)}`}>
                                     <span className="text-sm">{getCategoryIcon(fullDecision.significance_category)}</span>
                                     <span className="font-bold text-xs uppercase tracking-wide">{fullDecision.significance_category}</span>
                                 </div>
                             )}
-                        </div>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
                             <div className="flex items-center gap-1.5 bg-white dark:bg-gray-700 px-3 py-1 rounded-full shadow-sm border border-gray-200 dark:border-gray-600">
-                                <span className="font-mono">#{fullDecision.id} • {fullDecision.case_number || ''}</span>
+                                <span className="font-mono text-xs text-gray-700 dark:text-gray-200">#{fullDecision.id} · {fullDecision.case_number || ''}</span>
                             </div>
                             <div className="flex items-center gap-1.5 bg-white dark:bg-gray-700 px-3 py-1 rounded-full shadow-sm border border-gray-200 dark:border-gray-600">
-                                <Calendar className="h-4 w-4 text-blue-500" />
-                                <span>{formatDate(fullDecision.date_str)}</span>
+                                <Calendar className="h-3.5 w-3.5 text-blue-500" />
+                                <span className="text-xs">{formatDate(fullDecision.date_str)}</span>
                             </div>
                             <button
                                 onClick={() => setShowPlaylistSelector(true)}
-                                className="flex items-center gap-2 px-4 py-1.5 rounded-full shadow-sm border transition-all bg-purple-50 border-purple-200 text-purple-600 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                                className="flex items-center gap-1.5 px-3 py-1 rounded-full shadow-sm border transition-all bg-purple-50 border-purple-200 text-purple-600 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30"
                                 title="Add Audio Digest to LexPlay queue"
                             >
-                                <Headphones className="w-4 h-4" />
-                                <span className="font-bold text-xs uppercase tracking-tight">
-                                    Add to LexPlay Playlist
-                                </span>
+                                <Headphones className="w-3.5 h-3.5" />
+                                <span className="font-bold text-xs uppercase tracking-tight">Add to LexPlay Playlist</span>
                             </button>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 transition-colors">
-                        <X size={24} />
-                    </button>
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}

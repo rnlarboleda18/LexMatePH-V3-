@@ -17,18 +17,24 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
         subject = req.params.get('subject')
         limit = req.params.get('limit', '10000')
         
-        query = "SELECT id, year, subject, text, source_label, (SELECT text FROM answers a WHERE a.question_id = questions.id LIMIT 1) as answer FROM questions WHERE 1=1"
+        query = """
+            SELECT q.id, q.year, q.subject, q.text, q.source_label, a.text as answer
+            FROM questions q
+            LEFT JOIN answers a ON a.question_id = q.id
+            WHERE 1=1
+        """
         params = []
-        
+
         if year:
-            query += " AND year = %s"
+            query += " AND q.year = %s"
             params.append(year)
-        
+
         if subject:
-            query += " AND subject = %s"
+            query += " AND q.subject = %s"
             params.append(subject)
-            
-        query += " ORDER BY RANDOM() LIMIT %s"
+
+        # Stable order — frontend shuffles per subject
+        query += " ORDER BY q.year DESC, q.subject, q.id ASC LIMIT %s"
         params.append(int(limit))
         
         conn = get_db_connection()

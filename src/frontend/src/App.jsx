@@ -73,10 +73,8 @@ function App() {
         const groupedData = [];
         let currentParent = null;
 
-        // Sort by ID to keep logical flow (consecutive rows usually belong together)
-        const sortedRaw = [...data].sort((a, b) => a.id - b.id);
-
-        for (const q of sortedRaw) {
+        // API returns data ordered by year DESC, subject, id ASC — no re-sort needed
+        for (const q of data) {
           const qText = q.text.trim();
           const aText = (q.answer || "").trim();
           

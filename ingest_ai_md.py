@@ -4,8 +4,8 @@ import psycopg2
 from psycopg2.extras import execute_values
 import json
 
-# DB Config from local.settings.json
-DB_CONN = "postgresql://bar_admin:[DB_PASSWORD]@localhost:5432/lexmateph-ea-db"
+# DB Config pointing to Azure Cloud DB
+DB_CONN = "postgresql://bar_admin:RABpass021819!@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
 
 # Mapping filenames to DB subjects
 SUBJECT_MAP = {
@@ -24,11 +24,12 @@ def parse_md_file(file_path):
         content = f.read()
     
     # Split content by "Question (" header OR "Q#:" question marker
-    # This ensures we catch questions even if they lack the year header.
     units = re.split(r'\n(?=Question\s*\(|Q\d+[a-z]?:)', content)
     qa_pairs = []
     
     current_context_year = 0
+    last_major_id = None
+    last_subject = None
     
     for unit in units:
         unit = unit.strip()
@@ -40,13 +41,15 @@ def parse_md_file(file_path):
         if header_match:
             current_context_year = int(header_match.group(1))
             
-        # 2. Check if this unit actually contains a question and answer
-        has_question = re.search(r"^Q\d+[a-z]?:", unit, re.IGNORECASE)
+        # 2. Extract Marker (e.g., Q1, Q4a)
+        marker_match = re.search(r"^Q(\d+)([a-z])?:", unit, re.IGNORECASE)
         has_answer = "Suggested Answer" in unit
         
-        if has_question and has_answer:
-            # Extract Year from unit text if possible (overrides context year)
-            # Look for (2022 BAR) or (2022, 2021 BAR)
+        if marker_match and has_answer:
+            major_id = marker_match.group(1)
+            minor_id = marker_match.group(2) # 'a', 'b', etc.
+            
+            # Extract Year
             embedded_year_match = re.search(r"\(\D?(\d{4}).*?BAR\)", unit, re.IGNORECASE)
             year = current_context_year
             if embedded_year_match:
@@ -56,19 +59,25 @@ def parse_md_file(file_path):
             parts = re.split(r'\n\s*Suggested Answer\s*\n', unit, maxsplit=1, flags=re.IGNORECASE)
             if len(parts) == 2:
                 q_text = parts[0].strip()
-                # Remove question markers like Q1: at start
+                # Remove ONLY the Q1: part, keep the rest (like (a) if present)
                 q_text = re.sub(r"^Q\d+[a-z]?:\s*", "", q_text, flags=re.IGNORECASE).strip()
                 
                 a_text = parts[1].strip()
-                # Remove answer markers like A1: at start
                 a_text = re.sub(r"^A\d+[a-z]?:\s*", "", a_text, flags=re.IGNORECASE).strip()
                 
-                if q_text and a_text:
+                # Check if this belongs to the previous parent (same major_id and year)
+                if last_major_id == major_id and qa_pairs and qa_pairs[-1]["year"] == year:
+                    # APPEND to existing record
+                    qa_pairs[-1]["question"] += f"\n\n{q_text}"
+                    qa_pairs[-1]["answer"] += f"\n\n{a_text}"
+                else:
+                    # New Parent
                     qa_pairs.append({
                         "year": year,
                         "question": q_text,
                         "answer": a_text
                     })
+                    last_major_id = major_id
                 
     return qa_pairs
 
