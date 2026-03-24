@@ -52,7 +52,7 @@ const LexifyControls = ({ onSubmit, onHide, onExit, onToggleNotes, notesOpen, an
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <span className="font-bold text-base tracking-tight text-white">Examplify</span>
+                <span className="font-bold text-base tracking-tight text-white">Lexify</span>
                 <span className="text-white/40 text-sm">|</span>
                 <span className="text-sm font-semibold tracking-wide uppercase text-white/90">
                     {examLabel ? examLabel.split(' (')[0] : 'EXAM'}
