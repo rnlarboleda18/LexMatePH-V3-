@@ -259,29 +259,54 @@ const Updates = () => {
                 </div>
                 <p className="text-slate-400 text-sm mb-8">Follow official real-time updates from the Supreme Court PIO.</p>
                 <div className="grid grid-cols-2 gap-4">
-                  <a href="https://x.com/SupremeCourtPh" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold">
+                  <a href="https://x.com/SCPh_PIO" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold">
                     <Twitter size={16} /> Official X
                   </a>
-                  <a href="https://www.facebook.com/SupremeCourtPH" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold">
+                  <a href="https://www.facebook.com/SupremeCourtPhilippines" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold">
                     <Facebook size={16} /> Facebook
                   </a>
                 </div>
               </div>
               
-              <div className="h-[600px] bg-slate-50 dark:bg-[#0d1117] p-4 relative">
-                <div id="twitter-container" className="h-full scrollbar-hide">
-                  <a 
-                    className="twitter-timeline" 
-                    data-height="568"
+              <div className="bg-slate-50 dark:bg-[#0d1117] p-4 relative">
+                {/* X/Twitter embedded timeline via official publish widget */}
+                <div id="twitter-container" className="scrollbar-hide">
+                  <a
+                    className="twitter-timeline"
+                    data-height="580"
                     data-theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
-                    data-chrome="noheader, nofooter, noborders, transparent"
-                    href="https://twitter.com/SupremeCourtPh?ref_src=twsrc%5Etfw"
+                    data-chrome="noheader nofooter noborders transparent"
+                    href="https://twitter.com/SCPh_PIO"
                   >
-                    <div className="flex flex-col items-center justify-center p-20 text-slate-400">
-                      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-sky-500 mb-6"></div>
-                      <p className="font-bold text-slate-500">Decrypting feeds...</p>
+                    {/* Fallback shown while widget loads or if blocked */}
+                    <div className="flex flex-col items-center justify-center py-16 gap-5 text-slate-400">
+                      <Twitter size={40} className="text-sky-500 opacity-60" />
+                      <p className="text-sm font-semibold text-slate-500">Loading SC PIO feed…</p>
+                      <a
+                        href="https://x.com/SCPh_PIO"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-sm font-bold transition-all shadow-lg shadow-sky-500/30 hover:scale-105"
+                      >
+                        <ExternalLink size={14} /> View on X
+                      </a>
                     </div>
                   </a>
+                </div>
+
+                {/* Facebook embed */}
+                <div className="mt-6">
+                  <iframe
+                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FSupremeCourtPhilippines&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+                    width="100%"
+                    height="500"
+                    style={{ border: 'none', overflow: 'hidden', borderRadius: '16px' }}
+                    scrolling="no"
+                    frameBorder="0"
+                    allowFullScreen={true}
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    title="Supreme Court Philippines Facebook"
+                  ></iframe>
                 </div>
               </div>
             </div>
