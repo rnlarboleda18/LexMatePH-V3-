@@ -8,7 +8,7 @@
  */
 
 const DB_NAME = 'LexMateCacheDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2; // bumped to force wipe of corrupt v1 data
 
 class LexCache {
   constructor() {
@@ -23,15 +23,17 @@ class LexCache {
 
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
-        if (!db.objectStoreNames.contains('cases')) {
-          db.createObjectStore('cases', { keyPath: 'id' });
-        }
-        if (!db.objectStoreNames.contains('codals')) {
-          db.createObjectStore('codals', { keyPath: 'key' });
-        }
-        if (!db.objectStoreNames.contains('questions')) {
-          db.createObjectStore('questions', { keyPath: 'id' });
-        }
+        // Drop all old stores to wipe corrupt data from previous versions
+        const storeNames = ['cases', 'codals', 'questions'];
+        storeNames.forEach(name => {
+          if (db.objectStoreNames.contains(name)) {
+            db.deleteObjectStore(name);
+          }
+        });
+        // Recreate stores cleanly
+        db.createObjectStore('cases', { keyPath: 'id' });
+        db.createObjectStore('codals', { keyPath: 'key' });
+        db.createObjectStore('questions', { keyPath: 'id' });
       };
 
       request.onsuccess = (event) => {
