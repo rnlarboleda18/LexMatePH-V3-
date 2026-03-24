@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight, Zap, ChevronDown } from 'lucide-react';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
@@ -22,6 +22,8 @@ const QuestionDetailModal = ({
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
+    const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(true);
+    const [isCompactView, setIsCompactView] = useState(false);
 
     const { 
         savedPlaylists, 
@@ -77,53 +79,81 @@ const QuestionDetailModal = ({
             <div className="glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-3xl rounded-3xl shadow-[0_10px_50px_rgba(0,0,0,0.4)] w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-white/50 dark:border-white/20 relative">
                 
                 {/* Ambient glow orbs inside the modal to drive the glass effect */}
-                <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
-                <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
+                <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 
                 {/* Header */}
-                <div className="p-6 md:p-8 border-b border-white/30 dark:border-white/10 flex justify-between items-start shrink-0 relative z-10 bg-white/20 dark:bg-black/10 backdrop-blur-sm">
-                    <div className="flex-1">
-                        <span className={`inline-block mb-3 px-3 py-1 rounded-md text-[11px] md:text-xs font-black uppercase tracking-widest glass bg-white/40 dark:bg-white/10 border border-white/40 dark:border-white/10 shadow-sm ${textColor}`}>
-                            {question.subject}
-                        </span>
-                        <h3 className="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white mt-1">
-                            {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && <span className="text-gray-500 font-medium text-sm ml-2">({question.source_label})</span>}
-                        </h3>
+                <div className="p-4 sm:p-6 md:p-8 border-b border-white/30 dark:border-white/10 flex justify-between items-start shrink-0 relative z-10 bg-white/20 dark:bg-black/10 backdrop-blur-sm">
+                    <div className="flex-1 min-w-0">
+                        <div className={`transition-all duration-300 ${isHeaderCollapsed ? 'hidden sm:block' : 'block'}`}>
+                            <span className={`inline-block mb-2 sm:mb-3 px-3 py-1 rounded-md text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-widest glass bg-white/40 dark:bg-white/10 border border-white/40 dark:border-white/10 shadow-sm ${textColor}`}>
+                                {question.subject}
+                            </span>
+                            <h3 className="text-base sm:text-lg md:text-xl font-extrabold text-gray-900 dark:text-white mt-1 leading-tight sm:leading-snug">
+                                {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && <span className="text-gray-500 font-medium text-xs sm:text-sm ml-2">({question.source_label})</span>}
+                            </h3>
+                        </div>
+                        
+                        {/* Compact Title for Mobile when collapsed */}
+                        {isHeaderCollapsed && (
+                            <h3 className="sm:hidden text-[14px] font-bold text-gray-900 dark:text-white line-clamp-1 mb-1">
+                                {question.year} {question.subject}
+                            </h3>
+                        )}
+
                         <button
                             onClick={() => setShowPlaylistSelector(true)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 mt-3 rounded-lg shadow-sm border border-purple-200 dark:border-purple-800 transition-all bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:scale-[1.02]"
+                            className="flex items-center gap-1.5 px-3 py-1.5 mt-2 sm:mt-3 rounded-lg shadow-sm border border-purple-200 dark:border-purple-800 transition-all bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:scale-[1.02]"
                             title="Add Question Audio to LexPlay queue"
                         >
                             <Headphones className="w-3.5 h-3.5" />
                             <span className="font-extrabold text-[10px] uppercase tracking-wide">
-                                Add to LexPlay Playlist
+                                {isHeaderCollapsed ? "Add" : "Add to LexPlay Playlist"}
                             </span>
                         </button>
                     </div>
 
                     {/* Navigation and Close Buttons */}
-                    <div className="flex items-center gap-2 ml-4">
-                        <div className="flex items-center glass bg-white/50 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm rounded-lg p-1">
+                    <div className="flex items-center gap-1 sm:gap-2 ml-2 sm:ml-4 shrink-0">
+                        {/* Compact View Toggle */}
+                        <button
+                            className="p-1.5 rounded-full text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all border border-transparent shadow-sm"
+                            onClick={() => setIsCompactView(v => !v)}
+                            title={isCompactView ? 'Show Full Labels' : 'Compact View (Hide Labels)'}
+                        >
+                            <Zap size={18} className={isCompactView ? 'text-amber-500 fill-amber-500' : ''} />
+                        </button>
+                        
+                        <div className="flex items-center glass bg-white/50 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm rounded-lg p-0.5 sm:p-1">
                             <button
                                 onClick={onPrev}
                                 disabled={!hasPrev}
-                                className="p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                className="p-1.5 sm:p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
                                 title="Previous Question"
                             >
-                                <ChevronLeft size={18} />
+                                <ChevronLeft size={16} sm={18} />
                             </button>
                             <button
                                 onClick={onNext}
                                 disabled={!hasNext}
-                                className="p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                className="p-1.5 sm:p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
                                 title="Next Question"
                             >
-                                <ChevronRight size={18} />
+                                <ChevronRight size={16} sm={18} />
                             </button>
                         </div>
+                        
+                        {/* Collapse toggle — mobile only */}
+                        <button
+                            className="sm:hidden p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all border border-transparent shadow-sm"
+                            onClick={() => setIsHeaderCollapsed(v => !v)}
+                        >
+                            <ChevronDown size={18} className={`transition-transform duration-200 ${isHeaderCollapsed ? '' : 'rotate-180'}`} />
+                        </button>
+
                         <button
                             onClick={onClose}
-                            className="p-2 ml-2 rounded-full glass bg-red-50/50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 transition-all shadow-sm hover:scale-110"
+                            className="p-1.5 sm:p-2 ml-1 rounded-full glass bg-red-50/50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 transition-all shadow-sm hover:scale-110"
                         >
                             <X size={20} />
                         </button>
@@ -191,13 +221,13 @@ const QuestionDetailModal = ({
                 )}
 
                 {/* Content - Scrollable */}
-                <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-10 relative z-10 custom-scrollbar">
+                <div className={`flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 relative z-10 custom-scrollbar ${isCompactView ? 'space-y-6' : 'space-y-10'}`}>
                     {/* Main/Parent Question */}
                     <div>
-                        <h4 className="text-[13px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm mb-4">
-                            {question.subQuestions && question.subQuestions.length > 0 ? "Problem Stem" : "Question"}
+                        <h4 className={`text-[13px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm ${isCompactView ? 'mb-2' : 'mb-4'}`}>
+                            {isCompactView ? "" : (question.subQuestions && question.subQuestions.length > 0 ? "Problem Stem" : "Question")}
                         </h4>
-                        <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium">
+                        <div className={`${isCompactView ? 'text-[16px]' : 'text-[17px]'} leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium`}>
                             <HighlightText text={question.text} query={searchQuery} />
                         </div>
                     </div>
@@ -205,10 +235,12 @@ const QuestionDetailModal = ({
                     {/* Main/Parent Answer (Only if it exists or if no subs) */}
                     {((!question.subQuestions || question.subQuestions.length === 0) || (question.answer && question.answer.trim())) && (
                         <div>
-                            <h4 className={`text-[13px] font-black uppercase tracking-widest px-1 drop-shadow-sm mb-4 ${textColor}`}>Suggested Answer</h4>
-                            <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                            <h4 className={`text-[13px] font-black uppercase tracking-widest px-1 drop-shadow-sm ${isCompactView ? 'mb-2' : 'mb-4'} ${textColor}`}>
+                                {isCompactView ? "" : "Suggested Answer"}
+                            </h4>
+                            <div className={`relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-5 sm:p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}>
                                 <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
-                                <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                <div className={`${isCompactView ? 'text-[16px]' : 'text-[17px]'} leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap`}>
                                     <HighlightText text={question.answer || "Answer not available."} query={searchQuery} />
                                 </div>
                             </div>
@@ -217,21 +249,23 @@ const QuestionDetailModal = ({
 
                     {/* Sub-questions loop */}
                     {question.subQuestions && question.subQuestions.map((sub, sIdx) => (
-                        <div key={sub.id} className="pt-10 mt-8 relative space-y-6">
+                        <div key={sub.id} className={`${isCompactView ? 'pt-6 mt-4' : 'pt-10 mt-8'} relative space-y-4 sm:space-y-6`}>
                             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                             
                             <div>
-                                <h4 className="text-[13px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm mb-4">Sub-Question {sIdx + 1}</h4>
-                                <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium">
+                                <h4 className={`text-[12px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm ${isCompactView ? 'mb-1' : 'mb-4'}`}>Sub-Question {sIdx + 1}</h4>
+                                <div className={`${isCompactView ? 'text-[16px]' : 'text-[17px]'} leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium`}>
                                     <HighlightText text={sub.text} query={searchQuery} />
                                 </div>
                             </div>
                             
                             <div>
-                                <h4 className={`text-[13px] font-black uppercase tracking-widest px-1 drop-shadow-sm mb-4 ${textColor}`}>Suggested Answer</h4>
-                                <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                                <h4 className={`text-[12px] font-black uppercase tracking-widest px-1 drop-shadow-sm ${isCompactView ? 'mb-1' : 'mb-4'} ${textColor}`}>
+                                    {isCompactView ? "" : "Suggested Answer"}
+                                </h4>
+                                <div className={`relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-5 sm:p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}>
                                     <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
-                                    <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                    <div className={`${isCompactView ? 'text-[16px]' : 'text-[17px]'} leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap`}>
                                         <HighlightText text={sub.answer || "Answer not available."} query={searchQuery} />
                                     </div>
                                 </div>

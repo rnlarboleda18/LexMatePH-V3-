@@ -1,5 +1,5 @@
-import React from 'react';
-import { X, BookOpen, Scale, Gavel, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, BookOpen, Scale, Gavel, AlertCircle, Zap } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 
 const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
@@ -16,6 +16,7 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
     } = caseData;
 
     const subjectColorClass = getSubjectColor(subject);
+    const [isCompactView, setIsCompactView] = useState(false);
 
     // Helper to highlight search terms
     const highlightText = (text, query) => {
@@ -62,72 +63,81 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
                 {/* Header */}
                 <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/50">
                     <div className="flex-1 pr-4">
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className={`px-2 py-0.5 text-xs font-bold border rounded-full ${subjectColorClass}`}>
+                        <div className={`flex flex-wrap items-center gap-2 mb-2 ${isCompactView ? 'hidden sm:flex' : 'flex'}`}>
+                            <span className={`px-2 py-0.5 text-[10px] sm:text-xs font-bold border rounded-full ${subjectColorClass}`}>
                                 {subject}
                             </span>
-                            <span className="px-2 py-0.5 text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
+                            <span className="px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
                                 {year}
                             </span>
-                            <span className="px-2 py-0.5 text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 rounded-full">
+                            <span className="px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 rounded-full">
                                 {topic}
                             </span>
                             {(isPIL || sourceLabel === 'PIL') && (
-                                <span className="px-2 py-0.5 text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 rounded-full">
+                                <span className="px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 rounded-full">
                                     PIL
                                 </span>
                             )}
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+                        <h3 className={`text-base sm:text-lg md:text-xl font-bold text-gray-900 dark:text-white leading-tight ${isCompactView ? 'line-clamp-1' : ''}`}>
                             {highlightText(caseTitle, searchQuery)}
                         </h3>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors flex-shrink-0"
-                    >
-                        <X size={24} />
-                    </button>
+                    <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                        <button
+                            className="p-1.5 rounded-full text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all border border-transparent shadow-sm"
+                            onClick={() => setIsCompactView(v => !v)}
+                            title={isCompactView ? 'Show Full Labels' : 'Compact View (Hide Labels)'}
+                        >
+                            <Zap size={18} className={isCompactView ? 'text-amber-500 fill-amber-500' : ''} />
+                        </button>
+                        <button
+                            onClick={onClose}
+                            className="p-1.5 sm:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                    </div>
                 </div>
 
                 {/* Content - Scrollable */}
-                <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                <div className={`flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6`}>
 
                     {/* Doctrine */}
                     <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-xl border border-blue-100 dark:border-blue-800/30">
-                        <div className="flex items-center gap-2 mb-2 text-blue-700 dark:text-blue-400 font-bold uppercase tracking-wide text-sm">
+                        <div className="flex items-center gap-2 mb-2 text-blue-700 dark:text-blue-400 font-bold uppercase tracking-wide text-xs sm:text-sm">
                             <Scale size={18} />
-                            <span>Doctrine</span>
+                            {!isCompactView && <span>Doctrine</span>}
                         </div>
-                        <p className="text-gray-800 dark:text-gray-200 italic leading-relaxed text-lg">
+                        <p className={`text-gray-800 dark:text-gray-200 italic leading-relaxed ${isCompactView ? 'text-base' : 'text-lg'}`}>
                             {highlightText(doctrine, searchQuery)}
                         </p>
                     </div>
 
                     {/* Digest Sections */}
                     {digestSections ? (
-                        <div className="space-y-6">
+                        <div className={isCompactView ? "space-y-4" : "space-y-6"}>
                             <div>
-                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-sm tracking-wide">
-                                    <BookOpen size={18} className="text-gray-400" /> FACTS
+                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-xs sm:text-sm tracking-wide">
+                                    <BookOpen size={18} className="text-gray-400" /> {!isCompactView && "FACTS"}
                                 </h4>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                                <p className={`text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap ${isCompactView ? 'text-[15px]' : 'text-base'}`}>
                                     {digestSections.facts}
                                 </p>
                             </div>
                             <div>
-                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-sm tracking-wide">
-                                    <AlertCircle size={18} className="text-gray-400" /> ISSUE
+                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-xs sm:text-sm tracking-wide">
+                                    <AlertCircle size={18} className="text-gray-400" /> {!isCompactView && "ISSUE"}
                                 </h4>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                                <p className={`text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap ${isCompactView ? 'text-[15px]' : 'text-base'}`}>
                                     {digestSections.issue}
                                 </p>
                             </div>
                             <div>
-                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-sm tracking-wide">
-                                    <Gavel size={18} className="text-gray-400" /> RULING
+                                <h4 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-2 uppercase text-xs sm:text-sm tracking-wide">
+                                    <Gavel size={18} className="text-gray-400" /> {!isCompactView && "RULING"}
                                 </h4>
-                                <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                                <p className={`text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap ${isCompactView ? 'text-[15px]' : 'text-base'}`}>
                                     {digestSections.ruling}
                                 </p>
                             </div>

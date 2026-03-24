@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { jsPDF } from "jspdf";
-import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User } from 'lucide-react';
+import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Zap } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { getSubjectColor } from '../utils/colors';
@@ -336,6 +336,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // collapsed by default on mobile
+    const [isCompactView, setIsCompactView] = useState(false);
     const ratioRef = useRef(null);
 
     const { 
@@ -533,16 +534,24 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         <h2 className="text-[15px] sm:text-[16px] font-bold text-gray-900 dark:text-white leading-snug line-clamp-1 flex-1">
                             {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                         </h2>
-                        <div className="flex items-center gap-2 shrink-0">
+                        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                            {/* Compact View Toggle */}
+                            <button
+                                className="p-1.5 rounded-full text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all border border-transparent shadow-sm"
+                                onClick={() => setIsCompactView(v => !v)}
+                                title={isCompactView ? 'Show Full Labels' : 'Compact View (Hide Labels)'}
+                            >
+                                <Zap size={18} className={isCompactView ? 'text-amber-500 fill-amber-500' : ''} />
+                            </button>
                             {/* Collapse toggle — mobile only */}
                             <button
-                                className="sm:hidden p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all"
+                                className="sm:hidden p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all border border-transparent shadow-sm"
                                 onClick={() => setHeaderCollapsed(v => !v)}
                                 title={headerCollapsed ? 'Show details' : 'Hide details'}
                             >
                                 <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
                             </button>
-                            <button onClick={onClose} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 transition-colors">
+                            <button onClick={onClose} className="p-1.5 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400 transition-colors">
                                 <X size={22} />
                             </button>
                         </div>
@@ -573,30 +582,31 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 </div>
                             )}
 
-                            <button
+                             <button
                                 onClick={() => setShowPlaylistSelector(true)}
                                 className="flex items-center gap-1.5 px-3 py-1 rounded-md shadow-sm border border-purple-200 dark:border-purple-800 transition-all bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 sm:ml-auto"
                                 title="Add Audio Digest to LexPlay queue"
                             >
                                 <Headphones className="w-3.5 h-3.5" />
-                                <span className="font-extrabold text-[10px] uppercase tracking-wide">Add to LexPlay Playlist</span>
+                                <span className="font-extrabold text-[10px] uppercase tracking-wide hidden xs:inline-block">
+                                    {isCompactView ? "Add" : "Add to LexPlay Playlist"}
+                                </span>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="flex-grow overflow-y-auto p-6 md:p-8 custom-scrollbar bg-transparent relative z-10">
+                <div className={`flex-grow overflow-y-auto p-4 sm:p-6 md:p-8 custom-scrollbar bg-transparent relative z-10 ${isCompactView ? 'space-y-4' : 'space-y-0'}`}>
 
                     {viewMode === 'digest' ? (
                         <>
-                            {/* MAIN DOCTRINE */}
-                            {fullDecision.main_doctrine && (
-                                <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 mb-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                             {fullDecision.main_doctrine && (
+                                <div className={`relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-5 sm:p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${isCompactView ? 'mb-6' : 'mb-10'}`}>
                                     <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
                                     <h4 className="text-[13px] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                                         <Lightbulb className="w-5 h-5 text-blue-500 drop-shadow-sm" /> 
-                                        Main Doctrine
+                                        {isCompactView ? '' : 'Main Doctrine'}
                                     </h4>
                                     <div className="text-gray-800 dark:text-gray-100 italic text-lg leading-relaxed font-medium">
                                         <SmartLink text={fullDecision.main_doctrine} onCaseClick={handleSmartCaseClick} />
@@ -606,12 +616,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* FACTS */}
                             {fullDecision.digest_facts && (
-                                <section className="mb-10">
-                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                <section className={isCompactView ? "mb-6" : "mb-10"}>
+                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <FileText className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                                         </span>
-                                        <span className="tracking-wide uppercase text-[15px]">Facts</span>
+                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Facts</span>}
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -625,12 +635,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* ISSUE */}
                             {fullDecision.digest_issues && (
-                                <section className="mb-10">
-                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                <section className={isCompactView ? "mb-6" : "mb-10"}>
+                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
                                         </span>
-                                        <span className="tracking-wide uppercase text-[15px]">Issue</span>
+                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Issue</span>}
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -641,12 +651,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* RULING */}
                             {fullDecision.digest_ruling && (
-                                <section className="mb-10">
-                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                <section className={isCompactView ? "mb-6" : "mb-10"}>
+                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <Gavel className="w-5 h-5 text-blue-500 dark:text-blue-400" />
                                         </span>
-                                        <span className="tracking-wide uppercase text-[15px]">Ruling</span>
+                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Ruling</span>}
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -657,12 +667,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* RATIO DECIDENDI */}
                             {fullDecision.digest_ratio && (
-                                <section className="mb-10">
-                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                <section className={isCompactView ? "mb-6" : "mb-10"}>
+                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <BookOpen className="w-5 h-5 text-purple-500 dark:text-purple-400" />
                                         </span>
-                                        <span className="tracking-wide uppercase text-[15px]">Ratio Decidendi</span>
+                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Ratio Decidendi</span>}
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -681,7 +691,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.separate_opinions && fullDecision.separate_opinions.length > 0 && (
                                 <div className="mt-12 pt-8 relative">
                                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-white/20 to-transparent"></div>
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-white mb-6 text-center uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-gray-300 dark:to-white">Separate Opinions</h4>
+                                    <h4 className={`text-[16px] font-bold text-gray-900 dark:text-white ${isCompactView ? 'mb-3' : 'mb-6'} text-center uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-gray-300 dark:to-white`}>
+                                        {isCompactView ? 'Opinions' : 'Separate Opinions'}
+                                    </h4>
                                     <div className="space-y-6">
                                         {fullDecision.separate_opinions.map((op, idx) => (
                                             <SeparateOpinionCard key={idx} op={op} idx={idx} />
