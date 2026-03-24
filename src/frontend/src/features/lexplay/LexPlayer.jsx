@@ -160,18 +160,18 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
 
     return (
         <div className="w-full max-w-2xl mb-4 z-10">
-            <div className="flex justify-between text-xs font-bold text-white/40 mb-2 px-2 tracking-widest font-mono">
+            <div className="flex justify-between text-xs font-bold text-slate-500 dark:text-white/50 mb-2 px-2 tracking-widest font-mono">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(duration)}</span>
             </div>
             <div
-                className="h-3 bg-white/10 rounded-full cursor-pointer relative group"
+                className="h-3 glass bg-white/40 dark:bg-white/10 border border-white/30 dark:border-white/10 shadow-inner rounded-full cursor-pointer relative group overflow-hidden"
                 ref={progressBarRef}
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
             >
-                <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style={{ width: `${progressPercent}%` }} />
-                <div className={`absolute top-1/2 -translate-y-1/2 -ml-2.5 w-5 h-5 bg-white rounded-full scale-0 group-hover:scale-100 ${isScrubbing ? 'scale-125' : ''} transition-all duration-200 border-4 border-purple-600`} style={{ left: `${progressPercent}%` }} />
+                <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]" style={{ width: `${progressPercent}%` }} />
+                <div className={`absolute top-1/2 -translate-y-1/2 -ml-2.5 w-5 h-5 bg-white rounded-full scale-0 group-hover:scale-100 ${isScrubbing ? 'scale-125' : ''} transition-all duration-200 border-4 border-purple-600 shadow-lg`} style={{ left: `${progressPercent}%` }} />
             </div>
         </div>
     );
@@ -184,8 +184,8 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, onPlay, onR
     if (!item) return null;
 
     return (
-        <div className={`relative group flex items-start gap-4 p-4 rounded-3xl border transition-all ${isActive ? 'bg-white/10 border-white/20 shadow-xl' : 'bg-white/[0.03] border-white/5 hover:border-white/10'}`}>
-            <div className={`relative w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center border ${isActive ? 'bg-purple-600 border-none' : 'bg-white/5 border-white/10'}`}>
+        <div className={`relative group flex items-start gap-4 p-4 rounded-3xl border transition-all duration-300 ${isActive ? 'glass bg-white/30 dark:bg-white/10 border-white/40 shadow-2xl scale-[1.02]' : 'glass bg-white/10 dark:bg-slate-800/20 border-white/20 hover:border-white/40 hover:bg-white/20'}`}>
+            <div className={`relative w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center border transition-colors ${isActive ? 'bg-gradient-to-br from-indigo-500 to-purple-600 border-none shadow-lg' : 'bg-white/10 dark:bg-white/5 border-white/20'}`}>
                 
                 {/* Action Overlay: Hover state, or Active+Paused state */}
                 <div className={`absolute inset-0 z-20 bg-purple-600/80 flex items-center justify-center transition-opacity ${(isActive && !isPlaying) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
@@ -563,11 +563,15 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center">
             {/* Backdrop Overlay */}
             <div 
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 animate-in fade-in"
+                className="absolute inset-0 bg-slate-100/40 dark:bg-black/60 backdrop-blur-md transition-opacity duration-500 animate-in fade-in"
                 onClick={onMinimize}
             />
             
-            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-[#0f172a] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2.5rem] glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl border border-white/40 shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+                {/* Ambient Glow Orbs */}
+                <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDelay: '1s' }}></div>
+
                 {/* Global Header Actions (Minimize/Close) */}
                 <div className="absolute top-4 left-4 right-4 z-[60] flex items-center justify-end pointer-events-none md:top-6 md:left-6 md:right-6 md:gap-3 lg:top-8 lg:left-8 lg:right-8">
                     <button
@@ -604,14 +608,14 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     </div>
 
                     {/* Left Area: Playlist */}
-                    <div className={`w-full md:w-72 lg:w-80 xl:w-[400px] bg-white/5 backdrop-blur-xl border-b md:border-b-0 md:border-r border-white/10 flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
+                    <div className={`w-full md:w-72 lg:w-80 xl:w-[400px] glass bg-white/20 dark:bg-black/20 backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/30 flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center gap-4">
-                            <div className="p-2 bg-purple-500/10 rounded-xl"><ListMusic className="text-purple-400" size={24} /></div>
+                            <div className="p-2 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-white/20 shadow-inner"><ListMusic className="text-purple-600 dark:text-purple-400" size={24} /></div>
                             <div>
-                                <h3 className="text-lg lg:text-xl font-bold text-white">
+                                <h3 className="text-lg lg:text-xl font-bold text-slate-900 dark:text-white drop-shadow-sm">
                                     {activePlaylistName || 'LexPlaylist'}
                                 </h3>
-                                <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} items</p>
+                                <p className="text-[10px] font-bold text-slate-500 dark:text-white/50 uppercase tracking-widest">{playlist.length} items</p>
                             </div>
                             <button onClick={() => setShowBulkModal(true)} className="ml-auto bg-purple-600 hover:bg-purple-500 text-white p-3 rounded-2xl shadow-lg transition-all"><Plus size={20} /></button>
                         </div>
@@ -678,10 +682,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         <div className="m-auto shrink-0 flex flex-col items-center w-full pt-16 pb-6 px-4 md:px-8 z-10">
                         
                         <div className="relative group animate-float flex-shrink-0">
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-[32px] md:rounded-[40px] opacity-30 blur-2xl group-hover:opacity-50 transition-opacity"></div>
-                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] bg-gradient-to-tr from-[#6366f1] via-[#a855f7] to-[#ec4899] animate-gradient rounded-[30px] md:rounded-[32px] shadow-2xl flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"></div>
-                                <Headphones size={72} className={`text-white drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] transform transition-transform duration-700 z-10 md:w-20 md:h-20 ${isPlaying ? '-translate-y-5 md:-translate-y-6 scale-90' : 'group-hover:scale-110'}`} />
+                            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-[32px] md:rounded-[40px] opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] glass bg-white/30 dark:bg-white/10 backdrop-blur-xl border border-white/40 shadow-[0_20px_40px_rgba(0,0,0,0.2)] md:rounded-[32px] flex items-center justify-center overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/40 via-purple-500/40 to-pink-500/40 opacity-80 backdrop-blur-md"></div>
+                                <Headphones size={72} className={`text-white drop-shadow-xl transform transition-transform duration-700 z-10 md:w-20 md:h-20 ${isPlaying ? '-translate-y-5 md:-translate-y-6 scale-90' : 'group-hover:scale-110'}`} />
                                 {isPlaying && (
                                     <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex items-end gap-1.5 h-8 md:h-10 z-10">
                                         {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3].map((h, i) => (
@@ -693,10 +697,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         </div>
 
                         <div className="text-center mt-4 mb-3 max-w-xl z-10">
-                            <h2 className="text-2xl lg:text-3xl font-bold font-serif text-white mb-2 line-clamp-2">
+                            <h2 className="text-2xl lg:text-3xl font-bold font-serif text-slate-900 dark:text-white mb-2 line-clamp-2 drop-shadow-sm">
                                 {currentTrack ? currentTrack.title : "LexPlayer is idle"}
                             </h2>
-                            <p className="text-base lg:text-lg text-white/60 font-medium tracking-wide">
+                            <p className="text-base lg:text-lg text-slate-700 dark:text-white/70 font-medium tracking-wide">
                                 {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist to start listening"}
                             </p>
                             {/* Fixed height container to prevent layout shift during loading/error states */}
@@ -720,11 +724,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
                         <div className="flex flex-col items-center gap-3 w-full max-w-2xl z-10">
                             <div className="flex items-center gap-5 lg:gap-8">
-                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90 disabled:opacity-20"><SkipBack size={28} /></button>
-                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="relative w-14 h-14 lg:w-16 lg:h-16 bg-white text-[#0f172a] rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all">
-                                    {isLoading ? <div className="w-8 h-8 border-[3px] border-[#0f172a]/20 border-t-[#0f172a] rounded-full animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1" />)}
+                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="p-3 text-slate-500 dark:text-white/60 hover:text-purple-600 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/20 rounded-full transition-all active:scale-90 disabled:opacity-30"><SkipBack size={28} /></button>
+                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="relative w-14 h-14 lg:w-16 lg:h-16 glass bg-white/60 dark:bg-white/10 backdrop-blur-2xl border border-white/50 text-slate-900 dark:text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all">
+                                    {isLoading ? <div className="w-8 h-8 border-[3px] border-current/20 border-t-current rounded-full animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1" />)}
                                 </button>
-                                <button onClick={handleNext} disabled={playlist.length === 0} className="p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90 disabled:opacity-20"><SkipForward size={28} /></button>
+                                <button onClick={handleNext} disabled={playlist.length === 0} className="p-3 text-slate-500 dark:text-white/60 hover:text-purple-600 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/20 rounded-full transition-all active:scale-90 disabled:opacity-30"><SkipForward size={28} /></button>
                             </div>
                             <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-1 shadow-lg max-w-[90%]">
                                 {[0.7, 0.8, 0.9, 1.0, 1.25, 1.5, 2.0].map(speed => (
