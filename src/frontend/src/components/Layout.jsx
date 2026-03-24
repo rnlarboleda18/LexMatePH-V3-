@@ -144,7 +144,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Main Content Area */}
             <main className={`${isFullscreen ? 'pt-0' : 'pt-28'} transition-all duration-300 min-h-screen
-        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-8`}`}
+        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[calc(2rem_+_var(--player-height,0px))]`}`}
             >
                 <div className={`${isFullscreen ? 'max-w-full' : (mode === 'codex' ? 'max-w-full ml-0' : 'mx-auto max-w-7xl')}`}>
                     {children}

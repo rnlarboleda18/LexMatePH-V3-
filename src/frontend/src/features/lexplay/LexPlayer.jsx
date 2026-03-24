@@ -351,6 +351,22 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         fetchPlaylists();
     }, [fetchPlaylists]);
 
+    // Dynamic Layout Offset Management: Update global CSS variable when minimized
+    useEffect(() => {
+        const root = document.documentElement;
+        if (isMinimized) {
+            // Minimized height is roughly 72-80px depending on sm/md breakpoints. 
+            // 76px is a good safe average that prevents modal overlap.
+            root.style.setProperty('--player-height', '76px');
+        } else {
+            root.style.setProperty('--player-height', '0px');
+        }
+        
+        return () => {
+            root.style.setProperty('--player-height', '0px');
+        };
+    }, [isMinimized]);
+
     // Playlist Manager State
     const [isCreating, setIsCreating] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');

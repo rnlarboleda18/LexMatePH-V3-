@@ -50,7 +50,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
     };
 
     return (
-        <nav className="space-y-1 pb-20"> {/* Added padding bottom for scroll */}
+        <nav className="space-y-1 pb-[calc(5rem_+_var(--player-height,0px))]"> {/* Dynamic padding for LexPlayer */}
 
             {/* Mobile Only Actions */}
             <div className="lg:hidden px-4 mb-6 space-y-4">
