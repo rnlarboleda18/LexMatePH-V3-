@@ -34,6 +34,13 @@ export const LexPlayProvider = ({ children }) => {
     const repeatModeRef = useRef('none');
     const isShuffleRef = useRef(false);
     
+    // MediaSession Stable Handler Refs
+    const playPauseRef = useRef(null);
+    const nextTrackRef = useRef(null);
+    const prevTrackRef = useRef(null);
+    const seekForwardRef = useRef(null);
+    const seekBackwardRef = useRef(null);
+    
     const MAX_RETRIES = 3;
 
     // Keep refs in sync with state
@@ -147,6 +154,10 @@ export const LexPlayProvider = ({ children }) => {
     useEffect(() => {
         if (!audioRef.current) {
             audioRef.current = new Audio();
+            // Critical for iOS background playback
+            audioRef.current.setAttribute('playsinline', 'true');
+            audioRef.current.preload = 'auto';
+            
             audioRef.current.onended = handleTrackEnd;
             audioRef.current.onerror = (e) => {
                 // Ignore "empty src" errors which happen during cleanup or initialization
@@ -420,7 +431,7 @@ export const LexPlayProvider = ({ children }) => {
                     loadErrorPromise
                 ]);
                 setIsPlaying(true);
-                updateMediaSession(track);
+                // MediaSession is now handled by a dedicated useEffect
             }
         } catch (error) {
             // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted.
@@ -567,29 +578,64 @@ export const LexPlayProvider = ({ children }) => {
         setRepeatMode(next);
     }, []);
 
-    const updateMediaSession = useCallback((track) => {
-        if ('mediaSession' in navigator) {
+    // Sync Handlers to Refs
+    useEffect(() => {
+        playPauseRef.current = handlePlayPause;
+        nextTrackRef.current = handleNext;
+        prevTrackRef.current = handlePrevious;
+        seekForwardRef.current = handleScrubForward;
+        seekBackwardRef.current = handleScrubBackward;
+    }, [handlePlayPause, handleNext, handlePrevious, handleScrubForward, handleScrubBackward]);
+
+    // Universal MediaSession Manager
+    useEffect(() => {
+        if (!('mediaSession' in navigator)) return;
+
+        if (currentTrack) {
             navigator.mediaSession.metadata = new MediaMetadata({
-                title: track.title,
-                artist: 'LexPlay - Bar Reviewer',
-                album: track.type === 'codal' ? 'Codal Provisions' : 'Case Digests',
-                // artwork: [{ src: '/lexplay-icon.png', sizes: '512x512', type: 'image/png' }] // Optional artwork
+                title: currentTrack.title,
+                artist: 'LexMatePH - Bar Reviewer',
+                album: currentTrack.type === 'codal' ? 'Codal Provisions' : 'Case Digests'
             });
 
-            navigator.mediaSession.setActionHandler('play', handlePlayPause);
-            navigator.mediaSession.setActionHandler('pause', handlePlayPause);
-            navigator.mediaSession.setActionHandler('previoustrack', handlePrevious);
-            navigator.mediaSession.setActionHandler('nexttrack', handleNext);
-
-            // Optional: Seek handlers
+            // Register handlers ONCE (using stable refs)
+            // This prevents the "session drop" on iOS and "controls flicker" on Android
+            navigator.mediaSession.setActionHandler('play', () => playPauseRef.current?.());
+            navigator.mediaSession.setActionHandler('pause', () => playPauseRef.current?.());
+            navigator.mediaSession.setActionHandler('previoustrack', () => prevTrackRef.current?.());
+            navigator.mediaSession.setActionHandler('nexttrack', () => nextTrackRef.current?.());
             navigator.mediaSession.setActionHandler('seekbackward', (details) => {
-                if (audioRef.current) audioRef.current.currentTime = Math.max(audioRef.current.currentTime - (details.seekOffset || 10), 0);
+                const offset = details.seekOffset || 10;
+                seekBackwardRef.current?.(offset);
             });
             navigator.mediaSession.setActionHandler('seekforward', (details) => {
-                if (audioRef.current) audioRef.current.currentTime = Math.min(audioRef.current.currentTime + (details.seekOffset || 10), audioRef.current.duration);
+                const offset = details.seekOffset || 10;
+                seekForwardRef.current?.(offset);
             });
         }
-    }, [handlePlayPause, handleNext, handlePrevious]);
+
+        // Sync playback state for iOS lock screen and Android notifications
+        navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+
+        // Update position state for high-fidelity progress bars (Android/Tablets)
+        const updatePosition = () => {
+            if (audioRef.current && !isNaN(audioRef.current.duration) && audioRef.current.duration > 0) {
+                try {
+                    navigator.mediaSession.setPositionState({
+                        duration: audioRef.current.duration,
+                        playbackRate: 1.0,
+                        position: audioRef.current.currentTime
+                    });
+                } catch (e) { /* Some browsers throw if duration/position mismatch slightly */ }
+            }
+        };
+
+        if (isPlaying) {
+            const posInterval = setInterval(updatePosition, 2000);
+            updatePosition();
+            return () => clearInterval(posInterval);
+        }
+    }, [currentTrack, isPlaying]);
 
     const addToPlaylist = useCallback((item) => {
         setActivePlaylistId(null);
