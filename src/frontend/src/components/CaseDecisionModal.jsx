@@ -460,7 +460,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-            <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-2xl shadow-xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 border border-white/40 dark:border-white/10 relative">
+            <div className="glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-3xl rounded-3xl shadow-[0_10px_50px_rgba(0,0,0,0.4)] w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-white/50 dark:border-white/20 relative">
+                
+                {/* Ambient glow orbs inside the modal to drive the glass effect */}
+                <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
@@ -523,7 +527,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 )}
 
                 {/* HEADER */}
-                <div className="border-b border-white/20 dark:border-white/5 mb-0 pb-0">
+                <div className="border-b border-white/30 dark:border-white/10 mb-0 pb-0 relative z-10 bg-white/20 dark:bg-black/10 backdrop-blur-sm">
                     {/* Always-visible title row */}
                     <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3">
                         <h2 className="text-[15px] sm:text-[16px] font-bold text-gray-900 dark:text-white leading-snug line-clamp-1 flex-1">
@@ -582,17 +586,19 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="flex-grow overflow-y-auto p-6 custom-scrollbar bg-white/40 dark:bg-slate-900/20 backdrop-blur-md">
+                <div className="flex-grow overflow-y-auto p-6 md:p-8 custom-scrollbar bg-transparent relative z-10">
 
                     {viewMode === 'digest' ? (
                         <>
                             {/* MAIN DOCTRINE */}
                             {fullDecision.main_doctrine && (
-                                <div className="bg-black/5 dark:bg-black/20 p-5 rounded-xl border-l-4 border-blue-500 border-t border-r border-b border-black/5 dark:border-white/5 mb-8 font-medium shadow-inner">
-                                    <h4 className="text-[16px] font-extrabold text-blue-800 dark:text-blue-400 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                        <Lightbulb className="w-5 h-5" /> Main Doctrine
+                                <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 mb-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                                    <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
+                                    <h4 className="text-[13px] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                        <Lightbulb className="w-5 h-5 text-blue-500 drop-shadow-sm" /> 
+                                        Main Doctrine
                                     </h4>
-                                    <div className="text-gray-800 dark:text-gray-200 italic leading-relaxed">
+                                    <div className="text-gray-800 dark:text-gray-100 italic text-lg leading-relaxed font-medium">
                                         <SmartLink text={fullDecision.main_doctrine} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </div>
@@ -600,11 +606,17 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* FACTS */}
                             {fullDecision.digest_facts && (
-                                <section className="mb-8">
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-white/10 pb-2 mb-4 flex items-center gap-2">
-                                        <FileText className="w-5 h-5 text-gray-500" /> FACTS
+                                <section className="mb-10">
+                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                            <FileText className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+                                        </span>
+                                        <span className="tracking-wide uppercase text-[15px]">Facts</span>
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
-                                    <MarkdownText content={fullDecision.digest_facts} variant="facts" onCaseClick={handleSmartCaseClick} />
+                                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        <MarkdownText content={fullDecision.digest_facts} variant="facts" onCaseClick={handleSmartCaseClick} />
+                                    </div>
                                 </section>
                             )}
 
@@ -613,31 +625,47 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* ISSUE */}
                             {fullDecision.digest_issues && (
-                                <section className="mb-8">
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-white/10 pb-2 mb-4 flex items-center gap-2">
-                                        <AlertTriangle className="w-5 h-5 text-amber-500" /> ISSUE
+                                <section className="mb-10">
+                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                            <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
+                                        </span>
+                                        <span className="tracking-wide uppercase text-[15px]">Issue</span>
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
-                                    <MarkdownText content={fullDecision.digest_issues} onCaseClick={handleSmartCaseClick} />
+                                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        <MarkdownText content={fullDecision.digest_issues} onCaseClick={handleSmartCaseClick} />
+                                    </div>
                                 </section>
                             )}
 
                             {/* RULING */}
                             {fullDecision.digest_ruling && (
-                                <section className="mb-8">
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-white/10 pb-2 mb-4 flex items-center gap-2">
-                                        <Gavel className="w-5 h-5 text-blue-500" /> RULING
+                                <section className="mb-10">
+                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                            <Gavel className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+                                        </span>
+                                        <span className="tracking-wide uppercase text-[15px]">Ruling</span>
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
-                                    <MarkdownText content={fullDecision.digest_ruling} onCaseClick={handleSmartCaseClick} />
+                                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                        <MarkdownText content={fullDecision.digest_ruling} onCaseClick={handleSmartCaseClick} />
+                                    </div>
                                 </section>
                             )}
 
                             {/* RATIO DECIDENDI */}
                             {fullDecision.digest_ratio && (
-                                <section className="mb-8">
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-white/10 pb-2 mb-4 flex items-center gap-2">
-                                        <BookOpen className="w-5 h-5 text-purple-500" /> RATIO DECIDENDI
+                                <section className="mb-10">
+                                    <h4 className="text-xl font-extrabold text-gray-900 dark:text-white pb-3 mb-5 flex items-center gap-3 relative">
+                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                            <BookOpen className="w-5 h-5 text-purple-500 dark:text-purple-400" />
+                                        </span>
+                                        <span className="tracking-wide uppercase text-[15px]">Ratio Decidendi</span>
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
-                                    <div className="pl-4 border-l-2 border-purple-100 dark:border-purple-900/30">
+                                    <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
                                         <MarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </section>
@@ -651,8 +679,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             <FlashcardSection flashcards={fullDecision.flashcards} />
 
                             {fullDecision.separate_opinions && fullDecision.separate_opinions.length > 0 && (
-                                <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
-                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-white mb-4">Separate Opinions</h4>
+                                <div className="mt-12 pt-8 relative">
+                                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-white/20 to-transparent"></div>
+                                    <h4 className="text-[16px] font-bold text-gray-900 dark:text-white mb-6 text-center uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-gray-300 dark:to-white">Separate Opinions</h4>
                                     <div className="space-y-6">
                                         {fullDecision.separate_opinions.map((op, idx) => (
                                             <SeparateOpinionCard key={idx} op={op} idx={idx} />
@@ -690,16 +719,16 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* FOOTER ACTIONS */}
-                <div className="p-4 border-t border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30 flex justify-end gap-3 backdrop-blur-sm">
+                <div className="p-4 md:p-6 border-t border-white/30 dark:border-white/10 bg-white/40 dark:bg-slate-900/60 flex justify-end gap-4 backdrop-blur-2xl relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
                     <button
                         onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
-                        className="px-4 py-2 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg text-sm font-medium hover:bg-white/60 dark:hover:bg-slate-600/60 transition-colors shadow-sm"
+                        className="px-6 py-2.5 glass bg-white/60 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-sm font-extrabold text-gray-800 dark:text-gray-200 hover:bg-white/80 dark:hover:bg-white/20 transition-all hover:scale-[1.02] active:scale-95 shadow-sm"
                     >
                         {viewMode === 'digest' ? 'Read Full Text' : 'View Digest'}
                     </button>
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-bold transition-colors shadow-md shadow-blue-600/20"
+                        className="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-500/30 border border-blue-400/50"
                     >
                         Close
                     </button>
