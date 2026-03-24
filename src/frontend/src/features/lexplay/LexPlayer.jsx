@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLexPlay } from './useLexPlay';
 import {
     Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
-    Volume2, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown, RotateCcw
+    Volume2, VolumeX, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown, RotateCcw,
+    Repeat, Repeat1, Shuffle, Rewind, FastForward
 } from 'lucide-react';
 
 // Custom modern dropdown for playlists
@@ -309,6 +310,14 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         isLoading,
         error,
         playbackRate,
+        volume,
+        setVolume,
+        repeatMode,
+        cycleRepeatMode,
+        isShuffle,
+        toggleShuffle,
+        handleScrubForward,
+        handleScrubBackward,
         setPlaybackRate,
         audioRef,
         handlePlayPause,
@@ -681,26 +690,26 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         {/* Bulletproof centering inner container */}
                         <div className="m-auto shrink-0 flex flex-col items-center w-full pt-16 pb-6 px-4 md:px-8 z-10">
                         
-                        <div className="relative group animate-float flex-shrink-0">
+                        <div className="relative group animate-float flex-shrink-0 mt-4 md:mt-8">
                             <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-[32px] md:rounded-[40px] opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
-                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] glass bg-white/30 dark:bg-white/10 backdrop-blur-xl border border-white/40 shadow-[0_20px_40px_rgba(0,0,0,0.2)] md:rounded-[32px] flex items-center justify-center overflow-hidden">
+                            <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 max-h-[40vh] max-w-[40vh] glass bg-white/30 dark:bg-white/10 backdrop-blur-xl border border-white/40 shadow-[0_30px_60px_rgba(0,0,0,0.3)] md:rounded-[40px] flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/40 via-purple-500/40 to-pink-500/40 opacity-80 backdrop-blur-md"></div>
-                                <Headphones size={72} className={`text-white drop-shadow-xl transform transition-transform duration-700 z-10 md:w-20 md:h-20 ${isPlaying ? '-translate-y-5 md:-translate-y-6 scale-90' : 'group-hover:scale-110'}`} />
+                                <Headphones size={80} className={`text-white drop-shadow-2xl transform transition-transform duration-700 z-10 md:w-24 md:h-24 ${isPlaying ? '-translate-y-6 md:-translate-y-8 scale-90 opacity-50' : 'group-hover:scale-110 opacity-100'}`} />
                                 {isPlaying && (
-                                    <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex items-end gap-1.5 h-8 md:h-10 z-10">
-                                        {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3].map((h, i) => (
-                                            <div key={i} className="w-1.5 bg-white/90 rounded-full animate-[bounce_1s_infinite]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                                    <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-end justify-center gap-1.5 h-12 md:h-16 z-10 w-full px-8">
+                                        {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
+                                            <div key={i} className="w-2 md:w-2.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] rounded-t-sm animate-[bounce_1s_infinite]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}></div>
                                         ))}
                                     </div>
                                 )}
                             </div>
                         </div>
 
-                        <div className="text-center mt-4 mb-3 max-w-xl z-10">
-                            <h2 className="text-2xl lg:text-3xl font-bold font-serif text-slate-900 dark:text-white mb-2 line-clamp-2 drop-shadow-sm">
+                        <div className="text-center mt-8 mb-6 max-w-xl z-10 px-4">
+                            <h2 className="text-3xl lg:text-4xl font-extrabold font-serif text-slate-900 dark:text-white mb-3 line-clamp-2 drop-shadow-md tracking-tight">
                                 {currentTrack ? currentTrack.title : "LexPlayer is idle"}
                             </h2>
-                            <p className="text-base lg:text-lg text-slate-700 dark:text-white/70 font-medium tracking-wide">
+                            <p className="text-sm lg:text-base text-purple-600 dark:text-purple-300 font-bold tracking-widest uppercase opacity-90 drop-shadow-sm">
                                 {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist to start listening"}
                             </p>
                             {/* Fixed height container to prevent layout shift during loading/error states */}
@@ -722,20 +731,65 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
                         <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={false} />
 
-                        <div className="flex flex-col items-center gap-3 w-full max-w-2xl z-10">
-                            <div className="flex items-center gap-5 lg:gap-8">
-                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="p-3 text-slate-500 dark:text-white/60 hover:text-purple-600 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/20 rounded-full transition-all active:scale-90 disabled:opacity-30"><SkipBack size={28} /></button>
-                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="relative w-14 h-14 lg:w-16 lg:h-16 glass bg-white/60 dark:bg-white/10 backdrop-blur-2xl border border-white/50 text-slate-900 dark:text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all">
-                                    {isLoading ? <div className="w-8 h-8 border-[3px] border-current/20 border-t-current rounded-full animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1" />)}
+                        <div className="w-full max-w-3xl flex flex-col gap-5 z-10 mt-2 px-2 lg:px-6">
+                            {/* Top Row: Playback Controls */}
+                            <div className="flex items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+                                <button onClick={toggleShuffle} className={`p-2 transition-all active:scale-90 ${isShuffle ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]' : 'text-slate-500 dark:text-white/40 hover:text-slate-800 dark:hover:text-white/80'}`}>
+                                    <Shuffle size={20} strokeWidth={2.5} />
                                 </button>
-                                <button onClick={handleNext} disabled={playlist.length === 0} className="p-3 text-slate-500 dark:text-white/60 hover:text-purple-600 dark:hover:text-white hover:bg-white/30 dark:hover:bg-white/20 rounded-full transition-all active:scale-90 disabled:opacity-30"><SkipForward size={28} /></button>
+                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="p-3 text-slate-800 dark:text-white/80 hover:text-purple-600 dark:hover:text-white transition-all active:scale-90 disabled:opacity-30">
+                                    <SkipBack size={28} fill="currentColor" />
+                                </button>
+                                
+                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="relative w-16 h-16 lg:w-20 lg:h-20 glass bg-white/80 dark:bg-white/20 backdrop-blur-2xl border border-white/50 dark:border-white/30 text-purple-600 dark:text-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition-all group">
+                                    {isLoading ? <div className="w-10 h-10 border-[4px] border-current/20 border-t-current rounded-full animate-spin" /> : (isPlaying ? <Pause size={36} fill="currentColor" /> : <Play size={36} fill="currentColor" className="ml-2" />)}
+                                </button>
+
+                                <button onClick={handleNext} disabled={playlist.length === 0} className="p-3 text-slate-800 dark:text-white/80 hover:text-purple-600 dark:hover:text-white transition-all active:scale-90 disabled:opacity-30">
+                                    <SkipForward size={28} fill="currentColor" />
+                                </button>
+
+                                <button onClick={cycleRepeatMode} className={`p-2 transition-all active:scale-90 ${repeatMode !== 'none' ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]' : 'text-slate-500 dark:text-white/40 hover:text-slate-800 dark:hover:text-white/80'}`}>
+                                    {repeatMode === 'one' ? <Repeat1 size={20} strokeWidth={2.5} /> : <Repeat size={20} strokeWidth={2.5} />}
+                                </button>
                             </div>
-                            <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-1 shadow-lg max-w-[90%]">
-                                {[0.7, 0.8, 0.9, 1.0, 1.25, 1.5, 2.0].map(speed => (
-                                    <button key={speed} onClick={() => setPlaybackRate(speed)} className={`px-2 py-1.5 md:px-3 text-xs lg:text-sm font-bold rounded-lg transition-all ${playbackRate === speed ? 'bg-white text-[#0f172a]' : 'text-white/60 hover:text-white'}`}>
-                                        {speed < 1 ? speed.toFixed(2).replace('0.', '.') + 'x' : speed === 1 ? '1x' : speed + 'x'}
-                                    </button>
-                                ))}
+
+                            {/* Middle Row: Scrub & Speed Tools */}
+                            <div className="flex items-center justify-between gap-4 w-full glass bg-white/40 dark:bg-slate-900/50 backdrop-blur-xl border border-white/40 dark:border-white/10 rounded-3xl px-6 py-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)] mt-2">
+                                <button onClick={handleScrubBackward} className="flex flex-col items-center justify-center p-2 text-slate-600 dark:text-white/60 hover:text-purple-600 dark:hover:text-white transition-colors active:scale-90">
+                                    <Rewind size={20} />
+                                    <span className="text-[9px] font-extrabold mt-1 tracking-widest text-slate-400 dark:text-white/40">-10s</span>
+                                </button>
+
+                                <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mx-auto">
+                                    {[0.8, 1.0, 1.25, 1.5, 2.0].map(speed => (
+                                        <button key={speed} onClick={() => setPlaybackRate(speed)} className={`px-2.5 py-1.5 md:px-3.5 text-[10px] lg:text-xs font-extrabold rounded-xl transition-all ${playbackRate === speed ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'text-slate-600 dark:text-white/50 hover:bg-white/60 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white'}`}>
+                                            {speed === 1 ? '1x' : speed + 'x'}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button onClick={handleScrubForward} className="flex flex-col items-center justify-center p-2 text-slate-600 dark:text-white/60 hover:text-purple-600 dark:hover:text-white transition-colors active:scale-90">
+                                    <FastForward size={20} />
+                                    <span className="text-[9px] font-extrabold mt-1 tracking-widest text-slate-400 dark:text-white/40">+10s</span>
+                                </button>
+                            </div>
+
+                            {/* Bottom Row: Volume Control Slider */}
+                            <div className="flex items-center justify-center gap-3 w-full max-w-xs mx-auto mt-2 opacity-60 hover:opacity-100 transition-opacity">
+                                <button onClick={() => setVolume(volume === 0 ? 1 : 0)} className="text-slate-600 dark:text-white/60 hover:text-purple-600 dark:hover:text-white transition-colors">
+                                    {volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                                </button>
+                                <input 
+                                    type="range" 
+                                    min="0" max="1" step="0.01" 
+                                    value={volume} 
+                                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                                    className="w-full h-1.5 bg-slate-300 dark:bg-slate-700/50 rounded-full appearance-none cursor-pointer border border-black/5 dark:border-white/5"
+                                    style={{
+                                        backgroundImage: `linear-gradient(to right, #9333ea ${volume * 100}%, transparent ${volume * 100}%)`
+                                    }}
+                                />
                             </div>
                         </div>
                         </div>

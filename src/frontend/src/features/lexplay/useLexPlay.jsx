@@ -22,11 +22,18 @@ export const LexPlayProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [playbackRate, setPlaybackRate] = useState(0.8);
+    const [volume, setVolume] = useState(1.0);
+    const [repeatMode, setRepeatMode] = useState('none'); // 'none', 'all', 'one'
+    const [isShuffle, setIsShuffle] = useState(false);
+    
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const audioRef = useRef(null);
     const playlistRef = useRef([]);
     const currentIndexRef = useRef(-1);
     const retryCountRef = useRef(0);
+    const repeatModeRef = useRef('none');
+    const isShuffleRef = useRef(false);
+    
     const MAX_RETRIES = 3;
 
     // Keep refs in sync with state
@@ -156,6 +163,9 @@ export const LexPlayProvider = ({ children }) => {
                 setIsPlaying(true);
                 setError(null);
                 
+                // Ensure volume is applied on load
+                audioRef.current.volume = volume;
+
                 // Handle initial seek from loaded state
                 if (audioRef.current.__targetTime) {
                     audioRef.current.currentTime = audioRef.current.__targetTime;
@@ -172,6 +182,13 @@ export const LexPlayProvider = ({ children }) => {
             }
         };
     }, []);
+
+    // Sync volume when state changes
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = volume;
+        }
+    }, [volume]);
 
     // --- Saved Playlists API Logic ---
 
@@ -462,34 +479,93 @@ export const LexPlayProvider = ({ children }) => {
     }, [isPlaying, currentTrack, playlist.length, playTrack, currentIndex]);
 
     const handleNext = useCallback(() => {
-        if (currentIndex < playlist.length - 1) {
+        if (isShuffleRef.current && playlist.length > 1) {
+            let nextIdx;
+            do { nextIdx = Math.floor(Math.random() * playlist.length); } 
+            while (nextIdx === currentIndex && playlist.length > 1);
+            playTrack(nextIdx);
+        } else if (currentIndex < playlist.length - 1) {
             playTrack(currentIndex + 1);
+        } else if (repeatModeRef.current === 'all') {
+            playTrack(0);
         }
     }, [currentIndex, playlist.length, playTrack]);
 
     const handlePrevious = useCallback(() => {
-        if (currentIndex > 0) {
+        if (audioRef.current && audioRef.current.currentTime > 3) {
+            // If more than 3s in, restart current track
+            audioRef.current.currentTime = 0;
+            if (!isPlaying) handlePlayPause();
+            return;
+        }
+
+        if (isShuffleRef.current && playlist.length > 1) {
+            let nextIdx;
+            do { nextIdx = Math.floor(Math.random() * playlist.length); } 
+            while (nextIdx === currentIndex && playlist.length > 1);
+            playTrack(nextIdx);
+        } else if (currentIndex > 0) {
             playTrack(currentIndex - 1);
         } else if (audioRef.current) {
-            // If at start of first track, just restart it
             audioRef.current.currentTime = 0;
             if (!isPlaying) handlePlayPause();
         }
-    }, [currentIndex, isPlaying, handlePlayPause, playTrack]);
+    }, [currentIndex, isPlaying, handlePlayPause, playTrack, playlist.length]);
 
     const handleTrackEnd = useCallback(() => {
         const idx = currentIndexRef.current;
         const list = playlistRef.current;
+        
+        if (repeatModeRef.current === 'one') {
+            playTrack(idx);
+            return;
+        }
+        
+        if (isShuffleRef.current && list.length > 1) {
+            let nextIdx;
+            do { nextIdx = Math.floor(Math.random() * list.length); } 
+            while (nextIdx === idx && list.length > 1);
+            playTrack(nextIdx);
+            return;
+        }
+
         if (idx < list.length - 1) {
             playTrack(idx + 1);
         } else {
-            setIsPlaying(false);
-            // Don't set to -1, stay at the last track or go to 0, but stop.
-            // This prevents UI crashes that expect a valid currentTrack.
-            if (list.length > 0) setCurrentIndex(0);
-            else setCurrentIndex(-1);
+            if (repeatModeRef.current === 'all') {
+                playTrack(0);
+            } else {
+                setIsPlaying(false);
+                if (list.length > 0) setCurrentIndex(0);
+                else setCurrentIndex(-1);
+            }
         }
     }, [playTrack]);
+
+    const handleScrubForward = useCallback(() => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = Math.min(audioRef.current.currentTime + 10, audioRef.current.duration || 0);
+        }
+    }, []);
+
+    const handleScrubBackward = useCallback(() => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = Math.max(audioRef.current.currentTime - 10, 0);
+        }
+    }, []);
+
+    const toggleShuffle = useCallback(() => {
+        const next = !isShuffleRef.current;
+        isShuffleRef.current = next;
+        setIsShuffle(next);
+    }, []);
+
+    const cycleRepeatMode = useCallback(() => {
+        const map = { 'none': 'all', 'all': 'one', 'one': 'none' };
+        const next = map[repeatModeRef.current];
+        repeatModeRef.current = next;
+        setRepeatMode(next);
+    }, []);
 
     const updateMediaSession = useCallback((track) => {
         if ('mediaSession' in navigator) {
@@ -578,6 +654,14 @@ export const LexPlayProvider = ({ children }) => {
         isLoading,
         error,
         playbackRate,
+        volume,
+        setVolume,
+        repeatMode,
+        cycleRepeatMode,
+        isShuffle,
+        toggleShuffle,
+        handleScrubForward,
+        handleScrubBackward,
         isDrawerOpen,
         setIsDrawerOpen,
         addToPlaylist,
@@ -611,6 +695,13 @@ export const LexPlayProvider = ({ children }) => {
         isLoading,
         error,
         playbackRate,
+        volume,
+        repeatMode,
+        isShuffle,
+        cycleRepeatMode,
+        toggleShuffle,
+        handleScrubForward,
+        handleScrubBackward,
         isDrawerOpen,
         savedPlaylists,
         activePlaylistId,
