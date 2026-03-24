@@ -2,17 +2,10 @@ import React, { useState } from 'react';
 
 const LexifySidebar = ({ questions, currentIndex, setCurrentIndex, userAnswers, flaggedQuestions, setFlaggedQuestions }) => {
     const [filter, setFilter] = useState('All'); // 'All', 'Unanswered', 'Answered', 'Flagged'
+    const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
     const answeredCount = questions.filter((_, i) => !!userAnswers[i]?.replace(/<[^>]*>?/gm, '').trim()).length;
     const flaggedCount = flaggedQuestions.size;
-    const unansweredCount = questions.length - answeredCount;
-
-    const handleFlagToggle = (index, e) => {
-        e.stopPropagation();
-        const newFlags = new Set(flaggedQuestions);
-        if (newFlags.has(index)) { newFlags.delete(index); } else { newFlags.add(index); }
-        setFlaggedQuestions(newFlags);
-    };
 
     const filteredQuestions = questions.map((q, idx) => {
         const isAnswered = !!userAnswers[idx]?.replace(/<[^>]*>?/gm, '').trim();
@@ -24,89 +17,69 @@ const LexifySidebar = ({ questions, currentIndex, setCurrentIndex, userAnswers, 
     }).filter(Boolean);
 
     return (
-        <div className="w-60 bg-gray-50 border-r border-gray-200 flex flex-col h-full shadow-sm shrink-0">
-            {/* Header with Stats */}
-            <div className="px-4 py-3 border-b border-gray-200 bg-white">
-                <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-gray-700 text-xs uppercase tracking-wider font-serif">Question List</span>
-                    <select
-                        value={filter}
-                        onChange={(e) => setFilter(e.target.value)}
-                        className="text-xs p-1 border border-gray-200 rounded bg-white text-gray-600 outline-none cursor-pointer"
-                    >
-                        <option value="All">All ({questions.length})</option>
-                        <option value="Answered">Answered ({answeredCount})</option>
-                        <option value="Unanswered">Unanswered ({unansweredCount})</option>
-                        <option value="Flagged">Flagged ({flaggedCount})</option>
-                    </select>
-                </div>
-                {/* Mini progress bar */}
-                <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                        className="h-full bg-blue-500 rounded-full transition-all"
-                        style={{ width: `${(answeredCount / questions.length) * 100}%` }}
-                    />
-                </div>
-                <p className="text-[10px] text-gray-400 mt-1">{answeredCount} of {questions.length} answered</p>
+        <div className="w-16 bg-[#f4f6f8] border-r border-[#d5dbe1] flex flex-col h-full shadow-sm select-none relative font-sans">
+            
+            {/* Filter Header Item 3 */}
+            <div className="relative border-b border-[#d5dbe1] bg-[#f4f6f8]">
+                <button 
+                    onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                    className="w-full text-left px-2 py-3 text-[10px] font-extrabold text-slate-500 hover:text-slate-700 tracking-wider flex items-center justify-between uppercase"
+                >
+                    FILTER <span className="text-[10px] scale-90 text-slate-400">❯</span>
+                </button>
+                
+                {showFilterDropdown && (
+                    <div className="absolute left-16 top-0 z-50 bg-[#212b36] border border-gray-600 rounded shadow-xl w-36 py-1 overflow-hidden">
+                        {['All', 'Answered', 'Unanswered', 'Flagged'].map(t => (
+                            <button 
+                                key={t}
+                                onClick={() => { setFilter(t); setShowFilterDropdown(false); }}
+                                className={`w-full text-left px-4 py-1.5 text-xs hover:bg-white/10 transition text-white ${filter === t ? 'font-bold text-[#3fa9f5]' : ''}`}
+                            >
+                                {t}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            {/* Question List */}
-            <div className="flex-1 overflow-y-auto py-2 px-2">
-                {filteredQuestions.map(({ q, idx, isAnswered, isFlagged }) => {
+            {/* Question List Item 4 */}
+            <div className="flex-1 overflow-y-auto py-3 flex flex-col items-center gap-3 overflow-x-hidden">
+                {filteredQuestions.map(({ idx, isAnswered, isFlagged }) => {
                     const isActive = currentIndex === idx;
+
                     return (
                         <div
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
-                            className={`flex items-center gap-3 px-2 py-2 mb-1 cursor-pointer rounded-xl transition-all ${
-                                isActive
-                                    ? 'bg-blue-50 border border-blue-200'
-                                    : 'hover:bg-gray-100 border border-transparent'
-                            }`}
+                            className="relative flex items-center justify-center cursor-pointer group"
                         >
-                            {/* Circle Indicator */}
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 border-2 transition-all ${
-                                isFlagged
-                                    ? 'bg-orange-100 border-orange-400 text-orange-700'
-                                    : isAnswered
-                                        ? 'bg-blue-500 border-blue-600 text-white'
-                                        : isActive
-                                            ? 'bg-white border-blue-400 text-blue-600'
-                                            : 'bg-white border-gray-300 text-gray-500'
-                            }`}>
+                            {/* Blue active left-bar border guide (if applicable in real app, useful indicator) */}
+                            {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#3fa9f5]" />}
+
+                            {/* Circular Frame item 4 and 5 */}
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold flex-shrink-0 border-2 transition-all relative ${
+                                isAnswered
+                                    ? 'bg-[#3fa9f5] border-[#3fa9f5] text-white shadow-sm'
+                                    : 'bg-white border-[#b0bbc5] text-[#2c3e50]'
+                            } ${isActive ? 'ring-2 ring-offset-1 ring-[#3fa9f5]/60' : ''}`}>
                                 {idx + 1}
-                            </div>
 
-                            {/* Subject Label */}
-                            <div className="flex-1 min-w-0">
-                                <p className={`text-xs truncate ${isActive ? 'text-blue-700 font-bold' : 'text-gray-500'}`}>
-                                    {q.subject || `Question ${idx + 1}`}
-                                </p>
-                                {isAnswered && <p className="text-[10px] text-green-500">✓ Answered</p>}
-                                {!isAnswered && <p className="text-[10px] text-gray-300">Unanswered</p>}
+                                {/* Orange Flag Badge (Overlap bottom-right item 5) */}
+                                {isFlagged && (
+                                    <div className="absolute bottom-[-3px] right-[-3px] w-4 h-4 bg-orange-500 rounded-sm flex items-center justify-center shadow" title="Flagged">
+                                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                                        </svg>
+                                    </div>
+                                )}
                             </div>
-
-                            {/* Flag Button */}
-                            <button
-                                onClick={(e) => handleFlagToggle(idx, e)}
-                                className={`p-1 rounded-lg hover:bg-gray-200 transition-colors flex-shrink-0 ${isFlagged ? 'text-orange-500' : 'text-gray-300 hover:text-gray-400'}`}
-                                title={isFlagged ? "Unflag Question" : "Flag for Review"}
-                            >
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill={isFlagged ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" />
-                                </svg>
-                            </button>
                         </div>
                     );
                 })}
             </div>
-
-            {/* Legend */}
-            <div className="px-4 py-3 border-t border-gray-200 bg-white text-[10px] text-gray-400 space-y-1">
-                <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0" /> Answered</div>
-                <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full border-2 border-gray-300 flex-shrink-0" /> Unanswered</div>
-                <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full border-2 border-orange-400 bg-orange-100 flex-shrink-0" /> Flagged for Review</div>
-            </div>
+            
+            {/* Legend or Indicator for answered if need to save space, otherwise it floats implicitly */}
         </div>
     );
 };

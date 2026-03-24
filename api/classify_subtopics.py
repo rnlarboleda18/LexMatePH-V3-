@@ -44,7 +44,9 @@ def load_settings():
 
 load_settings()
 
-DB_CONN_STR = os.environ.get("DATABASE_URL", "")
+DB_CONN_STR = os.environ.get("DB_CONNECTION_STRING") or os.environ.get("DATABASE_URL", "")
+if ":6432/" in DB_CONN_STR:
+    DB_CONN_STR = DB_CONN_STR.replace(":6432/", ":5432/")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
 BATCH_SIZE = 10          # Questions per Gemini call (balance cost vs speed)
 SLEEP_BETWEEN_BATCHES = 1.0   # Seconds between API calls (avoid rate limiting)
@@ -133,7 +135,7 @@ def classify_batch(questions: list[dict]) -> list[str | None]:
         user_content_lines.append(f"Q{i} [{q.get('subject', '')}]: {text}")
     user_content = "\n\n".join(user_content_lines)
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
     payload = {
         "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
         "contents": [{"parts": [{"text": user_content}]}],

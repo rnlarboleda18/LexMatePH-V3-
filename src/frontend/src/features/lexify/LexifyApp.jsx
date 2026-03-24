@@ -300,6 +300,7 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                 spellCheck={spellCheck}
                 onToggleSpellCheck={() => setSpellCheck(prev => !prev)}
                 alarmTime={alarmTime}
+                examLabel={examLabel}
             />
 
             {/* Main 3-Pane Layout */}
@@ -324,6 +325,13 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                     onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
                     onNext={() => setCurrentIndex(prev => Math.min(activeQuestions.length - 1, prev + 1))}
                     spellCheck={spellCheck}
+                    isFlagged={flaggedQuestions.has(currentIndex)}
+                    onToggleFlag={() => {
+                        const newFlags = new Set(flaggedQuestions);
+                        if (newFlags.has(currentIndex)) newFlags.delete(currentIndex);
+                        else newFlags.add(currentIndex);
+                        setFlaggedQuestions(newFlags);
+                    }}
                 />
             </div>
 
