@@ -7,16 +7,20 @@ import LexifyNotes from './LexifyNotes';
 import LexifyResults from './LexifyResults';
 
 // State Machine:
-// 0: Dashboard (My Exams)
-// 1: Orange Lockdown/Security Check
-// 2: Active Exam
-// 3: Green Upload Success Screen
-// 4: Exam Hidden (black screen)
-// 5: AI Grading (loading)
-// 6: Results Screen
+// -1: Fetching questions (loading)
+//  0: Dashboard (My Exams)
+//  1: Orange Lockdown/Security Check
+//  2: Active Exam
+//  3: Green Upload Success Screen
+//  4: Exam Hidden (black screen)
+//  5: AI Grading (loading)
+//  6: Results Screen
 
-const LexifyApp = ({ questions, onClose }) => {
+const LexifyApp = ({ questions: propQuestions, onClose }) => {
     const [examState, setExamState] = useState(0);
+    const [activeQuestions, setActiveQuestions] = useState(propQuestions || []);
+    const [examLabel, setExamLabel] = useState('');
+    const [fetchError, setFetchError] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState({});
     const [flaggedQuestions, setFlaggedQuestions] = useState(new Set());
@@ -40,17 +44,43 @@ const LexifyApp = ({ questions, onClose }) => {
         return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, [examState]);
 
-    const handleBeginExam = (alarm) => {
+    const handleBeginExam = async (examId, alarm) => {
         setAlarmTime(alarm || '00:30:00');
-        setExamState(1); // Orange lockdown screen
+        setFetchError('');
+        setExamState(-1); // Loading state
+
+        try {
+            // Fetch weighted questions for this specific exam
+            const res = await fetch(`/api/lexify_questions?exam=${examId}`);
+            if (!res.ok) throw new Error(`API error ${res.status}`);
+            const data = await res.json();
+            const qs = data.questions || [];
+
+            if (qs.length === 0) {
+                setFetchError('No questions found for this exam. Please run the sub-topic classifier first.');
+                setExamState(0);
+                return;
+            }
+
+            setActiveQuestions(qs);
+            setExamLabel(data.exam_label || '');
+            setCurrentIndex(0);
+            setUserAnswers({});
+            setFlaggedQuestions(new Set());
+
+        } catch (e) {
+            setFetchError(`Failed to load questions: ${e.message}`);
+            setExamState(0);
+            return;
+        }
+
+        setExamState(1); // Lockdown
 
         // Request fullscreen
         const elem = document.documentElement;
         if (elem.requestFullscreen) {
             elem.requestFullscreen().catch(() => {});
         }
-
-        // Simulate security check, then enter exam
         setTimeout(() => {
             setExamState(2);
             setExamStartTime(Date.now());
@@ -59,7 +89,7 @@ const LexifyApp = ({ questions, onClose }) => {
 
     const handleSubmit = async () => {
         const plainTextOf = (html) => html?.replace(/<[^>]*>?/gm, '').trim() || '';
-        const unanswered = questions.filter((_, i) => !plainTextOf(userAnswers[i])).length;
+        const unanswered = activeQuestions.filter((_, i) => !plainTextOf(userAnswers[i])).length;
 
         if (unanswered > 0) {
             const proceed = window.confirm(`You have ${unanswered} unanswered question(s). Are you sure you want to submit?`);
@@ -91,7 +121,7 @@ const LexifyApp = ({ questions, onClose }) => {
         try {
             // Grade each question individually and collect results
             const results = await Promise.all(
-                questions.map(async (q, i) => {
+                activeQuestions.map(async (q, i) => {
                     const answer = userAnswers[i] || '';
                     if (!answer.replace(/<[^>]*>?/gm, '').trim()) {
                         return null; // skipped / no answer
@@ -142,9 +172,28 @@ const LexifyApp = ({ questions, onClose }) => {
 
     // ——— SCREENS ———
 
+    // State -1: Fetching Questions
+    if (examState === -1) {
+        return (
+            <div className="fixed inset-0 z-[100] bg-[#0d1117] text-white flex flex-col items-center justify-center p-8">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-white/10 border-t-[#e94560] rounded-full animate-spin mx-auto mb-6" />
+                    <h2 className="text-xl font-bold mb-2">Loading Exam Questions...</h2>
+                    <p className="text-white/40 text-sm">Fetching weighted question set from the database</p>
+                    {fetchError && (
+                        <div className="mt-6 bg-red-500/10 border border-red-500/20 rounded-xl px-5 py-3 text-red-400 text-sm max-w-sm">
+                            {fetchError}
+                            <button onClick={() => setExamState(0)} className="block mt-3 text-xs underline text-red-300">← Back to Dashboard</button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
     // State 0: Dashboard
     if (examState === 0) {
-        return <LexifyDashboard onBeginExam={handleBeginExam} onClose={onClose} />;
+        return <LexifyDashboard onBeginExam={handleBeginExam} onClose={onClose} fetchError={fetchError} />;
     }
 
     // State 1: Orange Lockdown Screen
@@ -229,7 +278,7 @@ const LexifyApp = ({ questions, onClose }) => {
         return (
             <LexifyResults
                 results={gradingResults}
-                questions={questions}
+                questions={activeQuestions}
                 totalTime={timeUsed}
                 onReturnToDashboard={handleReturnToDashboard}
             />
@@ -247,7 +296,7 @@ const LexifyApp = ({ questions, onClose }) => {
                 onToggleNotes={() => setNotesOpen(prev => !prev)}
                 notesOpen={notesOpen}
                 answeredCount={Object.values(userAnswers).filter(a => a?.replace(/<[^>]*>?/gm, '').trim()).length}
-                totalCount={questions.length}
+                totalCount={activeQuestions.length}
                 spellCheck={spellCheck}
                 onToggleSpellCheck={() => setSpellCheck(prev => !prev)}
                 alarmTime={alarmTime}
@@ -257,7 +306,7 @@ const LexifyApp = ({ questions, onClose }) => {
             <div className="flex flex-1 overflow-hidden mt-14">
                 {/* Left Sidebar */}
                 <LexifySidebar
-                    questions={questions}
+                    questions={activeQuestions}
                     currentIndex={currentIndex}
                     setCurrentIndex={setCurrentIndex}
                     userAnswers={userAnswers}
@@ -267,13 +316,13 @@ const LexifyApp = ({ questions, onClose }) => {
 
                 {/* Main Workspace */}
                 <LexifyWorkspace
-                    question={questions[currentIndex]}
+                    question={activeQuestions[currentIndex]}
                     currentIndex={currentIndex}
-                    totalQuestions={questions.length}
+                    totalQuestions={activeQuestions.length}
                     userAnswer={userAnswers[currentIndex] || ""}
                     setUserAnswer={(val) => setUserAnswers({ ...userAnswers, [currentIndex]: val })}
                     onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
-                    onNext={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
+                    onNext={() => setCurrentIndex(prev => Math.min(activeQuestions.length - 1, prev + 1))}
                     spellCheck={spellCheck}
                 />
             </div>
