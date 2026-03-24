@@ -46,6 +46,8 @@ function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlayerVisible, setIsPlayerVisible] = useState(true);
   const [previousMode, setPreviousMode] = useState(null);
+  const [barCurrentPage, setBarCurrentPage] = useState(1);
+  const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
   console.log('App render. Mode:', mode, 'Fullscreen:', isFullscreen);
 
   // Intercept playNow signals to force player open
@@ -166,6 +168,11 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [isDarkMode]);
+
+  // Reset bar pagination when filters change
+  useEffect(() => {
+    setBarCurrentPage(1);
+  }, [currentSubject, searchTerm]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -398,18 +405,59 @@ function App() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                        {questions
-                          .filter(q => !currentSubject || q.subject === currentSubject)
-                          .map((q) => (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                        {(() => {
+                          const filtered = questions.filter(q => !currentSubject || q.subject === currentSubject);
+                          const paginated = filtered.slice((barCurrentPage - 1) * BAR_ITEMS_PER_PAGE, barCurrentPage * BAR_ITEMS_PER_PAGE);
+                          return paginated.map((q) => (
                             <QuestionCard
                               key={q.id}
                               question={q}
                               onClick={() => setSelectedQuestion(q)}
                               subjectColor={getSubjectColor(q.subject)}
                             />
-                          ))}
+                          ));
+                        })()}
                       </div>
+
+                      {/* Pagination UI copied from SC Decisions */}
+                      {(() => {
+                        const filtered = questions.filter(q => !currentSubject || q.subject === currentSubject);
+                        const totalCount = filtered.length;
+                        if (totalCount <= BAR_ITEMS_PER_PAGE) return null;
+                        
+                        return (
+                          <div className="flex flex-col items-center gap-2 mt-12 pb-8">
+                            <div className="flex justify-center items-center gap-4">
+                              <button
+                                onClick={() => {
+                                  setBarCurrentPage(prev => Math.max(1, prev - 1));
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                                disabled={barCurrentPage === 1}
+                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                              >
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                Previous
+                              </button>
+                              <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                                Page {barCurrentPage} of {Math.ceil(totalCount / BAR_ITEMS_PER_PAGE) || 1}
+                              </span>
+                              <button
+                                onClick={() => {
+                                  setBarCurrentPage(prev => prev + 1);
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                                disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
+                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                              >
+                                Next
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })()}
                     </div>
                   )}
                 </>
