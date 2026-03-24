@@ -69,12 +69,28 @@ function App() {
         if (!response.ok) throw new Error('Failed to fetch questions');
         const data = await response.json();
 
+        // --- Subject Normalizer ---
+        // Maps verbose/variant DB subject strings → the 8 canonical Sidebar keys.
+        const normalizeSubject = (raw) => {
+          const s = (raw || '').toLowerCase();
+          if (s.includes('civil')) return 'Civil Law';
+          if (s.includes('commercial') || s.includes('mercantile')) return 'Commercial Law';
+          if (s.includes('criminal') || s.includes('penal')) return 'Criminal Law';
+          if (s.includes('labor') || s.includes('social legislat')) return 'Labor Law';
+          if (s.includes('ethics') || s.includes('judicial ethics')) return 'Legal Ethics';
+          if (s.includes('political') || s.includes('constitutional')) return 'Political Law';
+          if (s.includes('remedial') || s.includes('procedure')) return 'Remedial Law';
+          if (s.includes('taxation') || s.includes('tax')) return 'Taxation Law';
+          return raw; // keep as-is if no match
+        };
+
         // --- Greedy Grouping Logic ---
         const groupedData = [];
         let currentParent = null;
 
         // API returns data ordered by year DESC, subject, id ASC — no re-sort needed
         for (const q of data) {
+          q.subject = normalizeSubject(q.subject);
           const qText = q.text.trim();
           const aText = (q.answer || "").trim();
           
