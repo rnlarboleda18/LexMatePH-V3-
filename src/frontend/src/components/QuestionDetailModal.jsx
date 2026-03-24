@@ -74,24 +74,28 @@ const QuestionDetailModal = ({
             className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[5vh] bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
             onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-            <div className="bg-white dark:bg-dark-card rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200 relative">
+            <div className="glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-3xl rounded-3xl shadow-[0_10px_50px_rgba(0,0,0,0.4)] w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-white/50 dark:border-white/20 relative">
+                
+                {/* Ambient glow orbs inside the modal to drive the glass effect */}
+                <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 
                 {/* Header */}
-                <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
+                <div className="p-6 md:p-8 border-b border-white/30 dark:border-white/10 flex justify-between items-start shrink-0 relative z-10 bg-white/20 dark:bg-black/10 backdrop-blur-sm">
                     <div className="flex-1">
-                        <span className={`inline-block mb-2 text-sm font-bold uppercase tracking-wider ${textColor}`}>
+                        <span className={`inline-block mb-3 px-3 py-1 rounded-md text-[11px] md:text-xs font-black uppercase tracking-widest glass bg-white/40 dark:bg-white/10 border border-white/40 dark:border-white/10 shadow-sm ${textColor}`}>
                             {question.subject}
                         </span>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-1">
-                            {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && `(${question.source_label})`}
+                        <h3 className="text-lg md:text-xl font-extrabold text-gray-900 dark:text-white mt-1">
+                            {question.year} Bar Exam Question {question.source_label && question.source_label !== `${question.year} Bar Exams` && <span className="text-gray-500 font-medium text-sm ml-2">({question.source_label})</span>}
                         </h3>
                         <button
                             onClick={() => setShowPlaylistSelector(true)}
-                            className="flex items-center gap-2 px-3 py-1 mt-2 rounded-full shadow-sm border transition-all bg-purple-50 border-purple-200 text-purple-600 dark:bg-purple-900/20 dark:border-purple-800 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                            className="flex items-center gap-1.5 px-3 py-1.5 mt-3 rounded-lg shadow-sm border border-purple-200 dark:border-purple-800 transition-all bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:scale-[1.02]"
                             title="Add Question Audio to LexPlay queue"
                         >
                             <Headphones className="w-3.5 h-3.5" />
-                            <span className="font-bold text-[10px] uppercase tracking-tight">
+                            <span className="font-extrabold text-[10px] uppercase tracking-wide">
                                 Add to LexPlay Playlist
                             </span>
                         </button>
@@ -99,29 +103,29 @@ const QuestionDetailModal = ({
 
                     {/* Navigation and Close Buttons */}
                     <div className="flex items-center gap-2 ml-4">
-                        <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+                        <div className="flex items-center glass bg-white/50 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm rounded-lg p-1">
                             <button
                                 onClick={onPrev}
                                 disabled={!hasPrev}
-                                className="p-2 rounded-md hover:bg-white dark:hover:bg-gray-700 text-gray-500 hover:text-primary transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                className="p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
                                 title="Previous Question"
                             >
-                                <ChevronLeft size={20} />
+                                <ChevronLeft size={18} />
                             </button>
                             <button
                                 onClick={onNext}
                                 disabled={!hasNext}
-                                className="p-2 rounded-md hover:bg-white dark:hover:bg-gray-700 text-gray-500 hover:text-primary transition-all disabled:opacity-30 disabled:hover:bg-transparent"
+                                className="p-2 rounded-md hover:bg-white/80 dark:hover:bg-white/20 text-gray-600 dark:text-gray-300 transition-all disabled:opacity-30 disabled:hover:bg-transparent"
                                 title="Next Question"
                             >
-                                <ChevronRight size={20} />
+                                <ChevronRight size={18} />
                             </button>
                         </div>
                         <button
                             onClick={onClose}
-                            className="p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-500 hover:text-red-500 transition-colors"
+                            className="p-2 ml-2 rounded-full glass bg-red-50/50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-500 transition-all shadow-sm hover:scale-110"
                         >
-                            <X size={24} />
+                            <X size={20} />
                         </button>
                     </div>
                 </div>
@@ -187,13 +191,13 @@ const QuestionDetailModal = ({
                 )}
 
                 {/* Content - Scrollable */}
-                <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-10 relative z-10 custom-scrollbar">
                     {/* Main/Parent Question */}
                     <div>
-                        <h4 className="text-sm font-semibold text-gray-400 uppercase mb-3">
+                        <h4 className="text-[13px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm mb-4">
                             {question.subQuestions && question.subQuestions.length > 0 ? "Problem Stem" : "Question"}
                         </h4>
-                        <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                        <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium">
                             <HighlightText text={question.text} query={searchQuery} />
                         </div>
                     </div>
@@ -201,10 +205,11 @@ const QuestionDetailModal = ({
                     {/* Main/Parent Answer (Only if it exists or if no subs) */}
                     {((!question.subQuestions || question.subQuestions.length === 0) || (question.answer && question.answer.trim())) && (
                         <div>
-                            <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
-                            <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
-                                <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-                                    <HighlightText text={question.answer} query={searchQuery} />
+                            <h4 className={`text-[13px] font-black uppercase tracking-widest px-1 drop-shadow-sm mb-4 ${textColor}`}>Suggested Answer</h4>
+                            <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                                <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
+                                <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                    <HighlightText text={question.answer || "Answer not available."} query={searchQuery} />
                                 </div>
                             </div>
                         </div>
@@ -212,18 +217,22 @@ const QuestionDetailModal = ({
 
                     {/* Sub-questions loop */}
                     {question.subQuestions && question.subQuestions.map((sub, sIdx) => (
-                        <div key={sub.id} className="pt-8 border-t border-gray-100 dark:border-gray-800/50 space-y-6">
+                        <div key={sub.id} className="pt-10 mt-8 relative space-y-6">
+                            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
+                            
                             <div>
-                                <h4 className="text-sm font-semibold text-gray-400 uppercase mb-3">Sub-Question {sIdx + 1}</h4>
-                                <div className="text-lg leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                <h4 className="text-[13px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest px-1 drop-shadow-sm mb-4">Sub-Question {sIdx + 1}</h4>
+                                <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap font-medium">
                                     <HighlightText text={sub.text} query={searchQuery} />
                                 </div>
                             </div>
+                            
                             <div>
-                                <h4 className={`text-sm font-semibold uppercase mb-3 ${textColor}`}>Suggested Answer</h4>
-                                <div className={`p-6 rounded-xl ${answerBgClass} border border-transparent dark:border-white/5`}>
-                                    <div className="text-base leading-relaxed text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-                                        <HighlightText text={sub.answer} query={searchQuery} />
+                                <h4 className={`text-[13px] font-black uppercase tracking-widest px-1 drop-shadow-sm mb-4 ${textColor}`}>Suggested Answer</h4>
+                                <div className="relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                                    <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
+                                    <div className="text-[17px] leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap">
+                                        <HighlightText text={sub.answer || "Answer not available."} query={searchQuery} />
                                     </div>
                                 </div>
                             </div>
@@ -232,10 +241,10 @@ const QuestionDetailModal = ({
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 flex justify-end">
+                <div className="p-5 md:p-6 border-t border-white/30 dark:border-white/10 bg-white/40 dark:bg-slate-900/60 flex justify-end shrink-0 backdrop-blur-2xl relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
                     <button
                         onClick={onClose}
-                        className="px-6 py-2.5 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium hover:opacity-90 transition-opacity"
+                        className="px-8 py-2.5 bg-gradient-to-r from-gray-700 to-gray-900 dark:from-gray-600 dark:to-gray-800 hover:from-gray-600 hover:to-gray-800 dark:hover:from-gray-500 dark:hover:to-gray-700 text-white rounded-xl text-sm font-extrabold transition-all shadow-lg hover:scale-[1.02] active:scale-95 border border-gray-600/50"
                     >
                         Close
                     </button>
