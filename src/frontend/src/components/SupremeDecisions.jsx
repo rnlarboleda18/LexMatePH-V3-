@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { jsPDF } from "jspdf";
-import { Search, Calendar, Gavel, FileText, X, Filter, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Zap } from 'lucide-react';
+import { Search, Calendar, Gavel, FileText, X, Filter, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, Users, ChevronRight } from 'lucide-react';
 
 
 
@@ -1012,156 +1012,147 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                             onClick={() => handleCaseClick(decision)}
                             className="glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-white/40 dark:border-white/10 p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 hover:bg-white/80 dark:hover:bg-slate-700/60 group relative"
                         >
-                            <div className="flex justify-between items-start gap-4 mb-4">
-                                <div className="flex-grow">
-                                    <div className="flex items-center gap-2 mb-2 flex-wrap">
-                                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <div className="flex items-center justify-between gap-4">
+                                <div className="flex flex-col gap-4 w-full">
+                                    {/* Header Row: Title & Badges */}
+                                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow pr-4">
                                             {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
                                         </h3>
-                                        {decision.significance_category && (
-                                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide ${getCategoryColor(decision.significance_category)} flex items-center gap-1`}>
-                                                <span>{getCategoryIcon(decision.significance_category)}</span>
-                                                <span>{decision.significance_category}</span>
-                                            </span>
-                                        )}
-                                        {decision.document_type && (
-                                            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600">
-                                                {decision.document_type}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div className="flex flex-wrap items-center gap-2 mb-3">
-                                        <span className="font-mono text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300">
-                                            #{decision.id} • {decision.case_number}
-                                        </span>
-                                        <span className="text-xs text-gray-500">•</span>
-                                        <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                                            {formatDate(decision.date_str)}
-                                        </span>
-                                        {decision.ponente && (
-                                            <>
-                                                <span className="text-xs text-gray-500">•</span>
-                                                <span className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full italic">
-                                                    {decision.ponente}
+                                        <div className="flex shrink-0 gap-2 flex-wrap">
+                                            {decision.significance_category && (
+                                                <span className={`px-2 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide shadow-sm border border-black/5 dark:border-white/5 ${getCategoryColor(decision.significance_category)} flex items-center gap-1.5`}>
+                                                    <span>{getCategoryIcon(decision.significance_category)}</span>
+                                                    <span>{decision.significance_category}</span>
                                                 </span>
-                                            </>
+                                            )}
+                                            {decision.document_type && (
+                                                <span className="px-2 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide shadow-sm bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-200 border border-black/5 dark:border-white/5">
+                                                    {decision.document_type}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Metadata Pills Row */}
+                                    <div className="flex flex-wrap items-center gap-2 text-xs">
+                                        <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
+                                            <Hash className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
+                                            <span className="font-mono text-gray-700 dark:text-gray-300 font-medium tracking-tight">#{decision.id} &middot; {decision.case_number}</span>
+                                        </div>
+
+                                        <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
+                                            <Calendar className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+                                            <span className="text-gray-700 dark:text-gray-300 font-medium">{formatDate(decision.date_str)}</span>
+                                        </div>
+
+                                        {decision.ponente && (
+                                            <div className="flex items-center gap-1.5 glass bg-blue-50/50 dark:bg-blue-900/20 px-2.5 py-1 rounded-md shadow-sm border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium italic pr-3">
+                                                <User className="w-3.5 h-3.5" />
+                                                {decision.ponente}
+                                            </div>
                                         )}
+
+                                        {decision.division && (
+                                            <div className="flex items-center gap-1.5 glass bg-orange-50/50 dark:bg-orange-900/20 px-2.5 py-1 rounded-md shadow-sm border border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 font-medium">
+                                                <Users className="w-3.5 h-3.5" />
+                                                {decision.division}
+                                            </div>
+                                        )}
+
+                                        {/* Subject Tag */}
                                         {decision.subject && (() => {
                                             const s = decision.subject.toString();
-                                            // Check for "Primary: X; Secondary: Y" pattern
                                             const complexMatch = s.match(/Primary:\s*([^;]+)(;\s*Secondary:\s*(.*))?/i);
 
                                             if (complexMatch) {
                                                 const primaryRaw = complexMatch[1].trim();
                                                 const secondaryRaw = complexMatch[3] ? complexMatch[3].trim() : null;
 
-                                                // Function to render a styled subject span
                                                 const renderSubject = (subj) => {
                                                     const norm = normalizeSubjectForColor(subj);
-                                                    const colorClass = getSubjectColor(norm); // Text color class
+                                                    const colorClass = getSubjectColor(norm);
                                                     return <span className={`${colorClass} font-bold`}>{subj}</span>;
                                                 };
 
                                                 return (
-                                                    <>
-                                                        <span className="text-xs text-gray-500">•</span>
-                                                        <span className="text-xs px-3 py-1 rounded-full font-medium border bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                                                            <span className="text-gray-500 dark:text-gray-400">Primary: </span>
-                                                            {renderSubject(primaryRaw)}
-                                                            {secondaryRaw && (
-                                                                <>
-                                                                    <span className="text-gray-400 mx-1">; </span>
-                                                                    <span className="text-gray-500 dark:text-gray-400">Secondary: </span>
-                                                                    {/* Split secondary items if they are comma separated? Or just render whole block colored based on first? 
-                                                                        User said "secondary colors font should as well follow their respective colors".
-                                                                        So we should split secondary by comma.
-                                                                    */}
-                                                                    {secondaryRaw.split(',').map((sec, idx) => (
-                                                                        <React.Fragment key={idx}>
-                                                                            {idx > 0 && <span className="text-gray-400 mr-1">,</span>}
-                                                                            {renderSubject(sec.trim())}
-                                                                        </React.Fragment>
-                                                                    ))}
-                                                                </>
-                                                            )}
-                                                        </span>
-                                                    </>
+                                                    <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5 whitespace-nowrap">
+                                                        <BookOpen className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 shrink-0" />
+                                                        <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Primary:</span>
+                                                        {renderSubject(primaryRaw)}
+                                                        {secondaryRaw && (
+                                                            <>
+                                                                <span className="text-gray-300 dark:text-gray-600 mx-0.5 shrink-0">|</span>
+                                                                <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Secondary:</span>
+                                                                {secondaryRaw.split(',').map((sec, idx) => (
+                                                                    <React.Fragment key={idx}>
+                                                                        {idx > 0 && <span className="text-gray-400 shrink-0">,</span>}
+                                                                        {renderSubject(sec.trim())}
+                                                                    </React.Fragment>
+                                                                ))}
+                                                            </>
+                                                        )}
+                                                    </div>
                                                 );
                                             }
 
-                                            // Fallback for simple subjects (no Primary/Secondary prefix)
                                             const normalizedSubject = normalizeSubjectForColor(decision.subject);
                                             const bgClass = getSubjectAnswerColor(normalizedSubject);
                                             const textClass = getSubjectColor(normalizedSubject);
 
                                             return (
-                                                <>
-                                                    <span className="text-xs text-gray-500">•</span>
-                                                    <span className={`text-xs ${bgClass} ${textClass} px-2 py-1 rounded-full font-medium border`}>
-                                                        {decision.subject}
-                                                    </span>
-                                                </>
+                                                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shadow-sm border font-medium whitespace-nowrap ${bgClass} ${textClass}`}>
+                                                    <BookOpen className="w-3.5 h-3.5 shrink-0" />
+                                                    {decision.subject}
+                                                </div>
                                             );
                                         })()}
-                                        {decision.division && (
-                                            <>
-                                                <span className="text-xs text-gray-500">•</span>
-                                                <span className="text-xs bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">
-                                                    {decision.division}
-                                                </span>
-                                            </>
-                                        )}
+
+                                        {/* Statutes Summary */}
+                                        {decision.statutes_involved && (() => {
+                                            try {
+                                                const s = typeof decision.statutes_involved === 'string' ? JSON.parse(decision.statutes_involved) : decision.statutes_involved;
+                                                if (Array.isArray(s) && s.length > 0) {
+                                                    const count = s.length;
+                                                    const top2 = s.slice(0, 2).map(i => i.law).join(", ");
+                                                    return (
+                                                        <div className="flex items-center gap-1.5 glass bg-teal-50/50 dark:bg-teal-900/20 px-2.5 py-1 rounded-md shadow-sm border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 whitespace-nowrap">
+                                                            <Book className="w-3.5 h-3.5 shrink-0" />
+                                                            <span className="font-semibold shrink-0">{count} Statutes:</span>
+                                                            <span className="truncate max-w-[150px]">{top2}{count > 2 ? '...' : ''}</span>
+                                                        </div>
+                                                    );
+                                                }
+                                            } catch (e) { return null; }
+                                        })()}
+
+                                        {/* Citations Summary */}
+                                        {decision.cited_cases && (() => {
+                                            try {
+                                                const c = typeof decision.cited_cases === 'string' ? JSON.parse(decision.cited_cases) : decision.cited_cases;
+                                                if (Array.isArray(c) && c.length > 0) {
+                                                    return (
+                                                        <div className="flex items-center gap-1.5 glass bg-indigo-50/50 dark:bg-indigo-900/20 px-2.5 py-1 rounded-md shadow-sm border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 whitespace-nowrap">
+                                                            <Gavel className="w-3.5 h-3.5 shrink-0" />
+                                                            <span className="font-semibold shrink-0">{c.length} Citations</span>
+                                                        </div>
+                                                    );
+                                                }
+                                            } catch (e) { return null; }
+                                        })()}
                                     </div>
-                                    {/* Statutes & Citations Summary Code */}
-                                    {(decision.statutes_involved || decision.cited_cases) && (
-                                        <div className="flex flex-wrap gap-3 mb-3 text-xs">
-                                            {/* Statutes Summary */}
-                                            {decision.statutes_involved && (() => {
-                                                try {
-                                                    const s = typeof decision.statutes_involved === 'string' ? JSON.parse(decision.statutes_involved) : decision.statutes_involved;
-                                                    if (Array.isArray(s) && s.length > 0) {
-                                                        const count = s.length;
-                                                        const top2 = s.slice(0, 2).map(i => i.law).join(", ");
-                                                        return (
-                                                            <div className="flex items-center gap-1.5 text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 px-2 py-1 rounded border border-teal-100 dark:border-teal-800">
-                                                                <Book className="w-3 h-3" />
-                                                                <span className="font-semibold">{count} Statutes:</span>
-                                                                <span className="truncate max-w-[200px]">{top2}{count > 2 ? '...' : ''}</span>
-                                                            </div>
-                                                        );
-                                                    }
-                                                } catch (e) { return null; }
-                                            })()}
 
-                                            {/* Citations Summary */}
-                                            {decision.cited_cases && (() => {
-                                                try {
-                                                    const c = typeof decision.cited_cases === 'string' ? JSON.parse(decision.cited_cases) : decision.cited_cases;
-                                                    if (Array.isArray(c) && c.length > 0) {
-                                                        return (
-                                                            <div className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded border border-indigo-100 dark:border-indigo-800">
-                                                                <Gavel className="w-3 h-3" />
-                                                                <span className="font-semibold">{c.length} Citations</span>
-                                                            </div>
-                                                        );
-                                                    }
-                                                } catch (e) { return null; }
-                                            })()}
-                                        </div>
-                                    )}
-
-                                    {/* Main Doctrine / Snippet Display */}
+                                    {/* Glassmorphism Main Doctrine Inset */}
                                     {(() => {
                                         const subject = decision.subject || 'Political Law';
                                         const normalizedSubject = normalizeSubjectForColor(subject);
-                                        const bgClass = getSubjectAnswerColor(normalizedSubject);
                                         const textClass = getSubjectColor(normalizedSubject);
 
                                         return (
-                                            <div className={`mb-4 ${bgClass} rounded-lg p-3 border-l-4 ${textClass} border-l-current border-t-0 border-r-0 border-b-0`}>
+                                            <div className={`mt-1 bg-black/5 dark:bg-black/20 rounded-xl p-4 border-l-4 ${textClass} border-l-current border-t border-r border-b border-black/5 dark:border-white/5 shadow-inner`}>
                                                 {(decision.main_doctrine || decision.snippet) && (
-                                                    <div className={`text-xs font-bold ${textClass} uppercase tracking-wider mb-1`}>
-                                                        Main Doctrine
+                                                    <div className={`text-xs font-extrabold ${textClass} uppercase tracking-wider mb-2 flex items-center gap-2`}>
+                                                        <Lightbulb className="w-4 h-4" /> MAIN DOCTRINE
                                                     </div>
                                                 )}
                                                 <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 leading-relaxed">
@@ -1172,19 +1163,20 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     })()}
 
                                     {/* Action Button */}
-                                    <div className="flex items-center gap-2">
+                                    <div className="mt-1">
                                         <button
-                                            onClick={(e) => handleViewFullText(e, decision)}
-                                            className="inline-flex items-center px-3 py-1.5 border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 text-xs font-semibold rounded hover:bg-blue-50 dark:hover:bg-blue-900/40 transition-colors z-10"
+                                            onClick={(e) => { e.stopPropagation(); handleViewFullText(e, decision); }}
+                                            className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-md shadow-blue-600/20 z-10"
                                         >
-                                            <BookOpen className="w-3 h-3 mr-1" />
+                                            <BookOpen className="w-3.5 h-3.5 mr-2" />
                                             View Full Text
                                         </button>
                                     </div>
                                 </div>
-                                {/* Optional: Chevron or Icon to indicate clickability */}
-                                <div className="hidden sm:block text-gray-300 dark:text-gray-600 group-hover:text-blue-400 dark:group-hover:text-blue-500 transition-colors self-center">
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                
+                                {/* Right Chevron Icon */}
+                                <div className="hidden sm:flex shrink-0 items-center justify-center text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors pl-2">
+                                    <ChevronRight className="w-8 h-8" />
                                 </div>
                             </div>
                         </div>

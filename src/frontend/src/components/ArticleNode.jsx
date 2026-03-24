@@ -88,7 +88,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         // 3. Break before unbracketed markers like `(b)` wedged directly on the same line after a sentence ender 
         .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
         // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
-        .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, "$1\n\n$2");
+        .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, "$1\n\n$2")
+        // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
+        .replace(/([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi, "$1\n\n$2");
 
     // --- SMART HEADER EXTRACTION ---
     // Detect if content starts with an embedded header (e.g., "**Article 266-A...")
@@ -339,11 +341,13 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             {/* Content Area - Split into Paragraphs/Segments */}
             <div className={`${isFirstSegSubHeader ? 'mt-0' : 'mt-3'}`}>
                 {(() => {
-                    const isRoc = (codeId && ['roc', 'rpc'].includes(codeId.toLowerCase())) || (article?.code_id && ['roc', 'rpc'].includes(article.code_id.toLowerCase()));
+                    const isRoc = (codeId && codeId.toLowerCase() === 'roc') || (article?.code_id && article.code_id.toLowerCase() === 'roc');
+                    const isRpc = (codeId && codeId.toLowerCase() === 'rpc') || (article?.code_id && article.code_id.toLowerCase() === 'rpc');
+                    const isRocOrRpc = isRoc || isRpc;
                     const isConst = (codeId && codeId.toLowerCase() === 'const') || (article?.code_id && article.code_id.toLowerCase() === 'const');
                     
                     let segments = [];
-                    if (isRoc) {
+                    if (isRocOrRpc) {
                         const rawLines = contentToDisplay.split('\n');
                         let currentSegment = "";
                         for (let rLine of rawLines) {
@@ -399,7 +403,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                     }
 
                     // --- Post-Processing: ROC specific clean-up ---
-                    if (isRoc) {
+                    if (isRocOrRpc) {
                         const merged = [];
                         for (let i = 0; i < segments.length; i++) {
                             const seg = segments[i];
@@ -450,7 +454,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                     let lastNumericEnumLevel = 0;
 
                     return segments.map((segment, segIdx) => {
-                        if (isRoc && typeof segment === 'string' && segment.trim() === '') {
+                        if (isRocOrRpc && typeof segment === 'string' && segment.trim() === '') {
                             // Explicit vertical spacing for intentional source blank lines
                             return <div key={`${lookup_id}-${segIdx}`} className="h-4" />;
                         }
@@ -497,9 +501,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                            !cleanSeg.endsWith('.') &&
                                            !cleanSeg.endsWith(':') &&
                                            !cleanSeg.endsWith(';') &&
+                                           !cleanSeg.endsWith(',') &&
                                            !/^(SECTION|ARTICLE|PREAMBLE)/i.test(cleanSeg) &&
                                            !/^(\d+|[a-zA-Z])[\.\)]/i.test(cleanSeg) && // Don't treat markers 1. or a) as headers
                                            !cleanSeg.includes('(') &&
+                                           !isRpc &&
                                            (isConst || isRoc || cleanSeg === cleanSeg.toUpperCase());
 
                         // Disable color bands for markdown headers and subheaders
@@ -526,8 +532,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             // Updated Regex: marker followed by space/nbsp OR end of string
                             if (/^(\([a-z]\)|[a-z][\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 1;
                             if (/^\d+[\.\)]([\s\u00A0]|$)/.test(textForIndent)) return 2;
-                            if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\.([\s\u00A0]|$)/i.test(textForIndent)) {
-                                return lastNumericEnumLevel >= 1 ? 2 : 0;
+                            if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.([\s\u00A0]|$)/i.test(textForIndent)) {
+                                return 3;
                             }
                             if (/^\(\d+\)([\s\u00A0]|$)/.test(textForIndent)) return 3;
                             if (/^\([ivxl]+\)([\s\u00A0]|$)/i.test(textForIndent)) return 4;
@@ -550,15 +556,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         } else if (indentationLevel > 0) {
                             lastEnumLevel = indentationLevel;
                             // Only update numeric context if it's a decimal/letter marker, NOT an ordinal
-                            if (!/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\.[\s\u00A0]/i.test(cleanSeg)) {
+                            if (!/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.[\s\u00A0]/i.test(cleanSeg)) {
                                 lastNumericEnumLevel = indentationLevel;
                             }
                         }
 
                         // Simple cascading indentation via Tailwind padding classes
-                        // FOR ROC: Use 3-6-9 pattern (tight fit)
+                        // FOR ROC/RPC: Use 3-6-9 pattern (tight fit)
                         // FOR OTHERS: Use 4-8-12 pattern (standard)
-                        const indentClass = isRoc ? (
+                        const indentClass = isRocOrRpc ? (
                             effectiveLevel === 1 ? "ml-3" :
                             effectiveLevel === 2 ? "ml-6" :
                             effectiveLevel === 3 ? "ml-9" :
