@@ -526,12 +526,15 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         </div>
 
                         {/* Main row */}
-                        <div className="flex items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3 w-full">
+                        <div 
+                            className="flex items-center justify-between px-3 py-2.5 sm:px-6 sm:py-3 w-full cursor-pointer group"
+                            onClick={onExpand}
+                        >
 
                             {/* Left Area: Album Art & Track Info (1/3 Width) */}
-                            <div className="flex items-center gap-3 flex-1 min-w-0 cursor-pointer group" onClick={onExpand}>
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
                                 {/* Album Art / Icon */}
-                                <button className="relative shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg overflow-hidden">
+                                <div className="relative shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg overflow-hidden">
                                     <Headphones size={20} className={`text-white z-10 transition-transform duration-300 ${isPlaying ? 'scale-90' : 'group-hover:scale-110'}`} />
                                     {isPlaying && (
                                         <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex items-end gap-[2px] h-3 z-10">
@@ -540,7 +543,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                             ))}
                                         </div>
                                     )}
-                                </button>
+                                </div>
 
                                 {/* Track Info */}
                                 <div className="flex-col min-w-0 pr-4 hidden sm:flex">
@@ -580,9 +583,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
                             {/* Right Area: Expand + Close (1/3 Width) */}
                             <div className="flex items-center justify-end gap-1 flex-1 min-w-0">
-                                <button onClick={(e) => { e.stopPropagation(); onExpand(); }} className="hidden md:flex p-2 text-slate-400 dark:text-white/30 hover:text-purple-600 dark:hover:text-white transition-all active:scale-90 rounded-full hover:bg-black/5 dark:hover:bg-white/10" title="Expand Player">
+                                <div className="hidden md:flex p-2 text-slate-400 dark:text-white/30 hover:text-purple-600 dark:hover:text-white transition-all active:scale-90 rounded-full hover:bg-black/5 dark:hover:bg-white/10" title="Expand Player">
                                     <Maximize2 size={16} />
-                                </button>
+                                </div>
                                 <button onClick={(e) => { e.stopPropagation(); handleCloseInternal(); }} className="p-2 text-slate-400 dark:text-white/30 hover:text-red-500 transition-all active:scale-90 rounded-full hover:bg-red-500/10 ml-1" title="Close Player">
                                     <X size={18} />
                                 </button>
@@ -645,7 +648,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     </div>
 
                     {/* Left Area: Playlist */}
-                    <div className={`w-full md:w-72 lg:w-80 xl:w-[400px] glass bg-white/20 dark:bg-black/20 backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/30 flex flex-col min-h-0 shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
+                    <div className={`flex-1 md:flex-none w-full md:w-72 lg:w-80 xl:w-[400px] glass bg-white/20 dark:bg-black/20 backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/30 flex flex-col min-h-0 shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center gap-4">
                             <div className="p-2 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-white/20 shadow-inner"><ListMusic className="text-purple-600 dark:text-purple-400" size={24} /></div>
                             <div>
