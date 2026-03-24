@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { jsPDF } from "jspdf";
 import { Search, Calendar, Gavel, FileText, X, Filter, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, Users, ChevronRight } from 'lucide-react';
+import { lexCache } from '../utils/cache';
 
 
 
@@ -655,19 +656,23 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const fetchDecisionDetails = async (id, currentDecision) => {
         setLoadingDetails(true);
         try {
-            const response = await fetch(`/api/sc_decisions/${id}`);
-            const data = await response.json();
+            const fetcher = async () => {
+                const response = await fetch(`/api/sc_decisions/${id}`);
+                return await response.json();
+            };
 
-            // Merge current lightweight decision with full details
-            const fullDecision = { ...currentDecision, ...data };
-            setSelectedDecision(fullDecision);
+            await lexCache.swr('cases', id, fetcher, (data, isCached) => {
+                // Merge current lightweight decision with full details
+                const fullDecision = { ...currentDecision, ...data };
+                setSelectedDecision(fullDecision);
 
-            if (data.full_text_html) setFullTextHtml(data.full_text_html);
-            if (data.full_text_md) setFullText(data.full_text_md);
+                if (data.full_text_html) setFullTextHtml(data.full_text_html);
+                if (data.full_text_md) setFullText(data.full_text_md);
+                setLoadingDetails(false);
+            });
 
         } catch (error) {
             console.error("Failed to fetch details", error);
-        } finally {
             setLoadingDetails(false);
         }
     };

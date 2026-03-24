@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import ArticleNode from './ArticleNode';
 import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
+import { lexCache } from '../utils/cache';
 import { Play, Loader2 } from 'lucide-react';
 
 const INITIAL_CHUNK = 30; // articles to render at first load
@@ -64,31 +65,25 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
     const showDocHeader = !!codeTitles[code.toUpperCase()];
 
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             setLoading(true);
             setError(null);
-            try {
+            
+            const cacheKey = titleNum ? `${apiCode}_title_${titleNum}` : (bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`);
+
+            const fetcher = async () => {
                 let url = '';
                 if (titleNum) {
-                    // Check if we need book context (RPC generic titles vs unique)
-                    // For now, simpler is better unless API demands it.
                     url = `/api/${apiCode}/title/${titleNum}`;
                     const res = await fetch(url);
                     if (!res.ok) throw new Error('Failed to fetch codal data');
-                    const data = await res.json();
-                    setArticles(data);
+                    return await res.json();
                 } else if (bookNum) {
                     url = `/api/${apiCode}/book/${bookNum}`;
                     const res = await fetch(url);
                     if (!res.ok) throw new Error('Failed to fetch codal data');
-                    const data = await res.json();
-                    setArticles(data);
+                    return await res.json();
                 } else {
-                    // Fetch ALL (Logic varies by code?)
-                    // RPC has Book 1 and 2. CIV has 4 books
-                    // If no book specified, maybe we shouldn't fetch ALL for huge codes like CIV?
-                    // But RPC logic fetched Book 1 and 2 explicitly.
-
                     if (code === 'RPC') {
                         const [res1, res2] = await Promise.all([
                             fetch(`/api/rpc/book/1`),
@@ -96,9 +91,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         ]);
                         const data1 = res1.ok ? await res1.json() : [];
                         const data2 = res2.ok ? await res2.json() : [];
-                        setArticles([...data1, ...data2]);
+                        return [...data1, ...data2];
                     } else if (code === 'CIV') {
-                        // Civil Code has 4 Books - fetch all
                         const [res1, res2, res3, res4] = await Promise.all([
                             fetch(`/api/civ/book/1`),
                             fetch(`/api/civ/book/2`),
@@ -109,40 +103,18 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         const data2 = res2.ok ? await res2.json() : [];
                         const data3 = res3.ok ? await res3.json() : [];
                         const data4 = res4.ok ? await res4.json() : [];
-                        setArticles([...data1, ...data2, ...data3, ...data4]);
+                        return [...data1, ...data2, ...data3, ...data4];
                     } else if (apiCode === 'roc') {
                         const res = await fetch(`/api/roc/all`);
-                        if (res.ok) {
-                            const data = await res.json();
-                            setArticles(data);
-                        } else {
-                            setArticles([]);
-                        }
-                    } else if (code.toUpperCase() === 'SPECIAL') {
-                        // Special Laws logic (if any)
-                        // For now empty or future implementation
-                        setArticles([]);
+                        return res.ok ? await res.json() : [];
                     } else if (apiCode === 'const') {
-                        // Fetch Constitution
                         const res = await fetch(`/api/const/book/1`);
-                        if (res.ok) {
-                            const data = await res.json();
-                            setArticles(data);
-                        } else {
-                            setArticles([]);
-                        }
+                        return res.ok ? await res.json() : [];
                     } else if (apiCode === 'fc') {
-                        // Fetch Family Code
                         const res = await fetch(`/api/fc/all`);
-                        if (res.ok) {
-                            const data = await res.json();
-                            setArticles(data);
-                        } else {
-                            setArticles([]);
-                        }
+                        return res.ok ? await res.json() : [];
                     } else if (apiCode === 'labor') {
-                        // Fetch Labor Code (All Books currently)
-                        const [res1, res2, res3, res4, res5, res6, res7, res8] = await Promise.all([
+                        const [res0, res1, res2, res3, res4, res5, res6, res7] = await Promise.all([
                             fetch(`/api/labor/books/preliminary`),
                             fetch(`/api/labor/books/1`),
                             fetch(`/api/labor/books/2`),
@@ -152,29 +124,30 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             fetch(`/api/labor/books/6`),
                             fetch(`/api/labor/books/7`)
                         ]);
-
                         const allData = [];
-                        for (const res of [res1, res2, res3, res4, res5, res6, res7, res8]) {
+                        for (const res of [res0, res1, res2, res3, res4, res5, res6, res7]) {
                             if (res.ok) {
                                 const data = await res.json();
-                                if (data.articles) {
-                                    allData.push(...data.articles);
-                                }
+                                if (data.articles) allData.push(...data.articles);
                             }
                         }
-                        setArticles(allData);
-                    } else {
-                        // Fallback
-                        setArticles([]);
+                        return allData;
                     }
                 }
+                return [];
+            };
+
+            try {
+                await lexCache.swr('codals', cacheKey, fetcher, (data) => {
+                    setArticles(data || []);
+                    setLoading(false);
+                });
             } catch (err) {
                 console.error(err);
                 setError(err.message);
-            } finally {
                 setLoading(false);
             }
-        }
+        };
 
         fetchData();
     }, [code, bookNum, titleNum, apiCode]);

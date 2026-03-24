@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import CodalStream from './CodalStream';
 import CodexJurisSidebar from './CodexJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
+import { lexCache } from '../utils/cache';
+
 
 // Recursive TOC Node Component
 const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
@@ -161,124 +163,132 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                 setSearchMode(false);
                 setSearchTerm('');
                 
-                const res = await fetch(url);
-                if (!res.ok) throw new Error('Failed to load Codex');
-                const json = await res.json();
-                setData(json);
-
-                // Build TOC
-                const root = { id: 'root', label: 'root', rank: -1, children: [], articles: [] };
-                const stack = [root];
-                let nodeIdCounter = 0;
-
-                const getRank = (text) => {
-                    const t = text.toUpperCase();
-                    if (t.startsWith('BOOK') || t.startsWith('PART')) return 0;
-                    if (t.startsWith('TITLE') || t.startsWith('PRELIMINARY TITLE') || t.startsWith('RULE')) return 1;
-                    if (t.startsWith('CHAPTER')) return 2;
-                    if (t.startsWith('SECTION')) return 3;
-                    return 4;
+                const fetcher = async () => {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error('Failed to load Codex');
+                    return await res.json();
                 };
 
-                const createNode = (label, rank) => ({
-                    id: `node-${nodeIdCounter++}`,
-                    label: label.replace(/^##\s+/, ''),
-                    rank,
-                    children: [],
-                    articles: []
-                });
+                const cacheKey = viewDate ? `${shortName}_${viewDate}` : shortName;
 
-                json.articles.forEach(art => {
-                    // Filter out sub-articles (e.g., "5(b)")
-                    if (art.article_number && art.article_number.includes('(')) return;
+                await lexCache.swr('codals', cacheKey, fetcher, (json, isCached) => {
+                    setData(json);
 
-                    // 1. Process headers inside article first (usually at the top)
-                    // This ensures the current article falls under the header it contains.
-                    const headers = [...art.content.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
-                    headers.forEach(headerText => {
-                        const rank = getRank(headerText);
-                        const newNode = createNode(headerText, rank);
-                        while (stack.length > 0 && stack[stack.length - 1].rank >= rank) {
-                            stack.pop();
-                        }
-                        const parent = stack.length > 0 ? stack[stack.length - 1] : root;
-                        parent.children.push(newNode);
-                        stack.push(newNode);
+                    // Build TOC
+                    const root = { id: 'root', label: 'root', rank: -1, children: [], articles: [] };
+                    const stack = [root];
+                    let nodeIdCounter = 0;
+
+                    const getRank = (text) => {
+                        const t = text.toUpperCase();
+                        if (t.startsWith('BOOK') || t.startsWith('PART')) return 0;
+                        if (t.startsWith('TITLE') || t.startsWith('PRELIMINARY TITLE') || t.startsWith('RULE')) return 1;
+                        if (t.startsWith('CHAPTER')) return 2;
+                        if (t.startsWith('SECTION')) return 3;
+                        return 4;
+                    };
+
+                    const createNode = (label, rank) => ({
+                        id: `node-${nodeIdCounter++}`,
+                        label: label.replace(/^##\s+/, ''),
+                        rank,
+                        children: [],
+                        articles: []
                     });
 
-                    // 2. Build Article Label
-                    let label = `Article ${art.article_number}`;
-                    if (art.article_number === '0' || !art.article_number) label = 'Preamble';
+                    json.articles.forEach(art => {
+                        // Filter out sub-articles (e.g., "5(b)")
+                        if (art.article_number && art.article_number.includes('(')) return;
 
-                    // Try to find title in content if not provided by backend
-                    if (!art.article_title) {
-                        const titleMatch = art.content.match(/^(?:\*\*)?(Article\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i);
-                        if (titleMatch && titleMatch[1]) {
-                            label = titleMatch[1].trim();
-                            if (label.length > 65) label = label.substring(0, 65) + '...';
-                        }
-                    }
-
-                    let cleanNum = art.article_number;
-                    let cleanTitle = art.article_title || label;
-
-                    // Robust Sanitization
-                    const isConstitution = shortName && shortName.toUpperCase() === 'CONST';
-                    const isROC = shortName && shortName.toUpperCase() === 'ROC';
-                    const hasRomanOrWord = /[IVXLCDM]/i.test(cleanNum) || /ARTICLE/i.test(cleanNum) || /RULE/i.test(cleanNum);
-
-                    // Priority 1: If the label already has a structural word at the start, use it as is
-                    const hasWordPrefix = /^(Article|Section|Title|Chapter|Preamble|Book|Rule|Part)/i.test(cleanTitle);
-
-                    let tocLabel = cleanTitle;
-
-                    if (!hasWordPrefix && cleanNum && cleanNum !== '0') {
-                        if (isConstitution) {
-                            // If it's something like "XIII", just use "ARTICLE XIII"
-                            if (isNaN(parseInt(cleanNum)) || hasRomanOrWord) {
-                                tocLabel = `${cleanNum}: ${cleanTitle}`;
-                                if (!tocLabel.toUpperCase().startsWith('ARTICLE')) {
-                                    tocLabel = `Article ${tocLabel}`;
-                                }
-                            } else {
-                                tocLabel = `Section ${cleanNum}: ${cleanTitle}`;
+                        // 1. Process headers inside article first (usually at the top)
+                        // This ensures the current article falls under the header it contains.
+                        const headers = [...art.content.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
+                        headers.forEach(headerText => {
+                            const rank = getRank(headerText);
+                            const newNode = createNode(headerText, rank);
+                            while (stack.length > 0 && stack[stack.length - 1].rank >= rank) {
+                                stack.pop();
                             }
-                        } else if (isROC) {
-                             // For ROC, article_num is often "Rule 1, Section 1"
-                             // Just use it as is, or strip Rule part if we want just section
-                             tocLabel = `${cleanNum}: ${cleanTitle}`;
-                        } else {
-                            tocLabel = `Article ${cleanNum}: ${cleanTitle}`;
+                            const parent = stack.length > 0 ? stack[stack.length - 1] : root;
+                            parent.children.push(newNode);
+                            stack.push(newNode);
+                        });
+
+                        // 2. Build Article Label
+                        let label = `Article ${art.article_number}`;
+                        if (art.article_number === '0' || !art.article_number) label = 'Preamble';
+
+                        // Try to find title in content if not provided by backend
+                        if (!art.article_title) {
+                            const titleMatch = art.content.match(/^(?:\*\*)?(Article\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i);
+                            if (titleMatch && titleMatch[1]) {
+                                label = titleMatch[1].trim();
+                                if (label.length > 65) label = label.substring(0, 65) + '...';
+                            }
                         }
-                    } else if (!hasWordPrefix && (cleanNum === '0' || !cleanNum)) {
-                        tocLabel = 'Preamble';
-                    }
 
-                    // Final cleanup: remove redundant "Section Article" or "Rule Article"
-                    tocLabel = tocLabel.replace(/^(Section|Article|Rule)\s+(Section|Article|Rule)/i, '$1');
+                        let cleanNum = art.article_number;
+                        let cleanTitle = art.article_title || label;
 
-                    // 3. Push to current stack top
-                    stack[stack.length - 1].articles.push({
-                        id: art.id || art.article_number,
-                        label: tocLabel
+                        // Robust Sanitization
+                        const isConstitution = shortName && shortName.toUpperCase() === 'CONST';
+                        const isROC = shortName && shortName.toUpperCase() === 'ROC';
+                        const hasRomanOrWord = /[IVXLCDM]/i.test(cleanNum) || /ARTICLE/i.test(cleanNum) || /RULE/i.test(cleanNum);
+
+                        // Priority 1: If the label already has a structural word at the start, use it as is
+                        const hasWordPrefix = /^(Article|Section|Title|Chapter|Preamble|Book|Rule|Part)/i.test(cleanTitle);
+
+                        let tocLabel = cleanTitle;
+
+                        if (!hasWordPrefix && cleanNum && cleanNum !== '0') {
+                            if (isConstitution) {
+                                // If it's something like "XIII", just use "ARTICLE XIII"
+                                if (isNaN(parseInt(cleanNum)) || hasRomanOrWord) {
+                                    tocLabel = `${cleanNum}: ${cleanTitle}`;
+                                    if (!tocLabel.toUpperCase().startsWith('ARTICLE')) {
+                                        tocLabel = `Article ${tocLabel}`;
+                                    }
+                                } else {
+                                    tocLabel = `Section ${cleanNum}: ${cleanTitle}`;
+                                }
+                            } else if (isROC) {
+                                 // For ROC, article_num is often "Rule 1, Section 1"
+                                 // Just use it as is, or strip Rule part if we want just section
+                                 tocLabel = `${cleanNum}: ${cleanTitle}`;
+                            } else {
+                                tocLabel = `Article ${cleanNum}: ${cleanTitle}`;
+                            }
+                        } else if (!hasWordPrefix && (cleanNum === '0' || !cleanNum)) {
+                            tocLabel = 'Preamble';
+                        }
+
+                        // Final cleanup: remove redundant "Section Article" or "Rule Article"
+                        tocLabel = tocLabel.replace(/^(Section|Article|Rule)\s+(Section|Article|Rule)/i, '$1');
+
+                        // 3. Push to current stack top
+                        stack[stack.length - 1].articles.push({
+                            id: art.id || art.article_number,
+                            label: tocLabel
+                        });
                     });
+
+                    setTocData(root);
+
+                    const expandAll = (node) => {
+                        const expanded = { [node.id]: true };
+                        node.children.forEach(child => Object.assign(expanded, expandAll(child)));
+                        return expanded;
+                    };
+                    const allExpanded = {};
+                    root.children.forEach(child => Object.assign(allExpanded, expandAll(child)));
+                    setExpandedGroups(allExpanded);
+                    setTocVersion(prev => prev + 1);
+                    setLoading(false);
                 });
-
-                setTocData(root);
-
-                const expandAll = (node) => {
-                    const expanded = { [node.id]: true };
-                    node.children.forEach(child => Object.assign(expanded, expandAll(child)));
-                    return expanded;
-                };
-                const allExpanded = {};
-                root.children.forEach(child => Object.assign(allExpanded, expandAll(child)));
-                setExpandedGroups(allExpanded);
-                setTocVersion(prev => prev + 1);
 
             } catch (err) {
+                console.error("Fetch error:", err);
                 setError(err.message);
-            } finally {
                 setLoading(false);
             }
         };
