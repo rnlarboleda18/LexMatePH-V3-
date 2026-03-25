@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from '@clerk/clerk-react';
 
 const SubscriptionContext = createContext(null);
 
@@ -21,21 +21,73 @@ const TIER_LABELS = {
   barrister: 'Barrister',
 };
 
+// ─── Hardcoded admin emails (purely frontend, no DB needed) ───────────────────
+const ADMIN_EMAILS = [
+  'rnlarboleda@gmail.com',
+  'rnlarboleda18@gmail.com',
+];
+
+function isAdminEmail(emailAddresses = []) {
+  return emailAddresses.some((ea) => {
+    const addr = (ea.emailAddress || ea || '').trim().toLowerCase();
+    return ADMIN_EMAILS.includes(addr);
+  });
+}
+
+// ─── Test/Dev tier override ───────────────────────────────────────────────────
+// To test a tier, open your browser console and run:
+//   localStorage.setItem('lexmate_test_tier', 'amicus')   // or 'juris', 'barrister', 'free'
+// To clear:
+//   localStorage.removeItem('lexmate_test_tier')
+// Then refresh the page.
+function getTestTierOverride() {
+  try {
+    const val = localStorage.getItem('lexmate_test_tier');
+    if (val && TIER_ORDER.includes(val)) return val;
+  } catch (_) {}
+  return null;
+}
+
 export function SubscriptionProvider({ children }) {
   const { getToken, isSignedIn } = useAuth();
+  const { user } = useUser();
   const [tier, setTier] = useState('free');
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
-  const [upgradeContext, setUpgradeContext] = useState(null); // { feature, requiredTier }
+  const [upgradeContext, setUpgradeContext] = useState(null);
+  const [testTier, setTestTier] = useState(() => getTestTierOverride());
 
+  // ── Step 1: Check admin PURELY from Clerk's user object (no backend needed) ──
+  useEffect(() => {
+    if (!user) {
+      setIsAdmin(false);
+      return;
+    }
+    const emails = user.emailAddresses || [];
+    const admin = isAdminEmail(emails);
+    if (admin) {
+      console.log('[Subscription] 🔑 Admin access granted for:', user.primaryEmailAddress?.emailAddress);
+      setIsAdmin(true);
+      setTier('barrister');
+      setStatus('active');
+      setLoading(false);
+    }
+  }, [user]);
+
+  // ── Step 2: Fetch from backend (for non-admin users) ──────────────────────────
   const fetchSubscriptionStatus = async () => {
     if (!isSignedIn) {
       setTier('free');
       setStatus('inactive');
       setIsAdmin(false);
+      setLoading(false);
+      return;
+    }
+    // Already determined admin via Clerk — skip the potentially failing API call
+    if (isAdmin) {
       setLoading(false);
       return;
     }
@@ -46,16 +98,20 @@ export function SubscriptionProvider({ children }) {
       });
       if (res.ok) {
         const data = await res.json();
-        const isAdminVal = data.is_admin || false;
-        setTier(data.tier || 'free');
+        const effectiveTier = testTier || data.tier || 'free';
+        const backendAdmin = data.is_admin || false;
+        setTier(effectiveTier);
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
-        setIsAdmin(isAdminVal);
-        console.log(`[Subscription] Tier: ${data.tier}, Admin: ${isAdminVal}, Email: ${data.email || 'N/A'}`);
+        setIsAdmin(backendAdmin);
+        console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
+      } else {
+        console.warn(`[Subscription] Backend API failed (${res.status}). Using test tier: ${testTier || 'free'}`);
+        if (testTier) setTier(testTier);
       }
-
     } catch (err) {
-      console.error('Failed to fetch subscription status:', err);
+      console.error('[Subscription] Failed to fetch status:', err);
+      if (testTier) setTier(testTier);
     } finally {
       setLoading(false);
     }
@@ -63,15 +119,17 @@ export function SubscriptionProvider({ children }) {
 
   useEffect(() => {
     fetchSubscriptionStatus();
-  }, [isSignedIn]);
+  }, [isSignedIn, isAdmin]);
+
+  // Effective tier takes admin override first, then test tier, then real tier
+  const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
 
   const canAccess = (feature) => {
     if (isAdmin) return true;
     const required = FEATURE_REQUIREMENTS[feature];
     if (!required) return true;
-    return TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(required);
+    return TIER_ORDER.indexOf(effectiveTier) >= TIER_ORDER.indexOf(required);
   };
-
 
   const requireAccess = (feature) => {
     if (canAccess(feature)) return true;
@@ -95,10 +153,25 @@ export function SubscriptionProvider({ children }) {
 
   const refreshStatus = () => fetchSubscriptionStatus();
 
+  // Dev helper: switch test tier from the browser console
+  const setTestTierOverride = (newTier) => {
+    if (newTier && TIER_ORDER.includes(newTier)) {
+      localStorage.setItem('lexmate_test_tier', newTier);
+      setTestTier(newTier);
+      setTier(newTier);
+      console.log(`[Subscription] 🧪 Test tier set to: ${newTier}`);
+    } else {
+      localStorage.removeItem('lexmate_test_tier');
+      setTestTier(null);
+      fetchSubscriptionStatus();
+      console.log('[Subscription] 🧪 Test tier cleared.');
+    }
+  };
+
   return (
     <SubscriptionContext.Provider
       value={{
-        tier,
+        tier: effectiveTier,
         status,
         expiresAt,
         loading,
@@ -110,10 +183,11 @@ export function SubscriptionProvider({ children }) {
         openUpgradeModal,
         closeUpgradeModal,
         refreshStatus,
-        tierLabel: TIER_LABELS[tier] || 'Free',
-
+        tierLabel: isAdmin ? 'Administrator' : (TIER_LABELS[effectiveTier] || 'Free'),
         TIER_LABELS,
         FEATURE_REQUIREMENTS,
+        testTier,
+        setTestTierOverride,
       }}
     >
       {children}
