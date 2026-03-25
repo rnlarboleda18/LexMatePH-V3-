@@ -47,6 +47,21 @@ ADMIN_EMAILS = [
     "rnlarboleda18@gmail.com"
 ]
 
+# ── Testing / dev mode ────────────────────────────────────────────────────────
+# Set PAYMONGO_BYPASS=true in local.settings.json to skip PayMongo entirely.
+# Any subscription button will IMMEDIATELY grant the tier without payment.
+PAYMONGO_BYPASS = os.environ.get("PAYMONGO_BYPASS", "").lower() in ("true", "1", "yes")
+
+# Simple plan-key to tier mapping (used in bypass mode)
+PLAN_KEY_TO_TIER = {
+    "amicus_monthly": "amicus",
+    "amicus_yearly": "amicus",
+    "juris_monthly": "juris",
+    "juris_yearly": "juris",
+    "barrister_monthly": "barrister",
+    "barrister_yearly": "barrister",
+}
+
 
 
 def _paymongo_headers():
@@ -224,7 +239,31 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         )
     try:
         body = req.get_json()
-        plan_id = body.get("plan_id", "").strip()
+        plan_id = body.get("plan_id", "").strip()          # PayMongo plan ID  (normal mode)
+        plan_key = body.get("plan_key", "").strip()        # e.g. 'amicus_monthly' (bypass mode)
+
+        # ── BYPASS MODE: skip PayMongo and immediately grant the tier ──────────
+        if PAYMONGO_BYPASS:
+            tier = PLAN_KEY_TO_TIER.get(plan_key) or PLAN_KEY_TO_TIER.get(plan_id, "free")
+            if tier == "free":
+                return func.HttpResponse(
+                    json.dumps({"error": "Invalid plan key for bypass mode"}),
+                    mimetype="application/json", status_code=400
+                )
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "UPDATE users SET subscription_tier = %s, subscription_status = 'active' WHERE clerk_id = %s",
+                        (tier, clerk_id)
+                    )
+                    conn.commit()
+            logging.info(f"[BYPASS] Granted tier '{tier}' to clerk_id={clerk_id}")
+            return func.HttpResponse(
+                json.dumps({"tier": tier, "bypass": True, "message": f"Bypass: granted {tier} tier."}),
+                mimetype="application/json", status_code=200
+            )
+        # ────────────────────────────────────────────────────────────────────────
+
         if not plan_id:
             return func.HttpResponse(
                 json.dumps({"error": "plan_id is required"}),
@@ -433,7 +472,7 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
 def available_plans(req: func.HttpRequest) -> func.HttpResponse:
     """Return available plan IDs for the frontend to use."""
     return func.HttpResponse(
-        json.dumps(AVAILABLE_PLANS),
+        json.dumps({**AVAILABLE_PLANS, "bypass_mode": PAYMONGO_BYPASS}),
         mimetype="application/json", status_code=200
     )
 

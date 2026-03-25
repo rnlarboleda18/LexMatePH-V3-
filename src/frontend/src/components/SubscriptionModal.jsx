@@ -95,28 +95,60 @@ export default function SubscriptionModal({ onClose }) {
   const { getToken } = useAuth();
   const [billing, setBilling] = useState('monthly');
   const [availablePlans, setAvailablePlans] = useState({});
+  const [bypassMode, setBypassMode] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState(null);
+  const [successPlan, setSuccessPlan] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     fetch('/api/available-plans')
       .then(r => r.json())
-      .then(setAvailablePlans)
+      .then(data => {
+        setAvailablePlans(data);
+        setBypassMode(data.bypass_mode === true);
+      })
       .catch(() => {});
   }, []);
 
   const handleSubscribe = async (plan) => {
     if (plan.id === 'free' || plan.id === tier) return;
-    const key = plan.planKey[billing];
-    const planId = availablePlans[key];
-    if (!planId) {
-      setErrorMsg('Plan not configured yet. Please try again later.');
-      return;
-    }
     setLoadingPlan(plan.id);
     setErrorMsg('');
+    setSuccessPlan(null);
+
     try {
       const token = await getToken();
+
+      // ── BYPASS MODE: skip PayMongo, grant tier instantly ──────────────────
+      if (bypassMode) {
+        const planKey = plan.planKey[billing]; // e.g. 'amicus_monthly'
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Clerk-Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ plan_key: planKey }),
+        });
+        const data = await res.json();
+        if (data.bypass && data.tier) {
+          setSuccessPlan(data.tier);
+          await refreshStatus();
+          setTimeout(() => onClose(), 1500);
+        } else {
+          setErrorMsg(data.error || 'Bypass failed.');
+        }
+        return;
+      }
+      // ─────────────────────────────────────────────────────────────────────
+
+      // Normal PayMongo flow
+      const key = plan.planKey[billing];
+      const planId = availablePlans[key];
+      if (!planId) {
+        setErrorMsg('Plan not configured yet. Please try again later.');
+        return;
+      }
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: {
@@ -246,24 +278,29 @@ export default function SubscriptionModal({ onClose }) {
                   disabled={!!isDisabled}
                   onClick={() => handleSubscribe(plan)}
                   className={`w-full py-2.5 rounded-xl text-sm font-extrabold transition-all flex items-center justify-center gap-2
-                    ${isCurrent
-                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-default'
-                      : plan.id === 'free'
-                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-default'
-                        : `text-white bg-gradient-to-r ${plan.color} hover:opacity-90 active:scale-95 shadow-md`
+                    ${successPlan === plan.id
+                      ? 'bg-green-500 text-white'
+                      : isCurrent
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-default'
+                        : plan.id === 'free'
+                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-default'
+                          : `text-white bg-gradient-to-r ${plan.color} hover:opacity-90 active:scale-95 shadow-md`
                     }
                   `}
                 >
-                  {loadingPlan === plan.id ? (
+                  {successPlan === plan.id ? (
+                    <><Check className="w-4 h-4" /> Activated!</>
+                  ) : loadingPlan === plan.id ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : isCurrent ? (
                     'Current Plan'
                   ) : plan.id === 'free' ? (
                     'Basic Access'
                   ) : (
-                    `Get ${plan.name}`
+                    bypassMode ? `⚡ Activate ${plan.name}` : `Get ${plan.name}`
                   )}
                 </button>
+
               </div>
             );
           })}
