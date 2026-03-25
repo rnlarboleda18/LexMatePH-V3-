@@ -42,6 +42,12 @@ FREE_TIER_DAILY_LIMITS = {
     "flashcard": 5,
 }
 
+ADMIN_EMAILS = [
+    "rnlarboleda@gmail.com",
+    "rnlarboleda18@gmail.com"
+]
+
+
 
 def _paymongo_headers():
     import base64
@@ -136,7 +142,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin FROM users WHERE clerk_id = %s",
+                    "SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email FROM users WHERE clerk_id = %s",
                     (clerk_id,)
                 )
                 row = cur.fetchone()
@@ -145,7 +151,17 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         json.dumps({"tier": "free", "status": "inactive", "expires_at": None, "is_admin": False}),
                         mimetype="application/json", status_code=200
                     )
-                tier, status, expires_at, is_admin = row
+                
+                tier, status, expires_at, is_admin, email = row
+                
+                # Check for hardcoded admin bypass
+                if email and email.lower() in [e.lower() for e in ADMIN_EMAILS]:
+                    is_admin = True
+                    # Self-heal DB if needed
+                    if not row[3]:
+                        cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
+                        conn.commit()
+
                 return func.HttpResponse(
                     json.dumps({
                         "tier": tier or "free",
@@ -155,6 +171,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     }),
                     mimetype="application/json", status_code=200
                 )
+
     except Exception as e:
         logging.error(f"subscription_status error: {e}")
         return func.HttpResponse(

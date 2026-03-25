@@ -49,21 +49,23 @@ def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
         email_addresses = data.get("email_addresses", [])
         email = email_addresses[0].get("email_address") if email_addresses else None
         
-        if not clerk_id or not email:
-            logging.error(f"Malformed {evt_type} data: {data}")
-            return func.HttpResponse("Malformed data", status_code=400)
-            
+        ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
+        is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS] if email else False
+
         conn_string = os.environ.get("DB_CONNECTION_STRING")
         try:
             with psycopg.connect(conn_string) as conn:
                 with conn.cursor() as cur:
                     # Link by clerk_id if it exists, otherwise link by email
                     cur.execute("""
-                        INSERT INTO users (clerk_id, email)
-                        VALUES (%s, %s)
-                        ON CONFLICT (clerk_id) DO UPDATE SET email = EXCLUDED.email
+                        INSERT INTO users (clerk_id, email, is_admin)
+                        VALUES (%s, %s, %s)
+                        ON CONFLICT (clerk_id) DO UPDATE SET 
+                            email = EXCLUDED.email,
+                            is_admin = EXCLUDED.is_admin
                         RETURNING id;
-                    """, (clerk_id, email))
+                    """, (clerk_id, email, is_admin))
+
                     
                     # If the above didn't link (e.g. clerk_id is new but email exists), 
                     # we update the existing row with the same email.
