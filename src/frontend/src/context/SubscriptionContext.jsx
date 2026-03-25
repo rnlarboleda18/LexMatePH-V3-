@@ -26,6 +26,7 @@ export function SubscriptionProvider({ children }) {
   const [tier, setTier] = useState('free');
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [upgradeContext, setUpgradeContext] = useState(null); // { feature, requiredTier }
@@ -34,6 +35,7 @@ export function SubscriptionProvider({ children }) {
     if (!isSignedIn) {
       setTier('free');
       setStatus('inactive');
+      setIsAdmin(false);
       setLoading(false);
       return;
     }
@@ -47,6 +49,7 @@ export function SubscriptionProvider({ children }) {
         setTier(data.tier || 'free');
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
+        setIsAdmin(data.is_admin || false);
       }
     } catch (err) {
       console.error('Failed to fetch subscription status:', err);
@@ -60,10 +63,12 @@ export function SubscriptionProvider({ children }) {
   }, [isSignedIn]);
 
   const canAccess = (feature) => {
+    if (isAdmin) return true;
     const required = FEATURE_REQUIREMENTS[feature];
     if (!required) return true;
     return TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(required);
   };
+
 
   const requireAccess = (feature) => {
     if (canAccess(feature)) return true;
@@ -98,10 +103,12 @@ export function SubscriptionProvider({ children }) {
         requireAccess,
         showUpgradeModal,
         upgradeContext,
+        isAdmin,
         openUpgradeModal,
         closeUpgradeModal,
         refreshStatus,
         tierLabel: TIER_LABELS[tier] || 'Free',
+
         TIER_LABELS,
         FEATURE_REQUIREMENTS,
       }}

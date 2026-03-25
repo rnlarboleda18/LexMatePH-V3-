@@ -10,20 +10,23 @@ from utils.clerk_auth import get_authenticated_user_id
 lexify_bp = func.Blueprint()
 
 
-def _get_user_tier(clerk_id: str) -> str:
-    """Return the subscription_tier for the given clerk_id. Defaults to 'free'."""
+def _get_user_info(clerk_id: str) -> tuple[str, bool]:
+    """Return (subscription_tier, is_admin) for the given clerk_id. Defaults to ('free', False)."""
     try:
         conn_string = os.environ.get("DB_CONNECTION_STRING")
         if not conn_string:
-            return "free"
+            return "free", False
         with psycopg.connect(conn_string) as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT subscription_tier FROM users WHERE clerk_id = %s", (clerk_id,))
+                cur.execute("SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s", (clerk_id,))
                 row = cur.fetchone()
-                return (row[0] if row else "free") or "free"
+                if not row:
+                    return "free", False
+                tier, is_admin = row
+                return (tier or "free"), (is_admin or False)
     except Exception as e:
-        logging.error(f"_get_user_tier error: {e}")
-        return "free"
+        logging.error(f"_get_user_info error: {e}")
+        return "free", False
 
 GRADING_SYSTEM_PROMPT = """You are a Philippine Bar Exam Grader (2026). Evaluate the examinee's answer against the Suggested Answer following the 2026 guidelines #SuccessAchievedthroughMerit.
 Focus on the precision of legal bases and succinctness.
@@ -47,11 +50,11 @@ Respond ONLY in valid JSON with this exact schema:
 @lexify_bp.route(route="lexify_grade", methods=["POST"])
 async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
     try:
-        # ── Subscription Gate: Barrister only ────────────────────────────────
+        # ── Subscription Gate: Barrister only (Admins bypass) ────────────────
         clerk_id_check, _ = get_authenticated_user_id(req)
         if clerk_id_check:
-            tier_check = _get_user_tier(clerk_id_check)
-            if tier_check != "barrister":
+            tier_check, is_admin = _get_user_info(clerk_id_check)
+            if not is_admin and tier_check != "barrister":
                 return func.HttpResponse(
                     json.dumps({
                         "error": "Lexify requires a Barrister subscription.",

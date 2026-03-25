@@ -32,17 +32,20 @@ const TIER_COLOR = {
     amicus: 'text-blue-600 dark:text-blue-400',
     juris: 'text-purple-600 dark:text-purple-400',
     barrister: 'text-amber-600 dark:text-amber-400',
+    admin: 'text-rose-600 dark:text-rose-400',
 };
 const TIER_BG = {
     free: 'bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700',
     amicus: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
     juris: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
     barrister: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800',
+    admin: 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800',
 };
 
 const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject, currentSubject }) => {
-    const { tier, tierLabel, openUpgradeModal } = useSubscription();
-    const TierIcon = TIER_ICON[tier] || Shield;
+    const { tier, tierLabel, openUpgradeModal, isAdmin } = useSubscription();
+    const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
+
     const [openSection, setOpenSection] = useState(() => {
         if (mode === 'codex' || mode === 'browse_bar') return mode === 'codex' ? 'codex' : 'bar';
         return null;
@@ -299,20 +302,25 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
             {/* Subscription Tier Badge */}
             <SignedIn>
-                <div className={`mx-4 mt-6 mb-2 p-3 rounded-2xl border ${TIER_BG[tier]} flex items-center gap-3`}>
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
+                <div className={`mx-4 mt-6 mb-2 p-3 rounded-2xl border ${isAdmin ? TIER_BG.admin : TIER_BG[tier]} flex items-center gap-3`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
                         <TierIcon size={16} />
                     </div>
                     <div className="flex-1 min-w-0">
-                        <p className={`text-xs font-extrabold ${TIER_COLOR[tier]} uppercase tracking-wide`}>{tierLabel} Plan</p>
-                        {tier === 'free' && (
+                        <p className={`text-xs font-extrabold ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} uppercase tracking-wide`}>
+                            {isAdmin ? 'Administrator' : `${tierLabel} Plan`}
+                        </p>
+                        {isAdmin && (
+                            <p className="text-[10px] text-rose-600 dark:text-rose-400 font-bold italic">Unlimited Access</p>
+                        )}
+                        {!isAdmin && tier === 'free' && (
                             <p className="text-[10px] text-gray-400 dark:text-gray-500">Limited access</p>
                         )}
-                        {tier === 'barrister' && (
+                        {!isAdmin && tier === 'barrister' && (
                             <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access</p>
                         )}
                     </div>
-                    {tier !== 'barrister' && (
+                    {!isAdmin && tier !== 'barrister' && (
                         <button
                             onClick={() => openUpgradeModal()}
                             className="shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-600 shadow-sm hover:opacity-90 transition-opacity"
