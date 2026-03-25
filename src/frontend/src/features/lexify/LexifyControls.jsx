@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const LexifyControls = ({ onSubmit, onHide, onExit, onToggleNotes, notesOpen, answeredCount, totalCount, spellCheck, onToggleSpellCheck, alarmTime, examLabel }) => {
+const LexifyControls = ({ onSubmit, onHide, onExit, onToggleNotes, notesOpen, onToggleCalculator, calculatorOpen, answeredCount, totalCount, spellCheck, onToggleSpellCheck, alarmTime, setAlarmTime, examLabel }) => {
     const [timeLeft, setTimeLeft] = useState(4 * 60 * 60); // 4 Hours
     const [alarmFired, setAlarmFired] = useState(false);
     const [showExamMenu, setShowExamMenu] = useState(false);
     const [showToolKitMenu, setShowToolKitMenu] = useState(false);
+
 
     const alarmSeconds = useCallback(() => {
         if (!alarmTime) return 30 * 60;
@@ -104,8 +105,12 @@ const LexifyControls = ({ onSubmit, onHide, onExit, onToggleNotes, notesOpen, an
                                 <span>Spell Check</span>
                                 {spellCheck && <span className="text-blue-400">✓</span>}
                             </button>
-                            <button onClick={() => { alert(`Alarm threshold: ${alarmTime || '00:30:00'}`); setShowToolKitMenu(false); }} className="w-full text-left px-4 py-2 text-xs hover:bg-white/10 transition text-white/90">Alarm</button>
-                            <button onClick={() => { alert('Calculator opened.'); setShowToolKitMenu(false); }} className="w-full text-left px-4 py-2 text-xs hover:bg-white/10 transition text-white/90">Calculator</button>
+                            <button onClick={() => { 
+                                const next = prompt("Set alarm remaining threshold (HH:MM:SS):", alarmTime || "00:30:00");
+                                if (next && setAlarmTime) setAlarmTime(next);
+                                setShowToolKitMenu(false); 
+                            }} className="w-full text-left px-4 py-2 text-xs hover:bg-white/10 transition text-white/90">Alarm</button>
+                            <button onClick={() => { onToggleCalculator(); setShowToolKitMenu(false); }} className="w-full text-left px-4 py-2 text-xs hover:bg-white/10 transition text-white/90">Calculator</button>
                         </div>
                     )}
                 </div>

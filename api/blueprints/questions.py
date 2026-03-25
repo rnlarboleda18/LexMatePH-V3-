@@ -166,6 +166,7 @@ def get_lexify_questions(req: func.HttpRequest) -> func.HttpResponse:
                 WHERE q.sub_topic = %s
                   AND a.text IS NOT NULL
                   AND trim(a.text) != ''
+                  AND q.text !~* '\\([a-d]\\)|\\b[a-d]\\.'
             """
             params = [sub_topic]
 

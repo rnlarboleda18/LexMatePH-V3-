@@ -4,17 +4,10 @@ import LexifySidebar from './LexifySidebar';
 import LexifyWorkspace from './LexifyWorkspace';
 import LexifyControls from './LexifyControls';
 import LexifyNotes from './LexifyNotes';
+import LexifyCalculator from './LexifyCalculator';
 import LexifyResults from './LexifyResults';
 
-// State Machine:
-// -1: Fetching questions (loading)
-//  0: Dashboard (My Exams)
-//  1: Orange Lockdown/Security Check
-//  2: Active Exam
-//  3: Green Upload Success Screen
-//  4: Exam Hidden (black screen)
-//  5: AI Grading (loading)
-//  6: Results Screen
+// ... state definitions intact
 
 const LexifyApp = ({ questions: propQuestions, onClose }) => {
     const [examState, setExamState] = useState(0);
@@ -25,12 +18,17 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
     const [userAnswers, setUserAnswers] = useState({});
     const [flaggedQuestions, setFlaggedQuestions] = useState(new Set());
     const [notesOpen, setNotesOpen] = useState(false);
+    const [calculatorOpen, setCalculatorOpen] = useState(false);
     const [spellCheck, setSpellCheck] = useState(false);
     const [alarmTime, setAlarmTime] = useState('00:30:00');
+    // ...
+    // ... lines omitted for brevity ...
+
     const [gradingResults, setGradingResults] = useState([]);
     const [gradingError, setGradingError] = useState('');
     const [examStartTime, setExamStartTime] = useState(null);
     const [timeUsed, setTimeUsed] = useState(0);
+    const [showDisclaimer, setShowDisclaimer] = useState(false); // Added for custom disclaimer overlay
 
     // Security: Alert on tab switch during active exam
     useEffect(() => {
@@ -40,11 +38,19 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                 alert('⚠ SECURITY NOTICE: Switching tabs or minimizing during the exam is prohibited and may be reported in a real examination.');
             }
         };
+        const handleBeforeUnload = (e) => {
+            e.preventDefault();
+            e.returnValue = '';
+        };
         document.addEventListener('visibilitychange', handleVisibilityChange);
-        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
     }, [examState]);
 
-    const handleBeginExam = async (examId, alarm) => {
+    const handleBeginExam = async (examId, alarm, prefillAnswers = false) => {
         setAlarmTime(alarm || '00:30:00');
         setFetchError('');
         setExamState(-1); // Loading state
@@ -65,8 +71,17 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
             setActiveQuestions(qs);
             setExamLabel(data.exam_label || '');
             setCurrentIndex(0);
-            setUserAnswers({});
             setFlaggedQuestions(new Set());
+
+            if (prefillAnswers) {
+                const initialAnswers = {};
+                qs.forEach((q, i) => {
+                    initialAnswers[i] = q.suggested_answer || q.answer || '';
+                });
+                setUserAnswers(initialAnswers);
+            } else {
+                setUserAnswers({});
+            }
 
         } catch (e) {
             setFetchError(`Failed to load questions: ${e.message}`);
@@ -96,8 +111,11 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
             if (!proceed) return;
         }
 
-        const confirm1 = window.confirm('I confirm that I have completed my exam and am ready to submit for grading.');
-        if (!confirm1) return;
+        setShowDisclaimer(true); // Open custom disclaimer modal
+    };
+
+    const handleProceedSubmit = () => {
+        setShowDisclaimer(false);
 
         if (examStartTime) {
             setTimeUsed(Math.floor((Date.now() - examStartTime) / 1000));
@@ -137,15 +155,53 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                                 question_text: q.text || ''
                             })
                         });
-                        if (!res.ok) return null;
+                        if (!res.ok) {
+                            const errData = await res.json().catch(() => ({}));
+                            setGradingError(errData.detail || errData.error || `Grading failed (Status ${res.status})`);
+                            return null;
+                        }
                         return await res.json();
                     } catch (e) {
                         return null;
                     }
                 })
             );
+
+            // Check if all are null (everything failed)
+            if (results.every(r => r === null) && !gradingError) {
+                setGradingError('All grading requests failed. Please check your AI API key configurations.');
+            }
+
             setGradingResults(results);
             setExamState(6); // Results
+
+            // Save to Attempt History (localStorage)
+            try {
+                const stored = localStorage.getItem('lexify_attempts');
+                const attempts = stored ? JSON.parse(stored) : { current: 1, history: {} };
+                const curr = attempts.current || 1;
+                
+                if (!attempts.history[curr]) attempts.history[curr] = {};
+
+                const validResults = results.filter(Boolean);
+                const totalScore = validResults.reduce((acc, r) => acc + (r?.score || 0), 0);
+                const maxPossible = activeQuestions.length * 5;
+                const rawScorePct = maxPossible > 0 ? (totalScore / maxPossible) * 100 : 0;
+                
+                const examIdKey = activeQuestions[0]?.exam_id || "unknown";
+
+                attempts.history[curr][examIdKey] = {
+                    score: rawScorePct.toFixed(1),
+                    date: new Date().toLocaleDateString(),
+                    answered: validResults.length,
+                    total: activeQuestions.length
+                };
+
+                localStorage.setItem('lexify_attempts', JSON.stringify(attempts));
+            } catch (e) {
+                console.error("Failed to save attempt to localStorage", e);
+            }
+
         } catch (e) {
             setGradingError('Grading failed. Please try again.');
             setExamState(6);
@@ -281,6 +337,8 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                 questions={activeQuestions}
                 totalTime={timeUsed}
                 onReturnToDashboard={handleReturnToDashboard}
+                examLabel={examLabel}
+                error={gradingError}
             />
         );
     }
@@ -295,16 +353,19 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                 onExit={handleExit}
                 onToggleNotes={() => setNotesOpen(prev => !prev)}
                 notesOpen={notesOpen}
+                onToggleCalculator={() => setCalculatorOpen(prev => !prev)}
+                calculatorOpen={calculatorOpen}
                 answeredCount={Object.values(userAnswers).filter(a => a?.replace(/<[^>]*>?/gm, '').trim()).length}
                 totalCount={activeQuestions.length}
                 spellCheck={spellCheck}
                 onToggleSpellCheck={() => setSpellCheck(prev => !prev)}
                 alarmTime={alarmTime}
+                setAlarmTime={setAlarmTime}
                 examLabel={examLabel}
             />
 
             {/* Main 3-Pane Layout */}
-            <div className="flex flex-1 overflow-hidden mt-14">
+            <div className="flex flex-1 overflow-hidden mt-12">
                 {/* Left Sidebar */}
                 <LexifySidebar
                     questions={activeQuestions}
@@ -335,10 +396,41 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                 />
             </div>
 
-            {/* Scratchpad Overlay */}
+            {/* Floating Overlays */}
             {notesOpen && <LexifyNotes onClose={() => setNotesOpen(false)} />}
 
-            {/* Click outside to close Exam menu dropdown */}
+            {showDisclaimer && (
+                <div className="fixed inset-0 z-[300] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
+                    <div className="bg-[#161b22] border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl font-sans">
+                        <div className="text-center mb-5">
+                            <div className="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">⚠️</div>
+                            <h3 className="text-lg font-bold font-serif text-white">LEGAL DISCLAIMER & AI NOTICE</h3>
+                            <p className="text-white/40 text-xs mt-1">Please read and acknowledge before submitting your exam:</p>
+                        </div>
+
+                        <div className="space-y-3 text-xs text-white/70 leading-relaxed max-h-80 overflow-y-auto pr-2">
+                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                                <p className="font-bold text-amber-400 mb-1">1. Artificial Intelligence Evaluation</p>
+                                <p>Your answers are graded by **Google Gemini AI** comparing against suggested answer guidelines. It evaluates structural and content precision. Scores do not take into account subjective interpretation differences.</p>
+                            </div>
+                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                                <p className="font-bold text-amber-400 mb-1">2. Simulation Purposes Only</p>
+                                <p>This software is built **strictly for self-assessment and mock-simulation purposes**. It is not affiliated with, endorsed by, or representative of the Supreme Court of the Philippines or any official Board of Bar Examiners.</p>
+                            </div>
+                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                                <p className="font-bold text-amber-400 mb-1">3. No Guarantee of Results</p>
+                                <p>Scores do not guarantee passing OR failing the actual Bar Exam. High scores don't guarantee success, and **low scores should not discourage you**; AI grading has variance and is designed strictly to augment, not define, your review diagnostics.</p>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3 mt-6">
+                            <button onClick={() => setShowDisclaimer(false)} className="flex-1 py-2 border border-white/10 rounded-xl text-sm text-white/40 hover:text-white transition">Cancel</button>
+                            <button onClick={handleProceedSubmit} className="flex-1 py-2 bg-[#e94560] hover:bg-[#c73652] text-white font-bold rounded-xl text-sm transition">I Understand & Submit</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {calculatorOpen && <LexifyCalculator onClose={() => setCalculatorOpen(false)} />}
         </div>
     );
 };

@@ -7,9 +7,27 @@ const SCORE_COLORS = {
 };
 
 const getColorLevel = (pct) => {
-    if (pct >= 70) return 'high';
-    if (pct >= 40) return 'mid';
+    if (pct >= 75) return 'high'; // Passing threshold 2026 is 75%
+    if (pct >= 50) return 'mid';  // Passing sub threshold
     return 'low';
+};
+
+const SUBJECT_WEIGHTS = [
+    { key: 'POLITICAL', label: 'Political & Public International Law', weight: 0.15 },
+    { key: 'COMMERCIAL', label: 'Commercial & Taxation Laws', weight: 0.20 },
+    { key: 'TAXATION', label: 'Commercial & Taxation Laws', weight: 0.20 },
+    { key: 'CIVIL', label: 'Civil Law; Land Titles & Deeds', weight: 0.20 },
+    { key: 'LAND TITLES', label: 'Civil Law; Land Titles & Deeds', weight: 0.20 },
+    { key: 'LABOR', label: 'Labor Law & Social Legislation', weight: 0.10 },
+    { key: 'CRIMINAL', label: 'Criminal Law', weight: 0.10 },
+    { key: 'REMEDIAL', label: 'Remedial Law; Ethics', weight: 0.25 },
+    { key: 'ETHICS', label: 'Remedial Law; Ethics', weight: 0.25 }
+];
+
+const getWeightForLabel = (label = '') => {
+    const check = label.toUpperCase();
+    const match = SUBJECT_WEIGHTS.find(w => check.includes(w.key));
+    return match ? match.weight : 0.20; // Default fallback to 20%
 };
 
 const ScoreCard = ({ result, index, question, expanded, onToggle }) => {
@@ -20,7 +38,7 @@ const ScoreCard = ({ result, index, question, expanded, onToggle }) => {
     const colors = SCORE_COLORS[getColorLevel(pct)];
 
     return (
-        <div className={`border ${colors.border} ${colors.bg} rounded-2xl overflow-hidden transition-all`}>
+        <div className={`border ${colors.border} ${colors.bg} rounded-2xl overflow-hidden transition-all shadow-md`}>
             {/* Card Header */}
             <button onClick={onToggle} className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition">
                 <div className="flex items-center gap-4">
@@ -29,13 +47,13 @@ const ScoreCard = ({ result, index, question, expanded, onToggle }) => {
                     </div>
                     <div>
                         <p className="text-xs text-white/40 uppercase tracking-widest">{question?.subject || `Question ${index + 1}`}</p>
-                        <p className="text-white font-medium text-sm mt-0.5 line-clamp-1">{question?.text?.substring(0, 90)}...</p>
+                        <p className="text-white font-medium text-sm mt-0.5 line-clamp-1">Answer Preview</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-4 shrink-0">
                     <div className="text-right">
                         <p className={`text-2xl font-bold font-mono ${colors.text}`}>{result.score.toFixed(1)}</p>
-                        <p className="text-xs text-white/30">out of {max}%</p>
+                        <p className="text-xs text-white/30">out of 5 pts</p>
                     </div>
                     <span className="text-white/40">{expanded ? '▲' : '▼'}</span>
                 </div>
@@ -47,30 +65,11 @@ const ScoreCard = ({ result, index, question, expanded, onToggle }) => {
                     {/* Score Bar */}
                     <div>
                         <div className="flex justify-between text-xs text-white/40 mb-1">
-                            <span>Score</span><span>{pct.toFixed(0)}%</span>
+                            <span>Rating</span><span>{pct.toFixed(0)}%</span>
                         </div>
                         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                             <div className={`h-full ${colors.bar} rounded-full transition-all`} style={{ width: `${pct}%` }} />
                         </div>
-                    </div>
-
-                    {/* Breakdown */}
-                    <div className="grid grid-cols-3 gap-3 text-center">
-                        {[
-                            { label: 'Conclusion', key: 'conclusion', max: 1 },
-                            { label: 'Legal Basis', key: 'legal_basis', max: 2 },
-                            { label: 'Application', key: 'application', max: 2 },
-                        ].map(({ label, key, max: m }) => {
-                            const val = result.breakdown?.[key] ?? 0;
-                            const p = (val / m) * 100;
-                            const c = SCORE_COLORS[getColorLevel(p)];
-                            return (
-                                <div key={key} className="bg-white/5 rounded-xl p-3">
-                                    <p className={`text-lg font-bold font-mono ${c.text}`}>{val.toFixed(1)}<span className="text-xs text-white/30">/{m}%</span></p>
-                                    <p className="text-xs text-white/40">{label}</p>
-                                </div>
-                            );
-                        })}
                     </div>
 
                     {/* AI Feedback */}
@@ -92,14 +91,24 @@ const ScoreCard = ({ result, index, question, expanded, onToggle }) => {
     );
 };
 
-const LexifyResults = ({ results, questions, totalTime, onReturnToDashboard }) => {
+const LexifyResults = ({ results, questions, totalTime, onReturnToDashboard, examLabel, error }) => {
     const [expandedIdx, setExpandedIdx] = useState(null);
 
     const validResults = results.filter(Boolean);
-    const totalScore = validResults.reduce((acc, r) => acc + (r?.score || 0), 0);
+    const totalScore = validResults.reduce((acc, r) => acc + (r?.score || 0), 0); // Out of 100 possible (20 questions * 5)
     const maxPossible = questions.length * 5;
-    const totalPct = maxPossible > 0 ? (totalScore / maxPossible) * 100 : 0;
-    const totalColors = SCORE_COLORS[getColorLevel(totalPct)];
+    
+    // Layer A - Raw % Score
+    const rawScorePct = maxPossible > 0 ? (totalScore / maxPossible) * 100 : 0;
+    
+    // Layer B - Weight Factor
+    const weightFactor = getWeightForLabel(examLabel);
+    const weightedContribution = rawScorePct * weightFactor;
+
+    const passingThreshold = 75.0;
+    const isDisqualified = rawScorePct < 50.0;
+
+    const totalColors = SCORE_COLORS[rawScorePct >= passingThreshold ? 'high' : rawScorePct >= 50 ? 'mid' : 'low'];
 
     const formatTime = (secs) => {
         const h = Math.floor(secs / 3600);
@@ -113,40 +122,55 @@ const LexifyResults = ({ results, questions, totalTime, onReturnToDashboard }) =
             {/* Top Bar */}
             <div className="h-14 bg-[#16213e] border-b border-white/10 flex items-center justify-between px-6 select-none shrink-0">
                 <span className="font-bold text-[#e94560] tracking-widest">LEXIFY</span>
-                <span className="text-sm text-white/50 font-serif">Exam Results — AI Graded</span>
+                <span className="text-sm text-white/50 font-serif">2026 Grading System #SuccessAchievedthroughMerit</span>
                 <button onClick={onReturnToDashboard} className="px-4 py-1.5 text-sm bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition">
                     Return to Dashboard
                 </button>
             </div>
 
             <div className="flex-1 overflow-y-auto">
+                {/* Global Error Banner */}
+                {error && (
+                    <div className="max-w-2xl mx-auto mt-6 bg-red-500/20 border border-red-500/40 rounded-xl px-5 py-3 text-red-300 text-xs flex items-center gap-3">
+                        <span className="text-xl">⚠️</span>
+                        <div>
+                            <p className="font-bold text-red-400">System Warning during Grading</p>
+                            <p className="opacity-80">{error}</p>
+                        </div>
+                    </div>
+                )}
+
                 {/* Total Score Header */}
                 <div className="bg-gradient-to-b from-[#16213e] to-[#0a0a1a] py-12 px-8 text-center border-b border-white/10">
                     <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold border ${totalColors.border} ${totalColors.bg} mb-6`}>
-                        <span className={totalColors.text}>AI GRADED RESULT</span>
+                        <span className={totalColors.text}>2026 RAW SUBJECT SCORE</span>
                     </div>
                     <div className={`text-7xl font-bold font-mono mb-2 ${totalColors.text}`}>
-                        {totalScore.toFixed(1)}
-                        <span className="text-2xl text-white/20">/{maxPossible}%</span>
+                        {rawScorePct.toFixed(1)}%
                     </div>
-                    <p className="text-white/40 text-lg">{totalPct.toFixed(1)}% Total Score</p>
+                    <p className="text-white/40 text-sm mt-1 uppercase tracking-wider">
+                        Layer B Contribution: {weightedContribution.toFixed(2)} pts (Weight: {(weightFactor * 100).toFixed(0)}%)
+                    </p>
 
-                    {/* Score bar */}
-                    <div className="max-w-md mx-auto mt-6">
-                        <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                            <div className={`h-full ${totalColors.bar} rounded-full transition-all`} style={{ width: `${totalPct}%` }} />
+                    {/* Disqualification Flag Banner */}
+                    {isDisqualified && (
+                        <div className="mt-5 max-w-md mx-auto bg-red-500/20 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-xs flex items-center gap-2 justify-center">
+                            <span>🚨 Disqualification Rule: Raw score is &lt; 50% (Rule 138)</span>
                         </div>
-                    </div>
+                    )}
+
+                    {/* Passing Indicator */}
+                    {!isDisqualified && rawScorePct >= passingThreshold && (
+                        <div className="mt-5 max-w-sm mx-auto bg-green-500/20 border border-green-500/30 rounded-xl px-4 py-2 text-green-400 text-xs flex items-center gap-2 justify-center">
+                            <span>✅ Above 2026 Passing Threshold ({passingThreshold}%)</span>
+                        </div>
+                    )}
 
                     {/* Stats row */}
                     <div className="flex justify-center gap-8 mt-8 text-sm">
                         <div><p className="text-white/30 text-xs uppercase tracking-widest">Questions</p><p className="font-bold">{questions.length}</p></div>
                         <div><p className="text-white/30 text-xs uppercase tracking-widest">Answered</p><p className="font-bold">{validResults.length}</p></div>
                         <div><p className="text-white/30 text-xs uppercase tracking-widest">Time Used</p><p className="font-bold">{totalTime ? formatTime(totalTime) : '—'}</p></div>
-                    </div>
-
-                    <div className="mt-8 max-w-sm mx-auto bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-xs text-amber-300 text-left">
-                        <strong>Disclaimer:</strong> This AI grading is for practice purposes only and does not reflect official Bar Exam scores. Results are generated by Gemini AI based on the provided suggested answers.
                     </div>
                 </div>
 

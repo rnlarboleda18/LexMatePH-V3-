@@ -1,22 +1,23 @@
-import os
-import sqlite3
+import psycopg2
 
-def list_all_tables():
-    for root, dirs, files in os.walk(r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2'):
-        for file in files:
-            if file.endswith('.db'):
-                db_path = os.path.join(root, file)
-                try:
-                    conn = sqlite3.connect(db_path)
-                    cursor = conn.cursor()
-                    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-                    tables = cursor.fetchall()
-                    if tables:
-                        print(f'\nTables in {db_path}:')
-                        for table in tables:
-                            print(f'  - {table[0]}')
-                except Exception as e:
-                    pass
+conn_str = "postgres://bar_admin:RABpass021819!@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
 
-if __name__ == "__main__":
-    list_all_tables()
+try:
+    conn = psycopg2.connect(conn_str)
+    cur = conn.cursor()
+    
+    # Check A. B. C. D. style MCQs
+    cur.execute("SELECT COUNT(*) FROM questions WHERE text ~ ' B\\. '")
+    dot_b = cur.fetchone()[0]
+    
+    # Check 1. 2. 3. style subquestions
+    cur.execute("SELECT COUNT(*) FROM questions WHERE text ~ ' 2\\. '")
+    dot_2 = cur.fetchone()[0]
+
+    print(f"With ' B. ': {dot_b}")
+    print(f"With ' 2. ': {dot_2}")
+    
+    cur.close()
+    conn.close()
+except Exception as e:
+    print("Error:", e)

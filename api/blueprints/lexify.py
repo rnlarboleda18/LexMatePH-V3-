@@ -6,30 +6,22 @@ import requests
 
 lexify_bp = func.Blueprint()
 
-GRADING_SYSTEM_PROMPT = """You are a Philippine Bar Exam Grader. Your task is to evaluate a bar examinee's answer against the provided Suggested Answer.
+GRADING_SYSTEM_PROMPT = """You are a Philippine Bar Exam Grader (2026). Evaluate the examinee's answer against the Suggested Answer following the 2026 guidelines #SuccessAchievedthroughMerit.
+Focus on the precision of legal bases and succinctness.
 
-Grading Rubric (Total 5 points per question):
-- Conclusion (1 point): Did the examinee reach the correct legal conclusion?
-- Legal Basis (2 points): Did they cite the correct law, doctrine, provision, or jurisprudence?
-- Application (2 points): Did they correctly apply the law to the facts of the question?
-
-STRICT RULES:
-- A bare "Yes" or "No" answer without explanation gets 0 for application.
-- Incomplete legal basis (e.g., citing wrong article or wrong law) gets at most 0.5 for legal basis.
-- Partial credit is allowed (e.g., 0.5, 1.0, 1.5).
-- Be constructive and specific in your feedback.
-- Do NOT invent doctrine not found in the Suggested Answer.
+Score Rating (0-5 Points Qualitative Criteria):
+- 5 pts: Excellent - Correct conclusion + Correct legal bases + Succinct, clear, and polished delivery.
+- 4 pts: Very Good - Correct conclusion + Correct legal bases + Minor flaws in communication/grammar.
+- 3 pts: Good/Fair - Correct conclusion + Incorrect/inapplicable bases (or vice-versa).
+- 2 pts: Needs Work - Incorrect conclusion + Exhibits capacity for effective legal reasoning/references.
+- 1 pt: Poor - Incorrect conclusion + Inability to reason + Bona fide attempt only.
+- 0 pts: Unresponsive - Blank, gibberish, or completely irrelevant.
 
 Respond ONLY in valid JSON with this exact schema:
 {
-  "score": 4.5,
-  "breakdown": {
-    "conclusion": 1.0,
-    "legal_basis": 1.5,
-    "application": 2.0
-  },
-  "feedback": "A narrative paragraph explaining what was correct, what was missing, and what should have been included.",
-  "comparison_highlight": "A concise statement of the most critical difference between the examinee's answer and the suggested answer."
+  "score": 4, 
+  "feedback": "Narrative paragraph explaining the rating based on the criteria.",
+  "comparison_highlight": "A concise statement of the most critical difference."
 }"""
 
 
@@ -107,7 +99,7 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
             parsed_json = json.loads(output_text)
 
             # Validate the schema
-            if 'score' not in parsed_json or 'breakdown' not in parsed_json:
+            if 'score' not in parsed_json:
                 raise ValueError("Unexpected AI response format")
 
             # Clamp score to valid range [0, 5]
