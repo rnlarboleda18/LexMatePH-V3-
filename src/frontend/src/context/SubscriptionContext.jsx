@@ -46,11 +46,14 @@ export function SubscriptionProvider({ children }) {
       });
       if (res.ok) {
         const data = await res.json();
+        const isAdminVal = data.is_admin || false;
         setTier(data.tier || 'free');
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
-        setIsAdmin(data.is_admin || false);
+        setIsAdmin(isAdminVal);
+        console.log(`[Subscription] Tier: ${data.tier}, Admin: ${isAdminVal}, Email: ${data.email || 'N/A'}`);
       }
+
     } catch (err) {
       console.error('Failed to fetch subscription status:', err);
     } finally {

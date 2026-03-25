@@ -27,22 +27,24 @@ def _get_user_info(clerk_id: str) -> tuple[str, bool]:
                 cur.execute("SELECT subscription_tier, is_admin, email FROM users WHERE clerk_id = %s", (clerk_id,))
                 row = cur.fetchone()
                 if not row:
+                    logging.info(f"[lexify._get_user_info] clerk_id {clerk_id} not found in DB")
                     return "free", False
                 tier, is_admin, email = row
 
                 # Cross-check with hardcoded admin list
-                if email and email.lower() in [e.lower() for e in ADMIN_EMAILS]:
+                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True
                     # Self-heal DB
                     if not row[1]:
+                        logging.info(f"[lexify._get_user_info] Self-healing admin status for {email}")
                         cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
                         conn.commit()
 
                 return (tier or "free"), (is_admin or False)
-
     except Exception as e:
         logging.error(f"_get_user_info error: {e}")
         return "free", False
+
 
 GRADING_SYSTEM_PROMPT = """You are a Philippine Bar Exam Grader (2026). Evaluate the examinee's answer against the Suggested Answer following the 2026 guidelines #SuccessAchievedthroughMerit.
 Focus on the precision of legal bases and succinctness.

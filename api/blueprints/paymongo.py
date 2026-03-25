@@ -146,19 +146,25 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     (clerk_id,)
                 )
                 row = cur.fetchone()
+                
+                logging.info(f"[subscription-status] clerk_id: {clerk_id}, found: {row is not None}")
+                
                 if not row:
                     return func.HttpResponse(
-                        json.dumps({"tier": "free", "status": "inactive", "expires_at": None, "is_admin": False}),
-                        mimetype="application/json", status_code=200
+                        json.dumps({"tier": "free", "status": "inactive", "expires_at": None, "is_admin": False, "debug": "User not in DB"}),
+                        mimetype="application/json", 
+                        status_code=200,
+                        headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                     )
                 
                 tier, status, expires_at, is_admin, email = row
                 
                 # Check for hardcoded admin bypass
-                if email and email.lower() in [e.lower() for e in ADMIN_EMAILS]:
+                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True
                     # Self-heal DB if needed
                     if not row[3]:
+                        logging.info(f"[subscription-status] Self-healing admin status for {email}")
                         cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
                         conn.commit()
 
@@ -168,9 +174,13 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         "status": status or "inactive",
                         "expires_at": expires_at.isoformat() if expires_at else None,
                         "is_admin": is_admin or False,
+                        "email": email
                     }),
-                    mimetype="application/json", status_code=200
+                    mimetype="application/json", 
+                    status_code=200,
+                    headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                 )
+
 
     except Exception as e:
         logging.error(f"subscription_status error: {e}")
