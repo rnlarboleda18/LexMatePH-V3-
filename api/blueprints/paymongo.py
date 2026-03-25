@@ -141,12 +141,28 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
-                cur.execute(
-                    "SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email FROM users WHERE clerk_id = %s",
-                    (clerk_id,)
-                )
-                row = cur.fetchone()
-                
+                # 1. Try fetching everything (assuming migration has run)
+                try:
+                    cur.execute(
+                        "SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email FROM users WHERE clerk_id = %s",
+                        (clerk_id,)
+                    )
+                    row = cur.fetchone()
+                except Exception as db_err:
+                    logging.warning(f"Full user fetch failed (migration might be missing): {db_err}")
+                    conn.rollback() # Important to reset transaction
+                    # 2. Fallback to columns we are SURE exist
+                    cur.execute(
+                        "SELECT subscription_tier, email FROM users WHERE clerk_id = %s",
+                        (clerk_id,)
+                    )
+                    row = cur.fetchone()
+                    # Map fallback row back to our expected format
+                    if row:
+                        tier, email = row
+                        status, expires_at, is_admin = "inactive", None, False
+                        row = (tier, status, expires_at, is_admin, email)
+
                 logging.info(f"[subscription-status] clerk_id: {clerk_id}, found: {row is not None}")
                 
                 if not row:
@@ -162,11 +178,15 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                 # Check for hardcoded admin bypass
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True
-                    # Self-heal DB if needed
-                    if not row[3]:
-                        logging.info(f"[subscription-status] Self-healing admin status for {email}")
-                        cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
-                        conn.commit()
+                    # Self-heal DB if needed (wrap in try to avoid 500 if col missing)
+                    try:
+                        if not row[3]: # row[3] is is_admin
+                            cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
+                            conn.commit()
+                    except:
+                        conn.rollback()
+                        logging.warning("Could not self-heal is_admin column (probably missing)")
+
 
                 return func.HttpResponse(
                     json.dumps({
@@ -180,6 +200,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     status_code=200,
                     headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                 )
+
 
 
     except Exception as e:
