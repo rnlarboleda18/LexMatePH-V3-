@@ -13,13 +13,18 @@ import Updates from './components/Updates';
 import SupremeDecisions from './components/SupremeDecisions';
 import CodexViewer from './components/CodexViewer';
 import CaseDecisionModal from './components/CaseDecisionModal';
+import SubscriptionModal from './components/SubscriptionModal';
+import UpgradeWall from './components/UpgradeWall';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
 import { ChevronRight } from 'lucide-react';
 import { getSubjectColor } from './utils/colors';
+import { useSubscription } from './context/SubscriptionContext';
+
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
+  const { showUpgradeModal, closeUpgradeModal, tier, canAccess } = useSubscription();
   
   // --- State ---
   const [questions, setQuestions] = useState([]);
@@ -28,6 +33,7 @@ function App() {
   const [error, setError] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const { user } = useUser();
+
 
   // Filters
   const [currentSubject, setCurrentSubject] = useState(null);
@@ -362,6 +368,7 @@ function App() {
                       onCaseSelect={setGlobalSelectedCase}
                       isFullscreen={isFullscreen}
                       onToggleFullscreen={handleToggleFullscreen}
+                      subscriptionTier={tier}
                     />
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
@@ -377,10 +384,18 @@ function App() {
                     />
                   )}
                   {effectiveMode === 'quiz' && (
-                    <LexifyApp
-                      questions={questions}
-                      onClose={() => setMode('supreme_decisions')}
-                    />
+                    canAccess('lexify') ? (
+                      <LexifyApp
+                        questions={questions}
+                        onClose={() => setMode('supreme_decisions')}
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center min-h-[60vh]">
+                        <div className="max-w-md w-full">
+                          <UpgradeWall feature="lexify" variant="inline" />
+                        </div>
+                      </div>
+                    )
                   )}
                   {effectiveMode === 'browse_bar' && (
                     <div className="p-6">
@@ -526,6 +541,11 @@ function App() {
           />
         );
       })()}
+      {/* Global Subscription Upgrade Modal */}
+      {showUpgradeModal && (
+        <SubscriptionModal onClose={closeUpgradeModal} />
+      )}
+
     </Layout>
   );
 }

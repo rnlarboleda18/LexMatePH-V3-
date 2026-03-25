@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize } from 'lucide-react';
+import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import CodalStream from './CodalStream';
 import CodexJurisSidebar from './CodexJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
+import { useSubscription } from '../context/SubscriptionContext';
 
 
 // Recursive TOC Node Component
@@ -53,7 +54,9 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen }) => {
+const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen, subscriptionTier }) => {
+    const { canAccess, openUpgradeModal } = useSubscription();
+
 
     // Title mapping (mirrors CodalStream — keep in sync)
     const codeTitleMap = {
@@ -127,10 +130,15 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     }, [activeAmendmentArticle?.article_num, setActiveAmendmentArticle, setActiveJurisArticle]);
 
     const handleJurisprudenceClick = useCallback((articleNum, paragraphIndex) => {
+        // Gate: Amicus+ only
+        if (!canAccess('codex_linked_cases')) {
+            openUpgradeModal('codex_linked_cases');
+            return;
+        }
         setActiveJurisArticle(articleNum);
         setActiveJurisParagraph(paragraphIndex);
         setActiveAmendmentArticle(null);
-    }, [setActiveJurisArticle, setActiveJurisParagraph, setActiveAmendmentArticle]);
+    }, [canAccess, openUpgradeModal, setActiveJurisArticle, setActiveJurisParagraph, setActiveAmendmentArticle]);
 
 
     // Close active info when clicking outside

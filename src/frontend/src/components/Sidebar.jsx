@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { getSubjectColor } from '../utils/colors';
-import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus, Brain } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import { useSubscription } from '../context/SubscriptionContext';
 
 const subjects = [
     "Civil Law",
@@ -25,7 +26,23 @@ const codexSubjects = [
     { title: "Special Laws", id: "special", icon: Book, color: "text-violet-500", disabled: true }
 ];
 
+const TIER_ICON = { free: Shield, amicus: Zap, juris: Star, barrister: Crown };
+const TIER_COLOR = {
+    free: 'text-gray-500 dark:text-gray-400',
+    amicus: 'text-blue-600 dark:text-blue-400',
+    juris: 'text-purple-600 dark:text-purple-400',
+    barrister: 'text-amber-600 dark:text-amber-400',
+};
+const TIER_BG = {
+    free: 'bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+    amicus: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
+    juris: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
+    barrister: 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800',
+};
+
 const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject, currentSubject }) => {
+    const { tier, tierLabel, openUpgradeModal } = useSubscription();
+    const TierIcon = TIER_ICON[tier] || Shield;
     const [openSection, setOpenSection] = useState(() => {
         if (mode === 'codex' || mode === 'browse_bar') return mode === 'codex' ? 'codex' : 'bar';
         return null;
@@ -279,6 +296,32 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             </div>
 
 
+
+            {/* Subscription Tier Badge */}
+            <SignedIn>
+                <div className={`mx-4 mt-6 mb-2 p-3 rounded-2xl border ${TIER_BG[tier]} flex items-center gap-3`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
+                        <TierIcon size={16} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className={`text-xs font-extrabold ${TIER_COLOR[tier]} uppercase tracking-wide`}>{tierLabel} Plan</p>
+                        {tier === 'free' && (
+                            <p className="text-[10px] text-gray-400 dark:text-gray-500">Limited access</p>
+                        )}
+                        {tier === 'barrister' && (
+                            <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access</p>
+                        )}
+                    </div>
+                    {tier !== 'barrister' && (
+                        <button
+                            onClick={() => openUpgradeModal()}
+                            className="shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-600 shadow-sm hover:opacity-90 transition-opacity"
+                        >
+                            Upgrade
+                        </button>
+                    )}
+                </div>
+            </SignedIn>
 
         </nav >
     );
