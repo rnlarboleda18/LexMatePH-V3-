@@ -257,7 +257,9 @@ export const LexPlayProvider = ({ children }) => {
             });
             if (res.ok) {
                 const newPlaylist = await res.json();
-                fetchPlaylists();
+                // Optimistically update savedPlaylists so UI updates immediately
+                setSavedPlaylists(prev => [...prev, newPlaylist]);
+                fetchPlaylists(); // Background sync
                 // Auto-select the newly created playlist
                 setActivePlaylistId(newPlaylist.id);
                 setPlaylist([]); // New playlist starts empty

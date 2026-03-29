@@ -20,9 +20,9 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
     }, []);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 relative overflow-hidden ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-50 text-slate-900'}`}>
             {/* Global Glassmorphism Background Orbs */}
-            <div className="fixed inset-0 pointer-events-none z-0">
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
                 <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-float ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`}></div>
                 <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-float ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`} style={{animationDelay: '1s'}}></div>
                 <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-float ${isDarkMode ? 'bg-blue-900' : 'bg-blue-200'}`} style={{animationDelay: '2s'}}></div>

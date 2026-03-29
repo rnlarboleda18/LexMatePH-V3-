@@ -8,6 +8,7 @@ const PlaylistDrawer = () => {
         currentTrack,
         currentIndex,
         isPlaying,
+        isLoading,
         playbackRate,
         isDrawerOpen,
         setIsDrawerOpen,
@@ -191,7 +192,17 @@ const PlaylistDrawer = () => {
                                 onClick={handlePlayPause}
                                 className="w-20 h-20 bg-white text-[#0f172a] rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] transition-all hover:scale-105 active:scale-90"
                             >
-                                {isPlaying ? <Pause size={36} fill="currentColor" strokeWidth={0} /> : <Play size={36} fill="currentColor" strokeWidth={0} className="ml-1" />}
+                                {isLoading ? (
+                                    <div className="relative w-12 h-12 flex items-center justify-center">
+                                        <div className="absolute inset-0 border-[4px] border-purple-600/10 rounded-full" />
+                                        <div className="absolute inset-0 border-[4px] border-purple-600 border-t-transparent rounded-full animate-spin" />
+                                        <div className="w-3 h-3 bg-purple-600 rounded-full animate-pulse shadow-[0_0_15px_rgba(147,51,234,0.5)]" />
+                                    </div>
+                                ) : isPlaying ? (
+                                    <Pause size={36} fill="currentColor" strokeWidth={0} />
+                                ) : (
+                                    <Play size={36} fill="currentColor" strokeWidth={0} className="ml-1" />
+                                )}
                             </button>
                             <button
                                 onClick={handleNext}
@@ -247,7 +258,17 @@ const PlaylistDrawer = () => {
                                 >
                                     <div className="relative w-12 h-12 rounded-2xl bg-white/5 flex-shrink-0 overflow-hidden flex items-center justify-center border border-white/10">
                                         <div className={`absolute inset-0 bg-purple-600/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 ${isCurrent ? 'opacity-100' : ''}`}>
-                                            {isCurrent && isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
+                                            {isCurrent && isLoading ? (
+                                                <div className="relative w-7 h-7 flex items-center justify-center">
+                                                    <div className="absolute inset-0 border-2 border-white/20 rounded-full" />
+                                                    <div className="absolute inset-0 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                                                </div>
+                                            ) : isCurrent && isPlaying ? (
+                                                <Pause size={20} fill="currentColor" />
+                                            ) : (
+                                                <Play size={20} fill="currentColor" />
+                                            )}
                                         </div>
                                         <span className={`text-[14px] font-bold ${isCurrent ? 'text-white' : 'text-white/20'}`}>
                                             {idx + 1}

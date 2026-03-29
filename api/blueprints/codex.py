@@ -202,7 +202,16 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      # Hide section_label entirely for CONST because it's rendered inline by ArticleNode
                      section_lbl = ""
                          
-                     article_num = str(r.get('section_num') or "")
+                     article_num = str(r.get('article_num') or "")
+
+                     # Skip stub chapter-header rows: article_num has no '-' and content is very short.
+                     # e.g. 'II', 'X', 'XIV' are nav dividers, NOT real audio articles.
+                     # Real single-section articles like National Territory ('I') have long content.
+                     if ('-' not in article_num
+                             and len((content_to_send or '').strip()) < 50
+                             and 'PREAMBLE' not in title_lbl.upper()):
+                         continue
+
                  elif short_name.upper() == 'FC':
                      book_lbl = "FAMILY CODE"
                      book_n = "1"
@@ -237,7 +246,8 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                  
                  if title_n and str(title_n) not in ['0', 'None', ''] and short_name.upper() not in ['CONST', 'FC']:
                      if short_name.upper() == 'ROC':
-                         title_lbl = f"Rule {title_n} - {title_lbl}" if title_lbl else f"Rule {title_n}"
+                         # Do not prepend for ROC, CodalStream.jsx dynamically hoists the Rule N header 
+                         pass
                      else:
                          title_lbl = f"Title {int_to_roman(title_n)} - {title_lbl}" if title_lbl else f"Title {int_to_roman(title_n)}"
 
@@ -306,7 +316,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 "metadata": code_meta,
                 "articles": mapped_rows,
                 "date": target_date or "latest"
-             }, req, 200, max_age=3600 if not target_date else 86400)
+             }, req, 200, max_age=(0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400)
 
         # 2. Query Active Versions
         if target_date:
@@ -427,7 +437,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
         cur.execute(f"""
             SELECT l.id as link_id, l.case_id, 
             CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
-            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url
+            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
             FROM codal_case_links l JOIN sc_decided_cases s ON l.case_id = s.id
             WHERE l.statute_id = %s AND ({where_clause})
             {'AND l.subject_area = %s' if subject_filter else ''}

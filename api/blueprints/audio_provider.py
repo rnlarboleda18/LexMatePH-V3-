@@ -3,6 +3,8 @@ import os
 import io
 import re
 import json
+import time
+import threading
 from datetime import datetime, timedelta
 
 # Removed local file logging as it causes permission errors in production
@@ -25,8 +27,12 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v9" # Strip SSML tokens from gTTS fallback path
-AZURE_VOICE_NAME = "en-PH-RosaNeural" # Hardcoded to bypass invalid production environment variable
+CACHE_VERSION = "v1"  # Reset to v1 as blobs are being cleared
+
+# Global lock: Azure Speech F0 allows only 1 concurrent real-time synthesis.
+# This prevents 429 errors when multiple requests overlap (e.g. fast track skipping).
+_TTS_LOCK = threading.Lock()
+_TTS_LOCK_TIMEOUT = 30  # seconds to wait before giving up and using gTTS
 
 # ----- Custom Pronunciation Rules -----
 LATIN_REPLACEMENTS = {
@@ -55,22 +61,27 @@ LATIN_REPLACEMENTS = {
 }
 
 SPANISH_TERMS = [
+    # ── Compound phrases first (longest match wins) ──────────────────────────
     "reclusión perpetua", "reclusion perpetua",
     "reclusión temporal", "reclusion temporal",
-    "prisión mayor", "prision mayor",
+    "reclusión mayor",   "reclusion mayor",      # ← was missing
+    "prisión mayor",     "prision mayor",
     "prisión correccional", "prision correccional",
+    "prisión correccional mayor", "prision correccional mayor",  # ← was missing
     "arresto mayor",
     "arresto menor",
+    # ── Individual terms ─────────────────────────────────────────────────────
     "prisión", "prision",
     "arresto",
-    "mayor",
-    "menor",
-    "correccional",
     "reclusión", "reclusion",
+    "correccional",
     "perpetua",
     "temporal",
+    "mayor",
+    "menor",
     "destierro",
-    "fianza"
+    "fianza",
+    "multa",
 ]
 
 FILIPINO_LEGAL_TERMS = [
@@ -301,6 +312,53 @@ def _chunk_text(text, max_len=2000):
 
 
 # ----- Text fetch from DB -----
+import threading
+_codal_boundaries = {}
+_codal_boundaries_lock = threading.Lock()
+
+def get_codal_boundaries(table_name):
+    global _codal_boundaries
+    if table_name in _codal_boundaries:
+        return _codal_boundaries[table_name]
+        
+    with _codal_boundaries_lock:
+        if table_name in _codal_boundaries:
+            return _codal_boundaries[table_name]
+            
+        bounds = {}
+        try:
+            conn = get_db_connection()
+            try:
+                with conn.cursor() as cur:
+                    if table_name == 'roc_codal':
+                        bounds = {'g1': {}, 'g2': {}}
+                        cur.execute("SELECT id, LOWER(group_1_title), LOWER(group_2_title) FROM roc_codal ORDER BY rule_num ASC, section_num ASC")
+                        for row in cur.fetchall():
+                            id_val, g1, g2 = row
+                            id_str = str(id_val)
+                            if g1 and g1 not in bounds['g1']: bounds['g1'][g1] = id_str
+                            if g2 and g2 not in bounds['g2']: bounds['g2'][g2] = id_str
+                        
+                    elif table_name in ['const_codal', 'consti_codal', 'fc_codal']:
+                        bounds = {'group_header': {}}
+                        cur.execute(f"SELECT LOWER(group_header), MIN(id) FROM {table_name} WHERE group_header IS NOT NULL AND group_header != '' GROUP BY LOWER(group_header)")
+                        for r in cur.fetchall(): bounds['group_header'][r[0]] = r[1]
+                        
+                    elif table_name in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                        bounds = {'book_label': {}, 'title_label': {}, 'chapter_label': {}}
+                        for col in bounds.keys():
+                            cur.execute(f"SELECT LOWER({col}), MIN(id) FROM {table_name} WHERE {col} IS NOT NULL AND {col} != '' GROUP BY LOWER({col})")
+                            for r in cur.fetchall(): bounds[col][r[0]] = r[1]
+                            
+            finally:
+                put_db_connection(conn)
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning(f"Failed to load boundaries for {table_name}: {e}")
+            
+        _codal_boundaries[table_name] = bounds
+        return bounds
+
 def _get_text_for_case(content_id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -393,17 +451,31 @@ def _get_text_for_codal(content_id, code_id=None):
     try:
         if code_id and code_id.lower() in LEGACY_TABLES:
             table = LEGACY_TABLES[code_id.lower()]
-            # group_header only exists in const_codal
-            cols = "article_num, article_title, content_md"
+            cols = "id, article_num, article_title, content_md"
             if table in ["consti_codal", "const_codal"]:
-                cols = "article_num, article_title, group_header, content_md, section_label"
+                cols = "id, article_num, article_title, group_header, content_md, section_label"
             elif table == "fc_codal":
-                cols = "article_num, article_title, content_md, section_label"
+                cols = "id, article_num, article_title, content_md, section_label, group_header"
+            elif table in ["rpc_codal", "civ_codal", "labor_codal"]:
+                cols = "id, book_label, title_label, chapter_label, article_num, article_title, content_md"
             elif table == "roc_codal":
-                cols = "rule_section_label AS article_num, section_title AS article_title, section_content AS content_md, group_2_title AS section_label"
+                cols = (
+                    "id, rule_section_label AS article_num, section_title AS article_title, "
+                    "section_content AS content_md, group_1_title, group_2_title, "
+                    "part_num, part_title, "
+                    "COALESCE(rule_title_full, ("
+                    "  SELECT r2.rule_title_full FROM roc_codal r2 "
+                    "  WHERE r2.rule_num = roc_codal.rule_num "
+                    "  AND r2.rule_title_full IS NOT NULL LIMIT 1"
+                    ")) AS group_header"
+                )
 
             # --- Multi-stage Lookup Strategy ---
             search_patterns = [str(content_id)] # 1. Exact match
+            
+            # Backward compat: '0' used to be the Preamble before we renamed to 'PREAMBLE'
+            if str(content_id) == '0' and code_id and code_id.lower() == 'const':
+                search_patterns.insert(0, 'PREAMBLE')
             
             cid_str = str(content_id).strip()
             extra_filter = ""
@@ -456,12 +528,33 @@ def _get_text_for_codal(content_id, code_id=None):
                 clean = re.sub(r'[:;]', ',', clean)
                 # Replace all newlines and excessive whitespace with a single space
                 clean = re.sub(r'\s+', ' ', clean).strip()
-                
+
+                # Strip literal backslash-escape text stored in DB content
+                # e.g. DB may store literal '\n' (backslash+n as 2 chars) between enumeration items
+                # Azure TTS reads these as "backslash en" — audible as "backslash TWO backslash"
+                clean = re.sub(r'\\[nrtfvb]', ' ', clean)  # \n \r \t etc. as text
+                clean = clean.replace('\\', ' ')           # any remaining lone backslash
+                clean = re.sub(r'\s+', ' ', clean).strip() # re-collapse after removals
+
+                # Strip redundant digit clarifications like "one (1)" -> "one", "five (5) years" -> "five years"
+                # MUST run BEFORE enumeration conversion while (N) is still in paren form
+                clean = re.sub(r'([a-zA-Z-]+)\s*\(\s*\d+\s*\)', r'\1', clean)
+
+                # Convert enumerated item labels (1) (2) (3) to "1," so TTS reads them naturally
+                # Uses \s* around digit to handle spaces left by backslash stripping: \(2\) -> " (2 )" -> "2,"
+                clean = re.sub(r'\(\s*(\d+)\s*\)', r'\1,', clean)
+
                 # Strip currency repetitions like (₱40,000) or (P200,000)
                 clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
                 
-                # Strip article version tags at the end of paragraphs like (75a), (n), (1a, n)
-                clean = re.sub(r'\s*\(\s*(?:(?:\d+[a-zA-Z]?|n)(?:,\s*(?:\d+[a-zA-Z]?|n))*)\s*\)\s*(?=\n|$)', '', clean.strip())
+                # Strip legal citation/version tags ANYWHERE in text:
+                # Matches (n), (1a), (6a), (1a, R2), (1a, n) etc.
+                # Does NOT match pure subsection labels (a),(b),(c) — those have a single letter only
+                clean = re.sub(
+                    r'\s*\(\s*(?:(?:\d+[a-zA-Z]?|n|[A-Z]\d+)(?:\s*,\s*(?:\d+[a-zA-Z]?|n|[A-Z]\d+))*)\s*\)',
+                    ' ', clean
+                )
+                clean = re.sub(r'\s+', ' ', clean).strip()
                 
                 # Deduplication logic (for Family Code mostly):
                 is_redundant = False
@@ -481,33 +574,175 @@ def _get_text_for_codal(content_id, code_id=None):
                     clean_num = art_num.split('-')[-1]
                 
                 if code_id and code_id.lower() == 'const':
-                    # Use section_label directly for Constitution to decouple grouping titles
+                    # Use article_num (DB value) for routing logic
+                    art_num_db = str(art_num).strip()
                     s_label = (row.get('section_label') or '').strip().rstrip('.')
-                    
-                    if "PREAMBLE" in s_label.upper() or "PREAMBLE" in str(clean_num).upper() or "PREAMBLE" in art_title.upper():
-                        header = "Preamble"
+
+                    if "PREAMBLE" in art_num_db.upper() or "PREAMBLE" in s_label.upper():
+                        # Preamble row: prepend Codal name
+                        header = "1987 Constitution of the Republic of the Philippines. Preamble"
+
                     else:
-                        header = s_label if s_label else f"Article {clean_num}"
-                        # Standalone Header rows should include the title
-                        if "ARTICLE" in header.upper():
-                            if art_title and not is_redundant and art_title.lower() not in header.lower():
-                                header += f'. {art_title}'
+                        # Section row: article_num like 'I-0', 'II-1', 'IX-A-1', 'XVIII-5'
+                        parts = art_num_db.split('-')
+                        sect_num = parts[-1]  # Always the last segment (e.g. '0', '1', '5')
+
+                        # Build article identifier
+                        if len(parts) == 3 and not parts[1].isdigit():
+                            # e.g. IX-A-1 → sub-article "IX-A"
+                            art_roman = f"{parts[0]}-{parts[1]}"
+                        else:
+                            art_roman = parts[0]  # e.g. 'I', 'II', 'XVIII'
+
+                        # Handle special Article I (has body but no sections, encoded as I-0)
+                        if sect_num == '0':
+                            art_label = f"Article {art_roman}"
+                            if art_title and not is_redundant:
+                                art_label += f'. {art_title}'
+                            header = art_label
+                        else:
+                            # Integrated Boundary Detection (Handles sub-headers like "Principles", "State Policies")
+                            group_val = row.get('group_header')
+                            section_id = row.get('id')
+                            
+                            # Use boundary map to determine if we should announce a header update
+                            boundaries = get_codal_boundaries(table)
+                            is_group_start = False
+                            if group_val and boundaries and 'group_header' in boundaries:
+                                g_lower = group_val.lower()
+                                if g_lower in boundaries['group_header'] and str(boundaries['group_header'][g_lower]) == str(section_id):
+                                    is_group_start = True
+
+                            if is_group_start:
+                                # Prepend the group header naturally
+                                # For Section 1, also include Article name
+                                if sect_num == '1':
+                                    art_label = f"Article {art_roman}"
+                                    if art_title and not is_redundant:
+                                        art_label += f'. {art_title}'
+                                    header = f"{art_label}. {group_val}. Section 1"
+                                else:
+                                    header = f"{group_val}. Section {sect_num}"
+                            elif sect_num == '1':
+                                # Standard Section 1 (no mid-section group header)
+                                art_label = f"Article {art_roman}"
+                                if art_title and not is_redundant:
+                                    art_label += f'. {art_title}'
+                                header = f"{art_label}. Section 1"
+                            else:
+                                # Normal section
+                                header = f"Section {sect_num}"
+
+                        # FIX: Strip leading "SECTION N." from clean to avoid double-mention
+                        # e.g. header="...Section 1" and clean starts with "SECTION 1, The Philippines..."
+                        import re as _re
+                        clean = _re.sub(r'^SECTION\s+\d+[\.,]?\s*', '', clean, flags=_re.IGNORECASE).strip()
                 else:
                     if code_id and code_id.lower() == 'roc':
-                        # ROC Specific: Suppress Rule repetition for sections > 1
-                        # art_num is typically "Rule 1, Section 2"
-                        section_match = re.search(r'Section\s+(\d+)', str(clean_num), re.IGNORECASE)
-                        if section_match and section_match.group(1) != '1':
-                            header = f"Section {section_match.group(1)}"
+                        # ROC: art_num looks like "Rule 2, Section 1" or "Rule 2, Section 8"
+                        roc_rule_m = re.search(r'(Rule\s+\d+)', str(clean_num), re.IGNORECASE)
+                        roc_sect_m = re.search(r'Section\s+(\d+)', str(clean_num), re.IGNORECASE)
+                        rule_label = roc_rule_m.group(1) if roc_rule_m else str(clean_num)
+                        sect_num_roc = roc_sect_m.group(1) if roc_sect_m else '1'
+                        
+                        rule_num_int = 0
+                        if roc_rule_m:
+                            try:
+                                rule_num_int = int(re.search(r'\d+', rule_label).group())
+                            except:
+                                pass
+
+                        hdr_parts = []
+                        starts = get_codal_boundaries('roc_codal')
+                        curr_id = row.get('id')
+                        
+                        # 0. Codal Title & Part - Only on first rule of a Part (always sect 1)
+                        if sect_num_roc == '1' and rule_num_int in [1, 72, 110, 128]:
+                            hdr_parts.append("Rules of Court of the Philippines")
+                            p_num = row.get('part_num')
+                            p_title = (row.get('part_title') or '').title()
+                            if p_num and p_title:
+                                hdr_parts.append(f"Part {p_num}. {p_title}")
+                        
+                        # 1. Group 1 Title
+                        g1 = (row.get('group_1_title') or '').strip()
+                        if g1 and starts['g1'].get(g1.lower()) == str(curr_id):
+                            hdr_parts.append(g1.title())
+                        
+                        # 2. Group 2 Title
+                        g2 = (row.get('group_2_title') or '').strip()
+                        if g2 and starts['g2'].get(g2.lower()) == str(curr_id):
+                            hdr_parts.append(g2.title())
+
+                        if sect_num_roc == '1':
+                            # 3. Rule Number
+                            hdr_parts.append(rule_label)
+                            
+                            # 4. Rule Title
+                            g_hdr = (row.get('group_header') or '').strip()
+                            if g_hdr:
+                                # Strip artifact 'RULE N' prefix if somehow still present
+                                clean_g_hdr = re.sub(r'^RULE\s+\d+\s+', '', g_hdr, flags=re.IGNORECASE).strip()
+                                if clean_g_hdr: hdr_parts.append(clean_g_hdr.title())
+                            
+                            roc_hdr = '. '.join(hdr_parts)
+                            header = f"{roc_hdr}. Section 1"
                         else:
-                            header = str(clean_num)
+                            if hdr_parts:
+                                header = f"{'. '.join(hdr_parts)}. Section {sect_num_roc}"
+                            else:
+                                header = f"Section {sect_num_roc}"
+                            
+                        if art_title and not is_redundant:
+                            header += f". {art_title}"
+                    elif table in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                        hdr_parts = []
+                        starts = get_codal_boundaries(table)
+                        curr_id = row.get('id')
+                        
+                        b_lbl = (row.get('book_label') or '').strip()
+                        if b_lbl and starts['book_label'].get(b_lbl.lower()) == curr_id:
+                            hdr_parts.append(b_lbl.title())
+                            
+                        t_lbl = (row.get('title_label') or '').strip()
+                        if t_lbl and starts['title_label'].get(t_lbl.lower()) == curr_id:
+                            hdr_parts.append(t_lbl.title())
+                            
+                        c_lbl = (row.get('chapter_label') or '').strip()
+                        if c_lbl and starts['chapter_label'].get(c_lbl.lower()) == curr_id:
+                            hdr_parts.append(c_lbl.title())
+                            
+                        art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
+                        if art_title and not is_redundant:
+                            art_name += f'. {art_title}'
+                            
+                        hdr_parts.append(art_name)
+                        header = '. '.join(hdr_parts)
+                        
+                    elif table == 'fc_codal':
+                        hdr_parts = []
+                        starts = get_codal_boundaries('fc_codal')
+                        curr_id = row.get('id')
+                        
+                        g_hdr = (row.get('group_header') or '').strip()
+                        if g_hdr and starts['group_header'].get(g_hdr.lower()) == curr_id:
+                            hdr_parts.append(g_hdr.title())
+                            
+                        art_name = str(clean_num) if re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE) else f'Article {clean_num}'
+                        if art_title and not is_redundant:
+                            art_name += f'. {art_title}'
+                            
+                        hdr_parts.append(art_name)
+                        header = '. '.join(hdr_parts)
+                        
                     elif re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE):
                         header = str(clean_num)
+                        if art_title and not is_redundant: 
+                            header += f'. {art_title}'
                     else:
                         header = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
-
-                    if art_title and not is_redundant: 
-                        header += f'. {art_title}'
+                        if art_title and not is_redundant: 
+                            header += f'. {art_title}'
                     
                 # Deduplicate: if the stored content body already BEGINS with the article header, skip the prefix
                 # This handles cases like 266-A where content starts with "Article 266-A. Rape..."
@@ -541,11 +776,24 @@ def _get_text_for_codal(content_id, code_id=None):
         clean = re.sub(r'[:;]', ',', clean)
         clean = re.sub(r'\s+', ' ', clean).strip()
 
+        # Strip literal backslash-escape text stored in DB content
+        # e.g. DB stores \(1\) as Markdown-escaped parens — TTS reads \ as "backslash"
+        clean = re.sub(r'\\[nrtfvb]', ' ', clean)  # literal \n \r \t as text
+        clean = clean.replace('\\', ' ')           # any remaining lone backslash
+        clean = re.sub(r'\s+', ' ', clean).strip() # re-collapse
+
+        # Convert enumerated item labels \(1\) / (1) to "1," for natural TTS speech
+        clean = re.sub(r'\(\s*(\d+)\s*\)', r'\1,', clean)
+
         # Strip currency repetitions like (₱40,000) or (P200,000)
         clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
         
-        # Strip article version tags at the end like (75a), (9a), (10)
-        clean = re.sub(r'\(\d+[a-z]?\)\s*$', '', clean.strip())
+        # Strip legal citation/version tags ANYWHERE in text (n), (1a), (6a), (1a, R2)
+        clean = re.sub(
+            r'\s*\(\s*(?:(?:\d+[a-zA-Z]?|n|[A-Z]\d+)(?:\s*,\s*(?:\d+[a-zA-Z]?|n|[A-Z]\d+))*)\s*\)',
+            ' ', clean
+        )
+        clean = re.sub(r'\s+', ' ', clean).strip()
 
         header = 'Preliminary Article' if str(art_num) == '0' else f'Article {art_num}'
         full_text = f"{header}. {clean}" if header else clean
@@ -647,70 +895,71 @@ def _generate_audio_gtts(text):
     return combined_data, 'audio/mpeg', '.mp3'
 
 def _generate_audio_azure(text, voice_name="en-PH-RosaNeural", rate=1.0):
-    """Generate MP3 audio using Azure Speech SDK.
-    Supports multi-chunk concatenation to bypass 4000 char limit.
-    The `rate` parameter controls speech speed natively via SSML prosody,
-    which produces natural-sounding results (unlike browser-side playbackRate manipulation).
+    """Generate MP3 audio using Azure Speech REST API (HTTP POST, not WebSocket SDK).
+    The REST API avoids WebSocket connection rate limiting issues on the F0 tier.
+    Supports multi-chunk concatenation to bypass SSML size limits.
     """
+    import requests as _requests
+
     speech_key = os.environ.get("SPEECH_KEY", "")
     speech_region = os.environ.get("SPEECH_REGION", "japaneast")
     if not speech_key or "<insert" in speech_key:
         raise ValueError("Azure Speech key not configured")
-        
-    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
-    # Use dynamic voice name passed as argument
-    speech_config.speech_synthesis_voice_name = voice_name
-    speech_config.set_speech_synthesis_output_format(
-        speechsdk.SpeechSynthesisOutputFormat.Audio16Khz128KBitRateMonoMp3
-    )
-    
-    synth = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
-    
+
+    tts_url = f"https://{speech_region}.tts.speech.microsoft.com/cognitiveservices/v1"
+    headers = {
+        "Ocp-Apim-Subscription-Key": speech_key,
+        "Content-Type": "application/ssml+xml",
+        "X-Microsoft-OutputFormat": "audio-16khz-128kbitrate-mono-mp3",
+    }
+
     # Use en-PH for James/Rosa, or fil-PH for Blessica/Angelo
     lang_code = "en-PH" if "James" in voice_name or "Rosa" in voice_name else "en-US"
     if "Blessica" in voice_name or "Angelo" in voice_name:
         lang_code = "fil-PH"
 
-    # Clamp rate to a safe range (Azure supports 0.5x - 2.0x natively without artifacts)
+    # Clamp rate to a safe range (Azure supports 0.5x - 2.0x natively)
     rate = max(0.5, min(2.0, float(rate)))
-    # Format as a percentage string for SSML (e.g. 0.8 -> "-20%", 1.25 -> "+25%")
-    # Azure SSML prosody rate also accepts plain floats like "0.8" for relative speed
     rate_str = f"{rate}"
 
     # Chunk text to stay under SSML limits
     chunks = _chunk_text(text, max_len=3000)
     if not chunks:
         raise ValueError("No text provided for Azure TTS")
-        
+
     all_audio_data = []
     for chunk in chunks:
         # Escape special XML characters for SSML
         escaped_text = chunk.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        
-        # Hydrate the Multilingual SSML tokens!
+
+        # Hydrate the Multilingual SSML tokens
         escaped_text = escaped_text.replace("__ES_START__", "<lang xml:lang='es-MX'>")
         escaped_text = escaped_text.replace("__ES_END__", "</lang>")
         escaped_text = escaped_text.replace("__PH_START__", "<lang xml:lang='fil-PH'>")
         escaped_text = escaped_text.replace("__PH_END__", "</lang>")
         escaped_text = escaped_text.replace("__LATIN_START__", "<lang xml:lang='it-IT'>")
         escaped_text = escaped_text.replace("__LATIN_END__", "</lang>")
-        
+
+        # mstts namespace required for multilingual language switching
         ssml = (
-            f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{lang_code}'>"
+            f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis'"
+            f" xmlns:mstts='http://www.w3.org/2001/mstts' xml:lang='{lang_code}'>"
             f"<voice name='{voice_name}'>"
             f"<prosody rate='{rate_str}'>{escaped_text.strip()}</prosody>"
             f"</voice></speak>"
         )
-        
-        result = synth.speak_ssml_async(ssml).get()
-        if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-            all_audio_data.append(result.audio_data)
+
+        resp = _requests.post(tts_url, headers=headers, data=ssml.encode("utf-8"), timeout=30)
+        if resp.status_code == 200:
+            all_audio_data.append(resp.content)
         else:
-            raise RuntimeError(f"Azure TTS chunk failed: {result.reason}")
-            
-    # Concatenate MP3 bytes
+            raise RuntimeError(
+                f"Azure TTS REST API failed: HTTP {resp.status_code} | {resp.text[:200]}"
+            )
+
     combined_data = b"".join(all_audio_data)
     return combined_data, 'audio/mpeg', '.mp3'
+
 
 # ----- Main endpoint: streams audio directly -----
 @audio_provider_bp.route(route="audio/{content_type}/{content_id}", auth_level=func.AuthLevel.ANONYMOUS, methods=["GET"])
@@ -777,36 +1026,75 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     if not text or not text.strip():
         return func.HttpResponse("No text content to synthesize", status_code=404)
 
-    # --- 3. Generate audio via Azure Speech (Preferred) ---
+    # --- 3. Generate audio via Azure Speech (Preferred) with retry on 429 ---
+    # Acquire global TTS lock to prevent concurrent synthesis on F0 (1 concurrent session limit)
     audio_data, mime_type, ext = None, None, None
+    tts_engine = "unknown"
     try:
         if AZURE_SPEECH_AVAILABLE:
-            try:
-                audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
-                logging.info(f"Audio generated via Azure TTS (MP3) at rate={rate}")
-            except Exception as e:
-                logging.warning(f"Azure TTS failed, falling back to gTTS: {e}")
+            azure_success = False
+            last_azure_error = None
+            max_retries = 3
+
+            lock_acquired = _TTS_LOCK.acquire(timeout=_TTS_LOCK_TIMEOUT)
+            if not lock_acquired:
+                logging.warning("TTS lock timeout — another synthesis is running too long. Falling back to gTTS.")
                 audio_data, mime_type, ext = _generate_audio_gtts(text)
+                tts_engine = "gtts"
+            else:
+                try:
+                    for attempt in range(1, max_retries + 1):
+                        try:
+                            audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
+                            logging.info(f"Audio generated via Azure TTS ({voice_name}) at rate={rate} (attempt {attempt})")
+                            tts_engine = "azure"
+                            azure_success = True
+                            break
+                        except Exception as e:
+                            last_azure_error = e
+                            err_str = str(e).lower()
+                            is_throttle = "429" in err_str or "too many" in err_str or "toomany" in err_str
+                            if is_throttle and attempt < max_retries:
+                                wait_sec = 2 ** attempt  # 2s, 4s
+                                logging.warning(f"Azure TTS throttled (429), retry {attempt}/{max_retries} in {wait_sec}s")
+                                time.sleep(wait_sec)
+                            else:
+                                logging.warning(f"Azure TTS failed after {attempt} attempt(s): {e}")
+                                break
+                    if not azure_success:
+                        logging.warning(f"Azure TTS unavailable, falling back to gTTS. Last error: {last_azure_error}")
+                        audio_data, mime_type, ext = _generate_audio_gtts(text)
+                        tts_engine = "gtts"
+                finally:
+                    _TTS_LOCK.release()
         else:
-            logging.warning("Azure Speech not available, falling back to gTTS")
+            logging.warning("Azure Speech SDK not available, falling back to gTTS")
             audio_data, mime_type, ext = _generate_audio_gtts(text)
+            tts_engine = "gtts"
     except Exception as e:
-        logging.error(f"TTS fallback failed: {e}")
+        logging.error(f"TTS generation failed entirely: {e}")
         return func.HttpResponse(f"Audio generation failed: {e}", status_code=500)
 
     # --- 4. Upload to Azure Blob and Redirect ---
-    blob_name = f"{cache_key}{ext}"
+    # Use a separate cache key suffix for TTS engines so they can be explicitly identified
+    effective_cache_key = f"{cache_key}_{tts_engine}"
+    blob_name = f"{effective_cache_key}{ext}"
     _save_to_cache(blob_name, audio_data, mime_type=mime_type)
     sas_url = _get_from_cache(blob_name)
     if sas_url:
-        logging.info(f"Uploaded to Azure Blob, Redirecting to SAS URL")
+        logging.info(f"Uploaded to Azure Blob ({tts_engine}), Redirecting to SAS URL")
         return func.HttpResponse(
             status_code=302,
-            headers={"Location": sas_url}
+            headers={
+                "Location": sas_url,
+                "X-TTS-Engine": tts_engine,
+            }
         )
 
     # --- 5. Fallback: stream audio directly if blob upload failed ---
-    logging.info(f"Blob upload failed, streaming {len(audio_data)} bytes directly")
+    if not audio_data:
+        return func.HttpResponse("Audio generation produced no data", status_code=500)
+    logging.info(f"Blob upload failed, streaming {len(audio_data)} bytes directly ({tts_engine})")
     return func.HttpResponse(
         body=audio_data,
         status_code=200,
@@ -814,5 +1102,6 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
         headers={
             "Content-Length": str(len(audio_data)),
             "Accept-Ranges": "bytes",
+            "X-TTS-Engine": tts_engine,
         }
     )

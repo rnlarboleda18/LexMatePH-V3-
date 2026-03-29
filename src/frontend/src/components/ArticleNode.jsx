@@ -9,16 +9,23 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     if (!article) return null;
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
+    // --- HOOKS MUST BE CALLED TOP-LEVEL ---
     const { playNow } = useLexPlayApi();
     const docCode = (codeId || article?.code_id || "").toLowerCase();
-    const skipKeywords = ['roc', 'const'].includes(docCode) ? ['SECTION'] : [];
+    
+    const hasContent = !!(article.content_md || 
+                  (article.elements && article.elements !== '[]') || 
+                  (article.amendments && article.amendments !== '[]') ||
+                  (article.amendment_links && article.amendment_links.length > 0));
+
+    const skipKeywords = ['roc', 'const'].includes(docCode) ? ['SECTION', 'RULE'] : [];
 
     const handleAddToPlaylist = (e) => {
         e.stopPropagation();
 
         const numStr = String(article.article_num || '');
         let displayTitle = /^(article|preamble|section|rule)/i.test(numStr)
-            ? toTitleCase(numStr)
+            ? toTitleCase(numStr, skipKeywords)
             : `Article ${numStr}`;
             
         if (numStr === '0') displayTitle = 'Preliminary Article';
@@ -45,9 +52,23 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             if (displayTitle.toLowerCase().includes('preamble') || articleHeader.toLowerCase().includes('preamble')) {
                 displayTitle = "Preamble";
             } else {
-                const articleMatch = articleHeader.match(/(ARTICLE [A-Z]+)/i);
+                // title_label is like "ARTICLE II\nDeclaration of Principles and State Policies"
+                const headerLines = articleHeader.split('\n');
+                const articleMatch = headerLines[0].match(/(ARTICLE\s+[A-Z0-9-]+)/i);
+                const chapTitle = headerLines[1] ? headerLines[1].trim() : '';
+
                 if (articleMatch) {
-                    displayTitle = `${toTitleCase(articleMatch[1])}, ${displayTitle}`;
+                    const articleLabel = toTitleCase(articleMatch[1]); // "Article II"
+                    if (displayTitle.toUpperCase().startsWith('ARTICLE')) {
+                        // displayTitle is already the article label (chapter headers / standalone articles)
+                        // Build "Article I. National Territory" instead of "Article I, Article I"
+                        displayTitle = chapTitle
+                            ? `${articleLabel}. ${chapTitle}`
+                            : articleLabel;
+                    } else {
+                        // displayTitle is "Section 5" — prepend article label for context
+                        displayTitle = `${articleLabel}, ${displayTitle}`;
+                    }
                 }
             }
         } else {
@@ -69,6 +90,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
     let contentToDisplay = article.content_md || '';
 
+    // GLOBAL PRE-PROCESS: The DB stores enumeration markers as backslash-escaped parens, e.g. \(2\).
+    // Un-escape all \(X\) patterns to (X) so all downstream regex splitting works correctly.
+    contentToDisplay = contentToDisplay.replace(/\\\(([^)]*)\\\)/g, '($1)');
+
     // Strip section headers that were mistakenly included in content during ingestion
     // These should be rendered separately via section_label, not embedded in content
     contentToDisplay = contentToDisplay.replace(/^##\s+SECTION\s+\d+\s+.+$/gm, '').trim();
@@ -79,18 +104,24 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     contentToDisplay = contentToDisplay.replace(/^#\s+(?!Article|Section|Art\.)[^\n]+\n?/, '').trim();
 
     // Force nested enumerations that are incorrectly fused (either on the same line or via a single \n)
-    // to become independent paragaph building-blocks so they can each receive their own cascading indent styling.
-    contentToDisplay = contentToDisplay
-        // 1. Break before embedded bracketed markers like `[(b)` wedged mid-sentence
-        .replace(/([a-zA-Z0-9.,;:!?])\s+(\[\s*\([a-zA-Z0-9]{1,3}\)\s*)/g, "$1\n\n$2")
-        // 2. Break before unbracketed markers like `(a)` that are only separated by a single newline
-        .replace(/([a-zA-Z0-9.,;:!?])\s*\n\s*(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
-        // 3. Break before unbracketed markers like `(b)` wedged directly on the same line after a sentence ender 
-        .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
-        // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
-        .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, "$1\n\n$2")
-        // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
-        .replace(/([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi, "$1\n\n$2");
+    // to become independent paragraph building-blocks so they can each receive their own cascading indent styling.
+    // SKIP for Constitution: the Constitution-specific rendering block handles all splitting itself.
+    // (Running these rules on Constitution breaks Section headers by splitting SECTION 12. (1) into two paragraphs,
+    //  and also causes false positives like "provided with one." being treated as an ordinal marker.)
+    const _isConstForPreProc = (codeId || article?.code_id || '').toLowerCase() === 'const';
+    if (!_isConstForPreProc) {
+        contentToDisplay = contentToDisplay
+            // 1. Break before embedded bracketed markers like `[(b)` wedged mid-sentence
+            .replace(/([a-zA-Z0-9.,;:!?])\s+(\[\s*\([a-zA-Z0-9]{1,3}\)\s*)/g, "$1\n\n$2")
+            // 2. Break before unbracketed markers like `(a)` that are only separated by a single newline
+            .replace(/([a-zA-Z0-9.,;:!?])\s*\n\s*(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
+            // 3. Break before unbracketed markers like `(b)` wedged directly on the same line after a sentence ender
+            .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
+            // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
+            .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, "$1\n\n$2")
+            // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
+            .replace(/([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi, "$1\n\n$2");
+    }
 
     // --- SMART HEADER EXTRACTION ---
     // Detect if content starts with an embedded header (e.g., "**Article 266-A...")
@@ -138,8 +169,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     }
 
     const {
+        id,
         key_id,
         article_num,
+        article_number,
         article_suffix,
         article_title,
         content_md,
@@ -149,7 +182,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         footnotes
     } = article;
 
-    const lookup_id = key_id || String(article_num);
+    const currentArtNum = article_num || article_number;
+    const stableId = id || currentArtNum;
+    const lookup_id = key_id || String(currentArtNum);
 
     const parsedElements = typeof elements === 'string' ? JSON.parse(elements) : elements;
     let parsedAmendments = typeof amendments === 'string' ? JSON.parse(amendments) : amendments;
@@ -203,6 +238,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     // Keep track of which footnote popover is open
     const [activeFootnoteMarker, setActiveFootnoteMarker] = useState(null);
 
+    // Bypassing empty articles AFTER all hooks have been initialized
+    if (!hasContent) return null;
+
     const generalLinkCount = (article.paragraph_links && article.paragraph_links['-1']) || 0;
     const isConstCode = codeId === 'const' || (article?.code_id && article.code_id.toLowerCase() === 'const');
     const hasDynamicTitle = (!(!article_num || String(article_num).includes('Header') || String(article_num).includes('Subheader'))) && !isConstCode;
@@ -220,7 +258,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                !cleanFirstSeg.includes('(');
 
     return (
-        <div id={`article-${article_num}`} className="relative group mt-4">
+        <div id={`article-${stableId}`} className="relative group mt-4">
 
             {/* Main Content Area with Floated Badge */}
             {hasHeaderContent && (
@@ -306,16 +344,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                     {/* Amendment History (Floating Popover) */}
                     {isAmended && isHistoryOpen && (
-                        <div className="absolute top-8 left-0 z-50 w-[500px] max-w-[90vw] bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
+                        <div className="absolute top-8 left-0 sm:left-2 z-50 w-[500px] max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
                             <div className="flex justify-between items-start mb-3">
                                 <h4 className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase flex items-center gap-2">
                                     <Info size={14} /> Amendment History
                                 </h4>
                                 <button
                                     onClick={() => setIsHistoryOpen(false)}
-                                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xs"
+                                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                                 >
-                                    Close
+                                    <X size={16} />
                                 </button>
                             </div>
 
@@ -396,9 +434,31 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         }
                         if (currentSegment) segments.push(currentSegment);
                     } else {
-                        segments = contentToDisplay.split(/\n\n+/);
+                        // For Constitution, if a new line starts with an enumeration like `(1)` or `(a)`,
+                        // we enforce a double newline so it is parsed as an independent paragraph segment.
+                        let processedContent = contentToDisplay;
                         if (isConst) {
-                            segments = segments.map(s => s.replace(/\n/g, ' '));
+                            // CONSTITUTION SPLITTING RULES:
+                            // The general pre-processor is SKIPPED for Constitution (see above).
+                            // Here we handle all splitting ourselves:
+                            // - (1) must stay INLINE with "SECTION N." — DO NOT split it
+                            // - (2), (3), (a), (b), etc. must each be their own paragraph
+
+                            // Step 1: Un-escape any remaining \(X\) → (X) (global un-escape already ran but just in case)
+                            processedContent = processedContent.replace(/\\\(([^)]*)\\\)/g, '($1)');
+
+                            // Step 2: Split on (2)+ or (b)+ that appear after a newline
+                            processedContent = processedContent.replace(/\n\s*(\([2-9a-z]\))/g, '\n\n$1');
+
+                            // Step 3: Split on (2)+ or (b)+ that are still inline after a sentence end
+                            processedContent = processedContent.replace(/([.!?])\s+(\([2-9]\)|\([b-z]\))(?=\s)/g, '$1\n\n$2');
+                        }
+
+                        segments = processedContent.split(/\n\n+/);
+                        
+                        // Strip remaining inner single newlines to ensure clean paragraph wrapping
+                        if (isConst) {
+                            segments = segments.map(s => s.replace(/\n/g, ' ').replace(/\r/g, ''));
                         }
                     }
 
@@ -562,19 +622,20 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         }
 
                         // Simple cascading indentation via Tailwind padding classes
-                        // FOR ROC/RPC: Use 3-6-9 pattern (tight fit)
-                        // FOR OTHERS: Use 4-8-12 pattern (standard)
-                        const indentClass = isRocOrRpc ? (
-                            effectiveLevel === 1 ? "ml-3" :
-                            effectiveLevel === 2 ? "ml-6" :
-                            effectiveLevel === 3 ? "ml-9" :
-                            effectiveLevel === 4 ? "ml-12" : ""
-                        ) : (
-                            effectiveLevel === 1 ? "ml-4" :
-                            effectiveLevel === 2 ? "ml-8" :
-                            effectiveLevel === 3 ? "ml-12" :
-                            effectiveLevel === 4 ? "ml-16" : ""
-                        );
+                        let indentClass = "";
+                        if (!isConst) {
+                            indentClass = isRocOrRpc ? (
+                                effectiveLevel === 1 ? "ml-3" :
+                                effectiveLevel === 2 ? "ml-6" :
+                                effectiveLevel === 3 ? "ml-9" :
+                                effectiveLevel === 4 ? "ml-12" : ""
+                            ) : (
+                                effectiveLevel === 1 ? "ml-4" :
+                                effectiveLevel === 2 ? "ml-8" :
+                                effectiveLevel === 3 ? "ml-12" :
+                                effectiveLevel === 4 ? "ml-16" : ""
+                            );
+                        }
 
                         const paddingClass = hasBands ? "pl-6" : "";
 
@@ -589,7 +650,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         }
 
                         // Compact margins for enumerated items (Level 1+) vs substantive paragraphs
-                        const marginClass = effectiveLevel > 0 ? "mb-1.5" : "mb-5 text-justify";
+                        let marginClass = effectiveLevel > 0 ? "mb-1.5" : "mb-5 text-justify";
+                        if (isConst) {
+                            // Constitution: proper 1 space (mb-4) between purely substantive structural blocks
+                            marginClass = "mb-4 text-justify";
+                        }
 
                         return (
                             <div key={segIdx} className={`relative ${paddingClass} group/segment ${marginClass}`}>
@@ -741,7 +806,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                 </span>
                                                             )}
 
-                                                             {isLastSegment && (article.id || article.key_id) && (
+                                                             {isLastSegment && (article.id || article.key_id) && !isSubHeader && (
                                                                  <button
                                                                      type="button"
                                                                      onClick={handleAddToPlaylist}
@@ -779,7 +844,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                 </span>
                                                             )}
 
-                                                             {isLastSegment && (article.id || article.key_id) && (
+                                                             {isLastSegment && (article.id || article.key_id) && !isSubHeader && (
                                                                  <button
                                                                      type="button"
                                                                      onClick={handleAddToPlaylist}

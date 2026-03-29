@@ -11,6 +11,7 @@ const FEATURE_REQUIREMENTS = {
   flashcard_unlimited: 'amicus',
   codex_linked_cases: 'amicus',
   lexplay_unlimited: 'juris',
+  case_digest_download: 'juris',
   lexify: 'barrister',
 };
 

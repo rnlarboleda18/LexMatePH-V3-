@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, onSelectRatio, paragraphFilter }) => {
     const [groupedLinks, setGroupedLinks] = useState({});
+    const [availablePonentes, setAvailablePonentes] = useState([]);
+    const [ponenteFilter, setPonenteFilter] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -37,6 +39,7 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                             caseId: link.case_id,
                             shortTitle: link.short_title,
                             date: link.case_date,
+                            ponente: link.ponente,
                             ratios: []
                         };
                     }
@@ -49,8 +52,12 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                     const dateB = new Date(b.date);
                     return dateB - dateA; // Newest first
                 });
+                
+                // Extract unique ponentes, filtering out falsy values
+                const ponentes = [...new Set(sortedGroups.map(g => g.ponente).filter(Boolean))].sort();
 
                 setGroupedLinks(sortedGroups);
+                setAvailablePonentes(ponentes);
             } catch (err) {
                 console.error(err);
                 setError(err.message);
@@ -67,17 +74,32 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
     return (
         <div className="h-full min-h-0 flex flex-col bg-transparent transition-all duration-300">
             {/* Header */}
-            <div className="p-3 bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm border-b border-white/20 dark:border-white/5 flex justify-between items-center sticky top-0 z-10">
-                <div>
-                    <h3 className="text-[16px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Jurisprudence</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Atomic Ratios for Art. {articleNum}</p>
+            <div className="p-3 bg-slate-50/90 dark:bg-slate-800/30 backdrop-blur-sm border-b border-slate-200/80 dark:border-white/5 flex flex-col gap-2 sticky top-0 z-10">
+                <div className="flex justify-between items-center">
+                    <div>
+                        <h3 className="text-[16px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Jurisprudence</h3>
+                        <p className="text-xs text-slate-500 dark:text-gray-400">Atomic Ratios for Art. {articleNum}</p>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="p-1 hover:bg-slate-200 dark:hover:bg-gray-800 rounded-full text-slate-500 dark:text-gray-400 transition-colors"
+                    >
+                        ✕
+                    </button>
                 </div>
-                <button
-                    onClick={onClose}
-                    className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-gray-500 dark:text-gray-400"
-                >
-                    ✕
-                </button>
+                {/* Ponente Filter */}
+                {availablePonentes.length > 0 && (
+                    <select
+                        value={ponenteFilter}
+                        onChange={(e) => setPonenteFilter(e.target.value)}
+                        className="w-full mt-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-lg px-2 py-1.5 outline-none shadow-sm cursor-pointer"
+                    >
+                        <option value="">All Ponentes</option>
+                        {availablePonentes.map(p => (
+                            <option key={p} value={p}>{p}</option>
+                        ))}
+                    </select>
+                )}
             </div>
 
             {/* Content List */}
@@ -103,7 +125,9 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                     </div>
                 )}
 
-                {Object.values(groupedLinks).map((group) => {
+                {Object.values(groupedLinks)
+                    .filter(group => !ponenteFilter || group.ponente === ponenteFilter)
+                    .map((group) => {
                     const firstLink = group.ratios[0];
                     return (
                         <div
@@ -124,10 +148,16 @@ const CodexJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, on
                                         #{firstLink.citation_rank}
                                     </span>
                                 </div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center space-x-2">
-                                    <span>{new Date(group.date).getFullYear()}</span>
+                                <div className="text-xs text-gray-500 dark:text-gray-400 flex flex-wrap items-center gap-1.5 mt-1">
+                                    <span className="font-semibold text-slate-600 dark:text-slate-300">{new Date(group.date).getFullYear()}</span>
+                                    {group.ponente && (
+                                        <>
+                                            <span>•</span>
+                                            <span className="font-medium text-slate-600 dark:text-slate-300 truncate max-w-[120px]">{group.ponente}</span>
+                                        </>
+                                    )}
                                     <span>•</span>
-                                    <span className="truncate">{firstLink.subject_area}</span>
+                                    <span className="truncate flex-1">{firstLink.subject_area}</span>
                                 </div>
                             </div>
 

@@ -33,10 +33,15 @@ export const toTitleCase = (str, skipRomanKeywords = []) => {
         const wordParts = array.slice(0, index).filter(w => w.trim() && !w.match(/^[-.,;:?!/()]$/));
         const wordIndex = wordParts.length;
         
+        // Find total number of actual words
+        const totalWords = array.filter(w => w.trim() && !w.match(/^[-.,;:?!/()]$/)).length;
+        
         const cleanWord = word.trim().toUpperCase();
         
         // 1. Process Structural Numbering
         const prevWord = wordIndex > 0 ? wordParts[wordIndex - 1].toUpperCase() : null;
+        const prevSeparator = index > 0 ? array[index - 1] : null;
+
         if (prevWord && /^(CHAPTER|SECTION|TITLE|BOOK|PART|RULE)$/.test(prevWord)) {
             // Conversion/Preservation logic for numbering
             if (skipRomanKeywords.includes(prevWord)) {
@@ -54,9 +59,15 @@ export const toTitleCase = (str, skipRomanKeywords = []) => {
         if (romanNumerals.test(cleanWord)) {
             return word.toUpperCase();
         }
+
+        // 3. Force uppercase for single letter alphabetical subsection suffixes (e.g. 266-A)
+        // If there is a hyphen directly before this single character
+        if (cleanWord.length === 1 && cleanWord.match(/[A-Z]/) && prevSeparator === '-') {
+            return word.toUpperCase();
+        }
         
         // Capitalize if first word, last word, or not a small word
-        if (wordIndex === 0 || wordIndex === array.length - 1 || !smallWords.test(word)) {
+        if (wordIndex === 0 || wordIndex === totalWords - 1 || !smallWords.test(word)) {
             return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
         }
         return word.toLowerCase();

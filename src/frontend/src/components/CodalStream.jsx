@@ -168,7 +168,10 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
     // ensure that chunk is loaded so we can scroll to it.
     useEffect(() => {
         if (!targetArticleId || articles.length === 0) return;
-        const targetIndex = articles.findIndex(a => a.id === targetArticleId || String(a.article_num) === String(targetArticleId));
+        const targetIndex = articles.findIndex(a => 
+            a.id === targetArticleId || 
+            String(a.article_num || a.article_number) === String(targetArticleId)
+        );
         if (targetIndex >= visibleCount) {
             setVisibleCount(Math.min(targetIndex + 20, articles.length)); // Load enough to show it plus a buffer
         }
@@ -230,15 +233,18 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                             return;
                                         }
                                         setIsAddingAll(true);
-                                        const payloadItems = processedArticles.map(a => ({
-                                            content_id: String(a.key_id || a.article_num || a.id),
-                                            content_type: 'codal',
-                                            code_id: code.toUpperCase(), // e.g RPC
-                                            title: /^(article|preamble|section|rule)/i.test(String(a.article_num))
-                                                ? String(a.article_num)
-                                                : `Article ${a.article_num || ''}`,
-                                            subtitle: a.article_title || mainTitle
-                                        }));
+                                        const payloadItems = processedArticles.map(a => {
+                                            const currentArtNum = a.article_num || a.article_number || a.key_id || a.id;
+                                            return {
+                                                content_id: String(currentArtNum),
+                                                content_type: 'codal',
+                                                code_id: code.toUpperCase(), // e.g RPC
+                                                title: /^(article|preamble|section|rule)/i.test(String(currentArtNum))
+                                                    ? toTitleCase(String(currentArtNum), code && code.toUpperCase() === 'ROC' ? ['SECTION', 'RULE'] : [])
+                                                    : `Article ${currentArtNum || ''}`,
+                                                subtitle: a.article_title || mainTitle
+                                            };
+                                        });
                                         await addBulkToSpecificPlaylist(targetId, payloadItems);
                                         // Force load to ensure state sync even if it was the first add
                                         await loadSavedPlaylist(targetId);
@@ -317,22 +323,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         headersToRender.push({ type: 'PREAMBLE', text: art.title_label });
                     }
 
-                    // Render Title Label if changed
-                    if (String(art.article_num) !== '0' && art.title_label && art.title_label !== prevArt.title_label) {
-                        const cleanLabel = formatHeader(art.title_label);
-                        const titleText = (cleanLabel.toUpperCase().startsWith('TITLE'))
-                            ? cleanLabel
-                            : (art.title_num && parseInt(art.title_num) > 0 && code.toLowerCase() !== 'roc')
-                                ? `Title ${intToRoman(parseInt(art.title_num))} - ${cleanLabel}`
-                                : cleanLabel;
-                        
-                        // Deduplicate: Don't render Title if it's identical to the Book/Part label already pushed
-                        if (!headersToRender.some(h => normalizeTitle(h.text) === normalizeTitle(titleText))) {
-                            headersToRender.push({ type: 'TITLE', text: titleText });
-                        }
-                    }
-
-                    // Render Chapter Label if changed
+                    // Render Chapter (Group 1 / outer group) if changed
                     if (art.chapter_label && art.chapter_label !== prevArt.chapter_label) {
                         const cleanLabel = formatHeader(art.chapter_label);
                         const chapterText = (cleanLabel.toUpperCase().startsWith('CHAPTER'))
@@ -343,19 +334,47 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         headersToRender.push({ type: 'CHAPTER', text: chapterText });
                     }
 
-                    // Render Group Header (Constitution/General)
+                    const isConstStream = code.toLowerCase() === 'const';
+
+                    // Render Section (Group 2 / sub-group) if changed
+                    if (art.section_label && art.section_label !== prevArt.section_label) {
+                        // FIX: Do not hoist section labels for Constitution to prevent double 
+                        // "Article I" and redundant "Section 1" headers, as they are part of paragraph text.
+                        if (!isConstStream) {
+                            headersToRender.push({ type: 'SECTION', text: formatHeader(art.section_label) });
+                        }
+                    }
+
+                    // ROC: render "Rule N" as its own header when the rule changes
+                    const isRocStream = code.toLowerCase() === 'roc';
+                    if (isRocStream && art.title_num != null && art.title_num !== prevArt.title_num) {
+                        headersToRender.push({ type: 'RULE', text: `Rule ${art.title_num}` });
+                    }
+
+                    // Render Title Label (rule title for ROC, Title N for others) if changed
+                    // For ROC trigger on title_num change so it always fires with the rule
+                    const titleTrigger = isRocStream
+                        ? (art.title_num != null && art.title_num !== prevArt.title_num)
+                        : (art.title_label && art.title_label !== prevArt.title_label);
+                    if (String(art.article_num) !== '0' && art.title_label && titleTrigger) {
+                        const cleanLabel = formatHeader(art.title_label);
+                        const titleText = (cleanLabel.toUpperCase().startsWith('TITLE'))
+                            ? cleanLabel
+                            : (art.title_num && parseInt(art.title_num) > 0 && !isRocStream)
+                                ? `Title ${intToRoman(parseInt(art.title_num))} - ${cleanLabel}`
+                                : cleanLabel;
+                        if (!headersToRender.some(h => normalizeTitle(h.text) === normalizeTitle(titleText))) {
+                            headersToRender.push({ type: 'TITLE', text: titleText });
+                        }
+                    }
+
+                    // Render Group Header (Constitution/General) - Moved to bottom so it appears UNDER Article/Rule titles
                     if (art.group_header && art.group_header !== prevArt.group_header) {
                         const parts = art.group_header.split('\n');
                         parts.forEach((p, idx) => {
-                            // First part roughly map to BOOK size, second to TITLE size
                             const type = idx === 0 ? 'BOOK' : 'TITLE';
                             headersToRender.push({ type, text: formatHeader(p) });
                         });
-                    }
-
-                    // Render Section Label if changed
-                    if (art.section_label && art.section_label !== prevArt.section_label) {
-                        headersToRender.push({ type: 'SECTION', text: formatHeader(art.section_label) });
                     }
 
                     return (
@@ -372,12 +391,12 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                     sizeClass = "text-[16px]";
                                     colorClass = "text-gray-900 dark:text-gray-300 font-bold";
                                 }
-                                else if (h.type === 'CHAPTER') sizeClass = "text-[16px]";
-                                else if (h.type === 'TITLE') sizeClass = "text-[16px]";
-                                else if (h.type === 'BOOK' || h.type === 'PREAMBLE') sizeClass = "text-[16px]";
+                                else if (h.type === 'RULE' || h.type === 'CHAPTER' || h.type === 'TITLE' || h.type === 'BOOK' || h.type === 'PREAMBLE') {
+                                    sizeClass = "text-[16px]";
+                                }
 
                                 return (
-                                    <div key={i} className={`my-2 ${ (h.type === 'BOOK' || h.type === 'TITLE' || h.type === 'PREAMBLE' || h.type === 'CHAPTER' || h.type === 'SECTION') ? 'text-center border-b-[1px] border-gray-100 dark:border-gray-800 pb-1 mb-4' : '' }`}>
+                                    <div key={i} className={`my-2 ${ (h.type === 'BOOK' || h.type === 'TITLE' || h.type === 'PREAMBLE' || h.type === 'CHAPTER' || h.type === 'SECTION' || h.type === 'RULE') ? 'text-center border-b-[1px] border-gray-100 dark:border-gray-800 pb-1 mb-4' : '' }`}>
                                         {/* Add Main Header just once before the Preamble or First Book */}
                                         {h.type === 'PREAMBLE' && (
                                             <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 mb-2 tracking-wide font-sans">

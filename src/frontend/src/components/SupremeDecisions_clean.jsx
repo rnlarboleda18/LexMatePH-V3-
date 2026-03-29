@@ -3,6 +3,7 @@ import { jsPDF } from "jspdf";
 import { Search, Calendar, Gavel, FileText } from 'lucide-react';
 import { formatDate } from '../utils/dateUtils';
 import ReactMarkdown from 'react-markdown';
+import { useSubscription } from '../context/SubscriptionContext';
 
 const SmartLink = ({ text, onCaseClick }) => {
     const [tooltip, setTooltip] = useState({ visible: false, content: '', x: 0, y: 0 });
@@ -71,6 +72,7 @@ const SmartLinkWrapper = ({ children, onCaseClick }) => {
 };
 
 const SupremeDecisions = () => {
+    const { requireAccess } = useSubscription();
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -179,39 +181,69 @@ const SupremeDecisions = () => {
 
     const handleDownloadDigestPDF = () => {
         if (!selectedDecision) return;
-        const doc = new jsPDF();
+        
+        if (!requireAccess('case_digest_download')) return;
 
-        doc.setFontSize(16);
-        doc.text("Supreme Court Decision Digest", 105, 20, null, null, "center");
+        const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const margin = 20;
+        const maxLineWidth = pageWidth - margin * 2;
+        let y = margin + 10;
 
-        doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
-        doc.text(selectedDecision.title, 105, 30, null, null, "center");
+        // Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        const titleLines = doc.splitTextToSize((selectedDecision.title || '').toUpperCase(), maxLineWidth);
+        titleLines.forEach(line => {
+            doc.text(line, pageWidth / 2, y, { align: "center" });
+            y += 6;
+        });
 
-        doc.setFont(undefined, 'normal');
-        doc.setFontSize(10);
-        doc.text(`G.R. No. ${selectedDecision.gr_number} | ${formatDate(selectedDecision.date)}`, 105, 40, null, null, "center");
+        // GR Number + Date
+        y += 2;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.text(`G.R. No. ${selectedDecision.gr_number} | ${formatDate(selectedDecision.date)}`, pageWidth / 2, y, { align: "center" });
+        y += 15;
 
-        let y = 50;
+        // Strip markdown asterisks just in case
+        const stripMd = (str) => (str || '').replace(/\*/g, '').replace(/_/g, '').trim();
 
-        const addSection = (title, content) => {
-            if (!content) return;
-            if (y > 270) { doc.addPage(); y = 20; }
-            doc.setFont(undefined, 'bold');
-            doc.text(title, 20, y);
-            y += 7;
-            doc.setFont(undefined, 'normal');
-            const splitText = doc.splitTextToSize(content, 170);
-            doc.text(splitText, 20, y);
-            y += splitText.length * 5 + 10;
+        const addTextSection = (title, content, isItalic = false) => {
+            if (!content || !content.trim()) return;
+            
+            if (y > pageHeight - margin - 15) { doc.addPage(); y = margin + 10; }
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(11);
+            doc.text(title, margin, y);
+            y += 6;
+
+            doc.setFont("helvetica", isItalic ? "italic" : "normal");
+            doc.setFontSize(10);
+            
+            const cleanContent = stripMd(content);
+            const splitText = doc.splitTextToSize(cleanContent, maxLineWidth);
+            
+            splitText.forEach(line => {
+                if (y > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin + 10;
+                }
+                doc.text(line, margin, y, { align: "justify", maxWidth: maxLineWidth });
+                y += 5;
+            });
+            y += 8; // spacing after section
         };
 
-        addSection("FACTS", selectedDecision.digest_facts);
-        addSection("ISSUE", selectedDecision.digest_issues);
-        addSection("RULING", selectedDecision.digest_ruling);
-        addSection("RATIO DECIDENDI", selectedDecision.digest_ratio);
+        addTextSection("MAIN DOCTRINE", selectedDecision.main_doctrine, true);
+        addTextSection("FACTS", selectedDecision.digest_facts);
+        addTextSection("ISSUE(S)", selectedDecision.digest_issues);
+        addTextSection("RULING", selectedDecision.digest_ruling);
+        addTextSection("RATIO DECIDENDI", selectedDecision.digest_ratio);
 
-        doc.save(`${selectedDecision.gr_number}_digest.pdf`);
+        doc.save(`${selectedDecision.gr_number}_Digest.pdf`);
     };
 
     const handleDownloadFullTextPDF = () => {

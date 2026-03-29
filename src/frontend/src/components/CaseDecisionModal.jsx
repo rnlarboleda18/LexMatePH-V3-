@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { jsPDF } from "jspdf";
-import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Zap } from 'lucide-react';
+import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Zap, Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
-import { getSubjectColor } from '../utils/colors';
+import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay';
+import { useSubscription } from '../context/SubscriptionContext';
+import DigestHtmlViewer from './DigestHtmlViewer';
 
 // --- HELPER COMPONENTS ---
 
@@ -329,10 +331,12 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
 // --- MAIN MODAL COMPONENT ---
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
+    const { requireAccess } = useSubscription();
     const [fullDecision, setFullDecision] = useState(decision);
     const [loading, setLoading] = useState(false);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
+    const [showHtmlViewer, setShowHtmlViewer] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // collapsed by default on mobile
@@ -453,6 +457,156 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             document.body.style.cursor = 'default';
         }
     }, [onCaseSelect]);
+
+    const handleViewHtmlViewer = () => {
+        if (!fullDecision) return;
+        if (!requireAccess('case_digest_download')) return;
+        setShowHtmlViewer(true);
+    };
+
+    const handleDownloadDigestPDF = () => {
+        if (!fullDecision) return;
+        if (!requireAccess('case_digest_download')) return;
+
+        const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const margin = 20;
+        const maxLineWidth = pageWidth - margin * 2;
+        let y = margin + 5;
+
+        // Supreme Court Digest Header
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("Supreme Court Decision Digest", pageWidth / 2, y, { align: "center" });
+        y += 10;
+
+        // Title
+        doc.setFontSize(13);
+        const titleLines = doc.splitTextToSize(toTitleCase(fullDecision.short_title || fullDecision.title || ''), maxLineWidth * 0.9);
+        titleLines.forEach(line => {
+            doc.text(line, pageWidth / 2, y, { align: "center" });
+            y += 6;
+        });
+
+        // Case Number + Date
+        let caseNo = (fullDecision.case_number || fullDecision.gr_number || '').trim();
+        if (caseNo && !caseNo.toLowerCase().includes('no.') && !caseNo.toLowerCase().includes('g.r.') && !caseNo.toLowerCase().includes('a.m.')) {
+            caseNo = `G.R. No. ${caseNo}`;
+        }
+        const dateStr = formatDate(fullDecision.date_str || fullDecision.date) || "";
+        const subTitle = [caseNo, dateStr].filter(Boolean).join(' | ');
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.text(subTitle, pageWidth / 2, y, { align: "center" });
+        y += 6; // slightly more space before horizontal line
+
+        // Horizontal Rule
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 10;
+
+        // Sanitize string targeting unsupported Unicode, preserving markdown for font parsing
+        const sanitizeUnicode = (str) => {
+            if (!str) return '';
+            let s = str.replace(/_/g, '').trim();
+            
+            s = s.replace(/₱/g, 'Php ')
+                 .replace(/[“”]/g, '"')
+                 .replace(/[‘’]/g, "'")
+                 .replace(/—/g, '--')
+                 .replace(/–/g, '-')
+                 .replace(/…/g, '...')
+                 .replace(/•/g, '-');
+            
+            // Strictly preserve the asterisks (\*) for bold tracking
+            s = s.replace(/[^\x09\x0A\x0D\x20-\xFF\*]/g, '');
+            return s;
+        };
+
+        const formatContent = (content) => {
+            if (!content) return '';
+            let formatted = content.replace(/^\s*[\*\-]\s+/gm, '\n\n');
+            formatted = formatted.replace(/([A-Za-z0-9\.])\s*\n(\*\*.*?\*\*[:?]?)/g, '$1\n\n$2');
+            formatted = formatted.replace(/\n{3,}/g, '\n\n');
+            return formatted.trim();
+        };
+
+        const addTextSection = (title, rawContent, isItalic = false) => {
+            let content = formatContent(rawContent);
+            content = sanitizeUnicode(content);
+            if (!content) return;
+            
+            if (y > pageHeight - margin - 15) { doc.addPage(); y = margin + 10; }
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(11);
+            doc.text(title, margin, y);
+            y += 6;
+
+            const paragraphs = content.split('\n');
+            paragraphs.forEach(paragraph => {
+                if (!paragraph.trim()) {
+                    y += 5.5; // empty line gap
+                    return;
+                }
+
+                if (y > pageHeight - margin - 10) {
+                    doc.addPage();
+                    y = margin + 10;
+                }
+
+                let currentX = margin;
+                const parts = paragraph.split(/(\*\*.*?\*\*)/g);
+                
+                parts.forEach(part => {
+                    if (!part) return;
+                    const isBold = part.startsWith('**') && part.endsWith('**');
+                    let cleanPart = isBold ? part.slice(2, -2) : part;
+                    cleanPart = cleanPart.replace(/\*/g, ''); // scrub trailing asterisks
+
+                    doc.setFont("helvetica", isBold ? "bold" : (isItalic ? "italic" : "normal"));
+                    doc.setFontSize(10);
+                    
+                    const tokens = cleanPart.match(/(\s+|\S+)/g) || [];
+                    tokens.forEach(token => {
+                        const tokenWidth = doc.getTextWidth(token);
+                        
+                        // Word-wrap if limit exceeded
+                        if (currentX + tokenWidth > margin + maxLineWidth && token.trim() !== '') {
+                            y += 5.5;
+                            currentX = margin;
+                            if (y > pageHeight - margin) {
+                                doc.addPage();
+                                y = margin + 10;
+                            }
+                        }
+                        
+                        // Skip rendering floating leading spaces on new lines
+                        if (currentX === margin && token.trim() === '') {
+                            return;
+                        }
+                        
+                        doc.text(token, currentX, y);
+                        currentX += tokenWidth;
+                    });
+                });
+                
+                y += 5.5; // End of paragraph
+            });
+            y += 4; // Extra padding below section
+        };
+
+        addTextSection("MAIN DOCTRINE", fullDecision.main_doctrine, true);
+        addTextSection("FACTS", fullDecision.digest_facts);
+        addTextSection("ISSUE(S)", fullDecision.digest_issues);
+        addTextSection("RULING", fullDecision.digest_ruling);
+        addTextSection("RATIO DECIDENDI", fullDecision.digest_ratio);
+
+        doc.save(`${fullDecision.case_number || fullDecision.gr_number}_Digest.pdf`);
+    };
 
     if (!fullDecision) return null;
 
@@ -731,22 +885,40 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* FOOTER ACTIONS */}
-                <div className="p-4 md:p-6 border-t border-white/30 dark:border-white/10 bg-white/40 dark:bg-slate-900/60 flex justify-end gap-4 backdrop-blur-2xl relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                <div className="p-4 md:p-6 border-t border-white/30 dark:border-white/10 bg-white/40 dark:bg-slate-900/60 flex flex-wrap justify-end gap-3 md:gap-4 backdrop-blur-2xl relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                    {viewMode === 'digest' && (
+                        <button
+                            onClick={handleViewHtmlViewer}
+                            className="mr-auto px-4 md:px-5 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+                        >
+                            <FileText size={18} />
+                            View Digest Format
+                        </button>
+                    )}
                     <button
                         onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
-                        className="px-6 py-2.5 glass bg-white/60 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-sm font-extrabold text-gray-800 dark:text-gray-200 hover:bg-white/80 dark:hover:bg-white/20 transition-all hover:scale-[1.02] active:scale-95 shadow-sm"
+                        className="px-5 md:px-6 py-2.5 glass bg-white/60 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-sm font-extrabold text-gray-800 dark:text-gray-200 hover:bg-white/80 dark:hover:bg-white/20 transition-all hover:scale-[1.02] active:scale-95 shadow-sm"
                     >
                         {viewMode === 'digest' ? 'Read Full Text' : 'View Digest'}
                     </button>
                     <button
                         onClick={onClose}
-                        className="px-8 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-500/30 border border-blue-400/50"
+                        className="px-6 md:px-8 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-500/30 border border-blue-400/50"
                     >
                         Close
                     </button>
                 </div>
 
             </div>
+
+            {/* DIGEST HTML VIEWER OVERLAY */}
+            {showHtmlViewer && (
+                <DigestHtmlViewer 
+                    decision={fullDecision}
+                    onClose={() => setShowHtmlViewer(false)}
+                    onDownload={handleDownloadDigestPDF}
+                />
+            )}
         </div>
     );
 };

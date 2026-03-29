@@ -9,6 +9,7 @@ import { lexCache } from '../utils/cache';
 import { formatDate } from '../utils/dateUtils';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
+import { useSubscription } from '../context/SubscriptionContext';
 
 const BAR_SUBJECTS = [
     "Political Law",
@@ -480,6 +481,7 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
+    const { requireAccess } = useSubscription();
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -792,38 +794,69 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     const handleDownloadDigestPDF = () => {
         if (!selectedDecision) return;
-        const doc = new jsPDF();
+        
+        if (!requireAccess('case_digest_download')) return;
 
-        doc.setFontSize(16);
-        doc.text("Supreme Court Decision Digest", 105, 20, null, null, "center");
+        const doc = new jsPDF({ format: 'a4', unit: 'mm' });
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const margin = 20;
+        const maxLineWidth = pageWidth - margin * 2;
+        let y = margin + 10;
 
-        doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
-        doc.text(selectedDecision.title, 105, 30, null, null, "center");
+        // Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        const titleLines = doc.splitTextToSize((selectedDecision.title || '').toUpperCase(), maxLineWidth);
+        titleLines.forEach(line => {
+            doc.text(line, pageWidth / 2, y, { align: "center" });
+            y += 6;
+        });
 
-        doc.setFont(undefined, 'normal');
-        doc.setFontSize(10);
-        doc.text(`G.R. No. ${selectedDecision.case_number} | ${formatDate(selectedDecision.date_str)}`, 105, 40, null, null, "center");
+        // GR Number + Date
+        y += 2;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.text(`G.R. No. ${selectedDecision.case_number || selectedDecision.gr_number} | ${formatDate(selectedDecision.date_str || selectedDecision.date)}`, pageWidth / 2, y, { align: "center" });
+        y += 15;
 
-        let y = 50;
-        const addSection = (title, content) => {
-            if (!content) return;
-            if (y > 270) { doc.addPage(); y = 20; }
-            doc.setFont(undefined, 'bold');
-            doc.text(title, 20, y);
-            y += 7;
-            doc.setFont(undefined, 'normal');
-            const splitText = doc.splitTextToSize(content, 170);
-            doc.text(splitText, 20, y);
-            y += splitText.length * 5 + 10;
+        // Strip markdown asterisks just in case
+        const stripMd = (str) => (str || '').replace(/\*/g, '').replace(/_/g, '').trim();
+
+        const addTextSection = (title, content, isItalic = false) => {
+            if (!content || !content.trim()) return;
+            
+            if (y > pageHeight - margin - 15) { doc.addPage(); y = margin + 10; }
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(11);
+            doc.text(title, margin, y);
+            y += 6;
+
+            doc.setFont("helvetica", isItalic ? "italic" : "normal");
+            doc.setFontSize(10);
+            
+            const cleanContent = stripMd(content);
+            const splitText = doc.splitTextToSize(cleanContent, maxLineWidth);
+            
+            splitText.forEach(line => {
+                if (y > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin + 10;
+                }
+                doc.text(line, margin, y, { align: "justify", maxWidth: maxLineWidth });
+                y += 5;
+            });
+            y += 8; // spacing after section
         };
 
-        addSection("FACTS", selectedDecision.digest_facts);
-        addSection("ISSUE", selectedDecision.digest_issues);
-        addSection("RULING", selectedDecision.digest_ruling);
-        addSection("RATIO DECIDENDI", selectedDecision.digest_ratio);
+        addTextSection("MAIN DOCTRINE", selectedDecision.main_doctrine, true);
+        addTextSection("FACTS", selectedDecision.digest_facts);
+        addTextSection("ISSUE(S)", selectedDecision.digest_issues);
+        addTextSection("RULING", selectedDecision.digest_ruling);
+        addTextSection("RATIO DECIDENDI", selectedDecision.digest_ratio);
 
-        doc.save(`${selectedDecision.case_number}_digest.pdf`);
+        doc.save(`${selectedDecision.case_number || selectedDecision.gr_number}_Digest.pdf`);
     };
 
     const handleDownloadFullTextPDF = () => {
@@ -1167,21 +1200,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                         );
                                     })()}
 
-                                    {/* Action Button */}
-                                    <div className="mt-1">
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleViewFullText(e, decision); }}
-                                            className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors shadow-md shadow-blue-600/20 z-10"
-                                        >
-                                            <BookOpen className="w-3.5 h-3.5 mr-2" />
-                                            View Full Text
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                {/* Right Chevron Icon */}
-                                <div className="hidden sm:flex shrink-0 items-center justify-center text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors pl-2">
-                                    <ChevronRight className="w-8 h-8" />
                                 </div>
                             </div>
                         </div>

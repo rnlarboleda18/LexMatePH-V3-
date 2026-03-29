@@ -16,7 +16,10 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     return (
         <div className="mb-1">
             <button
-                onClick={() => hasChildren && onToggle(node.id)}
+                onClick={() => {
+                    if (hasChildren) onToggle(node.id);
+                    if (node.targetId) onArticleClick(node.targetId);
+                }}
                 className={`w-full text-left flex items-center justify-between text-[16px] font-bold text-gray-900 dark:text-gray-100 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800 rounded px-1 transition-colors group ${!hasChildren ? 'cursor-default opacity-80' : ''}`}
             >
                 <span className="truncate mr-1">{toTitleCase(node.label.replace(/TITLE/i, 'Title').replace(/CHAPTER/i, 'Chapter'))}</span>
@@ -196,10 +199,11 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         return 4;
                     };
 
-                    const createNode = (label, rank) => ({
+                    const createNode = (label, rank, targetId) => ({
                         id: `node-${nodeIdCounter++}`,
                         label: label.replace(/^##\s+/, ''),
                         rank,
+                        targetId,
                         children: [],
                         articles: []
                     });
@@ -213,7 +217,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         const headers = [...art.content.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
                         headers.forEach(headerText => {
                             const rank = getRank(headerText);
-                            const newNode = createNode(headerText, rank);
+                            const newNode = createNode(headerText, rank, art.id || art.article_number || art.key_id);
                             while (stack.length > 0 && stack[stack.length - 1].rank >= rank) {
                                 stack.pop();
                             }
@@ -312,13 +316,15 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         // Tell CodalStream to ensure this article is loaded
         setTargetArticleId(articleNumber);
 
-        // Give React a frame to expand the visibleCount and render the new DOM chunk
+        // Give React enough time to expand the visibleCount and render the new DOM chunk
         setTimeout(() => {
             const element = document.getElementById(`article-${articleNumber}`);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                console.warn(`[Scroll] Target element 'article-${articleNumber}' not found in DOM.`);
             }
-        }, 100);
+        }, 300);
     };
 
     // Dummy search handlers (simplified for reconstruction)
@@ -407,7 +413,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     };
 
     return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 lg:pb-8 overflow-x-clip justify-center items-start">
+        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 lg:pb-8 justify-center items-start">
             {/* 1. Floating TOC Sidebar (Left) */}
             <div className={`
                 flex-none z-20 sticky top-28 mt-0 transition-all duration-300 ease-in-out
@@ -458,8 +464,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             )}
 
             {/* Codal Stream Card */}
-            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative overflow-hidden`} id="main-content">
+            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
+                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative`} id="main-content">
 
                     {/* ── Sticky Header Bar ── */}
                     <div className="sticky top-0 z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5 px-4 py-3 flex items-center gap-3">
