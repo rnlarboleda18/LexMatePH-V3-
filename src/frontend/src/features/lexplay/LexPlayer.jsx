@@ -651,13 +651,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 onClick={onMinimize}
             />
             
-            <div className="relative flex flex-col w-full h-full md:h-[calc(100vh-14rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[3rem] glass bg-white/80 dark:bg-slate-900/40 backdrop-blur-3xl border-2 border-slate-200/60 dark:border-white/20 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.3)] dark:shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+            <div className="relative flex flex-col w-full h-full md:h-[calc(100vh-20rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[3rem] glass bg-white/80 dark:bg-slate-900/40 backdrop-blur-3xl border-2 border-slate-200/60 dark:border-white/20 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.3)] dark:shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
                 {/* Ambient Glow Orbs */}
                 <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse"></div>
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDelay: '1s' }}></div>
 
                 {/* Global Header Actions - absolute right to not interfere with flex heights */}
-                <div className="absolute top-6 right-6 z-[60] flex items-center justify-end p-2 md:p-3 gap-2 md:gap-3 bg-transparent pointer-events-none">
+                <div className="absolute top-10 right-10 z-[60] flex items-center justify-end p-2 md:p-3 gap-2 md:gap-3 bg-transparent pointer-events-none">
                     <div className="pointer-events-auto flex gap-2 md:gap-3">
                     <button
                         onClick={onMinimize}
@@ -676,9 +676,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row flex-1 min-h-0 h-full w-full relative items-stretch pt-16 md:pt-4">
+                <div className="flex flex-col md:flex-row flex-1 min-h-0 h-full w-full relative items-stretch pt-24 md:pt-4">
                     {/* Mobile View Switcher - Pill Style */}
-                    <div className="md:hidden absolute top-4 left-1/2 -translate-x-1/2 z-[55] flex bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-0.5 shadow-2xl">
+                    <div className="md:hidden absolute top-8 left-1/2 -translate-x-1/2 z-[55] flex bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-0.5 shadow-2xl">
                         <button
                             onClick={() => setActiveTab('playlist')}
                             className={`px-4 py-1.5 rounded-full text-[9px] font-extrabold uppercase tracking-widest transition-all duration-300 ${activeTab === 'playlist' ? 'bg-white text-[#0f172a] shadow-lg' : 'text-white/40 hover:text-white/60'}`}
