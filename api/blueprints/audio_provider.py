@@ -869,28 +869,54 @@ def _strip_ssml_tokens(text):
     return text.strip()
 
 # ----- Audio generation -----
-def _generate_audio_gtts(text):
-    """Generate MP3 audio bytes using gTTS (free, needs internet).
+def _generate_audio_edge_tts(text, voice="en-US-JennyNeural", rate=1.0):
+    """Generate MP3 audio bytes using edge-tts (free, needs internet).
     Supports multi-chunk concatenation.
     """
-    from gtts import gTTS
+    import subprocess
+    import tempfile
+    import os
     
-    # Strip SSML tokens that are only for Azure - gTTS will read them literally as underscores
+    # Strip SSML tokens that are only for Azure APIs
     text = _strip_ssml_tokens(text)
     
-    # Use 2000 as safe chunk size for gTTS
+    # Scale the playback speed down by default (1.0x LexPlayer speed = 90% Jenny speed)
+    adjusted_rate = rate * 0.9
+    
+    # Format the rate string for edge-tts (e.g., +20%, -10%, +0%)
+    # Edge-TTS expects percentage offsets relative to its own baseline 100%
+    rate_str = "+0%" if adjusted_rate == 1.0 else f"{int((adjusted_rate - 1.0) * 100)}%"
+    if int((adjusted_rate - 1.0) * 100) > 0 and not rate_str.startswith('+'):
+        rate_str = "+" + rate_str
+    
+    # Use 2000 as safe chunk size to avoid any CLI max argument limits
     chunks = _chunk_text(text, max_len=2000)
     if not chunks:
-        raise ValueError("No text provided for gTTS")
+        raise ValueError("No text provided for edge-tts")
         
     all_audio_data = []
     for chunk in chunks:
-        tts = gTTS(text=chunk, lang='en', tld='com.ph', slow=False)
-        fp = io.BytesIO()
-        tts.write_to_fp(fp)
-        all_audio_data.append(fp.getvalue())
+        # Create temp file without deleting it immediately so subprocess can write to it
+        fd, temp_path = tempfile.mkstemp(suffix=".mp3")
+        os.close(fd) # Close initially opened fd
         
-    # Concatenate MP3 bytes (MP3 can usually be joined simply)
+        try:
+            # Call edge-tts payload
+            subprocess.run([
+                'edge-tts', 
+                '--voice', voice, 
+                f'--rate={rate_str}', 
+                '--text', chunk, 
+                '--write-media', temp_path
+            ], check=True, capture_output=True)
+            
+            with open(temp_path, 'rb') as f:
+                all_audio_data.append(f.read())
+        finally:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+                
+    # Concatenate MP3 bytes 
     combined_data = b"".join(all_audio_data)
     return combined_data, 'audio/mpeg', '.mp3'
 
@@ -988,10 +1014,17 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     voice_name = "en-US-JennyMultilingualNeural"
 
     # --- 1b. Check blob cache first ---
+    # Smart format the content_id to include 'article' if it's purely a number for codals
+    formatted_id = content_id
+    if content_type == 'codal':
+        # Default to prepending 'article' if it's a pure number or doesn't have an explict prefix
+        if not formatted_id.lower().startswith(('art', 'sec', 'rule', 'preamble')):
+            formatted_id = f"article{formatted_id}"
+            
     # Include voice name, rate, and cache version in key to ensure fresh/correct audio
     voice_slug = voice_name.split('-')[-1].replace('Neural', '').lower()
     rate_slug = str(rate).replace('.', 'p')  # e.g. 0.8 -> "0p8"
-    cache_key = f"{content_type}_{code_id or ''}_{content_id}_{voice_slug}_r{rate_slug}_{CACHE_VERSION}"
+    cache_key = f"{content_type}_{code_id or ''}_{formatted_id}_{voice_slug}_r{rate_slug}_{CACHE_VERSION}"
     
     cache_status = "MISS"
     for ext in ['.mp3', '.wav']:
@@ -1038,9 +1071,9 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
 
             lock_acquired = _TTS_LOCK.acquire(timeout=_TTS_LOCK_TIMEOUT)
             if not lock_acquired:
-                logging.warning("TTS lock timeout — another synthesis is running too long. Falling back to gTTS.")
-                audio_data, mime_type, ext = _generate_audio_gtts(text)
-                tts_engine = "gtts"
+                logging.warning("TTS lock timeout — another synthesis is running too long. Falling back to edge_tts.")
+                audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
+                tts_engine = "edge_tts"
             else:
                 try:
                     for attempt in range(1, max_retries + 1):
@@ -1062,15 +1095,15 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
                                 logging.warning(f"Azure TTS failed after {attempt} attempt(s): {e}")
                                 break
                     if not azure_success:
-                        logging.warning(f"Azure TTS unavailable, falling back to gTTS. Last error: {last_azure_error}")
-                        audio_data, mime_type, ext = _generate_audio_gtts(text)
-                        tts_engine = "gtts"
+                        logging.warning(f"Azure TTS unavailable, falling back to edge_tts. Last error: {last_azure_error}")
+                        audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
+                        tts_engine = "edge_tts"
                 finally:
                     _TTS_LOCK.release()
         else:
-            logging.warning("Azure Speech SDK not available, falling back to gTTS")
-            audio_data, mime_type, ext = _generate_audio_gtts(text)
-            tts_engine = "gtts"
+            logging.warning("Azure Speech SDK not available, falling back to edge_tts")
+            audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
+            tts_engine = "edge_tts"
     except Exception as e:
         logging.error(f"TTS generation failed entirely: {e}")
         return func.HttpResponse(f"Audio generation failed: {e}", status_code=500)
