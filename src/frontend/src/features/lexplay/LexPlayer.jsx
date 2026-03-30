@@ -180,35 +180,45 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
 /**
  * PlaylistItem: Memoized track item to prevent re-rendering when other items are interacting.
  */
-const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, onPlay, onRemove }) => {
+const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, onPlay, onRemove }) => {
     if (!item) return null;
 
     return (
-        <div className={`relative group flex items-start gap-4 p-4 rounded-3xl border transition-all ${isActive ? 'bg-white/10 border-white/20 shadow-xl' : 'bg-white/[0.03] border-white/5 hover:border-white/10'}`}>
-            <div className={`relative w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center border ${isActive ? 'bg-purple-600 border-none' : 'bg-white/5 border-white/10'}`}>
+        <div className={`relative group flex items-center gap-3 py-2 px-4 rounded-2xl border transition-all ${isActive ? 'bg-white/10 border-white/20 shadow-lg scale-[1.02] ring-1 ring-purple-500/30' : 'bg-white/[0.03] border-white/5 hover:border-white/10'}`}>
+            <div className={`relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border ${isActive ? 'bg-purple-600 border-none shadow-[0_0_15px_rgba(139,92,246,0.4)]' : 'bg-white/5 border-white/10'}`}>
                 
                 {/* Action Overlay: Hover state, or Active+Paused state */}
                 <div className={`absolute inset-0 z-20 bg-purple-600/80 flex items-center justify-center transition-opacity ${(isActive && !isPlaying) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                     <button onClick={onPlay} className="text-white w-full h-full flex items-center justify-center">
-                        {isActive && isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
+                        {isActive && isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
                     </button>
                 </div>
 
                 {/* Track Number: Default state when completely inactive */}
-                {!isActive && <span className="text-lg font-bold text-white/20 z-10 relative group-hover:opacity-0 transition-opacity">{index + 1}</span>}
+                {!isActive && <span className="text-sm font-black text-white/20 z-10 relative group-hover:opacity-0 transition-opacity tracking-tighter">{index + 1}</span>}
                 
-                {/* Playing Animation: Default state when playing */}
-                {isActive && isPlaying && (
-                    <div className="flex items-end gap-1 h-4 z-10 relative group-hover:opacity-0 transition-opacity">
-                        {[0.4, 1.0, 0.6].map((h, i) => (
-                            <div key={i} className="w-1 bg-white rounded-full animate-[bounce_1s_infinite]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
-                        ))}
+                {/* 
+                  Enhanced Feedback:
+                  1. Spinner (if loading)
+                  2. Equalizer (if playing)
+                */}
+                {isActive && (
+                    <div className="z-10 relative group-hover:opacity-0 transition-opacity">
+                        {isPlaying && !isLoading ? (
+                            <div className="flex items-end gap-0.5 h-3.5">
+                                {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                    <div key={i} className="w-1 bg-white rounded-full animate-[bounce_0.8s_infinite] shadow-[0_0_8px_white]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}></div>
+                                ))}
+                            </div>
+                        ) : (
+                            isLoading && <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                        )}
                     </div>
                 )}
             </div>
             <div className="flex-1 min-w-0 pr-8">
-                <h4 className={`text-sm font-bold truncate ${isActive ? 'text-white' : 'text-white/80'}`}>{item?.title}</h4>
-                <p className="text-xs text-white/40 truncate">{item?.subtitle}</p>
+                <h4 className={`text-xs font-black truncate ${isActive ? 'text-white' : 'text-white/80'}`}>{item?.title}</h4>
+                <p className="text-[10px] font-bold text-white/30 truncate uppercase tracking-wider">{item?.subtitle}</p>
             </div>
             <button 
                 onClick={onRemove}
@@ -220,7 +230,7 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, onPlay, onR
     );
 });
 
-const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, onPlay, onRemove }) => {
+const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoading, onPlay, onRemove }) => {
     const containerRef = useRef(null);
 
     // Automatically scroll to active item when list changes or currentIndex changes
@@ -244,7 +254,7 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, onPlay
     const currentItem = items[currentIndex];
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-3">
             {/* Optional: we removed the floating duplicate current track so the list flows naturally */}
 
             {items.length > 0 && (
@@ -270,6 +280,7 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, onPlay
                                     index={index} 
                                     isActive={index === currentIndex} 
                                     isPlaying={index === currentIndex ? isPlaying : false} 
+                                    isLoading={isLoading}
                                     onPlay={() => onPlay(index)} 
                                     onRemove={() => onRemove(item, index)}
                                 />
@@ -534,26 +545,26 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 onClick={onMinimize}
             />
             
-            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-[#0f172a] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-white/[0.03] backdrop-blur-3xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
                 {/* Global Header Actions (Minimize/Close) */}
-                <div className="absolute top-4 left-4 right-4 z-[60] flex items-center justify-between pointer-events-none md:top-6 md:left-6 md:right-6 md:justify-start md:gap-3 lg:top-8 lg:left-8 lg:right-8">
+                <div className="absolute top-4 left-4 right-4 z-[60] flex items-center justify-end gap-3 pointer-events-none md:top-6 md:right-6 md:left-auto md:gap-4 lg:top-8 lg:right-8">
                     <button
                         onClick={onMinimize}
-                        className="p-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 text-white transition-all hover:scale-110 active:scale-95 group pointer-events-auto"
+                        className="p-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-3xl rounded-full border border-white/20 text-white transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
                         title="Minimize Player"
                     >
                         <Minimize2 size={20} className="transition-transform group-hover:scale-110" />
                     </button>
                     <button
                         onClick={handleCloseInternal}
-                        className="p-2.5 bg-red-500/10 hover:bg-red-500/20 backdrop-blur-md rounded-full border border-red-500/20 text-red-400 transition-all hover:scale-110 active:scale-95 group pointer-events-auto"
+                        className="p-2.5 bg-red-500/10 hover:bg-red-500/20 backdrop-blur-3xl rounded-full border border-red-500/30 text-red-400 transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
                         title="Close Player"
                     >
                         <X size={20} className="transition-transform group-hover:rotate-90" />
                     </button>
                 </div>
 
-                <div className="flex flex-col md:flex-row h-full w-full relative">
+                <div className="flex flex-col md:flex-row-reverse h-full w-full relative">
                     {/* Mobile View Switcher - Pill Style */}
                     <div className="md:hidden absolute top-6 left-1/2 -translate-x-1/2 z-[55] flex bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-0.5 shadow-2xl">
                         <button
@@ -570,7 +581,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         </button>
                     </div>
 
-                    {/* Left/Top Area: Now Playing & Controls */}
+                    {/* Right Area: Player Stage (Desktop) - Moves to top on mobile */}
                     <div className={`flex-1 flex flex-col relative overflow-y-auto scrollbar-hide transition-all duration-500 ease-in-out ${activeTab === 'player' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         {/* Background ambient glow - absolute to scroll container so it stays fixed */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none sticky inset-0"></div>
@@ -582,28 +593,27 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-[32px] md:rounded-[40px] opacity-30 blur-2xl group-hover:opacity-50 transition-opacity"></div>
                             <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] bg-gradient-to-tr from-[#6366f1] via-[#a855f7] to-[#ec4899] animate-gradient rounded-[30px] md:rounded-[32px] shadow-2xl flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"></div>
-                                <Headphones size={72} className={`text-white drop-shadow-[0_8px_16px_rgba(0,0,0,0.3)] transform transition-transform duration-700 z-10 md:w-20 md:h-20 ${isPlaying ? '-translate-y-5 md:-translate-y-6 scale-90' : 'group-hover:scale-110'}`} />
+                                <Headphones size={80} className={`text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transform transition-transform duration-700 z-10 md:w-24 md:h-24 ${isPlaying ? '-translate-y-5 md:-translate-y-8 scale-90' : 'group-hover:scale-110'}`} />
                                 {isPlaying && (
-                                    <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex items-end gap-1.5 h-8 md:h-10 z-10">
-                                        {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3].map((h, i) => (
-                                            <div key={i} className="w-1.5 bg-white/90 rounded-full animate-[bounce_1s_infinite]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                                    <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-end justify-center gap-2 h-10 md:h-12 z-10 w-full px-4">
+                                        {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
+                                            <div key={i} className="w-2 md:w-2.5 bg-white shadow-[0_0_10px_rgba(255,255,255,1)] rounded-full animate-[bounce_1s_infinite]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
                                         ))}
                                     </div>
                                 )}
                             </div>
                         </div>
 
-                        <div className="text-center mt-4 mb-3 max-w-xl z-10">
-                            <h2 className="text-2xl lg:text-3xl font-bold font-serif text-white mb-2 line-clamp-2">
+                        <div className="text-center mt-6 mb-4 max-w-xl z-10">
+                            <h2 className="text-3xl lg:text-4xl font-black font-serif text-white mb-2 line-clamp-2 drop-shadow-md">
                                 {currentTrack ? currentTrack.title : "LexPlayer is idle"}
                             </h2>
-                            <p className="text-base lg:text-lg text-white/60 font-medium tracking-wide">
-                                {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist to start listening"}
+                            <p className="text-lg lg:text-xl text-purple-300 font-extrabold tracking-widest uppercase opacity-90">
+                                {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist"}
                             </p>
-                            {/* Fixed height container to prevent layout shift during loading/error states */}
-                            <div className="min-h-[2.5rem] mt-1 flex items-center justify-center w-full">
-                                {error && <div className="inline-flex items-center justify-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-2xl px-6 py-2 text-sm font-semibold">⚠ {error}</div>}
-                                {isLoading && !error && <div className="inline-flex items-center justify-center gap-2 bg-white/5 text-white/80 border border-white/10 rounded-2xl px-6 py-3 text-sm font-semibold animate-pulse">Adding...</div>}
+                            {/* Enhanced Loading/Error feedback */}
+                            <div className="min-h-[4rem] mt-4 flex flex-col items-center justify-center w-full">
+                                {error && <div className="inline-flex items-center justify-center gap-2 bg-red-500/20 text-red-400 border-2 border-red-500/40 rounded-2xl px-8 py-3 text-sm font-black animate-in shake">⚠ {error}</div>}
                             </div>
                         </div>
 
@@ -628,22 +638,25 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Right Area: Playlist */}
-                    <div className={`w-full md:w-72 lg:w-80 xl:w-[400px] bg-white/5 backdrop-blur-xl border-t md:border-t-0 md:border-l border-white/10 flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 translate-x-10'}`}>
-                        <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center gap-4">
-                            <div className="p-2 bg-purple-500/10 rounded-xl"><ListMusic className="text-purple-400" size={24} /></div>
-                            <div>
-                                <h3 className="text-lg lg:text-xl font-bold text-white">
-                                    {activePlaylistName || 'LexPlaylist'}
-                                </h3>
-                                <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} items</p>
+                    {/* Left Area: Playlist (Desktop) */}
+                    <div className={`w-full md:w-72 lg:w-80 xl:w-[420px] bg-white/[0.03] backdrop-blur-3xl border-b md:border-b-0 md:border-r border-white/10 flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
+                        <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center justify-between gap-4">
+                            <button onClick={() => setShowBulkModal(true)} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-2xl shadow-[0_8px_20px_rgba(139,92,246,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0"><Plus size={18} /> Add Tracks</button>
+                            <div className="min-w-0 flex-1 flex items-center justify-end gap-4 text-right">
+                                <div>
+                                    <h3 className="text-lg lg:text-xl font-black text-white truncate">
+                                        {activePlaylistName || 'LexPlaylist'}
+                                    </h3>
+                                    <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} items</p>
+                                </div>
+                                <div className="p-2.5 bg-purple-500/20 rounded-xl border border-white/10 shadow-lg"><ListMusic className="text-purple-400" size={24} /></div>
                             </div>
-                            <button onClick={() => setShowBulkModal(true)} className="ml-auto bg-purple-600 hover:bg-purple-500 text-white p-3 rounded-2xl shadow-lg transition-all"><Plus size={20} /></button>
                         </div>
 
                         <div className="p-6 border-b border-white/5 bg-white/[0.02]">
                             {!isCreating ? (
                                 <div className="flex items-center gap-3">
+                                    <button onClick={() => setIsCreating(true)} className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 min-w-[100px]">Create</button>
                                     <CustomPlaylistSelect
                                         value={activePlaylistId || ''}
                                         onChange={(val) => val && loadSavedPlaylist(val)}
@@ -652,7 +665,6 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                             label: `${p.name} (${p.item_count || 0})`
                                         }))}
                                     />
-                                    <button onClick={() => setIsCreating(true)} className="p-3 bg-white/5 text-white/60 rounded-2xl border border-white/10 hover:text-white transition-all"><Plus size={24} /></button>
                                 </div>
                             ) : (
                                 <div className="flex items-center gap-2">
@@ -662,13 +674,19 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                 </div>
                             )}
                             {activePlaylistId && !isCreating && (
-                                <div className="mt-4 flex items-center justify-end gap-4 px-2">
+                                <div className="mt-4 flex items-center justify-start gap-4 px-2">
                                     {!isEditing ? (
                                         <>
-                                            <button onClick={() => { setIsEditing(true); setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || ''); }} className="text-xs font-bold text-white/40 hover:text-purple-400 flex items-center gap-1.5 transition-all">
+                                            <button 
+                                                onClick={() => { setIsEditing(true); setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || ''); }} 
+                                                className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-2 min-w-[100px]"
+                                            >
                                                 <Edit2 size={14} /> Rename
                                             </button>
-                                            <button onClick={() => window.confirm("Delete playlist?") && deletePlaylist(activePlaylistId)} className="text-xs font-bold text-white/40 hover:text-red-400 flex items-center gap-1.5 transition-all">
+                                            <button 
+                                                onClick={() => window.confirm("Delete playlist?") && deletePlaylist(activePlaylistId)} 
+                                                className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-2 min-w-[100px]"
+                                            >
                                                 <Trash2 size={14} /> Delete
                                             </button>
                                         </>
@@ -684,10 +702,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth overscroll-contain">
-                            <PlaylistList 
-                                playlist={playlist}
+                            <VirtualizedPlaylist 
+                                items={playlist}
                                 currentIndex={currentIndex}
                                 isPlaying={isPlaying}
+                                isLoading={isLoading}
                                 onPlay={handlePlaylistPlay}
                                 onRemove={handlePlaylistRemove}
                             />
@@ -697,27 +716,27 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 
                 {/* Bulk Add Modal */}
                 {showBulkModal && (
-                    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-                        <div className="bg-[#1e293b]/90 border border-white/10 rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden">
+                    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/70 backdrop-blur-3xl">
+                        <div className="bg-[#1e293b]/40 backdrop-blur-3xl border border-white/10 rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden">
                             <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
                                 <div>
-                                    <h3 className="text-xl font-bold text-white flex items-center gap-2"><Plus className="text-purple-400" size={24} /> Add Items</h3>
-                                    <p className="text-xs font-medium text-white/30 uppercase tracking-widest mt-1">Bulk create audio queue</p>
+                                    <h3 className="text-xl font-black text-white flex items-center gap-2 tracking-tight">Add Tracks</h3>
+                                    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.2em] mt-1">Bulk create audio queue</p>
                                 </div>
                                 <button onClick={() => setShowBulkModal(false)} className="text-white/40 hover:text-white"><X size={24} /></button>
                             </div>
                             <div className="p-8 space-y-6">
-                                {bulkError && <div className="p-4 bg-red-500/10 text-red-400 border border-red-500/20 rounded-2xl text-sm font-medium">{bulkError}</div>}
+                                {bulkError && <div className="p-4 bg-red-500/20 text-red-400 border border-red-500/40 rounded-2xl text-xs font-black uppercase">{bulkError}</div>}
                                 <div className="space-y-2">
-                                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest ml-1">Destination Playlist</label>
-                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl outline-none" value={bulkForm.targetPlaylist} onChange={e => setBulkForm({...bulkForm, targetPlaylist: e.target.value})}>
+                                    <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">Destination Playlist</label>
+                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl font-bold outline-none" value={bulkForm.targetPlaylist} onChange={e => setBulkForm({...bulkForm, targetPlaylist: e.target.value})}>
                                         <option value="" disabled className="bg-[#0f172a]">Select a playlist...</option>
                                         {savedPlaylists.map(p => <option key={p.id} value={p.id} className="bg-[#0f172a]">{p.name}</option>)}
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest ml-1">Select Codal</label>
-                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl outline-none" value={bulkForm.codal} onChange={e => setBulkForm({...bulkForm, codal: e.target.value})}>
+                                    <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">Select Codal</label>
+                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl font-bold outline-none" value={bulkForm.codal} onChange={e => setBulkForm({...bulkForm, codal: e.target.value})}>
                                         <option value="RPC" className="bg-[#0f172a]">Revised Penal Code</option>
                                         <option value="CIV" className="bg-[#0f172a]">Civil Code</option>
                                         <option value="FC" className="bg-[#0f172a]">Family Code</option>
@@ -727,18 +746,18 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest ml-1">
+                                    <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">
                                         {bulkForm.codal === 'ROC' ? 'Rule Range (Optional)' : 
                                          bulkForm.codal === 'CONST' ? 'Article / Section Range (Optional)' : 
                                          'Article Range (Optional)'}
                                     </label>
-                                    <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl outline-none" />
+                                    <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl font-bold outline-none" />
                                 </div>
                             </div>
-                            <div className="px-8 py-6 border-t border-white/5 bg-white/[0.02] flex justify-end gap-3">
-                                <button onClick={() => setShowBulkModal(false)} className="px-6 py-3 text-sm font-bold text-white/60 hover:text-white transition-all">Cancel</button>
-                                <button onClick={handleAddBulkItems} disabled={isBulking} className="px-8 py-3 text-sm font-bold text-white bg-purple-600 rounded-[20px] hover:bg-purple-500 shadow-lg disabled:opacity-50 transition-all active:scale-95">
-                                    {isBulking ? "Adding..." : "Add to Playlist"}
+                            <div className="px-8 py-6 border-t border-white/5 bg-white/[0.02] flex justify-end gap-4">
+                                <button onClick={() => setShowBulkModal(false)} className="text-xs font-black text-white/30 hover:text-white uppercase tracking-widest transition-all">Cancel</button>
+                                <button onClick={handleAddBulkItems} disabled={isBulking} className="px-10 py-4 text-xs font-black text-white bg-purple-600 rounded-[20px] hover:bg-purple-500 shadow-xl shadow-purple-600/20 disabled:opacity-50 transition-all active:scale-95 uppercase tracking-widest">
+                                    {isBulking ? "Adding..." : "Add to Tracks"}
                                 </button>
                             </div>
                         </div>
