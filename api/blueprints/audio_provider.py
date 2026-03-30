@@ -473,9 +473,13 @@ def _get_text_for_codal(content_id, code_id=None):
             # --- Multi-stage Lookup Strategy ---
             search_patterns = [str(content_id)] # 1. Exact match
             
-            # Backward compat: '0' used to be the Preamble before we renamed to 'PREAMBLE'
-            if str(content_id) == '0' and code_id and code_id.lower() == 'const':
-                search_patterns.insert(0, 'PREAMBLE')
+            # Backward compat: '0' used to be the Preamble/Preliminary before we renamed or for specific codal indexing
+            if str(content_id) == '0' and code_id:
+                if code_id.lower() == 'const':
+                    search_patterns.insert(0, 'PREAMBLE')
+                elif code_id.lower() == 'rpc':
+                    # RPC first record or Preliminary
+                    search_patterns.insert(0, '1') # Fallback to Art 1 if 0 is used for indexing
             
             cid_str = str(content_id).strip()
             extra_filter = ""
@@ -894,30 +898,33 @@ def _generate_audio_edge_tts(text, voice="en-US-JennyNeural", rate=1.0):
     if not chunks:
         raise ValueError("No text provided for edge-tts")
         
-    all_audio_data = []
-    for chunk in chunks:
-        # Create temp file without deleting it immediately so subprocess can write to it
-        fd, temp_path = tempfile.mkstemp(suffix=".mp3")
-        os.close(fd) # Close initially opened fd
+    # Concatenate MP3 bytes using the native Python API (reliable in Cloud)
+    import asyncio
+    import edge_tts
+
+    async def _amain():
+        _all_data = []
+        for chunk in chunks:
+            communicate = edge_tts.Communicate(chunk, voice, rate=rate_str)
+            # Use a memory/temp pipe or write to temp then read
+            fd, temp_path = tempfile.mkstemp(suffix=".mp3")
+            os.close(fd)
+            try:
+                await communicate.save(temp_path)
+                with open(temp_path, 'rb') as f:
+                    _all_data.append(f.read())
+            finally:
+                if os.path.exists(temp_path):
+                    os.remove(temp_path)
+        return b"".join(_all_data)
+
+    try:
+        # Run the async loop inside the sync function
+        combined_data = asyncio.run(_amain())
+    except Exception as e:
+        logging.error(f"Edge-TTS Python API failed: {e}")
+        raise RuntimeError(f"Fallback audio engine failed: {str(e)}")
         
-        try:
-            # Call edge-tts payload
-            subprocess.run([
-                'edge-tts', 
-                '--voice', voice, 
-                f'--rate={rate_str}', 
-                '--text', chunk, 
-                '--write-media', temp_path
-            ], check=True, capture_output=True)
-            
-            with open(temp_path, 'rb') as f:
-                all_audio_data.append(f.read())
-        finally:
-            if os.path.exists(temp_path):
-                os.remove(temp_path)
-                
-    # Concatenate MP3 bytes 
-    combined_data = b"".join(all_audio_data)
     return combined_data, 'audio/mpeg', '.mp3'
 
 def _generate_audio_azure(text, voice_name="en-PH-RosaNeural", rate=1.0):
