@@ -21,7 +21,7 @@ export const LexPlayProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [playbackRate, setPlaybackRate] = useState(0.8);
+    const [playbackRate, setPlaybackRate] = useState(1.0);
     const [volume, setVolume] = useState(1.0);
     const [repeatMode, setRepeatMode] = useState('none'); // 'none', 'all', 'one'
     const [isShuffle, setIsShuffle] = useState(false);
@@ -405,16 +405,32 @@ export const LexPlayProvider = ({ children }) => {
             const currentRate = playbackRateRef.current || playbackRate;
             const rateParam = `rate=${currentRate}`;
             const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-            const timestampParam = `&t=${new Date().getTime()}`;
-            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}${timestampParam}`;
+            // REMOVED: timestampParam = `&t=${new Date().getTime()}`; // CACHE BUSTER REMOVED
+            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}`;
             console.log(`LEXPLAY AUDIO: Load attempt ${attempt}/${MAX_RETRIES}:`, fetchUrl);
 
+            // --- Cache-First Retrieval ---
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current.removeAttribute('src');
                 audioRef.current.load(); // Reset previous errors
 
-                audioRef.current.src = fetchUrl;
+                let finalSource = fetchUrl;
+                try {
+                    if ('caches' in window) {
+                        const cache = await caches.open('audio-cache');
+                        const matchedResponse = await cache.match(fetchUrl);
+                        if (matchedResponse) {
+                            console.log("LEXPLAY CACHE: 🚀 Instant Play (Cache Hit)");
+                            const blob = await matchedResponse.blob();
+                            finalSource = URL.createObjectURL(blob);
+                        }
+                    }
+                } catch (cacheErr) {
+                    console.warn("Cache retrieval failed, falling back to network:", cacheErr);
+                }
+
+                audioRef.current.src = finalSource;
                 audioRef.current.playbackRate = 1.0; // Always native speed — rate is baked into the audio by Azure
 
                 // Listen for load errors before play() resolves

@@ -260,6 +260,19 @@ def _get_from_cache(blob_name):
         logging.warning(f"Cache read error: {e}")
     return None
 
+def _get_data_from_cache(blob_name):
+    """Fetch raw blob data from Azure Storage (Proxy Mode)."""
+    client = _get_blob_client(blob_name)
+    if not client:
+        return None
+    try:
+        if client.exists():
+            logging.info(f"CACHE HIT (PROXY): {blob_name}")
+            return client.download_blob().readall()
+    except Exception as e:
+        logging.warning(f"Cache download error: {e}")
+    return None
+
 def _save_to_cache(blob_name, data, mime_type='audio/mpeg'):
     client = _get_blob_client(blob_name)
     if not client:
@@ -1035,13 +1048,17 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     
     cache_status = "MISS"
     for ext in ['.mp3', '.wav']:
-        cached_url = _get_from_cache(f"{cache_key}{ext}")
-        if cached_url:
-            logging.info(f"CACHE HIT: Redirecting to {cached_url[:60]}...")
+        blob_name = f"{cache_key}{ext}"
+        cached_data = _get_data_from_cache(blob_name)
+        if cached_data:
+            logging.info(f"CACHE HIT: Proxying {len(cached_data)} bytes...")
             return func.HttpResponse(
-                status_code=302,
+                body=cached_data,
+                status_code=200,
+                mimetype="audio/mpeg",
                 headers={
-                    "Location": cached_url,
+                    "Content-Length": str(len(cached_data)),
+                    "Accept-Ranges": "bytes",
                     "X-Cache-Status": "HIT",
                     "X-Cache-Version": CACHE_VERSION
                 }
@@ -1115,21 +1132,25 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
         logging.error(f"TTS generation failed entirely: {e}")
         return func.HttpResponse(f"Audio generation failed: {e}", status_code=500)
 
-    # --- 4. Upload to Azure Blob and Redirect ---
+    # --- 4. Upload to Azure Blob and return data ---
     # Use a separate cache key suffix for TTS engines so they can be explicitly identified
     effective_cache_key = f"{cache_key}_{tts_engine}"
     blob_name = f"{effective_cache_key}{ext}"
     _save_to_cache(blob_name, audio_data, mime_type=mime_type)
-    sas_url = _get_from_cache(blob_name)
-    if sas_url:
-        logging.info(f"Uploaded to Azure Blob ({tts_engine}), Redirecting to SAS URL")
-        return func.HttpResponse(
-            status_code=302,
-            headers={
-                "Location": sas_url,
-                "X-TTS-Engine": tts_engine,
-            }
-        )
+    
+    # We already have audio_data in memory, so we just return it directly (proxy) 
+    # instead of doing a redirect loop.
+    return func.HttpResponse(
+        body=audio_data,
+        status_code=200,
+        mimetype=mime_type,
+        headers={
+            "Content-Length": str(len(audio_data)),
+            "Accept-Ranges": "bytes",
+            "X-TTS-Engine": tts_engine,
+            "X-Cache-Status": "MISS"
+        }
+    )
 
     # --- 5. Fallback: stream audio directly if blob upload failed ---
     if not audio_data:

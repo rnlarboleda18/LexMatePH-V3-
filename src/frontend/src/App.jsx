@@ -28,7 +28,7 @@ function App() {
   
   // --- State ---
   const [questions, setQuestions] = useState([]);
-  console.log('App render. Mode: (initializing)', 'Fullscreen: (initializing)');
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -54,7 +54,7 @@ function App() {
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
   const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
-  console.log('App render. Mode:', mode, 'Fullscreen:', isFullscreen);
+
 
   // Intercept playNow signals to force player open
   useEffect(() => {

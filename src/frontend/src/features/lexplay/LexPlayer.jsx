@@ -185,32 +185,65 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
     const [isDownloaded, setIsDownloaded] = useState(false);
     const [isDownloading, setIsDownloading] = useState(false);
 
+    // Build the audio URL from track fields (same formula as playTrack in useLexPlay)
+    const getAudioUrl = (track, rate = 1.0) => {
+        if (!track?.id || !track?.type) return null;
+        const codeParam = track.code_id ? `code=${track.code_id}&` : '';
+        return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+    };
+
     // Check if the track is already in the audio-cache
     useEffect(() => {
-        if (!item?.audio_url) return;
+        if (!item?.id) return;
         const checkCache = async () => {
             try {
+                if (!('caches' in window)) return;
                 const cache = await caches.open('audio-cache');
-                const response = await cache.match(item.audio_url);
+                // Check both with and without rate param
+                const url = getAudioUrl(item, 1.0);
+                const response = await cache.match(url);
                 setIsDownloaded(!!response);
             } catch (err) {
                 console.warn('Cache check failed:', err);
             }
         };
         checkCache();
-    }, [item?.audio_url]);
+    }, [item?.id]);
 
     const handleDownload = async (e) => {
         e.stopPropagation();
-        if (isDownloaded || isDownloading || !item?.audio_url) return;
-        
+        if (isDownloaded || isDownloading || !item?.id) return;
+
+        const audioUrl = getAudioUrl(item, 1.0);
+        if (!audioUrl) return;
+
         setIsDownloading(true);
         try {
-            const cache = await caches.open('audio-cache');
-            const response = await fetch(item.audio_url);
+            const response = await fetch(audioUrl);
             if (response.ok) {
-                await cache.put(item.audio_url, response);
+                if ('caches' in window) {
+                    // Cache the response clone for offline use
+                    const cache = await caches.open('audio-cache');
+                    await cache.put(audioUrl, response.clone());
+                }
+                // Also trigger an actual file download with descriptive naming
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                
+                // Construct a safe, descriptive filename: [Codal Name] Title.mp3
+                // Sanitize for Windows filename restrictions
+                const cleanCodal = (item.subtitle || '').replace(/[\\/:*?"<>|]/g, '_').trim();
+                const cleanTitle = (item.title || 'audio').replace(/[\\/:*?"<>|]/g, '_').trim();
+                const finalFileName = cleanCodal ? `[${cleanCodal}] ${cleanTitle}.mp3` : `${cleanTitle}.mp3`;
+                
+                a.download = finalFileName;
+                a.click();
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
                 setIsDownloaded(true);
+            } else {
+                console.error('Download failed: server returned', response.status);
             }
         } catch (err) {
             console.error('Manual download failed:', err);
@@ -258,18 +291,21 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                 <h4 className={`text-xs font-black truncate ${isActive ? 'text-white' : 'text-white/80'}`}>{item?.title}</h4>
                 <div className="flex items-center gap-2">
                     <p className="text-[10px] font-bold text-white/30 truncate uppercase tracking-wider">{item?.subtitle}</p>
-                    {isDownloaded && <CheckCircle2 size={10} className="text-green-400" />}
                 </div>
             </div>
             <div className="flex items-center gap-1">
-                {!isDownloaded && (
+                {isDownloaded ? (
+                    <div className="p-2.5 text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.4)]">
+                        <CheckCircle2 size={20} />
+                    </div>
+                ) : (
                     <button 
                         onClick={handleDownload}
                         disabled={isDownloading}
-                        className={`p-2 transition-all ${isDownloading ? 'text-purple-400 opacity-100' : 'text-white/20 hover:text-white group-hover:opacity-100 opacity-0'}`}
+                        className={`p-2.5 transition-all ${isDownloading ? 'text-purple-400 opacity-100' : 'text-white/40 hover:text-white hover:scale-110 group-hover:opacity-100 opacity-60'}`}
                         title="Download for offline"
                     >
-                        {isDownloading ? <Loader2 size={16} className="animate-spin" /> : <DownloadCloud size={16} />}
+                        {isDownloading ? <Loader2 size={20} className="animate-spin" /> : <DownloadCloud size={20} />}
                     </button>
                 )}
                 <button 
@@ -405,40 +441,88 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const [downloadProgress, setDownloadProgress] = useState(0);
     const [isDownloadingAll, setIsDownloadingAll] = useState(false);
     const [downloadStatusText, setDownloadStatusText] = useState('');
+    const [cachedCount, setCachedCount] = useState(0);
+
+    const updateCachedCount = useCallback(async () => {
+        if (!playlist || playlist.length === 0 || !('caches' in window)) {
+            setCachedCount(0);
+            return;
+        }
+        try {
+            const cache = await caches.open('audio-cache');
+            let count = 0;
+            // For efficiency with large playlists, we only check in chunks if necessary
+            // or just iterate (MP3 cached check is purely cache-key lookup, very fast)
+            for (const track of playlist) {
+                const url = buildAudioUrl(track, 1.0);
+                const match = await cache.match(url);
+                if (match) count++;
+            }
+            setCachedCount(count);
+        } catch (e) { console.warn("Cache check failed:", e); }
+    }, [playlist]);
+
+    useEffect(() => {
+        updateCachedCount();
+    }, [playlist, updateCachedCount]);
+
+    // Build the audio URL from track fields — same formula as playTrack in useLexPlay
+    const buildAudioUrl = (track, rate = 1.0) => {
+        if (!track?.id || !track?.type) return null;
+        const codeParam = track.code_id ? `code=${track.code_id}&` : '';
+        return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+    };
 
     const handleDownloadAll = async () => {
         if (isDownloadingAll || playlist.length === 0) return;
-        
+
         setIsDownloadingAll(true);
         setDownloadProgress(0);
-        
+        setDownloadStatusText('Starting...');
+
+        let completed = 0;
+        const total = playlist.length;
+        let successCount = 0;
+
         try {
-            const cache = await caches.open('audio-cache');
-            let completed = 0;
-            const total = playlist.length;
-            
+            const cache = 'caches' in window ? await caches.open('audio-cache') : null;
+
             for (const track of playlist) {
-                if (track.audio_url) {
-                    setDownloadStatusText(`Caching: ${track.title}`);
-                    const exists = await cache.match(track.audio_url);
-                    if (!exists) {
-                        try {
-                            const resp = await fetch(track.audio_url);
-                            if (resp.ok) await cache.put(track.audio_url, resp);
-                        } catch (e) { console.warn(`Failed to cache ${track.title}`, e); }
+                const audioUrl = buildAudioUrl(track, 1.0);
+                if (audioUrl) {
+                    setDownloadStatusText(`Downloading: ${track.title}`);
+                    try {
+                        // Check if already cached
+                        const existing = cache ? await cache.match(audioUrl) : null;
+                        if (!existing) {
+                            const resp = await fetch(audioUrl);
+                            if (resp.ok) {
+                                if (cache) await cache.put(audioUrl, resp);
+                                successCount++;
+                            } else {
+                                console.warn(`Server error ${resp.status} for ${track.title}`);
+                            }
+                        } else {
+                            successCount++; // already cached
+                        }
+                    } catch (e) {
+                        console.warn(`Failed to download ${track.title}:`, e);
                     }
                 }
                 completed++;
                 setDownloadProgress(Math.round((completed / total) * 100));
             }
-            
-            setDownloadStatusText('Playlist Offline!');
+
+            setDownloadStatusText(`✓ ${successCount}/${total} tracks cached for offline`);
+            updateCachedCount(); // Refresh the bulk indicator
             setTimeout(() => {
                 setIsDownloadingAll(false);
                 setDownloadProgress(0);
+                setDownloadStatusText('');
             }, 3000);
         } catch (err) {
             console.error('Bulk download failed:', err);
+            setDownloadStatusText('Download failed. Try again.');
             setIsDownloadingAll(false);
         }
     };
@@ -764,7 +848,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     <div className={`w-full md:w-72 lg:w-80 xl:w-[420px] bg-[#0f172a]/40 backdrop-blur-[20px] border-b md:border-b-0 md:border-r border-white/10 shadow-[-8px_0_32px_rgba(0,0,0,0.5)] flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center justify-between gap-4">
                             <div className="min-w-0 flex-1 flex items-center justify-start gap-4 text-left">
-                                <div className="p-2.5 bg-purple-500 rounded-xl border border-white/10 shadow-[0_4px_12px_rgba(168,85,247,0.4)]"><ListMusic className="text-white" size={24} /></div>
+                                <button 
+                                    onClick={() => setShowBulkModal(true)}
+                                    className="group relative p-2.5 bg-purple-500 rounded-xl border border-white/20 shadow-[0_4px_12px_rgba(168,85,247,0.4)] hover:bg-purple-400 transition-all hover:scale-110 active:scale-90"
+                                    title="Add Tracks to Playlist"
+                                >
+                                    <Plus className="text-white transition-transform group-hover:rotate-90 duration-300" size={24} />
+                                </button>
                                 <div>
                                     <h3 className="text-lg lg:text-xl font-black text-white truncate">
                                         {activePlaylistName || 'LexPlaylist'}
@@ -773,21 +863,32 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                <button onClick={() => setShowBulkModal(true)} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-2xl shadow-[0_8px_20px_rgba(139,92,246,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0 animate-in fade-in slide-in-from-left-4 duration-500"><Plus size={18} /> Add Tracks</button>
                                 {playlist.length > 0 && (
                                     <button 
                                         onClick={handleDownloadAll}
                                         disabled={isDownloadingAll}
-                                        className={`p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all flex items-center gap-2 ${isDownloadingAll ? 'text-purple-400' : 'text-white/60 hover:text-white'}`}
-                                        title="Download All for Offline"
+                                        className={`p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all flex items-center gap-2 ${isDownloadingAll ? 'text-purple-400' : (cachedCount === playlist.length ? 'text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.3)]' : 'text-white/60 hover:text-white')}`}
+                                        title={cachedCount === playlist.length ? "All tracks cached for offline" : (cachedCount > 0 ? `${cachedCount}/${playlist.length} items cached` : "Download all for offline")}
                                     >
                                         {isDownloadingAll ? (
                                             <>
-                                                <Loader2 size={20} className="animate-spin" />
+                                                <Loader2 size={24} className="animate-spin" />
                                                 <span className="text-[10px] font-black">{downloadProgress}%</span>
                                             </>
+                                        ) : cachedCount === playlist.length ? (
+                                            <CheckCircle2 size={24} />
                                         ) : (
-                                            <DownloadCloud size={20} />
+                                            <>
+                                                <div className="relative">
+                                                    <DownloadCloud size={24} />
+                                                    {cachedCount > 0 && (
+                                                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full border border-[#0f172a] animate-pulse" />
+                                                    )}
+                                                </div>
+                                                {cachedCount > 0 && (
+                                                    <span className="text-[10px] font-black text-white/40">{cachedCount}/{playlist.length}</span>
+                                                )}
+                                            </>
                                         )}
                                     </button>
                                 )}
@@ -831,7 +932,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                 </div>
                             )}
                             {activePlaylistId && !isCreating && (
-                                <div className="mt-4 flex items-center justify-start gap-4 px-2">
+                                <div className="mt-4 flex items-center justify-between gap-4 px-2">
                                     {!isEditing ? (
                                         <>
                                             <button 

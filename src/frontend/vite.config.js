@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
+      includeAssets: ['pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'LexMatePH',
         short_name: 'LexMate',
@@ -73,20 +73,20 @@ export default defineConfig({
             },
           },
           {
-            // Specialized Audio Caching Strategy
+            // Specialized Audio Caching Strategy (2GB QUOTA)
             urlPattern: /.*\.mp3$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'audio-cache',
               expiration: {
-                maxEntries: 1000,                    // Up to ~500+ hours of legal audio
-                maxAgeSeconds: 60 * 60 * 24 * 30,   // Keep tracks for 30 days
-                purgeOnQuotaError: true,             // Auto-evict when storage is full
+                maxEntries: 200, // Limit to 200 tracks
+                maxAgeSeconds: 60 * 60 * 24 * 30, // Keep tracks for 30 days
               },
               cacheableResponse: {
-                statuses: [0, 200, 206], // 206 = Partial Content for streaming/seeking
+                statuses: [0, 200, 260], // Support successful and partial content/streaming
               },
-              rangeRequests: true, // Critical for audio seeking on Safari/Chrome
+              // Critical for audio/video streaming (Safari/Chrome support)
+              rangeRequests: true, 
             },
           },
         ],

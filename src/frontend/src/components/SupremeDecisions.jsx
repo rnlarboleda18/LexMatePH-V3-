@@ -880,7 +880,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     return (
         <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
             {/* Header */}
-            <header className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-sm sticky top-0 z-10 border-b border-white/20 dark:border-white/10">
+            <header className="bg-white/95 dark:bg-slate-900/95 md:bg-white/40 md:dark:bg-slate-900/40 md:backdrop-blur-xl shadow-sm sticky top-0 z-10 border-b border-white/20 dark:border-white/10" style={{willChange:'transform'}}>
                 <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         <Gavel className="h-8 w-8 text-blue-600 dark:text-blue-400" />

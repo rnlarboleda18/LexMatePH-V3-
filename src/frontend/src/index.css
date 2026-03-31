@@ -9,6 +9,37 @@
   --player-height: 0px;
 }
 
+/* ===== MOBILE SCROLL PERFORMANCE ===== */
+
+/* Momentum scrolling on iOS */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  /* Prevent browser from waiting for JS before scrolling */
+  touch-action: pan-y;
+}
+
+/* Ensure the page root doesn't block native scroll */
+#root {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Stop float animation on mobile to reduce GPU overdraw */
+@media (max-width: 1024px) {
+  .animate-float {
+    animation: none !important;
+  }
+}
+
+/* Disable float animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-gradient {
+    animation: none !important;
+  }
+}
+/* ===================================== */
+
 /* Custom Scrollbar (Global) */
 ::-webkit-scrollbar {
   width: 8px;
