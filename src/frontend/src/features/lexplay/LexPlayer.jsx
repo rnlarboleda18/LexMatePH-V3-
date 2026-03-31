@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLexPlay } from './useLexPlay';
 import {
     Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
-    Volume2, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown
+    Volume2, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown,
+    DownloadCloud, CheckCircle2, Loader2
 } from 'lucide-react';
 
 // Custom modern dropdown for playlists
@@ -181,6 +182,43 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
  * PlaylistItem: Memoized track item to prevent re-rendering when other items are interacting.
  */
 const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, onPlay, onRemove }) => {
+    const [isDownloaded, setIsDownloaded] = useState(false);
+    const [isDownloading, setIsDownloading] = useState(false);
+
+    // Check if the track is already in the audio-cache
+    useEffect(() => {
+        if (!item?.audio_url) return;
+        const checkCache = async () => {
+            try {
+                const cache = await caches.open('audio-cache');
+                const response = await cache.match(item.audio_url);
+                setIsDownloaded(!!response);
+            } catch (err) {
+                console.warn('Cache check failed:', err);
+            }
+        };
+        checkCache();
+    }, [item?.audio_url]);
+
+    const handleDownload = async (e) => {
+        e.stopPropagation();
+        if (isDownloaded || isDownloading || !item?.audio_url) return;
+        
+        setIsDownloading(true);
+        try {
+            const cache = await caches.open('audio-cache');
+            const response = await fetch(item.audio_url);
+            if (response.ok) {
+                await cache.put(item.audio_url, response);
+                setIsDownloaded(true);
+            }
+        } catch (err) {
+            console.error('Manual download failed:', err);
+        } finally {
+            setIsDownloading(false);
+        }
+    };
+
     if (!item) return null;
 
     return (
@@ -216,16 +254,32 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                     </div>
                 )}
             </div>
-            <div className="flex-1 min-w-0 pr-8">
+            <div className="flex-1 min-w-0">
                 <h4 className={`text-xs font-black truncate ${isActive ? 'text-white' : 'text-white/80'}`}>{item?.title}</h4>
-                <p className="text-[10px] font-bold text-white/30 truncate uppercase tracking-wider">{item?.subtitle}</p>
+                <div className="flex items-center gap-2">
+                    <p className="text-[10px] font-bold text-white/30 truncate uppercase tracking-wider">{item?.subtitle}</p>
+                    {isDownloaded && <CheckCircle2 size={10} className="text-green-400" />}
+                </div>
             </div>
-            <button 
-                onClick={onRemove}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white/20 hover:text-red-400 transition-opacity opacity-0 group-hover:opacity-100"
-            >
-                <Trash2 size={18} />
-            </button>
+            <div className="flex items-center gap-1">
+                {!isDownloaded && (
+                    <button 
+                        onClick={handleDownload}
+                        disabled={isDownloading}
+                        className={`p-2 transition-all ${isDownloading ? 'text-purple-400 opacity-100' : 'text-white/20 hover:text-white group-hover:opacity-100 opacity-0'}`}
+                        title="Download for offline"
+                    >
+                        {isDownloading ? <Loader2 size={16} className="animate-spin" /> : <DownloadCloud size={16} />}
+                    </button>
+                )}
+                <button 
+                    onClick={onRemove}
+                    className="p-2 text-white/20 hover:text-red-400 transition-opacity opacity-0 group-hover:opacity-100"
+                    title="Remove item"
+                >
+                    <Trash2 size={18} />
+                </button>
+            </div>
         </div>
     );
 });
@@ -346,6 +400,48 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const [isBulking, setIsBulking] = useState(false);
     const [bulkError, setBulkError] = useState('');
     const [activeTab, setActiveTab] = useState('player'); // 'player' | 'playlist'
+
+    // Bulk Download Progress State
+    const [downloadProgress, setDownloadProgress] = useState(0);
+    const [isDownloadingAll, setIsDownloadingAll] = useState(false);
+    const [downloadStatusText, setDownloadStatusText] = useState('');
+
+    const handleDownloadAll = async () => {
+        if (isDownloadingAll || playlist.length === 0) return;
+        
+        setIsDownloadingAll(true);
+        setDownloadProgress(0);
+        
+        try {
+            const cache = await caches.open('audio-cache');
+            let completed = 0;
+            const total = playlist.length;
+            
+            for (const track of playlist) {
+                if (track.audio_url) {
+                    setDownloadStatusText(`Caching: ${track.title}`);
+                    const exists = await cache.match(track.audio_url);
+                    if (!exists) {
+                        try {
+                            const resp = await fetch(track.audio_url);
+                            if (resp.ok) await cache.put(track.audio_url, resp);
+                        } catch (e) { console.warn(`Failed to cache ${track.title}`, e); }
+                    }
+                }
+                completed++;
+                setDownloadProgress(Math.round((completed / total) * 100));
+            }
+            
+            setDownloadStatusText('Playlist Offline!');
+            setTimeout(() => {
+                setIsDownloadingAll(false);
+                setDownloadProgress(0);
+            }, 3000);
+        } catch (err) {
+            console.error('Bulk download failed:', err);
+            setIsDownloadingAll(false);
+        }
+    };
 
     // Force fetch playlists when the player is opened/mounted
     useEffect(() => {
@@ -676,8 +772,43 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                     <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} items</p>
                                 </div>
                             </div>
-                            <button onClick={() => setShowBulkModal(true)} className="flex items-center justify-center gap-2 px-5 py-3 bg-purple-500 hover:bg-purple-400 text-white rounded-2xl shadow-[0_4px_12px_rgba(168,85,247,0.2)] hover:shadow-[0_8px_20px_rgba(168,85,247,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0 min-w-[100px]"><Plus size={18} /> Add Tracks</button>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => setShowBulkModal(true)} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-2xl shadow-[0_8px_20px_rgba(139,92,246,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0 animate-in fade-in slide-in-from-left-4 duration-500"><Plus size={18} /> Add Tracks</button>
+                                {playlist.length > 0 && (
+                                    <button 
+                                        onClick={handleDownloadAll}
+                                        disabled={isDownloadingAll}
+                                        className={`p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all flex items-center gap-2 ${isDownloadingAll ? 'text-purple-400' : 'text-white/60 hover:text-white'}`}
+                                        title="Download All for Offline"
+                                    >
+                                        {isDownloadingAll ? (
+                                            <>
+                                                <Loader2 size={20} className="animate-spin" />
+                                                <span className="text-[10px] font-black">{downloadProgress}%</span>
+                                            </>
+                                        ) : (
+                                            <DownloadCloud size={20} />
+                                        )}
+                                    </button>
+                                )}
+                            </div>
                         </div>
+
+                        {/* Bulk Download Progress Bar Overlay */}
+                        {isDownloadingAll && (
+                            <div className="px-6 py-3 bg-purple-500/10 border-b border-white/10 animate-in slide-in-from-top-4 duration-300">
+                                <div className="flex justify-between items-center mb-1.5">
+                                    <span className="text-[9px] font-black text-purple-200 uppercase tracking-widest">{downloadStatusText}</span>
+                                    <span className="text-[9px] font-black text-purple-200">{downloadProgress}%</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div 
+                                        className="h-full bg-gradient-to-r from-purple-600 to-purple-400 transition-all duration-500" 
+                                        style={{ width: `${downloadProgress}%` }}
+                                    />
+                                </div>
+                            </div>
+                        )}
 
                         <div className="p-6 border-b border-white/5 bg-white/[0.02]">
                             {!isCreating ? (

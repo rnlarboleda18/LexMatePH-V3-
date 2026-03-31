@@ -79,8 +79,8 @@ export default defineConfig({
             options: {
               cacheName: 'audio-cache',
               expiration: {
-                // Large Storage: 2GB (in bytes)
-                maxSizeInBytes: 2 * 1024 * 1024 * 1024, 
+                // Massive Storage: 5GB (in bytes)
+                maxSizeInBytes: 5 * 1024 * 1024 * 1024, 
                 maxAgeSeconds: 60 * 60 * 24 * 30, // Keep tracks for 30 days
               },
               cacheableResponse: {
