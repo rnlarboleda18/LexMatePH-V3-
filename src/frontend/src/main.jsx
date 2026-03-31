@@ -2,6 +2,11 @@ import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import { registerSW } from 'virtual:pwa-register'
+
+// Register the service worker for PWA support (auto-updates silently in background)
+registerSW({ immediate: true })
+
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
