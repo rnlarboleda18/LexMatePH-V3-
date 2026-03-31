@@ -72,7 +72,29 @@ export default defineConfig({
               cacheableResponse: { statuses: [0, 200] },
             },
           },
+          {
+            // Specialized Audio Caching Strategy
+            urlPattern: /.*\.mp3$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'audio-cache',
+              expiration: {
+                maxEntries: 200, // Large enough for ~50-70 hours of legal content
+                maxAgeSeconds: 60 * 60 * 24 * 30, // Keep tracks for 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200, 260], // Support successful and partial content/streaming
+              },
+              // Critical for audio/video streaming (Safari/Chrome support)
+              rangeRequests: true, 
+            },
+          },
         ],
+      },
+      // Enable the virtual:pwa-register module in dev mode too
+      devOptions: {
+        enabled: true,
+        type: 'module',
       },
     }),
   ],
