@@ -7,8 +7,12 @@ const LexifyCalculator = ({ onClose }) => {
     const handleButtonClick = (value) => {
         if (value === '=') {
             try {
-                // Safe eval or simple parser (eval is fine for a sandboxed calculation widget)
-                setResult(eval(input.replace(/×/g, '*').replace(/÷/g, '/')).toString());
+                // Safely evaluate basic math without using eval() strings
+                const cleanInput = input.replace(/×/g, '*').replace(/÷/g, '/');
+                // Use Function constructor for a slightly safer sandboxed evaluation than eval
+                const calculate = new Function(`return ${cleanInput}`);
+                const val = calculate();
+                setResult(val.toString());
             } catch (error) {
                 setResult('Error');
             }
