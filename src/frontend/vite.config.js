@@ -73,13 +73,14 @@ export default defineConfig({
             },
           },
           {
-            // Specialized Audio Caching Strategy
+            // Specialized Audio Caching Strategy (2GB QUOTA)
             urlPattern: /.*\.mp3$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'audio-cache',
               expiration: {
-                maxEntries: 200, // Large enough for ~50-70 hours of legal content
+                // Large Storage: 2GB (in bytes)
+                maxSizeInBytes: 2 * 1024 * 1024 * 1024, 
                 maxAgeSeconds: 60 * 60 * 24 * 30, // Keep tracks for 30 days
               },
               cacheableResponse: {
