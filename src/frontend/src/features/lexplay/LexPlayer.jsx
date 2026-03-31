@@ -559,20 +559,20 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 {/* Inner shine layer for glass effect */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-30 pointer-events-none z-0"></div>
                 {/* Global Header Actions (Minimize/Close) */}
-                <div className="absolute top-4 left-4 right-4 z-[60] flex items-center justify-end gap-3 pointer-events-none md:top-6 md:right-6 md:left-auto md:gap-4 lg:top-8 lg:right-8">
+                <div className="absolute top-5 right-4 z-[60] flex items-center gap-2 pointer-events-none md:top-6 md:right-6 md:gap-4 lg:top-8 lg:right-8">
                     <button
                         onClick={onMinimize}
-                        className="p-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-3xl rounded-full border border-white/20 text-white transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
+                        className="p-1.5 md:p-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-3xl rounded-full border border-white/20 text-white transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
                         title="Minimize Player"
                     >
-                        <Minimize2 size={20} className="transition-transform group-hover:scale-110" />
+                        <Minimize2 size={14} className="md:w-5 md:h-5 transition-transform group-hover:scale-110" />
                     </button>
                     <button
                         onClick={handleCloseInternal}
-                        className="p-2.5 bg-red-500/10 hover:bg-red-500/20 backdrop-blur-3xl rounded-full border border-red-500/30 text-red-400 transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
+                        className="p-1.5 md:p-2.5 bg-red-500/10 hover:bg-red-500/20 backdrop-blur-3xl rounded-full border border-red-500/30 text-red-400 transition-all hover:scale-110 active:scale-95 group pointer-events-auto shadow-xl"
                         title="Close Player"
                     >
-                        <X size={20} className="transition-transform group-hover:rotate-90" />
+                        <X size={14} className="md:w-5 md:h-5 transition-transform group-hover:rotate-90" />
                     </button>
                 </div>
 
