@@ -40,7 +40,7 @@ const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a 
                         <button
                             key={option.value}
                             type="button"
-                            className={`w-full text-left px-4 py-3 text-sm transition-colors hover:bg-purple-600/30 hover:text-white ${value === option.value ? 'bg-purple-600/20 text-purple-300 font-bold' : 'text-white/70'}`}
+                            className={`w-full text-left px-4 py-3 text-sm transition-colors hover:bg-purple-500/30 hover:text-white ${value === option.value ? 'bg-purple-500/20 text-purple-200 font-bold' : 'text-white/70'}`}
                             onClick={() => {
                                 onChange(option.value);
                                 setIsOpen(false);
@@ -145,11 +145,11 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                     onTouchStart={onMouseDown}
                 >
                     <div className="h-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full relative overflow-hidden">
-                        <div className="absolute top-0 left-0 h-full bg-purple-600" style={{ width: `${progressPercent}%` }} />
+                        <div className="absolute top-0 left-0 h-full bg-primary" style={{ width: `${progressPercent}%` }} />
                     </div>
                     {/* Visual Thumb for Minimized Mode */}
                     <div 
-                        className={`absolute top-1/2 -translate-y-1/2 -ml-1.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 shadow-md border-2 border-purple-600 ${isScrubbing ? 'scale-125' : 'scale-0 group-hover:scale-100'}`} 
+                        className={`absolute top-1/2 -translate-y-1/2 -ml-1.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 shadow-md border-2 border-purple-500 ${isScrubbing ? 'scale-125' : 'scale-0 group-hover:scale-100'}`} 
                         style={{ left: `${progressPercent}%` }} 
                     />
                 </div>
@@ -170,8 +170,8 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
             >
-                <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full" style={{ width: `${progressPercent}%` }} />
-                <div className={`absolute top-1/2 -translate-y-1/2 -ml-2.5 w-5 h-5 bg-white rounded-full scale-0 group-hover:scale-100 ${isScrubbing ? 'scale-125' : ''} transition-all duration-200 border-4 border-purple-600`} style={{ left: `${progressPercent}%` }} />
+                <div className="absolute top-0 left-0 h-full bg-purple-500/80 rounded-full" style={{ width: `${progressPercent}%` }} />
+                <div className={`absolute top-1/2 -translate-y-1/2 -ml-2.5 w-5 h-5 bg-white rounded-full scale-0 group-hover:scale-100 ${isScrubbing ? 'scale-125' : ''} transition-all duration-200 border-4 border-purple-500`} style={{ left: `${progressPercent}%` }} />
             </div>
         </div>
     );
@@ -184,35 +184,35 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
     if (!item) return null;
 
     return (
-        <div className={`relative group flex items-center gap-3 py-2 px-4 rounded-2xl border transition-all ${isActive ? 'bg-white/10 border-white/20 shadow-lg scale-[1.02] ring-1 ring-purple-500/30' : 'bg-white/[0.03] border-white/5 hover:border-white/10'}`}>
-            <div className={`relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border ${isActive ? 'bg-purple-600 border-none shadow-[0_0_15px_rgba(139,92,246,0.4)]' : 'bg-white/5 border-white/10'}`}>
+        <div className={`relative group flex items-center gap-3 py-2 px-4 rounded-2xl border transition-all ${isActive ? 'bg-white/10 border-white/20 shadow-lg scale-[1.02] ring-1 ring-purple-600/30' : 'bg-white/[0.03] border-white/5 hover:border-white/10'}`}>
+            <div className={`relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 flex items-center justify-center border ${isActive ? 'bg-purple-500 border-none shadow-[0_0_15px_rgba(168,85,247,0.4)]' : 'bg-white/5 border-white/10'}`}>
                 
-                {/* Action Overlay: Hover state, or Active+Paused state */}
-                <div className={`absolute inset-0 z-20 bg-purple-600/80 flex items-center justify-center transition-opacity ${(isActive && !isPlaying) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                {/* Action Overlay: Hover state, or Active+Paused state, or Loading state */}
+                <div className={`absolute inset-0 z-20 bg-purple-500/80 flex items-center justify-center transition-opacity ${((isActive && !isPlaying) || (isActive && isLoading)) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                     <button onClick={onPlay} className="text-white w-full h-full flex items-center justify-center">
-                        {isActive && isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
+                        {isActive && isLoading ? (
+                            <div className="relative w-6 h-6 flex items-center justify-center">
+                                <div className="absolute inset-0 border-2 border-white/20 rounded-full" />
+                                <div className="absolute inset-0 border-2 border-white border-t-transparent rounded-full animate-[spin_0.8s_linear_infinite]" />
+                                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,1)]" />
+                            </div>
+                        ) : (
+                            isActive && isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />
+                        )}
                     </button>
                 </div>
 
                 {/* Track Number: Default state when completely inactive */}
                 {!isActive && <span className="text-sm font-black text-white/20 z-10 relative group-hover:opacity-0 transition-opacity tracking-tighter">{index + 1}</span>}
                 
-                {/* 
-                  Enhanced Feedback:
-                  1. Spinner (if loading)
-                  2. Equalizer (if playing)
-                */}
-                {isActive && (
+                {/* Enhanced Feedback: Equalizer solely for Active+Playing+NotLoading */}
+                {isActive && isPlaying && !isLoading && (
                     <div className="z-10 relative group-hover:opacity-0 transition-opacity">
-                        {isPlaying && !isLoading ? (
-                            <div className="flex items-end gap-0.5 h-3.5">
-                                {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
-                                    <div key={i} className="w-1 bg-white rounded-full animate-[bounce_0.8s_infinite] shadow-[0_0_8px_white]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}></div>
-                                ))}
-                            </div>
-                        ) : (
-                            isLoading && <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                        )}
+                        <div className="flex items-end gap-0.5 h-3.5">
+                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                <div key={i} className="w-1 bg-white rounded-full animate-[bounce_0.8s_infinite] shadow-[0_0_8px_white]" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}></div>
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>
@@ -435,11 +435,21 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
             }
             
             const payloadItems = articles.map(a => {
-                const numStr = String(a.article_number);
-                // Don't add "Article" prefix if it's already there, or if it's ROC (which uses Rule)
-                const displayTitle = /^(rule|article|section|preamble)/i.test(numStr)
-                    ? numStr
-                    : (bulkForm.codal === 'ROC' ? `Rule ${numStr}` : `Article ${numStr}`);
+                let numStr = String(a.article_number);
+                let displayTitle = numStr;
+
+                if (bulkForm.codal === 'CONST') {
+                    if (numStr.toUpperCase() === 'PREAMBLE') {
+                        displayTitle = 'Preamble';
+                    } else if (numStr.includes('-')) {
+                        const [art, sect] = numStr.split('-');
+                        displayTitle = `Article ${art}, Section ${sect}`;
+                    } else {
+                        displayTitle = `Article ${numStr}`;
+                    }
+                } else if (!/^(rule|article|section|preamble)/i.test(numStr)) {
+                    displayTitle = (bulkForm.codal === 'ROC' ? `Rule ${numStr}` : `Article ${numStr}`);
+                }
 
                 return {
                     content_id: String(a.key_id || a.article_num || a.id || a.article_number),
@@ -480,7 +490,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 onClick={onExpand}
             >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <div className="h-9 w-9 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400">
+                    <div className="h-9 w-9 shrink-0 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-300 dark:text-purple-300">
                         <Headphones size={18} />
                     </div>
                     <div className="flex flex-col truncate pr-4">
@@ -490,7 +500,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                         {error ? (
                             <span className="text-[10px] text-red-500 dark:text-red-400 truncate font-medium">⚠ {error}</span>
                         ) : isLoading ? (
-                            <span className="text-[10px] text-purple-500 dark:text-purple-400 truncate animate-pulse">Generating audio...</span>
+                            <span className="text-[10px] text-purple-300 dark:text-purple-300 truncate animate-pulse">Generating audio...</span>
                         ) : (
                             <span className="text-[10px] text-gray-500 dark:text-gray-400 truncate">
                                 {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add a Codal or Case Digest"}
@@ -501,19 +511,19 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
 
                 <div className="flex flex-col items-center shrink-0 px-2 sm:px-4 flex-1 justify-center max-w-md gap-0.5">
                     <div className="flex items-center gap-3 sm:gap-4">
-                        <button onClick={(e) => { e.stopPropagation(); handlePrevious(); }} className="p-1.5 text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors" disabled={playlist.length === 0}>
+                        <button onClick={(e) => { e.stopPropagation(); handlePrevious(); }} className="p-1.5 text-gray-600 hover:text-purple-300 dark:text-gray-400 dark:hover:text-purple-300 transition-colors" disabled={playlist.length === 0}>
                             <SkipBack size={18} />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                             disabled={playlist.length === 0}
-                            className="h-9 w-9 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50"
+                            className="h-9 w-9 rounded-full bg-primary hover:bg-purple-700 text-white flex items-center justify-center transition-transform hover:scale-105 disabled:opacity-50"
                         >
                             {isLoading ? (
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             ) : isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-0.5" />}
                         </button>
-                        <button onClick={(e) => { e.stopPropagation(); handleNext(); }} className="p-1.5 text-gray-600 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400 transition-colors" disabled={playlist.length === 0}>
+                        <button onClick={(e) => { e.stopPropagation(); handleNext(); }} className="p-1.5 text-gray-600 hover:text-purple-300 dark:text-gray-400 dark:hover:text-purple-300 transition-colors" disabled={playlist.length === 0}>
                             <SkipForward size={18} />
                         </button>
                     </div>
@@ -541,11 +551,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center">
             {/* Backdrop Overlay */}
             <div 
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 animate-in fade-in"
+                className="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-md transition-opacity duration-500 animate-in fade-in"
                 onClick={onMinimize}
             />
             
-            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-white/[0.03] backdrop-blur-3xl border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+            <div className="relative w-full h-full md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent backdrop-blur-[40px] border border-white/20 shadow-[0_32px_64px_-16px_rgba(31,38,135,0.4)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
+                {/* Inner shine layer for glass effect */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-30 pointer-events-none z-0"></div>
                 {/* Global Header Actions (Minimize/Close) */}
                 <div className="absolute top-4 left-4 right-4 z-[60] flex items-center justify-end gap-3 pointer-events-none md:top-6 md:right-6 md:left-auto md:gap-4 lg:top-8 lg:right-8">
                     <button
@@ -584,16 +596,17 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     {/* Right Area: Player Stage (Desktop) - Moves to top on mobile */}
                     <div className={`flex-1 flex flex-col relative overflow-y-auto scrollbar-hide transition-all duration-500 ease-in-out ${activeTab === 'player' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         {/* Background ambient glow - absolute to scroll container so it stays fixed */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full pointer-events-none sticky inset-0"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none sticky inset-0"></div>
                         
                         {/* Bulletproof centering inner container */}
                         <div className="m-auto shrink-0 flex flex-col items-center w-full pt-16 pb-6 px-4 md:px-8 z-10">
                         
                         <div className="relative group animate-float flex-shrink-0">
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-[32px] md:rounded-[40px] opacity-30 blur-2xl group-hover:opacity-50 transition-opacity"></div>
-                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] bg-gradient-to-tr from-[#6366f1] via-[#a855f7] to-[#ec4899] animate-gradient rounded-[30px] md:rounded-[32px] shadow-2xl flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"></div>
-                                <Headphones size={80} className={`text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] transform transition-transform duration-700 z-10 md:w-24 md:h-24 ${isPlaying ? '-translate-y-5 md:-translate-y-8 scale-90' : 'group-hover:scale-110'}`} />
+                            <div className="absolute -inset-4 bg-purple-500/30 rounded-[32px] md:rounded-[40px] opacity-40 blur-2xl group-hover:opacity-60 transition-opacity"></div>
+                            <div className="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 max-h-[35vh] max-w-[35vh] bg-white/5 border border-white/20 backdrop-blur-md shadow-[0_8px_32px_0_rgba(168,85,247,0.5)] rounded-[30px] md:rounded-[32px] flex items-center justify-center overflow-hidden">
+                                {/* Diagonal glassy shine overlay */}
+                                <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent skew-y-12 transform origin-top-left z-0 pointer-events-none"></div>
+                                <Headphones size={80} className={`text-white drop-shadow-[0_10px_20px_rgba(168,85,247,0.8)] transform transition-transform duration-700 z-10 md:w-24 md:h-24 ${isPlaying ? '-translate-y-5 md:-translate-y-8 scale-90' : 'group-hover:scale-110'}`} />
                                 {isPlaying && (
                                     <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-end justify-center gap-2 h-10 md:h-12 z-10 w-full px-4">
                                         {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
@@ -604,33 +617,46 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             </div>
                         </div>
 
-                        <div className="text-center mt-6 mb-4 max-w-xl z-10">
+                        <div className="text-center mt-6 max-w-xl z-10">
                             <h2 className="text-3xl lg:text-4xl font-black font-serif text-white mb-2 line-clamp-2 drop-shadow-md">
                                 {currentTrack ? currentTrack.title : "LexPlayer is idle"}
                             </h2>
-                            <p className="text-lg lg:text-xl text-purple-300 font-extrabold tracking-widest uppercase opacity-90">
+                            <p className="text-lg lg:text-xl text-purple-200 font-extrabold tracking-widest uppercase opacity-90">
                                 {currentTrack ? (activePlaylistName ? `${activePlaylistName} • ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist"}
                             </p>
-                            {/* Enhanced Loading/Error feedback */}
-                            <div className="min-h-[4rem] mt-4 flex flex-col items-center justify-center w-full">
+                            {/* Loading/Error feedback */}
+                            <div className="min-h-[2rem] mt-2 flex flex-col items-center justify-center w-full">
                                 {error && <div className="inline-flex items-center justify-center gap-2 bg-red-500/20 text-red-400 border-2 border-red-500/40 rounded-2xl px-8 py-3 text-sm font-black animate-in shake">⚠ {error}</div>}
                             </div>
                         </div>
 
                         <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={false} />
 
-                        <div className="flex flex-col items-center gap-3 w-full max-w-2xl z-10">
-                            <div className="flex items-center gap-5 lg:gap-8">
-                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90 disabled:opacity-20"><SkipBack size={28} /></button>
-                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="relative w-14 h-14 lg:w-16 lg:h-16 bg-white text-[#0f172a] rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all">
-                                    {isLoading ? <div className="w-8 h-8 border-[3px] border-[#0f172a]/20 border-t-[#0f172a] rounded-full animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1" />)}
+                        <div className="flex flex-col items-center w-full max-w-2xl z-10 mb-8 mt-4 space-y-8">
+                            {/* Floating Modern Controls */}
+                            <div className="flex items-center justify-center gap-10 md:gap-14">
+                                <button onClick={handlePrevious} disabled={playlist.length === 0} className="text-white/40 hover:text-white transition-all active:scale-90 disabled:opacity-20 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]">
+                                    <SkipBack size={32} fill="currentColor" />
                                 </button>
-                                <button onClick={handleNext} disabled={playlist.length === 0} className="p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90 disabled:opacity-20"><SkipForward size={28} /></button>
+                                
+                                <button onClick={handlePlayPause} disabled={playlist.length === 0} className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-purple-500 hover:bg-purple-400 text-white flex items-center justify-center shadow-[0_12px_40px_-10px_rgba(168,85,247,0.8)] transition-all hover:scale-110 active:scale-95 disabled:opacity-50 disabled:hover:scale-100">
+                                    {isLoading ? <div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin" /> : (isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1.5" />)}
+                                </button>
+                                
+                                <button onClick={handleNext} disabled={playlist.length === 0} className="text-white/40 hover:text-white transition-all active:scale-90 disabled:opacity-20 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)]">
+                                    <SkipForward size={32} fill="currentColor" />
+                                </button>
                             </div>
-                            <div className="flex flex-wrap justify-center bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-1 shadow-lg max-w-[90%]">
-                                {[0.7, 0.8, 0.9, 1.0, 1.25, 1.5, 2.0].map(speed => (
-                                    <button key={speed} onClick={() => setPlaybackRate(speed)} className={`px-2 py-1.5 md:px-3 text-xs lg:text-sm font-bold rounded-lg transition-all ${playbackRate === speed ? 'bg-white text-[#0f172a]' : 'text-white/60 hover:text-white'}`}>
-                                        {speed < 1 ? speed.toFixed(2).replace('0.', '.') + 'x' : speed === 1 ? '1x' : speed + 'x'}
+
+                            {/* Minimalist Glowing Typography Speed Selector */}
+                            <div className="flex items-center gap-6 opacity-60 hover:opacity-100 transition-opacity">
+                                {[0.8, 1.0, 1.25, 1.5, 2.0].map(speed => (
+                                    <button 
+                                        key={speed} 
+                                        onClick={() => setPlaybackRate(speed)} 
+                                        className={`text-[10px] md:text-xs font-black tracking-widest uppercase transition-all duration-300 ${playbackRate === speed ? 'text-purple-300 scale-125 drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]' : 'text-white/50 hover:text-white hover:scale-110'}`}
+                                    >
+                                        {speed === 1 ? '1.0x' : speed + 'x'}
                                     </button>
                                 ))}
                             </div>
@@ -639,24 +665,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                     </div>
 
                     {/* Left Area: Playlist (Desktop) */}
-                    <div className={`w-full md:w-72 lg:w-80 xl:w-[420px] bg-white/[0.03] backdrop-blur-3xl border-b md:border-b-0 md:border-r border-white/10 flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
+                    <div className={`w-full md:w-72 lg:w-80 xl:w-[420px] bg-[#0f172a]/40 backdrop-blur-[20px] border-b md:border-b-0 md:border-r border-white/10 shadow-[-8px_0_32px_rgba(0,0,0,0.5)] flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
                         <div className="p-4 md:p-6 pt-20 md:pt-6 border-b border-white/10 flex items-center justify-between gap-4">
-                            <button onClick={() => setShowBulkModal(true)} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-4 py-2.5 rounded-2xl shadow-[0_8px_20px_rgba(139,92,246,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0"><Plus size={18} /> Add Tracks</button>
-                            <div className="min-w-0 flex-1 flex items-center justify-end gap-4 text-right">
+                            <div className="min-w-0 flex-1 flex items-center justify-start gap-4 text-left">
+                                <div className="p-2.5 bg-purple-500 rounded-xl border border-white/10 shadow-[0_4px_12px_rgba(168,85,247,0.4)]"><ListMusic className="text-white" size={24} /></div>
                                 <div>
                                     <h3 className="text-lg lg:text-xl font-black text-white truncate">
                                         {activePlaylistName || 'LexPlaylist'}
                                     </h3>
                                     <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} items</p>
                                 </div>
-                                <div className="p-2.5 bg-purple-500/20 rounded-xl border border-white/10 shadow-lg"><ListMusic className="text-purple-400" size={24} /></div>
                             </div>
+                            <button onClick={() => setShowBulkModal(true)} className="flex items-center justify-center gap-2 px-5 py-3 bg-purple-500 hover:bg-purple-400 text-white rounded-2xl shadow-[0_4px_12px_rgba(168,85,247,0.2)] hover:shadow-[0_8px_20px_rgba(168,85,247,0.3)] transition-all text-xs font-black uppercase tracking-widest flex-shrink-0 min-w-[100px]"><Plus size={18} /> Add Tracks</button>
                         </div>
 
                         <div className="p-6 border-b border-white/5 bg-white/[0.02]">
                             {!isCreating ? (
                                 <div className="flex items-center gap-3">
-                                    <button onClick={() => setIsCreating(true)} className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 min-w-[100px]">Create</button>
+                                    <button onClick={() => setIsCreating(true)} className="px-5 py-3 bg-purple-500 hover:bg-purple-400 text-white rounded-2xl shadow-[0_4px_12px_rgba(168,85,247,0.2)] hover:shadow-[0_8px_20px_rgba(168,85,247,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 min-w-[100px]">Create</button>
                                     <CustomPlaylistSelect
                                         value={activePlaylistId || ''}
                                         onChange={(val) => val && loadSavedPlaylist(val)}
@@ -669,7 +695,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             ) : (
                                 <div className="flex items-center gap-2">
                                     <input type="text" placeholder="Name..." value={newPlaylistName} onChange={(e) => setNewPlaylistName(e.target.value)} className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl p-3 outline-none" autoFocus />
-                                    <button onClick={async () => { if(newPlaylistName.trim()){ await createPlaylist(newPlaylistName.trim()); setNewPlaylistName(''); setIsCreating(false); }}} className="p-3 bg-green-500/20 text-green-400 rounded-2xl transition-all"><Save size={24} /></button>
+                                    <button onClick={async () => { if(newPlaylistName.trim()){ await createPlaylist(newPlaylistName.trim()); setNewPlaylistName(''); setIsCreating(false); }}} className="p-3 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-2xl transition-all hover:bg-purple-500/30"><Save size={24} /></button>
                                     <button onClick={() => setIsCreating(false)} className="p-3 bg-white/5 text-white/40 rounded-2xl transition-all"><X size={24} /></button>
                                 </div>
                             )}
@@ -679,21 +705,21 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                         <>
                                             <button 
                                                 onClick={() => { setIsEditing(true); setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || ''); }} 
-                                                className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-2 min-w-[100px]"
+                                                className="px-2 py-1 bg-purple-500 hover:bg-purple-400 text-white rounded-lg shadow-sm hover:shadow-md text-[9px] font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-1"
                                             >
-                                                <Edit2 size={14} /> Rename
+                                                <Edit2 size={10} /> Rename
                                             </button>
                                             <button 
                                                 onClick={() => window.confirm("Delete playlist?") && deletePlaylist(activePlaylistId)} 
-                                                className="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl shadow-[0_4px_12px_rgba(139,92,246,0.2)] hover:shadow-[0_8px_20px_rgba(139,92,246,0.3)] text-xs font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-2 min-w-[100px]"
+                                                className="px-2 py-1 bg-purple-500 hover:bg-purple-400 text-white rounded-lg shadow-sm hover:shadow-md text-[9px] font-black uppercase tracking-widest transition-all flex-shrink-0 flex items-center justify-center gap-1"
                                             >
-                                                <Trash2 size={14} /> Delete
+                                                <Trash2 size={10} /> Delete
                                             </button>
                                         </>
                                     ) : (
                                         <div className="flex items-center gap-2 w-full">
                                             <input type="text" value={editPlaylistName} onChange={(e) => setEditPlaylistName(e.target.value)} className="flex-1 bg-white/5 border border-white/10 text-white text-xs rounded-xl p-2 outline-none" autoFocus />
-                                            <button onClick={() => { if(editPlaylistName.trim()){ renamePlaylist(activePlaylistId, editPlaylistName.trim()); setIsEditing(false); }}} className="p-2 text-green-400 hover:bg-green-500/10 rounded-xl"><Save size={16} /></button>
+                                            <button onClick={() => { if(editPlaylistName.trim()){ renamePlaylist(activePlaylistId, editPlaylistName.trim()); setIsEditing(false); }}} className="p-2 text-purple-300 hover:bg-purple-500/10 rounded-xl"><Save size={16} /></button>
                                             <button onClick={() => setIsEditing(false)} className="p-2 text-white/40 hover:bg-white/10 rounded-xl"><X size={16} /></button>
                                         </div>
                                     )}
@@ -729,21 +755,31 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                 {bulkError && <div className="p-4 bg-red-500/20 text-red-400 border border-red-500/40 rounded-2xl text-xs font-black uppercase">{bulkError}</div>}
                                 <div className="space-y-2">
                                     <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">Destination Playlist</label>
-                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl font-bold outline-none" value={bulkForm.targetPlaylist} onChange={e => setBulkForm({...bulkForm, targetPlaylist: e.target.value})}>
-                                        <option value="" disabled className="bg-[#0f172a]">Select a playlist...</option>
-                                        {savedPlaylists.map(p => <option key={p.id} value={p.id} className="bg-[#0f172a]">{p.name}</option>)}
-                                    </select>
+                                    <div className="flex h-[46px]">
+                                        <CustomPlaylistSelect 
+                                            value={bulkForm.targetPlaylist} 
+                                            onChange={val => setBulkForm({...bulkForm, targetPlaylist: val})}
+                                            options={savedPlaylists.map(p => ({ value: p.id, label: p.name }))}
+                                            placeholder="Select a playlist..."
+                                        />
+                                    </div>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">Select Codal</label>
-                                    <select className="w-full p-4 bg-white/5 border border-white/10 text-white text-sm rounded-2xl font-bold outline-none" value={bulkForm.codal} onChange={e => setBulkForm({...bulkForm, codal: e.target.value})}>
-                                        <option value="RPC" className="bg-[#0f172a]">Revised Penal Code</option>
-                                        <option value="CIV" className="bg-[#0f172a]">Civil Code</option>
-                                        <option value="FC" className="bg-[#0f172a]">Family Code</option>
-                                        <option value="CONST" className="bg-[#0f172a]">1987 Constitution</option>
-                                        <option value="LABOR" className="bg-[#0f172a]">Labor Code</option>
-                                        <option value="ROC" className="bg-[#0f172a]">Rules of Court</option>
-                                    </select>
+                                    <div className="flex h-[46px]">
+                                        <CustomPlaylistSelect 
+                                            value={bulkForm.codal} 
+                                            onChange={val => setBulkForm({...bulkForm, codal: val})}
+                                            options={[
+                                                { value: "RPC", label: "Revised Penal Code" },
+                                                { value: "CIV", label: "Civil Code" },
+                                                { value: "FC", label: "Family Code" },
+                                                { value: "CONST", label: "1987 Constitution" },
+                                                { value: "LABOR", label: "Labor Code" },
+                                                { value: "ROC", label: "Rules of Court" }
+                                            ]}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="block text-[10px] font-black text-white/30 uppercase tracking-[0.2em] ml-1">
@@ -756,7 +792,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             </div>
                             <div className="px-8 py-6 border-t border-white/5 bg-white/[0.02] flex justify-end gap-4">
                                 <button onClick={() => setShowBulkModal(false)} className="text-xs font-black text-white/30 hover:text-white uppercase tracking-widest transition-all">Cancel</button>
-                                <button onClick={handleAddBulkItems} disabled={isBulking} className="px-10 py-4 text-xs font-black text-white bg-purple-600 rounded-[20px] hover:bg-purple-500 shadow-xl shadow-purple-600/20 disabled:opacity-50 transition-all active:scale-95 uppercase tracking-widest">
+                                <button onClick={handleAddBulkItems} disabled={isBulking} className="px-10 py-4 text-xs font-black text-white bg-purple-500 rounded-[20px] hover:bg-purple-400 shadow-xl shadow-purple-500/20 disabled:opacity-50 transition-all active:scale-95 uppercase tracking-widest">
                                     {isBulking ? "Adding..." : "Add to Tracks"}
                                 </button>
                             </div>

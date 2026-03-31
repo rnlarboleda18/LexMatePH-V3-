@@ -39,7 +39,7 @@ const PlaylistDrawer = () => {
         return (
             <button
                 onClick={() => setIsDrawerOpen(true)}
-                className="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-xl transition-transform hover:scale-105 animate-in slide-in-from-bottom"
+                className="fixed bottom-6 right-6 z-50 bg-purple-600 hover:bg-purple-500 text-white rounded-full p-4 shadow-xl transition-transform hover:scale-105 animate-in slide-in-from-bottom"
                 title="Open LexPlay Playlist"
             >
                 <div className="relative">
@@ -55,7 +55,7 @@ const PlaylistDrawer = () => {
     return (
         <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] bg-white/[0.08] backdrop-blur-3xl shadow-2xl border-l border-white/10 flex flex-col animate-in slide-in-from-right duration-500 ease-out">
             {/* Drawer Header */}
-            <div className="p-6 lg:p-8 border-b border-white/10 flex justify-between items-center bg-gradient-to-r from-purple-600/20 to-blue-600/10">
+            <div className="p-6 lg:p-8 border-b border-white/10 flex justify-between items-center bg-gradient-to-r from-purple-600/20 to-purple-800/10">
                 <div className="flex items-center gap-4 text-white">
                     <div className="p-2.5 bg-white/10 rounded-xl">
                         <ListMusic className="w-6 h-6 text-purple-300" />
@@ -82,7 +82,7 @@ const PlaylistDrawer = () => {
                             onChange={(e) => {
                                 if (e.target.value) loadSavedPlaylist(e.target.value);
                             }}
-                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl focus:ring-purple-500 focus:border-purple-500 block w-full p-3 transition-all outline-none"
+                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl focus:ring-purple-600 focus:border-purple-600 block w-full p-3 transition-all outline-none"
                         >
                             <option value="" disabled className="bg-[#0f172a]">Select a Playlist...</option>
                             {savedPlaylists.map(p => (
@@ -100,7 +100,7 @@ const PlaylistDrawer = () => {
                             placeholder="Playlist name..."
                             value={newPlaylistName}
                             onChange={(e) => setNewPlaylistName(e.target.value)}
-                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl p-3 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all placeholder:text-white/20"
+                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl p-3 focus:ring-purple-600 focus:border-purple-600 outline-none transition-all placeholder:text-white/20"
                             autoFocus
                         />
                         <button onClick={async () => {
@@ -125,15 +125,15 @@ const PlaylistDrawer = () => {
                                 <button onClick={() => {
                                     setIsEditing(true);
                                     setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || '');
-                                }} className="text-xs font-bold text-white/40 hover:text-purple-400 flex items-center gap-1.5 transition-all uppercase tracking-widest">
-                                    <Edit2 className="w-3.5 h-3.5" /> Rename
+                                }} className="text-[10px] font-bold text-white/40 hover:text-purple-400 flex items-center gap-1 transition-all uppercase tracking-widest">
+                                    <Edit2 className="w-3 h-3" /> Rename
                                 </button>
                                 <button onClick={() => {
                                     if(window.confirm("Are you sure you want to delete this playlist?")) {
                                         deletePlaylist(activePlaylistId);
                                     }
-                                }} className="text-xs font-bold text-white/40 hover:text-red-400 flex items-center gap-1.5 transition-all uppercase tracking-widest">
-                                    <Trash2 className="w-3.5 h-3.5" /> Delete
+                                }} className="text-[10px] font-bold text-white/40 hover:text-red-400 flex items-center gap-1 transition-all uppercase tracking-widest">
+                                    <Trash2 className="w-3 h-3" /> Delete
                                 </button>
                             </>
                         ) : (
@@ -142,7 +142,7 @@ const PlaylistDrawer = () => {
                                     type="text" 
                                     value={editPlaylistName} 
                                     onChange={(e) => setEditPlaylistName(e.target.value)} 
-                                    className="flex-1 bg-white/5 border border-white/10 text-white text-xs rounded-xl p-2 focus:ring-purple-500 focus:border-purple-500 outline-none" 
+                                    className="flex-1 bg-white/5 border border-white/10 text-white text-xs rounded-xl p-2 focus:ring-purple-600 focus:border-purple-600 outline-none" 
                                     autoFocus
                                 />
                                 <button onClick={() => {
@@ -166,9 +166,9 @@ const PlaylistDrawer = () => {
                             {currentTrack.type}
                         </span>
                         <div className="flex items-center gap-1 h-3">
-                            <div className="w-0.5 bg-purple-400 h-full animate-[bounce_0.8s_infinite]"></div>
-                            <div className="w-0.5 bg-purple-400 h-2/3 animate-[bounce_0.8s_infinite_0.2s]"></div>
-                            <div className="w-0.5 bg-purple-400 h-full animate-[bounce_0.8s_infinite_0.4s]"></div>
+                            <div className="w-0.5 bg-purple-600 h-full animate-[bounce_0.8s_infinite]"></div>
+                            <div className="w-0.5 bg-purple-600 h-2/3 animate-[bounce_0.8s_infinite_0.2s]"></div>
+                            <div className="w-0.5 bg-purple-600 h-full animate-[bounce_0.8s_infinite_0.4s]"></div>
                         </div>
                     </div>
                     
@@ -190,7 +190,7 @@ const PlaylistDrawer = () => {
                             </button>
                             <button
                                 onClick={handlePlayPause}
-                                className="w-20 h-20 bg-white text-[#0f172a] rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] transition-all hover:scale-105 active:scale-90"
+                                className="w-20 h-20 rounded-full bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-[0_12px_40px_-10px_rgba(147,51,234,0.8)] transition-all hover:scale-110 active:scale-95"
                             >
                                 {isLoading ? (
                                     <div className="relative w-12 h-12 flex items-center justify-center">

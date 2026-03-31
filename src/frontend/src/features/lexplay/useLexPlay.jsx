@@ -298,7 +298,12 @@ export const LexPlayProvider = ({ children }) => {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${id}`, { method: 'DELETE', headers });
             if (res.ok) {
-                if (activePlaylistId === id) setActivePlaylistId(null);
+                if (activePlaylistId === id) {
+                    setActivePlaylistId(null);
+                    setPlaylist([]);
+                    setCurrentIndex(-1);
+                    handleStop();
+                }
                 fetchPlaylists();
             } else {
                 const errorData = await res.json().catch(() => ({}));
