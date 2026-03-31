@@ -33,6 +33,12 @@ export const LexPlayProvider = ({ children }) => {
     const retryCountRef = useRef(0);
     const repeatModeRef = useRef('none');
     const isShuffleRef = useRef(false);
+    const isMounted = useRef(true);
+    
+    useEffect(() => {
+        isMounted.current = true;
+        return () => { isMounted.current = false; };
+    }, []);
     
     // MediaSession Stable Handler Refs
     const playPauseRef = useRef(null);
@@ -59,6 +65,10 @@ export const LexPlayProvider = ({ children }) => {
             'Content-Type': 'application/json' 
         };
     };
+
+    const safeSetState = useCallback((setter, value) => {
+        if (isMounted.current) setter(value);
+    }, []);
 
     // Handle initial state load and sync
     const [isStateLoaded, setIsStateLoaded] = useState(false);
@@ -430,31 +440,8 @@ export const LexPlayProvider = ({ children }) => {
                     console.warn("Cache retrieval failed, falling back to network:", cacheErr);
                 }
 
+                if (!isMounted.current) return;
                 audioRef.current.src = finalSource;
-                audioRef.current.playbackRate = 1.0; // Always native speed — rate is baked into the audio by Azure
-
-                // Listen for load errors before play() resolves
-                const loadErrorPromise = new Promise((_, reject) => {
-                    const onError = (e) => {
-                        audioRef.current?.removeEventListener('error', onError);
-                        const code = audioRef.current?.error?.code;
-                        const msgs = {
-                            1: 'Playback aborted.',
-                            2: 'Network error while loading audio.',
-                            3: 'Audio decoding failed.',
-                            4: 'Audio format not supported or source unavailable.',
-                        };
-                        reject(new Error(msgs[code] || 'Audio failed to load.'));
-                    };
-                    audioRef.current?.addEventListener('error', onError, { once: true });
-                });
-
-                await Promise.race([
-                    audioRef.current.play(),
-                    loadErrorPromise
-                ]);
-                setIsPlaying(true);
-                // MediaSession is now handled by a dedicated useEffect
             }
         } catch (error) {
             // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted.

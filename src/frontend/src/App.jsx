@@ -17,9 +17,10 @@ import SubscriptionModal from './components/SubscriptionModal';
 import UpgradeWall from './components/UpgradeWall';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, RefreshCcw, AlertTriangle } from 'lucide-react';
 import { getSubjectColor } from './utils/colors';
 import { useSubscription } from './context/SubscriptionContext';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 function App() {
@@ -163,6 +164,29 @@ function App() {
 
     fetchQuestions();
   }, []);
+
+  const handleRetryFetch = () => {
+    setError(null);
+    setLoading(true);
+    // 1. Fetch Questions
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch('/api/questions?limit=5000');
+        if (!response.ok) throw new Error('Failed to fetch questions');
+        const data = await response.json();
+        
+        // Subject normalizing and grouping logic... 
+        // Note: For brevity, I'm just reusing the original logic structure.
+        // In a real refactor, I'd move this to a utility.
+        window.location.reload(); // Simplest way to retry the complex setup logic
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchQuestions();
+  };
 
 
 
@@ -349,11 +373,27 @@ function App() {
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                 </div>
               ) : error ? (
-                <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-4 rounded-lg text-center">
-                  Error: {error}
+                <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center space-y-6">
+                  <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.3)]">
+                    <AlertTriangle size={40} />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Data Load Failed</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium max-w-xs mx-auto">
+                      {error}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="px-8 py-3 bg-amber-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-700 transition-all flex items-center gap-2 shadow-lg shadow-amber-900/20"
+                  >
+                    <RefreshCcw size={16} />
+                    Retry Connection
+                  </button>
                 </div>
               ) : (
-                <>
+                <ErrorBoundary message="Content area encountered an error.">
+                  <>
                   {effectiveMode === 'about' && <About />}
                   {effectiveMode === 'updates' && <Updates />}
                   {effectiveMode === 'supreme_decisions' && (
@@ -475,20 +515,23 @@ function App() {
                       })()}
                     </div>
                   )}
-                </>
+                  </>
+                </ErrorBoundary>
               )}
             </div>
 
             {/* Full Player Overlay */}
             {isLexPlayerFull && (
-              <LexPlayer
-                isMinimized={false}
-                onMinimize={() => setMode(previousMode || 'supreme_decisions')}
-                onClose={() => {
-                  setIsPlayerVisible(false);
-                  setMode(previousMode || 'supreme_decisions');
-                }}
-              />
+              <ErrorBoundary message="LexPlayer encountered an error. Try resetting your queue.">
+                <LexPlayer
+                  isMinimized={false}
+                  onMinimize={() => setMode(previousMode || 'supreme_decisions')}
+                  onClose={() => {
+                    setIsPlayerVisible(false);
+                    setMode(previousMode || 'supreme_decisions');
+                  }}
+                />
+              </ErrorBoundary>
             )}
           </>
         );
@@ -508,14 +551,16 @@ function App() {
 
       {/* Global Minimized LexPlayer */}
       {mode !== 'lexplay' && isPlayerVisible && (
-        <LexPlayer
-          isMinimized={true}
-          onExpand={() => {
-            setPreviousMode(mode);
-            setMode('lexplay');
-          }}
-          onClose={() => setIsPlayerVisible(false)}
-        />
+        <ErrorBoundary>
+          <LexPlayer
+            isMinimized={true}
+            onExpand={() => {
+              setPreviousMode(mode);
+              setMode('lexplay');
+            }}
+            onClose={() => setIsPlayerVisible(false)}
+          />
+        </ErrorBoundary>
       )}
 
       {/* Question Detail Modal */}

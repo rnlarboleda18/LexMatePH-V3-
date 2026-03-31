@@ -10,7 +10,7 @@ import {
 const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a Playlist..." }) => {
     const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef(null);
-    const selectedOption = options.find(o => o.value === value);
+    const selectedOption = options?.find(o => o.value === value);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -34,10 +34,10 @@ const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a 
             </button>
             {isOpen && (
                 <div className="absolute z-50 w-full mt-2 bg-[#0f172a]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl py-2 max-h-60 overflow-y-auto">
-                    {options.length === 0 && (
+                    {options?.length === 0 && (
                         <div className="px-4 py-3 text-sm text-white/40 italic text-center">No playlists found</div>
                     )}
-                    {options.map((option) => (
+                    {options?.map((option) => (
                         <button
                             key={option.value}
                             type="button"
@@ -181,9 +181,9 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
 /**
  * PlaylistItem: Memoized track item to prevent re-rendering when other items are interacting.
  */
-const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, onPlay, onRemove }) => {
-    const [isDownloaded, setIsDownloaded] = useState(false);
+const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, isDownloaded: isDownloadedProp, onPlay, onRemove, onDownloadSuccess }) => {
     const [isDownloading, setIsDownloading] = useState(false);
+    const isDownloaded = isDownloadedProp;
 
     // Build the audio URL from track fields (same formula as playTrack in useLexPlay)
     const getAudioUrl = (track, rate = 1.0) => {
@@ -192,23 +192,8 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
         return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
     };
 
-    // Check if the track is already in the audio-cache
-    useEffect(() => {
-        if (!item?.id) return;
-        const checkCache = async () => {
-            try {
-                if (!('caches' in window)) return;
-                const cache = await caches.open('audio-cache');
-                // Check both with and without rate param
-                const url = getAudioUrl(item, 1.0);
-                const response = await cache.match(url);
-                setIsDownloaded(!!response);
-            } catch (err) {
-                console.warn('Cache check failed:', err);
-            }
-        };
-        checkCache();
-    }, [item?.id]);
+    // The child no longer manages its own cache state; it relies on the parent's downloadedTrackIds set.
+    // This provides a single source of truth and enables real-time updates for bulk downloads.
 
     const handleDownload = async (e) => {
         e.stopPropagation();
@@ -241,7 +226,7 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                 a.download = finalFileName;
                 a.click();
                 setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-                setIsDownloaded(true);
+                onDownloadSuccess?.(item.id);
             } else {
                 console.error('Download failed: server returned', response.status);
             }
@@ -320,7 +305,7 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
     );
 });
 
-const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoading, onPlay, onRemove }) => {
+const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoading, downloadedTrackIds, onPlay, onRemove, onDownloadSuccess }) => {
     const containerRef = useRef(null);
 
     // Automatically scroll to active item when list changes or currentIndex changes
@@ -370,9 +355,11 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoad
                                     index={index} 
                                     isActive={index === currentIndex} 
                                     isPlaying={index === currentIndex ? isPlaying : false} 
-                                    isLoading={isLoading}
-                                    onPlay={() => onPlay(index)} 
-                                    onRemove={() => onRemove(item, index)}
+                                    isLoading={index === currentIndex ? isLoading : false}
+                                    isDownloaded={downloadedTrackIds?.has(String(item.id))}
+                                    onPlay={() => onPlay?.(index)} 
+                                    onRemove={() => onRemove?.(item, index)}
+                                    onDownloadSuccess={onDownloadSuccess}
                                 />
                             </div>
                         );
@@ -387,16 +374,20 @@ const PlaylistList = React.memo(({
     playlist, 
     currentIndex, 
     isPlaying, 
+    downloadedTrackIds,
     onPlay, 
-    onRemove 
+    onRemove,
+    onDownloadSuccess
 }) => {
     return (
         <VirtualizedPlaylist
             items={playlist}
             currentIndex={currentIndex}
             isPlaying={isPlaying}
+            downloadedTrackIds={downloadedTrackIds}
             onPlay={onPlay}
             onRemove={onRemove}
+            onDownloadSuccess={onDownloadSuccess}
         />
     );
 });
@@ -442,6 +433,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const [isDownloadingAll, setIsDownloadingAll] = useState(false);
     const [downloadStatusText, setDownloadStatusText] = useState('');
     const [cachedCount, setCachedCount] = useState(0);
+    const [downloadedTrackIds, setDownloadedTrackIds] = useState(new Set());
 
     const updateCachedCount = useCallback(async () => {
         if (!playlist || playlist.length === 0 || !('caches' in window)) {
@@ -451,14 +443,18 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         try {
             const cache = await caches.open('audio-cache');
             let count = 0;
-            // For efficiency with large playlists, we only check in chunks if necessary
-            // or just iterate (MP3 cached check is purely cache-key lookup, very fast)
-            for (const track of playlist) {
+            const ids = new Set();
+            for (const track of (playlist || [])) {
+                if (!track) continue;
                 const url = buildAudioUrl(track, 1.0);
                 const match = await cache.match(url);
-                if (match) count++;
+                if (match) {
+                    count++;
+                    ids.add(String(track.id));
+                }
             }
             setCachedCount(count);
+            setDownloadedTrackIds(ids);
         } catch (e) { console.warn("Cache check failed:", e); }
     }, [playlist]);
 
@@ -474,7 +470,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     };
 
     const handleDownloadAll = async () => {
-        if (isDownloadingAll || playlist.length === 0) return;
+        if (isDownloadingAll || !playlist || playlist.length === 0) return;
 
         setIsDownloadingAll(true);
         setDownloadProgress(0);
@@ -499,6 +495,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             if (resp.ok) {
                                 if (cache) await cache.put(audioUrl, resp);
                                 successCount++;
+                                // Update status in real-time
+                                setDownloadedTrackIds(prev => new Set(prev).add(String(track.id)));
                             } else {
                                 console.warn(`Server error ${resp.status} for ${track.title}`);
                             }
@@ -538,7 +536,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editPlaylistName, setEditPlaylistName] = useState('');
 
-    const activePlaylistName = savedPlaylists.find(p => p.id === activePlaylistId)?.name;
+    const activePlaylistName = savedPlaylists?.find(p => p.id === activePlaylistId)?.name;
 
     // --- Optimized Callbacks ---
     const handlePlaylistPlay = useCallback((index) => {
