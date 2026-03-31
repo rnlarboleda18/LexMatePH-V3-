@@ -73,21 +73,20 @@ export default defineConfig({
             },
           },
           {
-            // Specialized Audio Caching Strategy (2GB QUOTA)
+            // Specialized Audio Caching Strategy
             urlPattern: /.*\.mp3$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'audio-cache',
               expiration: {
-                // Massive Storage: 5GB (in bytes)
-                maxSizeInBytes: 5 * 1024 * 1024 * 1024, 
-                maxAgeSeconds: 60 * 60 * 24 * 30, // Keep tracks for 30 days
+                maxEntries: 1000,                    // Up to ~500+ hours of legal audio
+                maxAgeSeconds: 60 * 60 * 24 * 30,   // Keep tracks for 30 days
+                purgeOnQuotaError: true,             // Auto-evict when storage is full
               },
               cacheableResponse: {
-                statuses: [0, 200, 260], // Support successful and partial content/streaming
+                statuses: [0, 200, 206], // 206 = Partial Content for streaming/seeking
               },
-              // Critical for audio/video streaming (Safari/Chrome support)
-              rangeRequests: true, 
+              rangeRequests: true, // Critical for audio seeking on Safari/Chrome
             },
           },
         ],
