@@ -445,26 +445,26 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
         try {
             const cache = await caches.open('audio-cache');
 
-            // DIAGNOSTIC: list all stored keys
+            // Get all stored keys once (absolute URLs)
             const allKeys = await cache.keys();
-            const storedUrls = allKeys.map(r => r.url);
-            console.log(`[LexPlay] audio-cache has ${storedUrls.length} entries:`, storedUrls.slice(0, 5));
+            const storedUrls = new Set(allKeys.map(r => r.url));
+            console.log(`[LexPlay] audio-cache has ${storedUrls.size} entries`);
 
             let count = 0;
             const ids = new Set();
             for (const track of (playlist || [])) {
                 if (!track?.id || !track?.type) continue;
-                const url = buildAudioUrl(track, 1.0);
-                if (!url) continue;
-                // Try both absolute and relative URL matching
-                const absoluteUrl = new URL(url, window.location.origin).href;
-                const match = storedUrls.some(k => k === absoluteUrl || k.endsWith(url));
-                if (match) {
+                const relUrl = buildAudioUrl(track, 1.0);
+                if (!relUrl) continue;
+                // Convert to absolute URL (same as what Cache API stores)
+                const absUrl = new URL(relUrl, window.location.origin).href;
+                if (storedUrls.has(absUrl)) {
                     count++;
                     ids.add(String(track.id));
+                    console.log(`[LexPlay] MATCH: ${absUrl} → id=${track.id}`);
                 }
             }
-            console.log(`[LexPlay] Cache check: ${count}/${playlist.length} tracks cached, IDs:`, [...ids].slice(0, 5));
+            console.log(`[LexPlay] Cache check: ${count}/${playlist.length} cached, IDs:`, [...ids]);
             setCachedCount(count);
             setDownloadedTrackIds(ids);
         } catch (e) { console.warn("Cache check failed:", e); }
@@ -969,8 +969,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                                 currentIndex={currentIndex}
                                 isPlaying={isPlaying}
                                 isLoading={isLoading}
+                                downloadedIds={Array.from(downloadedTrackIds || []).sort()}
                                 onPlay={handlePlaylistPlay}
                                 onRemove={handlePlaylistRemove}
+                                onDownloadSuccess={(id) => setDownloadedTrackIds(prev => new Set(prev).add(String(id)))}
                             />
                         </div>
                     </div>
