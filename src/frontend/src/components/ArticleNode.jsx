@@ -344,8 +344,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                     {/* Amendment History (Floating Popover) */}
                     {isAmended && isHistoryOpen && (
-                        <div className="absolute top-8 left-0 sm:left-2 z-50 w-[500px] max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
-                            <div className="flex justify-between items-start mb-3">
+                        <>
+                            {/* Mobile backdrop to close on tap outside */}
+                            <div className="fixed inset-0 z-40 sm:hidden" onClick={() => setIsHistoryOpen(false)} />
+                            <div className="fixed inset-x-4 top-1/4 sm:inset-auto sm:absolute sm:top-8 sm:left-0 z-50 sm:w-[500px] max-w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
+                                <div className="flex justify-between items-start mb-3">
                                 <h4 className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase flex items-center gap-2">
                                     <Info size={14} /> Amendment History
                                 </h4>
@@ -371,6 +374,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                 ))}
                             </div>
                         </div>
+                        </>
                     )}
                 </div>
                 </div>
@@ -707,26 +711,30 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                             </button>
 
                                                             {isOpen && (
-                                                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 md:w-80 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-indigo-200 dark:border-indigo-900/50 animate-in fade-in zoom-in-95 duration-200 z-50 text-left cursor-default" onClick={e => e.stopPropagation()}>
-                                                                    <div className="flex justify-between items-center mb-2">
-                                                                        <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 capitalize flex items-center gap-1">
-                                                                            <Info size={14} className="inline" /> Footnote {marker}
-                                                                        </span>
-                                                                        <button
-                                                                            onClick={(e) => {
-                                                                                e.preventDefault();
-                                                                                e.stopPropagation();
-                                                                                setActiveFootnoteMarker(null);
-                                                                            }}
-                                                                            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                                                                        >
-                                                                            <X size={14} />
-                                                                        </button>
+                                                                <>
+                                                                    {/* Mobile backdrop to close on tap outside */}
+                                                                    <div className="fixed inset-0 z-40 sm:hidden" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setActiveFootnoteMarker(null); }} />
+                                                                    <div className="fixed inset-x-4 top-1/3 sm:inset-auto sm:absolute sm:bottom-full sm:left-1/2 sm:-translate-x-1/2 sm:mb-2 max-w-full sm:w-80 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-indigo-200 dark:border-indigo-900/50 animate-in fade-in zoom-in-95 duration-200 z-50 text-left cursor-default" onClick={e => e.stopPropagation()}>
+                                                                        <div className="flex justify-between items-center mb-2">
+                                                                            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 capitalize flex items-center gap-1">
+                                                                                <Info size={14} className="inline" /> Footnote {marker}
+                                                                            </span>
+                                                                            <button
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                    e.stopPropagation();
+                                                                                    setActiveFootnoteMarker(null);
+                                                                                }}
+                                                                                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                                                                            >
+                                                                                <X size={14} />
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="text-sm font-sans font-normal text-gray-700 dark:text-gray-300 leading-relaxed max-h-48 overflow-y-auto custom-scrollbar">
+                                                                            {footnoteText}
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="text-sm font-sans font-normal text-gray-700 dark:text-gray-300 leading-relaxed max-h-48 overflow-y-auto custom-scrollbar">
-                                                                        {footnoteText}
-                                                                    </div>
-                                                                </div>
+                                                                </>
                                                             )}
                                                         </span>
                                                     );

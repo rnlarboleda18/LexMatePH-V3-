@@ -443,8 +443,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* Mobile/Overlay Sidebar (for smaller screens) */}
             {isSidebarOpen && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start p-4">
-                    <div className="w-80 max-h-[80vh] flex flex-col glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
+                <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start p-4" onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}>
+                    <div className="w-80 max-h-[80vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
                         <div className="p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30">
                             <span className="font-bold">Contents</span>
                             <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
@@ -614,7 +614,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                     className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-start justify-end p-4"
                     onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
                 >
-                    <div className="w-80 h-[82vh] flex flex-col glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
+                    <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
                         {activeJurisArticle && (
                             <CodexJurisSidebar
                                 articleNum={activeJurisArticle}
