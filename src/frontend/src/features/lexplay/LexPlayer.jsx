@@ -207,31 +207,15 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
             const response = await fetch(audioUrl);
             if (response.ok) {
                 if ('caches' in window) {
-                    // Cache the response clone for offline use
                     const cache = await caches.open('audio-cache');
-                    await cache.put(audioUrl, response.clone());
+                    await cache.put(audioUrl, response);
                 }
-                // Also trigger an actual file download with descriptive naming
-                const blob = await response.blob();
-                const blobUrl = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = blobUrl;
-                
-                // Construct a safe, descriptive filename: [Codal Name] Title.mp3
-                // Sanitize for Windows filename restrictions
-                const cleanCodal = (item.subtitle || '').replace(/[\\/:*?"<>|]/g, '_').trim();
-                const cleanTitle = (item.title || 'audio').replace(/[\\/:*?"<>|]/g, '_').trim();
-                const finalFileName = cleanCodal ? `[${cleanCodal}] ${cleanTitle}.mp3` : `${cleanTitle}.mp3`;
-                
-                a.download = finalFileName;
-                a.click();
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
                 onDownloadSuccess?.(item.id);
             } else {
                 console.error('Download failed: server returned', response.status);
             }
         } catch (err) {
-            console.error('Manual download failed:', err);
+            console.error('Cache save failed:', err);
         } finally {
             setIsDownloading(false);
         }
