@@ -442,6 +442,23 @@ export const LexPlayProvider = ({ children }) => {
 
                 if (!isMounted.current) return;
                 audioRef.current.src = finalSource;
+
+                // Restoring the playback engine
+                try {
+                    const playPromise = audioRef.current.play();
+                    if (playPromise !== undefined) {
+                        await playPromise;
+                        safeSetState(setIsPlaying, true);
+                        safeSetState(setIsLoading, false);
+                    }
+                } catch (playErr) {
+                    if (playErr.name !== 'AbortError') {
+                        console.error("Playback failed:", playErr);
+                        safeSetState(setError, "Playback failed. Check your browser permissions.");
+                        safeSetState(setIsPlaying, false);
+                        safeSetState(setIsLoading, false);
+                    }
+                }
             }
         } catch (error) {
             // Browsers throw AbortError or NotAllowedError if play() is rapidly interrupted.

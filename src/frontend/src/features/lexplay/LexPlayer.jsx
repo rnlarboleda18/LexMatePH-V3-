@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useLexPlay } from './useLexPlay';
 import {
     Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
@@ -305,10 +305,12 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
     );
 });
 
-const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoading, downloadedTrackIds, onPlay, onRemove, onDownloadSuccess }) => {
+// Note: NOT using React.memo here so downloadedTrackIds changes always propagate
+const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, downloadedIds, onPlay, onRemove, onDownloadSuccess }) => {
     const containerRef = useRef(null);
+    // Convert array back to Set for O(1) lookup
+    const downloadedSet = useMemo(() => new Set(downloadedIds), [downloadedIds]);
 
-    // Automatically scroll to active item when list changes or currentIndex changes
     useEffect(() => {
         if (!containerRef.current) return;
         const activeItem = containerRef.current.querySelector('[data-active="true"]');
@@ -326,12 +328,8 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoad
         );
     }
 
-    const currentItem = items[currentIndex];
-
     return (
         <div className="space-y-3">
-            {/* Optional: we removed the floating duplicate current track so the list flows naturally */}
-
             {items.length > 0 && (
                 <div className="space-y-4" ref={containerRef}>
                     <div className="flex items-center justify-between px-2">
@@ -356,7 +354,7 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoad
                                     isActive={index === currentIndex} 
                                     isPlaying={index === currentIndex ? isPlaying : false} 
                                     isLoading={index === currentIndex ? isLoading : false}
-                                    isDownloaded={downloadedTrackIds?.has(String(item.id))}
+                                    isDownloaded={downloadedSet.has(String(item.id))}
                                     onPlay={() => onPlay?.(index)} 
                                     onRemove={() => onRemove?.(item, index)}
                                     onDownloadSuccess={onDownloadSuccess}
@@ -368,29 +366,24 @@ const VirtualizedPlaylist = React.memo(({ items, currentIndex, isPlaying, isLoad
             )}
         </div>
     );
-});
+};
 
-const PlaylistList = React.memo(({ 
-    playlist, 
-    currentIndex, 
-    isPlaying, 
-    downloadedTrackIds,
-    onPlay, 
-    onRemove,
-    onDownloadSuccess
-}) => {
+// Note: NOT using React.memo here - downloadedTrackIds must always propagate
+const PlaylistList = ({ playlist, currentIndex, isPlaying, downloadedTrackIds, onPlay, onRemove, onDownloadSuccess }) => {
+    // Convert Set to sorted array so React can do equality checks between renders
+    const downloadedIds = useMemo(() => Array.from(downloadedTrackIds || []).sort(), [downloadedTrackIds]);
     return (
         <VirtualizedPlaylist
             items={playlist}
             currentIndex={currentIndex}
             isPlaying={isPlaying}
-            downloadedTrackIds={downloadedTrackIds}
+            downloadedIds={downloadedIds}
             onPlay={onPlay}
             onRemove={onRemove}
             onDownloadSuccess={onDownloadSuccess}
         />
     );
-});
+};
 
 const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const {
@@ -435,39 +428,51 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
     const [cachedCount, setCachedCount] = useState(0);
     const [downloadedTrackIds, setDownloadedTrackIds] = useState(new Set());
 
+    // Build the audio URL from track fields — same formula as playTrack in useLexPlay
+    // useCallback ensures stable reference so updateCachedCount closure always works
+    const buildAudioUrl = useCallback((track, rate = 1.0) => {
+        if (!track?.id || !track?.type) return null;
+        const codeParam = track.code_id ? `code=${track.code_id}&` : '';
+        return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+    }, []);
+
     const updateCachedCount = useCallback(async () => {
         if (!playlist || playlist.length === 0 || !('caches' in window)) {
             setCachedCount(0);
+            setDownloadedTrackIds(new Set());
             return;
         }
         try {
             const cache = await caches.open('audio-cache');
+
+            // DIAGNOSTIC: list all stored keys
+            const allKeys = await cache.keys();
+            const storedUrls = allKeys.map(r => r.url);
+            console.log(`[LexPlay] audio-cache has ${storedUrls.length} entries:`, storedUrls.slice(0, 5));
+
             let count = 0;
             const ids = new Set();
             for (const track of (playlist || [])) {
-                if (!track) continue;
+                if (!track?.id || !track?.type) continue;
                 const url = buildAudioUrl(track, 1.0);
-                const match = await cache.match(url);
+                if (!url) continue;
+                // Try both absolute and relative URL matching
+                const absoluteUrl = new URL(url, window.location.origin).href;
+                const match = storedUrls.some(k => k === absoluteUrl || k.endsWith(url));
                 if (match) {
                     count++;
                     ids.add(String(track.id));
                 }
             }
+            console.log(`[LexPlay] Cache check: ${count}/${playlist.length} tracks cached, IDs:`, [...ids].slice(0, 5));
             setCachedCount(count);
             setDownloadedTrackIds(ids);
         } catch (e) { console.warn("Cache check failed:", e); }
-    }, [playlist]);
+    }, [playlist, buildAudioUrl]);
 
     useEffect(() => {
         updateCachedCount();
     }, [playlist, updateCachedCount]);
-
-    // Build the audio URL from track fields — same formula as playTrack in useLexPlay
-    const buildAudioUrl = (track, rate = 1.0) => {
-        if (!track?.id || !track?.type) return null;
-        const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-        return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
-    };
 
     const handleDownloadAll = async () => {
         if (isDownloadingAll || !playlist || playlist.length === 0) return;
@@ -488,9 +493,12 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                 if (audioUrl) {
                     setDownloadStatusText(`Downloading: ${track.title}`);
                     try {
-                        // Check if already cached
+                        // Check if already cached — still mark as downloaded
                         const existing = cache ? await cache.match(audioUrl) : null;
-                        if (!existing) {
+                        if (existing) {
+                            successCount++;
+                            setDownloadedTrackIds(prev => new Set(prev).add(String(track.id)));
+                        } else {
                             const resp = await fetch(audioUrl);
                             if (resp.ok) {
                                 if (cache) await cache.put(audioUrl, resp);
@@ -500,8 +508,6 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onClose }) => {
                             } else {
                                 console.warn(`Server error ${resp.status} for ${track.title}`);
                             }
-                        } else {
-                            successCount++; // already cached
                         }
                     } catch (e) {
                         console.warn(`Failed to download ${track.title}:`, e);
