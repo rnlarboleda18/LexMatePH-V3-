@@ -1,18 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield } from 'lucide-react';
+import React from 'react';
+import { BookOpen, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
-
-const codexSubjects = [
-    { title: "Revised Penal Code", id: "rpc", icon: Swords, color: "text-rose-500" },
-    { title: "Civil Code of the Philippines", id: "civ", icon: Users, color: "text-blue-500" },
-    { title: "Family Code", id: "fc", icon: Heart, color: "text-pink-500" },
-    { title: "Rules of Court", id: "roc", icon: Scale, color: "text-red-500" },
-    { title: "Philippine Constitution", id: "const", icon: Globe, color: "text-sky-500" },
-    { title: "Labor Code", id: "labor", icon: Briefcase, color: "text-amber-600" },
-    { title: "Administrative Code", id: "admin", icon: Building2, color: "text-emerald-500", disabled: true },
-    { title: "Special Laws", id: "special", icon: Book, color: "text-violet-500", disabled: true }
-];
 
 const TIER_ICON = { free: Shield, amicus: Zap, juris: Star, barrister: Crown };
 const TIER_COLOR = {
@@ -30,29 +19,9 @@ const TIER_BG = {
     admin: 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800',
 };
 
-const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
+const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onToggleLexCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
     const { tier, tierLabel, openUpgradeModal, isAdmin } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
-
-    const [openSection, setOpenSection] = useState(() => (mode === 'codex' ? 'codex' : null));
-    const timeoutRef = useRef(null);
-
-    const toggleSection = (section) => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        setOpenSection(openSection === section ? null : section);
-    };
-
-    const handleMouseEnter = (section) => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-            setOpenSection(section);
-        }, 500);
-    };
-
-    const handleMouseLeave = () => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        setOpenSection(null);
-    };
 
     return (
         <nav className="space-y-1 px-2 sm:px-3 pb-[calc(5rem_+_var(--player-height,0px))]">
@@ -134,7 +103,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     onToggleAbout();
-                    setOpenSection(null);
                 }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'about'
@@ -150,7 +118,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     onToggleUpdates();
-                    setOpenSection(null);
                 }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'updates'
@@ -182,7 +149,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     if (onToggleFlashcard) onToggleFlashcard();
-                    setOpenSection(null);
                 }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'flashcard'
@@ -198,7 +164,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     if (onToggleLexPlay) onToggleLexPlay();
-                    setOpenSection(null);
                 }}
                 className="group flex w-full items-center gap-3 rounded-xl border-l-[3px] border-transparent px-3 py-2.5 text-left text-[15px] font-medium text-slate-800 transition-colors hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06] md:py-3 md:text-base"
             >
@@ -211,7 +176,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     onToggleSupremeDecisions();
-                    setOpenSection(null);
                 }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'supreme_decisions'
@@ -223,45 +187,20 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                 SC Decisions
             </button>
 
-            {/* LexCode section */}
-            <div>
-                <button
-                    onClick={() => toggleSection('codex')}
-                    className={`group flex w-full items-center justify-between rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
-                    ${mode === 'codex'
-                            ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
-                            : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
-                        }`}
-                >
-                    <span className="flex items-center gap-3">
-                        <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
-                        LexCode
-                    </span>
-                    {openSection === 'codex' ? <ChevronDown size={18} className="text-slate-400 dark:text-slate-500" /> : <ChevronRight size={18} className="text-slate-400 dark:text-slate-500" />}
-                </button>
-
-                {openSection === 'codex' && (
-                    <div className="animate-in slide-in-from-top-2 duration-200 overflow-hidden rounded-lg border border-white/20 bg-white/20 dark:border-white/5 dark:bg-slate-900/20">
-                        {codexSubjects.map((item) => (
-                            <button
-                                key={item.id}
-                                disabled={item.disabled}
-                                onClick={() => !item.disabled && onSelectCodal && onSelectCodal(item.id)}
-                                className={`group/item flex w-full items-center gap-3 border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
-                                 ${mode === 'codex' && selectedCodalCode === item.id && !item.disabled
-                                        ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
-                                        : item.disabled
-                                            ? 'cursor-not-allowed border-transparent text-slate-500 opacity-50 dark:text-slate-600'
-                                            : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
-                                    }`}
-                            >
-                                {item.title} {item.disabled && <span className="text-xs ml-auto border rounded px-1 py-0.5 text-gray-500 dark:border-gray-600 not-italic no-underline">Soon</span>}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
-
+            {/* LexCode — codal picker lives on the page */}
+            <button
+                onClick={() => {
+                    if (onToggleLexCode) onToggleLexCode();
+                }}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                ${mode === 'codex'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
+                    }`}
+            >
+                <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
+                LexCode
+            </button>
 
 
 
@@ -270,7 +209,6 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <button
                 onClick={() => {
                     if (onSelectSubject) onSelectSubject('All Subjects');
-                    setOpenSection(null);
                 }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'browse_bar'

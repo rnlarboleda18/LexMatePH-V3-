@@ -17,12 +17,23 @@ import SubscriptionModal from './components/SubscriptionModal';
 import UpgradeWall from './components/UpgradeWall';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
-import { RefreshCcw, AlertTriangle, ClipboardList, Brain } from 'lucide-react';
+import { RefreshCcw, AlertTriangle, ClipboardList, Brain, Library } from 'lucide-react';
 import { normalizeBarSubject } from './utils/subjectNormalize';
 import { apiUrl } from './utils/apiUrl';
 import { useSubscription } from './context/SubscriptionContext';
 import ErrorBoundary from './components/ErrorBoundary';
 
+/** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
+const CODAL_FILTER_OPTIONS = [
+  { id: 'rpc', label: 'Revised Penal Code' },
+  { id: 'civ', label: 'Civil Code of the Philippines' },
+  { id: 'fc', label: 'Family Code' },
+  { id: 'roc', label: 'Rules of Court' },
+  { id: 'const', label: 'Philippine Constitution' },
+  { id: 'labor', label: 'Labor Code' },
+  { id: 'admin', label: 'Administrative Code', disabled: true },
+  { id: 'special', label: 'Special Laws', disabled: true },
+];
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
@@ -39,7 +50,7 @@ function App() {
 
   // Filters
   const [currentSubject, setCurrentSubject] = useState(null);
-  const [selectedCodalCode, setSelectedCodalCode] = useState(null);
+  const [selectedCodalCode, setSelectedCodalCode] = useState('rpc');
   const [selectedYear, setSelectedYear] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -449,6 +460,10 @@ function App() {
     setFlashcardDeckError(null);
   };
 
+  const handleToggleLexCode = useCallback(() => {
+    setMode('codex');
+  }, []);
+
   // Handle Native Fullscreen
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -516,11 +531,7 @@ function App() {
             setPreviousMode(mode);
             setMode('lexplay');
           }}
-          onSelectCodal={(codeId) => {
-            setSelectedCodalCode(codeId);
-            setMode('codex');
-          }}
-          selectedCodalCode={selectedCodalCode}
+          onToggleLexCode={handleToggleLexCode}
           mode={mode}
           isFullscreen={isFullscreen}
         />
@@ -583,14 +594,78 @@ function App() {
                       onCaseSelect={selectGlobalCase}
                     />
                   )}
-                  {effectiveMode === 'codex' && selectedCodalCode && (
-                    <LexCodeViewer
-                      shortName={selectedCodalCode.toUpperCase()}
-                      onCaseSelect={selectGlobalCase}
-                      isFullscreen={isFullscreen}
-                      onToggleFullscreen={handleToggleFullscreen}
-                      subscriptionTier={tier}
-                    />
+                  {effectiveMode === 'codex' && (
+                    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                      <header
+                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        style={{ willChange: 'transform' }}
+                      >
+                        <div
+                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
+                          aria-hidden
+                        />
+                        <div
+                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
+                          aria-hidden
+                        />
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                          <div
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            aria-hidden
+                          >
+                            <Library className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                          </div>
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
+                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                              LexCode
+                            </h1>
+                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                              Philippine codals & statutes
+                            </p>
+                          </div>
+                        </div>
+                      </header>
+                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                        <div className="glass mb-4 rounded-lg border border-white/40 bg-white/45 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/35">
+                          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                            <div className="min-w-0 flex-1">
+                              <label htmlFor="lexcode-codal-filter" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                                Codal
+                              </label>
+                              <select
+                                id="lexcode-codal-filter"
+                                value={selectedCodalCode}
+                                onChange={(e) => {
+                                  const v = e.target.value;
+                                  if (!v) return;
+                                  setSelectedCodalCode(v);
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                                className="block w-full max-w-md pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
+                              >
+                                {CODAL_FILTER_OPTIONS.map((opt) => (
+                                  <option key={opt.id} value={opt.id} disabled={opt.disabled}>
+                                    {opt.label}
+                                    {opt.disabled ? ' (Soon)' : ''}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="inline-flex shrink-0 items-center rounded-full border border-amber-200/60 bg-amber-50/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/30 dark:text-amber-300">
+                              {selectedCodalCode.toUpperCase()}
+                            </div>
+                          </div>
+                        </div>
+
+                        <LexCodeViewer
+                          shortName={selectedCodalCode.toUpperCase()}
+                          onCaseSelect={selectGlobalCase}
+                          isFullscreen={isFullscreen}
+                          onToggleFullscreen={handleToggleFullscreen}
+                          subscriptionTier={tier}
+                        />
+                      </main>
+                    </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">

@@ -413,7 +413,7 @@ const LexCodeViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscre
     };
 
     return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 lg:pb-8 justify-center items-start">
+        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:pb-8 justify-center items-start">
             {/* 1. Floating TOC Sidebar (Left) */}
             <div className={`
                 flex-none z-20 sticky top-28 mt-0 transition-all duration-300 ease-in-out
