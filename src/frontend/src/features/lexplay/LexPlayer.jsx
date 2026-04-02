@@ -738,72 +738,88 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                     <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized />
                 </div>
 
-                {/* Label flush left; transport centered in bar (1fr / auto / 1fr grid) — static text, no marquee */}
+                {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
-                    className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 hover:bg-white/95 dark:hover:bg-gray-900/95
+                    className="flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
                         pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(0.35rem,env(safe-area-inset-right,0px))] py-1"
                     onClick={onExpand}
                 >
-                    <div className="min-w-0 justify-self-start self-center py-0.5 pr-2">
+                    <div className="md:hidden w-full px-2 pt-1.5 pb-0.5">
                         <p
-                            className={`truncate text-left text-[11px] font-semibold leading-snug tracking-tight sm:text-xs md:text-sm ${miniMarqueeClass}`}
+                            className={`truncate text-center text-[11px] font-semibold leading-snug tracking-tight sm:text-xs ${miniMarqueeClass}`}
                             title={miniMarqueeText}
                         >
                             {miniMarqueeText}
                         </p>
                     </div>
-                    {/* Transport — geometrically centered; stops click from expanding player */}
+
                     <div
-                        className="relative z-10 flex shrink-0 justify-self-center"
-                        onClick={(e) => e.stopPropagation()}
+                        className="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2"
                     >
-                        <div className="flex items-center justify-center gap-4 sm:gap-5">
-                            <button
-                                type="button"
-                                onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                                disabled={playlist.length === 0}
-                                aria-label="Previous track"
+                        {/* Desktop/tablet left label */}
+                        <div className="hidden min-w-0 justify-self-start self-center py-0.5 pr-2 md:block">
+                            <p
+                                className={`truncate text-left text-[11px] font-semibold leading-snug tracking-tight sm:text-xs md:text-sm ${miniMarqueeClass}`}
+                                title={miniMarqueeText}
                             >
-                                <SkipBack className="h-5 w-5" fill="currentColor" />
-                            </button>
-                            <button
-                                type="button"
-                                onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
-                                disabled={playlist.length === 0}
-                                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
-                                aria-label={isPlaying ? 'Pause' : 'Play'}
-                            >
-                                {isLoading ? (
-                                    <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
-                                ) : isPlaying ? (
-                                    /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
-                                    <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
-                                        {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
-                                            <div
-                                                key={i}
-                                                className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
-                                                style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
-                                            />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <Play className="ml-0.5 h-6 w-6 fill-current" />
-                                )}
-                            </button>
-                            <button
-                                type="button"
-                                onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                                disabled={playlist.length === 0}
-                                aria-label="Next track"
-                            >
-                                <SkipForward className="h-5 w-5" fill="currentColor" />
-                            </button>
+                                {miniMarqueeText}
+                            </p>
                         </div>
+
+                        {/* Transport — geometrically centered; stops click from expanding player */}
+                        <div
+                            className="relative z-10 flex shrink-0 justify-self-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex items-center justify-center gap-4 sm:gap-5">
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    disabled={playlist.length === 0}
+                                    aria-label="Previous track"
+                                >
+                                    <SkipBack className="h-5 w-5" fill="currentColor" />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+                                    disabled={playlist.length === 0}
+                                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    aria-label={isPlaying ? 'Pause' : 'Play'}
+                                >
+                                    {isLoading ? (
+                                        <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
+                                    ) : isPlaying ? (
+                                        /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
+                                        <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
+                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
+                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <Play className="ml-0.5 h-6 w-6 fill-current" />
+                                    )}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    disabled={playlist.length === 0}
+                                    aria-label="Next track"
+                                >
+                                    <SkipForward className="h-5 w-5" fill="currentColor" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Balance column so middle transport stays true center */}
+                        <div className="min-w-0 md:block" aria-hidden />
                     </div>
-                    {/* Balance column so middle track stays true center */}
-                    <div className="min-w-0" aria-hidden />
                 </div>
             </div>
         );
