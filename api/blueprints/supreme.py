@@ -12,6 +12,14 @@ from cache import cache_get, cache_set, cache_delete, cache_clear_pattern
 from config import DB_CONNECTION_STRING, REDIS_ENABLED, CACHE_TTL_DECISIONS, CACHE_TTL_PONENTES, CACHE_TTL_FLASHCARD_CONCEPTS
 import re
 
+from utils.flashcard_legal_concepts import (
+    FLASHCARD_SOURCE_YEAR_MAX,
+    FLASHCARD_SOURCE_YEAR_MIN,
+    merge_digest_rows_to_concepts_list,
+    flashcard_digest_select_sql_and_params,
+    sources_keep_latest_only,
+)
+
 supreme_bp = func.Blueprint()
 
 @supreme_bp.route(route="sc_decisions", auth_level=func.AuthLevel.ANONYMOUS)
@@ -458,98 +466,13 @@ def _normalize_subject_bar(raw):
     return str(raw).strip()
 
 
-def _parse_legal_concepts(raw):
-    """Normalize legal_concepts from DB (json/jsonb/text/list) into list of dicts with term/definition."""
-    if raw is None:
-        return []
-    if isinstance(raw, bytes):
-        try:
-            raw = raw.decode("utf-8")
-        except Exception:
-            return []
-    if isinstance(raw, dict):
-        # Single concept object
-        if raw.get("term") or raw.get("concept") or raw.get("title") or raw.get("name"):
-            return [raw]
-        # Wrapped payloads e.g. {"legal_concepts": [...]} or {"items": [...]}
-        for key in ("legal_concepts", "concepts", "items", "data"):
-            inner = raw.get(key)
-            if isinstance(inner, list):
-                return _parse_legal_concepts(inner)
-            if isinstance(inner, dict):
-                return _parse_legal_concepts(inner)
-        return []
-    if isinstance(raw, list):
-        out = []
-        for x in raw:
-            if isinstance(x, dict):
-                out.append(x)
-            elif isinstance(x, str) and x.strip():
-                out.append({"term": x.strip(), "definition": ""})
-        return out
-    if isinstance(raw, str):
-        try:
-            if not raw.strip():
-                return []
-            parsed = json.loads(raw)
-            return _parse_legal_concepts(parsed)
-        except Exception:
-            return []
-    return []
-
-
-def _concept_term(item):
-    """Extract display term from a concept dict (several pipelines use different keys)."""
-    if not isinstance(item, dict):
-        return ""
-    return (
-        (item.get("term") or item.get("concept") or item.get("title") or item.get("name") or item.get("label") or item.get("key") or "")
-        .strip()
-    )
-
-
-def _concept_definition(item):
-    if not isinstance(item, dict):
-        return ""
-    return (item.get("definition") or item.get("content") or item.get("text") or item.get("summary") or "").strip()
-
-
-def _merge_concept_into_map(concepts_map, term, definition, case_id, case_number, title, date_str, subj):
-    if not term or not str(term).strip():
-        return
-    term = str(term).strip()
-    definition = (definition or "").strip()
-    key = re.sub(r"\s+", " ", term).lower()
-    src = {
-        "case_id": case_id,
-        "case_number": case_number or "",
-        "title": title or "",
-        "date_str": date_str or "",
-        "subject": subj or "",
-    }
-    if key not in concepts_map:
-        concepts_map[key] = {
-            "term": term,
-            "definition": definition,
-            "sources": [],
-            "_seen_case_ids": set(),
-        }
-    else:
-        if definition and len(definition) > len(concepts_map[key].get("definition") or ""):
-            concepts_map[key]["definition"] = definition
-    ent = concepts_map[key]
-    if case_id not in ent["_seen_case_ids"]:
-        ent["_seen_case_ids"].add(case_id)
-        ent["sources"].append(src)
-
-
-# v4: legal_concepts only — digest "flashcards" caused 100k+ unique cards (one per Q/A per case).
-FLASHCARD_CONCEPTS_CACHE_KEY = "flashcard_concepts:v4:legal_only"
+# v7: table + digest fallback for decision years 1987–2025, En Banc division.
+FLASHCARD_CONCEPTS_CACHE_KEY = "flashcard_concepts:v8:latest_source_only"
 
 
 @supreme_bp.route(route="sc_decisions/flashcard_concepts", auth_level=func.AuthLevel.ANONYMOUS)
 def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
-    """Deduplicated key legal concepts from case digests, with case labels. Optional ?subject= canonical bar subject."""
+    """Deduplicated legal concepts (flashcard_concepts table, or digest merge if empty): years 1987–2025, En Banc only. Optional ?subject= canonical bar subject."""
     subject_filter = (req.params.get("subject") or "").strip()
     ns_filter = _normalize_subject_bar(subject_filter) if subject_filter else ""
 
@@ -588,51 +511,47 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
-        cur.execute(
-            """
-            SELECT id, case_number, short_title, subject,
-                   TO_CHAR(date, 'YYYY-MM-DD') AS date_str,
-                   legal_concepts
-            FROM sc_decided_cases
-            WHERE legal_concepts IS NOT NULL
-              AND length(trim(both from legal_concepts::text)) > 2
-              AND trim(both from legal_concepts::text) NOT IN ('null', '{}', '[]')
-            """
-        )
-        rows = cur.fetchall()
-
-        logging.info(f"flashcard_concepts: loaded {len(rows) if rows else 0} cases with legal_concepts")
-
-        concepts_map = {}
-
-        for row in rows or []:
-            case_id = row.get("id")
-            case_number = row.get("case_number") or ""
-            title = row.get("short_title") or row.get("title") or ""
-            date_str = row.get("date_str") or ""
-            subj = row.get("subject") or ""
-
-            for item in _parse_legal_concepts(row.get("legal_concepts")):
-                if not isinstance(item, dict):
-                    continue
-                term = _concept_term(item)
-                if not term:
-                    continue
-                definition = _concept_definition(item)
-                _merge_concept_into_map(
-                    concepts_map, term, definition, case_id, case_number, title, date_str, subj
-                )
-
         out = []
-        for _k, ent in concepts_map.items():
-            ent.pop("_seen_case_ids", None)
-            out.append(
-                {
-                    "term": ent["term"],
-                    "definition": ent.get("definition") or "",
-                    "sources": ent["sources"],
-                }
+        try:
+            cur.execute(
+                """
+                SELECT term, definition, sources
+                FROM flashcard_concepts
+                ORDER BY term
+                """
             )
+            stored = cur.fetchall() or []
+        except Exception as ex:
+            logging.warning(f"flashcard_concepts: table read failed (run migration?), falling back to digest merge: {ex}")
+            stored = []
+
+        if stored:
+            logging.info(f"flashcard_concepts: loaded {len(stored)} rows from flashcard_concepts table")
+            for r in stored:
+                src = r.get("sources")
+                if isinstance(src, str):
+                    try:
+                        src = json.loads(src)
+                    except Exception:
+                        src = []
+                if not isinstance(src, list):
+                    src = []
+                out.append(
+                    {
+                        "term": r.get("term") or "",
+                        "definition": (r.get("definition") or "").strip(),
+                        "sources": sources_keep_latest_only(src),
+                    }
+                )
+        else:
+            sql_fb, params_fb = flashcard_digest_select_sql_and_params()
+            cur.execute(sql_fb, params_fb)
+            rows = cur.fetchall()
+            logging.info(
+                f"flashcard_concepts: legacy merge from {len(rows) if rows else 0} cases "
+                f"(years {FLASHCARD_SOURCE_YEAR_MIN}–{FLASHCARD_SOURCE_YEAR_MAX}, En Banc only)"
+            )
+            out = merge_digest_rows_to_concepts_list(rows or [])
 
         if REDIS_ENABLED and out:
             try:

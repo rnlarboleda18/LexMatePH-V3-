@@ -11,7 +11,7 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "   LexMatePH v3 — Startup" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "[CONFIG] Use cloud Postgres via api\local.settings.json (DB_CONNECTION_STRING)." -ForegroundColor DarkGray
+Write-Host "[CONFIG] Use cloud Postgres via api\local.settings.json with key DB_CONNECTION_STRING." -ForegroundColor DarkGray
 Write-Host "         Do not set ENVIRONMENT=local unless you intend a local database." -ForegroundColor DarkGray
 Write-Host ""
 
@@ -27,7 +27,10 @@ if (-not (Test-Path $localSettings)) {
 }
 if (-not (Test-Path $venvActivate)) {
     Write-Host "[FATAL] Python venv not found: $venvActivate" -ForegroundColor Red
-    Write-Host "        Run: cd api && python -m venv .venv && .\.venv\Scripts\pip install -r requirements.txt" -ForegroundColor Yellow
+    Write-Host "        Run these commands:" -ForegroundColor Yellow
+    Write-Host "          cd api" -ForegroundColor Yellow
+    Write-Host "          python -m venv .venv" -ForegroundColor Yellow
+    Write-Host "          .\.venv\Scripts\pip install -r requirements.txt" -ForegroundColor Yellow
     exit 1
 }
 if (-not (Test-Path (Join-Path $frontendDir "node_modules"))) {
@@ -98,47 +101,11 @@ catch {
     Write-Host "  Portal:" -ForegroundColor Yellow
     Write-Host "  https://portal.azure.com/#view/Microsoft_Azure_FluidRelay/PostGresFlexibleServerNetworkingBlade/subscriptionId/4a9c8f45-3889-4055-a2f0-097be69d078c/resourceGroupName/LexMatePH/serverName/lexmateph-ea-db" -ForegroundColor Cyan
     Write-Host ""
-    $continue = Read-Host "  Start anyway? (y/N)"
-    if ($continue -ne "y" -and $continue -ne "Y") {
-        Write-Host "Aborted." -ForegroundColor Red
-        exit 1
-    }
+    Write-Host "  [AUTO-CONTINUE] Proceeding with startup without confirmation." -ForegroundColor DarkYellow
 }
 
-# ── 3. Azurite (LexPlay blob) — optional, idempotent ────────────────────────
-$azuriteName = "lexmate-azurite-blob"
-Write-Host "`n[INFO] LexPlay storage (Azurite on :10000)..." -ForegroundColor Yellow
-$docker = Get-Command docker -ErrorAction SilentlyContinue
-if (-not $docker) {
-    Write-Host "       [SKIP] Docker not in PATH — start Docker Desktop if you need Azurite." -ForegroundColor DarkYellow
-}
-else {
-    try {
-        $running = docker ps -q -f "name=$azuriteName" 2>$null
-        if ($running) {
-            Write-Host "       [OK] Container already running." -ForegroundColor Green
-        }
-        else {
-            $exists = docker ps -aq -f "name=$azuriteName" 2>$null
-            if ($exists) {
-                docker start $azuriteName 2>$null | Out-Null
-                Write-Host "       [OK] Started existing container $azuriteName" -ForegroundColor Green
-            }
-            else {
-                docker run -d --name $azuriteName -p 10000:10000 mcr.microsoft.com/azure-storage/azurite azurite-blob --blobHost 0.0.0.0 2>$null | Out-Null
-                if ($LASTEXITCODE -eq 0) {
-                    Write-Host "       [OK] Created and started $azuriteName" -ForegroundColor Green
-                }
-                else {
-                    Write-Host "       [WARN] Could not start Azurite — LexPlay uploads may fail until this runs." -ForegroundColor DarkYellow
-                }
-            }
-        }
-    }
-    catch {
-        Write-Host "       [WARN] Azurite step failed: $_" -ForegroundColor DarkYellow
-    }
-}
+# ── 3. Storage mode ──────────────────────────────────────────────────────────
+Write-Host "`n[INFO] Storage: using Azure cloud storage (Azurite skipped)." -ForegroundColor Yellow
 
 # ── 4. Azure Functions (API) — must be up before Vite uses /api proxy ───────
 Write-Host "`n[INFO] Starting Azure Functions (new window)..." -ForegroundColor Yellow
@@ -159,25 +126,49 @@ Start-Process cmd -ArgumentList "/k", "`"$batPath`""
 Write-Host "[WAIT] Polling http://localhost:7071/api/health ..." -ForegroundColor Yellow
 $healthUrl = "http://localhost:7071/api/health"
 $ready = $false
-for ($i = 0; $i -lt 60; $i++) {
+$maxWaitSec = 120
+$elapsedSec = 0
+$sleepSec = 1
+$maxSleepSec = 6
+
+while ($elapsedSec -lt $maxWaitSec) {
     try {
         $r = Invoke-WebRequest -Uri $healthUrl -UseBasicParsing -TimeoutSec 2 -ErrorAction Stop
         if ($r.StatusCode -eq 200) {
-            Write-Host "       [OK] API is ready." -ForegroundColor Green
+            Write-Host "       [OK] API health endpoint is ready." -ForegroundColor Green
             $ready = $true
             break
         }
     }
     catch {
-        # host still starting
+        # host may still be starting
     }
-    if (($i % 5) -eq 0 -and $i -gt 0) {
-        Write-Host "       ... still waiting ($i s)" -ForegroundColor DarkGray
+
+    # Early success: if the host is already listening on 7071, continue startup.
+    try {
+        $probe = New-Object System.Net.Sockets.TcpClient
+        $ar = $probe.BeginConnect("127.0.0.1", 7071, $null, $null)
+        if ($ar.AsyncWaitHandle.WaitOne(400, $false) -and $probe.Connected) {
+            $probe.EndConnect($ar)
+            $probe.Close()
+            Write-Host "       [OK] API host is listening on :7071 (health endpoint not ready yet)." -ForegroundColor Green
+            $ready = $true
+            break
+        }
+        $probe.Close()
     }
-    Start-Sleep -Seconds 1
+    catch {
+        # ignore probe failures while booting
+    }
+
+    Write-Host "       ... still waiting ($elapsedSec s)" -ForegroundColor DarkGray
+    Start-Sleep -Seconds $sleepSec
+    $elapsedSec += $sleepSec
+    $sleepSec = [Math]::Min($maxSleepSec, [Math]::Ceiling($sleepSec * 1.5))
 }
+
 if (-not $ready) {
-    Write-Host "       [WARN] Health check did not succeed in 60s. Open the API window for errors; starting Vite anyway." -ForegroundColor DarkYellow
+    Write-Host "       [WARN] API health/listen check did not succeed in ${maxWaitSec}s. Open the API window for errors; starting Vite anyway." -ForegroundColor DarkYellow
 }
 
 # ── 6. Vite frontend ────────────────────────────────────────────────────────

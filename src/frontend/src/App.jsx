@@ -17,8 +17,7 @@ import SubscriptionModal from './components/SubscriptionModal';
 import UpgradeWall from './components/UpgradeWall';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
-import { ChevronRight, RefreshCcw, AlertTriangle } from 'lucide-react';
-import { getSubjectColor } from './utils/colors';
+import { RefreshCcw, AlertTriangle, ClipboardList, Brain } from 'lucide-react';
 import { normalizeBarSubject } from './utils/subjectNormalize';
 import { apiUrl } from './utils/apiUrl';
 import { useSubscription } from './context/SubscriptionContext';
@@ -54,7 +53,6 @@ function App() {
   const [flashcardConceptsError, setFlashcardConceptsError] = useState(null);
   const [flashcardDeckError, setFlashcardDeckError] = useState(null);
   /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
-  const [flashcardVariant, setFlashcardVariant] = useState('concepts');
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to Dark Mode
   // Global case modal state (shared between SC Decisions and Codex)
   const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
@@ -86,6 +84,17 @@ function App() {
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
   const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
+
+  const BAR_SUBJECT_OPTIONS = [
+    'Civil Law',
+    'Commercial Law',
+    'Criminal Law',
+    'Labor Law',
+    'Legal Ethics',
+    'Political Law',
+    'Remedial Law',
+    'Taxation Law',
+  ];
 
 
   // Intercept playNow signals to force full-screen LexPlay
@@ -205,7 +214,9 @@ function App() {
     }
 
     const ac = new AbortController();
-    const tid = setTimeout(() => ac.abort(), 120000);
+    // Match api/host.json functionTimeout (00:05:00). Heavy path = merge digests when flashcard_concepts is empty.
+    const FLASHCARD_FETCH_MS = 300000;
+    const tid = setTimeout(() => ac.abort(), FLASHCARD_FETCH_MS);
     let cancelled = false;
 
     const load = async () => {
@@ -233,7 +244,7 @@ function App() {
         if (cancelled) return;
         if (e.name === 'AbortError') {
           setFlashcardConceptsError(
-            'Request timed out after 2 minutes. The concepts query is heavy: ensure the API is running (local: port 7071), the database is reachable, and try Bar exam questions below. A second open may be faster if Redis cached the result.'
+            'Request timed out (5 min). The API merges digests from the database when the flashcard_concepts table is empty or the cache is cold—that can take several minutes. Fix: run scripts/populate_flashcard_concepts_from_digest.py on your cloud DB so the API reads the prebuilt table (fast). Also ensure the API and DB are reachable; retry once Redis has cached the response.'
           );
         } else {
           let msg = e.message || 'Load failed';
@@ -280,24 +291,6 @@ function App() {
     });
     return counts;
   }, [flashcardConceptPool]);
-
-  const barFlashcardSubjectCounts = useMemo(() => {
-    const subjects = [
-      'Civil Law',
-      'Commercial Law',
-      'Criminal Law',
-      'Labor Law',
-      'Legal Ethics',
-      'Political Law',
-      'Remedial Law',
-      'Taxation Law',
-    ];
-    const counts = { all: questions.length };
-    subjects.forEach((s) => {
-      counts[s] = questions.filter((q) => normalizeBarSubject(q.subject) === s).length;
-    });
-    return counts;
-  }, [questions]);
 
   const handleRetryFetch = () => {
     setError(null);
@@ -408,7 +401,6 @@ function App() {
     }
 
     setFlashcardDeckError(null);
-    setFlashcardVariant('concepts');
 
     let selected = [];
     if (subject) {
@@ -422,40 +414,8 @@ function App() {
     if (selected.length === 0) {
       setFlashcardDeckError(
         subject
-          ? `No key legal concepts found for ${subject} yet. Try another subject, All subjects, or use bar questions below.`
-          : 'No key legal concepts are available yet. Use bar exam questions below, or run your digest pipeline to fill legal_concepts.'
-      );
-      return;
-    }
-
-    for (let i = selected.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [selected[i], selected[j]] = [selected[j], selected[i]];
-    }
-
-    setFlashcardQuestions(selected);
-    setFlashcardIndex(0);
-    setFlashcardState('active');
-  };
-
-  const handleStartBarFlashcards = (subject) => {
-    if (subject === 'CANCEL') {
-      setMode('supreme_decisions');
-      return;
-    }
-    setFlashcardDeckError(null);
-    setFlashcardVariant('bar');
-
-    let selected = [];
-    if (subject) {
-      selected = questions.filter((q) => normalizeBarSubject(q.subject) === subject);
-    } else {
-      selected = [...questions];
-    }
-
-    if (selected.length === 0) {
-      setFlashcardDeckError(
-        subject ? `No bar questions for ${subject} in the loaded set.` : 'No bar questions loaded.'
+          ? `No key legal concepts found for ${subject} yet. Try another subject or All subjects.`
+          : 'No key legal concepts are available yet. Run your digest pipeline to fill legal_concepts.'
       );
       return;
     }
@@ -487,7 +447,6 @@ function App() {
     setMode('flashcard');
     setFlashcardState('setup');
     setFlashcardDeckError(null);
-    setFlashcardVariant('concepts');
   };
 
   // Handle Native Fullscreen
@@ -535,6 +494,7 @@ function App() {
       isDarkMode={isDarkMode}
       toggleTheme={toggleTheme}
       mode={mode}
+      mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
       isFullscreen={isFullscreen}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {
@@ -563,7 +523,6 @@ function App() {
           selectedCodalCode={selectedCodalCode}
           mode={mode}
           isFullscreen={isFullscreen}
-          currentSubject={currentSubject}
         />
       }
     >
@@ -634,27 +593,64 @@ function App() {
                     />
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
-                    <FlashcardSetup
-                      onStart={handleStartFlashcard}
-                      onStartBar={handleStartBarFlashcards}
-                      conceptsLoading={flashcardConceptsLoading}
-                      conceptsError={flashcardConceptsError}
-                      deckError={flashcardDeckError}
-                      subjectCounts={flashcardSubjectCounts}
-                      barSubjectCounts={barFlashcardSubjectCounts}
-                      barAvailable={!loading && !error && questions.length > 0}
-                      onRetryConcepts={refetchFlashcardConcepts}
-                    />
+                    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                      <header
+                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        style={{ willChange: 'transform' }}
+                      >
+                        <div
+                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
+                          aria-hidden
+                        />
+                        <div
+                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
+                          aria-hidden
+                        />
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                          <div
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            aria-hidden
+                          >
+                            <Brain className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                          </div>
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
+                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                              Flashcards
+                            </h1>
+                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                              Concept and Bar exam study deck
+                            </p>
+                          </div>
+                        </div>
+                      </header>
+                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                        <FlashcardSetup
+                          embedded
+                          onStart={handleStartFlashcard}
+                          conceptsLoading={flashcardConceptsLoading}
+                          conceptsError={flashcardConceptsError}
+                          deckError={flashcardDeckError}
+                          subjectCounts={flashcardSubjectCounts}
+                          onRetryConcepts={refetchFlashcardConcepts}
+                        />
+                      </main>
+                    </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && (
-                    <Flashcard
-                      variant={flashcardVariant}
-                      card={flashcardQuestions[flashcardIndex]}
-                      total={flashcardQuestions.length}
-                      currentIndex={flashcardIndex}
-                      onNext={handleNextFlashcard}
-                      onClose={() => setMode('supreme_decisions')}
-                    />
+                    <div
+                      className="flex h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-3.5rem)] min-h-[280px] w-full flex-col items-center justify-center px-3 pb-3 pt-2 text-gray-900 dark:text-gray-100 sm:px-5 md:h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-5rem)] md:px-6 md:pb-4 md:pt-3"
+                    >
+                      <div className="flex h-full min-h-0 w-full max-w-2xl flex-col md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))]">
+                        <Flashcard
+                          variant="concepts"
+                          card={flashcardQuestions[flashcardIndex]}
+                          total={flashcardQuestions.length}
+                          currentIndex={flashcardIndex}
+                          onNext={handleNextFlashcard}
+                          onClose={() => setMode('supreme_decisions')}
+                        />
+                      </div>
+                    </div>
                   )}
                   {effectiveMode === 'quiz' && (
                     canAccess('lexify') ? (
@@ -671,51 +667,90 @@ function App() {
                     )
                   )}
                   {effectiveMode === 'browse_bar' && (
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-8">
-                        <div>
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
-                        <button 
-                          onClick={() => setCurrentSubject(null)}
-                          className="hover:text-amber-600 dark:hover:text-amber-500 transition-colors"
-                        >
-                          Bar Questions
-                        </button>
-                        <ChevronRight size={14} />
-                        <span className="text-amber-600 dark:text-amber-500 font-medium">{currentSubject || 'All Subjects'}</span>
-                      </div>
-                          <p className="text-gray-600 dark:text-gray-400">
-    Browse individual bar exam questions and answers.
-                          </p>
+                    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                      <header
+                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        style={{ willChange: 'transform' }}
+                      >
+                        <div
+                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
+                          aria-hidden
+                        />
+                        <div
+                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
+                          aria-hidden
+                        />
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                          <div
+                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            aria-hidden
+                          >
+                            <ClipboardList className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                          </div>
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
+                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                              Bar Questions
+                            </h1>
+                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                              Actual Bar questions & suggested answers
+                            </p>
+                          </div>
                         </div>
-                        <div className="bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-full text-sm font-bold border border-amber-200 dark:border-amber-800">
-                          {questions.filter(q => !currentSubject || q.subject === currentSubject).length} Questions
+                      </header>
+                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                      <div className="glass mb-4 rounded-lg border border-white/40 bg-white/45 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/35">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                          <div className="min-w-0 flex-1">
+                            <label htmlFor="bar-subject-filter" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                              Bar subject
+                            </label>
+                            <select
+                              id="bar-subject-filter"
+                              value={currentSubject ?? ''}
+                              onChange={(e) => {
+                                const v = e.target.value;
+                                setCurrentSubject(v === '' ? null : v);
+                                setBarCurrentPage(1);
+                              }}
+                              className="block w-full max-w-md pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
+                            >
+                              <option value="">All subjects</option>
+                              {BAR_SUBJECT_OPTIONS.map((s) => (
+                                <option key={s} value={s}>
+                                  {s}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="inline-flex shrink-0 items-center rounded-full border border-indigo-200/60 bg-indigo-50/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:border-indigo-800/40 dark:bg-indigo-900/30 dark:text-indigo-300">
+                            {questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject).length}{' '}
+                            questions
+                          </div>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                         {(() => {
-                          const filtered = questions.filter(q => !currentSubject || q.subject === currentSubject);
+                          const filtered = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
                           const paginated = filtered.slice((barCurrentPage - 1) * BAR_ITEMS_PER_PAGE, barCurrentPage * BAR_ITEMS_PER_PAGE);
                           return paginated.map((q) => (
                             <QuestionCard
                               key={q.id}
                               question={q}
                               onClick={() => setSelectedQuestion(q)}
-                              subjectColor={getSubjectColor(q.subject)}
                             />
                           ));
                         })()}
                       </div>
 
-                      {/* Pagination UI copied from SC Decisions */}
+                      {/* Pagination UI */}
                       {(() => {
-                        const filtered = questions.filter(q => !currentSubject || q.subject === currentSubject);
+                        const filtered = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
                         const totalCount = filtered.length;
                         if (totalCount <= BAR_ITEMS_PER_PAGE) return null;
                         
                         return (
-                          <div className="flex flex-col items-center gap-2 mt-12 pb-8">
+                          <div className="mt-8 flex flex-col items-center gap-2 pb-6">
                             <div className="flex justify-center items-center gap-4">
                               <button
                                 onClick={() => {
@@ -723,7 +758,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
-                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-4 py-2 glass bg-white/50 dark:bg-slate-700/40 border border-white/30 dark:border-white/10 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -737,7 +772,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
-                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-4 py-2 glass bg-white/50 dark:bg-slate-700/40 border border-white/30 dark:border-white/10 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
                               >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -746,6 +781,7 @@ function App() {
                           </div>
                         );
                       })()}
+                      </main>
                     </div>
                   )}
                   </>
@@ -793,7 +829,7 @@ function App() {
 
       {/* Question Detail Modal */}
       {selectedQuestion && (() => {
-        const currentList = questions.filter(q => !currentSubject || q.subject === currentSubject);
+        const currentList = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
         const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
         return (
           <QuestionDetailModal

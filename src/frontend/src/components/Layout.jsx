@@ -3,7 +3,7 @@ import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
-const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onToggleMode, onToggleQuiz, user, isFullscreen }) => {
+const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onToggleMode, onToggleQuiz, user, isFullscreen, mainFullWidth = false }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { isDrawerOpen } = useLexPlay();
 
@@ -32,83 +32,87 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Header */}
             {!isFullscreen && (
-                <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 md:px-8 pt-[env(safe-area-inset-top,0px)]
+                <header className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
                     ${isDarkMode
-                        ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(6rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
-                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(6rem+env(safe-area-inset-top,0px))] bg-white/80 md:bg-white/40 md:backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30_px_rgba(0,0,0,0.05)]'
+                        ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
+                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-white/80 md:bg-white/40 md:backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30_px_rgba(0,0,0,0.05)]'
                     }`} style={{willChange:'transform'}}>
 
                     {/* LEFT — Brand */}
-                    <div className="flex items-center gap-2 md:gap-3">
+                    <div className="relative z-10 flex min-w-0 items-center gap-2 md:gap-3">
                         {/* Mobile hamburger */}
                         <button
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden p-1.5 md:p-2 rounded-lg transition-colors ${isDarkMode ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20' : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50'}`}
+                            className={`xl:hidden shrink-0 p-1.5 md:p-2 rounded-lg transition-colors ${isDarkMode ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20' : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50'}`}
                             aria-label="Toggle Sidebar"
                         >
                             {isSidebarOpen ? <X size={20} className="md:w-[22px] md:h-[22px]" /> : <Menu size={20} className="md:w-[22px] md:h-[22px]" />}
                         </button>
 
                         {/* Brand — wordmark + scales mark (no vertical bar); LexMatePH casing preserved */}
-                        <div className="flex flex-col items-start justify-center">
-                            <div className="flex items-center gap-2.5 md:gap-3">
-                                <div
-                                    className={`flex shrink-0 items-center justify-center rounded-xl border h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
-                                        isDarkMode
-                                            ? 'border-white/10 bg-white/[0.06] text-indigo-300'
-                                            : 'border-slate-200/90 bg-white text-indigo-600 shadow-sm'
-                                    }`}
-                                    aria-hidden
-                                >
-                                    <Scale
-                                        className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8"
-                                        strokeWidth={2}
-                                    />
-                                </div>
-                                <div className="flex min-w-0 flex-col">
-                                    <span
-                                        className={`select-none font-semibold leading-none tracking-tight text-[1.125rem] sm:text-xl md:text-2xl lg:text-[1.75rem] ${
-                                            isDarkMode
-                                                ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
-                                                : 'text-slate-900'
-                                        }`}
-                                    >
-                                        LexMatePH
-                                    </span>
-                                    <span
-                                        className={`mt-1 hidden text-[11px] font-medium leading-snug tracking-tight md:block md:text-xs lg:text-[13px] ${
-                                            isDarkMode ? 'text-slate-400' : 'text-slate-500'
-                                        }`}
-                                    >
-                                        Your Law Companion
-                                    </span>
-                                </div>
-                            </div>
-                            {/* Feature strip — large screens */}
+                        <div className="flex min-w-0 items-center gap-2.5 md:gap-3">
                             <div
-                                className={`mt-2 hidden max-w-[min(100vw-8rem,42rem)] flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium leading-snug lg:flex lg:gap-x-4 lg:text-[14px] ${
-                                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                                className={`flex shrink-0 items-center justify-center rounded-xl border h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+                                    isDarkMode
+                                        ? 'border-white/10 bg-white/[0.06] text-indigo-300'
+                                        : 'border-slate-200/90 bg-white text-indigo-600 shadow-sm'
                                 }`}
+                                aria-hidden
                             >
-                                <span className="whitespace-nowrap">Bar Questions</span>
-                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
-                                    ·
+                                <Scale
+                                    className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8"
+                                    strokeWidth={2}
+                                />
+                            </div>
+                            <div className="flex min-w-0 flex-col">
+                                <span
+                                    className={`select-none font-semibold leading-none tracking-tight text-[1.125rem] sm:text-xl md:text-2xl lg:text-[1.75rem] ${
+                                        isDarkMode
+                                            ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
+                                            : 'text-slate-900'
+                                    }`}
+                                >
+                                    LexMatePH
                                 </span>
-                                <span className="whitespace-nowrap">SC Decisions</span>
-                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
-                                    ·
+                                <span
+                                    className={`mt-1 hidden text-[11px] font-medium leading-snug tracking-tight md:block md:text-xs lg:text-[13px] ${
+                                        isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                                    }`}
+                                >
+                                    Your Law Companion
                                 </span>
-                                <span className="whitespace-nowrap">Case Digests</span>
-                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
-                                    ·
-                                </span>
-                                <span className="whitespace-nowrap">Codals</span>
                             </div>
                         </div>
                     </div>
 
+                    {/* CENTER — Feature strip (same row as logo; grid-centered between brand and actions) */}
+                    <nav
+                        className="hidden min-w-0 max-w-[min(46vw,32rem)] justify-center justify-self-center px-1 text-center md:flex md:items-center"
+                        aria-label="LexMatePH feature areas"
+                    >
+                        <p
+                            className={`flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[15px] font-semibold leading-snug tracking-tight md:text-[17px] lg:text-lg xl:text-xl ${
+                                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                            }`}
+                        >
+                            <span className="whitespace-nowrap">Bar Questions</span>
+                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                                ·
+                            </span>
+                            <span className="whitespace-nowrap">SC Decisions</span>
+                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                                ·
+                            </span>
+                            <span className="whitespace-nowrap">Case Digests</span>
+                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                                ·
+                            </span>
+                            <span className="whitespace-nowrap">Codals</span>
+                        </p>
+                    </nav>
+
                     {/* RIGHT — Actions */}
-                    <div className="flex items-center gap-1.5 md:gap-2">
+                    <div className="relative z-10 col-start-2 flex shrink-0 items-center justify-end gap-1.5 justify-self-end md:col-start-3 md:gap-2">
 
                         {/* Theme Toggle */}
                         <button
@@ -161,7 +165,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             {/* Sidebar (Navigation Drawer) */}
             {!isFullscreen && (
                 <aside
-                    className={`fixed left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(7rem+env(safe-area-inset-top,0px))]
+                    className={`fixed left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white xl:bg-white/40 xl:backdrop-blur-xl border-r border-white/40 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
@@ -183,11 +187,21 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Main Content Area */}
             <main
-                className={`${isFullscreen ? 'pt-0' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(7rem+env(safe-area-inset-top,0px))]'} min-h-screen
-        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
+                className={`${isFullscreen ? 'pt-0' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
+        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
-                <div className={`${isFullscreen ? 'max-w-full' : (mode === 'codex' ? 'max-w-full ml-0' : 'mx-auto max-w-7xl')}`}>
+                <div
+                    className={`${
+                        isFullscreen
+                            ? 'max-w-full'
+                            : mode === 'codex'
+                              ? 'max-w-full ml-0'
+                              : mainFullWidth
+                                ? 'mx-auto w-full max-w-none'
+                                : 'mx-auto max-w-7xl'
+                    }`}
+                >
                     {children}
                 </div>
             </main>

@@ -1,19 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { getSubjectColor } from '../utils/colors';
 import { ChevronDown, ChevronRight, BookOpen, Info, History, Scale, Swords, Newspaper, Gavel, Globe, Library, Briefcase, Calculator, Building2, Book, Heart, Users, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
-
-const subjects = [
-    "Civil Law",
-    "Commercial Law",
-    "Criminal Law",
-    "Labor Law",
-    "Legal Ethics",
-    "Political Law",
-    "Remedial Law",
-    "Taxation Law"
-];
 
 const codexSubjects = [
     { title: "Revised Penal Code", id: "rpc", icon: Swords, color: "text-rose-500" },
@@ -42,14 +30,11 @@ const TIER_BG = {
     admin: 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800',
 };
 
-const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject, currentSubject }) => {
+const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onSelectCodal, selectedCodalCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
     const { tier, tierLabel, openUpgradeModal, isAdmin } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
-    const [openSection, setOpenSection] = useState(() => {
-        if (mode === 'codex' || mode === 'browse_bar') return mode === 'codex' ? 'codex' : 'bar';
-        return null;
-    });
+    const [openSection, setOpenSection] = useState(() => (mode === 'codex' ? 'codex' : null));
     const timeoutRef = useRef(null);
 
     const toggleSection = (section) => {
@@ -281,53 +266,21 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
 
 
-            {/* Bar Questions Collapsible Section */}
-            <div>
-                <button
-                    onClick={() => toggleSection('bar')}
-                    className={`group flex w-full items-center justify-between rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
-                    ${mode === 'browse_bar' && openSection === 'bar'
-                            ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
-                            : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
-                        }`}
-                >
-                    <span className="flex items-center gap-3">
-                        <Book size={20} className={`${openSection === 'bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
-                        Bar Questions
-                    </span>
-                    {openSection === 'bar' ? <ChevronDown size={18} className="text-slate-400 dark:text-slate-500" /> : <ChevronRight size={18} className="text-slate-400 dark:text-slate-500" />}
-                </button>
-
-                {openSection === 'bar' && (
-                    <div className="animate-in slide-in-from-top-2 duration-200 overflow-hidden rounded-lg border border-white/20 bg-white/20 dark:border-white/5 dark:bg-slate-900/20">
-                        <button
-                            onClick={() => onSelectSubject && onSelectSubject('All Subjects')}
-                            className={`group/item w-full border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
-                                ${mode === 'browse_bar' && (currentSubject === null || currentSubject === 'All Subjects')
-                                    ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
-                                    : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
-                                }`}
-                        >
-                            <span className="w-2 h-2 rounded-full mr-2 bg-gray-400 dark:bg-gray-500 opacity-70 group-hover/item:opacity-100 transition-all" />
-                            All Subjects
-                        </button>
-                        {subjects.map((subject) => (
-                            <button
-                                key={subject}
-                                onClick={() => onSelectSubject && onSelectSubject(subject)}
-                                className={`group/item w-full border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
-                                    ${mode === 'browse_bar' && currentSubject === subject
-                                        ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
-                                        : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
-                                    }`}
-                            >
-                                <span className={`w-2 h-2 rounded-full mr-2 ${getSubjectColor(subject)} opacity-70 group-hover/item:opacity-100 transition-all`} />
-                                {subject}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
+            {/* Bar Questions — subject filter lives on the page */}
+            <button
+                onClick={() => {
+                    if (onSelectSubject) onSelectSubject('All Subjects');
+                    setOpenSection(null);
+                }}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                ${mode === 'browse_bar'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
+                    }`}
+            >
+                <Book size={20} className={`${mode === 'browse_bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
+                Bar Questions
+            </button>
 
 
 
