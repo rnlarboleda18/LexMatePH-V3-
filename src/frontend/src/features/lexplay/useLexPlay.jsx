@@ -4,6 +4,12 @@ import { useAuth } from '@clerk/clerk-react';
 const LexPlayContext = createContext();
 const LexPlayApiContext = createContext();
 
+/** Relative URL for LexPlay TTS/audio (same formula as playTrack). */
+function buildAudioFetchPath(track, rate = 1.0) {
+    const codeParam = track.code_id ? `code=${track.code_id}&` : '';
+    return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+}
+
 export const useLexPlay = () => {
     return useContext(LexPlayContext);
 };
@@ -37,7 +43,10 @@ export const LexPlayProvider = ({ children }) => {
     const repeatModeRef = useRef('none');
     const isShuffleRef = useRef(false);
     const isMounted = useRef(true);
-    
+    /** Prefetched blob URL for the upcoming track index (lock-screen / iOS gapless advance). */
+    const prefetchedNextRef = useRef(null);
+    const handleTrackEndRef = useRef(() => {});
+
     useEffect(() => {
         isMounted.current = true;
         return () => { isMounted.current = false; };
@@ -53,6 +62,18 @@ export const LexPlayProvider = ({ children }) => {
     const MAX_RETRIES = 3;
     /** LexPlay audio is always synthesized at 1× (UI speed picker removed). */
     const PLAYBACK_RATE = 1.0;
+
+    const clearNextPrefetch = useCallback(() => {
+        const p = prefetchedNextRef.current;
+        if (p?.objectUrl) {
+            try {
+                URL.revokeObjectURL(p.objectUrl);
+            } catch {
+                /* ignore */
+            }
+        }
+        prefetchedNextRef.current = null;
+    }, []);
 
     // Keep refs in sync with state
     useEffect(() => { playlistRef.current = playlist; }, [playlist]);
@@ -183,11 +204,12 @@ export const LexPlayProvider = ({ children }) => {
     useEffect(() => {
         if (!audioRef.current) {
             audioRef.current = new Audio();
-            // Critical for iOS background playback
+            // Critical for iOS background / lock-screen playback
             audioRef.current.setAttribute('playsinline', 'true');
+            audioRef.current.setAttribute('webkit-playsinline', 'true');
             audioRef.current.preload = 'auto';
-            
-            audioRef.current.onended = handleTrackEnd;
+            // Ref indirection so onended always runs latest handler (avoids stale closure from mount-only effect).
+            audioRef.current.onended = () => handleTrackEndRef.current();
             audioRef.current.onerror = (e) => {
                 // Ignore "empty src" errors which happen during cleanup or initialization
                 if (!audioRef.current || !audioRef.current.src || audioRef.current.src === window.location.href) {
@@ -442,6 +464,8 @@ export const LexPlayProvider = ({ children }) => {
         const track = trackOverride || latestPlaylist[index];
         if (!track) return;
 
+        clearNextPrefetch();
+
         setCurrentIndex(index);
         setIsLoading(true);
         setIsPlaying(false);
@@ -454,10 +478,7 @@ export const LexPlayProvider = ({ children }) => {
         }
 
         try {
-            const rateParam = `rate=${PLAYBACK_RATE}`;
-            const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-            // REMOVED: timestampParam = `&t=${new Date().getTime()}`; // CACHE BUSTER REMOVED
-            const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}`;
+            const fetchUrl = buildAudioFetchPath(track, PLAYBACK_RATE);
             console.log(`LEXPLAY AUDIO: Load attempt ${attempt}/${MAX_RETRIES}:`, fetchUrl);
 
             // --- Cache-First Retrieval ---
@@ -524,7 +545,71 @@ export const LexPlayProvider = ({ children }) => {
             setIsPlaying(false);
             setIsLoading(false);
         }
-    }, [safeSetState]);
+    }, [safeSetState, clearNextPrefetch]);
+
+    /**
+     * Auto-advance / lock-screen path: set src and call play() without await before play().
+     * iOS Safari often blocks the next track if playTrack() awaits cache I/O first — the "ended"
+     * activation context is lost. Falls back to async playTrack on failure.
+     */
+    const playTrackImmediate = useCallback(
+        (index, trackOverride = null) => {
+            const list = playlistRef.current;
+            const track = trackOverride || list[index];
+            if (!track || !audioRef.current) return;
+
+            if (audioRef.current.src?.startsWith('blob:')) {
+                try {
+                    URL.revokeObjectURL(audioRef.current.src);
+                } catch {
+                    /* ignore */
+                }
+            }
+
+            setCurrentIndex(index);
+            setIsLoading(true);
+            setIsPlaying(false);
+            setError(null);
+
+            const fetchPath = buildAudioFetchPath(track, PLAYBACK_RATE);
+            const absoluteUrl = new URL(fetchPath, window.location.origin).href;
+
+            let src = absoluteUrl;
+            const pref = prefetchedNextRef.current;
+            if (pref && pref.index === index && pref.objectUrl) {
+                src = pref.objectUrl;
+                prefetchedNextRef.current = null;
+            } else if (pref?.objectUrl) {
+                clearNextPrefetch();
+            }
+
+            const a = audioRef.current;
+            a.volume = volume;
+            a.src = src;
+            a.load();
+
+            try {
+                const playP = a.play();
+                if (playP !== undefined) {
+                    playP
+                        .then(() => {
+                            safeSetState(setIsLoading, false);
+                            safeSetState(setIsPlaying, true);
+                        })
+                        .catch((err) => {
+                            console.warn('[LexPlay] playTrackImmediate failed, using async load', err?.name);
+                            clearNextPrefetch();
+                            playTrack(index, trackOverride, 1);
+                        });
+                }
+            } catch (e) {
+                console.warn('[LexPlay] playTrackImmediate threw', e);
+                clearNextPrefetch();
+                playTrack(index, trackOverride, 1);
+            }
+        },
+        [volume, safeSetState, playTrack, clearNextPrefetch]
+    );
 
     const handlePlayPause = useCallback(() => {
         if (!audioRef.current) return;
@@ -592,15 +677,16 @@ export const LexPlayProvider = ({ children }) => {
     const handleNext = useCallback(() => {
         if (isShuffleRef.current && playlist.length > 1) {
             let nextIdx;
-            do { nextIdx = Math.floor(Math.random() * playlist.length); } 
-            while (nextIdx === currentIndex && playlist.length > 1);
-            playTrack(nextIdx);
+            do {
+                nextIdx = Math.floor(Math.random() * playlist.length);
+            } while (nextIdx === currentIndex && playlist.length > 1);
+            playTrackImmediate(nextIdx);
         } else if (currentIndex < playlist.length - 1) {
-            playTrack(currentIndex + 1);
+            playTrackImmediate(currentIndex + 1);
         } else if (repeatModeRef.current === 'all') {
-            playTrack(0);
+            playTrackImmediate(0);
         }
-    }, [currentIndex, playlist.length, playTrack]);
+    }, [currentIndex, playlist.length, playTrackImmediate]);
 
     const handlePrevious = useCallback(() => {
         if (audioRef.current && audioRef.current.currentTime > 3) {
@@ -612,46 +698,98 @@ export const LexPlayProvider = ({ children }) => {
 
         if (isShuffleRef.current && playlist.length > 1) {
             let nextIdx;
-            do { nextIdx = Math.floor(Math.random() * playlist.length); } 
-            while (nextIdx === currentIndex && playlist.length > 1);
-            playTrack(nextIdx);
+            do {
+                nextIdx = Math.floor(Math.random() * playlist.length);
+            } while (nextIdx === currentIndex && playlist.length > 1);
+            playTrackImmediate(nextIdx);
         } else if (currentIndex > 0) {
-            playTrack(currentIndex - 1);
+            playTrackImmediate(currentIndex - 1);
         } else if (audioRef.current) {
             audioRef.current.currentTime = 0;
             if (!isPlaying) handlePlayPause();
         }
-    }, [currentIndex, isPlaying, handlePlayPause, playTrack, playlist.length]);
+    }, [currentIndex, isPlaying, handlePlayPause, playTrackImmediate, playlist.length]);
 
     const handleTrackEnd = useCallback(() => {
         const idx = currentIndexRef.current;
         const list = playlistRef.current;
-        
+
         if (repeatModeRef.current === 'one') {
-            playTrack(idx);
+            playTrackImmediate(idx);
             return;
         }
-        
+
         if (isShuffleRef.current && list.length > 1) {
             let nextIdx;
-            do { nextIdx = Math.floor(Math.random() * list.length); } 
-            while (nextIdx === idx && list.length > 1);
-            playTrack(nextIdx);
+            do {
+                nextIdx = Math.floor(Math.random() * list.length);
+            } while (nextIdx === idx && list.length > 1);
+            playTrackImmediate(nextIdx);
             return;
         }
 
         if (idx < list.length - 1) {
-            playTrack(idx + 1);
+            playTrackImmediate(idx + 1);
+        } else if (repeatModeRef.current === 'all') {
+            playTrackImmediate(0);
         } else {
-            if (repeatModeRef.current === 'all') {
-                playTrack(0);
-            } else {
-                setIsPlaying(false);
-                if (list.length > 0) setCurrentIndex(0);
-                else setCurrentIndex(-1);
-            }
+            setIsPlaying(false);
+            if (list.length > 0) setCurrentIndex(0);
+            else setCurrentIndex(-1);
         }
-    }, [playTrack]);
+    }, [playTrackImmediate]);
+
+    useEffect(() => {
+        handleTrackEndRef.current = handleTrackEnd;
+    }, [handleTrackEnd]);
+
+    useEffect(() => () => clearNextPrefetch(), [clearNextPrefetch]);
+
+    // Warm next track into a blob URL while the current one plays so auto-advance can call play() synchronously (iOS lock screen).
+    useEffect(() => {
+        if (!isPlaying || currentIndex < 0) return;
+        const list = playlistRef.current;
+        const nextIdx = currentIndex + 1;
+        if (nextIdx >= list.length) {
+            clearNextPrefetch();
+            return;
+        }
+
+        let cancelled = false;
+        const track = list[nextIdx];
+        const fetchPath = buildAudioFetchPath(track, PLAYBACK_RATE);
+
+        (async () => {
+            try {
+                let blob = null;
+                if ('caches' in window) {
+                    const cache = await caches.open('audio-cache');
+                    const matched = await cache.match(fetchPath);
+                    if (matched) blob = await matched.blob();
+                }
+                if (!blob) {
+                    const res = await fetch(fetchPath, { credentials: 'include' });
+                    if (res.ok) blob = await res.blob();
+                }
+                if (cancelled || !blob) return;
+                const old = prefetchedNextRef.current;
+                if (old?.objectUrl) {
+                    try {
+                        URL.revokeObjectURL(old.objectUrl);
+                    } catch {
+                        /* ignore */
+                    }
+                }
+                prefetchedNextRef.current = { index: nextIdx, objectUrl: URL.createObjectURL(blob) };
+            } catch (e) {
+                console.warn('[LexPlay] prefetch next track failed', e);
+            }
+        })();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [isPlaying, currentIndex, playlist, clearNextPrefetch]);
 
     const handleScrubForward = useCallback(() => {
         if (audioRef.current) {

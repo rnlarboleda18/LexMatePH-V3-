@@ -183,15 +183,11 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
         );
     }
 
+    /* max-lg: stream-style thin scrub (touch-friendly thumb); lg+: original desktop bar */
     return (
-        <div className="z-10 w-full max-w-2xl px-0 sm:px-2 md:max-w-xl md:px-0">
-            <div className="mb-4 flex items-center justify-center gap-2.5 px-1 md:mb-2">
-                <span className="h-px w-8 rounded-full bg-gradient-to-r from-purple-400/50 to-transparent md:w-8" aria-hidden />
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white/45">Playback</span>
-                <span className="h-px w-8 rounded-full bg-gradient-to-l from-purple-400/50 to-transparent md:w-8" aria-hidden />
-            </div>
+        <div className="z-10 w-full max-w-2xl px-0 sm:px-2 md:max-w-xl md:px-0 max-lg:max-w-none max-lg:px-0">
             <div
-                className="group relative h-2.5 w-full cursor-pointer touch-manipulation select-none rounded-full bg-white/[0.06] ring-1 ring-white/[0.04] md:h-2"
+                className="group relative w-full cursor-pointer touch-manipulation select-none rounded-full bg-white/[0.12] h-1 sm:h-[5px] ring-0 lg:h-2.5 lg:bg-white/[0.06] lg:ring-1 lg:ring-white/[0.04] lg:md:h-2"
                 ref={progressBarRef}
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
@@ -202,15 +198,15 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                 aria-label="Playback position"
             >
                 <div
-                    className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-violet-400 shadow-[0_0_12px_rgba(168,85,247,0.35)] transition-[width] duration-150 ease-out"
+                    className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-violet-400 shadow-[0_0_12px_rgba(168,85,247,0.35)] transition-[width] duration-150 ease-out max-lg:shadow-[0_0_10px_rgba(168,85,247,0.4)]"
                     style={{ width: `${progressPercent}%` }}
                 />
                 <div
-                    className={`absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/90 bg-white shadow-md ring-2 ring-purple-500/40 transition-transform duration-200 ${isScrubbing ? 'scale-110' : 'scale-0 group-hover:scale-100'}`}
+                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/95 bg-white shadow-md ring-2 ring-purple-500/35 transition-transform duration-200 max-lg:h-3.5 max-lg:w-3.5 max-lg:scale-100 max-lg:border lg:h-4 lg:w-4 lg:border-2 lg:border-white/90 lg:ring-purple-500/40 ${isScrubbing ? 'scale-110' : 'max-lg:scale-100 lg:scale-0 lg:group-hover:scale-100'}`}
                     style={{ left: `${progressPercent}%` }}
                 />
             </div>
-            <div className="mt-2.5 flex justify-between px-0.5 font-mono text-[11px] font-bold tabular-nums tracking-wider text-white/50 sm:px-1 md:mt-1.5 md:text-[10px]">
+            <div className="mt-2 flex justify-between px-0.5 tabular-nums max-lg:mt-2.5 max-lg:text-[11px] max-lg:font-medium max-lg:text-white/40 max-lg:sm:text-xs lg:mt-2 lg:font-mono lg:text-[11px] lg:font-bold lg:tracking-wider lg:text-white/50 sm:px-1 lg:md:mt-1.5 lg:md:text-[10px]">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(duration)}</span>
             </div>
@@ -941,9 +937,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
         return typeof document !== 'undefined' ? createPortal(miniPlayer, document.body) : null;
     }
 
-    // Full Screen Mode — max-md respects iOS safe areas (notch / home indicator)
-    return (
-        <div className="fixed inset-0 z-[100] flex items-stretch justify-center md:items-center">
+    // Full Screen Mode — portaled to body so z-index stacks above Layout header (main is z-10; header z-50)
+    const fullScreenUi = (
+        <div className="fixed inset-0 z-[120] flex items-stretch justify-center md:items-center">
             {/* Backdrop Overlay */}
             <div 
                 className="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-md transition-opacity duration-500 animate-in fade-in"
@@ -953,8 +949,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
             <div className="relative w-full h-full min-h-0 max-md:max-h-[100dvh] md:h-[calc(100vh-8rem)] md:w-[90vw] lg:w-[85vw] xl:w-[80vw] md:max-w-6xl md:rounded-[2rem] bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent backdrop-blur-[40px] border border-white/20 shadow-[0_32px_64px_-16px_rgba(31,38,135,0.4)] overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500">
                 {/* Inner shine layer for glass effect */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-30 pointer-events-none z-0"></div>
-                {/* Mobile: viewport-centered compact pills; window controls top-right */}
-                <div className="md:hidden absolute inset-x-0 z-[60] top-[max(0.75rem,env(safe-area-inset-top,0px))] h-12 pointer-events-none">
+                {/* Mobile + tablet (<lg): centered pills + minimize; lg+ uses floating minimize only */}
+                <div className="lg:hidden absolute inset-x-0 z-[60] top-[max(0.75rem,env(safe-area-inset-top,0px))] h-12 pointer-events-none">
                     <div className="absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-5.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-1 shadow-xl pointer-events-auto">
                         <button
                             type="button"
@@ -982,8 +978,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                         </button>
                     </div>
                 </div>
-                {/* Desktop: top nudged to match playlist header items-center row (title + badge taller than h-12); right inset matches player area padding */}
-                <div className="pointer-events-none absolute z-[60] hidden md:top-[calc(1.25rem+0.0625rem)] md:flex md:items-center md:right-8 lg:right-10 xl:right-12">
+                {/* Desktop (lg+): top-right minimize — tabs are inline in playlist/player headers below lg */}
+                <div className="pointer-events-none absolute z-[60] hidden lg:top-[calc(1.25rem+0.0625rem)] lg:flex lg:items-center lg:right-10 xl:right-12">
                     <button
                         type="button"
                         onClick={onMinimize}
@@ -994,111 +990,120 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                     </button>
                 </div>
 
-                <div className="flex flex-col md:flex-row-reverse h-full w-full relative">
+                <div className="flex h-full w-full flex-col lg:flex-row-reverse">
 
-                    {/* Right Area: Player Stage — visual language matches playlist column */}
-                    <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 backdrop-blur-2xl transition-all duration-500 ease-in-out md:overflow-y-auto md:overscroll-contain md:border-l md:border-white/[0.07] md:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 md:flex md:translate-x-0 md:opacity-100'}`}>
+                    {/* Right Area: Player Stage — lg+ = original centered column; max-lg = mobile/tablet layout */}
+                    <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 backdrop-blur-2xl transition-all duration-500 ease-in-out lg:overflow-y-auto lg:overscroll-contain lg:border-l lg:border-white/[0.07] lg:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-purple-500/[0.06] via-transparent to-indigo-950/20" />
-                        <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-500/10 blur-[90px] md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)]" />
+                        <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-500/10 blur-[90px] md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)] lg:top-[42%]" />
 
-                        <div className="relative z-10 mx-auto flex w-full max-w-2xl shrink-0 flex-col items-center gap-7 px-0 pb-6 pt-[calc(env(safe-area-inset-top,0px)+3.25rem)] sm:gap-8 sm:px-4 md:min-h-0 md:shrink md:flex-1 md:justify-center md:gap-5 md:px-6 md:pb-5 md:pt-12 lg:gap-6 lg:px-8 max-md:pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]">
-                        <header className="flex w-full flex-col items-center justify-center px-4 pt-1 md:pt-0">
-                            <p className="flex items-baseline gap-0.5 text-3xl font-bold tracking-tight sm:text-4xl md:text-2xl lg:text-[1.65rem]" aria-label="LexPlayer">
-                                <span className="text-white">Lex</span>
-                                <span className="bg-gradient-to-r from-violet-300 via-fuchsia-200 to-purple-400 bg-clip-text text-transparent">Player</span>
-                            </p>
-                            <div className="mt-2 h-[3px] w-12 rounded-full bg-gradient-to-r from-purple-500/0 via-purple-400/80 to-fuchsia-500/0 md:mt-1.5 md:w-10" aria-hidden />
-                        </header>
+                        {/* max-lg: vertically centered block + even gaps; lg+: centered column */}
+                        <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center px-4 pt-[calc(env(safe-area-inset-top,0px)+3rem)] sm:px-5 md:max-lg:max-w-4xl md:max-lg:px-5 md:max-lg:pt-[calc(env(safe-area-inset-top,0px)+3rem)] lg:max-w-2xl lg:min-h-0 lg:shrink lg:flex-1 lg:justify-center lg:gap-7 lg:px-8 lg:pb-5 lg:pt-12 max-lg:flex-1 max-lg:justify-center max-lg:gap-4 max-lg:py-2 max-lg:pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
+                            <header className="flex w-full flex-col items-center justify-center max-lg:mb-0 lg:pt-0">
+                                <p className="flex items-baseline gap-0.5 text-2xl font-bold tracking-tight sm:text-3xl md:text-2xl md:max-lg:text-[1.35rem] lg:text-[1.65rem]" aria-label="LexPlayer">
+                                    <span className="text-white">Lex</span>
+                                    <span className="bg-gradient-to-r from-violet-300 via-fuchsia-200 to-purple-400 bg-clip-text text-transparent">Player</span>
+                                </p>
+                                <div className="mt-1 h-[2px] w-10 rounded-full bg-gradient-to-r from-purple-500/0 via-purple-400/80 to-fuchsia-500/0 max-lg:mt-0.5 max-lg:w-9 lg:mt-2 lg:h-[3px] lg:w-12" aria-hidden />
+                            </header>
 
-                        <div className="relative flex-shrink-0 group">
-                            <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-purple-500/25 via-fuchsia-500/12 to-transparent opacity-80 blur-2xl transition-opacity group-hover:opacity-100 md:-inset-3 md:rounded-xl" />
-                            <div className="relative flex h-52 w-52 max-h-[42vh] max-w-[42vh] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.1] bg-white/[0.04] shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)] ring-1 ring-white/[0.08] backdrop-blur-sm sm:h-60 sm:w-60 md:h-44 md:w-44 md:max-h-none md:max-w-none md:rounded-2xl lg:h-48 lg:w-48 lg:rounded-[1.75rem]">
-                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.12] via-white/[0.03] to-transparent" />
-                                <Headphones className={`relative z-10 h-[5rem] w-[5rem] text-white/90 drop-shadow-[0_8px_24px_rgba(124,58,237,0.45)] transition-transform duration-700 sm:h-32 sm:w-32 md:h-28 md:w-28 lg:h-[7.25rem] lg:w-[7.25rem] ${isPlaying ? '-translate-y-3 scale-95 md:-translate-y-2 md:scale-95' : 'group-hover:scale-105'}`} strokeWidth={1.25} />
-                                {isPlaying && (
-                                    <div className="absolute bottom-5 left-1/2 z-10 flex h-9 w-full max-w-[85%] -translate-x-1/2 items-end justify-center gap-1.5 px-3 md:bottom-4 md:h-8 md:gap-1.5">
-                                        {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
-                                            <div key={i} className="w-1.5 animate-[bounce_1s_infinite] rounded-full bg-white/95 shadow-[0_0_8px_rgba(255,255,255,0.85)] md:w-2" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }} />
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="z-10 w-full max-w-xl px-3 text-center md:max-w-lg md:px-2">
-                            <h2 className="line-clamp-2 text-2xl font-bold tracking-tight text-white drop-shadow-sm sm:text-3xl md:text-lg md:leading-snug lg:text-xl">
-                                {currentTrack ? currentTrack.title : "LexPlayer is idle"}
-                            </h2>
-                            <p className="mt-2 text-xs font-semibold uppercase leading-relaxed tracking-[0.12em] text-white/45 sm:text-sm md:mt-1.5 md:text-[11px] md:leading-snug lg:text-xs">
-                                {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist"}
-                            </p>
-                            <div className="mt-3 flex min-h-0 flex-col items-center justify-center md:mt-2">
-                                {error && (
-                                    <div className="inline-flex max-w-full items-center gap-2 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-5 py-2.5 text-center text-xs font-bold text-rose-200/95 animate-in shake">
-                                        {error}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={false} />
-
-                        <div className="z-10 flex w-full max-w-2xl flex-col items-center space-y-6 sm:space-y-8 md:space-y-0">
-                            <div className="flex w-full items-center justify-center gap-8 px-4 md:gap-10 lg:gap-12">
-                                <button
-                                    type="button"
-                                    onClick={handlePrevious}
-                                    disabled={playlist.length === 0}
-                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-10 md:w-10 lg:h-11 lg:w-11"
-                                    aria-label="Previous track"
-                                >
-                                    <SkipBack className="h-6 w-6 md:h-5 md:w-5 lg:h-6 lg:w-6" fill="currentColor" />
-                                </button>
-
-                                <button
-                                    type="button"
-                                    onClick={handlePlayPause}
-                                    disabled={playlist.length === 0}
-                                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_8px_28px_-6px_rgba(124,58,237,0.55)] ring-1 ring-white/15 transition-all hover:scale-[1.04] hover:shadow-[0_12px_32px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 md:h-14 md:w-14 lg:h-[3.75rem] lg:w-[3.75rem]"
-                                    aria-label={isPlaying ? 'Pause' : 'Play'}
-                                >
-                                    {isLoading ? (
-                                        <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-white/25 border-t-white md:h-6 md:w-6" />
-                                    ) : isPlaying ? (
-                                        <div
-                                            className="flex h-4 w-9 items-end justify-center gap-0.5 md:h-5 md:w-11 md:gap-1 lg:h-6 lg:w-12"
-                                            aria-hidden
-                                        >
-                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_10px_rgba(255,255,255,0.95)] md:w-1.5"
-                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
-                                                />
-                                            ))}
+                            {/* Mobile: vertical; Tablet (md–lg): art | meta+controls; Desktop lg+: vertical stack */}
+                            <div className="flex w-full flex-col items-center gap-4 md:max-lg:flex-row md:max-lg:items-start md:max-lg:gap-4 lg:flex-col lg:items-center lg:gap-7">
+                                {/* Artwork column */}
+                                <div className="relative flex w-full max-w-[min(100%,18rem)] shrink-0 justify-center md:max-lg:max-w-none md:max-lg:w-[40%] md:max-lg:min-w-0 md:max-lg:self-center lg:max-w-none lg:w-full">
+                                    <div className="group relative flex-shrink-0">
+                                        <div className="pointer-events-none absolute -inset-3 rounded-[1.75rem] bg-gradient-to-br from-purple-500/25 via-fuchsia-500/12 to-transparent opacity-80 blur-2xl transition-opacity group-hover:opacity-100 md:-inset-2.5 md:rounded-xl lg:-inset-4 lg:rounded-[2rem]" />
+                                        <div className="relative mx-auto flex h-[12rem] w-[12rem] max-h-[min(36vh,210px)] max-w-[min(36vh,210px)] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.1] bg-white/[0.04] shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)] ring-1 ring-white/[0.08] backdrop-blur-sm sm:h-56 sm:w-56 sm:max-h-[min(38vh,220px)] sm:max-w-[min(38vh,220px)] md:max-lg:h-44 md:max-lg:w-44 md:max-lg:max-h-none md:max-lg:max-w-none md:max-lg:rounded-2xl lg:mx-0 lg:h-48 lg:w-48 lg:max-h-none lg:max-w-none lg:rounded-[1.75rem]">
+                                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.12] via-white/[0.03] to-transparent" />
+                                            <Headphones className={`relative z-10 h-[4.75rem] w-[4.75rem] text-white/90 drop-shadow-[0_8px_24px_rgba(124,58,237,0.45)] transition-transform duration-700 sm:h-[5rem] sm:w-[5rem] md:max-lg:h-24 md:max-lg:w-24 lg:h-[7.25rem] lg:w-[7.25rem] ${isPlaying ? '-translate-y-3 scale-95 md:max-lg:-translate-y-2 lg:-translate-y-3' : 'group-hover:scale-105'}`} strokeWidth={1.25} />
+                                            {isPlaying && (
+                                                <div className="absolute bottom-4 left-1/2 z-10 flex h-8 w-full max-w-[85%] -translate-x-1/2 items-end justify-center gap-1.5 px-3 md:bottom-3 md:max-lg:h-7 lg:bottom-5 lg:h-9">
+                                                    {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
+                                                        <div key={i} className="w-1.5 animate-[bounce_1s_infinite] rounded-full bg-white/95 shadow-[0_0_8px_rgba(255,255,255,0.85)] md:w-2" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }} />
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
-                                    ) : (
-                                        <Play className="ml-1 h-8 w-8 md:h-7 md:w-7 lg:h-8 lg:w-8" fill="currentColor" />
-                                    )}
-                                </button>
+                                    </div>
+                                </div>
 
-                                <button
-                                    type="button"
-                                    onClick={handleNext}
-                                    disabled={playlist.length === 0}
-                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-10 md:w-10 lg:h-11 lg:w-11"
-                                    aria-label="Next track"
-                                >
-                                    <SkipForward className="h-6 w-6 md:h-5 md:w-5 lg:h-6 lg:w-6" fill="currentColor" />
-                                </button>
+                                {/* Track info + scrub + transport */}
+                                <div className="flex w-full min-w-0 flex-col items-center gap-4 md:max-lg:flex-1 md:max-lg:justify-start md:max-lg:gap-4 lg:w-full lg:gap-6">
+                                    <div className="z-10 w-full max-w-xl px-0 text-center md:max-lg:max-w-none md:max-lg:text-left lg:max-w-xl lg:px-2 lg:text-center">
+                                        <h2 className="line-clamp-2 text-lg font-semibold leading-snug tracking-tight text-white drop-shadow-sm sm:text-xl md:max-lg:line-clamp-3 md:max-lg:text-[1.2rem] md:text-lg md:leading-snug lg:text-xl lg:font-bold">
+                                            {currentTrack ? currentTrack.title : 'LexPlayer is idle'}
+                                        </h2>
+                                        <p className="mt-1 text-[10px] font-medium uppercase leading-relaxed tracking-[0.1em] text-white/45 sm:text-[11px] md:max-lg:mt-1 md:mt-1.5 md:text-[11px] md:leading-snug lg:mt-2 lg:text-xs lg:font-semibold lg:tracking-[0.12em]">
+                                            {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : 'Add items to your LexPlaylist'}
+                                        </p>
+                                        <div className="mt-2 flex min-h-0 flex-col items-center justify-center md:max-lg:items-start md:mt-1.5 lg:mt-3 lg:items-center">
+                                            {error && (
+                                                <div className="inline-flex max-w-full items-center gap-2 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-5 py-2.5 text-center text-xs font-bold text-rose-200/95 animate-in shake md:max-lg:text-left">
+                                                    {error}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full max-w-xl pt-0.5 md:max-lg:max-w-none lg:max-w-xl">
+                                        <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={false} />
+                                    </div>
+
+                                    <div className="z-10 flex w-full max-w-2xl flex-col items-center pb-0 md:max-lg:max-w-none lg:max-w-2xl">
+                                        <div className="flex w-full items-center justify-center gap-2 px-1 sm:gap-3 md:max-lg:gap-3 md:max-lg:px-2 lg:gap-10 lg:px-4">
+                                            <button
+                                                type="button"
+                                                onClick={handlePrevious}
+                                                disabled={playlist.length === 0}
+                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/80 shadow-md transition-all hover:border-white/18 hover:bg-white/[0.1] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11"
+                                                aria-label="Previous track"
+                                            >
+                                                <SkipBack className="h-6 w-6 sm:h-7 sm:w-7 md:max-lg:h-8 md:max-lg:w-8 lg:h-6 lg:w-6" fill="currentColor" />
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={handlePlayPause}
+                                                disabled={playlist.length === 0}
+                                                className="flex h-[7.5rem] w-[7.5rem] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_16px_44px_-6px_rgba(124,58,237,0.55)] ring-2 ring-white/10 transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 sm:h-[8.25rem] sm:w-[8.25rem] md:max-lg:h-[9rem] md:max-lg:w-[9rem] lg:h-[6.5rem] lg:w-[6.5rem] lg:ring-1"
+                                                aria-label={isPlaying ? 'Pause' : 'Play'}
+                                            >
+                                                {isLoading ? (
+                                                    <div className="h-11 w-11 animate-spin rounded-full border-[3px] border-white/25 border-t-white sm:h-12 sm:w-12 md:max-lg:h-14 md:max-lg:w-14 lg:h-10 lg:w-10" />
+                                                ) : isPlaying ? (
+                                                    <div className="flex h-8 w-[4.25rem] items-end justify-center gap-0.5 sm:h-9 sm:w-20 sm:gap-1 md:max-lg:h-12 md:max-lg:w-24 lg:h-6 lg:w-12" aria-hidden>
+                                                        {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className="w-2.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_10px_rgba(255,255,255,0.95)] sm:w-3 md:max-lg:w-3.5 lg:w-1.5"
+                                                                style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <Play className="ml-1 h-14 w-14 sm:h-16 sm:w-16 md:max-lg:h-[4.5rem] md:max-lg:w-[4.5rem] lg:h-12 lg:w-12" fill="currentColor" />
+                                                )}
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={handleNext}
+                                                disabled={playlist.length === 0}
+                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/80 shadow-md transition-all hover:border-white/18 hover:bg-white/[0.1] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11"
+                                                aria-label="Next track"
+                                            >
+                                                <SkipForward className="h-6 w-6 sm:h-7 sm:w-7 md:max-lg:h-8 md:max-lg:w-8 lg:h-6 lg:w-6" fill="currentColor" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
 
-                    {/* Left Area: Playlist (Desktop) */}
-                    <div className={`w-full md:w-72 lg:w-80 xl:w-[420px] flex flex-col h-full shrink-0 z-20 transition-all duration-500 ease-in-out bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/[0.07] shadow-[inset_1px_0_0_rgba(255,255,255,0.04),-12px_0_40px_-8px_rgba(0,0,0,0.4)] ${activeTab === 'playlist' ? 'opacity-100 translate-x-0' : 'hidden md:flex md:opacity-100 md:translate-x-0 opacity-0 -translate-x-10'}`}>
-                        <div className="p-4 md:p-5 max-md:pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] md:pt-5 border-b border-white/[0.06] bg-white/[0.02] flex items-center justify-between gap-3 md:gap-4">
+                    {/* Left Area: Playlist — side panel from lg+; full-width sheet on mobile/tablet tab */}
+                    <div className={`flex h-full w-full shrink-0 flex-col border-b border-white/[0.07] bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 shadow-[inset_1px_0_0_rgba(255,255,255,0.04),-12px_0_40px_-8px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-all duration-500 ease-in-out z-20 lg:w-80 lg:border-b-0 lg:border-r xl:w-[420px] ${activeTab === 'playlist' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
+                        <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] bg-white/[0.02] p-4 max-lg:pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] md:gap-4 lg:p-5 lg:pt-5">
                             <div className="min-w-0 flex-1 flex items-center justify-start gap-3 md:gap-3.5 text-left">
                                 <button
                                     type="button"
@@ -1334,6 +1339,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
             </div>
         </div>
     );
+
+    return typeof document !== 'undefined' ? createPortal(fullScreenUi, document.body) : null;
 };
 
 export default LexPlayer;

@@ -406,6 +406,7 @@ function App() {
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
       isFullscreen={isFullscreen}
+      lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {
         setMode(newMode);

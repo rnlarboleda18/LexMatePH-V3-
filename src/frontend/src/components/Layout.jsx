@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
-import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
-const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onToggleMode, onToggleQuiz, user, isFullscreen, mainFullWidth = false }) => {
+const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onToggleMode, onToggleQuiz, user, isFullscreen, mainFullWidth = false, lexPlayFullscreen = false }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { isDrawerOpen } = useLexPlay();
 
 
     // Close sidebar on mobile when window resizes to desktop
@@ -40,13 +38,22 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
                     {/* LEFT — Brand */}
                     <div className="relative z-10 flex min-w-0 items-center gap-2 md:gap-3">
-                        {/* Mobile hamburger */}
+                        {/* Mobile hamburger — box size matches scales mark beside it */}
                         <button
+                            type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden shrink-0 p-1.5 md:p-2 rounded-lg transition-colors ${isDarkMode ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20' : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50'}`}
+                            className={`xl:hidden flex shrink-0 h-9 w-9 items-center justify-center rounded-xl border transition-colors sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+                                isDarkMode
+                                    ? 'border-white/10 bg-white/[0.06] text-gray-300 hover:text-amber-400 hover:bg-amber-900/20'
+                                    : 'border-slate-200/90 bg-white text-gray-600 shadow-sm hover:text-amber-700 hover:bg-amber-50'
+                            }`}
                             aria-label="Toggle Sidebar"
                         >
-                            {isSidebarOpen ? <X size={20} className="md:w-[22px] md:h-[22px]" /> : <Menu size={20} className="md:w-[22px] md:h-[22px]" />}
+                            {isSidebarOpen ? (
+                                <X className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8" strokeWidth={2} />
+                            ) : (
+                                <Menu className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8" strokeWidth={2} />
+                            )}
                         </button>
 
                         {/* Brand — wordmark + scales mark (no vertical bar); LexMatePH casing preserved */}
@@ -177,17 +184,9 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                 </aside>
             )}
 
-            {/* Overlay for Mobile Sidebar */}
-            {isSidebarOpen && !isFullscreen && (
-                <div
-                    className="fixed inset-0 z-30 bg-black bg-opacity-50 xl:hidden"
-                    onClick={() => setIsSidebarOpen(false)}
-                />
-            )}
-
-            {/* Main Content Area */}
+            {/* Main Content Area — z-10 so mobile sidebar scrim (rendered after) can sit above and capture taps */}
             <main
-                className={`${isFullscreen ? 'pt-0' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
+                className={`relative z-10 ${isFullscreen ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
         ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
@@ -205,6 +204,15 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                     {children}
                 </div>
             </main>
+
+            {/* Mobile sidebar scrim: must be after <main> in DOM so it stacks above page content (z-35 < aside z-40 < header z-50) */}
+            {isSidebarOpen && !isFullscreen && (
+                <div
+                    className="fixed inset-0 z-[35] bg-black/50 xl:hidden"
+                    aria-hidden
+                    onClick={() => setIsSidebarOpen(false)}
+                />
+            )}
             </div>
         </div>
     );
