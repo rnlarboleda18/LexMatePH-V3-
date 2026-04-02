@@ -8,11 +8,17 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['pwa-192x192.png', 'pwa-512x512.png', 'apple-touch-icon.png'],
+      includeAssets: [
+        'pwa-192x192.png',
+        'pwa-512x512.png',
+        'apple-touch-icon.png',
+        'favicon.png',
+        'favicon-16.png',
+      ],
       manifest: {
         name: 'LexMatePH',
-        short_name: 'LexMate',
-        description: 'Your AI-powered Philippine legal research companion.',
+        short_name: 'LexMatePH',
+        description: 'Your Law Companion — Philippine bar review, SC decisions, case digests, and codals.',
         theme_color: '#0f172a',
         background_color: '#0f172a',
         display: 'standalone',
@@ -105,6 +111,9 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:7071',
         changeOrigin: true,
+        // Flashcard concepts aggregation can exceed default proxy timeouts
+        timeout: 180000,
+        proxyTimeout: 180000,
       },
     },
   },

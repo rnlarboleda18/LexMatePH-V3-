@@ -60,12 +60,12 @@ const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
                 </div>
 
                 <button
+                    type="button"
                     onClick={onDownload}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm rounded-lg shadow-md hover:shadow-lg transition-all active:scale-95"
+                    className="hidden items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-amber-600 hover:shadow-lg active:scale-95 md:inline-flex"
                 >
-                    <Download size={18} />
-                    <span className="hidden sm:inline">Download PDF</span>
-                    <span className="sm:hidden">PDF</span>
+                    <Download size={18} aria-hidden />
+                    Download PDF
                 </button>
             </div>
 

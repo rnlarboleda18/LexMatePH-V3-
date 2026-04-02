@@ -1,13 +1,15 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download } from 'lucide-react';
+import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
 import DigestHtmlViewer from './DigestHtmlViewer';
+import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 
 // --- HELPER COMPONENTS ---
 
@@ -74,17 +76,17 @@ const getCategoryColor = (cat) => {
     return map[c] || map['REITERATION'];
 };
 
-const getCategoryIcon = (cat) => {
+/** Muted text color for case header metadata (no pills, no pulse). */
+const getCategoryTextClass = (cat) => {
     const c = cat?.toUpperCase() || 'REITERATION';
-    const iconMap = {
-        'NEW DOCTRINE': '✨',
-        'MODIFICATION': '⚡',
-        'ABANDONMENT': '🚫',
-        'REVERSAL': '🔄',
-        'CLARIFICATION': '🔍',
-        'REITERATION': '📘',
-    };
-    return iconMap[c] || '📘';
+    if (c === 'MODIFICATION') return 'text-amber-800 dark:text-amber-200';
+    if (c === 'ABANDONMENT') return 'text-red-800 dark:text-red-300';
+    if (c === 'NEW DOCTRINE') return 'text-emerald-800 dark:text-emerald-300';
+    if (c === 'REVERSAL') return 'text-orange-800 dark:text-orange-300';
+    if (c === 'CLARIFICATION') return 'text-cyan-800 dark:text-cyan-300';
+    if (c === 'LANDMARK') return 'text-amber-900 dark:text-amber-200';
+    if (c === 'DOCTRINAL') return 'text-blue-800 dark:text-blue-300';
+    return 'text-slate-800 dark:text-slate-200';
 };
 
 const TimelineSection = React.memo(({ timeline }) => {
@@ -330,6 +332,10 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
 
 // --- MAIN MODAL COMPONENT ---
 
+/** Matches Tailwind `md` (768px). Digest PDF preview + download are disabled below this width. */
+const isMobileDigestPdfDisabled = () =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
+
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { requireAccess } = useSubscription();
     const [fullDecision, setFullDecision] = useState(decision);
@@ -338,7 +344,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [showHtmlViewer, setShowHtmlViewer] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
-    const [headerCollapsed, setHeaderCollapsed] = useState(true); // collapsed by default on mobile
+    const [headerCollapsed, setHeaderCollapsed] = useState(true); // metadata panel hidden until user expands (all breakpoints)
     const ratioRef = useRef(null);
 
     const { 
@@ -411,6 +417,15 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         }
     }, [fullDecision]);
 
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 767px)');
+        const onViewportChange = () => {
+            if (mq.matches) setShowHtmlViewer(false);
+        };
+        mq.addEventListener('change', onViewportChange);
+        return () => mq.removeEventListener('change', onViewportChange);
+    }, []);
+
     // Internal Smart Link Handler
     const handleSmartCaseClick = useCallback(async (caseRef) => {
         try {
@@ -438,14 +453,25 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         }
     }, [onCaseSelect]);
 
+    const handleClose = useCallback(
+        (e) => {
+            e?.preventDefault?.();
+            e?.stopPropagation?.();
+            closeModalAbsorbingGhostTap(onClose);
+        },
+        [onClose]
+    );
+
     const handleViewHtmlViewer = () => {
         if (!fullDecision) return;
+        if (isMobileDigestPdfDisabled()) return;
         if (!requireAccess('case_digest_download')) return;
         setShowHtmlViewer(true);
     };
 
     const handleDownloadDigestPDF = () => {
         if (!fullDecision) return;
+        if (isMobileDigestPdfDisabled()) return;
         if (!requireAccess('case_digest_download')) return;
 
         const doc = new jsPDF({ format: 'a4', unit: 'mm' });
@@ -601,9 +627,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
           })()
         : '';
 
-    return (
-        <div className="fixed inset-0 z-[150] lex-modal-overlay animate-in fade-in duration-200">
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={onClose} />
+    return createPortal(
+        <div className="fixed inset-0 z-[520] lex-modal-overlay animate-in fade-in duration-200">
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={handleClose} />
             <div
                 className="glass absolute bottom-[var(--player-height,0px)] left-1/2 flex w-full max-w-5xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-white/50 bg-white/50 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-3xl animate-in zoom-in-95 duration-300 dark:border-white/20 dark:bg-slate-900/50 top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-xl sm:border md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-y-1/2 md:rounded-3xl"
                 role="dialog"
@@ -675,42 +701,40 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
                 )}
 
-                {/* HEADER — align with Bar question modal: LexPlay · title · (spacer) · year · close */}
-                <div className="relative z-10 border-b border-white/30 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
-                    <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 px-1.5 py-1.5 sm:px-2 md:px-3">
-                        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
-                            <button
-                                type="button"
-                                onClick={() => setShowPlaylistSelector(true)}
-                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
-                                title="Add audio digest to LexPlay playlist"
-                                aria-label="Add to LexPlay playlist"
-                            >
-                                <Headphones className="h-3 w-3" strokeWidth={2} />
-                            </button>
-                            <h2 className="min-w-0 flex-1 truncate text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
-                                {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                            </h2>
-                            <button
-                                type="button"
-                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-400 transition-all hover:bg-gray-100 hover:text-gray-700 active:scale-95 sm:hidden dark:hover:bg-gray-700 dark:hover:text-gray-200"
-                                onClick={() => setHeaderCollapsed((v) => !v)}
-                                title={headerCollapsed ? 'Show details' : 'Hide details'}
-                                aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
-                            >
-                                <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
-                            </button>
-                        </div>
-                        <div className="pointer-events-none flex justify-center justify-self-center" aria-hidden />
-                        <div className="flex items-center justify-end gap-1.5 sm:gap-2">
+                {/* HEADER — must stack above scroll body (both were z-10; scroll came later in DOM and ate taps on the X on mobile) */}
+                <div className="relative z-30 shrink-0 border-b border-white/30 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
+                    <div className="flex min-w-0 items-start gap-1.5 px-1.5 pt-1.5 pb-1 sm:gap-2 sm:px-2 md:px-3">
+                        <button
+                            type="button"
+                            onClick={() => setShowPlaylistSelector(true)}
+                            className="touch-manipulation mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
+                            title="Add audio digest to LexPlay playlist"
+                            aria-label="Add to LexPlay playlist"
+                        >
+                            <Headphones className="h-3 w-3" strokeWidth={2} />
+                        </button>
+                        <h2 className="min-w-0 flex-1 break-words text-[15px] font-medium leading-snug text-gray-900 [overflow-wrap:anywhere] dark:text-white md:text-[17px]">
+                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                        </h2>
+                        <div className="mt-0.5 flex shrink-0 items-center gap-0.5 sm:gap-1">
                             {decisionYear !== '' && (
-                                <span className="shrink-0 tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
+                                <span className="tabular-nums text-[14px] font-medium leading-snug text-gray-900 dark:text-white sm:text-[15px] md:text-[17px]">
                                     {decisionYear}
                                 </span>
                             )}
                             <button
                                 type="button"
-                                onClick={onClose}
+                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+                                onClick={() => setHeaderCollapsed((v) => !v)}
+                                title={headerCollapsed ? 'Show details' : 'Hide details'}
+                                aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
+                                aria-expanded={!headerCollapsed}
+                            >
+                                <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleClose}
                                 className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
                                 title="Close"
                                 aria-label="Close"
@@ -720,37 +744,106 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         </div>
                     </div>
 
-                    <div className={`px-4 pb-4 sm:px-6 sm:pb-5 sm:block ${headerCollapsed ? 'hidden' : 'block'}`}>
-                        <div className="flex flex-wrap items-center gap-2">
-                            {fullDecision.significance_category && (
-                                <div className={`flex items-center gap-1.5 rounded-md border border-black/5 px-2.5 py-1 shadow-sm dark:border-white/5 ${getCategoryColor(fullDecision.significance_category)}`}>
-                                    <span className="text-sm">{getCategoryIcon(fullDecision.significance_category)}</span>
-                                    <span className="text-[10px] font-extrabold uppercase tracking-wide">{fullDecision.significance_category}</span>
-                                </div>
-                            )}
-                            <div className="glass flex items-center gap-1.5 rounded-md border border-white/40 bg-white/40 px-2.5 py-1 shadow-sm dark:border-white/5 dark:bg-slate-800/60">
-                                <Hash className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" />
-                                <span className="font-mono text-[11px] font-medium tracking-tight text-gray-700 dark:text-gray-300">
-                                    #{fullDecision.id} &middot; {fullDecision.case_number || ''}
+                    <div className="border-t border-white/20 px-1.5 py-1 sm:px-2 md:px-3 dark:border-white/10">
+                        <p
+                            className="w-full truncate text-left font-mono text-[12px] font-medium leading-snug text-gray-600 dark:text-gray-400 sm:text-[13px]"
+                            title={
+                                [fullDecision.case_number, fullDecision.date_str ? formatDate(fullDecision.date_str) : '']
+                                    .filter(Boolean)
+                                    .join(' · ') || undefined
+                            }
+                        >
+                            {fullDecision.case_number || '—'}
+                            {fullDecision.date_str ? (
+                                <span className="text-gray-500 dark:text-gray-500">
+                                    {' '}
+                                    &middot; {formatDate(fullDecision.date_str)}
                                 </span>
-                            </div>
-                            <div className="glass flex items-center gap-1.5 rounded-md border border-white/40 bg-white/40 px-2.5 py-1 shadow-sm dark:border-white/5 dark:bg-slate-800/60">
-                                <Calendar className="h-3.5 w-3.5 text-blue-500 dark:text-blue-400" />
-                                <span className="text-[11px] font-medium text-gray-700 dark:text-gray-300">{formatDate(fullDecision.date_str)}</span>
-                            </div>
+                            ) : null}
+                        </p>
+                    </div>
 
-                            {fullDecision.ponente && (
-                                <div className="glass flex items-center gap-1.5 rounded-md border border-blue-200 bg-blue-50/50 px-2.5 py-1 pr-3 text-[11px] font-medium italic text-blue-700 shadow-sm dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300">
-                                    <User className="h-3.5 w-3.5" />
-                                    {fullDecision.ponente}
+                    <div className={`px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
+                        <div className="rounded-lg border border-white/35 bg-white/25 px-3 py-2.5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
+                            <dl className="space-y-2.5">
+                                {fullDecision.significance_category && (
+                                    <div className="flex gap-2.5">
+                                        <Landmark
+                                            className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
+                                            strokeWidth={2}
+                                            aria-hidden
+                                        />
+                                        <div className="min-w-0 flex-1">
+                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                Significance
+                                            </dt>
+                                            <dd
+                                                className={`mt-0.5 text-[13px] font-semibold leading-snug ${getCategoryTextClass(fullDecision.significance_category)}`}
+                                            >
+                                                {fullDecision.significance_category}
+                                            </dd>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div
+                                    className={`flex gap-2.5 ${fullDecision.significance_category ? 'border-t border-white/25 pt-2.5 dark:border-white/10' : ''}`}
+                                >
+                                    <Scale
+                                        className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                        strokeWidth={2}
+                                        aria-hidden
+                                    />
+                                    <div className="min-w-0 flex-1">
+                                        <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                            Court body
+                                        </dt>
+                                        <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                            {fullDecision.division?.trim() || '—'}
+                                        </dd>
+                                    </div>
                                 </div>
-                            )}
+
+                                <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                    <BookOpen
+                                        className="mt-0.5 h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
+                                        strokeWidth={2}
+                                        aria-hidden
+                                    />
+                                    <div className="min-w-0 flex-1">
+                                        <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                            Subject
+                                        </dt>
+                                        <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                            {fullDecision.subject?.toString().trim() || '—'}
+                                        </dd>
+                                    </div>
+                                </div>
+
+                                {fullDecision.ponente && (
+                                    <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                        <User
+                                            className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
+                                            strokeWidth={2}
+                                            aria-hidden
+                                        />
+                                        <div className="min-w-0 flex-1">
+                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                Ponente
+                                            </dt>
+                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-800 dark:text-gray-200">
+                                                {fullDecision.ponente}
+                                            </dd>
+                                        </div>
+                                    </div>
+                                )}
+                            </dl>
                         </div>
                     </div>
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="relative z-10 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent">
+                <div className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent">
 
                     {viewMode === 'digest' ? (
                         <>
@@ -883,25 +976,31 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 </div>
 
-                {/* FOOTER ACTIONS - MINIMIZED TO ICONS FOR MORE READING SPACE */}
-                <div className="px-3 sm:px-4 py-2 sm:py-3 border-t border-white/20 dark:border-white/10 bg-white/60 dark:bg-slate-950/90 flex flex-wrap justify-end items-center gap-2 sm:gap-4 md:gap-6 backdrop-blur-3xl relative z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] min-h-[56px] sm:min-h-[64px]">
+                {/* FOOTER — same visual language as header strip */}
+                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t border-white/30 bg-white/20 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/10 sm:gap-1 sm:px-2 md:px-3">
                     {viewMode === 'digest' && (
                         <button
                             type="button"
                             onClick={() => handleViewHtmlViewer()}
-                            className="touch-manipulation mr-auto min-h-[48px] min-w-[48px] p-3 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-xl transition-all active:scale-95 flex items-center justify-center shrink-0 shadow-sm relative z-50"
-                            title="View Digest Format"
+                            className="touch-manipulation mr-auto hidden h-7 w-7 shrink-0 items-center justify-center rounded-md border border-amber-200/80 bg-amber-50/90 text-amber-700 transition-all hover:bg-amber-100 active:scale-95 dark:border-amber-800/80 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-900/50 md:flex"
+                            title="View digest format (tablet or desktop)"
+                            aria-label="View digest format"
                         >
-                            <FileText size={22} />
+                            <FileText className="h-3.5 w-3.5" strokeWidth={2} />
                         </button>
                     )}
                     <button
                         type="button"
                         onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
-                        className="touch-manipulation min-h-[48px] min-w-[48px] p-3 glass bg-white/80 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-white/20 transition-all active:scale-95 shadow-sm flex items-center justify-center shrink-0 relative z-50"
-                        title={viewMode === 'digest' ? 'Read Full Text' : 'View Case Digest'}
+                        className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/50 bg-white/40 text-gray-700 transition-all hover:bg-white/70 active:scale-95 dark:border-white/15 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
+                        title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                        aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
                     >
-                        {viewMode === 'digest' ? <BookOpen size={22} /> : <FileText size={22} />}
+                        {viewMode === 'digest' ? (
+                            <BookOpen className="h-3.5 w-3.5" strokeWidth={2} />
+                        ) : (
+                            <FileText className="h-3.5 w-3.5" strokeWidth={2} />
+                        )}
                     </button>
                 </div>
 
@@ -915,7 +1014,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     onDownload={handleDownloadDigestPDF}
                 />
             )}
-        </div>
+        </div>,
+        document.body
     );
 };
 

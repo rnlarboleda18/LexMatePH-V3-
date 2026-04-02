@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useLexPlay } from './useLexPlay';
 import {
     Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
@@ -136,11 +137,11 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
     const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
     if (isMinimized) {
-        /* Thin scrub so control row can use larger hit targets without growing total bar height */
+        /* Thin scrub — keep bar short on desktop */
         return (
             <div
                 ref={progressBarRef}
-                className="relative w-full h-[6px] cursor-pointer group touch-manipulation select-none"
+                className="relative w-full h-[4px] cursor-pointer group touch-manipulation select-none"
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
                 role="slider"
@@ -161,18 +162,14 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
     }
 
     return (
-        <div className="z-10 mb-2 w-full max-w-2xl px-0 sm:px-2 md:px-0">
-            <div className="mb-3 flex items-center justify-center gap-2 px-1">
-                <span className="h-px w-6 rounded-full bg-gradient-to-r from-purple-400/50 to-transparent" aria-hidden />
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white/40">Playback</span>
-                <span className="h-px w-6 rounded-full bg-gradient-to-l from-purple-400/50 to-transparent" aria-hidden />
-            </div>
-            <div className="mb-2 flex justify-between px-1 font-mono text-[10px] font-bold tabular-nums tracking-wider text-white/35 sm:px-2">
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
+        <div className="z-10 w-full max-w-2xl px-0 sm:px-2 md:max-w-xl md:px-0">
+            <div className="mb-4 flex items-center justify-center gap-2.5 px-1 md:mb-2">
+                <span className="h-px w-8 rounded-full bg-gradient-to-r from-purple-400/50 to-transparent md:w-8" aria-hidden />
+                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-white/45">Playback</span>
+                <span className="h-px w-8 rounded-full bg-gradient-to-l from-purple-400/50 to-transparent md:w-8" aria-hidden />
             </div>
             <div
-                className="group relative h-2.5 w-full cursor-pointer touch-manipulation select-none rounded-full bg-white/[0.06] ring-1 ring-white/[0.04]"
+                className="group relative h-2.5 w-full cursor-pointer touch-manipulation select-none rounded-full bg-white/[0.06] ring-1 ring-white/[0.04] md:h-2"
                 ref={progressBarRef}
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
@@ -190,6 +187,10 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                     className={`absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/90 bg-white shadow-md ring-2 ring-purple-500/40 transition-transform duration-200 ${isScrubbing ? 'scale-110' : 'scale-0 group-hover:scale-100'}`}
                     style={{ left: `${progressPercent}%` }}
                 />
+            </div>
+            <div className="mt-2.5 flex justify-between px-0.5 font-mono text-[11px] font-bold tabular-nums tracking-wider text-white/50 sm:px-1 md:mt-1.5 md:text-[10px]">
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
             </div>
         </div>
     );
@@ -444,9 +445,6 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
     const [downloadStatusText, setDownloadStatusText] = useState('');
     const [cachedCount, setCachedCount] = useState(0);
     const [downloadedTrackIds, setDownloadedTrackIds] = useState(new Set());
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-        () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
-    );
 
     // Build the audio URL from track fields — same formula as playTrack in useLexPlay
     // useCallback ensures stable reference so updateCachedCount closure always works
@@ -723,23 +721,14 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
         };
     }, [isMinimized]);
 
-    useEffect(() => {
-        if (typeof window === 'undefined' || !window.matchMedia) return;
-        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const onChange = () => setPrefersReducedMotion(mq.matches);
-        mq.addEventListener('change', onChange);
-        return () => mq.removeEventListener('change', onChange);
-    }, []);
-
     if (isMinimized) {
-        const marqueeDurationSec = Math.min(48, Math.max(14, miniMarqueeText.length * 0.32));
-
-        return (
+        /** Portaled to body + z above modals (z-[520]): avoids blur/cover from modal overlay when mini bar lived under Layout's stacking context. */
+        const miniPlayer = (
             <div
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="fixed bottom-0 left-0 right-0 z-[500] flex flex-col overflow-hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-[0_-4px_24px_-8px_rgba(0,0,0,0.12)] dark:shadow-[0_-4px_24px_-8px_rgba(0,0,0,0.35)] transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)]"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden bg-white/90 dark:bg-gray-900/90 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.3)] transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)]"
             >
                 {/* Top edge: scrub line, full viewport width */}
                 <div
@@ -749,106 +738,77 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                     <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized />
                 </div>
 
-                {/* Equal thirds: vertically centered in row (equal space above/below controls vs scrub & bar bottom) */}
+                {/* Label flush left; transport centered in bar (1fr / auto / 1fr grid) — static text, no marquee */}
                 <div
-                    className="grid grid-cols-3 items-center gap-x-1 cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
-                        pl-[max(0.75rem,calc(env(safe-area-inset-left,0px)+0.5rem))] pr-[max(0.5rem,env(safe-area-inset-right,0px))] pt-1.5 pb-0"
+                    className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 hover:bg-white/95 dark:hover:bg-gray-900/95
+                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(0.35rem,env(safe-area-inset-right,0px))] py-1"
                     onClick={onExpand}
                 >
-                    {/* Left: same glass “stage” + Headphones treatment as full LexPlay player */}
-                    <div className="flex min-w-0 items-center justify-start">
-                        <div className="relative ml-1.5 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[12px] border border-white/20 bg-white/5 shadow-[0_4px_20px_0_rgba(168,85,247,0.45)] backdrop-blur-md dark:bg-white/5">
-                            <div className="pointer-events-none absolute left-0 top-0 z-0 h-1/2 w-full origin-top-left skew-y-6 bg-gradient-to-b from-white/20 to-transparent" />
-                            {!isPlaying && (
-                                <Headphones
-                                    className="relative z-10 h-[22px] w-[22px] text-white drop-shadow-[0_4px_14px_rgba(168,85,247,0.85)]"
-                                    strokeWidth={1.25}
-                                />
-                            )}
-                            {isPlaying && (
-                                <div className="absolute inset-x-1 bottom-1.5 top-1.5 z-10 flex items-end justify-center gap-px">
-                                    {[0.35, 0.75, 0.55, 0.95, 0.45, 0.85, 0.4, 0.7].map((h, i) => (
-                                        <div
-                                            key={i}
-                                            className="w-0.5 animate-[bounce_1s_ease-in-out_infinite] rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,0.95)]"
-                                            style={{ height: `${h * 100}%`, animationDelay: `${i * 0.09}s` }}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                    <div className="min-w-0 justify-self-start self-center py-0.5 pr-2">
+                        <p
+                            className={`truncate text-left text-[11px] font-semibold leading-snug tracking-tight sm:text-xs md:text-sm ${miniMarqueeClass}`}
+                            title={miniMarqueeText}
+                        >
+                            {miniMarqueeText}
+                        </p>
                     </div>
-
-                    {/* Center: transport — larger circular hit targets (not just larger SVGs) */}
+                    {/* Transport — geometrically centered; stops click from expanding player */}
                     <div
-                        className="flex min-w-0 items-center justify-center justify-self-center"
+                        className="relative z-10 flex shrink-0 justify-self-center"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="flex items-center justify-center gap-1.5 sm:gap-2">
+                        <div className="flex items-center justify-center gap-4 sm:gap-5">
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-600 hover:bg-purple-500/10 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-300 disabled:opacity-30"
+                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                 disabled={playlist.length === 0}
                                 aria-label="Previous track"
                             >
-                                <SkipBack className="h-6 w-6" strokeWidth={2.5} />
+                                <SkipBack className="h-5 w-5" fill="currentColor" />
                             </button>
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                 disabled={playlist.length === 0}
-                                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-md shadow-purple-500/25 transition-transform hover:scale-105 disabled:opacity-50"
+                                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
                                 aria-label={isPlaying ? 'Pause' : 'Play'}
                             >
                                 {isLoading ? (
-                                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                                    <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
                                 ) : isPlaying ? (
-                                    <Pause className="h-7 w-7 fill-current" />
+                                    /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
+                                    <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
+                                        {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                            <div
+                                                key={i}
+                                                className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
+                                                style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                            />
+                                        ))}
+                                    </div>
                                 ) : (
-                                    <Play className="ml-0.5 h-7 w-7 fill-current" />
+                                    <Play className="ml-0.5 h-6 w-6 fill-current" />
                                 )}
                             </button>
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-600 hover:bg-purple-500/10 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-300 disabled:opacity-30"
+                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                 disabled={playlist.length === 0}
                                 aria-label="Next track"
                             >
-                                <SkipForward className="h-6 w-6" strokeWidth={2.5} />
+                                <SkipForward className="h-5 w-5" fill="currentColor" />
                             </button>
                         </div>
                     </div>
-
-                    {/* Right: one-line looping marquee — R→L scroll; duration on the animated node so it always runs */}
-                    <div className="min-w-0 overflow-hidden py-0.5">
-                        {prefersReducedMotion ? (
-                            <p className={`truncate text-end text-xs font-semibold leading-none sm:text-sm ${miniMarqueeClass}`}>
-                                {miniMarqueeText}
-                            </p>
-                        ) : (
-                            <div className="relative w-full min-w-0 overflow-hidden">
-                                <div
-                                    className="lex-mini-marquee-track"
-                                    style={{ animation: `lex-mini-marquee-scroll ${marqueeDurationSec}s linear infinite` }}
-                                >
-                                    <span className={`inline-flex shrink-0 items-center pr-12 text-xs font-semibold leading-none whitespace-nowrap sm:text-sm ${miniMarqueeClass}`}>
-                                        {miniMarqueeText}
-                                    </span>
-                                    <span
-                                        className={`inline-flex shrink-0 items-center pr-12 text-xs font-semibold leading-none whitespace-nowrap sm:text-sm ${miniMarqueeClass}`}
-                                        aria-hidden
-                                    >
-                                        {miniMarqueeText}
-                                    </span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    {/* Balance column so middle track stays true center */}
+                    <div className="min-w-0" aria-hidden />
                 </div>
             </div>
         );
+
+        return typeof document !== 'undefined' ? createPortal(miniPlayer, document.body) : null;
     }
 
     // Full Screen Mode — max-md respects iOS safe areas (notch / home indicator)
@@ -907,26 +867,26 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                 <div className="flex flex-col md:flex-row-reverse h-full w-full relative">
 
                     {/* Right Area: Player Stage — visual language matches playlist column */}
-                    <div className={`relative flex flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 backdrop-blur-2xl transition-all duration-500 ease-in-out md:border-l md:border-white/[0.07] md:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 md:flex md:translate-x-0 md:opacity-100'}`}>
+                    <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-950/90 via-[#0c1222]/95 to-slate-950/90 backdrop-blur-2xl transition-all duration-500 ease-in-out md:overflow-y-auto md:overscroll-contain md:border-l md:border-white/[0.07] md:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 md:flex md:translate-x-0 md:opacity-100'}`}>
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-purple-500/[0.06] via-transparent to-indigo-950/20" />
-                        <div className="pointer-events-none absolute left-1/2 top-[28%] h-[min(420px,55vh)] w-[min(420px,85vw)] -translate-x-1/2 rounded-full bg-purple-500/10 blur-[100px]" />
+                        <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-500/10 blur-[90px] md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)]" />
 
-                        <div className="relative z-10 m-auto flex w-full max-w-2xl shrink-0 flex-col items-center px-0 pb-4 pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] sm:px-4 md:px-8 md:pb-8 md:pt-16 max-md:pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
-                        <div className="mb-6 flex w-full flex-col items-center justify-center px-4">
-                            <p className="flex items-baseline gap-0.5 text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.25rem]" aria-label="LexPlayer">
+                        <div className="relative z-10 mx-auto flex w-full max-w-2xl shrink-0 flex-col items-center gap-7 px-0 pb-6 pt-[calc(env(safe-area-inset-top,0px)+3.25rem)] sm:gap-8 sm:px-4 md:min-h-0 md:shrink md:flex-1 md:justify-center md:gap-5 md:px-6 md:pb-5 md:pt-12 lg:gap-6 lg:px-8 max-md:pb-[max(1.25rem,env(safe-area-inset-bottom,0px))]">
+                        <header className="flex w-full flex-col items-center justify-center px-4 pt-1 md:pt-0">
+                            <p className="flex items-baseline gap-0.5 text-3xl font-bold tracking-tight sm:text-4xl md:text-2xl lg:text-[1.65rem]" aria-label="LexPlayer">
                                 <span className="text-white">Lex</span>
                                 <span className="bg-gradient-to-r from-violet-300 via-fuchsia-200 to-purple-400 bg-clip-text text-transparent">Player</span>
                             </p>
-                            <div className="mt-2 h-[3px] w-14 rounded-full bg-gradient-to-r from-purple-500/0 via-purple-400/80 to-fuchsia-500/0" aria-hidden />
-                        </div>
+                            <div className="mt-2 h-[3px] w-12 rounded-full bg-gradient-to-r from-purple-500/0 via-purple-400/80 to-fuchsia-500/0 md:mt-1.5 md:w-10" aria-hidden />
+                        </header>
 
-                        <div className="relative flex-shrink-0 -translate-y-6 sm:-translate-y-8 md:-translate-y-10 group">
-                            <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-purple-500/30 via-fuchsia-500/15 to-transparent opacity-70 blur-3xl transition-opacity group-hover:opacity-100 md:-inset-6 md:rounded-[2.25rem]" />
-                            <div className="relative flex h-52 w-52 max-h-[44vh] max-w-[44vh] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.1] bg-white/[0.04] shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)] ring-1 ring-white/[0.08] backdrop-blur-sm sm:h-60 sm:w-60 md:rounded-[2.25rem] lg:h-72 lg:w-72 lg:rounded-[2.5rem]">
+                        <div className="relative flex-shrink-0 group">
+                            <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-purple-500/25 via-fuchsia-500/12 to-transparent opacity-80 blur-2xl transition-opacity group-hover:opacity-100 md:-inset-3 md:rounded-xl" />
+                            <div className="relative flex h-52 w-52 max-h-[42vh] max-w-[42vh] items-center justify-center overflow-hidden rounded-2xl border border-white/[0.1] bg-white/[0.04] shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)] ring-1 ring-white/[0.08] backdrop-blur-sm sm:h-60 sm:w-60 md:h-44 md:w-44 md:max-h-none md:max-w-none md:rounded-2xl lg:h-48 lg:w-48 lg:rounded-[1.75rem]">
                                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.12] via-white/[0.03] to-transparent" />
-                                <Headphones className={`relative z-10 h-[5rem] w-[5rem] text-white/90 drop-shadow-[0_8px_24px_rgba(124,58,237,0.45)] transition-transform duration-700 sm:h-32 sm:w-32 md:h-36 md:w-36 ${isPlaying ? '-translate-y-4 scale-95 md:-translate-y-6' : 'group-hover:scale-105'}`} strokeWidth={1.25} />
+                                <Headphones className={`relative z-10 h-[5rem] w-[5rem] text-white/90 drop-shadow-[0_8px_24px_rgba(124,58,237,0.45)] transition-transform duration-700 sm:h-32 sm:w-32 md:h-28 md:w-28 lg:h-[7.25rem] lg:w-[7.25rem] ${isPlaying ? '-translate-y-3 scale-95 md:-translate-y-2 md:scale-95' : 'group-hover:scale-105'}`} strokeWidth={1.25} />
                                 {isPlaying && (
-                                    <div className="absolute bottom-5 left-1/2 z-10 flex h-9 w-full max-w-[85%] -translate-x-1/2 items-end justify-center gap-1.5 px-3 md:bottom-6 md:h-11 md:gap-2">
+                                    <div className="absolute bottom-5 left-1/2 z-10 flex h-9 w-full max-w-[85%] -translate-x-1/2 items-end justify-center gap-1.5 px-3 md:bottom-4 md:h-8 md:gap-1.5">
                                         {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
                                             <div key={i} className="w-1.5 animate-[bounce_1s_infinite] rounded-full bg-white/95 shadow-[0_0_8px_rgba(255,255,255,0.85)] md:w-2" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }} />
                                         ))}
@@ -935,14 +895,14 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                             </div>
                         </div>
 
-                        <div className="z-10 mt-5 w-full max-w-xl px-3 text-center md:mt-6">
-                            <h2 className="line-clamp-2 text-2xl font-bold tracking-tight text-white drop-shadow-sm sm:text-3xl md:text-[1.75rem] lg:text-4xl">
+                        <div className="z-10 w-full max-w-xl px-3 text-center md:max-w-lg md:px-2">
+                            <h2 className="line-clamp-2 text-2xl font-bold tracking-tight text-white drop-shadow-sm sm:text-3xl md:text-lg md:leading-snug lg:text-xl">
                                 {currentTrack ? currentTrack.title : "LexPlayer is idle"}
                             </h2>
-                            <p className="mt-2 text-xs font-semibold uppercase leading-relaxed tracking-[0.12em] text-white/45 sm:text-sm md:text-base">
+                            <p className="mt-2 text-xs font-semibold uppercase leading-relaxed tracking-[0.12em] text-white/45 sm:text-sm md:mt-1.5 md:text-[11px] md:leading-snug lg:text-xs">
                                 {currentTrack ? (activePlaylistName ? `${activePlaylistName} · ${currentTrack.subtitle}` : currentTrack.subtitle) : "Add items to your LexPlaylist"}
                             </p>
-                            <div className="mt-3 flex min-h-[2rem] flex-col items-center justify-center">
+                            <div className="mt-3 flex min-h-0 flex-col items-center justify-center md:mt-2">
                                 {error && (
                                     <div className="inline-flex max-w-full items-center gap-2 rounded-2xl border border-rose-500/30 bg-rose-500/10 px-5 py-2.5 text-center text-xs font-bold text-rose-200/95 animate-in shake">
                                         {error}
@@ -953,31 +913,42 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
 
                         <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized={false} />
 
-                        <div className="z-10 mt-2 flex w-full max-w-2xl flex-col items-center space-y-6 sm:mt-3 sm:space-y-8">
-                            <div className="flex items-center justify-center gap-6 md:gap-10">
+                        <div className="z-10 flex w-full max-w-2xl flex-col items-center space-y-6 sm:space-y-8 md:space-y-0">
+                            <div className="flex w-full items-center justify-center gap-8 px-4 md:gap-10 lg:gap-12">
                                 <button
                                     type="button"
                                     onClick={handlePrevious}
                                     disabled={playlist.length === 0}
-                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-14 md:w-14"
+                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-10 md:w-10 lg:h-11 lg:w-11"
                                     aria-label="Previous track"
                                 >
-                                    <SkipBack className="h-6 w-6 md:h-7 md:w-7" fill="currentColor" />
+                                    <SkipBack className="h-6 w-6 md:h-5 md:w-5 lg:h-6 lg:w-6" fill="currentColor" />
                                 </button>
 
                                 <button
                                     type="button"
                                     onClick={handlePlayPause}
                                     disabled={playlist.length === 0}
-                                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_8px_28px_-6px_rgba(124,58,237,0.55)] ring-1 ring-white/15 transition-all hover:scale-[1.04] hover:shadow-[0_12px_32px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 md:h-[4.5rem] md:w-[4.5rem]"
+                                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_8px_28px_-6px_rgba(124,58,237,0.55)] ring-1 ring-white/15 transition-all hover:scale-[1.04] hover:shadow-[0_12px_32px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 md:h-14 md:w-14 lg:h-[3.75rem] lg:w-[3.75rem]"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
-                                        <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
+                                        <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-white/25 border-t-white md:h-6 md:w-6" />
                                     ) : isPlaying ? (
-                                        <Pause className="h-8 w-8 md:h-9 md:w-9" fill="currentColor" />
+                                        <div
+                                            className="flex h-4 w-9 items-end justify-center gap-0.5 md:h-5 md:w-11 md:gap-1 lg:h-6 lg:w-12"
+                                            aria-hidden
+                                        >
+                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_10px_rgba(255,255,255,0.95)] md:w-1.5"
+                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                />
+                                            ))}
+                                        </div>
                                     ) : (
-                                        <Play className="ml-1 h-8 w-8 md:h-9 md:w-9" fill="currentColor" />
+                                        <Play className="ml-1 h-8 w-8 md:h-7 md:w-7 lg:h-8 lg:w-8" fill="currentColor" />
                                     )}
                                 </button>
 
@@ -985,10 +956,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                                     type="button"
                                     onClick={handleNext}
                                     disabled={playlist.length === 0}
-                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-14 md:w-14"
+                                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 shadow-sm transition-all hover:border-white/18 hover:bg-white/[0.08] hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-25 md:h-10 md:w-10 lg:h-11 lg:w-11"
                                     aria-label="Next track"
                                 >
-                                    <SkipForward className="h-6 w-6 md:h-7 md:w-7" fill="currentColor" />
+                                    <SkipForward className="h-6 w-6 md:h-5 md:w-5 lg:h-6 lg:w-6" fill="currentColor" />
                                 </button>
                             </div>
                         </div>

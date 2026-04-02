@@ -1,16 +1,17 @@
-# Bar Project V2 - Restart All Applications
+# LexMatePH v3 — stop dev processes and relaunch via start_all.ps1
+$here = $PSScriptRoot
+if (-not $here) { $here = Split-Path -Parent $MyInvocation.MyCommand.Path }
+
 Write-Host "=========================================="
-Write-Host "   Bar Project V2 - Restart Script"
+Write-Host "   LexMatePH v3 - Restart"
 Write-Host "=========================================="
 Write-Host ""
 
-# Kill all running processes
-Write-Host "[INFO] Stopping all node and func processes..."
-Get-Process | Where-Object {$_.ProcessName -like "*node*" -or $_.ProcessName -like "*func*" -or $_.ProcessName -like "*swa*"} | Stop-Process -Force -ErrorAction SilentlyContinue
+Write-Host "[INFO] Stopping node / func hosts..."
+Get-Process | Where-Object { $_.ProcessName -like "*node*" -or $_.ProcessName -like "*func*" } | Stop-Process -Force -ErrorAction SilentlyContinue
 
-# Wait for processes to fully terminate
 Start-Sleep -Seconds 2
 
-# Relaunch using start_all.ps1
-Write-Host "[INFO] Relaunching applications..."
-& ".\start_all.ps1"
+$startAll = Join-Path $here "start_all.ps1"
+Write-Host "[INFO] Relaunching: $startAll"
+& $startAll

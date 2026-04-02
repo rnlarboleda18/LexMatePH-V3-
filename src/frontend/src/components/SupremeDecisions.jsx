@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { jsPDF } from "jspdf";
-import { Search, Calendar, Gavel, FileText, X, Filter, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, Users, ChevronRight } from 'lucide-react';
+import { Search, Gavel, FileText, X, Filter, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, Landmark } from 'lucide-react';
 import { lexCache } from '../utils/cache';
 
 
@@ -10,6 +10,43 @@ import { formatDate } from '../utils/dateUtils';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
+
+/** Read fetch body as JSON once; throws with actionable text if empty or non-JSON (common when API is down or returns HTML). */
+async function parseResponseJson(response) {
+    const text = await response.text();
+    if (text == null || !String(text).trim()) {
+        throw new Error(
+            `Empty response (HTTP ${response.status}). Start the API (Azure Functions on http://localhost:7071) so Vite can proxy /api, or set VITE_API_BASE_URL.`
+        );
+    }
+    try {
+        return JSON.parse(text);
+    } catch {
+        const preview = String(text).replace(/\s+/g, ' ').slice(0, 180);
+        throw new Error(
+            `Non-JSON response (HTTP ${response.status}): ${preview}${text.length > 180 ? '…' : ''}`
+        );
+    }
+}
+
+/** Map free-text / Primary: … subject strings to a bar subject key for theming. */
+const normalizeSubjectForColor = (subject) => {
+    if (!subject) return 'Political Law';
+    let s = subject.toString();
+    const primaryMatch = s.match(/Primary:\s*([^;]+)/i);
+    if (primaryMatch) s = primaryMatch[1];
+
+    if (s.includes('Political') || s.includes('Constitutional') || s.includes('Admin') || s.includes('Election') || s.includes('Public Corp')) return 'Political Law';
+    if (s.includes('Labor')) return 'Labor Law';
+    if (s.includes('Civil') || s.includes('Family') || s.includes('Property') || s.includes('Succession') || s.includes('Obligations')) return 'Civil Law';
+    if (s.includes('Taxation') || s.includes('Tax')) return 'Taxation Law';
+    if (s.includes('Commercial') || s.includes('Mercantile') || s.includes('Corporate') || s.includes('Insurance') || s.includes('Transportation')) return 'Commercial Law';
+    if (s.includes('Criminal')) return 'Criminal Law';
+    if (s.includes('Remedial') || s.includes('Procedure') || s.includes('Evidence')) return 'Remedial Law';
+    if (s.includes('Ethics') || s.includes('Legal Ethics') || s.includes('Judicial')) return 'Legal Ethics';
+
+    return 'Political Law';
+};
 
 const BAR_SUBJECTS = [
     "Political Law",
@@ -58,34 +95,6 @@ const SmartLink = ({ text, onCaseClick }) => {
         </span>
     );
 };
-
-// Helper to normalize subject string to a valid color key
-const normalizeSubjectForColor = (subject) => {
-    if (!subject) return 'Political Law'; // Default
-    let s = subject.toString();
-
-    // If matches "Primary: X; Secondary: Y", extract just "X"
-    // Regex: look for Primary: until semicolon or end of string
-    const primaryMatch = s.match(/Primary:\s*([^;]+)/i);
-    if (primaryMatch) {
-        s = primaryMatch[1];
-    }
-
-    if (s.includes("Political") || s.includes("Constitutional") || s.includes("Admin") || s.includes("Election") || s.includes("Public Corp")) return "Political Law";
-    if (s.includes("Labor")) return "Labor Law";
-    if (s.includes("Civil") || s.includes("Family") || s.includes("Property") || s.includes("Succession") || s.includes("Obligations")) return "Civil Law";
-    if (s.includes("Taxation") || s.includes("Tax")) return "Taxation Law";
-    if (s.includes("Commercial") || s.includes("Mercantile") || s.includes("Corporate") || s.includes("Insurance") || s.includes("Transportation")) return "Commercial Law";
-    if (s.includes("Criminal")) return "Criminal Law";
-    if (s.includes("Remedial") || s.includes("Procedure") || s.includes("Evidence")) return "Remedial Law";
-    if (s.includes("Ethics") || s.includes("Legal Ethics") || s.includes("Judicial")) return "Legal Ethics";
-
-    // Fallback logic if still effectively 'Political' but might be something else? 
-    // Actually the original fallback was Political Law.
-    return "Political Law";
-};
-
-
 
 const BulletedText = ({ text, onCaseClick }) => {
     if (!text) return null;
@@ -264,18 +273,17 @@ const getCategoryColor = (cat) => {
     return map[c] || map['REITERATION'];
 };
 
-// Icon mapping for significance categories
-const getCategoryIcon = (cat) => {
+/** Matches CaseDecisionModal — text color for significance in metadata rows. */
+const getCategoryTextClass = (cat) => {
     const c = cat?.toUpperCase() || 'REITERATION';
-    const iconMap = {
-        'NEW DOCTRINE': '✨', // Sparkles for new
-        'MODIFICATION': '⚡', // Lightning for change with pulse
-        'ABANDONMENT': '🚫', // Prohibited for abandoning doctrine
-        'REVERSAL': '🔄', // Reverse arrows for reversal
-        'CLARIFICATION': '🔍', // Magnifying glass for clarifying
-        'REITERATION': '📘', // Book for repeating established doctrine
-    };
-    return iconMap[c] || '📘';
+    if (c === 'MODIFICATION') return 'text-amber-800 dark:text-amber-200';
+    if (c === 'ABANDONMENT') return 'text-red-800 dark:text-red-300';
+    if (c === 'NEW DOCTRINE') return 'text-emerald-800 dark:text-emerald-300';
+    if (c === 'REVERSAL') return 'text-orange-800 dark:text-orange-300';
+    if (c === 'CLARIFICATION') return 'text-cyan-800 dark:text-cyan-300';
+    if (c === 'LANDMARK') return 'text-amber-900 dark:text-amber-200';
+    if (c === 'DOCTRINAL') return 'text-blue-800 dark:text-blue-300';
+    return 'text-slate-800 dark:text-slate-200';
 };
 
 
@@ -484,7 +492,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const { requireAccess } = useSubscription();
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [loading, setLoading] = useState(false);
+    /** Start true so we never flash "No decisions found" before the first request runs. */
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(null);
     const [selectedDecision, setSelectedDecision] = useState(null);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
     const [fullText, setFullText] = useState(null);
@@ -511,6 +521,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const [totalCount, setTotalCount] = useState(0);
     const [debugUrl, setDebugUrl] = useState('');
     const ITEMS_PER_PAGE = 20;
+    /** When true, shows modal-style metadata labels (dl); default hidden. */
+    const [caseDetailsExpandedById, setCaseDetailsExpandedById] = useState({});
 
     // Available options
     const [availableYears, setAvailableYears] = useState([]);
@@ -545,24 +557,22 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     // Debounced Search Effect
     useEffect(() => {
-        // Cancel previous request if it exists
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
         }
+        setLoading(true);
 
         const delayDebounceFn = setTimeout(() => {
             fetchDecisions();
-        }, 300); // 300ms delay for snappier live search
+        }, 300);
 
         return () => {
             clearTimeout(delayDebounceFn);
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort();
             }
-            // SAFETY: Force loading false on unmount/cleanup to prevent stuck spinners
-            setLoading(false);
         };
-    }, [searchTerm, selectedYear, selectedPonente, selectedSubject, selectedDivision, selectedSignificance, isDoctrinal, currentPage]);
+    }, [searchTerm, selectedYear, selectedMonth, selectedPonente, selectedSubject, selectedDivision, selectedSignificance, isDoctrinal, currentPage]);
 
     // Sync external case selection from App.jsx
     useEffect(() => {
@@ -617,10 +627,11 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         const { signal } = abortControllerRef.current;
 
         setLoading(true);
+        setFetchError(null);
         try {
             let query = `/api/sc_decisions?search=${encodeURIComponent(searchTerm)}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`;
             if (selectedYear) query += `&year=${selectedYear}`;
-            if (selectedMonth) query += `&month=${selectedMonth}`;
+            if (selectedMonth) query += `&month=${encodeURIComponent(selectedMonth)}`;
             if (selectedPonente) query += `&ponente=${encodeURIComponent(selectedPonente)}`;
             if (selectedSubject) query += `&subject=${encodeURIComponent(selectedSubject)}`;
             if (selectedDivision) query += `&division=${encodeURIComponent(selectedDivision)}`;
@@ -631,38 +642,56 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             setDebugUrl(query);
 
             const response = await fetch(query, { signal });
-            const data = await response.json();
 
-            if (signal.aborted) return; // Double check
-
-            if (data.error) {
-                console.error("Backend Error:", data.error);
-                // Only alert if it's the latest request
+            let data;
+            try {
+                data = await parseResponseJson(response);
+            } catch (parseErr) {
                 if (requestId === activeRequestRef.current) {
-                    alert(`Backend Error: ${data.error}`);
+                    setFetchError(parseErr?.message || 'Could not read the server response.');
                     setSearchResults([]);
+                    setTotalCount(0);
                 }
                 return;
             }
 
-            // Only update state if this is still the active request
+            if (signal.aborted) return;
+
+            if (!response.ok || data.error) {
+                const msg = data?.error || `Request failed (${response.status})`;
+                console.error('sc_decisions error:', msg);
+                if (requestId === activeRequestRef.current) {
+                    setFetchError(typeof msg === 'string' ? msg : JSON.stringify(msg));
+                    setSearchResults([]);
+                    setTotalCount(0);
+                }
+                return;
+            }
+
+            const rows = Array.isArray(data.data) ? data.data : [];
             if (requestId === activeRequestRef.current) {
-                setSearchResults(data.data || []);
+                setSearchResults(rows);
                 setTotalCount(parseInt(data.total, 10) || 0);
-                setHasInitialLoaded(true);
+                setFetchError(null);
             }
         } catch (error) {
             if (error.name === 'AbortError') {
-                console.log('Search aborted');
                 return;
             }
-            console.error("Search failed", error);
+            console.error('Search failed', error);
+            if (requestId === activeRequestRef.current) {
+                setFetchError(
+                    error.message?.includes('Failed to fetch') || error.name === 'TypeError'
+                        ? 'Cannot reach the server. Start the API (e.g. Azure Functions on port 7071) or check your connection.'
+                        : error.message || 'Search failed.'
+                );
+                setSearchResults([]);
+                setTotalCount(0);
+            }
         } finally {
-            // Turn off loading ONLY if we are the latest request
-            // This prevents "zombie" loading states from aborted requests
-            // while preserving loading state if a newer request has started
             if (requestId === activeRequestRef.current) {
                 setLoading(false);
+                setHasInitialLoaded(true);
             }
         }
     };
@@ -675,7 +704,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         try {
             const fetcher = async () => {
                 const response = await fetch(`/api/sc_decisions/${id}`);
-                return await response.json();
+                return parseResponseJson(response);
             };
 
             await lexCache.swr('cases', id, fetcher, (data, isCached) => {
@@ -703,7 +732,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             document.body.style.cursor = 'wait';
             try {
                 const res = await fetch(`/api/sc_decisions/${decision.id}`);
-                fullData = await res.json();
+                fullData = await parseResponseJson(res);
+                if (!res.ok || fullData?.error) {
+                    console.error('Case detail error:', fullData?.error || res.status);
+                }
                 // Update cache so next time it's instant
                 setPrefetchCache(prev => ({ ...prev, [decision.id]: fullData }));
             } catch (err) {
@@ -914,22 +946,41 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     return (
         <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-            {/* Header */}
-            <header className="bg-white/95 dark:bg-slate-900/95 md:bg-white/40 md:dark:bg-slate-900/40 md:backdrop-blur-xl shadow-sm sticky top-0 z-10 border-b border-white/20 dark:border-white/10" style={{willChange:'transform'}}>
-                <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <div className="flex items-center gap-3">
-                        <Gavel className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+            {/* Header — glass + accents; sticky below app chrome on all breakpoints (matches Layout main offset) */}
+            <header
+                className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(7rem+env(safe-area-inset-top,0px))]"
+                style={{ willChange: 'transform' }}
+            >
+                <div
+                    className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
+                    aria-hidden
+                />
+                <div
+                    className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
+                    aria-hidden
+                />
+                <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                    <div
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                        aria-hidden
+                    >
+                        <Gavel className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                    </div>
+                    <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
+                        <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
                             Supreme Court Decisions
                         </h1>
+                        <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                            Case digests & jurisprudence
+                        </p>
                     </div>
                 </div>
             </header>
 
-            <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                 {/* Search & Filter Section */}
-                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-6 mb-8 border border-white/40 dark:border-white/10">
-                    <div className="space-y-4">
+                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-4 mb-4 border border-white/40 dark:border-white/10">
+                    <div className="space-y-3">
                         {/* Main Search Input */}
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -937,7 +988,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                             </div>
                             <input
                                 type="text"
-                                className="block w-full pl-10 pr-10 py-3 border border-stone-400 dark:border-gray-600 shadow-sm rounded-lg leading-5 bg-gray-50 dark:bg-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-base dark:text-white transition-colors"
+                                className="block w-full pl-10 pr-10 py-2.5 border border-stone-400 dark:border-gray-600 shadow-sm rounded-lg leading-5 bg-gray-50 dark:bg-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-base dark:text-white transition-colors"
                                 placeholder="Start typing to search cases..."
                                 value={searchTerm}
                                 onFocus={() => {
@@ -946,10 +997,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     setSelectedMonth('');
                                     setSelectedPonente('');
                                     setSelectedSubject('');
-                                    setSelectedSubject('');
                                     setSelectedDivision('');
                                     setSelectedSignificance('');
-                                    setSelectedModel('');
                                     // Optional: Keep isDoctrinal or reset it? 
                                     // "Automatically set the year filter to 'all years' for global search"
                                     // implies resetting restrictive filters.
@@ -1066,183 +1115,268 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
                 {/* Status Indicator */}
                 {loading && (
-                    <div className="flex justify-center mb-6">
+                    <div className="flex justify-center mb-4">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                     </div>
                 )}
 
-                {/* Results Section - Stacked List */}
-                <div className="flex flex-col space-y-4">
-                    {searchResults.length === 0 && !loading && (
-                        <div className="text-center py-10 text-gray-500">
-                            <FileText className="h-12 w-12 mx-auto text-gray-300 mb-2" />
+                {fetchError && !loading && (
+                    <div
+                        className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-100"
+                        role="alert"
+                    >
+                        <p className="font-semibold">Could not load decisions</p>
+                        <p className="mt-1 text-rose-800/90 dark:text-rose-200/90">{fetchError}</p>
+                    </div>
+                )}
+
+                {/* Results — codal-style compact cards */}
+                <div className="flex flex-col space-y-2 sm:space-y-2.5">
+                    {hasInitialLoaded && !fetchError && searchResults.length === 0 && !loading && (
+                        <div className="text-center py-8 text-gray-500">
+                            <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
                             <p>No decisions found. Adjust your search or filters.</p>
                         </div>
                     )}
-                    {searchResults.map((decision) => (
-                        <div
-                            key={decision.id}
-                            onClick={() => handleCaseClick(decision)}
-                            onMouseEnter={() => prefetchDetails(decision.id)}
-                            onTouchStart={() => prefetchDetails(decision.id)}
-                            className="glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-white/40 dark:border-white/10 p-3.5 sm:p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 hover:bg-white/80 dark:hover:bg-slate-700/60 group relative"
-                        >
-                            <div className="flex items-center justify-between gap-2 sm:gap-4">
-                                <div className="flex flex-col gap-2 sm:gap-4 w-full">
-                                    {/* Header Row: Title & Badges */}
-                                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
-                                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow pr-4">
+                    {searchResults.map((decision) => {
+                        const detailsOpen = !!caseDetailsExpandedById[decision.id];
+
+                        let statutesParsed = null;
+                        let citationsParsed = null;
+                        try {
+                            if (decision.statutes_involved) {
+                                const st = typeof decision.statutes_involved === 'string' ? JSON.parse(decision.statutes_involved) : decision.statutes_involved;
+                                if (Array.isArray(st) && st.length > 0) statutesParsed = st;
+                            }
+                        } catch (e) { /* ignore */ }
+                        try {
+                            if (decision.cited_cases) {
+                                const c = typeof decision.cited_cases === 'string' ? JSON.parse(decision.cited_cases) : decision.cited_cases;
+                                if (Array.isArray(c) && c.length > 0) citationsParsed = c;
+                            }
+                        } catch (e) { /* ignore */ }
+
+                        const subjectKey = normalizeSubjectForColor(decision.subject || 'Political Law');
+                        const subjectAccentText = getSubjectColor(subjectKey).split(/\s+/)[0];
+                        const subjectSurfaceClasses = getSubjectAnswerColor(subjectKey);
+
+                        return (
+                            <div
+                                key={decision.id}
+                                className={`group glass bg-white/60 dark:bg-slate-800/40 rounded-lg border border-white/40 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
+                            >
+                                <div
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleCaseClick(decision)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleCaseClick(decision);
+                                        }
+                                    }}
+                                    onMouseEnter={() => prefetchDetails(decision.id)}
+                                    onTouchStart={() => prefetchDetails(decision.id)}
+                                    className="p-3 cursor-pointer hover:bg-white/50 dark:hover:bg-slate-700/40 transition-colors"
+                                >
+                                    <div className="flex flex-col gap-2">
+                                        <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                             {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
                                         </h3>
-                                        <div className="flex shrink-0 gap-2 flex-wrap">
-                                            {decision.significance_category && (
-                                                <span className={`px-2 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide shadow-sm border border-black/5 dark:border-white/5 ${getCategoryColor(decision.significance_category)} flex items-center gap-1.5`}>
-                                                    <span>{getCategoryIcon(decision.significance_category)}</span>
-                                                    <span>{decision.significance_category}</span>
-                                                </span>
-                                            )}
-                                            {decision.document_type && (
-                                                <span className="px-2 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wide shadow-sm bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-200 border border-black/5 dark:border-white/5">
-                                                    {decision.document_type}
-                                                </span>
-                                            )}
-                                        </div>
+
+                                        <p className="text-left text-[11px] font-mono text-gray-600 dark:text-gray-400 leading-snug">
+                                            {decision.case_number}
+                                            {decision.date_str ? (
+                                                <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
+                                            ) : null}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    {/* Metadata Pills Row */}
-                                    <div className="flex flex-wrap items-center gap-2 text-xs">
-                                        <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
-                                            <Hash className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
-                                            <span className="font-mono text-gray-700 dark:text-gray-300 font-medium tracking-tight">#{decision.id} &middot; {decision.case_number}</span>
-                                        </div>
+                                <div className="border-t border-white/15 dark:border-white/5">
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setCaseDetailsExpandedById((prev) => ({
+                                                ...prev,
+                                                [decision.id]: !prev[decision.id],
+                                            }));
+                                        }}
+                                        className="w-full flex items-center justify-between gap-2 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-white/20 dark:hover:bg-white/5 transition-colors"
+                                        aria-expanded={detailsOpen}
+                                    >
+                                        <span>Case details</span>
+                                        <ChevronDown
+                                            className={`w-4 h-4 text-gray-500 shrink-0 transition-transform ${detailsOpen ? 'rotate-180' : ''}`}
+                                            aria-hidden
+                                        />
+                                    </button>
+                                    {detailsOpen && (
+                                        <div className="px-3 pb-3 border-t border-white/10 dark:border-white/5">
+                                            <div className="rounded-lg border border-white/35 bg-white/25 px-3 py-2.5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
+                                                <dl className="space-y-2.5">
+                                                    {decision.significance_category && (
+                                                        <div className="flex gap-2.5">
+                                                            <Landmark
+                                                                className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
+                                                                strokeWidth={2}
+                                                                aria-hidden
+                                                            />
+                                                            <div className="min-w-0 flex-1">
+                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                    Significance
+                                                                </dt>
+                                                                <dd
+                                                                    className={`mt-0.5 text-[13px] font-semibold leading-snug ${getCategoryTextClass(decision.significance_category)}`}
+                                                                >
+                                                                    {decision.significance_category}
+                                                                </dd>
+                                                            </div>
+                                                        </div>
+                                                    )}
 
-                                        <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
-                                            <Calendar className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-                                            <span className="text-gray-700 dark:text-gray-300 font-medium">{formatDate(decision.date_str)}</span>
-                                        </div>
-
-                                        {decision.ponente && (
-                                            <div className="flex items-center gap-1.5 glass bg-blue-50/50 dark:bg-blue-900/20 px-2.5 py-1 rounded-md shadow-sm border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium italic pr-3">
-                                                <User className="w-3.5 h-3.5" />
-                                                {decision.ponente}
-                                            </div>
-                                        )}
-
-                                        {decision.division && (
-                                            <div className="flex items-center gap-1.5 glass bg-orange-50/50 dark:bg-orange-900/20 px-2.5 py-1 rounded-md shadow-sm border border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 font-medium">
-                                                <Users className="w-3.5 h-3.5" />
-                                                {decision.division}
-                                            </div>
-                                        )}
-
-                                        {/* Subject Tag */}
-                                        {decision.subject && (() => {
-                                            const s = decision.subject.toString();
-                                            const complexMatch = s.match(/Primary:\s*([^;]+)(;\s*Secondary:\s*(.*))?/i);
-
-                                            if (complexMatch) {
-                                                const primaryRaw = complexMatch[1].trim();
-                                                const secondaryRaw = complexMatch[3] ? complexMatch[3].trim() : null;
-
-                                                const renderSubject = (subj) => {
-                                                    const norm = normalizeSubjectForColor(subj);
-                                                    const colorClass = getSubjectColor(norm);
-                                                    return <span className={`${colorClass} font-bold`}>{subj}</span>;
-                                                };
-
-                                                return (
-                                                    <div className="flex flex-wrap items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5 line-clamp-2 max-w-full">
-                                                        <BookOpen className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 shrink-0 mt-0.5" />
-                                                        <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Primary:</span>
-                                                        <span className="truncate max-w-[200px] sm:max-w-none">{renderSubject(primaryRaw)}</span>
-                                                        {secondaryRaw && (
-                                                            <>
-                                                                <span className="text-gray-300 dark:text-gray-600 mx-0.5 shrink-0">|</span>
-                                                                <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Sec:</span>
-                                                                <span className="truncate max-w-[200px] sm:max-w-none">
-                                                                    {secondaryRaw.split(',').map((sec, idx) => (
-                                                                        <React.Fragment key={idx}>
-                                                                            {idx > 0 && <span className="text-gray-400 shrink-0">, </span>}
-                                                                            {renderSubject(sec.trim())}
-                                                                        </React.Fragment>
-                                                                    ))}
-                                                                </span>
-                                                            </>
-                                                        )}
+                                                    <div
+                                                        className={`flex gap-2.5 ${decision.significance_category ? 'border-t border-white/25 pt-2.5 dark:border-white/10' : ''}`}
+                                                    >
+                                                        <FileText
+                                                            className="mt-0.5 h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400"
+                                                            strokeWidth={2}
+                                                            aria-hidden
+                                                        />
+                                                        <div className="min-w-0 flex-1">
+                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                Decision / Resolution
+                                                            </dt>
+                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                                                {decision.document_type?.toString().trim() || '—'}
+                                                            </dd>
+                                                        </div>
                                                     </div>
-                                                );
-                                            }
 
-                                            const normalizedSubject = normalizeSubjectForColor(decision.subject);
-                                            const bgClass = getSubjectAnswerColor(normalizedSubject);
-                                            const textClass = getSubjectColor(normalizedSubject);
-
-                                            return (
-                                                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shadow-sm border font-medium truncate max-w-full ${bgClass} ${textClass}`}>
-                                                    <BookOpen className="w-3.5 h-3.5 shrink-0" />
-                                                    <span className="truncate">{decision.subject}</span>
-                                                </div>
-                                            );
-                                        })()}
-
-                                        {/* Statutes Summary */}
-                                        {decision.statutes_involved && (() => {
-                                            try {
-                                                const s = typeof decision.statutes_involved === 'string' ? JSON.parse(decision.statutes_involved) : decision.statutes_involved;
-                                                if (Array.isArray(s) && s.length > 0) {
-                                                    const count = s.length;
-                                                    const top2 = s.slice(0, 2).map(i => i.law).join(", ");
-                                                    return (
-                                                        <div className="flex items-center gap-1.5 glass bg-teal-50/50 dark:bg-teal-900/20 px-2.5 py-1 rounded-md shadow-sm border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 max-w-full">
-                                                            <Book className="w-3.5 h-3.5 shrink-0" />
-                                                            <span className="font-semibold shrink-0">{count} Statutes:</span>
-                                                            <span className="truncate max-w-[150px]">{top2}{count > 2 ? '...' : ''}</span>
+                                                    <div
+                                                        className={`flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10`}
+                                                    >
+                                                        <Scale
+                                                            className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                            strokeWidth={2}
+                                                            aria-hidden
+                                                        />
+                                                        <div className="min-w-0 flex-1">
+                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                Court body
+                                                            </dt>
+                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                                                {decision.division?.trim() || '—'}
+                                                            </dd>
                                                         </div>
-                                                    );
-                                                }
-                                            } catch (e) { return null; }
-                                        })()}
+                                                    </div>
 
-                                        {/* Citations Summary */}
-                                        {decision.cited_cases && (() => {
-                                            try {
-                                                const c = typeof decision.cited_cases === 'string' ? JSON.parse(decision.cited_cases) : decision.cited_cases;
-                                                if (Array.isArray(c) && c.length > 0) {
-                                                    return (
-                                                        <div className="flex items-center gap-1.5 glass bg-indigo-50/50 dark:bg-indigo-900/20 px-2.5 py-1 rounded-md shadow-sm border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 max-w-full">
-                                                            <Gavel className="w-3.5 h-3.5 shrink-0" />
-                                                            <span className="font-semibold shrink-0 truncate">{c.length} Citations</span>
+                                                    <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                        <BookOpen
+                                                            className="mt-0.5 h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
+                                                            strokeWidth={2}
+                                                            aria-hidden
+                                                        />
+                                                        <div className="min-w-0 flex-1">
+                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                Subject
+                                                            </dt>
+                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                                                {decision.subject?.toString().trim() || '—'}
+                                                            </dd>
                                                         </div>
-                                                    );
-                                                }
-                                            } catch (e) { return null; }
-                                        })()}
+                                                    </div>
+
+                                                    {decision.ponente && (
+                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                            <User
+                                                                className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
+                                                                strokeWidth={2}
+                                                                aria-hidden
+                                                            />
+                                                            <div className="min-w-0 flex-1">
+                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                    Ponente
+                                                                </dt>
+                                                                <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-800 dark:text-gray-200">
+                                                                    {decision.ponente}
+                                                                </dd>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {statutesParsed && (
+                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                            <Book
+                                                                className="mt-0.5 h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
+                                                                strokeWidth={2}
+                                                                aria-hidden
+                                                            />
+                                                            <div className="min-w-0 flex-1">
+                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                    Statutes
+                                                                </dt>
+                                                                <dd className="mt-0.5 text-[12px] font-medium leading-snug text-teal-800 dark:text-teal-200">
+                                                                    {statutesParsed.slice(0, 3).map((i) => i.law).filter(Boolean).join(', ')}
+                                                                    {statutesParsed.length > 3 ? ` (+${statutesParsed.length - 3} more)` : ''}
+                                                                </dd>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {citationsParsed && (
+                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                            <Gavel
+                                                                className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                                strokeWidth={2}
+                                                                aria-hidden
+                                                            />
+                                                            <div className="min-w-0 flex-1">
+                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                                    Citations
+                                                                </dt>
+                                                                <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                                                    {citationsParsed.length} cited case{citationsParsed.length === 1 ? '' : 's'}
+                                                                </dd>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => handleCaseClick(decision)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleCaseClick(decision);
+                                        }
+                                    }}
+                                    className="cursor-pointer border-t border-white/15 dark:border-white/5 p-3 hover:bg-white/30 dark:hover:bg-slate-700/30 transition-colors"
+                                >
+                                    <div
+                                        className={`relative flex h-[14rem] flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:h-[15.5rem] sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
+                                    >
+                                        <h4
+                                            className={`mb-2 flex shrink-0 items-center gap-2 text-[11px] font-black uppercase tracking-widest sm:text-[12px] ${subjectAccentText}`}
+                                        >
+                                            <Lightbulb className={`h-4 w-4 shrink-0 ${subjectAccentText}`} strokeWidth={2} aria-hidden />
+                                            Main doctrine
+                                        </h4>
+                                        <p className="pl-0.5 text-sm leading-relaxed text-gray-800 dark:text-gray-200 line-clamp-8 sm:line-clamp-9">
+                                            {decision.main_doctrine || decision.snippet || 'No snippet available.'}
+                                        </p>
                                     </div>
-
-                                    {/* Glassmorphism Main Doctrine Inset */}
-                                    {(() => {
-                                        const subject = decision.subject || 'Political Law';
-                                        const normalizedSubject = normalizeSubjectForColor(subject);
-                                        const textClass = getSubjectColor(normalizedSubject);
-
-                                        return (
-                                            <div className={`mt-0.5 sm:mt-1 bg-black/5 dark:bg-black/20 rounded-xl p-3 sm:p-4 border-l-4 ${textClass} border-l-current border-t border-r border-b border-black/5 dark:border-white/5 shadow-inner`}>
-                                                {(decision.main_doctrine || decision.snippet) && (
-                                                    <div className={`text-xs font-extrabold ${textClass} uppercase tracking-wider mb-2 flex items-center gap-2`}>
-                                                        <Lightbulb className="w-4 h-4" /> MAIN DOCTRINE
-                                                    </div>
-                                                )}
-                                                <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 leading-relaxed">
-                                                    {decision.main_doctrine || decision.snippet || "No snippet available."}
-                                                </p>
-                                            </div>
-                                        );
-                                    })()}
-
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {totalCount > 0 && (

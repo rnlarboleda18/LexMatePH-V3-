@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, BookOpen, LayoutGrid, Brain, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
@@ -49,21 +49,60 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                             {isSidebarOpen ? <X size={20} className="md:w-[22px] md:h-[22px]" /> : <Menu size={20} className="md:w-[22px] md:h-[22px]" />}
                         </button>
 
-                        {/* Brand block */}
+                        {/* Brand — wordmark + scales mark (no vertical bar); LexMatePH casing preserved */}
                         <div className="flex flex-col items-start justify-center">
-                            {/* Brand name */}
-                            <div className="text-xl sm:text-2xl md:text-3xl font-black tracking-widest select-none leading-none mb-0 pointer-events-none">
-                                <span className={isDarkMode ? 'text-stone-100' : 'text-slate-800'}>LexMate</span><span className="text-blue-500">P</span><span className="text-red-500">H</span>
+                            <div className="flex items-center gap-2.5 md:gap-3">
+                                <div
+                                    className={`flex shrink-0 items-center justify-center rounded-xl border h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+                                        isDarkMode
+                                            ? 'border-white/10 bg-white/[0.06] text-indigo-300'
+                                            : 'border-slate-200/90 bg-white text-indigo-600 shadow-sm'
+                                    }`}
+                                    aria-hidden
+                                >
+                                    <Scale
+                                        className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8"
+                                        strokeWidth={2}
+                                    />
+                                </div>
+                                <div className="flex min-w-0 flex-col">
+                                    <span
+                                        className={`select-none font-semibold leading-none tracking-tight text-[1.125rem] sm:text-xl md:text-2xl lg:text-[1.75rem] ${
+                                            isDarkMode
+                                                ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
+                                                : 'text-slate-900'
+                                        }`}
+                                    >
+                                        LexMatePH
+                                    </span>
+                                    <span
+                                        className={`mt-1 hidden text-[11px] font-medium leading-snug tracking-tight md:block md:text-xs lg:text-[13px] ${
+                                            isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                                        }`}
+                                    >
+                                        Your Law Companion
+                                    </span>
+                                </div>
                             </div>
-                            {/* Tag line — desktop only */}
-                            <div className={`hidden lg:flex items-center gap-4 text-[15px] font-semibold tracking-wide mt-1.5 ${isDarkMode ? 'text-amber-600/80' : 'text-amber-700/70'}`}>
-                                <span className="cursor-default">Bar Questions</span>
-                                <span>·</span>
-                                <span className="cursor-default">SC Decisions</span>
-                                <span>·</span>
-                                <span className="cursor-default">Case Digests</span>
-                                <span>·</span>
-                                <span className="cursor-default">Codals</span>
+                            {/* Feature strip — large screens */}
+                            <div
+                                className={`mt-2 hidden max-w-[min(100vw-8rem,42rem)] flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium leading-snug lg:flex lg:gap-x-4 lg:text-[14px] ${
+                                    isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                                }`}
+                            >
+                                <span className="whitespace-nowrap">Bar Questions</span>
+                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
+                                    ·
+                                </span>
+                                <span className="whitespace-nowrap">SC Decisions</span>
+                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
+                                    ·
+                                </span>
+                                <span className="whitespace-nowrap">Case Digests</span>
+                                <span className="text-slate-500 dark:text-slate-600" aria-hidden>
+                                    ·
+                                </span>
+                                <span className="whitespace-nowrap">Codals</span>
                             </div>
                         </div>
                     </div>

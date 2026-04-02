@@ -7,11 +7,11 @@ import os
 # Environment detection
 IS_LOCAL_DEV = os.getenv("ENVIRONMENT", "production").lower() == "local"
 
-# Database connection
+# Database connection (LOCAL_DB_CONNECTION_STRING wins when ENVIRONMENT=local)
 DB_CONNECTION_STRING = (
-    os.getenv("LOCAL_DB_CONNECTION_STRING") 
+    os.getenv("LOCAL_DB_CONNECTION_STRING")
     if IS_LOCAL_DEV and os.getenv("LOCAL_DB_CONNECTION_STRING")
-    else os.getenv("DB_CONNECTION_STRING")
+    else (os.getenv("DB_CONNECTION_STRING") or os.getenv("DATABASE_URL") or "")
 )
 
 # Redis configuration
@@ -22,6 +22,7 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 CACHE_TTL_DECISIONS = int(os.getenv("CACHE_TTL_DECISIONS", "60"))  # 1 minute
 CACHE_TTL_PONENTES = int(os.getenv("CACHE_TTL_PONENTES", "300"))  # 5 minutes
 CACHE_TTL_FILTERS = int(os.getenv("CACHE_TTL_FILTERS", "300"))  # 5 minutes
+CACHE_TTL_FLASHCARD_CONCEPTS = int(os.getenv("CACHE_TTL_FLASHCARD_CONCEPTS", "3600"))  # 1 hour — heavy aggregation
 
 # Logging
 import logging

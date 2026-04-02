@@ -70,14 +70,14 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
     };
 
     return (
-        <nav className="space-y-1 pb-[calc(5rem_+_var(--player-height,0px))]"> {/* Dynamic padding for LexPlayer */}
+        <nav className="space-y-1 px-2 sm:px-3 pb-[calc(5rem_+_var(--player-height,0px))]">
 
             {/* Mobile Only Actions */}
-            <div className="lg:hidden px-4 mb-6 space-y-4">
+            <div className="lg:hidden mb-5 space-y-4">
                 {/* Auth Section for Mobile */}
-                <div className="bg-gray-50 dark:bg-gray-800/40 p-4 rounded-2xl border border-gray-100 dark:border-gray-700/50">
+                <div className="glass rounded-xl border border-white/40 bg-white/35 p-4 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-900/40">
                     <SignedIn>
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3">
                             <UserButton 
                                 appearance={{
                                     elements: {
@@ -85,22 +85,22 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                                     }
                                 }}
                             />
-                            <div className="flex flex-col">
-                                <span className="text-sm font-bold text-gray-900 dark:text-white">Account Settings</span>
-                                <span className="text-xs text-gray-500 dark:text-gray-400">Manage your profile</span>
+                            <div className="flex min-w-0 flex-col">
+                                <span className="text-sm font-semibold text-slate-900 dark:text-white">Account</span>
+                                <span className="text-xs text-slate-500 dark:text-slate-400">Profile & settings</span>
                             </div>
                         </div>
                     </SignedIn>
                     <SignedOut>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-2.5">
                             <SignInButton mode="modal">
-                                <button className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm active:scale-95 transition-all">
+                                <button className="flex items-center justify-center gap-2 rounded-xl border border-white/50 bg-white/70 py-2.5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm transition-all active:scale-[0.98] dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-100">
                                     <LogIn size={18} />
                                     <span>Log In</span>
                                 </button>
                             </SignInButton>
                             <SignUpButton mode="modal">
-                                <button className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold bg-amber-600 text-white shadow-md shadow-amber-900/20 active:scale-95 transition-all">
+                                <button className="flex items-center justify-center gap-2 rounded-xl bg-amber-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-amber-900/25 transition-all active:scale-[0.98]">
                                     <UserPlus size={18} />
                                     <span>Sign Up</span>
                                 </button>
@@ -109,7 +109,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     </SignedOut>
                 </div>
 
-                <div className="h-px bg-gray-200 dark:bg-gray-700 my-4"></div>
+                <div className="my-3 h-px bg-white/30 dark:bg-white/10" />
             </div>
 
 
@@ -117,7 +117,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
             {/* Subscription Tier Badge */}
             <SignedIn>
-                <div className={`mx-4 mt-4 mb-2 p-3 rounded-2xl border ${isAdmin ? TIER_BG.admin : TIER_BG[tier]} flex items-center gap-3 shadow-sm`}>
+                <div className={`mb-3 mt-1 flex items-center gap-3 rounded-xl border p-3 shadow-sm backdrop-blur-sm ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}>
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
                         <TierIcon size={16} />
                     </div>
@@ -151,10 +151,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     onToggleAbout();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'about'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
             >
                 <Info size={20} className={`${mode === 'about' ? 'text-sky-700 dark:text-sky-400' : 'text-sky-600 dark:text-sky-400'} group-hover:scale-110 transition-all duration-200`} />
@@ -167,10 +167,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     onToggleUpdates();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'updates'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
             >
                 <Newspaper size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'updates' ? 'text-emerald-700 dark:text-emerald-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
@@ -183,10 +183,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     onToggleQuiz();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'quiz'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
             >
                 <Brain size={20} className={`${mode === 'quiz' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
@@ -199,10 +199,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     if (onToggleFlashcard) onToggleFlashcard();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'flashcard'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
             >
                 <BookOpen size={20} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
@@ -215,7 +215,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     if (onToggleLexPlay) onToggleLexPlay();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white`}
+                className="group flex w-full items-center gap-3 rounded-xl border-l-[3px] border-transparent px-3 py-2.5 text-left text-[15px] font-medium text-slate-800 transition-colors hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06] md:py-3 md:text-base"
             >
                 <Headphones size={20} className="text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-all duration-200" />
                 LexPlay
@@ -228,10 +228,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     onToggleSupremeDecisions();
                     setOpenSection(null);
                 }}
-                className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center gap-3 group
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                 ${mode === 'supreme_decisions'
-                        ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                        : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                        ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                        : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
             >
                 <Gavel size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'supreme_decisions' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'}`} />
@@ -242,32 +242,32 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <div>
                 <button
                     onClick={() => toggleSection('codex')}
-                    className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center justify-between group
+                    className={`group flex w-full items-center justify-between rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                     ${mode === 'codex'
-                            ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                            : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                            ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                            : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                         }`}
                 >
                     <span className="flex items-center gap-3">
                         <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                         LexCode
                     </span>
-                    {openSection === 'codex' ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
+                    {openSection === 'codex' ? <ChevronDown size={18} className="text-slate-400 dark:text-slate-500" /> : <ChevronRight size={18} className="text-slate-400 dark:text-slate-500" />}
                 </button>
 
                 {openSection === 'codex' && (
-                    <div className="animate-in slide-in-from-top-2 duration-200">
+                    <div className="animate-in slide-in-from-top-2 duration-200 overflow-hidden rounded-lg border border-white/20 bg-white/20 dark:border-white/5 dark:bg-slate-900/20">
                         {codexSubjects.map((item) => (
                             <button
                                 key={item.id}
                                 disabled={item.disabled}
                                 onClick={() => !item.disabled && onSelectCodal && onSelectCodal(item.id)}
-                                className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] flex items-center gap-3 group/item
+                                className={`group/item flex w-full items-center gap-3 border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
                                  ${mode === 'codex' && selectedCodalCode === item.id && !item.disabled
-                                        ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
+                                        ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
                                         : item.disabled
-                                            ? 'border-transparent text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
-                                            : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
+                                            ? 'cursor-not-allowed border-transparent text-slate-500 opacity-50 dark:text-slate-600'
+                                            : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
                                     }`}
                             >
                                 {item.title} {item.disabled && <span className="text-xs ml-auto border rounded px-1 py-0.5 text-gray-500 dark:border-gray-600 not-italic no-underline">Soon</span>}
@@ -285,27 +285,27 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             <div>
                 <button
                     onClick={() => toggleSection('bar')}
-                    className={`w-full text-left px-6 py-4 text-lg font-medium transition-colors border-l-[6px] flex items-center justify-between group
+                    className={`group flex w-full items-center justify-between rounded-xl border-l-[3px] px-3 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
                     ${mode === 'browse_bar' && openSection === 'bar'
-                            ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-600 text-amber-800 dark:text-amber-400'
-                            : 'border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 text-gray-900 dark:text-white'
+                            ? 'border-indigo-500 bg-indigo-50/95 text-slate-900 shadow-sm dark:border-indigo-400 dark:bg-indigo-950/35 dark:text-white'
+                            : 'border-transparent text-slate-800 hover:bg-white/55 dark:text-slate-100 dark:hover:bg-white/[0.06]'
                         }`}
                 >
                     <span className="flex items-center gap-3">
                         <Book size={20} className={`${openSection === 'bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                         Bar Questions
                     </span>
-                    {openSection === 'bar' ? <ChevronDown size={18} className="text-gray-400" /> : <ChevronRight size={18} className="text-gray-400" />}
+                    {openSection === 'bar' ? <ChevronDown size={18} className="text-slate-400 dark:text-slate-500" /> : <ChevronRight size={18} className="text-slate-400 dark:text-slate-500" />}
                 </button>
 
                 {openSection === 'bar' && (
-                    <div className="animate-in slide-in-from-top-2 duration-200">
+                    <div className="animate-in slide-in-from-top-2 duration-200 overflow-hidden rounded-lg border border-white/20 bg-white/20 dark:border-white/5 dark:bg-slate-900/20">
                         <button
                             onClick={() => onSelectSubject && onSelectSubject('All Subjects')}
-                            className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] group/item
+                            className={`group/item w-full border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
                                 ${mode === 'browse_bar' && (currentSubject === null || currentSubject === 'All Subjects')
-                                    ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
-                                    : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
+                                    ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
+                                    : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
                                 }`}
                         >
                             <span className="w-2 h-2 rounded-full mr-2 bg-gray-400 dark:bg-gray-500 opacity-70 group-hover/item:opacity-100 transition-all" />
@@ -315,10 +315,10 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                             <button
                                 key={subject}
                                 onClick={() => onSelectSubject && onSelectSubject(subject)}
-                                className={`w-full text-left pl-14 pr-6 py-3 text-base font-medium transition-colors border-l-[6px] group/item
+                                className={`group/item w-full border-l-[3px] py-2.5 pl-11 pr-3 text-left text-[14px] font-medium transition-colors md:pl-12 md:text-[15px]
                                     ${mode === 'browse_bar' && currentSubject === subject
-                                        ? 'bg-amber-100/50 dark:bg-amber-900/30 border-amber-500 text-amber-900 dark:text-amber-300'
-                                        : 'border-transparent hover:bg-amber-50 dark:hover:bg-amber-900/10 text-gray-600 dark:text-gray-300 hover:text-amber-800 dark:hover:text-amber-400'
+                                        ? 'border-indigo-500 bg-indigo-50/90 text-slate-900 dark:border-indigo-400 dark:bg-indigo-950/40 dark:text-white'
+                                        : 'border-transparent text-slate-600 hover:bg-white/50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/[0.05] dark:hover:text-white'
                                     }`}
                             >
                                 <span className={`w-2 h-2 rounded-full mr-2 ${getSubjectColor(subject)} opacity-70 group-hover/item:opacity-100 transition-all`} />

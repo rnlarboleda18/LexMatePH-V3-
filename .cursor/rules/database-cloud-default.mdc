@@ -1,0 +1,14 @@
+---
+description: Default to cloud database; never local DB unless user opts in
+alwaysApply: true
+---
+
+# Database: cloud by default
+
+For this project, **always assume the user works against their cloud database**, not a local Postgres instance.
+
+- Prefer **`DB_CONNECTION_STRING`** (or the project’s documented cloud/Azure URL) in examples, `local.settings.json` guidance, migrations, and scripts.
+- **Do not** recommend or switch to **`LOCAL_DB_CONNECTION_STRING`**, **`ENVIRONMENT=local`**, or **`localhost`** / local Postgres **unless the user explicitly asks** to use a local DB.
+- When debugging connection issues, assume cloud credentials/network/ssl first; mention local DB only as an optional alternative if they say they use it.
+
+If the user later says they want local DB, then local-only settings are fine.

@@ -9,7 +9,7 @@ from db_pool import get_db_connection, put_db_connection
 # Import caching and config
 import hashlib
 from cache import cache_get, cache_set, cache_delete, cache_clear_pattern
-from config import DB_CONNECTION_STRING, REDIS_ENABLED, CACHE_TTL_DECISIONS, CACHE_TTL_PONENTES
+from config import DB_CONNECTION_STRING, REDIS_ENABLED, CACHE_TTL_DECISIONS, CACHE_TTL_PONENTES, CACHE_TTL_FLASHCARD_CONCEPTS
 import re
 
 supreme_bp = func.Blueprint()
@@ -18,6 +18,7 @@ supreme_bp = func.Blueprint()
 def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Processing Supreme Decisions request.')
     
+    conn = None
     cur = None
     try:
         search_term = req.params.get('search', '').strip() # Don't lower() yet, FTS handles it, and don't replace hyphens!
@@ -433,6 +434,235 @@ def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+
+def _normalize_subject_bar(raw):
+    if not raw:
+        return ""
+    s = str(raw).lower()
+    if "civil" in s:
+        return "Civil Law"
+    if "commercial" in s or "mercantile" in s:
+        return "Commercial Law"
+    if "criminal" in s or "penal" in s:
+        return "Criminal Law"
+    if "labor" in s or "social legislat" in s:
+        return "Labor Law"
+    if "ethics" in s or "judicial ethics" in s:
+        return "Legal Ethics"
+    if "political" in s or "constitutional" in s:
+        return "Political Law"
+    if "remedial" in s or "procedure" in s:
+        return "Remedial Law"
+    if "taxation" in s or re.search(r"\btax\b", s):
+        return "Taxation Law"
+    return str(raw).strip()
+
+
+def _parse_legal_concepts(raw):
+    """Normalize legal_concepts from DB (json/jsonb/text/list) into list of dicts with term/definition."""
+    if raw is None:
+        return []
+    if isinstance(raw, bytes):
+        try:
+            raw = raw.decode("utf-8")
+        except Exception:
+            return []
+    if isinstance(raw, dict):
+        # Single concept object
+        if raw.get("term") or raw.get("concept") or raw.get("title") or raw.get("name"):
+            return [raw]
+        # Wrapped payloads e.g. {"legal_concepts": [...]} or {"items": [...]}
+        for key in ("legal_concepts", "concepts", "items", "data"):
+            inner = raw.get(key)
+            if isinstance(inner, list):
+                return _parse_legal_concepts(inner)
+            if isinstance(inner, dict):
+                return _parse_legal_concepts(inner)
+        return []
+    if isinstance(raw, list):
+        out = []
+        for x in raw:
+            if isinstance(x, dict):
+                out.append(x)
+            elif isinstance(x, str) and x.strip():
+                out.append({"term": x.strip(), "definition": ""})
+        return out
+    if isinstance(raw, str):
+        try:
+            if not raw.strip():
+                return []
+            parsed = json.loads(raw)
+            return _parse_legal_concepts(parsed)
+        except Exception:
+            return []
+    return []
+
+
+def _concept_term(item):
+    """Extract display term from a concept dict (several pipelines use different keys)."""
+    if not isinstance(item, dict):
+        return ""
+    return (
+        (item.get("term") or item.get("concept") or item.get("title") or item.get("name") or item.get("label") or item.get("key") or "")
+        .strip()
+    )
+
+
+def _concept_definition(item):
+    if not isinstance(item, dict):
+        return ""
+    return (item.get("definition") or item.get("content") or item.get("text") or item.get("summary") or "").strip()
+
+
+def _merge_concept_into_map(concepts_map, term, definition, case_id, case_number, title, date_str, subj):
+    if not term or not str(term).strip():
+        return
+    term = str(term).strip()
+    definition = (definition or "").strip()
+    key = re.sub(r"\s+", " ", term).lower()
+    src = {
+        "case_id": case_id,
+        "case_number": case_number or "",
+        "title": title or "",
+        "date_str": date_str or "",
+        "subject": subj or "",
+    }
+    if key not in concepts_map:
+        concepts_map[key] = {
+            "term": term,
+            "definition": definition,
+            "sources": [],
+            "_seen_case_ids": set(),
+        }
+    else:
+        if definition and len(definition) > len(concepts_map[key].get("definition") or ""):
+            concepts_map[key]["definition"] = definition
+    ent = concepts_map[key]
+    if case_id not in ent["_seen_case_ids"]:
+        ent["_seen_case_ids"].add(case_id)
+        ent["sources"].append(src)
+
+
+# v4: legal_concepts only — digest "flashcards" caused 100k+ unique cards (one per Q/A per case).
+FLASHCARD_CONCEPTS_CACHE_KEY = "flashcard_concepts:v4:legal_only"
+
+
+@supreme_bp.route(route="sc_decisions/flashcard_concepts", auth_level=func.AuthLevel.ANONYMOUS)
+def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
+    """Deduplicated key legal concepts from case digests, with case labels. Optional ?subject= canonical bar subject."""
+    subject_filter = (req.params.get("subject") or "").strip()
+    ns_filter = _normalize_subject_bar(subject_filter) if subject_filter else ""
+
+    def _build_response_payload(out_list):
+        if ns_filter:
+            filtered = []
+            for c in out_list:
+                srcs = [s for s in c["sources"] if _normalize_subject_bar(s.get("subject")) == ns_filter]
+                if srcs:
+                    filtered.append({**c, "sources": srcs})
+            out_list = filtered
+        return {"concepts": out_list}
+
+    bypass_cache = (req.params.get("nocache") or "").lower() in ("1", "true", "yes")
+
+    if REDIS_ENABLED and not bypass_cache:
+        cached = cache_get(FLASHCARD_CONCEPTS_CACHE_KEY)
+        # Do not serve a stale empty cache — forces recompute after fixes / new data
+        if (
+            cached
+            and isinstance(cached, dict)
+            and isinstance(cached.get("concepts"), list)
+            and len(cached["concepts"]) > 0
+        ):
+            logging.info("Serving flashcard_concepts from cache")
+            payload = _build_response_payload(cached["concepts"])
+            return func.HttpResponse(
+                json.dumps(payload, default=str),
+                mimetype="application/json",
+                status_code=200,
+            )
+
+    conn = None
+    cur = None
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+
+        cur.execute(
+            """
+            SELECT id, case_number, short_title, subject,
+                   TO_CHAR(date, 'YYYY-MM-DD') AS date_str,
+                   legal_concepts
+            FROM sc_decided_cases
+            WHERE legal_concepts IS NOT NULL
+              AND length(trim(both from legal_concepts::text)) > 2
+              AND trim(both from legal_concepts::text) NOT IN ('null', '{}', '[]')
+            """
+        )
+        rows = cur.fetchall()
+
+        logging.info(f"flashcard_concepts: loaded {len(rows) if rows else 0} cases with legal_concepts")
+
+        concepts_map = {}
+
+        for row in rows or []:
+            case_id = row.get("id")
+            case_number = row.get("case_number") or ""
+            title = row.get("short_title") or row.get("title") or ""
+            date_str = row.get("date_str") or ""
+            subj = row.get("subject") or ""
+
+            for item in _parse_legal_concepts(row.get("legal_concepts")):
+                if not isinstance(item, dict):
+                    continue
+                term = _concept_term(item)
+                if not term:
+                    continue
+                definition = _concept_definition(item)
+                _merge_concept_into_map(
+                    concepts_map, term, definition, case_id, case_number, title, date_str, subj
+                )
+
+        out = []
+        for _k, ent in concepts_map.items():
+            ent.pop("_seen_case_ids", None)
+            out.append(
+                {
+                    "term": ent["term"],
+                    "definition": ent.get("definition") or "",
+                    "sources": ent["sources"],
+                }
+            )
+
+        if REDIS_ENABLED and out:
+            try:
+                cache_set(
+                    FLASHCARD_CONCEPTS_CACHE_KEY,
+                    {"concepts": out},
+                    ttl=CACHE_TTL_FLASHCARD_CONCEPTS,
+                )
+            except Exception as ex:
+                logging.warning(f"flashcard_concepts cache set skipped: {ex}")
+
+        payload = _build_response_payload(out)
+        return func.HttpResponse(
+            json.dumps(payload, default=str),
+            mimetype="application/json",
+            status_code=200,
+        )
+    except Exception as e:
+        logging.error(f"Error in sc_decisions_flashcard_concepts: {e}")
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            mimetype="application/json",
+            status_code=500,
+        )
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            put_db_connection(conn)
+
 
 @supreme_bp.route(route="sc_decisions/{id:int}", auth_level=func.AuthLevel.ANONYMOUS)
 def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:

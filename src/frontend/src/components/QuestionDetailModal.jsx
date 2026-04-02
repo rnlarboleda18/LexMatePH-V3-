@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
+import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 
 const QuestionDetailModal = ({ 
     question, 
@@ -68,10 +70,19 @@ const QuestionDetailModal = ({
         }
     };
 
-    return (
-        <div className="fixed inset-0 z-[150] lex-modal-overlay animate-in fade-in duration-200">
+    const handleClose = useCallback(
+        (e) => {
+            e?.preventDefault?.();
+            e?.stopPropagation?.();
+            closeModalAbsorbingGhostTap(onClose);
+        },
+        [onClose]
+    );
+
+    return createPortal(
+        <div className="fixed inset-0 z-[520] lex-modal-overlay animate-in fade-in duration-200">
             {/* Full-screen backdrop; panel is a sibling with bottom anchored to mini LexPlay — avoids flex padding + max-h both subtracting player height */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={onClose} />
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={handleClose} />
             <div
                 className="glass absolute left-1/2 flex w-full max-w-3xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-white/50 bg-white/50 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-3xl animate-in zoom-in-95 duration-300 dark:border-white/20 dark:bg-slate-900/50 bottom-[var(--player-height,0px)] top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-xl sm:border md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-y-1/2 md:rounded-3xl"
                 role="dialog"
@@ -129,7 +140,7 @@ const QuestionDetailModal = ({
                         </span>
                         <button
                             type="button"
-                            onClick={onClose}
+                            onClick={handleClose}
                             className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
                             aria-label="Close"
                         >
@@ -266,7 +277,8 @@ const QuestionDetailModal = ({
                     ))}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

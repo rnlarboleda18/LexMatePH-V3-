@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import Layout from './components/Layout';
 import Sidebar from './components/Sidebar';
 import ControlBar from './components/ControlBar';
@@ -19,6 +19,8 @@ import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
 import { ChevronRight, RefreshCcw, AlertTriangle } from 'lucide-react';
 import { getSubjectColor } from './utils/colors';
+import { normalizeBarSubject } from './utils/subjectNormalize';
+import { apiUrl } from './utils/apiUrl';
 import { useSubscription } from './context/SubscriptionContext';
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -47,9 +49,39 @@ function App() {
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
+  const [flashcardConceptPool, setFlashcardConceptPool] = useState([]);
+  const [flashcardConceptsLoading, setFlashcardConceptsLoading] = useState(false);
+  const [flashcardConceptsError, setFlashcardConceptsError] = useState(null);
+  const [flashcardDeckError, setFlashcardDeckError] = useState(null);
+  /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
+  const [flashcardVariant, setFlashcardVariant] = useState('concepts');
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to Dark Mode
   // Global case modal state (shared between SC Decisions and Codex)
   const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
+  /** Only block ghost-tap reopen of the *same* case right after close (not all case opens — that broke sync + other picks). */
+  const lastClosedCaseIdRef = useRef(null);
+  const suppressSameCaseReopenUntilRef = useRef(0);
+
+  const selectGlobalCase = useCallback((next) => {
+    if (
+      next != null &&
+      lastClosedCaseIdRef.current != null &&
+      next.id === lastClosedCaseIdRef.current &&
+      Date.now() < suppressSameCaseReopenUntilRef.current
+    ) {
+      return;
+    }
+    setGlobalSelectedCase(next);
+  }, []);
+
+  const closeGlobalCaseModal = useCallback(() => {
+    const id = globalSelectedCase?.id;
+    if (id != null) {
+      lastClosedCaseIdRef.current = id;
+    }
+    suppressSameCaseReopenUntilRef.current = Date.now() + 750;
+    setGlobalSelectedCase(null);
+  }, [globalSelectedCase]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
@@ -163,6 +195,110 @@ function App() {
     fetchQuestions();
   }, []);
 
+  const [flashcardFetchNonce, setFlashcardFetchNonce] = useState(0);
+
+  // Load SC digest concepts when Flashcards is opened. Retry adds ?nocache=1 to bypass Redis.
+  useEffect(() => {
+    if (mode !== 'flashcard') {
+      setFlashcardConceptsLoading(false);
+      return;
+    }
+
+    const ac = new AbortController();
+    const tid = setTimeout(() => ac.abort(), 120000);
+    let cancelled = false;
+
+    const load = async () => {
+      setFlashcardConceptsLoading(true);
+      setFlashcardConceptsError(null);
+      try {
+        const q = flashcardFetchNonce > 0 ? '?nocache=1' : '';
+        const res = await fetch(apiUrl(`/api/sc_decisions/flashcard_concepts${q}`), { signal: ac.signal });
+        const raw = await res.text();
+        if (cancelled) return;
+        if (!res.ok) {
+          let msg = 'Failed to load key legal concepts';
+          try {
+            const j = JSON.parse(raw);
+            if (j.error) msg = String(j.error);
+          } catch (_) {
+            if (raw) msg = raw.slice(0, 200);
+          }
+          throw new Error(msg);
+        }
+        const data = JSON.parse(raw);
+        if (cancelled) return;
+        setFlashcardConceptPool(Array.isArray(data.concepts) ? data.concepts : []);
+      } catch (e) {
+        if (cancelled) return;
+        if (e.name === 'AbortError') {
+          setFlashcardConceptsError(
+            'Request timed out after 2 minutes. The concepts query is heavy: ensure the API is running (local: port 7071), the database is reachable, and try Bar exam questions below. A second open may be faster if Redis cached the result.'
+          );
+        } else {
+          let msg = e.message || 'Load failed';
+          if (msg === 'Failed to fetch' || /network/i.test(msg)) {
+            msg =
+              'Could not reach the API. For local dev, start the backend on port 7071 so Vite can proxy /api (see vite.config.js).';
+          }
+          setFlashcardConceptsError(msg);
+        }
+        setFlashcardConceptPool([]);
+      } finally {
+        clearTimeout(tid);
+        setFlashcardConceptsLoading(false);
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+      ac.abort();
+    };
+  }, [mode, flashcardFetchNonce]);
+
+  const refetchFlashcardConcepts = useCallback(() => {
+    setFlashcardFetchNonce((n) => n + 1);
+  }, []);
+
+  const flashcardSubjectCounts = useMemo(() => {
+    const subjects = [
+      'Civil Law',
+      'Commercial Law',
+      'Criminal Law',
+      'Labor Law',
+      'Legal Ethics',
+      'Political Law',
+      'Remedial Law',
+      'Taxation Law',
+    ];
+    const counts = { all: flashcardConceptPool.length };
+    subjects.forEach((s) => {
+      counts[s] = flashcardConceptPool.filter((c) =>
+        (c.sources || []).some((src) => normalizeBarSubject(src.subject) === s)
+      ).length;
+    });
+    return counts;
+  }, [flashcardConceptPool]);
+
+  const barFlashcardSubjectCounts = useMemo(() => {
+    const subjects = [
+      'Civil Law',
+      'Commercial Law',
+      'Criminal Law',
+      'Labor Law',
+      'Legal Ethics',
+      'Political Law',
+      'Remedial Law',
+      'Taxation Law',
+    ];
+    const counts = { all: questions.length };
+    subjects.forEach((s) => {
+      counts[s] = questions.filter((q) => normalizeBarSubject(q.subject) === s).length;
+    });
+    return counts;
+  }, [questions]);
+
   const handleRetryFetch = () => {
     setError(null);
     setLoading(true);
@@ -271,18 +407,63 @@ function App() {
       return;
     }
 
+    setFlashcardDeckError(null);
+    setFlashcardVariant('concepts');
+
     let selected = [];
     if (subject) {
-      // Filter by subject, but still respect global year/search if desired? 
-      // User request implies "random subjects or any subject", likely ignoring current browse filters.
-      // Let's filter from the FULL `questions` list to be safe and independent.
-      selected = questions.filter(q => q.subject === subject);
+      selected = flashcardConceptPool.filter((c) =>
+        (c.sources || []).some((src) => normalizeBarSubject(src.subject) === subject)
+      );
     } else {
-      // Random / All
+      selected = [...flashcardConceptPool];
+    }
+
+    if (selected.length === 0) {
+      setFlashcardDeckError(
+        subject
+          ? `No key legal concepts found for ${subject} yet. Try another subject, All subjects, or use bar questions below.`
+          : 'No key legal concepts are available yet. Use bar exam questions below, or run your digest pipeline to fill legal_concepts.'
+      );
+      return;
+    }
+
+    for (let i = selected.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [selected[i], selected[j]] = [selected[j], selected[i]];
+    }
+
+    setFlashcardQuestions(selected);
+    setFlashcardIndex(0);
+    setFlashcardState('active');
+  };
+
+  const handleStartBarFlashcards = (subject) => {
+    if (subject === 'CANCEL') {
+      setMode('supreme_decisions');
+      return;
+    }
+    setFlashcardDeckError(null);
+    setFlashcardVariant('bar');
+
+    let selected = [];
+    if (subject) {
+      selected = questions.filter((q) => normalizeBarSubject(q.subject) === subject);
+    } else {
       selected = [...questions];
     }
 
-    // Preserve the randomized order from the fetch shuffle
+    if (selected.length === 0) {
+      setFlashcardDeckError(
+        subject ? `No bar questions for ${subject} in the loaded set.` : 'No bar questions loaded.'
+      );
+      return;
+    }
+
+    for (let i = selected.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [selected[i], selected[j]] = [selected[j], selected[i]];
+    }
 
     setFlashcardQuestions(selected);
     setFlashcardIndex(0);
@@ -305,6 +486,8 @@ function App() {
   const handleToggleFlashcard = () => {
     setMode('flashcard');
     setFlashcardState('setup');
+    setFlashcardDeckError(null);
+    setFlashcardVariant('concepts');
   };
 
   // Handle Native Fullscreen
@@ -407,11 +590,11 @@ function App() {
 
             {/* Content Area - Always mounted so scroll position is preserved */}
             <div aria-hidden={isLexPlayerFull ? "true" : undefined} className={isLexPlayerFull ? "pointer-events-none" : ""}>
-              {loading ? (
+              {loading && effectiveMode !== 'flashcard' ? (
                 <div className="flex justify-center items-center h-64">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                 </div>
-              ) : error ? (
+              ) : error && effectiveMode !== 'flashcard' ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center space-y-6">
                   <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.3)]">
                     <AlertTriangle size={40} />
@@ -438,24 +621,35 @@ function App() {
                   {effectiveMode === 'supreme_decisions' && (
                     <SupremeDecisions
                       externalSelectedCase={globalSelectedCase}
-                      onCaseSelect={setGlobalSelectedCase}
+                      onCaseSelect={selectGlobalCase}
                     />
                   )}
                   {effectiveMode === 'codex' && selectedCodalCode && (
                     <CodexViewer
                       shortName={selectedCodalCode.toUpperCase()}
-                      onCaseSelect={setGlobalSelectedCase}
+                      onCaseSelect={selectGlobalCase}
                       isFullscreen={isFullscreen}
                       onToggleFullscreen={handleToggleFullscreen}
                       subscriptionTier={tier}
                     />
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
-                    <FlashcardSetup onStart={handleStartFlashcard} />
+                    <FlashcardSetup
+                      onStart={handleStartFlashcard}
+                      onStartBar={handleStartBarFlashcards}
+                      conceptsLoading={flashcardConceptsLoading}
+                      conceptsError={flashcardConceptsError}
+                      deckError={flashcardDeckError}
+                      subjectCounts={flashcardSubjectCounts}
+                      barSubjectCounts={barFlashcardSubjectCounts}
+                      barAvailable={!loading && !error && questions.length > 0}
+                      onRetryConcepts={refetchFlashcardConcepts}
+                    />
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && (
                     <Flashcard
-                      question={flashcardQuestions[flashcardIndex]}
+                      variant={flashcardVariant}
+                      card={flashcardQuestions[flashcardIndex]}
                       total={flashcardQuestions.length}
                       currentIndex={flashcardIndex}
                       onNext={handleNextFlashcard}
@@ -579,8 +773,8 @@ function App() {
       {globalSelectedCase && (
         <CaseDecisionModal
           decision={globalSelectedCase}
-          onClose={() => setGlobalSelectedCase(null)}
-          onCaseSelect={setGlobalSelectedCase}
+          onClose={closeGlobalCaseModal}
+          onCaseSelect={selectGlobalCase}
         />
       )}
 

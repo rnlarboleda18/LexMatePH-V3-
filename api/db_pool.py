@@ -8,22 +8,22 @@ the next call. This gives connection reuse without any borrow/return ceremony
 but put_db_connection() is now a no-op (the connection stays open for the
 lifetime of the thread).
 """
-import os
 import threading
 import logging
 import psycopg2
 
-# Read from environment variable - never hardcode credentials
-DB_CONNECTION_STRING = os.environ.get(
-    "DB_CONNECTION_STRING",
-    # Fallback pointing to Azure Cloud DB (Sanitized for GitHub)
-    "postgresql://bar_admin:[DB_PASSWORD]@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
-)
+# Single source of truth: config.py resolves LOCAL_DB_CONNECTION_STRING when ENVIRONMENT=local
+from config import DB_CONNECTION_STRING
 
 _local = threading.local()
 
 
 def _new_conn():
+    if not DB_CONNECTION_STRING or not str(DB_CONNECTION_STRING).strip():
+        raise RuntimeError(
+            "Database not configured: set DB_CONNECTION_STRING, or ENVIRONMENT=local with LOCAL_DB_CONNECTION_STRING "
+            "(see api/config.py)."
+        )
     conn = psycopg2.connect(
         DB_CONNECTION_STRING,
         connect_timeout=10
