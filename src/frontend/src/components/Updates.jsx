@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Twitter, 
-  Facebook, 
-  ExternalLink, 
-  Bell, 
-  Calendar, 
-  Scale, 
-  FileText, 
+import {
+  Twitter,
+  Facebook,
+  ExternalLink,
+  Bell,
+  Scale,
+  FileText,
   Newspaper,
   ChevronRight,
   Info,
-  Clock,
   ShieldCheck,
-  Globe,
   Zap,
   Bookmark
 } from 'lucide-react';
+import FeaturePageShell from './FeaturePageShell';
 
 const Updates = () => {
   const [latestDecisions, setLatestDecisions] = useState([]);
@@ -65,30 +63,12 @@ const Updates = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] p-4 md:p-8 animate-in fade-in duration-700 pb-24">
-      {/* Premium Header */}
-      <header className="relative mb-12 py-10 rounded-3xl overflow-hidden border border-white/20 dark:border-white/5 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 opacity-90 animate-gradient"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-        
-        <div className="relative z-10 text-center px-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 animate-float">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            <span className="text-white text-xs font-bold tracking-widest uppercase">Live Legal Intelligence</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
-            Updates & <span className="text-amber-400">Jurisprudence</span>
-          </h1>
-          <p className="text-indigo-100 max-w-2xl mx-auto text-lg font-medium opacity-90">
-            Real-time insights from the Supreme Court, automated social feeds, and specialized resources for the 2026 Bar Examinations.
-          </p>
-        </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto space-y-12">
+    <FeaturePageShell
+      icon={Newspaper}
+      title="Updates"
+      subtitle="SC news, Bar 2026 resources & social feeds"
+    >
+      <div className="animate-in fade-in space-y-12 pb-12 duration-700">
         {/* Bar 2026 Featured Section */}
         <section>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -327,7 +307,7 @@ const Updates = () => {
           </div>
         </div>
       </div>
-    </div>
+    </FeaturePageShell>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronRight, RotateCcw, X } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
+import { SubjectIcon } from '../utils/subjectIcons';
 
 /** Meta + actions repeated on front/back so nothing sits outside the flip as a separate “bar”. */
 const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, onClose }) => {
@@ -37,7 +38,13 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderMetaRow = () => (
         <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 pt-4 pb-2 sm:px-5 md:px-6">
-            <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+            <div className="flex min-w-0 items-center gap-2 sm:gap-2.5">
+                <div
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/50 bg-white/70 shadow-sm dark:border-white/10 dark:bg-slate-800/80 ${textColor}`}
+                    title={primarySubject}
+                >
+                    <SubjectIcon subject={primarySubject} className="h-[18px] w-[18px] md:h-5 md:w-5" />
+                </div>
                 <span className={`min-w-0 truncate text-[15px] font-medium leading-snug md:text-[17px] ${textColor}`}>
                     {primarySubject}
                 </span>

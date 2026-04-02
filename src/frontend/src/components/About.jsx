@@ -1,79 +1,109 @@
 import React from 'react';
-import { BookOpen, Brain, Search, Scale } from 'lucide-react';
+import {
+  Brain,
+  SquareStack,
+  Headphones,
+  Gavel,
+  Library,
+  Book,
+  Scale,
+} from 'lucide-react';
+import FeaturePageShell from './FeaturePageShell';
+
+/** Feature cards (excludes About / Updates — those are separate nav items, not listed here). */
+const FEATURES = [
+  {
+    icon: Brain,
+    title: 'Lexify',
+    color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
+    description:
+      'Timed mock-bar sessions modeled on the exam format for stamina, focus, and self-assessment (where your plan allows).',
+  },
+  {
+    icon: SquareStack,
+    title: 'Flashcards',
+    color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400',
+    description: 'Flip through concept decks tied to your materials to reinforce doctrines and definitions.',
+  },
+  {
+    icon: Headphones,
+    title: 'LexPlay',
+    color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
+    description: 'Listen to LexMatePH audio content alongside your study flow.',
+  },
+  {
+    icon: Gavel,
+    title: 'SC Decisions',
+    color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
+    description:
+      'Browse Supreme Court decisions and case-style digests. Digests may be AI-assisted—verify against full text and official sources.',
+  },
+  {
+    icon: Library,
+    title: 'LexCode',
+    color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+    description:
+      'Read major codals and statutes (RPC, Civil Code, Rules of Court, Constitution, Labor Code, and more) in one place.',
+  },
+  {
+    icon: Book,
+    title: 'Bar Questions',
+    color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-500',
+    description:
+      'Actual past Philippine Bar Examination questions with suggested answers for structured review.',
+  },
+];
 
 const About = () => {
-    return (
-        <div className="max-w-4xl mx-auto px-6 py-12">
-            {/* Hero Section */}
-            <div className="text-center mb-16">
-                <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-blue-100 dark:bg-blue-900/30 rounded-2xl">
-                        <Scale className="w-16 h-16 text-blue-600 dark:text-blue-400" />
-                    </div>
-                </div>
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Philippine Bar Reviewer
-                </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    Your comprehensive companion for mastering the Philippine Bar Examinations.
-                    Designed to help you study smarter, not harder.
-                </p>
-            </div>
-
-            {/* Features Grid */}
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-                <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-6">
-                        <Search className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Smart Search
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        Instantly find questions across all subjects and years. Filter by topic, year, or keyword to focus your review.
-                    </p>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6">
-                        <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Flashcard Mode
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        Test your recall with interactive flashcards. Perfect for memorizing key doctrines and provisions on the go.
-                    </p>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6">
-                        <Brain className="w-6 h-6 text-green-600 dark:text-green-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                        Mock Bar
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        Simulate the actual exam experience with randomized mock tests. Build stamina and confidence for the big day.
-                    </p>
-                </div>
-            </div>
-
-            {/* Mission / Disclaimer */}
-            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                    About This Project
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    This application aggregates past Philippine Bar Examination questions and answers from various sources, including the UPLC and other legal resources. It is intended for educational purposes to assist law students and bar reviewees.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-500">
-                    Disclaimer: While we strive for accuracy, please verify all answers with the latest jurisprudence and laws. This tool is a study aid and not a substitute for official legal advice or primary sources.
-                </p>
-            </div>
-
+  return (
+    <FeaturePageShell icon={Scale} title="LEXMATEPH" subtitle="YOUR LEGAL COMPANION">
+      <div className="mx-auto max-w-4xl space-y-8">
+        <div className="glass rounded-xl border border-white/40 bg-white/45 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
+          <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">About this App</h3>
+          <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+            LexMatePH is built for more than bar review alone. Whether you are a law student, professor, bar
+            candidate, or practitioner, you can use these tools to explore codals, past bar questions, Supreme Court
+            materials, and study aids in one workspace.
+          </p>
+          <ul className="mb-4 list-inside list-disc space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <li>
+              <span className="font-semibold text-gray-800 dark:text-gray-200">Bar Questions</span> are actual past
+              Philippine Bar Examination questions, presented with suggested answers to support your review.
+            </li>
+            <li>
+              <span className="font-semibold text-gray-800 dark:text-gray-200">Case digests</span> and related summary
+              content may be produced or assisted by AI. They are meant for quick orientation only—always read the
+              underlying decisions and verify against official reporters and current law.
+            </li>
+          </ul>
+          <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-500">
+            Disclaimer: Content is for education and research, not legal advice. Verify critical points with primary
+            sources, the latest jurisprudence, and applicable statutes. LexMatePH does not replace professional judgment
+            or counsel.
+          </p>
         </div>
-    );
+
+        <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+          LexMate Features at a glance
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {FEATURES.map(({ icon: Icon, title, description, color }) => (
+            <div
+              key={title}
+              className="glass rounded-xl border border-white/40 bg-white/45 p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/35"
+            >
+              <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${color}`}>
+                <Icon className="h-5 w-5" strokeWidth={2} />
+              </div>
+              <h3 className="mb-1.5 text-base font-bold text-gray-900 dark:text-white">{title}</h3>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </FeaturePageShell>
+  );
 };
 
 export default About;

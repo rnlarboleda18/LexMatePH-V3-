@@ -959,18 +959,18 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
                     aria-hidden
                 />
-                <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
                     <div
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
                         aria-hidden
                     >
-                        <Gavel className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                        <Gavel className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
                     </div>
-                    <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
-                        <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                    <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
+                        <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
                             Supreme Court Decisions
                         </h1>
-                        <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                        <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
                             Case digests & jurisprudence
                         </p>
                     </div>
@@ -1130,8 +1130,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     </div>
                 )}
 
-                {/* Results — codal-style compact cards */}
-                <div className="flex flex-col space-y-2 sm:space-y-2.5">
+                {/* Results — codal-style compact cards (two columns on md+) */}
+                <div className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-2 md:gap-3">
                     {hasInitialLoaded && !fetchError && searchResults.length === 0 && !loading && (
                         <div className="text-center py-8 text-gray-500">
                             <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
@@ -1163,7 +1163,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className={`group glass bg-white/60 dark:bg-slate-800/40 rounded-lg border border-white/40 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
+                                className={`group min-w-0 glass bg-white/60 dark:bg-slate-800/40 rounded-lg border border-white/40 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
                             >
                                 <div
                                     role="button"

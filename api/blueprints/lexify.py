@@ -10,6 +10,41 @@ from utils.clerk_auth import get_authenticated_user_id
 lexify_bp = func.Blueprint()
 
 
+def _resolve_gemini_api_key() -> str | None:
+    """Gemini key from env. Order matches typical Azure + local naming."""
+    for name in (
+        "GEMINI_API_KEY",
+        "GOOGLE_API_KEY",
+        "AI_API_KEY",  # some Azure app settings use this label
+    ):
+        v = os.environ.get(name)
+        if v and str(v).strip():
+            return str(v).strip()
+    return None
+
+
+def _gemini_error_user_message(response_data: dict) -> str | None:
+    """Return a short message if the failure is key-related (for 400/403)."""
+    try:
+        err = response_data.get("error") or {}
+        msg = (err.get("message") or "").lower()
+        status = (err.get("status") or "").upper()
+        if status == "INVALID_ARGUMENT" and ("api key" in msg or "expired" in msg):
+            return (
+                "Gemini API key is missing, invalid, or expired. "
+                "Set GEMINI_API_KEY, GOOGLE_API_KEY, or AI_API_KEY to match your Azure Function App configuration "
+                "(for local dev: api/local.settings.json → Values)."
+            )
+        if "api key" in msg or "api_key_invalid" in str(response_data).lower():
+            return (
+                "Gemini API key rejected. Renew the key in Google AI Studio and update "
+                "the same app setting you use in Azure (GEMINI_API_KEY / GOOGLE_API_KEY / AI_API_KEY)."
+            )
+    except Exception:
+        pass
+    return None
+
+
 ADMIN_EMAILS = [
     "rnlarboleda@gmail.com",
     "rnlarboleda18@gmail.com"
@@ -98,7 +133,7 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=400
             )
 
-        api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        api_key = _resolve_gemini_api_key()
         if not api_key:
             return func.HttpResponse(
                 json.dumps({"error": "Gemini API key not configured"}),
@@ -144,6 +179,13 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
 
         if response.status_code != 200:
             logging.error(f"Gemini API error: {response_data}")
+            friendly = _gemini_error_user_message(response_data if isinstance(response_data, dict) else {})
+            if friendly:
+                return func.HttpResponse(
+                    json.dumps({"error": friendly}),
+                    mimetype="application/json",
+                    status_code=502
+                )
             return func.HttpResponse(
                 json.dumps({"error": "AI Grading service error", "detail": str(response_data)}),
                 mimetype="application/json",

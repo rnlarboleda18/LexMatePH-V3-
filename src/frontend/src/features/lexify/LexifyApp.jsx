@@ -9,7 +9,7 @@ import LexifyResults from './LexifyResults';
 
 // ... state definitions intact
 
-const LexifyApp = ({ questions: propQuestions, onClose }) => {
+const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }) => {
     const [examState, setExamState] = useState(0);
     const [activeQuestions, setActiveQuestions] = useState(propQuestions || []);
     const [examLabel, setExamLabel] = useState('');
@@ -29,6 +29,14 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
     const [examStartTime, setExamStartTime] = useState(null);
     const [timeUsed, setTimeUsed] = useState(0);
     const [showDisclaimer, setShowDisclaimer] = useState(false); // Added for custom disclaimer overlay
+
+    // Tell App to hide minimized LexPlayer during simulation (loading, lockdown, exam, submit, grading — not dashboard or results).
+    useEffect(() => {
+        if (!onExamSimulationChange) return;
+        const inSimulation = examState !== 0 && examState !== 6;
+        onExamSimulationChange(inSimulation);
+        return () => onExamSimulationChange(false);
+    }, [examState, onExamSimulationChange]);
 
     // Security: Alert on tab switch during active exam
     useEffect(() => {
@@ -157,7 +165,7 @@ const LexifyApp = ({ questions: propQuestions, onClose }) => {
                         });
                         if (!res.ok) {
                             const errData = await res.json().catch(() => ({}));
-                            setGradingError(errData.detail || errData.error || `Grading failed (Status ${res.status})`);
+                            setGradingError(errData.error || errData.detail || `Grading failed (Status ${res.status})`);
                             return null;
                         }
                         return await res.json();

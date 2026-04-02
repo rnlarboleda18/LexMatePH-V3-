@@ -165,7 +165,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             {/* Sidebar (Navigation Drawer) */}
             {!isFullscreen && (
                 <aside
-                    className={`fixed left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
+                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white xl:bg-white/40 xl:backdrop-blur-xl border-r border-white/40 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
@@ -188,14 +188,14 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             {/* Main Content Area */}
             <main
                 className={`${isFullscreen ? 'pt-0' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
-        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
+        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
                 <div
                     className={`${
                         isFullscreen
                             ? 'max-w-full'
-                            : mode === 'codex'
+                            : ['codex', 'about', 'updates', 'quiz'].includes(mode)
                               ? 'max-w-full ml-0'
                               : mainFullWidth
                                 ? 'mx-auto w-full max-w-none'

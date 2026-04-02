@@ -4,8 +4,30 @@ import { useLexPlay } from './useLexPlay';
 import {
     Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
     Volume2, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown,
-    DownloadCloud, CheckCircle2, Loader2
+    DownloadCloud, CheckCircle2, Loader2, Eraser,
 } from 'lucide-react';
+
+/** Remove one track’s audio from the Cache Storage `audio-cache` bucket (matches buildAudioUrl @ rate 1.0). */
+async function removeTrackAudioFromCache(track, buildAudioUrlFn) {
+    if (!track?.id || !track?.type || !('caches' in window)) return false;
+    const rel = buildAudioUrlFn(track, 1.0);
+    if (!rel) return false;
+    const cache = await caches.open('audio-cache');
+    const abs = new URL(rel, window.location.origin).href;
+    let removed = (await cache.delete(rel)) || (await cache.delete(abs));
+    if (!removed) {
+        const keys = await cache.keys();
+        const needle = `/api/audio/${track.type}/${track.id}`;
+        for (const req of keys) {
+            if (req.url.includes(needle)) {
+                await cache.delete(req);
+                removed = true;
+                break;
+            }
+        }
+    }
+    return removed;
+}
 
 // Custom modern dropdown for playlists
 const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a Playlist..." }) => {
@@ -199,7 +221,7 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
 /**
  * PlaylistItem: Memoized track item to prevent re-rendering when other items are interacting.
  */
-const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, isDownloaded: isDownloadedProp, onPlay, onRemove, onDownloadSuccess }) => {
+const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, isDownloaded: isDownloadedProp, onPlay, onRemove, onDownloadSuccess, onClearDownload }) => {
     const [isDownloading, setIsDownloading] = useState(false);
     const isDownloaded = isDownloadedProp;
 
@@ -288,11 +310,28 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                 <h4 className={`text-[13px] font-bold leading-snug truncate tracking-tight ${isActive ? 'text-white' : 'text-white/85'}`}>{item?.title}</h4>
                 <p className="text-[10px] font-semibold text-white/35 truncate uppercase tracking-[0.12em] mt-0.5">{item?.subtitle}</p>
             </div>
-            <div className="flex items-center gap-0.5 shrink-0">
+            <div className="flex items-center gap-1 shrink-0">
                 {isDownloaded ? (
-                    <div className="p-2 rounded-xl text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20" title="Cached offline">
-                        <CheckCircle2 size={18} strokeWidth={2.25} />
-                    </div>
+                    <>
+                        <div
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-emerald-500/35 bg-emerald-500/12 text-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.12)]"
+                            title="Saved offline — plays without network"
+                            aria-label="Saved offline"
+                        >
+                            <CheckCircle2 size={17} strokeWidth={2.35} className="drop-shadow-[0_0_6px_rgba(52,211,153,0.35)]" />
+                        </div>
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onClearDownload?.(item);
+                            }}
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50 transition-colors hover:border-rose-500/35 hover:bg-rose-500/15 hover:text-rose-200"
+                            title="Remove offline copy from device"
+                        >
+                            <Eraser size={16} strokeWidth={2.25} />
+                        </button>
+                    </>
                 ) : (
                     <button
                         type="button"
@@ -318,7 +357,7 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
 });
 
 // Note: NOT using React.memo here so downloadedTrackIds changes always propagate
-const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, downloadedIds, onPlay, onRemove, onDownloadSuccess }) => {
+const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, downloadedIds, onPlay, onRemove, onDownloadSuccess, onClearDownload }) => {
     const containerRef = useRef(null);
     // Convert array back to Set for O(1) lookup
     const downloadedSet = useMemo(() => new Set(downloadedIds), [downloadedIds]);
@@ -377,6 +416,7 @@ const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, downlo
                                     onPlay={() => onPlay?.(index)} 
                                     onRemove={() => onRemove?.(item, index)}
                                     onDownloadSuccess={onDownloadSuccess}
+                                    onClearDownload={onClearDownload}
                                 />
                             </div>
                         );
@@ -388,7 +428,7 @@ const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, downlo
 };
 
 // Note: NOT using React.memo here - downloadedTrackIds must always propagate
-const PlaylistList = ({ playlist, currentIndex, isPlaying, downloadedTrackIds, onPlay, onRemove, onDownloadSuccess }) => {
+const PlaylistList = ({ playlist, currentIndex, isPlaying, downloadedTrackIds, onPlay, onRemove, onDownloadSuccess, onClearDownload }) => {
     // Convert Set to sorted array so React can do equality checks between renders
     const downloadedIds = useMemo(() => Array.from(downloadedTrackIds || []).sort(), [downloadedTrackIds]);
     return (
@@ -400,6 +440,7 @@ const PlaylistList = ({ playlist, currentIndex, isPlaying, downloadedTrackIds, o
             onPlay={onPlay}
             onRemove={onRemove}
             onDownloadSuccess={onDownloadSuccess}
+            onClearDownload={onClearDownload}
         />
     );
 };
@@ -420,6 +461,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
         removeFromPlaylist,
         playTrack,
         savedPlaylists,
+        playlistFetchError,
         activePlaylistId,
         addBulkToSpecificPlaylist,
         removeFromSpecificPlaylist,
@@ -548,6 +590,30 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
             setIsDownloadingAll(false);
         }
     };
+
+    const clearTrackFromCache = useCallback(
+        async (track) => {
+            try {
+                await removeTrackAudioFromCache(track, buildAudioUrl);
+                await updateCachedCount();
+            } catch (e) {
+                console.warn('Clear track cache failed:', e);
+            }
+        },
+        [buildAudioUrl, updateCachedCount]
+    );
+
+    const clearQueueCachedTracks = useCallback(async () => {
+        if (!playlist?.length || !('caches' in window)) return;
+        try {
+            for (const track of playlist) {
+                await removeTrackAudioFromCache(track, buildAudioUrl);
+            }
+            await updateCachedCount();
+        } catch (e) {
+            console.warn('Clear queue cache failed:', e);
+        }
+    }, [playlist, buildAudioUrl, updateCachedCount]);
 
     // Force fetch playlists when the player is opened/mounted
     useEffect(() => {
@@ -1061,28 +1127,44 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                             </div>
                             <div className="flex items-center gap-2 shrink-0">
                                 {playlist.length > 0 && (
-                                    <button
-                                        type="button"
-                                        onClick={handleDownloadAll}
-                                        disabled={isDownloadingAll}
-                                        className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${isDownloadingAll ? 'border-purple-400/30 bg-purple-500/15 text-purple-200' : cachedCount === playlist.length ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-400' : 'border-white/10 bg-white/[0.04] text-white/55 hover:border-white/20 hover:bg-white/[0.08] hover:text-white'}`}
-                                        title={cachedCount === playlist.length ? "All tracks cached for offline" : (cachedCount > 0 ? `${cachedCount}/${playlist.length} items cached` : "Download all for offline")}
-                                    >
-                                        {isDownloadingAll ? (
-                                            <Loader2 className="w-5 h-5 animate-spin" strokeWidth={2.5} />
-                                        ) : cachedCount === playlist.length ? (
-                                            <CheckCircle2 className="w-5 h-5" strokeWidth={2.25} />
-                                        ) : (
-                                            <div className="relative flex items-center justify-center">
-                                                <DownloadCloud className="w-5 h-5" strokeWidth={2} />
-                                                {cachedCount > 0 && (
-                                                    <span className="absolute -right-1 -top-1 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-emerald-500 px-0.5 text-[8px] font-black text-white ring-2 ring-slate-950">
-                                                        {cachedCount}
-                                                    </span>
-                                                )}
-                                            </div>
+                                    <>
+                                        <button
+                                            type="button"
+                                            onClick={handleDownloadAll}
+                                            disabled={isDownloadingAll}
+                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${isDownloadingAll ? 'border-purple-400/30 bg-purple-500/15 text-purple-200' : cachedCount === playlist.length ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-400' : 'border-white/10 bg-white/[0.04] text-white/55 hover:border-white/20 hover:bg-white/[0.08] hover:text-white'}`}
+                                            title={cachedCount === playlist.length ? "All tracks cached for offline" : (cachedCount > 0 ? `${cachedCount}/${playlist.length} items cached` : "Download all for offline")}
+                                        >
+                                            {isDownloadingAll ? (
+                                                <Loader2 className="w-5 h-5 animate-spin" strokeWidth={2.5} />
+                                            ) : cachedCount === playlist.length ? (
+                                                <CheckCircle2 className="w-5 h-5" strokeWidth={2.25} />
+                                            ) : (
+                                                <div className="relative flex items-center justify-center">
+                                                    <DownloadCloud className="w-5 h-5" strokeWidth={2} />
+                                                    {cachedCount > 0 && (
+                                                        <span className="absolute -right-1 -top-1 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-emerald-500 px-0.5 text-[8px] font-black text-white ring-2 ring-slate-950">
+                                                            {cachedCount}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </button>
+                                        {cachedCount > 0 && !isDownloadingAll && (
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    if (window.confirm(`Remove offline copies for all ${cachedCount} cached track(s) in this queue?`)) {
+                                                        clearQueueCachedTracks();
+                                                    }
+                                                }}
+                                                className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border border-rose-500/25 bg-rose-500/10 text-rose-200/95 transition-all hover:border-rose-400/40 hover:bg-rose-500/20"
+                                                title="Clear offline copies for this queue"
+                                            >
+                                                <Eraser className="h-5 w-5" strokeWidth={2.25} />
+                                            </button>
                                         )}
-                                    </button>
+                                    </>
                                 )}
                             </div>
                         </div>
@@ -1105,25 +1187,36 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
 
                         <div className="border-b border-white/[0.05] bg-gradient-to-b from-white/[0.03] to-transparent px-4 py-5 md:px-5">
                             {!isCreating ? (
-                                <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-                                    <button
-                                        type="button"
-                                        onClick={() => setIsCreating(true)}
-                                        className="sm:w-auto shrink-0 rounded-2xl border border-purple-400/35 bg-purple-500/15 px-4 py-3 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-purple-100 transition-all hover:border-purple-300/50 hover:bg-purple-500/25 active:scale-[0.98]"
-                                    >
-                                        New playlist
-                                    </button>
-                                    <div className="min-w-0 flex-1">
-                                        <CustomPlaylistSelect
-                                            value={activePlaylistId || ''}
-                                            onChange={(val) => val && loadSavedPlaylist(val)}
-                                            options={savedPlaylists.map(p => ({
-                                                value: p.id,
-                                                label: `${p.name} (${p.item_count || 0})`
-                                            }))}
-                                        />
+                                <>
+                                    <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsCreating(true)}
+                                            className="sm:w-auto shrink-0 rounded-2xl border border-purple-400/35 bg-purple-500/15 px-4 py-3 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-purple-100 transition-all hover:border-purple-300/50 hover:bg-purple-500/25 active:scale-[0.98]"
+                                        >
+                                            New playlist
+                                        </button>
+                                        <div className="min-w-0 flex-1">
+                                            <CustomPlaylistSelect
+                                                value={activePlaylistId || ''}
+                                                onChange={(val) => val && loadSavedPlaylist(val)}
+                                                options={savedPlaylists.map(p => ({
+                                                    value: p.id,
+                                                    label: `${p.name} (${p.item_count || 0})`
+                                                }))}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
+                                    {playlistFetchError && (
+                                        <p className="mt-3 text-[11px] leading-relaxed text-amber-200/90">
+                                            {playlistFetchError === 'unauthorized'
+                                                ? 'Playlists could not be loaded (server rejected the session). Try refreshing the page.'
+                                                : playlistFetchError === 'network'
+                                                  ? 'Could not reach the server to load playlists. Check your connection.'
+                                                  : 'Playlists could not be loaded.'}
+                                        </p>
+                                    )}
+                                </>
                             ) : (
                                 <div className="flex flex-wrap items-center gap-2">
                                     <input type="text" placeholder="Playlist name…" value={newPlaylistName} onChange={(e) => setNewPlaylistName(e.target.value)} className="min-w-[10rem] flex-1 rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none ring-0 focus:border-purple-400/40 focus:bg-white/[0.07]" autoFocus />
@@ -1179,6 +1272,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                                 onPlay={handlePlaylistPlay}
                                 onRemove={handlePlaylistRemove}
                                 onDownloadSuccess={(id) => setDownloadedTrackIds(prev => new Set(prev).add(String(id)))}
+                                onClearDownload={clearTrackFromCache}
                             />
                         </div>
                     </div>

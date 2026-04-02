@@ -16,6 +16,8 @@ export const LexPlayProvider = ({ children }) => {
     const { getToken, isLoaded, isSignedIn } = useAuth();
     const [playlist, setPlaylist] = useState([]); // This is the "Active Queue"
     const [savedPlaylists, setSavedPlaylists] = useState([]);
+    /** Set when GET /api/playlists fails (e.g. 401) so UI can explain empty dropdown while signed in */
+    const [playlistFetchError, setPlaylistFetchError] = useState(null);
     const [activePlaylistId, setActivePlaylistId] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -215,16 +217,35 @@ export const LexPlayProvider = ({ children }) => {
     const fetchPlaylists = useCallback(async () => {
         if (!isLoaded || !isSignedIn) {
             setSavedPlaylists([]);
+            setPlaylistFetchError(null);
             return;
         }
         try {
+            // Single getToken via getAuthHeaders. Do not bail if getToken() is briefly null while
+            // isSignedIn is true — Clerk can resolve the token on the next effect run; retry still runs.
             const headers = await getAuthHeaders();
             const res = await fetch('/api/playlists', { headers });
             if (res.ok) {
                 const data = await res.json();
-                setSavedPlaylists(data);
+                setSavedPlaylists(Array.isArray(data) ? data : []);
+                setPlaylistFetchError(null);
+                return;
             }
-        } catch (e) { console.error("Failed to fetch playlists:", e); }
+            let detail = '';
+            try {
+                const j = await res.json();
+                detail = j.details || j.error || '';
+            } catch {
+                detail = await res.text();
+            }
+            console.warn('[LexPlay] GET /api/playlists failed', res.status, detail);
+            setSavedPlaylists([]);
+            setPlaylistFetchError(res.status === 401 ? 'unauthorized' : `http_${res.status}`);
+        } catch (e) {
+            console.error('Failed to fetch playlists:', e);
+            setSavedPlaylists([]);
+            setPlaylistFetchError('network');
+        }
     }, [isLoaded, isSignedIn, getToken]);
 
     useEffect(() => {
@@ -739,6 +760,7 @@ export const LexPlayProvider = ({ children }) => {
         
         // Playlist API Context
         savedPlaylists,
+        playlistFetchError,
         activePlaylistId,
         fetchPlaylists,
         createPlaylist,
@@ -764,6 +786,7 @@ export const LexPlayProvider = ({ children }) => {
         handleScrubBackward,
         isDrawerOpen,
         savedPlaylists,
+        playlistFetchError,
         activePlaylistId,
         addToPlaylist,
         playNow,

@@ -17,11 +17,12 @@ import SubscriptionModal from './components/SubscriptionModal';
 import UpgradeWall from './components/UpgradeWall';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
-import { RefreshCcw, AlertTriangle, ClipboardList, Brain, Library } from 'lucide-react';
+import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import { normalizeBarSubject } from './utils/subjectNormalize';
 import { apiUrl } from './utils/apiUrl';
 import { useSubscription } from './context/SubscriptionContext';
 import ErrorBoundary from './components/ErrorBoundary';
+import FeaturePageShell from './components/FeaturePageShell';
 
 /** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
 const CODAL_FILTER_OPTIONS = [
@@ -65,6 +66,8 @@ function App() {
   const [flashcardDeckError, setFlashcardDeckError] = useState(null);
   /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to Dark Mode
+  /** Hide minimized LexPlayer during Lexify exam simulation (not dashboard / results). */
+  const [lexifyExamSimulationActive, setLexifyExamSimulationActive] = useState(false);
   // Global case modal state (shared between SC Decisions and Codex)
   const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
   /** Only block ghost-tap reopen of the *same* case right after close (not all case opens — that broke sync + other picks). */
@@ -608,57 +611,32 @@ function App() {
                           className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
                           aria-hidden
                         />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
                           <div
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
                             aria-hidden
                           >
-                            <Library className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                            <Library className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
                           </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
-                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
+                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
                               LexCode
                             </h1>
-                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
                               Philippine codals & statutes
                             </p>
                           </div>
                         </div>
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                        <div className="glass mb-4 rounded-lg border border-white/40 bg-white/45 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/35">
-                          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-                            <div className="min-w-0 flex-1">
-                              <label htmlFor="lexcode-codal-filter" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                                Codal
-                              </label>
-                              <select
-                                id="lexcode-codal-filter"
-                                value={selectedCodalCode}
-                                onChange={(e) => {
-                                  const v = e.target.value;
-                                  if (!v) return;
-                                  setSelectedCodalCode(v);
-                                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                className="block w-full max-w-md pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
-                              >
-                                {CODAL_FILTER_OPTIONS.map((opt) => (
-                                  <option key={opt.id} value={opt.id} disabled={opt.disabled}>
-                                    {opt.label}
-                                    {opt.disabled ? ' (Soon)' : ''}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                            <div className="inline-flex shrink-0 items-center rounded-full border border-amber-200/60 bg-amber-50/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/30 dark:text-amber-300">
-                              {selectedCodalCode.toUpperCase()}
-                            </div>
-                          </div>
-                        </div>
-
                         <LexCodeViewer
                           shortName={selectedCodalCode.toUpperCase()}
+                          codalOptions={CODAL_FILTER_OPTIONS}
+                          selectedCodal={selectedCodalCode}
+                          onCodalChange={(id) => {
+                            setSelectedCodalCode(id);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
                           onCaseSelect={selectGlobalCase}
                           isFullscreen={isFullscreen}
                           onToggleFullscreen={handleToggleFullscreen}
@@ -681,18 +659,18 @@ function App() {
                           className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
                           aria-hidden
                         />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
                           <div
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
                             aria-hidden
                           >
-                            <Brain className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                            <SquareStack className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
                           </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
-                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
+                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
                               Flashcards
                             </h1>
-                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
                               Concept and Bar exam study deck
                             </p>
                           </div>
@@ -732,13 +710,20 @@ function App() {
                       <LexifyApp
                         questions={questions}
                         onClose={() => setMode('supreme_decisions')}
+                        onExamSimulationChange={setLexifyExamSimulationActive}
                       />
                     ) : (
-                      <div className="flex items-center justify-center min-h-[60vh]">
-                        <div className="max-w-md w-full">
-                          <UpgradeWall feature="lexify" variant="inline" />
+                      <FeaturePageShell
+                        icon={Brain}
+                        title="Lexify"
+                        subtitle="2026 Philippine Bar mock exams · upgrade to unlock"
+                      >
+                        <div className="flex min-h-[40vh] items-center justify-center">
+                          <div className="w-full max-w-md">
+                            <UpgradeWall feature="lexify" variant="inline" />
+                          </div>
                         </div>
-                      </div>
+                      </FeaturePageShell>
                     )
                   )}
                   {effectiveMode === 'browse_bar' && (
@@ -755,18 +740,18 @@ function App() {
                           className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
                           aria-hidden
                         />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-3 px-3 py-3.5 sm:gap-4 sm:px-5 sm:py-4 md:gap-5 md:py-5 lg:gap-6 lg:px-6 lg:py-6">
+                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
                           <div
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 md:h-14 md:w-14 md:rounded-2xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-[3.75rem] lg:w-[3.75rem]"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
                             aria-hidden
                           >
-                            <ClipboardList className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-9 lg:w-9" strokeWidth={2} />
+                            <ClipboardList className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
                           </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-3 dark:border-l-indigo-400 sm:pl-4 md:border-l-4 md:pl-5 lg:pl-6">
-                            <h1 className="truncate text-lg font-bold tracking-tight sm:text-2xl md:text-3xl md:tracking-tight lg:text-[2rem] xl:text-[2.125rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
+                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
+                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
                               Bar Questions
                             </h1>
-                            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 sm:text-[11px] md:mt-1.5 md:text-xs md:tracking-[0.22em] lg:text-sm lg:tracking-[0.18em]">
+                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
                               Actual Bar questions & suggested answers
                             </p>
                           </div>
@@ -889,8 +874,8 @@ function App() {
         />
       )}
 
-      {/* Global Minimized LexPlayer — always visible docked to bottom when not in full LexPlay */}
-      {mode !== 'lexplay' && (
+      {/* Global Minimized LexPlayer — docked to bottom when not in full LexPlay; hidden during Lexify exam simulation */}
+      {mode !== 'lexplay' && !lexifyExamSimulationActive && (
         <ErrorBoundary>
           <LexPlayer
             isMinimized={true}

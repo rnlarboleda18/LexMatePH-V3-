@@ -1,6 +1,5 @@
 import os
 import jwt
-import requests
 import logging
 from jwt import PyJWKClient
 
@@ -9,18 +8,31 @@ from jwt import PyJWKClient
 # However, for JWT validation, we need the JWKS.
 CLERK_SECRET_KEY = (os.environ.get("CLERK_SECRET_KEY") or "").strip().strip("'").strip('"')
 
-# Replace this with your specific Clerk instance URL or use the publishable key to derive it
-# For development, it's often something like:
-# https://capital-ghost-60.clerk.accounts.dev/.well-known/jwks.json
-CLERK_JWKS_URL = "https://capital-ghost-60.clerk.accounts.dev/.well-known/jwks.json"
+# Optional env override; otherwise JWKS is derived from JWT `iss` (see _jwks_url_for_token).
+_DEFAULT_JWKS = "https://capital-ghost-60.clerk.accounts.dev/.well-known/jwks.json"
+CLERK_JWKS_URL = (os.environ.get("CLERK_JWKS_URL") or "").strip() or _DEFAULT_JWKS
 
-_jwks_client = None
+_jwks_clients = {}
 
-def get_jwks_client():
-    global _jwks_client
-    if _jwks_client is None:
-        _jwks_client = PyJWKClient(CLERK_JWKS_URL)
-    return _jwks_client
+
+def _jwks_url_for_token(token):
+    """Use issuer from token so RS256 validates for any Clerk Frontend API domain."""
+    try:
+        payload = jwt.decode(token, options={"verify_signature": False})
+        iss = payload.get("iss")
+        if iss and isinstance(iss, str):
+            return iss.rstrip("/") + "/.well-known/jwks.json"
+    except Exception:
+        pass
+    return CLERK_JWKS_URL
+
+
+def get_jwks_client(jwks_url=None):
+    url = jwks_url or CLERK_JWKS_URL
+    if url not in _jwks_clients:
+        _jwks_clients[url] = PyJWKClient(url)
+    return _jwks_clients[url]
+
 
 def validate_clerk_token(token):
     """
@@ -45,7 +57,8 @@ def validate_clerk_token(token):
             )
             return payload.get("sub"), None
         elif alg == "RS256":
-            client = PyJWKClient(CLERK_JWKS_URL)
+            jwks_url = _jwks_url_for_token(token)
+            client = get_jwks_client(jwks_url)
             signing_key = client.get_signing_key_from_jwt(token)
             payload = jwt.decode(
                 token,
