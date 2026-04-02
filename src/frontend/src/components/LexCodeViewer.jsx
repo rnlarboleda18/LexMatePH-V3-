@@ -113,14 +113,16 @@ const LexCodeViewer = ({
     const suggestionsRef = useRef(null);
     const mainContentRef = useRef(null);
 
-    // Body-scroll lock — simple overflow:hidden (no reflow, no scrollTo)
-    // Only lock on mobile screens (<1024px) where the sidebar renders as a full-screen overlay
-    const isSidebarActive = !!(activeJurisArticle || activeAmendmentArticle);
+    // Body-scroll lock on mobile when any LexCode drawer overlay is open (TOC or juris/amendments)
+    const isMobileOverlayOpen =
+        isSidebarOpen || !!(activeJurisArticle || activeAmendmentArticle);
     useEffect(() => {
-        if (!isSidebarActive || window.innerWidth >= 1024) return;
+        if (!isMobileOverlayOpen || typeof window === 'undefined' || window.innerWidth >= 1024) return;
         document.body.style.overflow = 'hidden';
-        return () => { document.body.style.overflow = ''; };
-    }, [isSidebarActive]);
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMobileOverlayOpen]);
 
     // Toggle TOC group expansion
     const toggleGroup = (idx) => {
@@ -450,15 +452,24 @@ const LexCodeViewer = ({
                 </div>
             </div>
 
-            {/* Mobile/Overlay Sidebar (for smaller screens) */}
+            {/* Mobile/Overlay Sidebar (for smaller screens) — safe-area + height cap so panel does not spill under notch/status bar */}
             {isSidebarOpen && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start p-4" onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}>
-                    <div className="w-80 max-h-[80vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
-                        <div className="p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30">
+                <div
+                    className="lg:hidden fixed inset-0 z-[100] flex items-start justify-start bg-black/50 backdrop-blur-sm pt-[max(0.5rem,env(safe-area-inset-top,0px))] pr-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-[max(0.75rem,env(safe-area-inset-left,0px))]"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) setIsSidebarOpen(false);
+                    }}
+                >
+                    <div
+                        className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white shadow-2xl animate-in slide-in-from-left duration-300 dark:border-white/10 dark:bg-slate-900"
+                    >
+                        <div className="flex flex-none justify-between items-center border-b border-white/20 bg-white/30 p-4 dark:border-white/5 dark:bg-slate-800/30">
                             <span className="font-bold">Contents</span>
-                            <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
+                            <button type="button" onClick={() => setIsSidebarOpen(false)} aria-label="Close contents">
+                                <X size={20} />
+                            </button>
                         </div>
-                        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                        <div className="min-h-0 flex-1 overflow-y-auto p-4 custom-scrollbar">
                             {tocData && (
                                 <div key={tocVersion} className="space-y-1">
                                     {tocData.articles.map(art => (
@@ -479,8 +490,8 @@ const LexCodeViewer = ({
                     {/* ── Sticky top: codal filter + document chrome (inside codal card) ── */}
                     <div className="sticky top-0 z-10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-white/25 dark:border-white/10">
                         {Array.isArray(codalOptions) && codalOptions.length > 0 && typeof onCodalChange === 'function' && (
-                            <div className="flex flex-col gap-2 border-b border-white/20 px-4 py-3 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                                <div className="min-w-0 flex-1 sm:max-w-md">
+                            <div className="border-b border-white/20 px-4 py-3 dark:border-white/10">
+                                <div className="min-w-0 max-w-md">
                                     <label htmlFor="lexcode-codal-filter-inline" className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                                         Codal
                                     </label>
@@ -502,9 +513,6 @@ const LexCodeViewer = ({
                                         ))}
                                     </select>
                                 </div>
-                                <div className="inline-flex shrink-0 items-center self-start rounded-full border border-amber-200/60 bg-amber-50/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-amber-800 dark:border-amber-800/40 dark:bg-amber-900/40 dark:text-amber-300 sm:self-center">
-                                    {(selectedCodal || shortName || '').toUpperCase()}
-                                </div>
                             </div>
                         )}
 
@@ -513,7 +521,14 @@ const LexCodeViewer = ({
                             {!isSidebarOpen && (
                                 <button
                                     type="button"
-                                    onClick={() => setIsSidebarOpen(true)}
+                                    onClick={() => {
+                                        if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                                            setActiveJurisArticle(null);
+                                            setActiveJurisParagraph(null);
+                                            setActiveAmendmentArticle(null);
+                                        }
+                                        setIsSidebarOpen(true);
+                                    }}
                                     className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
                                     title="Table of Contents"
                                 >
@@ -651,13 +666,19 @@ const LexCodeViewer = ({
                 </div>
             </div>
 
-            {/* Mobile Overlay for Right Sidebar */}
+            {/* Mobile Overlay for Right Sidebar — above TOC overlay; safe-area insets */}
             {(activeJurisArticle || activeAmendmentArticle) && (
                 <div
-                    className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-start justify-end p-4"
-                    onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
+                    className="lg:hidden fixed inset-0 z-[110] flex items-start justify-end bg-black/50 backdrop-blur-md pt-[max(0.5rem,env(safe-area-inset-top,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-3"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                            setActiveJurisArticle(null);
+                            setActiveJurisParagraph(null);
+                            setActiveAmendmentArticle(null);
+                        }
+                    }}
                 >
-                    <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
+                    <div className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900">
                         {activeJurisArticle && (
                             <LexCodeJurisSidebar
                                 articleNum={activeJurisArticle}

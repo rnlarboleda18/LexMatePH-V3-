@@ -19,6 +19,8 @@ export const LexPlayProvider = ({ children }) => {
     /** Set when GET /api/playlists fails (e.g. 401) so UI can explain empty dropdown while signed in */
     const [playlistFetchError, setPlaylistFetchError] = useState(null);
     const [activePlaylistId, setActivePlaylistId] = useState(null);
+    /** When set, LexPlay list UI shows this saved playlist while playback queue (`playlist`) stays unchanged — used when switching saved playlists during playback. */
+    const [browsePlaylistItems, setBrowsePlaylistItems] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +59,21 @@ export const LexPlayProvider = ({ children }) => {
     useEffect(() => { currentIndexRef.current = currentIndex; }, [currentIndex]);
 
     const currentTrack = currentIndex >= 0 && currentIndex < playlist.length ? playlist[currentIndex] : null;
+
+    const displayPlaylist = useMemo(
+        () => (browsePlaylistItems !== null ? browsePlaylistItems : playlist),
+        [browsePlaylistItems, playlist]
+    );
+
+    const listUiCurrentIndex = useMemo(() => {
+        if (browsePlaylistItems === null) {
+            return currentIndex;
+        }
+        if (!currentTrack) return -1;
+        return browsePlaylistItems.findIndex(
+            (t) => String(t.id) === String(currentTrack.id) && t.type === currentTrack.type
+        );
+    }, [browsePlaylistItems, currentTrack, currentIndex]);
 
     const getAuthHeaders = async () => {
         const token = await getToken();
@@ -102,6 +119,7 @@ export const LexPlayProvider = ({ children }) => {
                     const itemsRes = await fetch(`/api/playlists/${state.playlist_id}/items`, { headers });
                     if (itemsRes.ok) {
                         const tracks = await itemsRes.json();
+                        setBrowsePlaylistItems(null);
                         setPlaylist(tracks);
                         setActivePlaylistId(state.playlist_id);
                         
@@ -263,19 +281,30 @@ export const LexPlayProvider = ({ children }) => {
     }, [audioRef]);
 
     const loadSavedPlaylist = useCallback(async (playlistId) => {
-        handleStop();
         try {
             const headers = await getAuthHeaders();
             const res = await fetch(`/api/playlists/${playlistId}/items`, { headers });
-            if (res.ok) {
-                const tracks = await res.json();
-                setActivePlaylistId(playlistId);
+            if (!res.ok) return;
+            const tracks = await res.json();
+            setActivePlaylistId(playlistId);
+
+            const audioActive =
+                audioRef.current?.src &&
+                (isPlaying || (audioRef.current && !audioRef.current.paused));
+
+            if (audioActive) {
+                setBrowsePlaylistItems(tracks);
+            } else {
+                handleStop();
+                setBrowsePlaylistItems(null);
                 setPlaylist(tracks);
                 if (tracks.length > 0) setCurrentIndex(0);
                 else setCurrentIndex(-1);
             }
-        } catch (e) { console.error("Load playlist error:", e); }
-    }, [handleStop, getToken]);
+        } catch (e) {
+            console.error("Load playlist error:", e);
+        }
+    }, [handleStop, getToken, isPlaying]);
 
     const createPlaylist = useCallback(async (name) => {
         try {
@@ -292,6 +321,7 @@ export const LexPlayProvider = ({ children }) => {
                 fetchPlaylists(); // Background sync
                 // Auto-select the newly created playlist
                 setActivePlaylistId(newPlaylist.id);
+                setBrowsePlaylistItems(null);
                 setPlaylist([]); // New playlist starts empty
                 setCurrentIndex(-1);
                 return newPlaylist;
@@ -330,6 +360,7 @@ export const LexPlayProvider = ({ children }) => {
             if (res.ok) {
                 if (activePlaylistId === id) {
                     setActivePlaylistId(null);
+                    setBrowsePlaylistItems(null);
                     setPlaylist([]);
                     setCurrentIndex(-1);
                     handleStop();
@@ -526,6 +557,38 @@ export const LexPlayProvider = ({ children }) => {
         }
     }, [isPlaying, currentTrack, playlist.length, playTrack, currentIndex]);
 
+    const playTrackFromList = useCallback(
+        (index) => {
+            if (browsePlaylistItems !== null) {
+                const track = browsePlaylistItems[index];
+                if (!track) return;
+                setPlaylist(browsePlaylistItems);
+                setBrowsePlaylistItems(null);
+                playTrack(index, track);
+            } else {
+                playTrack(index);
+            }
+        },
+        [browsePlaylistItems, playTrack]
+    );
+
+    const activatePlaylistRow = useCallback(
+        (index) => {
+            if (browsePlaylistItems !== null) {
+                if (index === listUiCurrentIndex && listUiCurrentIndex >= 0) {
+                    handlePlayPause();
+                } else {
+                    playTrackFromList(index);
+                }
+            } else if (index === currentIndex) {
+                handlePlayPause();
+            } else {
+                playTrack(index);
+            }
+        },
+        [browsePlaylistItems, listUiCurrentIndex, currentIndex, handlePlayPause, playTrackFromList, playTrack]
+    );
+
     const handleNext = useCallback(() => {
         if (isShuffleRef.current && playlist.length > 1) {
             let nextIdx;
@@ -676,6 +739,7 @@ export const LexPlayProvider = ({ children }) => {
 
     const addToPlaylist = useCallback((item) => {
         setActivePlaylistId(null);
+        setBrowsePlaylistItems(null);
         setPlaylist((prev) => {
             // Avoid immediate duplicates
             if (prev.length > 0 && prev[prev.length - 1].id === item.id) {
@@ -700,6 +764,7 @@ export const LexPlayProvider = ({ children }) => {
 
     const playNow = useCallback((item) => {
         setActivePlaylistId(null);
+        setBrowsePlaylistItems(null);
         // Clear queue and add this item
         setPlaylist([item]);
         setCurrentIndex(0);
@@ -731,6 +796,11 @@ export const LexPlayProvider = ({ children }) => {
 
     const value = useMemo(() => ({
         playlist,
+        displayPlaylist,
+        listUiCurrentIndex,
+        browsePlaylistItems,
+        activatePlaylistRow,
+        playTrackFromList,
         currentTrack,
         currentIndex,
         isPlaying,
@@ -772,6 +842,11 @@ export const LexPlayProvider = ({ children }) => {
         loadSavedPlaylist
     }), [
         playlist,
+        displayPlaylist,
+        listUiCurrentIndex,
+        browsePlaylistItems,
+        activatePlaylistRow,
+        playTrackFromList,
         currentTrack,
         currentIndex,
         isPlaying,

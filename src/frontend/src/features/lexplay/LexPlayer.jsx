@@ -159,11 +159,11 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
     const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
     if (isMinimized) {
-        /* Thin scrub — keep bar short on desktop */
+        /* Thin scrub — a bit slimmer on mobile minimized bar */
         return (
             <div
                 ref={progressBarRef}
-                className="relative w-full h-[4px] cursor-pointer group touch-manipulation select-none"
+                className="relative w-full h-[3px] md:h-[4px] cursor-pointer group touch-manipulation select-none"
                 onMouseDown={onMouseDown}
                 onTouchStart={onMouseDown}
                 role="slider"
@@ -176,7 +176,7 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                     <div className="h-full bg-primary" style={{ width: `${progressPercent}%` }} />
                 </div>
                 <div
-                    className={`absolute top-1/2 -translate-y-1/2 -ml-1.5 w-2.5 h-2.5 bg-white rounded-full transition-transform duration-200 shadow-md border-2 border-purple-500 ${isScrubbing ? 'scale-125' : 'scale-0 group-hover:scale-100'}`}
+                    className={`absolute top-1/2 -translate-y-1/2 -ml-1 w-2 h-2 md:-ml-1.5 md:w-2.5 md:h-2.5 bg-white rounded-full transition-transform duration-200 shadow-md border-2 border-purple-500 ${isScrubbing ? 'scale-125' : 'scale-0 group-hover:scale-100'}`}
                     style={{ left: `${progressPercent}%` }}
                 />
             </div>
@@ -448,6 +448,9 @@ const PlaylistList = ({ playlist, currentIndex, isPlaying, downloadedTrackIds, o
 const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
     const {
         playlist,
+        displayPlaylist,
+        listUiCurrentIndex,
+        activatePlaylistRow,
         currentTrack,
         currentIndex,
         isPlaying,
@@ -497,7 +500,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
     }, []);
 
     const updateCachedCount = useCallback(async () => {
-        if (!playlist || playlist.length === 0 || !('caches' in window)) {
+        if (!displayPlaylist || displayPlaylist.length === 0 || !('caches' in window)) {
             setCachedCount(0);
             setDownloadedTrackIds(new Set());
             return;
@@ -512,7 +515,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
 
             let count = 0;
             const ids = new Set();
-            for (const track of (playlist || [])) {
+            for (const track of (displayPlaylist || [])) {
                 if (!track?.id || !track?.type) continue;
                 const relUrl = buildAudioUrl(track, 1.0);
                 if (!relUrl) continue;
@@ -524,31 +527,31 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                     console.log(`[LexPlay] MATCH: ${absUrl} → id=${track.id}`);
                 }
             }
-            console.log(`[LexPlay] Cache check: ${count}/${playlist.length} cached, IDs:`, [...ids]);
+            console.log(`[LexPlay] Cache check: ${count}/${displayPlaylist.length} cached, IDs:`, [...ids]);
             setCachedCount(count);
             setDownloadedTrackIds(ids);
         } catch (e) { console.warn("Cache check failed:", e); }
-    }, [playlist, buildAudioUrl]);
+    }, [displayPlaylist, buildAudioUrl]);
 
     useEffect(() => {
         updateCachedCount();
-    }, [playlist, updateCachedCount]);
+    }, [displayPlaylist, updateCachedCount]);
 
     const handleDownloadAll = async () => {
-        if (isDownloadingAll || !playlist || playlist.length === 0) return;
+        if (isDownloadingAll || !displayPlaylist || displayPlaylist.length === 0) return;
 
         setIsDownloadingAll(true);
         setDownloadProgress(0);
         setDownloadStatusText('Starting...');
 
         let completed = 0;
-        const total = playlist.length;
+        const total = displayPlaylist.length;
         let successCount = 0;
 
         try {
             const cache = 'caches' in window ? await caches.open('audio-cache') : null;
 
-            for (const track of playlist) {
+            for (const track of displayPlaylist) {
                 const audioUrl = buildAudioUrl(track, 1.0);
                 if (audioUrl) {
                     setDownloadStatusText(`Downloading: ${track.title}`);
@@ -604,16 +607,16 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
     );
 
     const clearQueueCachedTracks = useCallback(async () => {
-        if (!playlist?.length || !('caches' in window)) return;
+        if (!displayPlaylist?.length || !('caches' in window)) return;
         try {
-            for (const track of playlist) {
+            for (const track of displayPlaylist) {
                 await removeTrackAudioFromCache(track, buildAudioUrl);
             }
             await updateCachedCount();
         } catch (e) {
             console.warn('Clear queue cache failed:', e);
         }
-    }, [playlist, buildAudioUrl, updateCachedCount]);
+    }, [displayPlaylist, buildAudioUrl, updateCachedCount]);
 
     // Force fetch playlists when the player is opened/mounted
     useEffect(() => {
@@ -645,15 +648,6 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
         if (currentTrack) return 'text-gray-900 dark:text-white';
         return 'text-gray-500 dark:text-gray-400';
     }, [error, isLoading, currentTrack]);
-
-    // --- Optimized Callbacks ---
-    const handlePlaylistPlay = useCallback((index) => {
-        if (index === currentIndex) {
-            handlePlayPause();
-        } else {
-            playTrack(index);
-        }
-    }, [currentIndex, handlePlayPause, playTrack]);
 
     const handlePlaylistRemove = useCallback((item, index) => {
         if (activePlaylistId && item.playlist_item_id) {
@@ -807,66 +801,66 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                 {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
                     className="flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
-                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(0.35rem,env(safe-area-inset-right,0px))] py-1"
+                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(0.35rem,env(safe-area-inset-right,0px))] py-0 pb-0.5 md:py-1 md:pb-1"
                     onClick={onExpand}
                 >
-                    <div className="md:hidden w-full px-2 pt-1.5 pb-0.5">
+                    <div className="md:hidden w-full px-1.5 pt-1 pb-0">
                         <p
-                            className={`truncate text-center text-[11px] font-semibold leading-snug tracking-tight sm:text-xs ${miniMarqueeClass}`}
+                            className={`truncate text-center text-[10px] font-semibold leading-tight tracking-tight sm:text-[11px] ${miniMarqueeClass}`}
                             title={miniMarqueeText}
                         >
                             {miniMarqueeText}
                         </p>
                     </div>
 
-                    {/* Mobile: center transport buttons with flex */}
-                    <div className="w-full md:hidden flex items-center justify-center py-0.5">
+                    {/* Mobile: compact transport (md+ uses grid below) */}
+                    <div className="w-full md:hidden flex items-center justify-center pb-0 pt-0">
                         <div
                             className="relative z-10 flex shrink-0 items-center"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="flex items-center justify-center gap-4 sm:gap-5">
+                            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Previous track"
                                 >
-                                    <SkipBack className="h-5 w-5" fill="currentColor" />
+                                    <SkipBack className="h-4 w-4" fill="currentColor" />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                     disabled={playlist.length === 0}
-                                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_4px_14px_-4px_rgba(124,58,237,0.45)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
-                                        <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
+                                        <div className="h-5 w-5 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
                                     ) : isPlaying ? (
                                         /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
-                                        <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
+                                        <div className="flex h-3 items-end justify-center gap-0.5" aria-hidden>
                                             {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
                                                 <div
                                                     key={i}
-                                                    className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
+                                                    className="w-0.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
                                                     style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
                                                 />
                                             ))}
                                         </div>
                                     ) : (
-                                        <Play className="ml-0.5 h-6 w-6 fill-current" />
+                                        <Play className="ml-0.5 h-5 w-5 fill-current" />
                                     )}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Next track"
                                 >
-                                    <SkipForward className="h-5 w-5" fill="currentColor" />
+                                    <SkipForward className="h-4 w-4" fill="currentColor" />
                                 </button>
                             </div>
                         </div>
@@ -1120,24 +1114,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                                     </h3>
                                     <div className="mt-1 flex items-center gap-2">
                                         <span className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white/45">
-                                            {playlist.length} {playlist.length === 1 ? 'track' : 'tracks'}
+                                            {displayPlaylist.length} {displayPlaylist.length === 1 ? 'track' : 'tracks'}
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 shrink-0">
-                                {playlist.length > 0 && (
+                                {displayPlaylist.length > 0 && (
                                     <>
                                         <button
                                             type="button"
                                             onClick={handleDownloadAll}
                                             disabled={isDownloadingAll}
-                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${isDownloadingAll ? 'border-purple-400/30 bg-purple-500/15 text-purple-200' : cachedCount === playlist.length ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-400' : 'border-white/10 bg-white/[0.04] text-white/55 hover:border-white/20 hover:bg-white/[0.08] hover:text-white'}`}
-                                            title={cachedCount === playlist.length ? "All tracks cached for offline" : (cachedCount > 0 ? `${cachedCount}/${playlist.length} items cached` : "Download all for offline")}
+                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${isDownloadingAll ? 'border-purple-400/30 bg-purple-500/15 text-purple-200' : cachedCount === displayPlaylist.length ? 'border-emerald-500/25 bg-emerald-500/10 text-emerald-400' : 'border-white/10 bg-white/[0.04] text-white/55 hover:border-white/20 hover:bg-white/[0.08] hover:text-white'}`}
+                                            title={cachedCount === displayPlaylist.length ? "All tracks cached for offline" : (cachedCount > 0 ? `${cachedCount}/${displayPlaylist.length} items cached` : "Download all for offline")}
                                         >
                                             {isDownloadingAll ? (
                                                 <Loader2 className="w-5 h-5 animate-spin" strokeWidth={2.5} />
-                                            ) : cachedCount === playlist.length ? (
+                                            ) : cachedCount === displayPlaylist.length ? (
                                                 <CheckCircle2 className="w-5 h-5" strokeWidth={2.25} />
                                             ) : (
                                                 <div className="relative flex items-center justify-center">
@@ -1264,12 +1258,12 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
 
                         <div className="flex-1 overflow-y-auto scroll-smooth overscroll-contain px-4 py-5 md:px-5 md:pb-6">
                             <VirtualizedPlaylist 
-                                items={playlist}
-                                currentIndex={currentIndex}
+                                items={displayPlaylist}
+                                currentIndex={listUiCurrentIndex}
                                 isPlaying={isPlaying}
                                 isLoading={isLoading}
                                 downloadedIds={Array.from(downloadedTrackIds || []).sort()}
-                                onPlay={handlePlaylistPlay}
+                                onPlay={activatePlaylistRow}
                                 onRemove={handlePlaylistRemove}
                                 onDownloadSuccess={(id) => setDownloadedTrackIds(prev => new Set(prev).add(String(id)))}
                                 onClearDownload={clearTrackFromCache}

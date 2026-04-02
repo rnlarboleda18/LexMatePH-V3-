@@ -669,33 +669,32 @@ function App() {
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                       <div className="glass mb-4 rounded-lg border border-white/40 bg-white/45 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/35">
-                        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-                          <div className="min-w-0 flex-1">
-                            <label htmlFor="bar-subject-filter" className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                              Bar subject
-                            </label>
-                            <select
-                              id="bar-subject-filter"
-                              value={currentSubject ?? ''}
-                              onChange={(e) => {
-                                const v = e.target.value;
-                                setCurrentSubject(v === '' ? null : v);
-                                setBarCurrentPage(1);
-                              }}
-                              className="block w-full max-w-md pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
-                            >
-                              <option value="">All subjects</option>
-                              {BAR_SUBJECT_OPTIONS.map((s) => (
-                                <option key={s} value={s}>
-                                  {s}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="inline-flex shrink-0 items-center rounded-full border border-indigo-200/60 bg-indigo-50/80 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:border-indigo-800/40 dark:bg-indigo-900/30 dark:text-indigo-300">
-                            {questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject).length}{' '}
-                            questions
-                          </div>
+                        <div className="min-w-0 max-w-md">
+                          <label htmlFor="bar-subject-filter" className="mb-1.5 block text-xs font-medium text-gray-500 dark:text-gray-400">
+                            Bar subject
+                            <span className="ml-2 font-normal tabular-nums text-gray-400 dark:text-gray-500">
+                              (
+                              {questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject).length}{' '}
+                              questions)
+                            </span>
+                          </label>
+                          <select
+                            id="bar-subject-filter"
+                            value={currentSubject ?? ''}
+                            onChange={(e) => {
+                              const v = e.target.value;
+                              setCurrentSubject(v === '' ? null : v);
+                              setBarCurrentPage(1);
+                            }}
+                            className="block w-full pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
+                          >
+                            <option value="">All subjects</option>
+                            {BAR_SUBJECT_OPTIONS.map((s) => (
+                              <option key={s} value={s}>
+                                {s}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
 

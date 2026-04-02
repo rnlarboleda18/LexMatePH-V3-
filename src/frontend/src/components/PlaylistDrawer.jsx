@@ -5,6 +5,9 @@ import { X, Play, Pause, SkipForward, SkipBack, Settings, Trash2, ListMusic, Vol
 const PlaylistDrawer = () => {
     const {
         playlist,
+        displayPlaylist,
+        listUiCurrentIndex,
+        activatePlaylistRow,
         currentTrack,
         currentIndex,
         isPlaying,
@@ -12,7 +15,6 @@ const PlaylistDrawer = () => {
         isDrawerOpen,
         setIsDrawerOpen,
         removeFromPlaylist,
-        playTrack,
         handlePlayPause,
         handleNext,
         handlePrevious,
@@ -215,7 +217,7 @@ const PlaylistDrawer = () => {
 
             {/* Playlist Queue */}
             <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
-                {playlist.length === 0 ? (
+                {displayPlaylist.length === 0 ? (
                     <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
                         <div className="p-6 bg-white/5 rounded-[40px] border border-white/10">
                             <ListMusic size={64} className="text-white/10" />
@@ -227,8 +229,8 @@ const PlaylistDrawer = () => {
                     </div>
                 ) : (
                     <div className="space-y-3">
-                        {playlist.map((item, idx) => {
-                            const isCurrent = idx === currentIndex;
+                        {displayPlaylist.map((item, idx) => {
+                            const isCurrent = idx === listUiCurrentIndex;
                             return (
                                 <div
                                     key={`${item.id}-${idx}`}
@@ -236,7 +238,7 @@ const PlaylistDrawer = () => {
                                         ? 'bg-white/10 border-white/20 shadow-xl scale-[1.02]'
                                         : 'bg-white/[0.03] border-white/5 hover:border-white/10 hover:bg-white/[0.06]'
                                         }`}
-                                    onClick={() => playTrack(idx)}
+                                    onClick={() => activatePlaylistRow(idx)}
                                 >
                                     <div className="relative w-12 h-12 rounded-2xl bg-white/5 flex-shrink-0 overflow-hidden flex items-center justify-center border border-white/10">
                                         <div className={`absolute inset-0 bg-purple-600/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 ${isCurrent ? 'opacity-100' : ''}`}>
