@@ -817,8 +817,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                             </div>
                         </div>
 
-                        {/* Balance column so middle transport stays true center */}
-                        <div className="min-w-0 md:block" aria-hidden />
+                        {/* Balance column so middle transport stays true center (visible on mobile too) */}
+                        <div className="min-w-0" aria-hidden />
                     </div>
                 </div>
             </div>
