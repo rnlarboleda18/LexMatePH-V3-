@@ -4,7 +4,7 @@ from pathlib import Path
 import fitz  # PyMuPDF
 from docx import Document
 
-ROC_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC")
+ROC_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC")
 
 def convert_docx_to_md(docx_path):
     """Convert .docx to Markdown with run-level styling."""

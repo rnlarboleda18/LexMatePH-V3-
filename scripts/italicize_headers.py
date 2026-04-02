@@ -1,7 +1,7 @@
 import os
 import re
 
-directory = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC"
+directory = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC"
 
 def process_line(line):
     # Regex explicitly excludes lines with existing stars `*` in title

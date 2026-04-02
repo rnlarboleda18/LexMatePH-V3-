@@ -23,8 +23,8 @@ API_KEY = "REDACTED_API_KEY_HIDDEN"
 
 client = genai.Client(api_key=API_KEY)
 
-ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC"
-OUT_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC"
+ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC"
+OUT_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 PROMPT = """

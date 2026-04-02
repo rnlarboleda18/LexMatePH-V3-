@@ -11,7 +11,7 @@ import QuestionDetailModal from './components/QuestionDetailModal';
 import About from './components/About';
 import Updates from './components/Updates';
 import SupremeDecisions from './components/SupremeDecisions';
-import CodexViewer from './components/CodexViewer';
+import LexCodeViewer from './components/LexCodeViewer';
 import CaseDecisionModal from './components/CaseDecisionModal';
 import SubscriptionModal from './components/SubscriptionModal';
 import UpgradeWall from './components/UpgradeWall';
@@ -584,7 +584,7 @@ function App() {
                     />
                   )}
                   {effectiveMode === 'codex' && selectedCodalCode && (
-                    <CodexViewer
+                    <LexCodeViewer
                       shortName={selectedCodalCode.toUpperCase()}
                       onCaseSelect={selectGlobalCase}
                       isFullscreen={isFullscreen}

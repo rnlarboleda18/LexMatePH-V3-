@@ -1,7 +1,7 @@
 import fitz
 import json
 
-pdf_path = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\ROC Evidence as amended 2019.pdf"
+pdf_path = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\ROC Evidence as amended 2019.pdf"
 output_path = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\scripts\pdf_dict_dump.json"
 
 print(f"Opening: {pdf_path}")

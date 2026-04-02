@@ -2,7 +2,7 @@ import os
 import re
 
 def inspect_rules():
-    dir_path = r"CodexPhil\Codals\md\ROC"
+    dir_path = r"LexCode\Codals\md\ROC"
     files = [
         "1. ROC Civil Procedure as amended 2019.md",
         "2. ROC Special Proceeding.md",

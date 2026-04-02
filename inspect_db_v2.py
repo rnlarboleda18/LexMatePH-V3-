@@ -21,7 +21,7 @@ def check_db(db_path):
 
 if __name__ == "__main__":
     dbs = [
-        r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\codex_phil.db',
+        r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\codex_phil.db',
         r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api\questions.db'
     ]
     for db in dbs:

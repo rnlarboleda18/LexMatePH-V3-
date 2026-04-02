@@ -184,9 +184,9 @@ def parse_roc_combined(filepath):
     return sections
 
 def ingest_to_cloud():
-    filepath = 'CodexPhil/Codals/md/ROC/ROC_Combined.md'
+    filepath = 'LexCode/Codals/md/ROC/ROC_Combined.md'
     if not os.path.exists(filepath):
-         filepath = 'CodexPhil/Codals/md/clean/ROC/ROC_Combined.md'
+         filepath = 'LexCode/Codals/md/clean/ROC/ROC_Combined.md'
 
     print(f"Connecting to CLOUD DB...")
     conn = psycopg2.connect(CLOUD_DB)

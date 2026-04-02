@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 from pathlib import Path
 
-HTML_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\html\rules_court_elib")
-MD_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\rules_court_elib")
+HTML_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\html\rules_court_elib")
+MD_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\rules_court_elib")
 
 def clean_html_for_conversion(soup):
     # Remove printer friendly link and images

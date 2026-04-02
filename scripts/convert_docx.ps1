@@ -2,8 +2,8 @@ $word = New-Object -ComObject Word.Application
 $word.Visible = $false
 
 $docs = @(
-    "c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC Amendment\Amendment Direct_Implied to Criminal Procedure.docx",
-    "c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC Amendment\Amendment o Special Proceeding.docx"
+    "c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC Amendment\Amendment Direct_Implied to Criminal Procedure.docx",
+    "c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC Amendment\Amendment o Special Proceeding.docx"
 )
 
 $out = "c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\scripts\docx_out.txt"

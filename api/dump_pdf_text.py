@@ -2,7 +2,7 @@ import fitz
 import os
 
 def dump_all():
-    pdf_path = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\ROC Evidence as amended 2019.pdf'
+    pdf_path = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\ROC Evidence as amended 2019.pdf'
     output_path = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\api\evidence_pdf_text.txt'
     
     if not os.path.exists(pdf_path): return

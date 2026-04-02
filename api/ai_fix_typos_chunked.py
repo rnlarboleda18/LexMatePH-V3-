@@ -49,7 +49,7 @@ def split_md(md_content):
 
 def main():
     api_key = r"REDACTED_API_KEY_HIDDEN"
-    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC'
+    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC'
     
     # We will process Civil Procedure (Large file)
     pdf_name = 'ROC Civil Procedure as amended 2019.pdf'

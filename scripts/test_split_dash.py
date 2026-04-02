@@ -2,10 +2,10 @@ import re
 import os
 
 files = [
-    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\1. ROC Civil Procedure as amended 2019_fixed_chunked.md",
-    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\2. ROC Special Proceeding.md",
-    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\3. ROC Criminal Procedure.md",
-    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\4. ROC Evidence as amended 2019.md"
+    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\1. ROC Civil Procedure as amended 2019_fixed_chunked.md",
+    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\2. ROC Special Proceeding.md",
+    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\3. ROC Criminal Procedure.md",
+    r"c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\4. ROC Evidence as amended 2019.md"
 ]
 
 section_pattern = re.compile(r'^Section\s+(\d+)\.(.*)', re.IGNORECASE)

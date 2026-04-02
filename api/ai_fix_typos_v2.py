@@ -48,7 +48,7 @@ Rules:
 
 def main():
     api_key = r"REDACTED_API_KEY_HIDDEN"
-    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC'
+    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC'
     
     files_to_process = [
         ('ROC Evidence as amended 2019.pdf', '4. ROC Evidence as amended 2019.md'),

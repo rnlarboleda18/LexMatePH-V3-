@@ -59,7 +59,7 @@ Rules:
          return md_content, str(e)
 
 def main():
-    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC'
+    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC'
     pdf_path = os.path.join(directory, 'ROC Evidence as amended 2019.pdf')
     md_path = os.path.join(directory, '4. ROC Evidence as amended 2019.md')
     

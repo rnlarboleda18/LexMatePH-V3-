@@ -158,7 +158,7 @@ def parse_roc_combined(filepath):
     return sections
 
 def ingest_roc_combined():
-    filepath = 'CodexPhil/Codals/md/clean/ROC/ROC_Combined.md'
+    filepath = 'LexCode/Codals/md/clean/ROC/ROC_Combined.md'
     
     conn = get_db_connection()
     cur = conn.cursor()

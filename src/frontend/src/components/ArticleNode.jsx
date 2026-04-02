@@ -99,7 +99,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     contentToDisplay = contentToDisplay.replace(/^##\s+SECTION\s+\d+\s+.+$/gm, '').trim();
 
     // Strip a leading H1 that looks like a document title (e.g. "# THE REVISED PENAL CODE")
-    // These duplicate the document-title header now shown at the top of CodalStream.
+    // These duplicate the document-title header now shown at the top of LexCodeStream.
     // Safe rule: strip H1 lines at the very start that do NOT begin with "Article", "Section", or "Art."
     contentToDisplay = contentToDisplay.replace(/^#\s+(?!Article|Section|Art\.)[^\n]+\n?/, '').trim();
 

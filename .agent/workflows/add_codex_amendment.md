@@ -9,16 +9,16 @@ This workflow describes the end-to-end process for ingesting a new amendment int
 ## 1. Fetch & Store
 1.  **Locate the Law**: Find the full text of the amendment on [Lawphil.net](https://lawphil.net) or [ChanRobles](https://chanrobles.com).
 2.  **Save as HTML**: Save the page source as an HTML file in:
-    `data/CodexPhil/Codals/doc/[amendment_id]_[year].html`
-    *   *Example*: `data/CodexPhil/Codals/doc/ra_7659_1993.html`
+    `LexCode/Codals/doc/[amendment_id]_[year].html`
+    *   *Example*: `LexCode/Codals/doc/ra_7659_1993.html`
 
 ## 2. Convert to Markdown
 Run the conversion script to strip watermarks and standardize formatting.
 
 ```powershell
-python data/CodexPhil/codex_html_convert_to_md.py
+python LexCode/codex_html_convert_to_md.py
 ```
-*   **Output**: This will create a clean markdown file in `data/CodexPhil/Codals/md/`.
+*   **Output**: This will create a clean markdown file in `LexCode/Codals/md/`.
 *   *Note*: Verify the generated markdown file manually. If the HTML structure was unusual, you may need to tweak the file header to ensure it looks like:
     `[ Republic Act No. 7659, December 13, 1993 ]`
 
@@ -27,12 +27,12 @@ Run the processor script to parse the changes and apply them to the database.
 
 ```powershell
 # Dry Run (Verify changes first) -- Highly Recommended!
-python data/CodexPhil/scripts/process_amendment.py --file data/CodexPhil/Codals/md/ra_7659_1993.md --dry-run
+python LexCode/scripts/process_amendment.py --file LexCode/Codals/md/ra_7659_1993.md --dry-run
 ```
 
 ```powershell
 # Live Run (Commit to Database)
-python data/CodexPhil/scripts/process_amendment.py --file data/CodexPhil/Codals/md/ra_7659_1993.md
+python LexCode/scripts/process_amendment.py --file LexCode/Codals/md/ra_7659_1993.md
 ```
 
 ### What Happens Automatically:

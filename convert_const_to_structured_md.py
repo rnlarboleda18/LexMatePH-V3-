@@ -62,6 +62,6 @@ def convert_docx_to_md(docx_path, md_path):
     print(f"Conversion complete: {md_path}")
 
 if __name__ == "__main__":
-    SOURCE = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\Word\1987 Philippine Constitution.docx"
-    TARGET = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\1987_Philippine_Constitution_Structured.md"
+    SOURCE = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\Word\1987 Philippine Constitution.docx"
+    TARGET = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\1987_Philippine_Constitution_Structured.md"
     convert_docx_to_md(SOURCE, TARGET)

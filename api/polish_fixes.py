@@ -15,7 +15,7 @@ def polish_file(file_path):
     print(f"Polished spacing for: {file_path}")
 
 def main():
-    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC'
+    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC'
     file1 = os.path.join(directory, '1. ROC Civil Procedure as amended 2019_fixed_chunked.md')
     if os.path.exists(file1):
          polish_file(file1)

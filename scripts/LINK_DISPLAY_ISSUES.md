@@ -21,7 +21,7 @@ Examined the actual link data for Articles 8 and 217:
 ## Issues Identified
 
 ### 1. "Verified Link" Label (Article 8)
-**Root Cause**: Frontend logic in `CodexJurisSidebar.jsx` (lines 144-149)
+**Root Cause**: Frontend logic in `LexCodeJurisSidebar.jsx` (lines 144-149)
 ```javascript
 {ratio.target_paragraph_index !== undefined && 
  ratio.target_paragraph_index !== null && 
@@ -73,7 +73,7 @@ You're probably looking at paragraph 2, 3, 5, or 6, which each have exactly 1 li
 ### Option 1: Change "Verified Link" to Show Summary (Recommended)
 Instead of showing "Verified Link" for general article links, show the actual summary.
 
-**Change** `CodexJurisSidebar.jsx` line 136-150:
+**Change** `LexCodeJurisSidebar.jsx` line 136-150:
 ```javascript
 {/* Show summary for all links */}
 <p className="text-sm text-gray-800 dark:text-gray-300 leading-relaxed font-serif">

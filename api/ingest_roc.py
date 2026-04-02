@@ -160,10 +160,10 @@ def parse_roc_file(filepath, book_label):
 
 def ingest_roc():
     files = [
-        ('CodexPhil/Codals/md/ROC/1. ROC Civil Procedure as amended 2019.md', 'Civil Procedure'),
-        ('CodexPhil/Codals/md/ROC/2. ROC Special Proceeding.md', 'Special Proceeding'),
-        ('CodexPhil/Codals/md/ROC/3. ROC Criminal Procedure_cleaned.md', 'Criminal Procedure'),
-        ('CodexPhil/Codals/md/ROC/4. ROC Evidence as amended 2019.md', 'Evidence')
+        ('LexCode/Codals/md/ROC/1. ROC Civil Procedure as amended 2019.md', 'Civil Procedure'),
+        ('LexCode/Codals/md/ROC/2. ROC Special Proceeding.md', 'Special Proceeding'),
+        ('LexCode/Codals/md/ROC/3. ROC Criminal Procedure_cleaned.md', 'Criminal Procedure'),
+        ('LexCode/Codals/md/ROC/4. ROC Evidence as amended 2019.md', 'Evidence')
     ]
 
     conn = get_db_connection()

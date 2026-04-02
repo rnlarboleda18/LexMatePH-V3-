@@ -2,7 +2,7 @@ import fitz, re, os
 from pathlib import Path
 
 # Setup
-ROC_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC")
+ROC_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC")
 file_path = ROC_DIR / "1. ROC Civil Procedure as amended 2019.pdf"
 
 # Imports and functions from convert_roc_files_to_md

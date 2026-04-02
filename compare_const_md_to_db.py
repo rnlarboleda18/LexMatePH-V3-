@@ -57,7 +57,7 @@ def parse_md(md_path):
     return sections
 
 def compare():
-    md_sections = parse_md(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\1987_Philippine_Constitution_Structured.md")
+    md_sections = parse_md(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\1987_Philippine_Constitution_Structured.md")
     
     try:
         conn = psycopg2.connect(DB_CONNECTION)

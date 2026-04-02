@@ -2,8 +2,8 @@ import os
 import re
 
 def clean_criminal_proc():
-    path = r"CodexPhil\Codals\md\ROC\3. ROC Criminal Procedure.md"
-    out_path = r"CodexPhil\Codals\md\ROC\3. ROC Criminal Procedure_cleaned.md"
+    path = r"LexCode\Codals\md\ROC\3. ROC Criminal Procedure.md"
+    out_path = r"LexCode\Codals\md\ROC\3. ROC Criminal Procedure_cleaned.md"
     
     if not os.path.exists(path):
         print(f"File not found: {path}")

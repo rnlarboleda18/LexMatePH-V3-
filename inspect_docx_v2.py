@@ -31,4 +31,4 @@ def inspect_docx(docx_path):
                 f.write(f"Line {i}: [{align}] {style_name} (Bold:{is_bold}) | {text[:100]}\n")
 
 if __name__ == "__main__":
-    inspect_docx(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\Word\1987 Philippine Constitution.docx")
+    inspect_docx(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\Word\1987 Philippine Constitution.docx")

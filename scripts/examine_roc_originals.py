@@ -18,7 +18,7 @@ except ImportError:
 
 ROC_DIR = r"C:\Users\rnlar\AppData\Local\Programs\Python\Python312\Lib\site-packages" 
 # Better use relative or absolute path based on user's workspace
-ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC"
+ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC"
 
 def examine_pdf(filename):
     path = os.path.join(ROC_DIR, filename)

@@ -18,5 +18,5 @@ def scan_db(db_name):
         print(f"Error scanning {db_name}: {e}")
 
 if __name__ == "__main__":
-    for db in ['bar_project.db', 'CodexPhil/codex_phil.db', 'api/questions.db']:
+    for db in ['bar_project.db', 'LexCode/codex_phil.db', 'api/questions.db']:
         scan_db(db)

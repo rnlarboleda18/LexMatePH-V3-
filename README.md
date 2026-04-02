@@ -4,7 +4,7 @@ Codex Philippines is a next-generation legal research tool designed to modernize
 
 ## 🚀 Key Features
 
-*   **Codex Viewer**: A dedicated, distraction-free interface for reading Codals (e.g., Revised Penal Code, Civil Code) with integrated case references.
+*   **LexCode**: A dedicated, distraction-free interface for reading Codals (e.g., Revised Penal Code, Civil Code) with integrated case references.
 *   **AI-Driven Linking**: Automatically discovers semantic connections between specific legal provisions and Supreme Court decisions using Gemini AI.
 *   **Smart Search**: Full-text search across thousands of cases and statutes.
 *   **Responsive Design**: Modern UI built with React and Tailwind CSS.
@@ -15,8 +15,8 @@ The project is organized into three main components:
 
 ### 1. Frontend (`src/frontend`)
 *   **Tech Stack**: React, Vite, Tailwind CSS.
-*   **Role**: Delivers the user interface, including the Codex Viewer, Case Reader, and Search.
-*   **Key Components**: `CodexViewer.jsx`, `CaseReader.jsx`, `CodalStream.jsx`.
+*   **Role**: Delivers the user interface, including LexCode, Case Reader, and Search.
+*   **Key Components**: `LexCodeViewer.jsx`, `CaseReader.jsx`, `LexCodeStream.jsx`.
 
 ### 2. Backend API (`api/`)
 *   **Tech Stack**: Python (Azure Functions model).
@@ -25,12 +25,12 @@ The project is organized into three main components:
     *   `/api/codex/rpc`: Fetches Revised Penal Code data.
     *   `/api/cases`: Search and retrieve Supreme Court decisions.
 
-### 3. Data Pipeline (`CodexPhil/`)
+### 3. Data Pipeline (`LexCode/`)
 *   **Tech Stack**: Python, PostgreSQL, Gemini AI.
 *   **Role**: The engine room for data ingestion and processing.
 *   **Key Pipelines**:
-    *   **Ingestion**: Scrapes, parses, and structures raw legal text (`CodexPhil/pipelines/`).
-    *   **Linking**: The `universal_rpc_linker.py` (in `scripts/`) orchestrates the AI linking process.
+    *   **Ingestion**: Scrapes, parses, and structures raw legal text (`LexCode/pipelines/`).
+    *   **Linking**: `LexCode/linker/universal_rpc_linker.py` orchestrates the AI linking process.
 
 ## 🛠️ Getting Started
 
@@ -60,5 +60,5 @@ For detailed instructions on adding new legal codes or managing the data pipelin
 ## 🧹 Maintenance
 
 The project structure is kept clean by concentrating active development logic in specific directories. 
-*   **Core Scripts**: Found in `CodexPhil/` and `scripts/universal_rpc_linker.py`.
+*   **Core Scripts**: Found in `LexCode/` (including `LexCode/linker/universal_rpc_linker.py`).
 *   **Cleanup**: Use `scripts/cleanup_clutter.py` (if available) or manual removal for temporary debug scripts.

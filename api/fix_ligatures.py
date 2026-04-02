@@ -26,7 +26,7 @@ def fix_ligatures_in_content(content):
     return content
 
 def main():
-    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC'
+    directory = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC'
     files_to_process = [
         '1. ROC Civil Procedure as amended 2019.md',
         '2. ROC Special Proceeding.md',

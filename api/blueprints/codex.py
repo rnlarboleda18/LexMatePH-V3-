@@ -246,7 +246,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                  
                  if title_n and str(title_n) not in ['0', 'None', ''] and short_name.upper() not in ['CONST', 'FC']:
                      if short_name.upper() == 'ROC':
-                         # Do not prepend for ROC, CodalStream.jsx dynamically hoists the Rule N header 
+                         # Do not prepend for ROC, LexCodeStream.jsx dynamically hoists the Rule N header 
                          pass
                      else:
                          title_lbl = f"Title {int_to_roman(title_n)} - {title_lbl}" if title_lbl else f"Title {int_to_roman(title_n)}"

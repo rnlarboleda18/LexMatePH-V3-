@@ -77,7 +77,7 @@ Feature renders              SubscriptionModal opens
 | Case Digests (SC Decisions) | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
 | Bar Questions (detail view) | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
 | Flashcards | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
-| LexCode / CodexPhil (read-only) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| LexCode (read-only) | ✅ | ✅ | ✅ | ✅ | ✅ |
 | LexCode Linked Jurisprudence | ❌ | ✅ | ✅ | ✅ | ✅ |
 | Case Digest Sidebar in LexCode | ❌ | ✅ | ✅ | ✅ | ✅ |
 | LexPlay (audio/video) | 5 min/day | 5 min/day | Unlimited | Unlimited | Unlimited |
@@ -524,7 +524,7 @@ Full-screen pricing modal with 4 plan cards and PayMongo checkout integration.
 | Feature | Frontend Gate Location | Backend Gate Location |
 |---|---|---|
 | **Lexify AI Grading** | `App.jsx` — `canAccess('lexify')` renders `<UpgradeWall>` instead of `<LexifyApp>` | `api/blueprints/lexify.py` — checks Barrister tier before calling Gemini API |
-| **LexCode Linked Jurisprudence** | `CodexViewer.jsx` — `handleJurisprudenceClick` calls `openUpgradeModal` for Free users | *(none — sidebar data is public, link click is the gate)* |
+| **LexCode Linked Jurisprudence** | `LexCodeViewer.jsx` — `handleJurisprudenceClick` calls `openUpgradeModal` for Free users | *(none — sidebar data is public, link click is the gate)* |
 | **Case Digest Daily Limit** | *(pending: `SupremeDecisions.jsx`)* | `POST /api/track-usage` with `feature: "case_digest"` |
 | **Bar Question Daily Limit** | *(pending: `QuestionDetailModal.jsx`)* | `POST /api/track-usage` with `feature: "bar_question"` |
 | **Flashcard Daily Limit** | *(pending: `FlashcardSetup.jsx`)* | `POST /api/track-usage` with `feature: "flashcard"` |

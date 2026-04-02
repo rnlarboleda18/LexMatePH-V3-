@@ -43,7 +43,7 @@ def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
              s_label = r['section_label'] or ""
              
              # stable title_label for the whole article
-             # CodalStream hoists THIS when it changes
+             # LexCodeStream hoists THIS when it changes
              title_label = None
              if a_label:
                  title_label = a_label
@@ -61,8 +61,8 @@ def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
              new_r['key_id'] = str(r['article_num'])  
              new_r['article_num'] = article_num 
              new_r['article_title'] = "" 
-             new_r['title_label'] = title_label            # Hoisted as TITLE by CodalStream
-             new_r['group_header'] = r.get('group_header') # Hoisted as BOOK by CodalStream
+             new_r['title_label'] = title_label            # Hoisted as TITLE by LexCodeStream
+             new_r['group_header'] = r.get('group_header') # Hoisted as BOOK by LexCodeStream
              new_r['section_label'] = None                 # Prevent redundant SECTION hoisting
              
              mapped_results.append(new_r)

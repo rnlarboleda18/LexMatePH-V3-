@@ -2,7 +2,7 @@ import os
 import re
 
 def inspect_rules_detail():
-    dir_path = r"CodexPhil\Codals\md\ROC"
+    dir_path = r"LexCode\Codals\md\ROC"
     
     # 1. List ALL rules in Civil Procedure to verify 144
     civ_path = os.path.join(dir_path, "1. ROC Civil Procedure as amended 2019.md")

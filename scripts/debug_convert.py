@@ -1,6 +1,6 @@
 import fitz, re
 
-doc = fitz.open(r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\1. ROC Civil Procedure as amended 2019.pdf')
+doc = fitz.open(r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\1. ROC Civil Procedure as amended 2019.pdf')
 found = False
 
 for page_num in range(len(doc)):

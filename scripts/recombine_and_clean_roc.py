@@ -2,7 +2,7 @@ import re
 import os
 
 def clean_and_combine():
-    base_dir = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC"
+    base_dir = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC"
     source_files = [
         "1. ROC Civil Procedure as amended 2019.md",
         "2. ROC Special Proceeding.md",
@@ -175,7 +175,7 @@ def clean_and_combine():
                 e_count = 0
             result.append(line)
             
-    output_path = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC\Combined_Rules_of_Court.md"
+    output_path = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC\Combined_Rules_of_Court.md"
     with open(output_path, 'w', encoding='utf-8') as f:
         f.writelines(result)
     print(f"Successfully combined and cleaned {len(result)} lines into {output_path}")

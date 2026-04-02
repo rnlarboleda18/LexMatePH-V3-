@@ -1,7 +1,7 @@
 import os
 import re
 
-ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC"
+ROC_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC"
 
 def main():
     files = [

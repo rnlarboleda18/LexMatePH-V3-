@@ -159,6 +159,6 @@ def clean_markdown(input_path, output_path):
     print(f"Original lines: {len(lines)}, Cleaned lines: {len(final_lines)}")
 
 if __name__ == "__main__":
-    input_file = r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC\Combined_Rules_of_Court.md'
-    output_file = r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC\Combined_Rules_of_Court_Cleaned.md'
+    input_file = r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC\Combined_Rules_of_Court.md'
+    output_file = r'C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC\Combined_Rules_of_Court_Cleaned.md'
     clean_markdown(input_file, output_file)

@@ -18,4 +18,4 @@ def inspect_docx(file_path):
         print(f"P{i} [{style}] [Bold:{is_bold}] [Align:{alignment}]: {text[:80]}")
 
 if __name__ == "__main__":
-    inspect_docx(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\Word\1987 Philippine Constitution.docx")
+    inspect_docx(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\Word\1987 Philippine Constitution.docx")

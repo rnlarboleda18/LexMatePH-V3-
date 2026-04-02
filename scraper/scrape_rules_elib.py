@@ -16,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 BASE_URL = "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/11/"
-OUTPUT_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\html\rules_court_elib")
+OUTPUT_DIR = Path(r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\html\rules_court_elib")
 
 DOC_IDS = [
     99969, 100842, 99055, 367, 99702, 100762, 100125, 100836, 99241, 98606,

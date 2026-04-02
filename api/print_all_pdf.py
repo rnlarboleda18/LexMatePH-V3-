@@ -2,7 +2,7 @@ import fitz
 import os
 
 def print_all():
-    pdf_path = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\ROC Evidence as amended 2019.pdf'
+    pdf_path = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\ROC Evidence as amended 2019.pdf'
     if not os.path.exists(pdf_path): return
     
     doc = fitz.open(pdf_path)

@@ -1,7 +1,7 @@
 from docx import Document
 import os
 
-DOCX_PATH = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\Word\1987 Philippine Constitution.docx"
+DOCX_PATH = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\Word\1987 Philippine Constitution.docx"
 
 def check_art1():
     doc = Document(DOCX_PATH)

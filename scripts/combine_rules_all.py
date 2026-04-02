@@ -1,7 +1,7 @@
 import os
 import time
 
-OUT_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\clean\ROC"
+OUT_DIR = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\clean\ROC"
 TARGET = os.path.join(OUT_DIR, "Combined_Rules_of_Court.md")
 
 SEQUENCE = [

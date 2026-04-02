@@ -223,7 +223,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                 SC Decisions
             </button>
 
-            {/* Codex Philippine Section */}
+            {/* LexCode section */}
             <div>
                 <button
                     onClick={() => toggleSection('codex')}

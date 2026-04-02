@@ -12,7 +12,7 @@ except ImportError:
 API_KEY = "REDACTED_API_KEY_HIDDEN"
 client = genai.Client(api_key=API_KEY)
 
-PDF_PATH = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\1. ROC Civil Procedure as amended 2019.pdf"
+PDF_PATH = r"C:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\1. ROC Civil Procedure as amended 2019.pdf"
 
 PROMPT = "Convert this legal PDF file into clean Markdown. Strict verbatim structure."
 

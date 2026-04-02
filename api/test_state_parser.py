@@ -116,7 +116,7 @@ def test_parse(filepath):
     return sections
 
 def main():
-    filepath = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\CodexPhil\Codals\md\ROC\4. ROC Evidence as amended 2019.md'
+    filepath = r'c:\Users\rnlar\.gemini\antigravity\scratch\bar_project_v2\LexCode\Codals\md\ROC\4. ROC Evidence as amended 2019.md'
     # Clear log
     if os.path.exists('api/headers_log.txt'):
          os.remove('api/headers_log.txt')
