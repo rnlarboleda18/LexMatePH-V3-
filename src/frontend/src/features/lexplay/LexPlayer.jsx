@@ -753,11 +753,65 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                         </p>
                     </div>
 
+                    {/* Mobile: center transport buttons with flex */}
+                    <div className="w-full md:hidden flex items-center justify-center py-0.5">
+                        <div
+                            className="relative z-10 flex shrink-0 items-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex items-center justify-center gap-4 sm:gap-5">
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    disabled={playlist.length === 0}
+                                    aria-label="Previous track"
+                                >
+                                    <SkipBack className="h-5 w-5" fill="currentColor" />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+                                    disabled={playlist.length === 0}
+                                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    aria-label={isPlaying ? 'Pause' : 'Play'}
+                                >
+                                    {isLoading ? (
+                                        <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
+                                    ) : isPlaying ? (
+                                        /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
+                                        <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
+                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="w-1 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
+                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <Play className="ml-0.5 h-6 w-6 fill-current" />
+                                    )}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    disabled={playlist.length === 0}
+                                    aria-label="Next track"
+                                >
+                                    <SkipForward className="h-5 w-5" fill="currentColor" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Desktop/tablet: label left, transport centered via grid */}
                     <div
-                        className="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2"
+                        className="hidden w-full md:grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2"
                     >
                         {/* Desktop/tablet left label */}
-                        <div className="hidden min-w-0 justify-self-start self-center py-0.5 pr-2 md:block">
+                        <div className="min-w-0 justify-self-start self-center py-0.5 pr-2">
                             <p
                                 className={`truncate text-left text-[11px] font-semibold leading-snug tracking-tight sm:text-xs md:text-sm ${miniMarqueeClass}`}
                                 title={miniMarqueeText}
@@ -766,7 +820,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                             </p>
                         </div>
 
-                        {/* Transport — geometrically centered; stops click from expanding player */}
+                        {/* Transport */}
                         <div
                             className="relative z-10 flex shrink-0 justify-self-center"
                             onClick={(e) => e.stopPropagation()}
@@ -817,7 +871,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize }) => {
                             </div>
                         </div>
 
-                        {/* Balance column so middle transport stays true center (visible on mobile too) */}
+                        {/* Balance column */}
                         <div className="min-w-0" aria-hidden />
                     </div>
                 </div>
