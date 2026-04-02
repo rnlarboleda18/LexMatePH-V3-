@@ -504,6 +504,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const [selectedSignificance, setSelectedSignificance] = useState('');
 
     const [isDoctrinal, setIsDoctrinal] = useState(false);
+    const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -521,8 +522,21 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         fetchAvailableFilters();
         fetchPonentes();
         fetchDivisions();
-
     }, []);
+
+    // Global pre-fetch cache to make modals "instant" (Disable Lazy Load)
+    const [prefetchCache, setPrefetchCache] = useState({});
+
+    const prefetchDetails = async (id) => {
+        if (!id || prefetchCache[id]) return;
+        try {
+            const res = await fetch(`/api/sc_decisions/${id}`);
+            const data = await res.json();
+            setPrefetchCache(prev => ({ ...prev, [id]: data }));
+        } catch (err) {
+            console.error("Prefetch failed", err);
+        }
+    };
 
     // AbortController Ref
     const abortControllerRef = useRef(null);
@@ -635,6 +649,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             if (requestId === activeRequestRef.current) {
                 setSearchResults(data.data || []);
                 setTotalCount(parseInt(data.total, 10) || 0);
+                setHasInitialLoaded(true);
             }
         } catch (error) {
             if (error.name === 'AbortError') {
@@ -680,12 +695,32 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     const handleCaseClick = async (decision) => {
+        // Enforce "one instance" feel (Disable Lazy Load)
+        // If not cached, we fetch IT ALL before opening the modal.
+        let fullData = prefetchCache[decision.id];
+        
+        if (!fullData || !fullData.digest_facts) {
+            document.body.style.cursor = 'wait';
+            try {
+                const res = await fetch(`/api/sc_decisions/${decision.id}`);
+                fullData = await res.json();
+                // Update cache so next time it's instant
+                setPrefetchCache(prev => ({ ...prev, [decision.id]: fullData }));
+            } catch (err) {
+                console.error("Manual fetch failed", err);
+            } finally {
+                document.body.style.cursor = 'default';
+            }
+        }
+
+        const enrichedDecision = { ...decision, ...fullData };
+
         // Delegate to parent (App.jsx) which handles the Global Modal
         if (onCaseSelect) {
-            onCaseSelect(decision);
+            onCaseSelect(enrichedDecision);
         } else {
             // Fallback (shouldn't happen in new architecture)
-            setSelectedDecision(decision);
+            setSelectedDecision(enrichedDecision);
         }
     };
 
@@ -1048,10 +1083,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         <div
                             key={decision.id}
                             onClick={() => handleCaseClick(decision)}
-                            className="glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-white/40 dark:border-white/10 p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 hover:bg-white/80 dark:hover:bg-slate-700/60 group relative"
+                            onMouseEnter={() => prefetchDetails(decision.id)}
+                            onTouchStart={() => prefetchDetails(decision.id)}
+                            className="glass bg-white/60 dark:bg-slate-800/40 backdrop-blur-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-white/40 dark:border-white/10 p-3.5 sm:p-6 cursor-pointer transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:border-amber-300 dark:hover:border-amber-700 hover:bg-white/80 dark:hover:bg-slate-700/60 group relative"
                         >
-                            <div className="flex items-center justify-between gap-4">
-                                <div className="flex flex-col gap-4 w-full">
+                            <div className="flex items-center justify-between gap-2 sm:gap-4">
+                                <div className="flex flex-col gap-2 sm:gap-4 w-full">
                                     {/* Header Row: Title & Badges */}
                                     <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                                         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-grow pr-4">
@@ -1114,20 +1151,22 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                 };
 
                                                 return (
-                                                    <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5 whitespace-nowrap">
-                                                        <BookOpen className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 shrink-0" />
+                                                    <div className="flex flex-wrap items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5 line-clamp-2 max-w-full">
+                                                        <BookOpen className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 shrink-0 mt-0.5" />
                                                         <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Primary:</span>
-                                                        {renderSubject(primaryRaw)}
+                                                        <span className="truncate max-w-[200px] sm:max-w-none">{renderSubject(primaryRaw)}</span>
                                                         {secondaryRaw && (
                                                             <>
                                                                 <span className="text-gray-300 dark:text-gray-600 mx-0.5 shrink-0">|</span>
-                                                                <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Secondary:</span>
-                                                                {secondaryRaw.split(',').map((sec, idx) => (
-                                                                    <React.Fragment key={idx}>
-                                                                        {idx > 0 && <span className="text-gray-400 shrink-0">,</span>}
-                                                                        {renderSubject(sec.trim())}
-                                                                    </React.Fragment>
-                                                                ))}
+                                                                <span className="text-gray-500 dark:text-gray-400 font-medium shrink-0">Sec:</span>
+                                                                <span className="truncate max-w-[200px] sm:max-w-none">
+                                                                    {secondaryRaw.split(',').map((sec, idx) => (
+                                                                        <React.Fragment key={idx}>
+                                                                            {idx > 0 && <span className="text-gray-400 shrink-0">, </span>}
+                                                                            {renderSubject(sec.trim())}
+                                                                        </React.Fragment>
+                                                                    ))}
+                                                                </span>
                                                             </>
                                                         )}
                                                     </div>
@@ -1139,9 +1178,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                             const textClass = getSubjectColor(normalizedSubject);
 
                                             return (
-                                                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shadow-sm border font-medium whitespace-nowrap ${bgClass} ${textClass}`}>
+                                                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shadow-sm border font-medium truncate max-w-full ${bgClass} ${textClass}`}>
                                                     <BookOpen className="w-3.5 h-3.5 shrink-0" />
-                                                    {decision.subject}
+                                                    <span className="truncate">{decision.subject}</span>
                                                 </div>
                                             );
                                         })()}
@@ -1154,7 +1193,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     const count = s.length;
                                                     const top2 = s.slice(0, 2).map(i => i.law).join(", ");
                                                     return (
-                                                        <div className="flex items-center gap-1.5 glass bg-teal-50/50 dark:bg-teal-900/20 px-2.5 py-1 rounded-md shadow-sm border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 whitespace-nowrap">
+                                                        <div className="flex items-center gap-1.5 glass bg-teal-50/50 dark:bg-teal-900/20 px-2.5 py-1 rounded-md shadow-sm border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 max-w-full">
                                                             <Book className="w-3.5 h-3.5 shrink-0" />
                                                             <span className="font-semibold shrink-0">{count} Statutes:</span>
                                                             <span className="truncate max-w-[150px]">{top2}{count > 2 ? '...' : ''}</span>
@@ -1170,9 +1209,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                 const c = typeof decision.cited_cases === 'string' ? JSON.parse(decision.cited_cases) : decision.cited_cases;
                                                 if (Array.isArray(c) && c.length > 0) {
                                                     return (
-                                                        <div className="flex items-center gap-1.5 glass bg-indigo-50/50 dark:bg-indigo-900/20 px-2.5 py-1 rounded-md shadow-sm border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 whitespace-nowrap">
+                                                        <div className="flex items-center gap-1.5 glass bg-indigo-50/50 dark:bg-indigo-900/20 px-2.5 py-1 rounded-md shadow-sm border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 max-w-full">
                                                             <Gavel className="w-3.5 h-3.5 shrink-0" />
-                                                            <span className="font-semibold shrink-0">{c.length} Citations</span>
+                                                            <span className="font-semibold shrink-0 truncate">{c.length} Citations</span>
                                                         </div>
                                                     );
                                                 }
@@ -1187,7 +1226,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                         const textClass = getSubjectColor(normalizedSubject);
 
                                         return (
-                                            <div className={`mt-1 bg-black/5 dark:bg-black/20 rounded-xl p-4 border-l-4 ${textClass} border-l-current border-t border-r border-b border-black/5 dark:border-white/5 shadow-inner`}>
+                                            <div className={`mt-0.5 sm:mt-1 bg-black/5 dark:bg-black/20 rounded-xl p-3 sm:p-4 border-l-4 ${textClass} border-l-current border-t border-r border-b border-black/5 dark:border-white/5 shadow-inner`}>
                                                 {(decision.main_doctrine || decision.snippet) && (
                                                     <div className={`text-xs font-extrabold ${textClass} uppercase tracking-wider mb-2 flex items-center gap-2`}>
                                                         <Lightbulb className="w-4 h-4" /> MAIN DOCTRINE

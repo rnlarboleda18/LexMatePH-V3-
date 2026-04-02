@@ -93,7 +93,7 @@ export default defineConfig({
       },
       // Enable the virtual:pwa-register module in dev mode too
       devOptions: {
-        enabled: true,
+        enabled: false,
         type: 'module',
       },
     }),

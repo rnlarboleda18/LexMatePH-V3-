@@ -51,21 +51,19 @@ function App() {
   // Global case modal state (shared between SC Decisions and Codex)
   const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isPlayerVisible, setIsPlayerVisible] = useState(true);
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
   const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
 
 
-  // Intercept playNow signals to force player open
+  // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
     if (isDrawerOpen && mode !== 'lexplay') {
-      setIsPlayerVisible(true); // Guarantee the minimized player exists if they minimize it later
       setPreviousMode(mode);
       setMode('lexplay');
       setIsDrawerOpen(false); // Consume the signal
     }
-  }, [isDrawerOpen, mode, setIsDrawerOpen, setIsPlayerVisible]);
+  }, [isDrawerOpen, mode, setIsDrawerOpen]);
 
   // No manual session check needed with Clerk
 
@@ -374,7 +372,6 @@ function App() {
           onToggleLexPlay={() => {
             setPreviousMode(mode);
             setMode('lexplay');
-            setIsPlayerVisible(true);
           }}
           onSelectCodal={(codeId) => {
             setSelectedCodalCode(codeId);
@@ -568,10 +565,6 @@ function App() {
                 <LexPlayer
                   isMinimized={false}
                   onMinimize={() => setMode(previousMode || 'supreme_decisions')}
-                  onClose={() => {
-                    setIsPlayerVisible(false);
-                    setMode(previousMode || 'supreme_decisions');
-                  }}
                 />
               </ErrorBoundary>
             )}
@@ -591,8 +584,8 @@ function App() {
         />
       )}
 
-      {/* Global Minimized LexPlayer */}
-      {mode !== 'lexplay' && isPlayerVisible && (
+      {/* Global Minimized LexPlayer — always visible docked to bottom when not in full LexPlay */}
+      {mode !== 'lexplay' && (
         <ErrorBoundary>
           <LexPlayer
             isMinimized={true}
@@ -600,7 +593,6 @@ function App() {
               setPreviousMode(mode);
               setMode('lexplay');
             }}
-            onClose={() => setIsPlayerVisible(false)}
           />
         </ErrorBoundary>
       )}

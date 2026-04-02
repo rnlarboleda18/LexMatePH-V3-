@@ -9,6 +9,54 @@
   --player-height: 0px;
 }
 
+/* Full-screen modals: notch/home indicator + LexPlay mini bar */
+.lex-modal-overlay {
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+  padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(0.5rem, calc(env(safe-area-inset-bottom, 0px) + var(--player-height, 0px)));
+  padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
+}
+
+@media (min-width: 640px) {
+  .lex-modal-overlay {
+    padding-top: max(1rem, env(safe-area-inset-top, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + var(--player-height, 0px)));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  }
+}
+
+.lex-modal-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Minimized LexPlay: layout for marquee track — keyframes + duration applied inline in JSX */
+.lex-mini-marquee-track {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  min-width: max-content;
+  will-change: transform;
+}
+
+@keyframes lex-mini-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lex-mini-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* ===== MOBILE SCROLL PERFORMANCE ===== */
 
 /* Momentum scrolling on iOS */
@@ -19,9 +67,11 @@ html, body {
   touch-action: pan-y;
 }
 
-/* Ensure the page root doesn't block native scroll */
+/* Ensure the page root doesn't block native scroll; fill iOS visual viewport */
 #root {
   -webkit-overflow-scrolling: touch;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
 }
 
 /* Stop float animation on mobile to reduce GPU overdraw */

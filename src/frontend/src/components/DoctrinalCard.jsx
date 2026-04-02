@@ -58,42 +58,56 @@ const DoctrinalCard = ({ caseData, searchQuery, onClick }) => {
     const isPIL = sourceLabel === 'PIL';
 
     return (
-        <div className={`group bg-white dark:bg-dark-card rounded-xl shadow-sm hover:shadow-md border-2 ${borderColor} p-4 flex flex-col h-full border-l-[6px] transition-all duration-200`}>
+        <div className={`group bg-white dark:bg-dark-card rounded-xl shadow-sm hover:shadow-md border-2 ${borderColor} p-3 sm:p-4 flex flex-col h-full border-l-[6px] transition-all duration-200`}>
             {/* Header: ID - Subject (Year) */}
-            <div className={`text-sm font-bold mb-2 ${textColor}`}>
-                {subject} ({year})
+            <div 
+                className={`text-xs sm:text-sm font-bold mb-1.5 sm:mb-2 ${textColor} truncate`}
+                title={`${subject} (${year})`}
+            >
+                {subject} <span className="opacity-75">({year})</span>
             </div>
 
-            <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-slate-300 dark:border-gray-700">
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2 flex-nowrap overflow-hidden">
+                <span 
+                    className="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-slate-300 dark:border-gray-700 truncate max-w-[85%]"
+                    title={topic}
+                >
                     {topic}
                 </span>
                 {(isPIL || sourceLabel === 'PIL') && (
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 border border-orange-300 dark:border-orange-800">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 border border-orange-300 dark:border-orange-800 shrink-0">
                         PIL
                     </span>
                 )}
             </div>
 
             {/* Case Title */}
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2">
+            <h3 
+                className="text-[13px] sm:text-sm font-bold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2"
+                title={caseTitle}
+            >
                 {highlightText(caseTitle, searchQuery)}
             </h3>
 
-            {/* Doctrine Preview */}
+            {/* Doctrine Preview Accordion */}
             <div className="flex-grow mb-3">
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-4">
-                    <span className="font-semibold text-blue-600 dark:text-blue-400 mr-1">Doctrine:</span>
-                    {highlightText(doctrine, searchQuery)}
-                </p>
+                <details className="group/details">
+                    <summary className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline list-none flex items-center gap-1">
+                        <span className="group-open/details:hidden">▶ Show Doctrine Preview</span>
+                        <span className="hidden group-open/details:inline">▼ Hide Doctrine Preview</span>
+                    </summary>
+                    <p className="mt-2 text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-4 pl-2 border-l-2 border-blue-200 dark:border-blue-900/50">
+                        {highlightText(doctrine, searchQuery)}
+                    </p>
+                </details>
             </div>
 
             {/* Footer Button */}
             <button
                 onClick={() => onClick(caseData)}
-                className="w-full py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors shadow-sm mt-auto"
+                className="w-full py-2.5 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-extrabold transition-colors shadow-sm mt-auto shadow-blue-500/20 active:scale-95"
             >
-                View Details
+                Read Full Digest
             </button>
         </div>
     );

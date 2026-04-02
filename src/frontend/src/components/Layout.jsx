@@ -32,31 +32,31 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Header */}
             {!isFullscreen && (
-                <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8
+                <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-3 md:px-8 pt-[env(safe-area-inset-top,0px)]
                     ${isDarkMode
-                        ? 'h-24 bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
-                        : 'h-24 bg-white/80 md:bg-white/40 md:backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30px_rgba(0,0,0,0.05)]'
+                        ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(6rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
+                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(6rem+env(safe-area-inset-top,0px))] bg-white/80 md:bg-white/40 md:backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30_px_rgba(0,0,0,0.05)]'
                     }`} style={{willChange:'transform'}}>
 
                     {/* LEFT — Brand */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 md:gap-3">
                         {/* Mobile hamburger */}
                         <button
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden p-2 rounded-lg transition-colors ${isDarkMode ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20' : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50'}`}
+                            className={`xl:hidden p-1.5 md:p-2 rounded-lg transition-colors ${isDarkMode ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20' : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50'}`}
                             aria-label="Toggle Sidebar"
                         >
-                            {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
+                            {isSidebarOpen ? <X size={20} className="md:w-[22px] md:h-[22px]" /> : <Menu size={20} className="md:w-[22px] md:h-[22px]" />}
                         </button>
 
                         {/* Brand block */}
                         <div className="flex flex-col items-start justify-center">
                             {/* Brand name */}
-                            <div className="text-2xl sm:text-3xl font-black tracking-widest select-none leading-none mb-0.5 pointer-events-none">
+                            <div className="text-xl sm:text-2xl md:text-3xl font-black tracking-widest select-none leading-none mb-0 pointer-events-none">
                                 <span className={isDarkMode ? 'text-stone-100' : 'text-slate-800'}>LexMate</span><span className="text-blue-500">P</span><span className="text-red-500">H</span>
                             </div>
                             {/* Tag line — desktop only */}
-                            <div className={`hidden lg:flex items-center gap-4 text-lg font-semibold tracking-wide mt-2 ${isDarkMode ? 'text-amber-600/80' : 'text-amber-700/70'}`}>
+                            <div className={`hidden lg:flex items-center gap-4 text-[15px] font-semibold tracking-wide mt-1.5 ${isDarkMode ? 'text-amber-600/80' : 'text-amber-700/70'}`}>
                                 <span className="cursor-default">Bar Questions</span>
                                 <span>·</span>
                                 <span className="cursor-default">SC Decisions</span>
@@ -75,19 +75,19 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
                         <button
                             onClick={toggleTheme}
                             title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-lg font-medium transition-all duration-200
+                            className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-base md:text-lg font-medium transition-all duration-200
                                 ${isDarkMode
                                     ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20 border border-transparent hover:border-amber-800/40'
                                     : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50 border border-transparent hover:border-amber-200'
                                 }`}
                         >
-                            {isDarkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} className="text-violet-500" />}
+                            {isDarkMode ? <Sun size={18} className="text-amber-400 md:w-[20px] md:h-[20px]" /> : <Moon size={18} className="text-violet-500 md:w-[20px] md:h-[20px]" />}
                             <span className="hidden md:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
                         </button>
 
 
                         {/* Divider */}
-                        <div className={`hidden sm:block w-px h-6 mx-1 ${isDarkMode ? 'bg-gray-700' : 'bg-stone-200'}`} />
+                        <div className={`hidden sm:block w-px h-5 md:h-6 mx-1 ${isDarkMode ? 'bg-gray-700' : 'bg-stone-200'}`} />
 
                         {/* Auth - Hidden on mobile, moved to sidebar */}
                         <div className="hidden md:flex items-center gap-2">
@@ -122,13 +122,13 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             {/* Sidebar (Navigation Drawer) */}
             {!isFullscreen && (
                 <aside
-                    className={`fixed top-28 left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto
+                    className={`fixed left-0 bottom-0 w-64 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(7rem+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white xl:bg-white/40 xl:backdrop-blur-xl border-r border-white/40 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
                     style={{willChange:'transform'}}
                 >
-                    <div className="h-full flex flex-col pt-8">
+                    <div className="h-full flex flex-col pt-4 md:pt-8">
                         {sidebarContent}
                     </div>
                 </aside>
@@ -144,8 +144,8 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Main Content Area */}
             <main
-                className={`${isFullscreen ? 'pt-0' : 'pt-28'} min-h-screen
-        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[calc(2rem_+_var(--player-height,0px))]`}`}
+                className={`${isFullscreen ? 'pt-0' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(7rem+env(safe-area-inset-top,0px))]'} min-h-screen
+        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-64 ${['supreme_decisions', 'codex'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
                 <div className={`${isFullscreen ? 'max-w-full' : (mode === 'codex' ? 'max-w-full ml-0' : 'mx-auto max-w-7xl')}`}>

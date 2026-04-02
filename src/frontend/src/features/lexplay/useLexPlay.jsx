@@ -21,7 +21,6 @@ export const LexPlayProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [playbackRate, setPlaybackRate] = useState(1.0);
     const [volume, setVolume] = useState(1.0);
     const [repeatMode, setRepeatMode] = useState('none'); // 'none', 'all', 'one'
     const [isShuffle, setIsShuffle] = useState(false);
@@ -48,6 +47,8 @@ export const LexPlayProvider = ({ children }) => {
     const seekBackwardRef = useRef(null);
     
     const MAX_RETRIES = 3;
+    /** LexPlay audio is always synthesized at 1× (UI speed picker removed). */
+    const PLAYBACK_RATE = 1.0;
 
     // Keep refs in sync with state
     useEffect(() => { playlistRef.current = playlist; }, [playlist]);
@@ -107,8 +108,6 @@ export const LexPlayProvider = ({ children }) => {
                             const foundIndex = tracks.findIndex(t => String(t.id) === String(state.current_track_id));
                             if (foundIndex !== -1) {
                                 setCurrentIndex(foundIndex);
-                                setPlaybackRate(state.playback_rate || 1.0);
-                                
                                 // 3. Seek to time (if possible)
                                 if (audioRef.current && state.current_time > 0) {
                                     audioRef.current.__targetTime = state.current_time;
@@ -137,9 +136,9 @@ export const LexPlayProvider = ({ children }) => {
             playlist_id: activePlaylistId,
             current_track_id: currentTrack.id,
             current_time: audioRef.current?.currentTime || 0,
-            playback_rate: playbackRate
+            playback_rate: PLAYBACK_RATE
         });
-    }, [activePlaylistId, currentTrack?.id, playbackRate, isStateLoaded, isSignedIn]);
+    }, [activePlaylistId, currentTrack?.id, isStateLoaded, isSignedIn]);
 
     // 2. Debounced save for time updates
     useEffect(() => {
@@ -151,13 +150,13 @@ export const LexPlayProvider = ({ children }) => {
                     playlist_id: activePlaylistId,
                     current_track_id: currentTrack.id,
                     current_time: audioRef.current.currentTime,
-                    playback_rate: playbackRate
+                    playback_rate: PLAYBACK_RATE
                 });
             }
         }, 10000); // Sync time every 10 seconds while playing
 
         return () => clearInterval(interval);
-    }, [activePlaylistId, currentTrack?.id, playbackRate, isStateLoaded, isSignedIn, isPlaying]);
+    }, [activePlaylistId, currentTrack?.id, isStateLoaded, isSignedIn, isPlaying]);
 
 
     // Initialize Audio Element
@@ -383,15 +382,7 @@ export const LexPlayProvider = ({ children }) => {
     }, [activePlaylistId, fetchPlaylists, loadSavedPlaylist, getToken]);
 
     // --- Active Queue Logic ---
-    // Handle Playback Rate changes
-    // When playbackRate changes, reload the current track so the backend generates
-    // audio at the new speed natively via Azure TTS SSML prosody.
-    // We do NOT set audioRef.current.playbackRate because that causes robotic artifacts.
-    const playbackRateRef = useRef(playbackRate);
-    useEffect(() => {
-        playbackRateRef.current = playbackRate;
-    }, [playbackRate]);
-
+    // Playback is always at PLAYBACK_RATE (1×). Server receives rate= in audio URL.
 
     const playTrack = useCallback(async (index, trackOverride = null, attempt = 1) => {
         // Use ref to avoid stale closure on playlist
@@ -411,9 +402,7 @@ export const LexPlayProvider = ({ children }) => {
         }
 
         try {
-            // Pass rate to backend so Azure TTS synthesizes at the correct speed natively.
-            const currentRate = playbackRateRef.current || playbackRate;
-            const rateParam = `rate=${currentRate}`;
+            const rateParam = `rate=${PLAYBACK_RATE}`;
             const codeParam = track.code_id ? `code=${track.code_id}&` : '';
             // REMOVED: timestampParam = `&t=${new Date().getTime()}`; // CACHE BUSTER REMOVED
             const fetchUrl = `/api/audio/${track.type}/${track.id}?${codeParam}${rateParam}`;
@@ -483,7 +472,7 @@ export const LexPlayProvider = ({ children }) => {
             setIsPlaying(false);
             setIsLoading(false);
         }
-    }, [playbackRate]);
+    }, [safeSetState]);
 
     const handlePlayPause = useCallback(() => {
         if (!audioRef.current) return;
@@ -726,7 +715,7 @@ export const LexPlayProvider = ({ children }) => {
         isPlaying,
         isLoading,
         error,
-        playbackRate,
+        playbackRate: PLAYBACK_RATE,
         volume,
         setVolume,
         repeatMode,
@@ -745,7 +734,6 @@ export const LexPlayProvider = ({ children }) => {
         handleNext,
         handlePrevious,
         handleStop,
-        setPlaybackRate,
         audioRef,
         retryCurrentTrack,
         
@@ -767,7 +755,6 @@ export const LexPlayProvider = ({ children }) => {
         isPlaying,
         isLoading,
         error,
-        playbackRate,
         volume,
         repeatMode,
         isShuffle,
@@ -805,7 +792,6 @@ export const LexPlayProvider = ({ children }) => {
         handleNext,
         handlePrevious,
         handleStop,
-        setPlaybackRate,
         retryCurrentTrack,
         fetchPlaylists,
         createPlaylist,
@@ -824,7 +810,6 @@ export const LexPlayProvider = ({ children }) => {
         handleNext,
         handlePrevious,
         handleStop,
-        setPlaybackRate,
         retryCurrentTrack,
         fetchPlaylists,
         createPlaylist,

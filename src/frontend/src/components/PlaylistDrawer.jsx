@@ -9,7 +9,6 @@ const PlaylistDrawer = () => {
         currentIndex,
         isPlaying,
         isLoading,
-        playbackRate,
         isDrawerOpen,
         setIsDrawerOpen,
         removeFromPlaylist,
@@ -17,7 +16,6 @@ const PlaylistDrawer = () => {
         handlePlayPause,
         handleNext,
         handlePrevious,
-        setPlaybackRate,
         
         savedPlaylists,
         activePlaylistId,
@@ -210,22 +208,6 @@ const PlaylistDrawer = () => {
                             >
                                 <SkipForward size={28} />
                             </button>
-                        </div>
-
-                        {/* Speed Selector */}
-                        <div className="flex items-center bg-white/5 border border-white/10 rounded-2xl p-1 shadow-lg">
-                            {[1.0, 1.25, 1.5, 2.0].map(speed => (
-                                <button
-                                    key={speed}
-                                    onClick={() => setPlaybackRate(speed)}
-                                    className={`px-4 py-1.5 text-[10px] font-extrabold rounded-xl uppercase tracking-tighter transition-all ${playbackRate === speed
-                                        ? 'bg-white text-[#0f172a] shadow-md'
-                                        : 'text-white/40 hover:text-white hover:bg-white/5'
-                                        }`}
-                                >
-                                    {speed}x
-                                </button>
-                            ))}
                         </div>
                     </div>
                 </div>

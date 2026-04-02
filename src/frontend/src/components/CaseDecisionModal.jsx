@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { jsPDF } from "jspdf";
-import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Zap, Download } from 'lucide-react';
+import { Calendar, Gavel, FileText, X, BookOpen, Clock, Hash, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { toTitleCase } from '../utils/textUtils';
@@ -96,7 +96,7 @@ const TimelineSection = React.memo(({ timeline }) => {
     if (!Array.isArray(events) || events.length === 0) return null;
 
     return (
-        <div className="mb-8" style={{ contentVisibility: 'auto' }}>
+        <div className="mb-8">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 mb-4">
                 <Clock className="w-5 h-5 text-blue-500 dark:text-amber-500" />
                 TIMELINE OF EVENTS
@@ -123,7 +123,7 @@ const FlashcardSection = React.memo(({ flashcards }) => {
     if (cards.length === 0) return null;
 
     return (
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700" style={{ contentVisibility: 'auto' }}>
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-yellow-500 dark:text-amber-500" />
                 Study Flashcards
@@ -150,7 +150,7 @@ const LegalConceptsSection = React.memo(({ concepts }) => {
     if (!items || items.length === 0) return null;
 
     return (
-        <div className="bg-purple-50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/30 p-5 rounded-lg my-6" style={{ contentVisibility: 'auto' }}>
+        <div className="bg-purple-50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/30 p-5 rounded-lg my-6">
             <h4 className="text-[16px] font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2 mb-3">
                 <BookOpen className="w-5 h-5" />
                 KEY LEGAL CONCEPTS
@@ -183,7 +183,7 @@ const SignificanceSection = React.memo(({ narrative, category }) => {
     };
 
     return (
-        <section className="mb-8" style={{ contentVisibility: 'auto' }}>
+        <section className="mb-8">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
                 <span className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
@@ -194,7 +194,7 @@ const SignificanceSection = React.memo(({ narrative, category }) => {
             <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
                 <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm relative z-10">
                     <ReactMarkdown components={{
-                        p: ({ node, ...props }) => <p className="mb-4 last:mb-0 text-justify leading-relaxed" {...props} />,
+                        p: ({ node, ...props }) => <p className="mb-4 last:mb-0 text-left leading-relaxed" {...props} />,
                         strong: ({ node, ...props }) => <strong className="font-bold text-amber-900 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-1 rounded" {...props} />
                     }}>
                         {processContent(narrative)}
@@ -220,9 +220,9 @@ const MarkdownText = React.memo(({ content, onCaseClick, variant = 'default', co
     }
 
     return (
-        <div ref={contextRef} className="text-gray-800 dark:text-gray-200 leading-relaxed text-justify">
+        <div ref={contextRef} className="text-gray-800 dark:text-gray-200 leading-relaxed text-left text-sm">
             <ReactMarkdown components={{
-                p: ({ children }) => <div className="mb-4 text-gray-800 dark:text-gray-200 leading-relaxed text-justify"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></div>,
+                p: ({ children }) => <div className="mb-4 text-gray-800 dark:text-gray-200 leading-relaxed text-left"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></div>,
                 strong: ({ children }) => <strong className="font-bold text-gray-900 dark:text-gray-100">{children}</strong>,
                 ul: ({ children }) => <ul className="mb-4 list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-200">{children}</ul>,
                 li: ({ children }) => <li className="pl-1 leading-relaxed"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></li>
@@ -244,7 +244,7 @@ const StatutesSection = React.memo(({ statutes }) => {
     if (!Array.isArray(items) || items.length === 0) return null;
 
     return (
-        <div className="mb-8" style={{ contentVisibility: 'auto' }}>
+        <div className="mb-8">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center gap-2">
                 <Book className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 STATUTES INVOLVED
@@ -292,7 +292,7 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
     };
 
     return (
-        <div className="mb-8" style={{ contentVisibility: 'auto' }}>
+        <div className="mb-8">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center gap-2">
                 <Gavel className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                 CITED JURISPRUDENCE
@@ -333,14 +333,12 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { requireAccess } = useSubscription();
     const [fullDecision, setFullDecision] = useState(decision);
-    const [loading, setLoading] = useState(false);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [showHtmlViewer, setShowHtmlViewer] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // collapsed by default on mobile
-    const [isCompactView, setIsCompactView] = useState(false);
     const ratioRef = useRef(null);
 
     const { 
@@ -396,29 +394,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         }
     };
 
-    // Fetch Full Details on Mount or Update
-    useEffect(() => {
-        if (!decision?.id) return;
 
-        const fetchDetails = async () => {
-            setLoading(true);
-            try {
-                const res = await fetch(`/api/sc_decisions/${decision.id}`);
-                const data = await res.json();
-                setFullDecision({ ...decision, ...data });
-            } catch (err) {
-                console.error("Failed to load case details", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchDetails();
-    }, [decision.id]);
 
     // Handle Scroller Sync
     useEffect(() => {
-        if (!loading && fullDecision && fullDecision.scrollToRatioIndex !== undefined && ratioRef.current) {
+        if (fullDecision && fullDecision.scrollToRatioIndex !== undefined && ratioRef.current) {
             setTimeout(() => {
                 const divs = ratioRef.current.querySelectorAll('.mb-4'); 
                 const target = divs[fullDecision.scrollToRatioIndex];
@@ -429,7 +409,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 }
             }, 500);
         }
-    }, [fullDecision, loading]);
+    }, [fullDecision]);
 
     // Internal Smart Link Handler
     const handleSmartCaseClick = useCallback(async (caseRef) => {
@@ -610,12 +590,26 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
     if (!fullDecision) return null;
 
+    const decisionYear = fullDecision.date_str
+        ? (() => {
+              try {
+                  const y = new Date(fullDecision.date_str).getFullYear();
+                  return Number.isNaN(y) ? '' : y;
+              } catch {
+                  return '';
+              }
+          })()
+        : '';
+
     return (
-        <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 pb-[var(--player-height,0px)] bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
-            onClick={(e) => e.target === e.currentTarget && onClose()}
-        >
-            <div className="glass bg-white/50 dark:bg-slate-900/50 backdrop-blur-3xl rounded-3xl shadow-[0_10px_50px_rgba(0,0,0,0.4)] w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-300 border border-white/50 dark:border-white/20 relative">
+        <div className="fixed inset-0 z-[150] lex-modal-overlay animate-in fade-in duration-200">
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={onClose} />
+            <div
+                className="glass absolute bottom-[var(--player-height,0px)] left-1/2 flex w-full max-w-5xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-white/50 bg-white/50 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-3xl animate-in zoom-in-95 duration-300 dark:border-white/20 dark:bg-slate-900/50 top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-xl sm:border md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-y-1/2 md:rounded-3xl"
+                role="dialog"
+                aria-modal="true"
+                onClick={(e) => e.stopPropagation()}
+            >
                 
                 {/* Ambient glow orbs inside the modal to drive the glass effect */}
                 <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
@@ -623,7 +617,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
-                    <div className="absolute inset-x-0 top-0 z-[60] glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b border-white/30 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-6">
+                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(80dvh,100%)] overflow-y-auto lex-modal-scroll glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b border-white/30 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-4 sm:p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-[16px] font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 <ListMusic className="text-purple-500" />
@@ -634,11 +628,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             </button>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             {/* Existing Playlists */}
                             <div>
-                                <h4 className="text-[16px] font-bold text-gray-400 uppercase tracking-widest mb-3">Your Playlists</h4>
-                                <div className="max-h-48 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
+                                <h4 className="text-sm md:text-[16px] font-bold text-gray-400 uppercase tracking-widest mb-3">Your Playlists</h4>
+                                <div className="max-h-[40vh] sm:max-h-48 overflow-y-auto lex-modal-scroll space-y-2 pr-2 custom-scrollbar">
                                     {savedPlaylists.length === 0 ? (
                                         <p className="text-sm text-gray-500 italic py-2">No playlists created yet.</p>
                                     ) : (
@@ -657,7 +651,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             </div>
 
                             {/* Create New */}
-                            <div className="border-l border-gray-100 dark:border-gray-800 pl-6">
+                            <div className="md:border-l border-t md:border-t-0 border-gray-100 dark:border-gray-800 pt-4 md:pt-0 md:pl-6">
                                 <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Create New</h4>
                                 <div className="space-y-3">
                                     <input 
@@ -681,88 +675,93 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
                 )}
 
-                {/* HEADER */}
-                <div className="border-b border-white/30 dark:border-white/10 mb-0 pb-0 relative z-10 bg-white/20 dark:bg-black/10 backdrop-blur-sm">
-                    {/* Always-visible title row */}
-                    <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 gap-3">
-                        <h2 className="text-[15px] sm:text-[16px] font-bold text-gray-900 dark:text-white leading-snug line-clamp-1 flex-1">
-                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                        </h2>
-                        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                            {/* Compact View Toggle */}
+                {/* HEADER — align with Bar question modal: LexPlay · title · (spacer) · year · close */}
+                <div className="relative z-10 border-b border-white/30 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
+                    <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 px-1.5 py-1.5 sm:px-2 md:px-3">
+                        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                             <button
-                                className="p-1.5 rounded-full text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all border border-transparent shadow-sm"
-                                onClick={() => setIsCompactView(v => !v)}
-                                title={isCompactView ? 'Show Full Labels' : 'Compact View (Hide Labels)'}
+                                type="button"
+                                onClick={() => setShowPlaylistSelector(true)}
+                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
+                                title="Add audio digest to LexPlay playlist"
+                                aria-label="Add to LexPlay playlist"
                             >
-                                <Zap size={18} className={isCompactView ? 'text-amber-500 fill-amber-500' : ''} />
+                                <Headphones className="h-3 w-3" strokeWidth={2} />
                             </button>
-                            {/* Collapse toggle — mobile only */}
+                            <h2 className="min-w-0 flex-1 truncate text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
+                                {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                            </h2>
                             <button
-                                className="sm:hidden p-1.5 rounded-full text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all border border-transparent shadow-sm"
-                                onClick={() => setHeaderCollapsed(v => !v)}
+                                type="button"
+                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-400 transition-all hover:bg-gray-100 hover:text-gray-700 active:scale-95 sm:hidden dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                onClick={() => setHeaderCollapsed((v) => !v)}
                                 title={headerCollapsed ? 'Show details' : 'Hide details'}
+                                aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
                             >
                                 <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
                             </button>
-                            <button onClick={onClose} className="p-1.5 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400 transition-colors">
-                                <X size={22} />
+                        </div>
+                        <div className="pointer-events-none flex justify-center justify-self-center" aria-hidden />
+                        <div className="flex items-center justify-end gap-1.5 sm:gap-2">
+                            {decisionYear !== '' && (
+                                <span className="shrink-0 tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
+                                    {decisionYear}
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
+                                title="Close"
+                                aria-label="Close"
+                            >
+                                <X className="h-3.5 w-3.5" strokeWidth={2.25} />
                             </button>
                         </div>
                     </div>
 
-                    {/* Collapsible details — hidden by default on mobile, always shown on sm+ */}
                     <div className={`px-4 pb-4 sm:px-6 sm:pb-5 sm:block ${headerCollapsed ? 'hidden' : 'block'}`}>
                         <div className="flex flex-wrap items-center gap-2">
                             {fullDecision.significance_category && (
-                                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md shadow-sm border border-black/5 dark:border-white/5 ${getCategoryColor(fullDecision.significance_category)}`}>
+                                <div className={`flex items-center gap-1.5 rounded-md border border-black/5 px-2.5 py-1 shadow-sm dark:border-white/5 ${getCategoryColor(fullDecision.significance_category)}`}>
                                     <span className="text-sm">{getCategoryIcon(fullDecision.significance_category)}</span>
-                                    <span className="font-extrabold text-[10px] uppercase tracking-wide">{fullDecision.significance_category}</span>
+                                    <span className="text-[10px] font-extrabold uppercase tracking-wide">{fullDecision.significance_category}</span>
                                 </div>
                             )}
-                            <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
-                                <Hash className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
-                                <span className="font-mono text-[11px] text-gray-700 dark:text-gray-300 font-medium tracking-tight">#{fullDecision.id} &middot; {fullDecision.case_number || ''}</span>
+                            <div className="glass flex items-center gap-1.5 rounded-md border border-white/40 bg-white/40 px-2.5 py-1 shadow-sm dark:border-white/5 dark:bg-slate-800/60">
+                                <Hash className="h-3.5 w-3.5 text-gray-500 dark:text-gray-400" />
+                                <span className="font-mono text-[11px] font-medium tracking-tight text-gray-700 dark:text-gray-300">
+                                    #{fullDecision.id} &middot; {fullDecision.case_number || ''}
+                                </span>
                             </div>
-                            <div className="flex items-center gap-1.5 glass bg-white/40 dark:bg-slate-800/60 px-2.5 py-1 rounded-md shadow-sm border border-white/40 dark:border-white/5">
+                            <div className="glass flex items-center gap-1.5 rounded-md border border-white/40 bg-white/40 px-2.5 py-1 shadow-sm dark:border-white/5 dark:bg-slate-800/60">
                                 <Calendar className="h-3.5 w-3.5 text-blue-500 dark:text-blue-400" />
-                                <span className="text-[11px] text-gray-700 dark:text-gray-300 font-medium">{formatDate(fullDecision.date_str)}</span>
+                                <span className="text-[11px] font-medium text-gray-700 dark:text-gray-300">{formatDate(fullDecision.date_str)}</span>
                             </div>
 
                             {fullDecision.ponente && (
-                                <div className="flex items-center gap-1.5 glass bg-blue-50/50 dark:bg-blue-900/20 px-2.5 py-1 rounded-md shadow-sm border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-medium italic text-[11px] pr-3">
-                                    <User className="w-3.5 h-3.5" />
+                                <div className="glass flex items-center gap-1.5 rounded-md border border-blue-200 bg-blue-50/50 px-2.5 py-1 pr-3 text-[11px] font-medium italic text-blue-700 shadow-sm dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300">
+                                    <User className="h-3.5 w-3.5" />
                                     {fullDecision.ponente}
                                 </div>
                             )}
-
-                             <button
-                                onClick={() => setShowPlaylistSelector(true)}
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-md shadow-sm border border-purple-200 dark:border-purple-800 transition-all bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/50 sm:ml-auto"
-                                title="Add Audio Digest to LexPlay queue"
-                            >
-                                <Headphones className="w-3.5 h-3.5" />
-                                <span className="font-extrabold text-[10px] uppercase tracking-wide hidden xs:inline-block">
-                                    {isCompactView ? "Add" : "Add to LexPlay Playlist"}
-                                </span>
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className={`flex-grow overflow-y-auto p-4 sm:p-6 md:p-8 custom-scrollbar bg-transparent relative z-10 ${isCompactView ? 'space-y-4' : 'space-y-0'}`}>
+                <div className="relative z-10 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent">
 
                     {viewMode === 'digest' ? (
                         <>
                              {fullDecision.main_doctrine && (
-                                <div className={`relative overflow-hidden glass bg-gradient-to-br from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40 p-5 sm:p-6 md:p-8 rounded-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${isCompactView ? 'mb-6' : 'mb-10'}`}>
+                                <div className="glass relative mb-6 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br from-blue-50/60 to-white/40 p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] sm:mb-10 dark:border-white/10 dark:from-slate-800/60 dark:to-slate-900/40 sm:p-6 md:p-8">
                                     <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
-                                    <h4 className="text-[13px] font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <h4 className="mb-4 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[13px] font-black uppercase tracking-widest text-transparent dark:from-blue-400 dark:to-indigo-400">
                                         <Lightbulb className="w-5 h-5 text-blue-500 drop-shadow-sm" /> 
-                                        {isCompactView ? '' : 'Main Doctrine'}
+                                        Main Doctrine
                                     </h4>
-                                    <div className="text-gray-800 dark:text-gray-100 italic text-lg leading-relaxed font-medium">
+                                    <div className="text-gray-800 dark:text-gray-100 text-sm leading-relaxed font-medium">
                                         <SmartLink text={fullDecision.main_doctrine} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </div>
@@ -770,12 +769,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* FACTS */}
                             {fullDecision.digest_facts && (
-                                <section className={isCompactView ? "mb-6" : "mb-10"}>
-                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
+                                <section className="mb-6 sm:mb-10">
+                                    <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <FileText className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                                         </span>
-                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Facts</span>}
+                                        <span className="text-[15px] uppercase tracking-wide">Facts</span>
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -789,12 +788,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* ISSUE */}
                             {fullDecision.digest_issues && (
-                                <section className={isCompactView ? "mb-6" : "mb-10"}>
-                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
+                                <section className="mb-6 sm:mb-10">
+                                    <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
                                         </span>
-                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Issue</span>}
+                                        <span className="text-[15px] uppercase tracking-wide">Issue</span>
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -805,12 +804,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* RULING */}
                             {fullDecision.digest_ruling && (
-                                <section className={isCompactView ? "mb-6" : "mb-10"}>
-                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
+                                <section className="mb-6 sm:mb-10">
+                                    <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <Gavel className="w-5 h-5 text-blue-500 dark:text-blue-400" />
                                         </span>
-                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Ruling</span>}
+                                        <span className="text-[15px] uppercase tracking-wide">Ruling</span>
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -821,12 +820,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* RATIO DECIDENDI */}
                             {fullDecision.digest_ratio && (
-                                <section className={isCompactView ? "mb-6" : "mb-10"}>
-                                    <h4 className={`font-extrabold text-gray-900 dark:text-white pb-3 ${isCompactView ? 'mb-3' : 'mb-5'} flex items-center gap-3 relative`}>
+                                <section className="mb-6 sm:mb-10">
+                                    <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <BookOpen className="w-5 h-5 text-purple-500 dark:text-purple-400" />
                                         </span>
-                                        {!isCompactView && <span className="tracking-wide uppercase text-[15px]">Ratio Decidendi</span>}
+                                        <span className="text-[15px] uppercase tracking-wide">Ratio Decidendi</span>
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -845,8 +844,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.separate_opinions && fullDecision.separate_opinions.length > 0 && (
                                 <div className="mt-12 pt-8 relative">
                                     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-white/20 to-transparent"></div>
-                                    <h4 className={`text-[16px] font-bold text-gray-900 dark:text-white ${isCompactView ? 'mb-3' : 'mb-6'} text-center uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-gray-300 dark:to-white`}>
-                                        {isCompactView ? 'Opinions' : 'Separate Opinions'}
+                                    <h4 className="mb-6 bg-gradient-to-r from-gray-600 to-gray-900 bg-clip-text text-center text-[16px] font-bold uppercase tracking-widest text-transparent dark:from-gray-300 dark:to-white">
+                                        Separate Opinions
                                     </h4>
                                     <div className="space-y-6">
                                         {fullDecision.separate_opinions.map((op, idx) => (
@@ -884,28 +883,25 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 </div>
 
-                {/* FOOTER ACTIONS */}
-                <div className="p-4 md:p-6 border-t border-white/30 dark:border-white/10 bg-white/40 dark:bg-slate-900/60 flex flex-wrap justify-end gap-3 md:gap-4 backdrop-blur-2xl relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                {/* FOOTER ACTIONS - MINIMIZED TO ICONS FOR MORE READING SPACE */}
+                <div className="px-3 sm:px-4 py-2 sm:py-3 border-t border-white/20 dark:border-white/10 bg-white/60 dark:bg-slate-950/90 flex flex-wrap justify-end items-center gap-2 sm:gap-4 md:gap-6 backdrop-blur-3xl relative z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] min-h-[56px] sm:min-h-[64px]">
                     {viewMode === 'digest' && (
                         <button
-                            onClick={handleViewHtmlViewer}
-                            className="mr-auto px-4 md:px-5 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+                            type="button"
+                            onClick={() => handleViewHtmlViewer()}
+                            className="touch-manipulation mr-auto min-h-[48px] min-w-[48px] p-3 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 rounded-xl transition-all active:scale-95 flex items-center justify-center shrink-0 shadow-sm relative z-50"
+                            title="View Digest Format"
                         >
-                            <FileText size={18} />
-                            View Digest Format
+                            <FileText size={22} />
                         </button>
                     )}
                     <button
+                        type="button"
                         onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
-                        className="px-5 md:px-6 py-2.5 glass bg-white/60 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-sm font-extrabold text-gray-800 dark:text-gray-200 hover:bg-white/80 dark:hover:bg-white/20 transition-all hover:scale-[1.02] active:scale-95 shadow-sm"
+                        className="touch-manipulation min-h-[48px] min-w-[48px] p-3 glass bg-white/80 dark:bg-white/10 backdrop-blur-md border border-white/60 dark:border-white/10 rounded-xl text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-white/20 transition-all active:scale-95 shadow-sm flex items-center justify-center shrink-0 relative z-50"
+                        title={viewMode === 'digest' ? 'Read Full Text' : 'View Case Digest'}
                     >
-                        {viewMode === 'digest' ? 'Read Full Text' : 'View Digest'}
-                    </button>
-                    <button
-                        onClick={onClose}
-                        className="px-6 md:px-8 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-sm font-extrabold transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-500/30 border border-blue-400/50"
-                    >
-                        Close
+                        {viewMode === 'digest' ? <BookOpen size={22} /> : <FileText size={22} />}
                     </button>
                 </div>
 
@@ -927,7 +923,7 @@ const SeparateOpinionCard = React.memo(({ op, idx }) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-100 dark:border-gray-700/50" style={{ contentVisibility: 'auto' }}>
+        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-100 dark:border-gray-700/50">
             <div className="flex items-center justify-between mb-2">
                 <span className="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-blue-500"></span>
