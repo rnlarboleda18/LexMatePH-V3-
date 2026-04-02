@@ -3,10 +3,26 @@ import json
 import os
 import logging
 import random
+import gzip
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
 
 questions_bp = func.Blueprint()
+
+
+def _compressed_json_list(req: func.HttpRequest, data: list, max_age: int = 300) -> func.HttpResponse:
+    """JSON list response with gzip when supported and short public cache for repeat visits."""
+    json_str = json.dumps(data, default=str)
+    headers = {
+        "Cache-Control": f"public, max-age={max_age}",
+        "Content-Type": "application/json",
+    }
+    accept_encoding = req.headers.get("Accept-Encoding", "") or ""
+    if "gzip" in accept_encoding.lower():
+        body = gzip.compress(json_str.encode("utf-8"))
+        headers["Content-Encoding"] = "gzip"
+        return func.HttpResponse(body=body, headers=headers, status_code=200)
+    return func.HttpResponse(body=json_str, headers=headers, status_code=200)
 
 # ---------------------------------------------------------------------------
 # Existing endpoint: GET /api/questions (unchanged for Flashcards, etc.)
@@ -43,11 +59,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
         cur.execute(query, params)
         results = cur.fetchall()
 
-        return func.HttpResponse(
-            body=json.dumps(results, default=str),
-            mimetype="application/json",
-            status_code=200
-        )
+        return _compressed_json_list(req, results, max_age=300)
     except Exception as e:
         logging.error(f"Error getting questions: {e}")
         return func.HttpResponse(

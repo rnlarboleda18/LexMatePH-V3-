@@ -43,4 +43,4 @@ const FeaturePageShell = ({ icon: Icon, title, subtitle, children }) => {
   );
 };
 
-export default FeaturePageShell;
+export default React.memo(FeaturePageShell);

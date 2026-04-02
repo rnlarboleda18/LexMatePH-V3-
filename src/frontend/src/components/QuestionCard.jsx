@@ -48,4 +48,4 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
     );
 };
 
-export default QuestionCard;
+export default React.memo(QuestionCard);

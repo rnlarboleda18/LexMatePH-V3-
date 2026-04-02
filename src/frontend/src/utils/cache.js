@@ -5,6 +5,10 @@
  * IMPORTANT: IndexedDB stores objects. Arrays must be wrapped in a container
  * before storing, otherwise the spread operator ({ ...arr }) converts them
  * into plain objects with numeric keys, breaking .map() calls on retrieval.
+ *
+ * Usage: `lexCache.swr('questions', QUESTIONS_CACHE_KEY, fetcher, onUpdate)` in App.jsx
+ * stores the **raw** `/api/questions` JSON array so clients can re-run `buildBalancedQuestions`
+ * after load. The Service Worker (vite PWA) also caches `/api/*` with NetworkFirst—layers stack.
  */
 
 const DB_NAME = 'LexMateCacheDB';
@@ -76,6 +80,10 @@ class LexCache {
       if (Array.isArray(data)) {
         // Wrap arrays to prevent spread-to-object corruption
         record = { key, _isArray: true, _data: data, _cachedAt: Date.now() };
+        // Stores with keyPath `id` (not `key`) must set `id` on the wrapper — put() fails otherwise
+        if (storeName === 'cases' || storeName === 'questions') {
+          record.id = key;
+        }
       } else {
         record = { ...data, key, _cachedAt: Date.now() };
         // Ensure primary key is set for non-codal stores

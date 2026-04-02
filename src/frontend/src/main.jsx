@@ -7,6 +7,22 @@ import { registerSW } from 'virtual:pwa-register'
 // Register the service worker for PWA support (auto-updates silently in background)
 registerSW({ immediate: true })
 
+// Dev-only: log slow resources to the console (no extra npm dependency)
+if (import.meta.env.DEV && typeof PerformanceObserver !== 'undefined') {
+  try {
+    const po = new PerformanceObserver((list) => {
+      for (const e of list.getEntries()) {
+        if (e.duration > 80 && e.initiatorType === 'resource') {
+          console.debug('[perf]', e.name.slice(-48), `${Math.round(e.duration)}ms`)
+        }
+      }
+    })
+    po.observe({ type: 'resource', buffered: true })
+  } catch {
+    /* ignore */
+  }
+}
+
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

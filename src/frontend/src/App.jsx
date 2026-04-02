@@ -1,28 +1,34 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
+import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
+import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import Layout from './components/Layout';
 import Sidebar from './components/Sidebar';
 import ControlBar from './components/ControlBar';
 import QuestionCard from './components/QuestionCard';
-import Flashcard from './components/Flashcard';
-import FlashcardSetup from './components/FlashcardSetup';
-import LexifyApp from './features/lexify/LexifyApp';
-import QuestionDetailModal from './components/QuestionDetailModal';
-
-import About from './components/About';
-import Updates from './components/Updates';
 import SupremeDecisions from './components/SupremeDecisions';
-import LexCodeViewer from './components/LexCodeViewer';
-import CaseDecisionModal from './components/CaseDecisionModal';
-import SubscriptionModal from './components/SubscriptionModal';
-import UpgradeWall from './components/UpgradeWall';
-import { LexPlayer, useLexPlay } from './features/lexplay';
-import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
-import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
-import { normalizeBarSubject } from './utils/subjectNormalize';
-import { apiUrl } from './utils/apiUrl';
-import { useSubscription } from './context/SubscriptionContext';
+import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
 import FeaturePageShell from './components/FeaturePageShell';
+import { LexPlayer, useLexPlay } from './features/lexplay';
+import { useSubscription } from './context/SubscriptionContext';
+import { lexCache } from './utils/cache';
+import { buildBalancedQuestions } from './utils/barQuestionsTransform';
+import { normalizeBarSubject } from './utils/subjectNormalize';
+import { apiUrl } from './utils/apiUrl';
+
+const About = lazy(() => import('./components/About'));
+const Updates = lazy(() => import('./components/Updates'));
+const LexCodeViewer = lazy(() => import('./components/LexCodeViewer'));
+const LexifyApp = lazy(() => import('./features/lexify/LexifyApp'));
+const FlashcardSetup = lazy(() => import('./components/FlashcardSetup'));
+const Flashcard = lazy(() => import('./components/Flashcard'));
+const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
+const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
+const SubscriptionModal = lazy(() => import('./components/SubscriptionModal'));
+const UpgradeWall = lazy(() => import('./components/UpgradeWall'));
+
+/** IndexedDB key for bar questions list (must match fetch URL shape). */
+const QUESTIONS_CACHE_KEY = 'bar_questions_limit5000';
 
 /** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
 const CODAL_FILTER_OPTIONS = [
@@ -122,100 +128,35 @@ function App() {
 
   // No manual session check needed with Clerk
 
-  // 1. Fetch Questions
+  // 1. Bar questions: IndexedDB SWR (do not await swr — so cached data shows before network finishes)
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/questions?limit=5000');
-        if (!response.ok) throw new Error('Failed to fetch questions');
-        const data = await response.json();
-
-        // --- Subject Normalizer ---
-        // Maps verbose/variant DB subject strings → the 8 canonical Sidebar keys.
-        const normalizeSubject = (raw) => {
-          const s = (raw || '').toLowerCase();
-          if (s.includes('civil')) return 'Civil Law';
-          if (s.includes('commercial') || s.includes('mercantile')) return 'Commercial Law';
-          if (s.includes('criminal') || s.includes('penal')) return 'Criminal Law';
-          if (s.includes('labor') || s.includes('social legislat')) return 'Labor Law';
-          if (s.includes('ethics') || s.includes('judicial ethics')) return 'Legal Ethics';
-          if (s.includes('political') || s.includes('constitutional')) return 'Political Law';
-          if (s.includes('remedial') || s.includes('procedure')) return 'Remedial Law';
-          if (s.includes('taxation') || s.includes('tax')) return 'Taxation Law';
-          return raw; // keep as-is if no match
-        };
-
-        // --- Greedy Grouping Logic ---
-        const groupedData = [];
-        let currentParent = null;
-
-        // API returns data ordered by year DESC, subject, id ASC — no re-sort needed
-        for (const q of data) {
-          q.subject = normalizeSubject(q.subject);
-          const qText = q.text.trim();
-          const aText = (q.answer || "").trim();
-          
-          // Expanded Regex to identify sub-parts reliably
-          // 1. (a), a., 1a., (1a), a)
-          // 2. Q1a., A1a., Q1b, A1b
-          // 3. (i), (ii), i., ii. (Roman numerals)
-          const subPartRegex = /^([\(]?([a-z]|[0-9]+[a-z]|[ivx]+)[\.\)]|[QA]\d+[a-z][:.]?)/i;
-          
-          // Check BOTH question text and answer text for these markers
-          const isSub = subPartRegex.test(qText) || subPartRegex.test(aText);
-
-          const canGroup = currentParent && 
-                           currentParent.year === q.year && 
-                           currentParent.subject === q.subject;
-
-          if (isSub && canGroup) {
-            if (!currentParent.subQuestions) currentParent.subQuestions = [];
-            currentParent.subQuestions.push(q);
-          } else {
-            // New parent/stem question
-            currentParent = { ...q, subQuestions: [] };
-            groupedData.push(currentParent);
-          }
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    lexCache
+      .swr(
+        'questions',
+        QUESTIONS_CACHE_KEY,
+        async () => {
+          const response = await fetch('/api/questions?limit=5000');
+          if (!response.ok) throw new Error('Failed to fetch questions');
+          return response.json();
+        },
+        (data) => {
+          if (cancelled) return;
+          setQuestions(buildBalancedQuestions(Array.isArray(data) ? data : []));
+          setLoading(false);
         }
-
-        // Shuffle within groups if needed? No, just shuffle the groupedData.
-        // Actually, more important: shuffle the final list within subjects.
-        const subjects = {};
-        groupedData.forEach(q => {
-          if (!subjects[q.subject]) subjects[q.subject] = [];
-          subjects[q.subject].push(q);
-        });
-
-        // Ensure complete randomness within each subject
-        Object.keys(subjects).forEach(key => {
-          for (let i = subjects[key].length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [subjects[key][i], subjects[key][j]] = [subjects[key][j], subjects[key][i]];
-          }
-        });
-
-        // Finally interleave to balance subjects
-        const balancedQuestions = [];
-        const subjectKeys = Object.keys(subjects);
-        let maxCount = 0;
-        subjectKeys.forEach(key => maxCount = Math.max(maxCount, subjects[key].length));
-
-        for (let i = 0; i < maxCount; i++) {
-          subjectKeys.forEach(key => {
-            if (subjects[key][i]) balancedQuestions.push(subjects[key][i]);
-          });
+      )
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err.message || 'Failed to load questions');
+          setLoading(false);
         }
-
-        setQuestions(balancedQuestions);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      });
+    return () => {
+      cancelled = true;
     };
-
-    fetchQuestions();
   }, []);
 
   const [flashcardFetchNonce, setFlashcardFetchNonce] = useState(0);
@@ -306,70 +247,21 @@ function App() {
     return counts;
   }, [flashcardConceptPool]);
 
-  const handleRetryFetch = () => {
+  const handleRetryFetch = useCallback(async () => {
     setError(null);
     setLoading(true);
-    const doFetch = async () => {
-      try {
-        const response = await fetch('/api/questions?limit=5000');
-        if (!response.ok) throw new Error('Failed to fetch questions');
-        const data = await response.json();
-
-        const normalizeSubject = (raw) => {
-          const s = (raw || '').toLowerCase();
-          if (s.includes('civil')) return 'Civil Law';
-          if (s.includes('commercial') || s.includes('mercantile')) return 'Commercial Law';
-          if (s.includes('criminal') || s.includes('penal')) return 'Criminal Law';
-          if (s.includes('labor') || s.includes('social legislat')) return 'Labor Law';
-          if (s.includes('ethics') || s.includes('judicial ethics')) return 'Legal Ethics';
-          if (s.includes('political') || s.includes('constitutional')) return 'Political Law';
-          if (s.includes('remedial') || s.includes('procedure')) return 'Remedial Law';
-          if (s.includes('taxation') || s.includes('tax')) return 'Taxation Law';
-          return raw;
-        };
-
-        const groupedData = [];
-        let currentParent = null;
-        const subPartRegex = /^([\(]?([a-z]|[0-9]+[a-z]|[ivx]+)[\.\)]|[QA]\d+[a-z][:.]?)/i;
-        for (const q of data) {
-          q.subject = normalizeSubject(q.subject);
-          const qText = q.text.trim();
-          const aText = (q.answer || '').trim();
-          const isSub = subPartRegex.test(qText) || subPartRegex.test(aText);
-          const canGroup = currentParent && currentParent.year === q.year && currentParent.subject === q.subject;
-          if (isSub && canGroup) {
-            if (!currentParent.subQuestions) currentParent.subQuestions = [];
-            currentParent.subQuestions.push(q);
-          } else {
-            currentParent = { ...q, subQuestions: [] };
-            groupedData.push(currentParent);
-          }
-        }
-
-        const subjects = {};
-        groupedData.forEach(q => { if (!subjects[q.subject]) subjects[q.subject] = []; subjects[q.subject].push(q); });
-        Object.keys(subjects).forEach(key => {
-          for (let i = subjects[key].length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [subjects[key][i], subjects[key][j]] = [subjects[key][j], subjects[key][i]];
-          }
-        });
-        const balancedQuestions = [];
-        const subjectKeys = Object.keys(subjects);
-        let maxCount = 0;
-        subjectKeys.forEach(key => maxCount = Math.max(maxCount, subjects[key].length));
-        for (let i = 0; i < maxCount; i++) {
-          subjectKeys.forEach(key => { if (subjects[key][i]) balancedQuestions.push(subjects[key][i]); });
-        }
-        setQuestions(balancedQuestions);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    doFetch();
-  };
+    try {
+      const response = await fetch('/api/questions?limit=5000');
+      if (!response.ok) throw new Error('Failed to fetch questions');
+      const data = await response.json();
+      await lexCache.set('questions', QUESTIONS_CACHE_KEY, data);
+      setQuestions(buildBalancedQuestions(data));
+    } catch (err) {
+      setError(err.message || 'Failed to fetch questions');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
 
 
@@ -589,8 +481,16 @@ function App() {
               ) : (
                 <ErrorBoundary message="Content area encountered an error.">
                   <>
-                  {effectiveMode === 'about' && <About />}
-                  {effectiveMode === 'updates' && <Updates />}
+                  {effectiveMode === 'about' && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
+                      <About />
+                    </Suspense>
+                  )}
+                  {effectiveMode === 'updates' && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
+                      <Updates />
+                    </Suspense>
+                  )}
                   {effectiveMode === 'supreme_decisions' && (
                     <SupremeDecisions
                       externalSelectedCase={globalSelectedCase}
@@ -629,19 +529,21 @@ function App() {
                         </div>
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                        <LexCodeViewer
-                          shortName={selectedCodalCode.toUpperCase()}
-                          codalOptions={CODAL_FILTER_OPTIONS}
-                          selectedCodal={selectedCodalCode}
-                          onCodalChange={(id) => {
-                            setSelectedCodalCode(id);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                          }}
-                          onCaseSelect={selectGlobalCase}
-                          isFullscreen={isFullscreen}
-                          onToggleFullscreen={handleToggleFullscreen}
-                          subscriptionTier={tier}
-                        />
+                        <Suspense fallback={<PageLoadingFallback label="Loading LexCode…" />}>
+                          <LexCodeViewer
+                            shortName={selectedCodalCode.toUpperCase()}
+                            codalOptions={CODAL_FILTER_OPTIONS}
+                            selectedCodal={selectedCodalCode}
+                            onCodalChange={(id) => {
+                              setSelectedCodalCode(id);
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            onCaseSelect={selectGlobalCase}
+                            isFullscreen={isFullscreen}
+                            onToggleFullscreen={handleToggleFullscreen}
+                            subscriptionTier={tier}
+                          />
+                        </Suspense>
                       </main>
                     </div>
                   )}
@@ -677,15 +579,17 @@ function App() {
                         </div>
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                        <FlashcardSetup
-                          embedded
-                          onStart={handleStartFlashcard}
-                          conceptsLoading={flashcardConceptsLoading}
-                          conceptsError={flashcardConceptsError}
-                          deckError={flashcardDeckError}
-                          subjectCounts={flashcardSubjectCounts}
-                          onRetryConcepts={refetchFlashcardConcepts}
-                        />
+                        <Suspense fallback={<PageLoadingFallback label="Loading Flashcards…" />}>
+                          <FlashcardSetup
+                            embedded
+                            onStart={handleStartFlashcard}
+                            conceptsLoading={flashcardConceptsLoading}
+                            conceptsError={flashcardConceptsError}
+                            deckError={flashcardDeckError}
+                            subjectCounts={flashcardSubjectCounts}
+                            onRetryConcepts={refetchFlashcardConcepts}
+                          />
+                        </Suspense>
                       </main>
                     </div>
                   )}
@@ -694,24 +598,28 @@ function App() {
                       className="flex h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-3.5rem)] min-h-[280px] w-full flex-col items-center justify-center px-3 pb-3 pt-2 text-gray-900 dark:text-gray-100 sm:px-5 md:h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-5rem)] md:px-6 md:pb-4 md:pt-3"
                     >
                       <div className="flex h-full min-h-0 w-full max-w-2xl flex-col md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))]">
-                        <Flashcard
-                          variant="concepts"
-                          card={flashcardQuestions[flashcardIndex]}
-                          total={flashcardQuestions.length}
-                          currentIndex={flashcardIndex}
-                          onNext={handleNextFlashcard}
-                          onClose={() => setMode('supreme_decisions')}
-                        />
+                        <Suspense fallback={<PageLoadingFallback label="Loading card…" />}>
+                          <Flashcard
+                            variant="concepts"
+                            card={flashcardQuestions[flashcardIndex]}
+                            total={flashcardQuestions.length}
+                            currentIndex={flashcardIndex}
+                            onNext={handleNextFlashcard}
+                            onClose={() => setMode('supreme_decisions')}
+                          />
+                        </Suspense>
                       </div>
                     </div>
                   )}
                   {effectiveMode === 'quiz' && (
                     canAccess('lexify') ? (
-                      <LexifyApp
-                        questions={questions}
-                        onClose={() => setMode('supreme_decisions')}
-                        onExamSimulationChange={setLexifyExamSimulationActive}
-                      />
+                      <Suspense fallback={<PageLoadingFallback label="Loading Lexify…" />}>
+                        <LexifyApp
+                          questions={questions}
+                          onClose={() => setMode('supreme_decisions')}
+                          onExamSimulationChange={setLexifyExamSimulationActive}
+                        />
+                      </Suspense>
                     ) : (
                       <FeaturePageShell
                         icon={Brain}
@@ -720,7 +628,9 @@ function App() {
                       >
                         <div className="flex min-h-[40vh] items-center justify-center">
                           <div className="w-full max-w-md">
-                            <UpgradeWall feature="lexify" variant="inline" />
+                            <Suspense fallback={<PageLoadingFallback />}>
+                              <UpgradeWall feature="lexify" variant="inline" />
+                            </Suspense>
                           </div>
                         </div>
                       </FeaturePageShell>
@@ -867,11 +777,13 @@ function App() {
 
       {/* Global Case Decision Modal */}
       {globalSelectedCase && (
-        <CaseDecisionModal
-          decision={globalSelectedCase}
-          onClose={closeGlobalCaseModal}
-          onCaseSelect={selectGlobalCase}
-        />
+        <Suspense fallback={null}>
+          <CaseDecisionModal
+            decision={globalSelectedCase}
+            onClose={closeGlobalCaseModal}
+            onCaseSelect={selectGlobalCase}
+          />
+        </Suspense>
       )}
 
       {/* Global Minimized LexPlayer — docked to bottom when not in full LexPlay; hidden during Lexify exam simulation */}
@@ -892,27 +804,31 @@ function App() {
         const currentList = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
         const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
         return (
-          <QuestionDetailModal
-            question={selectedQuestion}
-            onClose={() => setSelectedQuestion(null)}
-            hasNext={idx < currentList.length - 1}
-            hasPrev={idx > 0}
-            onNext={() => {
-              if (idx < currentList.length - 1) {
-                setSelectedQuestion(currentList[idx + 1]);
-              }
-            }}
-            onPrev={() => {
-              if (idx > 0) {
-                setSelectedQuestion(currentList[idx - 1]);
-              }
-            }}
-          />
+          <Suspense fallback={null}>
+            <QuestionDetailModal
+              question={selectedQuestion}
+              onClose={() => setSelectedQuestion(null)}
+              hasNext={idx < currentList.length - 1}
+              hasPrev={idx > 0}
+              onNext={() => {
+                if (idx < currentList.length - 1) {
+                  setSelectedQuestion(currentList[idx + 1]);
+                }
+              }}
+              onPrev={() => {
+                if (idx > 0) {
+                  setSelectedQuestion(currentList[idx - 1]);
+                }
+              }}
+            />
+          </Suspense>
         );
       })()}
       {/* Global Subscription Upgrade Modal */}
       {showUpgradeModal && (
-        <SubscriptionModal onClose={closeUpgradeModal} />
+        <Suspense fallback={null}>
+          <SubscriptionModal onClose={closeUpgradeModal} />
+        </Suspense>
       )}
 
     </Layout>
