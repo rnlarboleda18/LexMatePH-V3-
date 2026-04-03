@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, Suspense } from 'react';
+import { createPortal } from 'react-dom';
 import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
@@ -603,54 +604,60 @@ const LexCodeViewer = ({
                 </div>
             </div>
 
-            {/* Mobile Overlay for Right Sidebar */}
-            {(activeJurisArticle || activeAmendmentArticle) && (
-                <div
-                    className="lg:hidden fixed inset-0 z-[110] flex items-start justify-end bg-black/50 backdrop-blur-md pt-[max(0.5rem,env(safe-area-inset-top,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-3"
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) {
-                            setActiveJurisArticle(null);
-                            setActiveJurisParagraph(null);
-                            setActiveAmendmentArticle(null);
-                        }
-                    }}
-                >
-                    <div className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900">
-                        {activeJurisArticle && (
-                            <LexCodeJurisSidebar
-                                articleNum={activeJurisArticle}
-                                statuteId={shortName}
-                                paragraphFilter={activeJurisParagraph}
-                                onClose={() => {
-                                    setActiveJurisArticle(null);
-                                    setActiveJurisParagraph(null);
-                                }}
-                                onSelectRatio={async (caseId, ratioIndex) => {
-                                    try {
-                                        const res = await fetch(`/api/sc_decisions/${caseId}`);
-                                        if (res.ok) {
-                                            const caseData = await res.json();
-                                            caseData.scrollToRatioIndex = ratioIndex;
-                                            onCaseSelect && onCaseSelect(caseData);
+            {/* Mobile / tablet (<lg): portaled above Layout header — main is z-10 so in-DOM fixed overlays stay under header z-50 and the close control is untappable */}
+            {typeof document !== 'undefined' &&
+                (activeJurisArticle || activeAmendmentArticle) &&
+                createPortal(
+                    <div
+                        className="lg:hidden fixed inset-0 z-[60] flex items-start justify-end bg-black/50 backdrop-blur-md pt-[calc(3.5rem+env(safe-area-inset-top,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-3 md:pt-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        role="presentation"
+                        onClick={(e) => {
+                            if (e.target === e.currentTarget) {
+                                setActiveJurisArticle(null);
+                                setActiveJurisParagraph(null);
+                                setActiveAmendmentArticle(null);
+                            }
+                        }}
+                    >
+                        <div className="flex h-[min(86dvh,calc(100dvh-3.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1.25rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900 md:h-[min(86dvh,calc(100dvh-5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1.25rem))]">
+                            {activeJurisArticle && (
+                                <LexCodeJurisSidebar
+                                    articleNum={activeJurisArticle}
+                                    statuteId={shortName}
+                                    paragraphFilter={activeJurisParagraph}
+                                    onClose={() => {
+                                        setActiveJurisArticle(null);
+                                        setActiveJurisParagraph(null);
+                                    }}
+                                    onSelectRatio={async (caseId, ratioIndex) => {
+                                        try {
+                                            const res = await fetch(`/api/sc_decisions/${caseId}`);
+                                            if (res.ok) {
+                                                const caseData = await res.json();
+                                                caseData.scrollToRatioIndex = ratioIndex;
+                                                onCaseSelect && onCaseSelect(caseData);
+                                            }
+                                        } catch (err) {
+                                            console.error('Failed to fetch case:', err);
                                         }
-                                    } catch (err) {
-                                        console.error('Failed to fetch case:', err);
-                                    }
-                                }}
-                            />
-                        )}
-                        {activeAmendmentArticle && !activeJurisArticle && (
-                            <div className="h-full flex flex-col p-4 overflow-y-auto font-sans">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold text-lg text-rose-700">Amendments</h3>
-                                    <button onClick={() => setActiveAmendmentArticle(null)}><X size={18} /></button>
+                                    }}
+                                />
+                            )}
+                            {activeAmendmentArticle && !activeJurisArticle && (
+                                <div className="flex h-full min-h-0 flex-col overflow-y-auto p-4 font-sans">
+                                    <div className="mb-4 flex items-center justify-between">
+                                        <h3 className="font-bold text-lg text-rose-700">Amendments</h3>
+                                        <button type="button" onClick={() => setActiveAmendmentArticle(null)} aria-label="Close">
+                                            <X size={18} />
+                                        </button>
+                                    </div>
+                                    <div className="text-sm">Article {activeAmendmentArticle.article_num}</div>
                                 </div>
-                                <div className="text-sm">Article {activeAmendmentArticle.article_num}</div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
+                            )}
+                        </div>
+                    </div>,
+                    document.body
+                )}
         </div>
     );
 };
