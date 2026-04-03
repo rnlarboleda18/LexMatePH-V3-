@@ -11,12 +11,12 @@ from azure.storage.blob import BlobServiceClient, ContentSettings
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Constants (Must match audio_provider.py)
+# Constants (Must match audio_provider.py get_audio_stream cache_key)
 CACHE_VERSION = "v1"
-VOICE_NAME = "en-US-JennyNeural"
+VOICE_NAME = "en-US-JennyMultilingualNeural"  # same voice as live endpoint
 RATE = 1.0
 RATE_SLUG = "1p0"
-VOICE_SLUG = "jennymultilingual"
+VOICE_SLUG = "jennymultilingual"  # must match voice_slug derived from VOICE_NAME in audio_provider
 TTS_ENGINE = "edge_tts"
 CODE_ID = "rpc"
 CONTENT_TYPE = "codal"

@@ -364,24 +364,38 @@ export const LexPlayProvider = ({ children }) => {
         });
     }, [activePlaylistId, currentTrack?.id, isStateLoaded, isSignedIn]);
 
-    // 2. Debounced save for time updates
+    // 2. Save position on seek (progress bar / skip ±10s) — avoids polling the API every N seconds
     useEffect(() => {
-        if (!isStateLoaded || !isSignedIn || !currentTrack || !isPlaying) return;
-        
-        const interval = setInterval(() => {
-            if (audioRef.current && !audioRef.current.paused) {
-                savePlaybackState({
-                    playlist_id: activePlaylistId,
-                    current_track_id: currentTrack.id,
-                    current_time: audioRef.current.currentTime,
-                    playback_rate: PLAYBACK_RATE
-                });
-            }
-        }, 10000); // Sync time every 10 seconds while playing
+        if (!isStateLoaded || !isSignedIn || !currentTrack) return;
+        const a = audioRef.current;
+        if (!a) return;
+        const onSeeked = () => {
+            savePlaybackState({
+                playlist_id: activePlaylistId,
+                current_track_id: currentTrack.id,
+                current_time: a.currentTime,
+                playback_rate: PLAYBACK_RATE,
+            });
+        };
+        a.addEventListener('seeked', onSeeked);
+        return () => a.removeEventListener('seeked', onSeeked);
+    }, [isStateLoaded, isSignedIn, currentTrack, activePlaylistId, savePlaybackState]);
 
-        return () => clearInterval(interval);
-    }, [activePlaylistId, currentTrack?.id, isStateLoaded, isSignedIn, isPlaying]);
-
+    // 3. Flush last known position when user switches tab / minimizes (mobile)
+    useEffect(() => {
+        if (!isStateLoaded || !isSignedIn || !currentTrack) return;
+        const onVis = () => {
+            if (document.visibilityState !== 'hidden' || !audioRef.current) return;
+            savePlaybackState({
+                playlist_id: activePlaylistId,
+                current_track_id: currentTrack.id,
+                current_time: audioRef.current.currentTime,
+                playback_rate: PLAYBACK_RATE,
+            });
+        };
+        document.addEventListener('visibilitychange', onVis);
+        return () => document.removeEventListener('visibilitychange', onVis);
+    }, [isStateLoaded, isSignedIn, currentTrack, activePlaylistId, savePlaybackState]);
 
     // Initialize Audio Element
     useEffect(() => {
@@ -800,6 +814,14 @@ export const LexPlayProvider = ({ children }) => {
         if (isPlaying) {
             audioRef.current.pause();
             setIsPlaying(false);
+            if (isStateLoaded && isSignedIn && currentTrack) {
+                void savePlaybackState({
+                    playlist_id: activePlaylistId,
+                    current_track_id: currentTrack.id,
+                    current_time: audioRef.current.currentTime,
+                    playback_rate: PLAYBACK_RATE,
+                });
+            }
         } else {
             if (currentTrack) {
                 // Check if the current src matches what we expect for this track
@@ -823,7 +845,17 @@ export const LexPlayProvider = ({ children }) => {
                 playTrack(0);
             }
         }
-    }, [isPlaying, currentTrack, playlist.length, playTrack, currentIndex]);
+    }, [
+        isPlaying,
+        currentTrack,
+        playlist.length,
+        playTrack,
+        currentIndex,
+        isStateLoaded,
+        isSignedIn,
+        activePlaylistId,
+        savePlaybackState,
+    ]);
 
     const playTrackFromList = useCallback(
         (index) => {

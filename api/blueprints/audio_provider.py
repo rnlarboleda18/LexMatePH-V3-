@@ -34,6 +34,39 @@ CACHE_VERSION = "v1"  # Reset to v1 as blobs are being cleared
 _TTS_LOCK = threading.Lock()
 _TTS_LOCK_TIMEOUT = 30  # seconds to wait before giving up and using gTTS
 
+# Default: Edge TTS. Set LEXPLAY_USE_AZURE_SPEECH=true for Azure Speech only (no Edge fallback if Azure fails).
+_USE_AZURE_SPEECH = os.environ.get("LEXPLAY_USE_AZURE_SPEECH", "").lower() in ("1", "true", "yes")
+
+# Reuse one BlobServiceClient + container client per instance (fewer storage API calls).
+_BLOB_INIT_LOCK = threading.Lock()
+_BLOB_SERVICE_CLIENT = None
+_BLOB_CONTAINER_NAME = "lexplay-audio-cache"
+_CONTAINER_READY = False
+
+# Browser/CDN caching for immutable audio at a stable URL (30d; bump CACHE_VERSION to refresh).
+_AUDIO_CACHE_CONTROL = "public, max-age=2592000, stale-while-revalidate=86400"
+
+
+def _audio_http_headers(
+    body_len,
+    cache_status,
+    *,
+    tts_engine=None,
+    blob_name=None,
+):
+    h = {
+        "Content-Length": str(body_len),
+        "Accept-Ranges": "bytes",
+        "Cache-Control": _AUDIO_CACHE_CONTROL,
+        "X-Cache-Status": cache_status,
+        "X-Cache-Version": CACHE_VERSION,
+    }
+    if tts_engine:
+        h["X-TTS-Engine"] = tts_engine
+    if blob_name:
+        h["ETag"] = f'W/"{CACHE_VERSION}-{blob_name}"'
+    return h
+
 # ----- Custom Pronunciation Rules -----
 LATIN_REPLACEMENTS = {
     r"certiorari": "ser-sho-rah-ree",
@@ -215,25 +248,31 @@ def _apply_custom_pronunciations(text):
 
 # ----- Blob Cache (best-effort, degrades silently) -----
 def _get_blob_client(blob_name):
+    """Return a BlobClient for blob_name; reuse account/container clients per process."""
+    global _BLOB_SERVICE_CLIENT, _CONTAINER_READY
     try:
         conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING", "UseDevelopmentStorage=true")
         if conn_str == "UseDevelopmentStorage=true":
             logging.warning("AZURE_STORAGE_CONNECTION_STRING not configured, blob cache disabled.")
             return None
-        svc = BlobServiceClient.from_connection_string(
-            conn_str,
-            connection_timeout=15,
-            read_timeout=30,
-            retry_total=2
-        )
-        container = svc.get_container_client("lexplay-audio-cache")
-        try:
-            if not container.exists():
-                container.create_container()
-        except Exception as e:
-            logging.warning(f"Failed to check/create container: {e}")
-            return None
-            
+        with _BLOB_INIT_LOCK:
+            if _BLOB_SERVICE_CLIENT is None:
+                _BLOB_SERVICE_CLIENT = BlobServiceClient.from_connection_string(
+                    conn_str,
+                    connection_timeout=15,
+                    read_timeout=30,
+                    retry_total=2,
+                )
+            container = _BLOB_SERVICE_CLIENT.get_container_client(_BLOB_CONTAINER_NAME)
+            if not _CONTAINER_READY:
+                try:
+                    if not container.exists():
+                        container.create_container()
+                    _CONTAINER_READY = True
+                except Exception as e:
+                    logging.warning(f"Failed to check/create container: {e}")
+                    return None
+
         return container.get_blob_client(blob_name)
     except Exception as e:
         logging.warning(f"Blob client initialization failed: {e}")
@@ -1046,23 +1085,21 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     rate_slug = str(rate).replace('.', 'p')  # e.g. 0.8 -> "0p8"
     cache_key = f"{content_type}_{code_id or ''}_{formatted_id}_{voice_slug}_r{rate_slug}_{CACHE_VERSION}"
     
-    cache_status = "MISS"
-    for ext in ['.mp3', '.wav']:
-        blob_name = f"{cache_key}{ext}"
-        cached_data = _get_data_from_cache(blob_name)
-        if cached_data:
-            logging.info(f"CACHE HIT: Proxying {len(cached_data)} bytes...")
-            return func.HttpResponse(
-                body=cached_data,
-                status_code=200,
-                mimetype="audio/mpeg",
-                headers={
-                    "Content-Length": str(len(cached_data)),
-                    "Accept-Ranges": "bytes",
-                    "X-Cache-Status": "HIT",
-                    "X-Cache-Version": CACHE_VERSION
-                }
-            )
+    # Try legacy base key, then engine-suffixed blobs (matches writes + precache_rpc)
+    for suffix in ("", "_azure", "_edge_tts"):
+        for ext in (".mp3", ".wav"):
+            blob_name = f"{cache_key}{suffix}{ext}"
+            cached_data = _get_data_from_cache(blob_name)
+            if cached_data:
+                logging.info(f"CACHE HIT: Proxying {len(cached_data)} bytes ({blob_name})...")
+                return func.HttpResponse(
+                    body=cached_data,
+                    status_code=200,
+                    mimetype="audio/mpeg",
+                    headers=_audio_http_headers(
+                        len(cached_data), "HIT", blob_name=blob_name
+                    ),
+                )
 
     # --- 2. Fetch text from DB ---
     text = None
@@ -1083,49 +1120,59 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     if not text or not text.strip():
         return func.HttpResponse("No text content to synthesize", status_code=404)
 
-    # --- 3. Generate audio via Azure Speech (Preferred) with retry on 429 ---
-    # Acquire global TTS lock to prevent concurrent synthesis on F0 (1 concurrent session limit)
+    # --- 3. Generate audio: Edge TTS by default; optional Azure-only path (no Edge fallback) ---
     audio_data, mime_type, ext = None, None, None
     tts_engine = "unknown"
     try:
-        if AZURE_SPEECH_AVAILABLE:
+        if _USE_AZURE_SPEECH and AZURE_SPEECH_AVAILABLE:
             azure_success = False
             last_azure_error = None
             max_retries = 3
 
             lock_acquired = _TTS_LOCK.acquire(timeout=_TTS_LOCK_TIMEOUT)
             if not lock_acquired:
-                logging.warning("TTS lock timeout — another synthesis is running too long. Falling back to edge_tts.")
-                audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
-                tts_engine = "edge_tts"
-            else:
-                try:
-                    for attempt in range(1, max_retries + 1):
-                        try:
-                            audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
-                            logging.info(f"Audio generated via Azure TTS ({voice_name}) at rate={rate} (attempt {attempt})")
-                            tts_engine = "azure"
-                            azure_success = True
+                logging.warning("TTS lock timeout — another Azure synthesis is still running.")
+                return func.HttpResponse(
+                    json.dumps({"error": "Audio synthesis is busy. Try again in a few seconds."}),
+                    status_code=503,
+                    mimetype="application/json",
+                )
+            try:
+                for attempt in range(1, max_retries + 1):
+                    try:
+                        audio_data, mime_type, ext = _generate_audio_azure(text, voice_name=voice_name, rate=rate)
+                        logging.info(f"Audio generated via Azure TTS ({voice_name}) at rate={rate} (attempt {attempt})")
+                        tts_engine = "azure"
+                        azure_success = True
+                        break
+                    except Exception as e:
+                        last_azure_error = e
+                        err_str = str(e).lower()
+                        is_throttle = "429" in err_str or "too many" in err_str or "toomany" in err_str
+                        if is_throttle and attempt < max_retries:
+                            wait_sec = 2 ** attempt  # 2s, 4s
+                            logging.warning(f"Azure TTS throttled (429), retry {attempt}/{max_retries} in {wait_sec}s")
+                            time.sleep(wait_sec)
+                        else:
+                            logging.warning(f"Azure TTS failed after {attempt} attempt(s): {e}")
                             break
-                        except Exception as e:
-                            last_azure_error = e
-                            err_str = str(e).lower()
-                            is_throttle = "429" in err_str or "too many" in err_str or "toomany" in err_str
-                            if is_throttle and attempt < max_retries:
-                                wait_sec = 2 ** attempt  # 2s, 4s
-                                logging.warning(f"Azure TTS throttled (429), retry {attempt}/{max_retries} in {wait_sec}s")
-                                time.sleep(wait_sec)
-                            else:
-                                logging.warning(f"Azure TTS failed after {attempt} attempt(s): {e}")
-                                break
-                    if not azure_success:
-                        logging.warning(f"Azure TTS unavailable, falling back to edge_tts. Last error: {last_azure_error}")
-                        audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
-                        tts_engine = "edge_tts"
-                finally:
-                    _TTS_LOCK.release()
+                if not azure_success:
+                    err_msg = str(last_azure_error) if last_azure_error else "Azure TTS failed"
+                    logging.error(f"Azure TTS unavailable (no Edge fallback): {err_msg}")
+                    return func.HttpResponse(
+                        json.dumps({"error": "Azure Speech synthesis failed.", "detail": err_msg[:500]}),
+                        status_code=502,
+                        mimetype="application/json",
+                    )
+            finally:
+                _TTS_LOCK.release()
+        elif _USE_AZURE_SPEECH and not AZURE_SPEECH_AVAILABLE:
+            return func.HttpResponse(
+                json.dumps({"error": "LEXPLAY_USE_AZURE_SPEECH is set but Azure Speech SDK is not available."}),
+                status_code=503,
+                mimetype="application/json",
+            )
         else:
-            logging.warning("Azure Speech SDK not available, falling back to edge_tts")
             audio_data, mime_type, ext = _generate_audio_edge_tts(text, rate=rate)
             tts_engine = "edge_tts"
     except Exception as e:
@@ -1137,32 +1184,18 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     effective_cache_key = f"{cache_key}_{tts_engine}"
     blob_name = f"{effective_cache_key}{ext}"
     _save_to_cache(blob_name, audio_data, mime_type=mime_type)
-    
-    # We already have audio_data in memory, so we just return it directly (proxy) 
-    # instead of doing a redirect loop.
-    return func.HttpResponse(
-        body=audio_data,
-        status_code=200,
-        mimetype=mime_type,
-        headers={
-            "Content-Length": str(len(audio_data)),
-            "Accept-Ranges": "bytes",
-            "X-TTS-Engine": tts_engine,
-            "X-Cache-Status": "MISS"
-        }
-    )
 
-    # --- 5. Fallback: stream audio directly if blob upload failed ---
     if not audio_data:
         return func.HttpResponse("Audio generation produced no data", status_code=500)
-    logging.info(f"Blob upload failed, streaming {len(audio_data)} bytes directly ({tts_engine})")
+
     return func.HttpResponse(
         body=audio_data,
         status_code=200,
         mimetype=mime_type,
-        headers={
-            "Content-Length": str(len(audio_data)),
-            "Accept-Ranges": "bytes",
-            "X-TTS-Engine": tts_engine,
-        }
+        headers=_audio_http_headers(
+            len(audio_data),
+            "MISS",
+            tts_engine=tts_engine,
+            blob_name=blob_name,
+        ),
     )
