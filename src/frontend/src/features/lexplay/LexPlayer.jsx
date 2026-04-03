@@ -340,7 +340,14 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                         title={isDownloading ? 'Stop download' : 'Download for offline'}
                         aria-label={isDownloading ? 'Stop download' : 'Download for offline'}
                     >
-                        {isDownloading ? <Square size={16} strokeWidth={2.5} className="fill-current" /> : <DownloadCloud size={18} strokeWidth={2} />}
+                        {isDownloading ? (
+                            <div className="relative flex items-center justify-center">
+                                <div className="absolute -inset-1.5 animate-spin rounded-full border-2 border-rose-500/20 border-t-rose-600 dark:border-rose-400/20 dark:border-t-rose-400" />
+                                <Square size={13} strokeWidth={2.5} className="fill-current relative z-10" />
+                            </div>
+                        ) : (
+                            <DownloadCloud size={18} strokeWidth={2} />
+                        )}
                     </button>
                 )}
                 <button
@@ -1044,7 +1051,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                             aria-label={isBulkDownloading ? 'Stop bulk download' : 'Download all for offline'}
                                         >
                                             {isBulkDownloading ? (
-                                                <Square className="h-5 w-5 fill-current" strokeWidth={2.25} />
+                                                <div className="relative flex items-center justify-center">
+                                                    <div className="absolute -inset-2.5 animate-spin rounded-full border-[3px] border-rose-500/20 border-t-rose-600 dark:border-rose-400/20 dark:border-t-rose-400" />
+                                                    <Square className="h-4 w-4 fill-current relative z-10" strokeWidth={2.5} />
+                                                </div>
                                             ) : cachedCount === displayPlaylist.length ? (
                                                 <CheckCircle2 className="w-5 h-5" strokeWidth={2.25} />
                                             ) : (
