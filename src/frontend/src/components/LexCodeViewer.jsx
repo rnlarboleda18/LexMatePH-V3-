@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, Suspense } from 'react';
 import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
@@ -321,100 +321,33 @@ const LexCodeViewer = ({
 
 
     const scrollToArticle = (articleNumber) => {
-        // Auto-close sidebar on smaller screens (up to iPad Pro 12.9 Landscape ~1366px)
+        // Auto-close sidebar on smaller screens
         if (window.innerWidth < 1400) setIsSidebarOpen(false);
 
         // Tell LexCodeStream to ensure this article is loaded
         setTargetArticleId(articleNumber);
 
-        // Give React enough time to expand the visibleCount and render the new DOM chunk
+        // Give React enough time to render
         setTimeout(() => {
             const element = document.getElementById(`article-${articleNumber}`);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                console.warn(`[Scroll] Target element 'article-${articleNumber}' not found in DOM.`);
             }
         }, 300);
     };
 
-    // Dummy search handlers (simplified for reconstruction)
-    const handleSearchSubmit = (e) => { e.preventDefault(); };
-    const handleSearchInputChange = (e) => setSearchTerm(e.target.value);
-    const handleClearSearch = () => setSearchTerm('');
-    const handleKeyDown = () => { };
-    const handleSuggestionClick = () => { };
-    const handlePreviousHighlight = () => { };
-    const handleNextHighlight = () => { };
-    const clearAllSearchStates = () => { };
     const handlePreviousArticle = () => { };
     const handleNextArticle = () => { };
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-    // Derived Data
-    const bookTitle = data?.metadata?.full_name || '';
-    const chapterTitle = '';
-    const sectionTitle = '';
-    const isFirstArticle = false;
-    const isLastArticle = false;
-
     if (loading) return <div className="p-8 text-center text-gray-500 animate-pulse">Loading LexCode...</div>;
     if (error) return <div className="p-8 text-center text-red-500">Error: {error}</div>;
     if (!data) return null;
 
-    // Renderers
-    const renderers = {
-        h1: ({ node, children, ...props }) => <h1 className="text-center font-extrabold text-amber-900 dark:text-gray-100 mt-10 mb-8 text-[16px] tracking-wide" {...props}>{toTitleCase(String(children))}</h1>,
-        h2: ({ node, children, ...props }) => <h2 className="text-center font-bold text-amber-800 dark:text-gray-200 mt-10 mb-6 text-[16px] tracking-wide border-b-2 border-amber-200 dark:border-gray-700 pb-3" {...props}>{toTitleCase(String(children))}</h2>,
-        h3: ({ node, children, ...props }) => {
-            let text = '';
-            const extractText = (c) => {
-                if (typeof c === 'string') return c;
-                if (Array.isArray(c)) return c.map(extractText).join('');
-                if (c?.props?.children) return extractText(c.props.children);
-                return '';
-            };
-            text = extractText(children);
-            const match = text.match(/^((?:Article|Art\.?)\s+\d+[.:]?)\s*(.*)$/s);
-            if (match) {
-                const prefix = match[1];
-                let suffix = match[2];
-                let titlePart = null;
-                const titleMatch = suffix.match(/^(.+?\.\s*-)(.*)/s);
-                if (titleMatch && titleMatch[1].length < 150) {
-                    titlePart = titleMatch[1].trim();
-                    suffix = titleMatch[2] || '';
-                }
-                return (
-                    <div className="mt-8 mb-4 leading-relaxed text-gray-900 dark:text-white text-justify" {...props}>
-                        <span className="text-amber-700 dark:text-gray-200 font-extrabold text-[16px] mr-2">{prefix}</span>
-                        {titlePart && <span className="text-amber-700 dark:text-gray-200 font-extrabold text-[16px] mr-2">{titlePart}</span>}
-                        <span className="text-[16px]">{suffix}</span>
-                    </div>
-                );
-            }
-            return <h3 className="text-left font-bold text-gray-900 dark:text-white mt-8 mb-4 text-[16px]" {...props}>{children}</h3>;
-        },
-        h4: ({ node, children, ...props }) => <h4 className="text-left font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3 text-[16px]" {...props}>{toTitleCase(String(children))}</h4>,
-        p: ({ node, children, ...props }) => {
-            // Simplified P renderer logic for rescue
-            return <p className="mb-4 leading-relaxed text-lg text-gray-900 dark:text-white text-justify" style={{ maxWidth: 'none' }} {...props}>{children}</p>;
-        },
-        ul: ({ node, ...props }) => <ul className="list-disc pl-8 space-y-2 my-3" {...props} />,
-        ol: ({ node, ...props }) => <ol className="list-decimal pl-8 space-y-2 my-3" {...props} />,
-        li: ({ node, ...props }) => <li className="pl-2 text-gray-900 dark:text-white" {...props} />,
-        blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-amber-500 pl-4 italic my-4 text-gray-600 dark:text-gray-400 bg-amber-50/50 dark:bg-gray-800/50 py-2 rounded-r" {...props} />,
-        strong: ({ node, children, ...props }) => <span className="font-normal text-gray-900 dark:text-white" {...props}>{children}</span>,
-        em: ({ node, ...props }) => <em className="italic text-gray-700 dark:text-gray-300" {...props} />
-    };
-
     const renderMainContent = () => {
         if (!data) return null;
-        if (searchMode) return renderSearchResults();
 
         const commonProps = {
             code: shortName,
-            hideDocHeader: true,   // title is now shown in the sticky header bar
+            hideDocHeader: true,
             onJurisprudenceClick: handleJurisprudenceClick,
             onAmendmentClick: handleAmendmentClick,
             targetArticleId
@@ -424,249 +357,253 @@ const LexCodeViewer = ({
     };
 
     return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:pb-8 justify-center items-start">
-            {/* 1. Floating TOC Sidebar (Left) */}
-            <div className={`
-                flex-none z-20 sticky top-28 mt-0 transition-all duration-300 ease-in-out
-                ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
-                hidden lg:block
-            `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 overflow-hidden max-h-[calc(100vh-100px)]">
-                    <div className="flex-none p-4 pb-0 border-b border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30">
-                        <div className="flex justify-between items-center mb-4">
-                            <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
-                            <button onClick={() => setIsSidebarOpen(false)} className="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500"><X size={20} /></button>
-                        </div>
-                    </div>
-
-                    <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-                        {activeTab === 'toc' && tocData && (
-                            <div key={tocVersion} className="space-y-1">
-                                {tocData.articles.map(art => (
-                                    <button key={art.id} onClick={() => scrollToArticle(art.id)} className="px-2 py-1.5 text-xs font-sans text-left text-gray-700 dark:text-gray-400 hover:text-amber-800 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded transition-colors truncate w-full">{art.label}</button>
-                                ))}
-                                {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile/Overlay Sidebar (for smaller screens) — safe-area + height cap so panel does not spill under notch/status bar */}
-            {isSidebarOpen && (
+        <div className="min-h-screen lg:min-h-0">
+            <div className="mx-auto max-w-full px-0 sm:px-4 lg:px-6">
+                {/*
+                  Desktop (lg+): fixed-height row + overflow-y ONLY on center column.
+                  Sticky sidebars failed because the page scrolls as a whole; isolating scroll keeps TOC/juris fixed in the row.
+                */}
                 <div
-                    className="lg:hidden fixed inset-0 z-[100] flex items-start justify-start bg-black/50 backdrop-blur-sm pt-[max(0.5rem,env(safe-area-inset-top,0px))] pr-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-[max(0.75rem,env(safe-area-inset-left,0px))]"
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) setIsSidebarOpen(false);
-                    }}
+                    className={`
+                        flex flex-col gap-4 bg-transparent p-0 lg:flex-row lg:items-stretch lg:justify-center
+                        lg:gap-6 xl:gap-8 lg:overflow-hidden lg:pb-2 lg:min-h-0
+                        ${
+                            isFullscreen
+                                ? 'lg:h-[calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-var(--player-height,0px))] lg:max-h-[calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-var(--player-height,0px))]'
+                                : 'lg:h-[calc(100dvh-10.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-var(--player-height,0px))] lg:max-h-[calc(100dvh-10.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-var(--player-height,0px))]'
+                        }
+                    `}
                 >
+                    {/* 1. TOC — column height matches row; list scrolls inside (no page scroll) */}
                     <div
-                        className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-left duration-300 dark:border-white/10 dark:bg-slate-900"
+                        className={`
+                        hidden lg:flex lg:h-full lg:min-h-0 lg:flex-none lg:flex-col lg:overflow-hidden lg:self-stretch
+                        z-[45] mt-0 transition-all duration-300 ease-in-out
+                        ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
+                    `}
                     >
-                        <div className="flex flex-none justify-between items-center border-b border-white/20 bg-white/30 p-4 dark:border-white/5 dark:bg-slate-800/30">
-                            <span className="font-bold">Contents</span>
-                            <button type="button" onClick={() => setIsSidebarOpen(false)} aria-label="Close contents">
-                                <X size={20} />
-                            </button>
-                        </div>
-                        <div className="min-h-0 flex-1 overflow-y-auto p-4 custom-scrollbar">
-                            {tocData && (
-                                <div key={tocVersion} className="space-y-1">
-                                    {tocData.articles.map(art => (
-                                        <button key={art.id} onClick={() => scrollToArticle(art.id)} className="px-2 py-1.5 text-xs font-sans text-left text-gray-700 dark:text-gray-400 hover:text-amber-800 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded transition-colors truncate w-full">{art.label}</button>
-                                    ))}
-                                    {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Codal Stream Card */}
-            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 min-h-max mb-20 relative`} id="main-content">
-
-                    {/* ── Sticky top: codal filter + document chrome (inside codal card) ── */}
-                    <div className="sticky top-0 z-10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-white/25 dark:border-white/10">
-                        {Array.isArray(codalOptions) && codalOptions.length > 0 && typeof onCodalChange === 'function' && (
-                            <div className="border-b border-white/20 px-4 py-3 dark:border-white/10">
-                                <div className="min-w-0 max-w-md">
-                                    <label htmlFor="lexcode-codal-filter-inline" className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                                        Codal
-                                    </label>
-                                    <select
-                                        id="lexcode-codal-filter-inline"
-                                        value={selectedCodal}
-                                        onChange={(e) => {
-                                            const v = e.target.value;
-                                            if (!v) return;
-                                            onCodalChange(v);
-                                        }}
-                                        className="block w-full rounded-lg border border-stone-400 bg-white/90 py-2 pl-3 pr-8 text-sm shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white"
-                                    >
-                                        {codalOptions.map((opt) => (
-                                            <option key={opt.id} value={opt.id} disabled={opt.disabled}>
-                                                {opt.label}
-                                                {opt.disabled ? ' (Soon)' : ''}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="flex items-center gap-3 px-4 py-3">
-                            {/* TOC / Menu Button */}
-                            {!isSidebarOpen && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-                                            setActiveJurisArticle(null);
-                                            setActiveJurisParagraph(null);
-                                            setActiveAmendmentArticle(null);
-                                        }
-                                        setIsSidebarOpen(true);
-                                    }}
-                                    className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
-                                    title="Table of Contents"
-                                >
-                                    <Menu size={20} />
-                                </button>
-                            )}
-
-                            {/* Document Title — centred in remaining space */}
-                            <div className="min-w-0 flex-1 px-2 text-center">
-                                <h1 className="font-sans text-[16px] font-extrabold leading-tight tracking-wide text-gray-900 dark:text-gray-100">
-                                    {toTitleCase(codeTitle)}
-                                </h1>
-                                {codeSubtitle && (
-                                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
-                                        {toTitleCase(codeSubtitle)}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* Fullscreen Toggle */}
-                            {onToggleFullscreen && (
-                                <button
-                                    type="button"
-                                    onClick={onToggleFullscreen}
-                                    className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
-                                    title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Mode'}
-                                >
-                                    {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-                                </button>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* ── Content Body ── */}
-                    <div className="px-2 pt-4">
-                        {renderMainContent()}
-                    </div>
-                </div>
-            </div>
-
-            {/* 3. Floating Right Sidebar (Jurisprudence/Amendments) */}
-            <div className={`
-                flex-none z-30 sticky top-28 mt-0 transition-all duration-300 ease-in-out
-                ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
-                hidden lg:block
-            `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 overflow-hidden h-[calc(100vh-100px)]">
-                    {activeJurisArticle && (
-                        <LexCodeJurisSidebar
-                            articleNum={activeJurisArticle}
-                            statuteId={shortName} // Pass current Code ID (e.g. RPC)
-                            paragraphFilter={activeJurisParagraph}
-                            onClose={() => {
-                                setActiveJurisArticle(null);
-                                setActiveJurisParagraph(null);
-                            }}
-                            onSelectRatio={async (caseId, ratioIndex) => {
-                                // Fetch the full case data and trigger the App-level modal
-                                try {
-                                    const res = await fetch(`/api/sc_decisions/${caseId}`);
-                                    if (res.ok) {
-                                        const caseData = await res.json();
-                                        // Add ratioIndex for scroll sync
-                                        caseData.scrollToRatioIndex = ratioIndex;
-                                        onCaseSelect && onCaseSelect(caseData);
-                                    }
-                                } catch (err) {
-                                    console.error('Failed to fetch case:', err);
-                                }
-                            }}
-                        />
-                    )}
-
-                    {activeAmendmentArticle && !activeJurisArticle && (
-                        <div className="h-full flex flex-col bg-transparent">
-                            <div className="flex-none p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm">
-                                <div>
-                                    <h3 className="font-bold text-lg text-rose-700 dark:text-rose-400 font-serif">
-                                        Amendments
-                                    </h3>
-                                    <div className="text-xs text-stone-500 uppercase tracking-wider font-bold">
-                                        Article {activeAmendmentArticle.article_num}
+                        <div className="flex h-full min-h-0 w-full flex-col">
+                            <div className="flex h-full min-h-0 w-80 flex-col glass overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40">
+                                <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-0 dark:border-white/5 dark:bg-slate-800/30">
+                                    <div className="mb-4 flex items-center justify-between">
+                                        <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
+                                        <button onClick={() => setIsSidebarOpen(false)} className="rounded-md p-1 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700">
+                                            <X size={20} />
+                                        </button>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={() => setActiveAmendmentArticle(null)}
-                                    className="p-1.5 rounded-full hover:bg-stone-200 dark:hover:bg-gray-700 text-stone-400 transition-colors"
-                                >
-                                    <X size={18} />
-                                </button>
+
+                                <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto p-4">
+                                    <div key={tocVersion} className="space-y-1">
+                                        {tocData.articles.map((art) => (
+                                            <button
+                                                key={art.id}
+                                                onClick={() => scrollToArticle(art.id)}
+                                                className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 hover:bg-amber-50 hover:text-amber-800 dark:text-gray-400 dark:hover:bg-amber-900/20 dark:hover:text-amber-400"
+                                            >
+                                                {art.label}
+                                            </button>
+                                        ))}
+                                        {tocData.children.map((node) => (
+                                            <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
-                                {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
-                                    <div key={idx} className="glass bg-white/60 dark:bg-slate-800/40 p-5 rounded-xl shadow-sm border-2 border-slate-300/75 dark:border-white/5 relative overflow-hidden group">
-                                        <div className="absolute top-0 left-0 w-1 h-full bg-rose-500/80"></div>
-
-                                        <div className="flex justify-between items-start mb-2 pl-2">
-                                            <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight pr-2">
-                                                {am.amendment_law}
-                                            </h4>
-                                            <span className="text-[10px] items-center px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap border border-rose-100 dark:border-rose-900/30">
-                                                {am.amendment_type}
-                                            </span>
+                    {/* 2. Main codal — ONLY this column scrolls on desktop */}
+                    <div
+                        className={`relative z-30 mt-0 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden transition-all duration-300 lg:min-h-0 ${isFullscreen ? 'max-w-full' : activeJurisArticle || activeAmendmentArticle ? 'max-w-3xl' : 'max-w-4xl'}`}
+                    >
+                        <div
+                            ref={mainContentRef}
+                            id="main-content"
+                            className="flex min-h-0 flex-1 flex-col max-lg:overflow-visible lg:overflow-y-auto lg:overscroll-y-contain"
+                        >
+                            <div
+                                className={`relative mb-4 w-full overflow-hidden rounded-[2.5rem] border-2 border-slate-300/80 bg-white/95 glass shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] sm:mb-8 lg:mb-4 ${isFullscreen ? 'min-h-0 flex-1' : 'min-h-min'}`}
+                            >
+                            {/* Not sticky: whole codal card (this bar + articles) scrolls together in #main-content */}
+                            <div className="shrink-0 border-b border-white/25 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/70">
+                                {Array.isArray(codalOptions) && codalOptions.length > 0 && typeof onCodalChange === 'function' && (
+                                    <div className="border-b border-white/20 px-4 py-3 dark:border-white/10">
+                                        <div className="min-w-0 max-w-md">
+                                            <label htmlFor="lexcode-codal-filter-inline" className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                                                Codal
+                                            </label>
+                                            <select
+                                                id="lexcode-codal-filter-inline"
+                                                value={selectedCodal}
+                                                onChange={(e) => {
+                                                    const v = e.target.value;
+                                                    if (!v) return;
+                                                    onCodalChange(v);
+                                                }}
+                                                className="block w-full rounded-lg border border-stone-400 bg-white/90 py-2 pl-3 pr-8 text-sm shadow-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white"
+                                            >
+                                                {codalOptions.map((opt) => (
+                                                    <option key={opt.id} value={opt.id} disabled={opt.disabled}>
+                                                        {opt.label}
+                                                        {opt.disabled ? ' (Soon)' : ''}
+                                                    </option>
+                                                ))}
+                                            </select>
                                         </div>
+                                    </div>
+                                )}
 
-                                        <div className="pl-2 mb-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
-                                                <Calendar size={12} />
-                                                <span>Effectivity: {am.valid_from || 'N/A'}</span>
-                                            </div>
-                                        </div>
+                                <div className="flex items-center gap-3 px-4 py-3">
+                                    {!isSidebarOpen && (
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+                                                    setActiveJurisArticle(null);
+                                                    setActiveJurisParagraph(null);
+                                                    setActiveAmendmentArticle(null);
+                                                }
+                                                setIsSidebarOpen(true);
+                                            }}
+                                            className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
+                                            title="Table of Contents"
+                                        >
+                                            <Menu size={20} />
+                                        </button>
+                                    )}
 
-                                        <div className="pl-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
-                                            {am.description}
-                                        </div>
-
-                                        {am.source_url && (
-                                            <div className="pl-2 mt-3 pt-3 border-t border-stone-100 dark:border-gray-700/50">
-                                                <a
-                                                    href={am.source_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                                                >
-                                                    View Official Text <ChevronRight size={12} />
-                                                </a>
-                                            </div>
+                                    <div className="min-w-0 flex-1 px-2 text-center">
+                                        <h1 className="font-sans text-[16px] font-extrabold leading-tight tracking-wide text-gray-900 dark:text-gray-100">
+                                            {toTitleCase(codeTitle)}
+                                        </h1>
+                                        {codeSubtitle && (
+                                            <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
+                                                {toTitleCase(codeSubtitle)}
+                                            </p>
                                         )}
                                     </div>
-                                ))}
+
+                                    {onToggleFullscreen && (
+                                        <button
+                                            type="button"
+                                            onClick={onToggleFullscreen}
+                                            className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
+                                            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Mode'}
+                                        >
+                                            {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="p-4 sm:p-8 lg:p-12">
+                                <Suspense fallback={<div className="p-12 text-center animate-pulse">Loading Codal Stream...</div>}>
+                                    {renderMainContent()}
+                                </Suspense>
                             </div>
                         </div>
-                    )}
+                    </div>
+                    </div>
+
+                    {/* 3. Juris / amendments — same as TOC: fills row height, scrolls inside */}
+                    <div
+                        className={`
+                        hidden lg:flex lg:h-full lg:min-h-0 lg:flex-none lg:flex-col lg:overflow-hidden lg:self-stretch
+                        z-[45] mt-0 transition-all duration-300 ease-in-out
+                        ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
+                    `}
+                    >
+                        <div className="flex h-full min-h-0 w-full flex-col">
+                        <div className="flex h-full min-h-0 w-80 flex-col glass overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40">
+                            {activeJurisArticle && (
+                                <LexCodeJurisSidebar
+                                    articleNum={activeJurisArticle}
+                                    statuteId={shortName}
+                                    paragraphFilter={activeJurisParagraph}
+                                    onClose={() => {
+                                        setActiveJurisArticle(null);
+                                        setActiveJurisParagraph(null);
+                                    }}
+                                    onSelectRatio={async (caseId, ratioIndex) => {
+                                        try {
+                                            const res = await fetch(`/api/sc_decisions/${caseId}`);
+                                            if (res.ok) {
+                                                const caseData = await res.json();
+                                                caseData.scrollToRatioIndex = ratioIndex;
+                                                onCaseSelect && onCaseSelect(caseData);
+                                            }
+                                        } catch (err) {
+                                            console.error('Failed to fetch case:', err);
+                                        }
+                                    }}
+                                />
+                            )}
+
+                            {activeAmendmentArticle && !activeJurisArticle && (
+                                <div className="h-full flex flex-col bg-transparent">
+                                    <div className="flex-none p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm">
+                                        <div>
+                                            <h3 className="font-bold text-lg text-rose-700 dark:text-rose-400 font-serif">
+                                                Amendments
+                                            </h3>
+                                            <div className="text-xs text-stone-500 uppercase tracking-wider font-bold">
+                                                Article {activeAmendmentArticle.article_num}
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setActiveAmendmentArticle(null)}
+                                            className="p-1.5 rounded-full hover:bg-stone-200 dark:hover:bg-gray-700 text-stone-400 transition-colors"
+                                        >
+                                            <X size={18} />
+                                        </button>
+                                    </div>
+
+                                    <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+                                        {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
+                                            <div key={idx} className="glass bg-white/60 dark:bg-slate-800/40 p-5 rounded-xl shadow-sm border-2 border-slate-300/75 dark:border-white/5 relative overflow-hidden group">
+                                                <div className="absolute top-0 left-0 w-1 h-full bg-rose-500/80"></div>
+                                                <div className="flex justify-between items-start mb-2 pl-2">
+                                                    <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight pr-2">
+                                                        {am.amendment_law}
+                                                    </h4>
+                                                    <span className="text-[10px] items-center px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap border border-rose-100 dark:border-rose-900/30">
+                                                        {am.amendment_type}
+                                                    </span>
+                                                </div>
+                                                <div className="pl-2 mb-3">
+                                                    <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+                                                        <Calendar size={12} />
+                                                        <span>Effectivity: {am.valid_from || 'N/A'}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="pl-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
+                                                    {am.description}
+                                                </div>
+                                                {am.source_url && (
+                                                    <div className="pl-2 mt-3 pt-3 border-t border-stone-100 dark:border-gray-700/50">
+                                                        <a
+                                                            href={am.source_url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform"
+                                                        >
+                                                            View Official Text <ChevronRight size={12} />
+                                                        </a>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* Mobile Overlay for Right Sidebar — above TOC overlay; safe-area insets */}
+            {/* Mobile Overlay for Right Sidebar */}
             {(activeJurisArticle || activeAmendmentArticle) && (
                 <div
                     className="lg:hidden fixed inset-0 z-[110] flex items-start justify-end bg-black/50 backdrop-blur-md pt-[max(0.5rem,env(safe-area-inset-top,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-3"

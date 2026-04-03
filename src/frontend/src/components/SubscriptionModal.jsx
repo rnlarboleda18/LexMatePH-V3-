@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Check, Zap, Star, Crown, Shield, Loader2 } from 'lucide-react';
 import { useAuth } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -170,51 +171,62 @@ export default function SubscriptionModal({ onClose }) {
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-2xl shadow-2xl border-2 border-slate-300/85 dark:border-white/10">
-
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors"
-        >
-          <X size={20} />
-        </button>
-
-        {/* Header */}
-        <div className="px-6 pt-8 pb-6 text-center">
-          <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">
+  const panel = (
+    <>
+      {/* Same bottom anchor as QuestionDetailModal / CaseDecisionModal — sits above mini LexPlayer */}
+      <div
+        className="glass absolute left-1/2 flex w-full max-w-5xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-slate-300/85 bg-white/90 shadow-[0_10px_50px_rgba(0,0,0,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/90 bottom-[var(--player-height,0px)] top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-2xl sm:border-2 md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-3xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="subscription-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header: always reachable; not inside scroll (fixes overlap with badges / LexPlayer) */}
+        <div className="relative z-20 flex shrink-0 items-center justify-between gap-3 border-b-2 border-slate-200/90 bg-white/95 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/95">
+          <h2 id="subscription-modal-title" className="min-w-0 text-lg font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-xl">
             Upgrade Your Plan
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm max-w-lg mx-auto">
-            Choose the plan that fits your study needs. All subscriptions support GCash, Maya, Card, and GrabPay.
-          </p>
-
-          {/* Billing Toggle */}
-          <div className="mt-5 inline-flex items-center gap-1 p-1 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            {['monthly', 'yearly'].map(b => (
-              <button
-                key={b}
-                onClick={() => setBilling(b)}
-                className={`px-5 py-2 rounded-lg text-sm font-bold transition-all ${billing === b
-                  ? 'bg-white dark:bg-slate-700 shadow-sm text-gray-900 dark:text-white'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
-                }`}
-              >
-                {b === 'monthly' ? 'Monthly' : 'Yearly'}
-                {b === 'yearly' && (
-                  <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-extrabold">
-                    SAVE 17%
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="touch-manipulation shrink-0 rounded-full p-2.5 text-gray-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Close"
+          >
+            <X size={22} />
+          </button>
         </div>
 
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
+          <div className="px-4 pb-2 pt-4 text-center sm:px-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Choose the plan that fits your study needs. All subscriptions support GCash, Maya, Card, and GrabPay.
+            </p>
+
+            <div className="mt-4 inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-800">
+              {['monthly', 'yearly'].map((b) => (
+                <button
+                  key={b}
+                  type="button"
+                  onClick={() => setBilling(b)}
+                  className={`rounded-lg px-4 py-2 text-sm font-bold transition-all sm:px-5 ${
+                    billing === b
+                      ? 'bg-white text-gray-900 shadow-sm dark:bg-slate-700 dark:text-white'
+                      : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                  }`}
+                >
+                  {b === 'monthly' ? 'Monthly' : 'Yearly'}
+                  {b === 'yearly' && (
+                    <span className="ml-2 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-extrabold text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                      SAVE 17%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
         {/* Plan Cards */}
-        <div className="px-6 pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 px-4 pb-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:pb-8">
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
@@ -223,16 +235,16 @@ export default function SubscriptionModal({ onClose }) {
             return (
               <div
                 key={plan.id}
-                className={`relative flex flex-col rounded-2xl border-2 ${plan.borderColor} ${isCurrent ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-5 transition-all hover:shadow-lg`}
+                className={`relative flex flex-col overflow-visible rounded-2xl border-2 ${plan.borderColor} ${isCurrent ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-5 pt-6 transition-all hover:shadow-lg`}
               >
-                {/* Popular badge */}
+                {/* Badges inside card top (no negative offset — avoids overlapping modal chrome) */}
                 {plan.popular && !isCurrent && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-extrabold text-white bg-gradient-to-r from-purple-500 to-violet-600 shadow uppercase tracking-wide whitespace-nowrap">
+                  <div className="absolute left-1/2 top-2 z-[1] -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-purple-500 to-violet-600 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow">
                     Most Popular
                   </div>
                 )}
                 {isCurrent && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-extrabold text-white bg-gradient-to-r from-gray-600 to-slate-700 shadow uppercase tracking-wide whitespace-nowrap">
+                  <div className="absolute left-1/2 top-2 z-[1] -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-gray-600 to-slate-700 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow">
                     Current Plan
                   </div>
                 )}
@@ -306,16 +318,29 @@ export default function SubscriptionModal({ onClose }) {
           })}
         </div>
 
-        {errorMsg && (
-          <div className="mx-6 mb-6 p-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm border border-red-200 dark:border-red-800">
-            {errorMsg}
-          </div>
-        )}
+          {errorMsg && (
+            <div className="mx-4 mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400 sm:mx-6">
+              {errorMsg}
+            </div>
+          )}
 
-        <p className="text-center text-xs text-gray-400 dark:text-gray-600 pb-6">
-          Payments processed securely by PayMongo · Cancel anytime · BSP Regulated
-        </p>
+          <p className="px-4 pb-6 text-center text-xs text-gray-400 dark:text-gray-600 sm:px-6">
+            Payments processed securely by PayMongo · Cancel anytime · BSP Regulated
+          </p>
+        </div>
       </div>
-    </div>
+    </>
+  );
+
+  return createPortal(
+    <div className="fixed inset-0 z-[540] animate-in fade-in duration-200">
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-md"
+        aria-hidden
+        onClick={onClose}
+      />
+      {panel}
+    </div>,
+    document.body
   );
 }

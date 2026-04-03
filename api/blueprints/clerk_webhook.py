@@ -76,37 +76,34 @@ def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
             with psycopg.connect(conn_string) as conn:
                 with conn.cursor() as cur:
                     # Link by clerk_id if it exists, otherwise link by email
+                    # 1. Update existing email row if clerk_id is missing
                     cur.execute("""
-                        INSERT INTO users (clerk_id, email, is_admin)
-                        VALUES (%s, %s, %s)
-                        ON CONFLICT (clerk_id) DO UPDATE SET 
-                            email = EXCLUDED.email,
-                            is_admin = EXCLUDED.is_admin
-                        RETURNING id;
-                    """, (clerk_id, email, is_admin))
-
+                        UPDATE users
+                        SET clerk_id = %s, founding_promo_eligible = TRUE
+                        WHERE LOWER(email) = LOWER(%s) AND clerk_id IS NULL;
+                    """, (clerk_id, email))
                     
-                    # If the above didn't link (e.g. clerk_id is new but email exists), 
-                    # we update the existing row with the same email.
-                    if email:
-                        try:
-                            cur.execute(
-                                """
-                                UPDATE users
-                                SET clerk_id = %s, founding_promo_eligible = TRUE
-                                WHERE email = %s AND clerk_id IS NULL
-                                """,
-                                (clerk_id, email),
-                            )
-                        except pg_errors.UndefinedColumn:
-                            cur.execute(
-                                """
-                                UPDATE users SET clerk_id = %s
-                                WHERE email = %s AND clerk_id IS NULL
-                                """,
-                                (clerk_id, email),
-                            )
-                    try_grant_founding_promo(cur, clerk_id, is_admin)
+                    if cur.rowcount == 0:
+                        # 2. upsert by clerk_id
+                        cur.execute("""
+                            INSERT INTO users (clerk_id, email, is_admin, founding_promo_eligible)
+                            VALUES (%s, %s, %s, TRUE)
+                            ON CONFLICT (clerk_id) DO UPDATE SET 
+                                email = EXCLUDED.email,
+                                is_admin = EXCLUDED.is_admin;
+                        """, (clerk_id, email, is_admin))
+
+                    if is_admin:
+                        # Admins get barrister tier directly without using a founding promo slot
+                        cur.execute("""
+                            UPDATE users SET 
+                                subscription_tier = 'barrister',
+                                subscription_status = 'active',
+                                subscription_source = 'admin_override'
+                            WHERE clerk_id = %s;
+                        """, (clerk_id,))
+                    else:
+                        try_grant_founding_promo(cur, clerk_id, is_admin)
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")
         except Exception as e:
