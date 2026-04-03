@@ -172,7 +172,7 @@ export default function SubscriptionModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
-      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/40 dark:border-white/10">
+      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto glass bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-2xl shadow-2xl border-2 border-slate-300/85 dark:border-white/10">
 
         {/* Close */}
         <button

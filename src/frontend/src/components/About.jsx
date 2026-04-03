@@ -58,7 +58,7 @@ const About = () => {
   return (
     <FeaturePageShell icon={Scale} title="LEXMATEPH" subtitle="YOUR LEGAL COMPANION">
       <div className="mx-auto max-w-4xl space-y-8">
-        <div className="glass rounded-xl border border-white/40 bg-white/45 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
+        <div className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
           <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">About this App</h3>
           <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
             LexMatePH is built for more than bar review alone. Whether you are a law student, professor, bar
@@ -91,7 +91,7 @@ const About = () => {
           {FEATURES.map(({ icon: Icon, title, description, color }) => (
             <div
               key={title}
-              className="glass rounded-xl border border-white/40 bg-white/45 p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/35"
+              className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/35"
             >
               <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${color}`}>
                 <Icon className="h-5 w-5" strokeWidth={2} />

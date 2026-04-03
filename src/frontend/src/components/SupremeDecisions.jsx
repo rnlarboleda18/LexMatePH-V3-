@@ -948,7 +948,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
             {/* Header — glass + accents; sticky below app chrome on all breakpoints (matches Layout main offset) */}
             <header
-                className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
                 style={{ willChange: 'transform' }}
             >
                 <div
@@ -979,7 +979,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
             <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                 {/* Search & Filter Section */}
-                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-4 mb-4 border border-white/40 dark:border-white/10">
+                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-4 mb-4 border-2 border-slate-300/80 dark:border-white/10">
                     <div className="space-y-3">
                         {/* Main Search Input */}
                         <div className="relative">
@@ -1016,7 +1016,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         <div className="md:hidden">
                             <button
                                 onClick={() => setShowMobileFilters(!showMobileFilters)}
-                                className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-white/40 dark:border-white/10 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 glass bg-white/40 dark:bg-slate-800/40 hover:bg-white/60 dark:hover:bg-slate-700/60 transition-colors shadow-sm"
+                                className="w-full flex items-center justify-center gap-2 rounded-lg border-2 border-slate-300/80 px-4 py-2 dark:border-white/10 text-sm font-medium text-gray-700 dark:text-gray-200 glass bg-white/40 dark:bg-slate-800/40 hover:bg-white/60 dark:hover:bg-slate-700/60 transition-colors shadow-sm"
                             >
                                 <Filter className="h-4 w-4" />
                                 {showMobileFilters ? "Hide Filters" : "Filter Results"}
@@ -1163,7 +1163,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className={`group min-w-0 glass bg-white/60 dark:bg-slate-800/40 rounded-lg border border-white/40 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
+                                className={`group min-w-0 glass bg-white/60 dark:bg-slate-800/40 rounded-lg border-2 border-slate-300/80 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
                             >
                                 <div
                                     role="button"

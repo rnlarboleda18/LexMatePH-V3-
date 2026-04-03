@@ -148,7 +148,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                         card.subQuestions?.map((sub, i) => (
                                             <p
                                                 key={i}
-                                                className="mt-4 border-t border-white/40 pt-4 text-left text-[15px] font-medium leading-relaxed text-gray-800 dark:text-gray-200 dark:border-white/10 whitespace-pre-wrap break-words"
+                                                className="mt-4 border-t-2 border-slate-300/80 pt-4 text-left text-[15px] font-medium leading-relaxed text-gray-800 dark:border-white/10 dark:text-gray-200 whitespace-pre-wrap break-words"
                                             >
                                                 {sub.text}
                                             </p>
@@ -176,7 +176,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                         {card.answer || 'Answer not available.'}
                                     </p>
                                     {card.subQuestions?.map((sub, i) => (
-                                        <div key={i} className="relative mt-4 border-t border-white/30 pt-4 dark:border-white/10">
+                                        <div key={i} className="relative mt-4 border-t-2 border-slate-300/75 pt-4 dark:border-white/10">
                                             <p className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap break-words">
                                                 {sub.answer || 'Answer not available.'}
                                             </p>
@@ -196,7 +196,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                             <span className="mb-2 mt-6 block text-[10px] font-black uppercase tracking-widest text-gray-500 dark:text-gray-400">
                                                 Latest case
                                             </span>
-                                            <div className="rounded-lg border border-white/40 bg-white/45 p-3 text-sm dark:border-white/10 dark:bg-black/30">
+                                            <div className="rounded-lg border-2 border-slate-300/80 bg-white/90 p-3 text-sm dark:border-white/10 dark:bg-black/30">
                                                 {sources.map((src) => (
                                                     <div key={`${src.case_id}-${src.case_number}`}>
                                                         <div className="font-semibold text-gray-900 dark:text-gray-100 line-clamp-2">

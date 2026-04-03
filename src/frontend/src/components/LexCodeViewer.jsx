@@ -431,7 +431,7 @@ const LexCodeViewer = ({
                 ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden max-h-[calc(100vh-100px)]">
+                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 overflow-hidden max-h-[calc(100vh-100px)]">
                     <div className="flex-none p-4 pb-0 border-b border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30">
                         <div className="flex justify-between items-center mb-4">
                             <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
@@ -461,7 +461,7 @@ const LexCodeViewer = ({
                     }}
                 >
                     <div
-                        className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white shadow-2xl animate-in slide-in-from-left duration-300 dark:border-white/10 dark:bg-slate-900"
+                        className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-left duration-300 dark:border-white/10 dark:bg-slate-900"
                     >
                         <div className="flex flex-none justify-between items-center border-b border-white/20 bg-white/30 p-4 dark:border-white/5 dark:bg-slate-800/30">
                             <span className="font-bold">Contents</span>
@@ -485,7 +485,7 @@ const LexCodeViewer = ({
 
             {/* Codal Stream Card */}
             <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative`} id="main-content">
+                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 min-h-max mb-20 relative`} id="main-content">
 
                     {/* ── Sticky top: codal filter + document chrome (inside codal card) ── */}
                     <div className="sticky top-0 z-10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-white/25 dark:border-white/10">
@@ -575,7 +575,7 @@ const LexCodeViewer = ({
                 ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-[calc(100vh-100px)]">
+                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border-2 border-slate-300/80 dark:border-white/10 overflow-hidden h-[calc(100vh-100px)]">
                     {activeJurisArticle && (
                         <LexCodeJurisSidebar
                             articleNum={activeJurisArticle}
@@ -623,7 +623,7 @@ const LexCodeViewer = ({
 
                             <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
                                 {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
-                                    <div key={idx} className="glass bg-white/60 dark:bg-slate-800/40 p-5 rounded-xl shadow-sm border border-white/40 dark:border-white/5 relative overflow-hidden group">
+                                    <div key={idx} className="glass bg-white/60 dark:bg-slate-800/40 p-5 rounded-xl shadow-sm border-2 border-slate-300/75 dark:border-white/5 relative overflow-hidden group">
                                         <div className="absolute top-0 left-0 w-1 h-full bg-rose-500/80"></div>
 
                                         <div className="flex justify-between items-start mb-2 pl-2">
@@ -678,7 +678,7 @@ const LexCodeViewer = ({
                         }
                     }}
                 >
-                    <div className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900">
+                    <div className="flex h-[min(86dvh,calc(100dvh-env(safe-area-inset-top)-env(safe-area-inset-bottom)-1rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900">
                         {activeJurisArticle && (
                             <LexCodeJurisSidebar
                                 articleNum={activeJurisArticle}

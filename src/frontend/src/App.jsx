@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import Layout from './components/Layout';
@@ -270,13 +270,9 @@ function App() {
 
 
 
-  // 2. Theme Management
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+  // 2. Theme Management — layout effect so `html.dark` matches state before paint (portaled UI e.g. LexPlayer uses Tailwind `dark:`)
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
   // Reset bar pagination when filters change
@@ -506,7 +502,7 @@ function App() {
                   {effectiveMode === 'codex' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
                       <header
-                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
                         style={{ willChange: 'transform' }}
                       >
                         <div
@@ -556,7 +552,7 @@ function App() {
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
                       <header
-                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
                         style={{ willChange: 'transform' }}
                       >
                         <div
@@ -645,7 +641,7 @@ function App() {
                   {effectiveMode === 'browse_bar' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
                       <header
-                        className="sticky z-20 overflow-hidden border-b border-white/30 bg-white/25 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
                         style={{ willChange: 'transform' }}
                       >
                         <div
@@ -674,7 +670,7 @@ function App() {
                         </div>
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                      <div className="glass mb-4 rounded-lg border border-white/40 bg-white/45 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/35">
+                      <div className="glass mb-4 rounded-lg border-2 border-slate-300/85 bg-white/90 p-4 shadow-md dark:border-white/10 dark:bg-slate-900/35">
                         <div className="min-w-0 max-w-md">
                           <label htmlFor="bar-subject-filter" className="mb-1.5 block text-xs font-medium text-gray-500 dark:text-gray-400">
                             Bar subject
@@ -733,7 +729,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
-                                className="px-4 py-2 glass bg-white/50 dark:bg-slate-700/40 border border-white/30 dark:border-white/10 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-4 py-2 glass rounded-lg border-2 border-slate-300/80 bg-white/85 text-sm font-medium text-gray-800 shadow-sm transition-colors hover:bg-white dark:border-white/10 dark:bg-slate-700/40 dark:text-gray-200 dark:hover:bg-slate-600/60 flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -747,7 +743,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
-                                className="px-4 py-2 glass bg-white/50 dark:bg-slate-700/40 border border-white/30 dark:border-white/10 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/70 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="px-4 py-2 glass rounded-lg border-2 border-slate-300/80 bg-white/85 text-sm font-medium text-gray-800 shadow-sm transition-colors hover:bg-white dark:border-white/10 dark:bg-slate-700/40 dark:text-gray-200 dark:hover:bg-slate-600/60 flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -769,6 +765,7 @@ function App() {
               <ErrorBoundary message="LexPlayer encountered an error. Try resetting your queue.">
                 <LexPlayer
                   isMinimized={false}
+                  isDarkMode={isDarkMode}
                   onMinimize={() => setMode(previousMode || 'supreme_decisions')}
                 />
               </ErrorBoundary>
@@ -796,6 +793,7 @@ function App() {
         <ErrorBoundary>
           <LexPlayer
             isMinimized={true}
+            isDarkMode={isDarkMode}
             onExpand={() => {
               setPreviousMode(mode);
               setMode('lexplay');

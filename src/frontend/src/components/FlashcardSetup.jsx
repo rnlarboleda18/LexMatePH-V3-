@@ -30,7 +30,7 @@ const FlashcardSetup = ({
     };
 
     const content = (
-            <div className={`glass w-full ${embedded ? 'max-w-7xl' : 'max-w-4xl max-h-[90vh]'} overflow-hidden flex flex-col rounded-2xl border border-white/40 bg-white/55 shadow-2xl dark:border-white/10 dark:bg-slate-900/45 animate-in zoom-in-95 duration-200`}>
+            <div className={`glass w-full ${embedded ? 'max-w-7xl' : 'max-w-4xl max-h-[90vh]'} overflow-hidden flex flex-col rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl dark:border-white/10 dark:bg-slate-900/45 animate-in zoom-in-95 duration-200`}>
                 {(conceptsLoading || conceptsError || deckError) && (
                     <div className="flex flex-col gap-2 border-b border-white/25 px-6 pb-3 pt-4 dark:border-white/10 sm:px-8">
                         {conceptsLoading && (

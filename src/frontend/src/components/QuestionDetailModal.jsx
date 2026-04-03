@@ -95,7 +95,7 @@ const QuestionDetailModal = ({
                 <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 
                 {/* Header: headphones + subject left · prev/next centered · year + close right */}
-                <div className="relative z-10 grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 border-b border-white/30 bg-white/25 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/15 sm:px-2 md:px-3">
+                <div className="relative z-10 grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 border-b-2 border-slate-300/85 bg-white/25 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/15 sm:px-2 md:px-3">
                     <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                         <button
                             type="button"

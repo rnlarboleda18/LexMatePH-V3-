@@ -643,7 +643,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
-                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(80dvh,100%)] overflow-y-auto lex-modal-scroll glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b border-white/30 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-4 sm:p-6">
+                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(80dvh,100%)] overflow-y-auto lex-modal-scroll glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b-2 border-slate-300/85 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-4 sm:p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-[16px] font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 <ListMusic className="text-purple-500" />
@@ -702,7 +702,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 )}
 
                 {/* HEADER — must stack above scroll body (both were z-10; scroll came later in DOM and ate taps on the X on mobile) */}
-                <div className="relative z-30 shrink-0 border-b border-white/30 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
+                <div className="relative z-30 shrink-0 border-b-2 border-slate-300/85 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
                     <div className="flex min-w-0 items-start gap-1.5 px-1.5 pt-1.5 pb-1 sm:gap-2 sm:px-2 md:px-3">
                         <button
                             type="button"
@@ -977,7 +977,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* FOOTER — same visual language as header strip */}
-                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t border-white/30 bg-white/20 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/10 sm:gap-1 sm:px-2 md:px-3">
+                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t-2 border-slate-300/85 bg-white/20 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/10 sm:gap-1 sm:px-2 md:px-3">
                     {viewMode === 'digest' && (
                         <button
                             type="button"

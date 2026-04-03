@@ -136,14 +136,14 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             subtitle="2026 Philippine Bar mock exams · secure simulator"
         >
             {/* Dashboard only: full-screen exam UI lives in LexifyApp (other exam states). */}
-            <div className="flex flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/45 font-sans text-gray-900 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-900/35 dark:text-gray-100">
-            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b border-white/30 bg-white/50 px-4 sm:px-6 dark:border-white/10 dark:bg-slate-900/50">
+            <div className="flex flex-col overflow-hidden rounded-2xl border-2 border-slate-300/80 bg-white/45 font-sans text-gray-900 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-900/35 dark:text-gray-100">
+            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b-2 border-slate-300/85 bg-white/50 px-4 sm:px-6 dark:border-white/10 dark:bg-slate-900/50">
                 <div className="relative z-50 flex items-center gap-3">
                     <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
                     </button>
                     {showMenu && (
-                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-white/40 bg-white/95 py-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
+                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white/95 py-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
                             <button onClick={() => { setShowPrefsModal(true); setShowMenu(false); }} className="w-full px-4 py-2.5 text-left text-sm text-gray-800 transition hover:bg-indigo-50 dark:text-gray-100 dark:hover:bg-white/10">⚙️ Preferences</button>
                             <button onClick={handleStartNewAttempt} className="w-full px-4 py-2.5 text-left text-sm text-emerald-700 transition hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-white/10">✨ Start New Attempt</button>
                             
@@ -313,7 +313,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             </div>
                         ) : (
                             Object.entries(attempts.history).reverse().map(([attemptNum, subjectMap]) => (
-                                <div key={attemptNum} className="rounded-2xl border border-white/40 bg-white/50 p-5 shadow-sm dark:border-white/10 dark:bg-slate-800/40">
+                                <div key={attemptNum} className="rounded-2xl border-2 border-slate-300/80 bg-white/50 p-5 shadow-sm dark:border-white/10 dark:bg-slate-800/40">
                                     <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-2 dark:border-white/10">
                                         <h3 className="text-base font-bold text-amber-800 dark:text-amber-400">Mock Bar Attempt No. {attemptNum}</h3>
                                         <span className="rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
@@ -362,7 +362,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             {/* Exam Details & Grading Info Modal */}
             {showDetailsModal && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-                    <div className="relative w-full max-w-md rounded-2xl border border-white/40 bg-white/95 p-6 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
+                    <div className="relative w-full max-w-md rounded-2xl border-2 border-slate-300/80 bg-white/95 p-6 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
                         <button type="button" onClick={() => setShowDetailsModal(null)} className="absolute right-4 top-4 text-gray-400 transition hover:text-gray-900 dark:text-gray-500 dark:hover:text-white">✕</button>
                         
                         <div className="mb-4">
@@ -413,7 +413,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             {/* Proctor Password Modal */}
             {showPasswordModal && selectedExam && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-                    <div className="w-full max-w-md rounded-2xl border border-white/40 bg-white/95 p-8 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
+                    <div className="w-full max-w-md rounded-2xl border-2 border-slate-300/80 bg-white/95 p-8 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
                         <div className="mb-6 text-center">
                             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl dark:bg-amber-500/15">🔒</div>
                             <h3 className="font-serif text-lg font-bold text-gray-900 dark:text-white">Proctor Authorization</h3>
@@ -442,7 +442,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             {/* Preferences Modal */}
             {showPrefsModal && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-                    <div className="w-full max-w-sm rounded-2xl border border-white/40 bg-white/95 p-8 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
+                    <div className="w-full max-w-sm rounded-2xl border-2 border-slate-300/80 bg-white/95 p-8 shadow-2xl dark:border-white/10 dark:bg-slate-900/95">
                         <h3 className="mb-5 font-serif text-lg font-bold text-gray-900 dark:text-white">Preferences</h3>
                         <label className="mb-1 block text-xs font-bold text-gray-600 dark:text-gray-400">⏰ Alarm Reminder (HH:MM:SS)</label>
                         <p className="mb-2 text-xs text-gray-500 dark:text-gray-500">Alert when this much time remains</p>

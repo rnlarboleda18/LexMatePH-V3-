@@ -31,7 +31,7 @@ const Layout = ({
     }, []);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-50 text-slate-900'}`}>
+        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
             {/* Global Glassmorphism Background Orbs — GPU-composited, no external fetch */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" style={{contain:'strict'}}>
                 <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-30 animate-float ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`} style={{willChange:'transform'}}></div>
@@ -46,7 +46,7 @@ const Layout = ({
                 <header className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
                     ${isDarkMode
                         ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
-                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-white/80 md:bg-white/40 md:backdrop-blur-xl border-b border-white/40 shadow-[0_4px_30_px_rgba(0,0,0,0.05)]'
+                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
                     }`} style={{willChange:'transform'}}>
 
                     {/* LEFT — Brand */}
@@ -58,7 +58,7 @@ const Layout = ({
                             className={`xl:hidden flex shrink-0 h-9 w-9 items-center justify-center rounded-xl border transition-colors sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
                                 isDarkMode
                                     ? 'border-white/10 bg-white/[0.06] text-gray-300 hover:text-amber-400 hover:bg-amber-900/20'
-                                    : 'border-slate-200/90 bg-white text-gray-600 shadow-sm hover:text-amber-700 hover:bg-amber-50'
+                                    : 'border-2 border-slate-400/70 bg-white text-gray-700 shadow-sm hover:text-amber-800 hover:bg-amber-50'
                             }`}
                             aria-label="Toggle Sidebar"
                         >
@@ -75,7 +75,7 @@ const Layout = ({
                                 className={`flex shrink-0 items-center justify-center rounded-xl border h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
                                     isDarkMode
                                         ? 'border-white/10 bg-white/[0.06] text-indigo-300'
-                                        : 'border-slate-200/90 bg-white text-indigo-600 shadow-sm'
+                                        : 'border-2 border-slate-400/70 bg-white text-indigo-700 shadow-sm'
                                 }`}
                                 aria-hidden
                             >
@@ -89,14 +89,14 @@ const Layout = ({
                                     className={`select-none font-semibold leading-none tracking-tight text-[1.125rem] sm:text-xl md:text-2xl lg:text-[1.75rem] ${
                                         isDarkMode
                                             ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
-                                            : 'text-slate-900'
+                                            : 'text-slate-950'
                                     }`}
                                 >
                                     LexMatePH
                                 </span>
                                 <span
                                     className={`mt-1 hidden text-[11px] font-medium leading-snug tracking-tight md:block md:text-xs lg:text-[13px] ${
-                                        isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                                        isDarkMode ? 'text-slate-400' : 'text-slate-600'
                                     }`}
                                 >
                                     Your Law Companion
@@ -112,19 +112,19 @@ const Layout = ({
                     >
                         <p
                             className={`flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[15px] font-semibold leading-snug tracking-tight md:text-[17px] lg:text-lg xl:text-xl ${
-                                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                                isDarkMode ? 'text-slate-300' : 'text-slate-700'
                             }`}
                         >
                             <span className="whitespace-nowrap">Bar Questions</span>
-                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">SC Decisions</span>
-                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Case Digests</span>
-                            <span className="text-slate-500 dark:text-slate-500" aria-hidden>
+                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Codals</span>
@@ -141,7 +141,7 @@ const Layout = ({
                             className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-base md:text-lg font-medium transition-all duration-200
                                 ${isDarkMode
                                     ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20 border border-transparent hover:border-amber-800/40'
-                                    : 'text-gray-500 hover:text-amber-700 hover:bg-amber-50 border border-transparent hover:border-amber-200'
+                                    : 'border-2 border-transparent text-gray-700 hover:border-amber-300/90 hover:bg-amber-50 hover:text-amber-900'
                                 }`}
                         >
                             {isDarkMode ? <Sun size={18} className="text-amber-400 md:w-[20px] md:h-[20px]" /> : <Moon size={18} className="text-violet-500 md:w-[20px] md:h-[20px]" />}
@@ -150,7 +150,7 @@ const Layout = ({
 
 
                         {/* Divider */}
-                        <div className={`hidden sm:block w-px h-5 md:h-6 mx-1 ${isDarkMode ? 'bg-gray-700' : 'bg-stone-200'}`} />
+                        <div className={`hidden sm:block w-0.5 h-5 md:h-6 mx-1 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-slate-400/80'}`} />
 
                         {/* Auth - Hidden on mobile, moved to sidebar */}
                         <div className="hidden md:flex items-center gap-2">
@@ -186,7 +186,7 @@ const Layout = ({
             {!hideAppChrome && (
                 <aside
                     className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
-            ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white xl:bg-white/40 xl:backdrop-blur-xl border-r border-white/40 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
+            ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'border-r-2 border-slate-300/90 bg-white xl:bg-white/85 xl:backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(15,23,42,0.08)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
                     style={{willChange:'transform'}}
