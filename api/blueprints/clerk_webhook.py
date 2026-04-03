@@ -5,6 +5,8 @@ import logging
 import psycopg
 from svix.webhooks import Webhook, WebhookVerificationError
 
+from utils.founding_promo import try_grant_founding_promo
+
 clerk_webhook_bp = func.Blueprint()
 
 @clerk_webhook_bp.route(route="clerk-webhook", methods=["POST"])
@@ -74,6 +76,7 @@ def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
                         SET clerk_id = %s 
                         WHERE email = %s AND clerk_id IS NULL;
                     """, (clerk_id, email))
+                    try_grant_founding_promo(cur, clerk_id, is_admin)
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")
         except Exception as e:

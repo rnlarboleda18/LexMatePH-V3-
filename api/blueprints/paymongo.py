@@ -9,6 +9,7 @@ import psycopg
 import requests
 
 from utils.clerk_auth import get_authenticated_user_id
+from utils.founding_promo import expire_founding_promo_for_user
 
 paymongo_bp = func.Blueprint()
 
@@ -154,13 +155,25 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=401
         )
     try:
+        # Expire promo in its own transaction so a rollback on fallback SELECT cannot undo it.
+        try:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    expire_founding_promo_for_user(cur, clerk_id)
+        except Exception as ex:
+            logging.warning("expire_founding_promo_for_user: %s", ex)
+
         with _get_db() as conn:
             with conn.cursor() as cur:
                 # 1. Try fetching everything (assuming migration has run)
                 try:
                     cur.execute(
-                        "SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email FROM users WHERE clerk_id = %s",
-                        (clerk_id,)
+                        """
+                        SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email,
+                               founding_promo_slot, subscription_source
+                        FROM users WHERE clerk_id = %s
+                        """,
+                        (clerk_id,),
                     )
                     row = cur.fetchone()
                 except Exception as db_err:
@@ -176,7 +189,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     if row:
                         tier, email = row
                         status, expires_at, is_admin = "inactive", None, False
-                        row = (tier, status, expires_at, is_admin, email)
+                        row = (tier, status, expires_at, is_admin, email, None, None)
 
                 logging.info(f"[subscription-status] clerk_id: {clerk_id}, found: {row is not None}")
                 
@@ -188,7 +201,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                     )
                 
-                tier, status, expires_at, is_admin, email = row
+                tier, status, expires_at, is_admin, email, founding_slot, sub_source = row
                 
                 # Check for hardcoded admin bypass
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
@@ -209,7 +222,9 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         "status": status or "inactive",
                         "expires_at": expires_at.isoformat() if expires_at else None,
                         "is_admin": is_admin or False,
-                        "email": email
+                        "email": email,
+                        "founding_promo_slot": founding_slot,
+                        "subscription_source": sub_source,
                     }),
                     mimetype="application/json", 
                     status_code=200,
@@ -547,7 +562,8 @@ def _handle_subscription_created(data: dict):
                 UPDATE users SET
                     subscription_tier = %s,
                     subscription_status = 'active',
-                    paymongo_subscription_id = %s
+                    paymongo_subscription_id = %s,
+                    subscription_source = 'paymongo'
                 WHERE clerk_id = %s
             """, (tier, sub_id, clerk_id))
             conn.commit()

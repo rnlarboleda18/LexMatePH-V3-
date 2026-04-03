@@ -89,3 +89,20 @@ def health_db(req: func.HttpRequest) -> func.HttpResponse:
     finally:
         if conn:
             put_db_connection(conn)
+
+
+@app.timer_trigger(schedule="0 0 2 * * *", arg_name="myTimer", run_on_startup=False)
+def founding_promo_expire_timer(myTimer: func.TimerRequest) -> None:
+    """Daily at 02:00 UTC: set founding-promo users to Free after FOUNDING_PROMO_DURATION_DAYS (default 30)."""
+    import psycopg
+    from utils.founding_promo import expire_all_founding_promo_past_due
+
+    cs = os.environ.get("DB_CONNECTION_STRING")
+    if not cs:
+        logging.error("founding_promo_expire_timer: DB_CONNECTION_STRING missing")
+        return
+    try:
+        with psycopg.connect(cs) as conn:
+            expire_all_founding_promo_past_due(conn)
+    except Exception as e:
+        logging.error("founding_promo_expire_timer: %s", e)
