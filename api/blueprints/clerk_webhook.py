@@ -28,8 +28,14 @@ def _clerk_primary_email(data: dict):
     return None
 
 @clerk_webhook_bp.route(route="clerk-webhook", methods=["POST"])
+def clerk_webhook_hyphen(req: func.HttpRequest) -> func.HttpResponse:
+    return clerk_webhook_core(req)
+
 @clerk_webhook_bp.route(route="clerk_webhook", methods=["POST"])
-def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
+def clerk_webhook_underscore(req: func.HttpRequest) -> func.HttpResponse:
+    return clerk_webhook_core(req)
+
+def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
     # 1. Get headers for verification
     svix_id = req.headers.get("svix-id")
     svix_timestamp = req.headers.get("svix-timestamp")
