@@ -96,6 +96,188 @@ export const LexPlayProvider = ({ children }) => {
         );
     }, [browsePlaylistItems, currentTrack, currentIndex]);
 
+    // --- Offline cache: downloads run in provider so they continue when browsing playlists or when LexPlayer unmounts ---
+    const bulkDownloadCancelRef = useRef(false);
+    const bulkFetchAbortRef = useRef(null);
+    const trackDownloadAbortRef = useRef(new Map());
+
+    const [isBulkDownloading, setIsBulkDownloading] = useState(false);
+    const [bulkDownloadProgress, setBulkDownloadProgress] = useState(0);
+    const [bulkDownloadStatusText, setBulkDownloadStatusText] = useState('');
+    const [downloadingTrackIds, setDownloadingTrackIds] = useState(() => new Set());
+    const [cachedCount, setCachedCount] = useState(0);
+    const [cachedTrackIds, setCachedTrackIds] = useState(() => new Set());
+    const cachedTrackIdsRef = useRef(cachedTrackIds);
+    useEffect(() => {
+        cachedTrackIdsRef.current = cachedTrackIds;
+    }, [cachedTrackIds]);
+
+    const refreshCacheForDisplayPlaylist = useCallback(async () => {
+        if (!displayPlaylist || displayPlaylist.length === 0 || !('caches' in window)) {
+            setCachedCount(0);
+            setCachedTrackIds(new Set());
+            return;
+        }
+        try {
+            const cache = await caches.open('audio-cache');
+            const allKeys = await cache.keys();
+            const storedUrls = new Set(allKeys.map((r) => r.url));
+            let count = 0;
+            const ids = new Set();
+            for (const track of displayPlaylist) {
+                if (!track?.id || !track?.type) continue;
+                const relUrl = buildAudioFetchPath(track, 1.0);
+                if (!relUrl) continue;
+                const absUrl = new URL(relUrl, window.location.origin).href;
+                if (storedUrls.has(absUrl)) {
+                    count++;
+                    ids.add(String(track.id));
+                }
+            }
+            setCachedCount(count);
+            setCachedTrackIds(ids);
+        } catch (e) {
+            console.warn('[LexPlay] Cache check failed:', e);
+        }
+    }, [displayPlaylist]);
+
+    useEffect(() => {
+        refreshCacheForDisplayPlaylist();
+    }, [refreshCacheForDisplayPlaylist]);
+
+    const stopTrackCacheDownload = useCallback((trackId) => {
+        const id = String(trackId);
+        trackDownloadAbortRef.current.get(id)?.abort();
+    }, []);
+
+    const startTrackCacheDownload = useCallback(
+        async (track) => {
+            if (!track?.id || !track?.type) return;
+            const id = String(track.id);
+            if (trackDownloadAbortRef.current.has(id)) return;
+            if (cachedTrackIdsRef.current.has(id)) return;
+
+            const audioUrl = buildAudioFetchPath(track, 1.0);
+            if (!audioUrl) return;
+
+            const ac = new AbortController();
+            trackDownloadAbortRef.current.set(id, ac);
+            setDownloadingTrackIds((prev) => new Set(prev).add(id));
+
+            try {
+                const response = await fetch(audioUrl, { signal: ac.signal });
+                if (response.ok && 'caches' in window) {
+                    const cache = await caches.open('audio-cache');
+                    await cache.put(audioUrl, response);
+                } else if (!response.ok) {
+                    console.error('[LexPlay] Download failed:', response.status);
+                }
+            } catch (err) {
+                if (err?.name !== 'AbortError') console.error('[LexPlay] Cache save failed:', err);
+            } finally {
+                trackDownloadAbortRef.current.delete(id);
+                setDownloadingTrackIds((prev) => {
+                    const next = new Set(prev);
+                    next.delete(id);
+                    return next;
+                });
+                await refreshCacheForDisplayPlaylist();
+            }
+        },
+        [refreshCacheForDisplayPlaylist]
+    );
+
+    const handleBulkCacheDownloadClick = useCallback(() => {
+        if (isBulkDownloading) {
+            bulkDownloadCancelRef.current = true;
+            bulkFetchAbortRef.current?.abort();
+            return;
+        }
+        const snapshot = displayPlaylist ? [...displayPlaylist] : [];
+        if (snapshot.length === 0) return;
+
+        void (async () => {
+            bulkDownloadCancelRef.current = false;
+            bulkFetchAbortRef.current = null;
+            setIsBulkDownloading(true);
+            setBulkDownloadProgress(0);
+            setBulkDownloadStatusText('Starting...');
+
+            let completed = 0;
+            const total = snapshot.length;
+            let successCount = 0;
+
+            try {
+                const cache = 'caches' in window ? await caches.open('audio-cache') : null;
+
+                for (const track of snapshot) {
+                    if (bulkDownloadCancelRef.current) break;
+
+                    const audioUrl = buildAudioFetchPath(track, 1.0);
+                    if (audioUrl) {
+                        safeSetState(setBulkDownloadStatusText, `Downloading: ${track.title}`);
+                        try {
+                            const existing = cache ? await cache.match(audioUrl) : null;
+                            if (existing) {
+                                successCount++;
+                                await refreshCacheForDisplayPlaylist();
+                            } else {
+                                const ac = new AbortController();
+                                bulkFetchAbortRef.current = ac;
+                                let resp;
+                                try {
+                                    resp = await fetch(audioUrl, { signal: ac.signal });
+                                } catch (fetchErr) {
+                                    bulkFetchAbortRef.current = null;
+                                    if (fetchErr?.name === 'AbortError') {
+                                        bulkDownloadCancelRef.current = true;
+                                        break;
+                                    }
+                                    throw fetchErr;
+                                }
+                                bulkFetchAbortRef.current = null;
+                                if (bulkDownloadCancelRef.current) break;
+                                if (resp.ok) {
+                                    if (cache) await cache.put(audioUrl, resp);
+                                    successCount++;
+                                    await refreshCacheForDisplayPlaylist();
+                                } else {
+                                    console.warn(`[LexPlay] Server error ${resp.status} for ${track.title}`);
+                                }
+                            }
+                        } catch (e) {
+                            bulkFetchAbortRef.current = null;
+                            if (e?.name === 'AbortError') {
+                                bulkDownloadCancelRef.current = true;
+                                break;
+                            }
+                            console.warn(`[LexPlay] Failed to download ${track.title}:`, e);
+                        }
+                    }
+                    completed++;
+                    safeSetState(setBulkDownloadProgress, Math.round((completed / total) * 100));
+                }
+
+                const cancelled = bulkDownloadCancelRef.current;
+                safeSetState(
+                    setBulkDownloadStatusText,
+                    cancelled ? 'Download cancelled' : `✓ ${successCount}/${total} tracks cached for offline`
+                );
+                await refreshCacheForDisplayPlaylist();
+                const delay = cancelled ? 1500 : 3000;
+                setTimeout(() => {
+                    safeSetState(setIsBulkDownloading, false);
+                    safeSetState(setBulkDownloadProgress, 0);
+                    safeSetState(setBulkDownloadStatusText, '');
+                }, delay);
+            } catch (err) {
+                console.error('[LexPlay] Bulk download failed:', err);
+                safeSetState(setBulkDownloadStatusText, 'Download failed. Try again.');
+                safeSetState(setIsBulkDownloading, false);
+            }
+        })();
+    }, [isBulkDownloading, displayPlaylist, refreshCacheForDisplayPlaylist, safeSetState]);
+
     const getAuthHeaders = async () => {
         const token = await getToken();
         if (!token) return { 'Content-Type': 'application/json' };
@@ -965,6 +1147,18 @@ export const LexPlayProvider = ({ children }) => {
         handleStop,
         audioRef,
         retryCurrentTrack,
+
+        // Offline cache (runs in provider — survives playlist browse / LexPlayer unmount)
+        cachedCount,
+        cachedTrackIds,
+        downloadingTrackIds,
+        isBulkDownloading,
+        bulkDownloadProgress,
+        bulkDownloadStatusText,
+        handleBulkCacheDownloadClick,
+        refreshCacheForDisplayPlaylist,
+        startTrackCacheDownload,
+        stopTrackCacheDownload,
         
         // Playlist API Context
         savedPlaylists,
@@ -1010,6 +1204,16 @@ export const LexPlayProvider = ({ children }) => {
         handlePrevious,
         handleStop,
         retryCurrentTrack,
+        cachedCount,
+        cachedTrackIds,
+        downloadingTrackIds,
+        isBulkDownloading,
+        bulkDownloadProgress,
+        bulkDownloadStatusText,
+        handleBulkCacheDownloadClick,
+        refreshCacheForDisplayPlaylist,
+        startTrackCacheDownload,
+        stopTrackCacheDownload,
         fetchPlaylists,
         createPlaylist,
         renamePlaylist,
