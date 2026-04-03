@@ -22,7 +22,14 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 CACHE_TTL_DECISIONS = int(os.getenv("CACHE_TTL_DECISIONS", "60"))  # 1 minute
 CACHE_TTL_PONENTES = int(os.getenv("CACHE_TTL_PONENTES", "300"))  # 5 minutes
 CACHE_TTL_FILTERS = int(os.getenv("CACHE_TTL_FILTERS", "300"))  # 5 minutes
-CACHE_TTL_FLASHCARD_CONCEPTS = int(os.getenv("CACHE_TTL_FLASHCARD_CONCEPTS", "3600"))  # 1 hour — heavy aggregation
+# Table-backed payload is stable; digest merge is rare. Long TTL = fewer DB reads & Redis rebuilds.
+CACHE_TTL_FLASHCARD_CONCEPTS = int(os.getenv("CACHE_TTL_FLASHCARD_CONCEPTS", "86400"))  # default 24h
+
+# Redis key for GET /sc_decisions/flashcard_concepts — invalidate after populating flashcard_concepts (see scripts/populate_flashcard_concepts_from_digest.py)
+FLASHCARD_CONCEPTS_CACHE_KEY = os.getenv(
+    "FLASHCARD_CONCEPTS_CACHE_KEY",
+    "flashcard_concepts:v8:latest_source_only",
+)
 
 # Logging
 import logging

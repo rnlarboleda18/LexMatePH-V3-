@@ -9,7 +9,14 @@ from db_pool import get_db_connection, put_db_connection
 # Import caching and config
 import hashlib
 from cache import cache_get, cache_set, cache_delete, cache_clear_pattern
-from config import DB_CONNECTION_STRING, REDIS_ENABLED, CACHE_TTL_DECISIONS, CACHE_TTL_PONENTES, CACHE_TTL_FLASHCARD_CONCEPTS
+from config import (
+    DB_CONNECTION_STRING,
+    REDIS_ENABLED,
+    CACHE_TTL_DECISIONS,
+    CACHE_TTL_PONENTES,
+    CACHE_TTL_FLASHCARD_CONCEPTS,
+    FLASHCARD_CONCEPTS_CACHE_KEY,
+)
 import re
 
 from utils.flashcard_legal_concepts import (
@@ -464,10 +471,6 @@ def _normalize_subject_bar(raw):
     if "taxation" in s or re.search(r"\btax\b", s):
         return "Taxation Law"
     return str(raw).strip()
-
-
-# v7: table + digest fallback for decision years 1987–2025, En Banc division.
-FLASHCARD_CONCEPTS_CACHE_KEY = "flashcard_concepts:v8:latest_source_only"
 
 
 @supreme_bp.route(route="sc_decisions/flashcard_concepts", auth_level=func.AuthLevel.ANONYMOUS)

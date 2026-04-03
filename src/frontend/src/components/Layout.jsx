@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
-const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onToggleMode, onToggleQuiz, user, isFullscreen, mainFullWidth = false, lexPlayFullscreen = false }) => {
+const Layout = ({
+    children,
+    sidebarContent,
+    isDarkMode,
+    toggleTheme,
+    mode,
+    onToggleMode,
+    onToggleQuiz,
+    user,
+    /** True = hide global header + sidebar (browser fullscreen OR Lexify exam simulation). */
+    hideAppChrome = false,
+    mainFullWidth = false,
+    lexPlayFullscreen = false,
+}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 
@@ -29,7 +42,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             <div className="relative z-10 flex flex-col min-h-screen">
 
             {/* Header */}
-            {!isFullscreen && (
+            {!hideAppChrome && (
                 <header className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
                     ${isDarkMode
                         ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
@@ -170,7 +183,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             )}
 
             {/* Sidebar (Navigation Drawer) */}
-            {!isFullscreen && (
+            {!hideAppChrome && (
                 <aside
                     className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'bg-white xl:bg-white/40 xl:backdrop-blur-xl border-r border-white/40 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.1)]'}
@@ -186,13 +199,13 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
 
             {/* Main Content Area — z-10 so mobile sidebar scrim (rendered after) can sit above and capture taps */}
             <main
-                className={`relative z-10 ${isFullscreen ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
-        ${isFullscreen ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
+                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
+        ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
                 <div
                     className={`${
-                        isFullscreen
+                        hideAppChrome
                             ? 'max-w-full'
                             : ['codex', 'about', 'updates', 'quiz'].includes(mode)
                               ? 'max-w-full ml-0'
@@ -206,7 +219,7 @@ const Layout = ({ children, sidebarContent, isDarkMode, toggleTheme, mode, onTog
             </main>
 
             {/* Mobile sidebar scrim: must be after <main> in DOM so it stacks above page content (z-35 < aside z-40 < header z-50) */}
-            {isSidebarOpen && !isFullscreen && (
+            {isSidebarOpen && !hideAppChrome && (
                 <div
                     className="fixed inset-0 z-[35] bg-black/50 xl:hidden"
                     aria-hidden

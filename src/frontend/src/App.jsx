@@ -67,7 +67,8 @@ function App() {
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardConceptPool, setFlashcardConceptPool] = useState([]);
-  const [flashcardConceptsLoading, setFlashcardConceptsLoading] = useState(false);
+  /** True while /flashcard_concepts request is in flight (prefetch on load or retry). */
+  const [flashcardConceptsBusy, setFlashcardConceptsBusy] = useState(false);
   const [flashcardConceptsError, setFlashcardConceptsError] = useState(null);
   const [flashcardDeckError, setFlashcardDeckError] = useState(null);
   /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
@@ -161,22 +162,26 @@ function App() {
 
   const [flashcardFetchNonce, setFlashcardFetchNonce] = useState(0);
 
-  // Load SC digest concepts when Flashcards is opened. Retry adds ?nocache=1 to bypass Redis.
-  useEffect(() => {
-    if (mode !== 'flashcard') {
-      setFlashcardConceptsLoading(false);
-      return;
-    }
+  // Spinner only when user is on Flashcards and we still have nothing to show.
+  const flashcardConceptsLoading =
+    mode === 'flashcard' &&
+    flashcardConceptsBusy &&
+    flashcardConceptPool.length === 0 &&
+    !flashcardConceptsError;
 
+  // Prefetch SC digest concepts on app load (and on retry) so Flashcards opens fast when Redis/table are warm.
+  useEffect(() => {
     const ac = new AbortController();
-    // Match api/host.json functionTimeout (00:05:00). Heavy path = merge digests when flashcard_concepts is empty.
     const FLASHCARD_FETCH_MS = 300000;
     const tid = setTimeout(() => ac.abort(), FLASHCARD_FETCH_MS);
     let cancelled = false;
 
     const load = async () => {
-      setFlashcardConceptsLoading(true);
+      setFlashcardConceptsBusy(true);
       setFlashcardConceptsError(null);
+      if (flashcardFetchNonce > 0) {
+        setFlashcardConceptPool([]);
+      }
       try {
         const q = flashcardFetchNonce > 0 ? '?nocache=1' : '';
         const res = await fetch(apiUrl(`/api/sc_decisions/flashcard_concepts${q}`), { signal: ac.signal });
@@ -212,7 +217,7 @@ function App() {
         setFlashcardConceptPool([]);
       } finally {
         clearTimeout(tid);
-        setFlashcardConceptsLoading(false);
+        if (!cancelled) setFlashcardConceptsBusy(false);
       }
     };
 
@@ -221,7 +226,7 @@ function App() {
       cancelled = true;
       ac.abort();
     };
-  }, [mode, flashcardFetchNonce]);
+  }, [flashcardFetchNonce]);
 
   const refetchFlashcardConcepts = useCallback(() => {
     setFlashcardFetchNonce((n) => n + 1);
@@ -405,7 +410,7 @@ function App() {
       toggleTheme={toggleTheme}
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
-      isFullscreen={isFullscreen}
+      hideAppChrome={isFullscreen || lexifyExamSimulationActive}
       lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {

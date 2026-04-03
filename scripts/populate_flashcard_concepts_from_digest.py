@@ -124,6 +124,13 @@ def main() -> None:
             conn.commit()
             print("No concepts to insert (merged list empty).")
             print(f"[timing] total: {time.perf_counter() - t0:.2f}s")
+            try:
+                from cache import cache_delete
+                from config import FLASHCARD_CONCEPTS_CACHE_KEY
+
+                cache_delete(FLASHCARD_CONCEPTS_CACHE_KEY)
+            except Exception as inv_ex:
+                print(f"[note] Redis flashcard cache invalidation skipped: {inv_ex}")
             return
 
         batch = args.batch_size
@@ -160,6 +167,15 @@ def main() -> None:
         print(f"[timing] batched INSERTs ({len(tuples)} rows, batch_size={batch}): {t_ins - t_ins0:.2f}s")
         print(f"Inserted {len(merged)} rows into flashcard_concepts.")
         print(f"[timing] total: {time.perf_counter() - t0:.2f}s")
+
+        try:
+            from cache import cache_delete
+            from config import FLASHCARD_CONCEPTS_CACHE_KEY
+
+            if cache_delete(FLASHCARD_CONCEPTS_CACHE_KEY):
+                print(f"Invalidated Redis key {FLASHCARD_CONCEPTS_CACHE_KEY!r} (next API request rebuilds cache).")
+        except Exception as inv_ex:
+            print(f"[note] Redis flashcard cache invalidation skipped: {inv_ex}")
     finally:
         conn.close()
 
