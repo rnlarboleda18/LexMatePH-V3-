@@ -75,6 +75,11 @@ export const LexPlayProvider = ({ children }) => {
         prefetchedNextRef.current = null;
     }, []);
 
+    /** Must be declared before any useCallback that lists it in deps (TDZ-safe). */
+    const safeSetState = useCallback((setter, value) => {
+        if (isMounted.current) setter(value);
+    }, []);
+
     // Keep refs in sync with state
     useEffect(() => { playlistRef.current = playlist; }, [playlist]);
     useEffect(() => { currentIndexRef.current = currentIndex; }, [currentIndex]);
@@ -288,10 +293,6 @@ export const LexPlayProvider = ({ children }) => {
             'Content-Type': 'application/json' 
         };
     };
-
-    const safeSetState = useCallback((setter, value) => {
-        if (isMounted.current) setter(value);
-    }, []);
 
     // Handle initial state load and sync
     const [isStateLoaded, setIsStateLoaded] = useState(false);
