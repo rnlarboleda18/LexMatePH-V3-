@@ -29,9 +29,18 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
     if is_admin or not clerk_id:
         return
     try:
+        # Idempotent: migration INSERT may not have run on some environments
+        cur.execute(
+            """
+            INSERT INTO founding_promo_state (id, claimed_count, max_slots)
+            VALUES (1, 0, 20)
+            ON CONFLICT (id) DO NOTHING
+            """
+        )
         cur.execute("SELECT claimed_count FROM founding_promo_state WHERE id = 1 FOR UPDATE")
         row = cur.fetchone()
         if not row:
+            logger.warning("founding_promo_state missing row id=1 after ensure; skipping grant")
             return
         limit = get_promo_slot_limit()
         if limit <= 0:
@@ -86,6 +95,8 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         logger.warning("Founding promo columns missing; run sql/founding_promo_migration.sql")
     except pg_errors.UndefinedTable:
         logger.warning("Founding promo tables missing; run sql/founding_promo_migration.sql")
+    except Exception:
+        logger.exception("try_grant_founding_promo failed for clerk_id=%s", clerk_id)
 
 
 def _expire_sql():

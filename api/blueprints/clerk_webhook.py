@@ -3,11 +3,29 @@ import json
 import os
 import logging
 import psycopg
+from psycopg import errors as pg_errors
 from svix.webhooks import Webhook, WebhookVerificationError
 
 from utils.founding_promo import try_grant_founding_promo
 
 clerk_webhook_bp = func.Blueprint()
+
+
+def _clerk_primary_email(data: dict):
+    """Prefer primary_email_address_id; avoids empty/wrong order in email_addresses."""
+    emails = data.get("email_addresses") or []
+    primary_id = data.get("primary_email_address_id")
+    if primary_id and isinstance(emails, list):
+        for e in emails:
+            if isinstance(e, dict) and e.get("id") == primary_id:
+                addr = e.get("email_address")
+                if addr:
+                    return addr.strip() if isinstance(addr, str) else addr
+    if emails and isinstance(emails[0], dict):
+        addr = emails[0].get("email_address")
+        if addr:
+            return addr.strip() if isinstance(addr, str) else addr
+    return None
 
 @clerk_webhook_bp.route(route="clerk-webhook", methods=["POST"])
 def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
@@ -48,8 +66,7 @@ def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
     
     if evt_type == "user.created" or evt_type == "user.updated":
         clerk_id = data.get("id")
-        email_addresses = data.get("email_addresses", [])
-        email = email_addresses[0].get("email_address") if email_addresses else None
+        email = _clerk_primary_email(data)
         
         ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
         is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS] if email else False
@@ -71,11 +88,24 @@ def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
                     
                     # If the above didn't link (e.g. clerk_id is new but email exists), 
                     # we update the existing row with the same email.
-                    cur.execute("""
-                        UPDATE users 
-                        SET clerk_id = %s 
-                        WHERE email = %s AND clerk_id IS NULL;
-                    """, (clerk_id, email))
+                    if email:
+                        try:
+                            cur.execute(
+                                """
+                                UPDATE users
+                                SET clerk_id = %s, founding_promo_eligible = TRUE
+                                WHERE email = %s AND clerk_id IS NULL
+                                """,
+                                (clerk_id, email),
+                            )
+                        except pg_errors.UndefinedColumn:
+                            cur.execute(
+                                """
+                                UPDATE users SET clerk_id = %s
+                                WHERE email = %s AND clerk_id IS NULL
+                                """,
+                                (clerk_id, email),
+                            )
                     try_grant_founding_promo(cur, clerk_id, is_admin)
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")

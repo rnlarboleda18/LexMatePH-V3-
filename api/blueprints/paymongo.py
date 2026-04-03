@@ -9,7 +9,7 @@ import psycopg
 import requests
 
 from utils.clerk_auth import get_authenticated_user_id
-from utils.founding_promo import expire_founding_promo_for_user
+from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
 
 paymongo_bp = func.Blueprint()
 
@@ -155,13 +155,25 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=401
         )
     try:
-        # Expire promo in its own transaction so a rollback on fallback SELECT cannot undo it.
+        # Expire + try grant in its own transaction so a rollback on fallback SELECT cannot undo it.
+        # try_grant fixes missed/delayed Clerk webhooks (user gets Barrister on first subscription-status).
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
                     expire_founding_promo_for_user(cur, clerk_id)
+                    cur.execute(
+                        "SELECT is_admin, email FROM users WHERE clerk_id = %s",
+                        (clerk_id,),
+                    )
+                    urow = cur.fetchone()
+                    if urow:
+                        db_admin, email = urow[0], urow[1]
+                        em = (email or "").strip().lower()
+                        admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
+                        is_admin_flag = bool(db_admin) or (em in admin_list)
+                        try_grant_founding_promo(cur, clerk_id, is_admin_flag)
         except Exception as ex:
-            logging.warning("expire_founding_promo_for_user: %s", ex)
+            logging.warning("founding promo expire/grant: %s", ex)
 
         with _get_db() as conn:
             with conn.cursor() as cur:
