@@ -28,6 +28,7 @@ def _clerk_primary_email(data: dict):
     return None
 
 @clerk_webhook_bp.route(route="clerk-webhook", methods=["POST"])
+@clerk_webhook_bp.route(route="clerk_webhook", methods=["POST"])
 def clerk_webhook(req: func.HttpRequest) -> func.HttpResponse:
     # 1. Get headers for verification
     svix_id = req.headers.get("svix-id")
