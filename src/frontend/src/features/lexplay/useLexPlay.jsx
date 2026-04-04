@@ -10,6 +10,23 @@ function buildAudioFetchPath(track, rate = 1.0) {
     return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
 }
 
+/** Compare loaded audio URL to the track (pathname + query). Fixes resume after lock screen: old check omitted `rate=` so src never matched and we always reloaded. */
+function audioSrcMatchesCurrentTrack(audioSrc, track, rate = 1.0) {
+    if (!audioSrc || !track) return false;
+    if (typeof window === 'undefined') return false;
+    if (!audioSrc || audioSrc === window.location.href) return false;
+    if (audioSrc.startsWith('blob:')) {
+        return true;
+    }
+    try {
+        const cur = new URL(audioSrc, window.location.origin);
+        const exp = new URL(buildAudioFetchPath(track, rate), window.location.origin);
+        return cur.pathname === exp.pathname && cur.search === exp.search;
+    } catch {
+        return false;
+    }
+}
+
 export const useLexPlay = () => {
     return useContext(LexPlayContext);
 };
@@ -431,6 +448,11 @@ export const LexPlayProvider = ({ children }) => {
                     delete audioRef.current.__targetTime;
                 }
             };
+            audioRef.current.onpause = () => {
+                const el = audioRef.current;
+                if (!el || el.ended) return;
+                setIsPlaying(false);
+            };
             audioRef.current.onwaiting = () => setIsLoading(true);
         }
 
@@ -810,43 +832,51 @@ export const LexPlayProvider = ({ children }) => {
 
     const handlePlayPause = useCallback(() => {
         if (!audioRef.current) return;
+        const a = audioRef.current;
 
-        if (isPlaying) {
-            audioRef.current.pause();
+        // Use element state, not React isPlaying — OS / lock-screen media controls can pause
+        // without matching React state, so a second tap would wrongly take the "pause" branch.
+        if (!a.paused) {
+            a.pause();
             setIsPlaying(false);
             if (isStateLoaded && isSignedIn && currentTrack) {
                 void savePlaybackState({
                     playlist_id: activePlaylistId,
                     current_track_id: currentTrack.id,
-                    current_time: audioRef.current.currentTime,
+                    current_time: a.currentTime,
                     playback_rate: PLAYBACK_RATE,
                 });
             }
-        } else {
-            if (currentTrack) {
-                // Check if the current src matches what we expect for this track
-                const expectedPath = `/api/audio/${currentTrack.type}/${currentTrack.id}${currentTrack.code_id ? `?code=${currentTrack.code_id}` : ''}`;
-                const currentSrc = audioRef.current.src;
-                const isCorrectSrc = currentSrc && (currentSrc.endsWith(expectedPath) || currentSrc === expectedPath);
-
-                if (!isCorrectSrc) {
-                    // Need to load it first if completely stopped or source mismatch
-                    playTrack(currentIndex);
-                } else {
-                    audioRef.current.play().catch(e => {
-                        if (e.name !== 'AbortError' && e.name !== 'NotAllowedError' && !e.message?.includes('interrupted')) {
-                            console.error("Error resuming playback:", e);
-                            setError(e.message);
-                        }
-                    });
-                    setIsPlaying(true);
-                }
-            } else if (playlist.length > 0) {
-                playTrack(0);
+        } else if (currentTrack) {
+            const matches = audioSrcMatchesCurrentTrack(a.src, currentTrack, PLAYBACK_RATE);
+            if (!matches) {
+                playTrack(currentIndex);
+                return;
             }
+            setIsLoading(true);
+            const playP = a.play();
+            if (playP !== undefined) {
+                playP
+                    .then(() => {
+                        setIsLoading(false);
+                        setIsPlaying(true);
+                    })
+                    .catch((e) => {
+                        setIsLoading(false);
+                        setIsPlaying(false);
+                        if (e.name === 'AbortError' || e.name === 'NotAllowedError' || e.message?.includes('interrupted')) {
+                            return;
+                        }
+                        console.error('Error resuming playback:', e);
+                        setError(e.message || 'Could not resume playback.');
+                    });
+            } else {
+                setIsPlaying(true);
+            }
+        } else if (playlist.length > 0) {
+            playTrack(0);
         }
     }, [
-        isPlaying,
         currentTrack,
         playlist.length,
         playTrack,
@@ -907,7 +937,7 @@ export const LexPlayProvider = ({ children }) => {
         if (audioRef.current && audioRef.current.currentTime > 3) {
             // If more than 3s in, restart current track
             audioRef.current.currentTime = 0;
-            if (!isPlaying) handlePlayPause();
+            if (audioRef.current.paused) handlePlayPause();
             return;
         }
 
@@ -921,9 +951,9 @@ export const LexPlayProvider = ({ children }) => {
             playTrackImmediate(currentIndex - 1);
         } else if (audioRef.current) {
             audioRef.current.currentTime = 0;
-            if (!isPlaying) handlePlayPause();
+            if (audioRef.current.paused) handlePlayPause();
         }
-    }, [currentIndex, isPlaying, handlePlayPause, playTrackImmediate, playlist.length]);
+    }, [currentIndex, handlePlayPause, playTrackImmediate, playlist.length]);
 
     const handleTrackEnd = useCallback(() => {
         const idx = currentIndexRef.current;

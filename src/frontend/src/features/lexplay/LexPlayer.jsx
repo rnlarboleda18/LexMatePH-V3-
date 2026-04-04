@@ -44,16 +44,16 @@ const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a 
     }, []);
 
     return (
-        <div className="relative flex-1" ref={selectRef}>
+        <div className="relative w-full min-w-0 flex-1" ref={selectRef}>
             <button
                 type="button"
-                className="w-full flex items-center justify-between rounded-2xl border-2 border-slate-300/85 bg-white text-sm text-slate-900 shadow-sm outline-none transition-all hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.03] dark:text-white dark:hover:bg-white/10"
+                className="flex w-full items-center justify-between rounded-2xl border-2 border-slate-300/85 bg-white p-4 text-left text-sm text-slate-900 shadow-sm outline-none transition-all hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.03] dark:text-white dark:hover:bg-white/10"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <span className={`truncate mr-2 ${!selectedOption ? 'text-slate-400 dark:text-white/40' : 'font-semibold'}`}>
+                <span className={`mr-2 min-w-0 flex-1 truncate ${!selectedOption ? 'font-normal text-slate-400 dark:text-white/40' : 'font-bold text-slate-900 dark:text-white'}`}>
                     {selectedOption ? selectedOption.label : placeholder}
                 </span>
-                <ChevronDown size={18} className={`text-slate-400 transition-transform dark:text-white/40 ${isOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={18} className={`shrink-0 text-slate-400 transition-transform dark:text-white/40 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
             {isOpen && (
                 <div className="absolute z-50 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border-2 border-slate-300/85 bg-white py-2 shadow-2xl backdrop-blur-3xl dark:border-white/10 dark:bg-[#0f172a]/95">
@@ -1110,7 +1110,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                         <button
                                             type="button"
                                             onClick={() => setIsCreating(true)}
-                                            className="shrink-0 rounded-2xl border border-purple-300/80 bg-purple-100/90 px-4 py-3 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-purple-900 transition-all hover:border-purple-400/70 hover:bg-purple-100 active:scale-[0.98] sm:w-auto dark:border-purple-400/35 dark:bg-purple-500/15 dark:text-purple-100 dark:hover:border-purple-300/50 dark:hover:bg-purple-500/25"
+                                            className="shrink-0 rounded-2xl border border-purple-300/80 bg-purple-100/90 px-4 py-4 text-center text-[11px] font-extrabold uppercase tracking-[0.15em] text-purple-900 transition-all hover:border-purple-400/70 hover:bg-purple-100 active:scale-[0.98] sm:flex sm:items-center sm:justify-center sm:self-stretch sm:w-auto dark:border-purple-400/35 dark:bg-purple-500/15 dark:text-purple-100 dark:hover:border-purple-300/50 dark:hover:bg-purple-500/25"
                                         >
                                             New playlist
                                         </button>
@@ -1209,31 +1209,27 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                 {bulkError && <div className="rounded-2xl border border-red-300/80 bg-red-50 p-4 text-xs font-black uppercase text-red-800 dark:border-red-500/40 dark:bg-red-500/20 dark:text-red-400">{bulkError}</div>}
                                 <div className="space-y-2">
                                     <label className="ml-1 block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Destination Playlist</label>
-                                    <div className="flex h-[46px]">
-                                        <CustomPlaylistSelect 
-                                            value={bulkForm.targetPlaylist} 
-                                            onChange={val => setBulkForm({...bulkForm, targetPlaylist: val})}
-                                            options={savedPlaylists.map(p => ({ value: p.id, label: p.name }))}
-                                            placeholder="Select a playlist..."
-                                        />
-                                    </div>
+                                    <CustomPlaylistSelect 
+                                        value={bulkForm.targetPlaylist} 
+                                        onChange={val => setBulkForm({...bulkForm, targetPlaylist: val})}
+                                        options={savedPlaylists.map(p => ({ value: p.id, label: p.name }))}
+                                        placeholder="Select a playlist..."
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="ml-1 block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Select Codal</label>
-                                    <div className="flex h-[46px]">
-                                        <CustomPlaylistSelect 
-                                            value={bulkForm.codal} 
-                                            onChange={val => setBulkForm({...bulkForm, codal: val})}
-                                            options={[
-                                                { value: "RPC", label: "Revised Penal Code" },
-                                                { value: "CIV", label: "Civil Code" },
-                                                { value: "FC", label: "Family Code" },
-                                                { value: "CONST", label: "1987 Constitution" },
-                                                { value: "LABOR", label: "Labor Code" },
-                                                { value: "ROC", label: "Rules of Court" }
-                                            ]}
-                                        />
-                                    </div>
+                                    <CustomPlaylistSelect 
+                                        value={bulkForm.codal} 
+                                        onChange={val => setBulkForm({...bulkForm, codal: val})}
+                                        options={[
+                                            { value: "RPC", label: "Revised Penal Code" },
+                                            { value: "CIV", label: "Civil Code" },
+                                            { value: "FC", label: "Family Code" },
+                                            { value: "CONST", label: "1987 Constitution" },
+                                            { value: "LABOR", label: "Labor Code" },
+                                            { value: "ROC", label: "Rules of Court" }
+                                        ]}
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="ml-1 block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">
