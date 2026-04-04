@@ -29,6 +29,56 @@ from utils.flashcard_legal_concepts import (
 
 supreme_bp = func.Blueprint()
 
+# Bar subject filter values from SupremeDecisions.jsx — must match dropdown + normalizeSubjectForColor buckets
+ALLOWED_BAR_SUBJECT_FILTERS = frozenset(
+    {
+        "Political Law",
+        "Labor Law",
+        "Civil Law",
+        "Taxation Law",
+        "Commercial Law",
+        "Criminal Law",
+        "Remedial Law",
+        "Legal Ethics",
+    }
+)
+
+
+def bar_subject_canon_sql(col: str = "subject") -> str:
+    """
+    PostgreSQL expression that mirrors SupremeDecisions.jsx normalizeSubjectForColor:
+    extract Primary: … segment (if present), then assign exactly one bar subject by
+    the same keyword order as the frontend. Using subject ILIKE '%Political Law%' missed
+    rows labeled only 'Constitutional Law', and double-counted rows whose text contained
+    multiple subject names — so filtered totals did not tally with ponente-only counts.
+    """
+    # POSIX regex (substring … from) — no \s; use [[:space:]]
+    seg = f"""(
+        COALESCE(
+            NULLIF(BTRIM(SUBSTRING(COALESCE({col}::text, '') FROM '[Pp]rimary:[[:space:]]*([^;]+)')), ''),
+            BTRIM(COALESCE({col}::text, ''))
+        )
+    )"""
+    return f"""(
+        CASE
+            WHEN {col} IS NULL OR BTRIM(COALESCE({col}::text, '')) = '' THEN 'Political Law'
+            ELSE (
+                CASE
+                    WHEN {seg} ILIKE '%Political%' OR {seg} ILIKE '%Constitutional%' OR {seg} ILIKE '%Admin%' OR {seg} ILIKE '%Election%' OR {seg} ILIKE '%Public Corp%' THEN 'Political Law'
+                    WHEN {seg} ILIKE '%Labor%' THEN 'Labor Law'
+                    WHEN {seg} ILIKE '%Civil%' OR {seg} ILIKE '%Family%' OR {seg} ILIKE '%Property%' OR {seg} ILIKE '%Succession%' OR {seg} ILIKE '%Obligations%' THEN 'Civil Law'
+                    WHEN {seg} ILIKE '%Taxation%' OR {seg} ILIKE '%Tax%' THEN 'Taxation Law'
+                    WHEN {seg} ILIKE '%Commercial%' OR {seg} ILIKE '%Mercantile%' OR {seg} ILIKE '%Corporate%' OR {seg} ILIKE '%Insurance%' OR {seg} ILIKE '%Transportation%' THEN 'Commercial Law'
+                    WHEN {seg} ILIKE '%Criminal%' THEN 'Criminal Law'
+                    WHEN {seg} ILIKE '%Remedial%' OR {seg} ILIKE '%Procedure%' OR {seg} ILIKE '%Evidence%' THEN 'Remedial Law'
+                    WHEN {seg} ILIKE '%Ethics%' OR {seg} ILIKE '%Legal Ethics%' OR {seg} ILIKE '%Judicial%' THEN 'Legal Ethics'
+                    ELSE 'Political Law'
+                END
+            )
+        END
+    )"""
+
+
 @supreme_bp.route(route="sc_decisions", auth_level=func.AuthLevel.ANONYMOUS)
 def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Processing Supreme Decisions request.')
@@ -120,8 +170,12 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
             base_where += " AND TRIM(TO_CHAR(date, 'Month')) ILIKE %s"
             base_params.append(month)
         if subject_filter:
-            base_where += " AND subject ILIKE %s"
-            base_params.append(f"%{subject_filter}%")
+            sf = subject_filter.strip()
+            if sf in ALLOWED_BAR_SUBJECT_FILTERS:
+                base_where += f" AND ({bar_subject_canon_sql('subject')}) = %s"
+                base_params.append(sf)
+            else:
+                logging.warning("Ignoring unknown bar subject filter: %s", sf[:80])
         if division_filter:
             base_where += " AND division ILIKE %s"
             base_params.append(division_filter)
