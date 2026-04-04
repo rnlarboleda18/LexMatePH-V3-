@@ -421,11 +421,8 @@ const LexCodeViewer = ({
                         <div
                             ref={mainContentRef}
                             id="main-content"
-                            className="flex min-h-0 flex-1 flex-col max-lg:overflow-visible lg:overflow-y-auto lg:overscroll-y-contain"
+                            className={`flex min-h-0 flex-1 flex-col max-lg:overflow-visible mb-4 w-full overflow-hidden rounded-[2.5rem] border-2 border-slate-300/80 bg-white/95 glass shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] sm:mb-8 lg:mb-4 lg:overflow-y-auto lg:overscroll-y-contain ${isFullscreen ? 'min-h-0 flex-1' : ''}`}
                         >
-                            <div
-                                className={`relative mb-4 w-full overflow-hidden rounded-[2.5rem] border-2 border-slate-300/80 bg-white/95 glass shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] sm:mb-8 lg:mb-4 ${isFullscreen ? 'min-h-0 flex-1' : 'min-h-min'}`}
-                            >
                             {/* Not sticky: whole codal card (this bar + articles) scrolls together in #main-content */}
                             <div className="shrink-0 border-b border-white/25 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/70">
                                 {Array.isArray(codalOptions) && codalOptions.length > 0 && typeof onCodalChange === 'function' && (
@@ -504,7 +501,6 @@ const LexCodeViewer = ({
                                 </Suspense>
                             </div>
                         </div>
-                    </div>
                     </div>
 
                     {/* 3. Juris / amendments — same as TOC: fills row height, scrolls inside */}

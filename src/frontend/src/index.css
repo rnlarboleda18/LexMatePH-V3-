@@ -19,14 +19,31 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  /* Mobile visible distance: 1.25rem + player height */
+  /* Push modal below fixed header on mobile (3.5rem) */
+  padding-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 0.75rem);
+  /* Mobile visible distance from LexPlayer: 1.25rem + player height */
   padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px) + var(--player-height, 0px));
+}
+
+@media (min-width: 768px) {
+  .lex-modal-overlay {
+    /* Push modal below taller md+ header (5rem) */
+    padding-top: calc(5rem + env(safe-area-inset-top, 0px) + 1rem);
+  }
 }
 
 @media (min-width: 640px) {
   .lex-modal-overlay {
     padding: 2rem;
+    padding-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 1rem);
     /* Desktop visible distance: 2rem + player height */
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px) + var(--player-height, 0px));
+  }
+}
+
+@media (min-width: 768px) {
+  .lex-modal-overlay {
+    padding-top: calc(5rem + env(safe-area-inset-top, 0px) + 1rem);
     padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px) + var(--player-height, 0px));
   }
 }
