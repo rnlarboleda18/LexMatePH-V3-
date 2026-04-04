@@ -968,7 +968,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     </div>
                     <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
                         <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
-                            Supreme Court Decisions
+                            Case Digest
                         </h1>
                         <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
                             Case digests & jurisprudence

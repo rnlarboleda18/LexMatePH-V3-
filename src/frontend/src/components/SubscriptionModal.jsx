@@ -171,16 +171,9 @@ export default function SubscriptionModal({ onClose }) {
     }
   };
 
-  const panel = (
+  const panelContent = (
     <>
-      {/* Same bottom anchor as QuestionDetailModal / CaseDecisionModal — sits above mini LexPlayer */}
-      <div
-        className="glass absolute left-1/2 flex w-full max-w-5xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-slate-300/85 bg-white/90 shadow-[0_10px_50px_rgba(0,0,0,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/90 bottom-[var(--player-height,0px)] top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-2xl sm:border-2 md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-3xl"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="subscription-modal-title"
-        onClick={(e) => e.stopPropagation()}
-      >
+        {/* Header: always reachable; not inside scroll (fixes overlap with badges / LexPlayer) */}
         {/* Header: always reachable; not inside scroll (fixes overlap with badges / LexPlayer) */}
         <div className="relative z-20 flex shrink-0 items-center justify-between gap-3 border-b-2 border-slate-200/90 bg-white/95 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/95">
           <h2 id="subscription-modal-title" className="min-w-0 text-lg font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-xl">
@@ -328,18 +321,20 @@ export default function SubscriptionModal({ onClose }) {
             Payments processed securely by PayMongo · Cancel anytime · BSP Regulated
           </p>
         </div>
-      </div>
     </>
   );
 
   return createPortal(
-    <div className="fixed inset-0 z-[540] animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-md"
-        aria-hidden
-        onClick={onClose}
-      />
-      {panel}
+        className="glass relative flex w-full max-w-5xl max-h-[90vh] flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="subscription-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {panelContent}
+      </div>
     </div>,
     document.body
   );

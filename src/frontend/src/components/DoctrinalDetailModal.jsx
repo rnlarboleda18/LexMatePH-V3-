@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, BookOpen, Scale, Gavel, AlertCircle, Zap } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 
@@ -57,9 +58,14 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
     const digestSections = parseDigest(digest);
     const isPIL = sourceLabel === 'PIL';
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4 pb-2 md:pb-[var(--player-height,0px)] bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-dark-card rounded-xl md:rounded-2xl shadow-2xl w-full h-[calc(100dvh-16px)] md:h-auto max-w-3xl md:max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+    return createPortal(
+        <div className="fixed inset-0 z-[520] lex-modal-overlay bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+            <div 
+                className="glass relative flex w-full max-w-3xl max-h-[90vh] flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                role="dialog"
+                aria-modal="true"
+                onClick={(e) => e.stopPropagation()}
+            >
                 {/* Header */}
                 <div className="p-3 md:p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/50">
                     <div className="flex-1 pr-2 md:pr-4">
@@ -159,7 +165,8 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

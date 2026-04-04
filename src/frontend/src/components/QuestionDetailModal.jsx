@@ -80,11 +80,9 @@ const QuestionDetailModal = ({
     );
 
     return createPortal(
-        <div className="fixed inset-0 z-[520] lex-modal-overlay animate-in fade-in duration-200">
-            {/* Full-screen backdrop; panel is a sibling with bottom anchored to mini LexPlay — avoids flex padding + max-h both subtracting player height */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden onClick={handleClose} />
+        <div className="fixed inset-0 z-[520] lex-modal-overlay bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={handleClose}>
             <div
-                className="glass absolute left-1/2 flex w-full max-w-3xl -translate-x-1/2 flex-col overflow-hidden rounded-t-2xl border-x border-t border-white/50 bg-white/50 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-3xl animate-in zoom-in-95 duration-300 dark:border-white/20 dark:bg-slate-900/50 bottom-[var(--player-height,0px)] top-[max(0.75rem,env(safe-area-inset-top,0px))] min-h-0 sm:rounded-xl sm:border md:bottom-auto md:top-1/2 md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))] md:min-h-0 md:-translate-y-1/2 md:rounded-3xl"
+                className="glass relative flex w-full max-w-3xl max-h-[90vh] flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}

@@ -33,10 +33,10 @@ const FEATURES = [
   },
   {
     icon: Gavel,
-    title: 'SC Decisions',
+    title: 'Case Digest',
     color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
     description:
-      'Browse Supreme Court decisions and case-style digests. Digests may be AI-assisted—verify against full text and official sources.',
+      'Browse Supreme Court decisions and evidence-grounded case digests. Our engine analyzes every decision with literal fidelity to official sources.',
   },
   {
     icon: Library,
@@ -81,6 +81,54 @@ const About = () => {
             sources, the latest jurisprudence, and applicable statutes. LexMatePH does not replace professional judgment
             or counsel.
           </p>
+        </div>
+
+        {/* The LexMatePH Standard Section */}
+        <div className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
+          <h3 className="mb-4 text-center text-lg font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+            🛡️ The LexMatePH Standard: Engineered Case Digests
+          </h3>
+          <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-400 text-center italic">
+            Built specifically for the Philippine Bar: Our high-fidelity legal engine ensures every digest is grounded in literal fidelity.
+          </p>
+          
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <span className="text-rose-500">👨‍⚖️</span> Professional Persona
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+                Our engine acts as a Senior Legal Editor, identifying shifts in doctrine and "Bar Traps" that generic tools miss.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <span className="text-blue-500">📜</span> Evidence-Based
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+                We enforce a "Zero-Hallucination" rule. All classifications (New Doctrine, Abandonment, etc.) require direct quotes from the text.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <span className="text-purple-500">👁️</span> 1M Token Context
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+                We leverage a massive 1-million-token context window to analyze entire decisions at once, ensuring perfect contextual continuity.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <span className="text-amber-500">🔬</span> Exhaustive Ratio
+              </h4>
+              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+                Every issue identified includes at least 5-7 sentences of Reasoning, maintaining the clinical "Language of the Law."
+              </p>
+            </div>
+          </div>
         </div>
 
         <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">

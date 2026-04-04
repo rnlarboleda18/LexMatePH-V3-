@@ -183,7 +183,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     }`}
             >
                 <Gavel size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'supreme_decisions' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'}`} />
-                SC Decisions
+                Case Digest
             </button>
 
             {/* LexCode — codal picker lives on the page */}
