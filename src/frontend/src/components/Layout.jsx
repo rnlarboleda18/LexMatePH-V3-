@@ -15,6 +15,8 @@ const Layout = ({
     hideAppChrome = false,
     mainFullWidth = false,
     lexPlayFullscreen = false,
+    /** True = blur the background while flashcard study session is active. */
+    flashcardStudying = false,
 }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -33,21 +35,29 @@ const Layout = ({
     return (
         <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
             {/* Global Glassmorphism Background Orbs — GPU-composited, no external fetch */}
-            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" style={{contain:'strict'}}>
+            <div
+                className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+                style={{ contain: 'strict', filter: flashcardStudying ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}
+            >
                 <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-30 animate-float ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`} style={{willChange:'transform'}}></div>
                 <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-30 animate-float ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`} style={{animationDelay: '1s', willChange:'transform'}}></div>
                 <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-20 animate-float ${isDarkMode ? 'bg-blue-900' : 'bg-blue-200'}`} style={{animationDelay: '2s', willChange:'transform'}}></div>
             </div>
-            
+
+            {/* Flashcard blur overlay — removed; blur applied directly via filter on each element below */}
+
             <div className="relative z-10 flex flex-col min-h-screen">
 
             {/* Header */}
             {!hideAppChrome && (
-                <header className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
+                <header
+                    className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
                     ${isDarkMode
                         ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
                         : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
-                    }`} style={{willChange:'transform'}}>
+                    }`}
+                    style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
+                >
 
                     {/* LEFT — Brand */}
                     <div className="relative z-10 flex min-w-0 items-center gap-2 md:gap-3">
@@ -189,7 +199,7 @@ const Layout = ({
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'border-r-2 border-slate-300/90 bg-white xl:bg-white/85 xl:backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(15,23,42,0.08)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
-                    style={{willChange:'transform'}}
+                    style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
                 >
                     <div className="h-full flex flex-col pt-4 md:pt-8">
                         {sidebarContent}
@@ -197,7 +207,7 @@ const Layout = ({
                 </aside>
             )}
 
-            {/* Main Content Area — z-10 so mobile sidebar scrim (rendered after) can sit above and capture taps */}
+            {/* Main Content Area — z-10 so mobile sidebar scrim can sit above and capture taps */}
             <main
                 className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
         ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}

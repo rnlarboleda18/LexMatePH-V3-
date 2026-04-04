@@ -72,7 +72,7 @@ function App() {
   const [flashcardConceptsError, setFlashcardConceptsError] = useState(null);
   const [flashcardDeckError, setFlashcardDeckError] = useState(null);
   /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default to Dark Mode
+  const [isDarkMode, setIsDarkMode] = useState(false); // Default to Light Mode
   /** Hide minimized LexPlayer during Lexify exam simulation (not dashboard / results). */
   const [lexifyExamSimulationActive, setLexifyExamSimulationActive] = useState(false);
   // Global case modal state (shared between SC Decisions and Codex)
@@ -406,6 +406,7 @@ function App() {
       toggleTheme={toggleTheme}
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
+      flashcardStudying={mode === 'flashcard' && flashcardState === 'active'}
       hideAppChrome={isFullscreen || lexifyExamSimulationActive}
       lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}

@@ -105,11 +105,12 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     return (
         <div
-            className="relative z-[1] flex h-full min-h-0 w-full max-w-none flex-col overflow-hidden rounded-none border-0 bg-transparent shadow-none"
+            className="relative z-[1] flex h-full min-h-0 w-full max-w-none flex-col border border-slate-200 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.14)] dark:border-white/10 dark:bg-slate-900"
+            style={{ borderRadius: '24px', clipPath: 'inset(0 round 24px)' }}
             role="region"
             aria-label="Flashcard"
         >
-            <div className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-t-2xl border border-white/25 bg-white/20 shadow-[0_10px_50px_rgba(0,0,0,0.4)] backdrop-blur-3xl dark:border-white/20 dark:bg-slate-900/50 sm:rounded-xl md:rounded-3xl">
+            <div className="flex h-full min-h-0 w-full flex-col">
                 <div className="relative min-h-0 flex-1 [perspective:1200px]">
                     <div
                         className="relative h-full min-h-0 w-full transition-transform duration-500 [transform-style:preserve-3d]"
@@ -117,7 +118,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                     >
                         {/* Front — meta + content + actions; no outer top/bottom bars */}
                         <div
-                            className="absolute inset-0 flex h-full min-h-full flex-col overflow-hidden rounded-t-2xl bg-gradient-to-br from-slate-50/95 to-white/85 [backface-visibility:hidden] dark:from-slate-800/95 dark:to-slate-900/90 sm:rounded-xl md:rounded-3xl"
+                            className="absolute inset-0 flex h-full min-h-full flex-col overflow-hidden rounded-3xl bg-gradient-to-br from-slate-50/95 to-white/85 [backface-visibility:hidden] dark:from-slate-800/95 dark:to-slate-900/90"
                             style={{ WebkitBackfaceVisibility: 'hidden' }}
                         >
                             {renderMetaRow()}
@@ -163,7 +164,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
                         {/* Back — same meta + actions; scroll definition only */}
                         <div
-                            className="absolute inset-0 flex h-full min-h-full flex-col overflow-hidden rounded-t-2xl bg-gradient-to-br from-indigo-50/95 to-violet-50/85 [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-indigo-950/65 dark:to-slate-900/90 sm:rounded-xl md:rounded-3xl"
+                            className="absolute inset-0 flex h-full min-h-full flex-col overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-50/95 to-violet-50/85 [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-indigo-950/65 dark:to-slate-900/90"
                             style={{ WebkitBackfaceVisibility: 'hidden' }}
                         >
                             {renderMetaRow()}

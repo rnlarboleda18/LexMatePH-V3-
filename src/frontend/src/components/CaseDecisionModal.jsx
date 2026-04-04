@@ -376,25 +376,18 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         if (!newPlaylistName.trim()) return;
         setIsCreatingPlaylist(true);
         try {
-            const headers = await (async () => {
-                // This is a bit hacky but we need the fetchPlaylists to update the state so we can find the new ID
-                // Alternatively, createPlaylist could return the new ID.
-                // Let's assume createPlaylist updates savedPlaylists in context.
-                await createPlaylist(newPlaylistName.trim());
-                // We need to wait for the update. In a real app we'd have the ID returned.
-                // For now, let's just use the active queue if creation is too complex to sync here,
-                // BUT the user specifically asked for "available LexPlay playlist to add to and the option to create one".
-            })();
-            
-            // Re-fetch to be sure
-            await fetchPlaylists();
-            setNewPlaylistName('');
-            setShowPlaylistSelector(false);
-            // After creation, user might expect it to be added to the NEW one.
-            // Since we don't have the ID easily, we'll suggest adding it from the list next time or 
-            // find the latest one.
+            const newPlaylist = await createPlaylist(newPlaylistName.trim());
+            if (newPlaylist && newPlaylist.id) {
+                await handleAddToPlaylist(newPlaylist.id);
+            } else {
+                // Fallback: re-fetch playlists and close selector
+                await fetchPlaylists();
+                setNewPlaylistName('');
+                setShowPlaylistSelector(false);
+            }
         } catch (err) {
-            console.error(err);
+            console.error("Failed to create and add:", err);
+            alert("Failed to create playlist or add case. Please try again.");
         } finally {
             setIsCreatingPlaylist(false);
         }

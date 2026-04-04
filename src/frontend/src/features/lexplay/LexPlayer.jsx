@@ -927,7 +927,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                             {isPlaying && (
                                                 <div className="absolute bottom-4 left-1/2 z-10 flex h-8 w-full max-w-[85%] -translate-x-1/2 items-end justify-center gap-1.5 px-3 md:bottom-3 md:max-lg:h-7 lg:bottom-5 lg:h-9">
                                                     {[0.4, 0.8, 0.6, 1.0, 0.5, 0.9, 0.7, 0.3, 0.6, 0.8].map((h, i) => (
-                                                        <div key={i} className="w-1.5 animate-[bounce_1s_infinite] rounded-full bg-white/95 shadow-[0_0_8px_rgba(255,255,255,0.85)] md:w-2" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }} />
+                                                        <div key={i} className="w-1.5 animate-[bounce_1s_infinite] rounded-full bg-purple-600 shadow-[0_0_8px_rgba(124,58,237,0.35)] dark:bg-white/95 dark:shadow-[0_0_8px_rgba(255,255,255,0.85)] md:w-2" style={{ height: `${h * 100}%`, animationDelay: `${i * 0.1}s` }} />
                                                     ))}
                                                 </div>
                                             )}
