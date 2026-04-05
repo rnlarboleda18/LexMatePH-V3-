@@ -30,7 +30,7 @@ const FlashcardSetup = ({
     };
 
     const content = (
-            <div className={`${embedded ? 'w-full max-w-7xl' : 'lex-modal-card relative max-w-4xl'} glass overflow-hidden flex flex-col rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl dark:border-white/10 dark:bg-slate-900/45 animate-in zoom-in-95 duration-200`}>
+            <div className={embedded ? "w-full flex flex-col" : "lex-modal-card relative max-w-4xl glass overflow-hidden flex flex-col rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl dark:border-white/10 dark:bg-slate-900/45 animate-in zoom-in-95 duration-200"}>
                 {(conceptsLoading || conceptsError || deckError) && (
                     <div className="flex flex-col gap-2 border-b border-white/25 px-6 pb-3 pt-4 dark:border-white/10 sm:px-8">
                         {conceptsLoading && (
@@ -57,7 +57,7 @@ const FlashcardSetup = ({
                     </div>
                 )}
 
-                <div className="flex-1 space-y-10 overflow-y-auto p-6 sm:p-8">
+                <div className={embedded ? "flex-1 space-y-6" : "flex-1 space-y-10 overflow-y-auto p-6 sm:p-8"}>
                     <section>
                         <h3 className="text-sm font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-3">
                             Key legal concepts (SC digests)
@@ -121,15 +121,17 @@ const FlashcardSetup = ({
 
                 </div>
 
-                <div className="p-6 border-t border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/10 flex justify-center">
-                    <button
-                        type="button"
-                        onClick={() => onStart('CANCEL')}
-                        className="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors shadow-sm"
-                    >
-                        Cancel
-                    </button>
-                </div>
+                {!embedded && (
+                    <div className="p-6 border-t border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/10 flex justify-center">
+                        <button
+                            type="button"
+                            onClick={() => onStart('CANCEL')}
+                            className="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors shadow-sm"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
             </div>
     );
 
