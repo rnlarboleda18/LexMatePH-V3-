@@ -64,14 +64,14 @@ def bar_subject_canon_sql(col: str = "subject") -> str:
             WHEN {col} IS NULL OR BTRIM(COALESCE({col}::text, '')) = '' THEN 'Political Law'
             ELSE (
                 CASE
-                    WHEN {seg} ILIKE '%Political%' OR {seg} ILIKE '%Constitutional%' OR {seg} ILIKE '%Admin%' OR {seg} ILIKE '%Election%' OR {seg} ILIKE '%Public Corp%' THEN 'Political Law'
-                    WHEN {seg} ILIKE '%Labor%' THEN 'Labor Law'
-                    WHEN {seg} ILIKE '%Civil%' OR {seg} ILIKE '%Family%' OR {seg} ILIKE '%Property%' OR {seg} ILIKE '%Succession%' OR {seg} ILIKE '%Obligations%' THEN 'Civil Law'
-                    WHEN {seg} ILIKE '%Taxation%' OR {seg} ILIKE '%Tax%' THEN 'Taxation Law'
-                    WHEN {seg} ILIKE '%Commercial%' OR {seg} ILIKE '%Mercantile%' OR {seg} ILIKE '%Corporate%' OR {seg} ILIKE '%Insurance%' OR {seg} ILIKE '%Transportation%' THEN 'Commercial Law'
-                    WHEN {seg} ILIKE '%Criminal%' THEN 'Criminal Law'
-                    WHEN {seg} ILIKE '%Remedial%' OR {seg} ILIKE '%Procedure%' OR {seg} ILIKE '%Evidence%' THEN 'Remedial Law'
-                    WHEN {seg} ILIKE '%Ethics%' OR {seg} ILIKE '%Legal Ethics%' OR {seg} ILIKE '%Judicial%' THEN 'Legal Ethics'
+                    WHEN {seg} ILIKE '%%Political%%' OR {seg} ILIKE '%%Constitutional%%' OR {seg} ILIKE '%%Admin%%' OR {seg} ILIKE '%%Election%%' OR {seg} ILIKE '%%Public Corp%%' THEN 'Political Law'
+                    WHEN {seg} ILIKE '%%Labor%%' THEN 'Labor Law'
+                    WHEN {seg} ILIKE '%%Civil%%' OR {seg} ILIKE '%%Family%%' OR {seg} ILIKE '%%Property%%' OR {seg} ILIKE '%%Succession%%' OR {seg} ILIKE '%%Obligations%%' THEN 'Civil Law'
+                    WHEN {seg} ILIKE '%%Taxation%%' OR {seg} ILIKE '%%Tax%%' THEN 'Taxation Law'
+                    WHEN {seg} ILIKE '%%Commercial%%' OR {seg} ILIKE '%%Mercantile%%' OR {seg} ILIKE '%%Corporate%%' OR {seg} ILIKE '%%Insurance%%' OR {seg} ILIKE '%%Transportation%%' THEN 'Commercial Law'
+                    WHEN {seg} ILIKE '%%Criminal%%' THEN 'Criminal Law'
+                    WHEN {seg} ILIKE '%%Remedial%%' OR {seg} ILIKE '%%Procedure%%' OR {seg} ILIKE '%%Evidence%%' THEN 'Remedial Law'
+                    WHEN {seg} ILIKE '%%Ethics%%' OR {seg} ILIKE '%%Legal Ethics%%' OR {seg} ILIKE '%%Judicial%%' THEN 'Legal Ethics'
                     ELSE 'Political Law'
                 END
             )
