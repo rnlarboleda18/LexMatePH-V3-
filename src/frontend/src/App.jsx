@@ -598,8 +598,8 @@ function App() {
                     </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
-                    <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-                      <div className="lex-modal-card flex max-w-3xl flex-col shadow-2xl animate-in zoom-in-95 duration-300">
+                    <div className="fixed inset-0 z-[540] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+                      <div className="flex w-full max-w-2xl h-[75vh] min-h-[500px] max-h-[850px] flex-col shadow-2xl animate-in zoom-in-95 duration-300">
                         <Suspense fallback={<PageLoadingFallback label="Loading card…" />}>
                           <Flashcard
                             variant="concepts"
