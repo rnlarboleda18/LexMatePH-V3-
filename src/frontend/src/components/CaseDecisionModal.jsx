@@ -621,9 +621,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         : '';
 
     return createPortal(
-        <div className="fixed inset-0 z-[520] lex-modal-overlay bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={handleClose}>
+        <div className="fixed inset-0 z-[520] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={handleClose}>
             <div
-                className="glass relative flex w-full max-w-5xl max-h-[90vh] flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}

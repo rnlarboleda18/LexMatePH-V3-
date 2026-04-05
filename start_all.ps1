@@ -187,8 +187,36 @@ $viteBat = Join-Path $env:TEMP "lexmate_start_vite.bat"
 Set-Content -Path $viteBat -Value $viteCmd -Encoding ASCII
 Start-Process cmd -ArgumentList "/k", "`"$viteBat`""
 
+# ── 7. SWA CLI emulator ─────────────────────────────────────────────────────
+Write-Host "`n[INFO] Waiting 5s for Vite to start before launching SWA CLI..." -ForegroundColor Yellow
+Start-Sleep -Seconds 5
+
+$swaExists = Get-Command swa -ErrorAction SilentlyContinue
+if (-not $swaExists) {
+    Write-Host "[WARN] SWA CLI not found. Install: npm i -g @azure/static-web-apps-cli" -ForegroundColor Yellow
+    Write-Host "       Skipping SWA emulator - use http://localhost:5173 directly." -ForegroundColor DarkGray
+} else {
+    Write-Host "[INFO] Starting SWA emulator on http://localhost:4280 (new window)..." -ForegroundColor Yellow
+    $swaBatContent  = "@echo off`r`n"
+    $swaBatContent += "cd /d `"$Root`"`r`n"
+    $swaBatContent += "echo Starting SWA CLI emulator...`r`n"
+    $swaBatContent += "echo   Frontend: http://localhost:5173`r`n"
+    $swaBatContent += "echo   API:      http://localhost:7071`r`n"
+    $swaBatContent += "echo   SWA CLI:  http://localhost:4280`r`n"
+    $swaBatContent += "swa start --config-name bar-project-v2`r`n"
+    $swaBat = Join-Path $env:TEMP "lexmate_start_swa.bat"
+    Set-Content -Path $swaBat -Value $swaBatContent -Encoding ASCII
+    Start-Process cmd -ArgumentList "/k", "`"$swaBat`""
+}
+
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
-Write-Host "  Done. Two CMD windows: API + Vite." -ForegroundColor Green
-Write-Host "  Close those windows or run restart_all.ps1 to stop." -ForegroundColor DarkGray
+Write-Host "  Done. Up to 3 CMD windows: API + Vite + SWA." -ForegroundColor Green
+Write-Host ""
+Write-Host "  Access via:" -ForegroundColor Yellow
+Write-Host "    SWA emulator (recommended): http://localhost:4280" -ForegroundColor Green
+Write-Host "    Vite direct:                http://localhost:5173" -ForegroundColor DarkGray
+Write-Host "    LAN (tablets/phones):       http://$($localIp):4280" -ForegroundColor Green
+Write-Host ""
+Write-Host "  Close the CMD windows or run restart_all.ps1 to stop." -ForegroundColor DarkGray
 Write-Host "==========================================" -ForegroundColor Cyan

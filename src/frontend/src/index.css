@@ -20,13 +20,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  /* Mobile: header is 3.5rem tall — stop the overlay there */
+  padding: 0.5rem;
+  /* Mobile: header is 3.5rem tall - stop the overlay there */
   top: calc(3.5rem + env(safe-area-inset-top, 0px)) !important;
   /* Stop above the minimised LexPlayer */
   bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
   left: 0 !important;
   right: 0 !important;
+  /* Stronger blur so background is clearly obscured */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 @media (min-width: 768px) {
@@ -35,6 +38,24 @@
     /* md+: header is 5rem tall */
     top: calc(5rem + env(safe-area-inset-top, 0px)) !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Shared modal card — uniform sizing and shape across all modals on mobile.
+   On mobile: card fills the full available window (overlay handles safe gaps).
+   On md+: reverts to centered floating card with max-height. */
+.lex-modal-card {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 1rem;
+}
+
+@media (min-width: 768px) {
+  .lex-modal-card {
+    height: auto;
+    max-height: 88vh;
+    border-radius: 1rem;
   }
 }
 
