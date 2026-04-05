@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
+import { createPortal } from 'react-dom';
 import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import Layout from './components/Layout';
@@ -596,11 +597,9 @@ function App() {
                       </main>
                     </div>
                   )}
-                  {effectiveMode === 'flashcard' && flashcardState === 'active' && (
-                    <div
-                      className="flex h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-3.5rem)] min-h-[280px] w-full flex-col items-center justify-center px-3 pb-3 pt-2 text-gray-900 dark:text-gray-100 sm:px-5 md:h-[calc(100dvh-var(--player-height,0px)-env(safe-area-inset-top,0px)-5rem)] md:px-6 md:pb-4 md:pt-3"
-                    >
-                      <div className="flex h-full min-h-0 w-full max-w-2xl flex-col md:max-h-[min(90vh,calc(100dvh-var(--player-height,0px)-min(5vh,3rem)))]">
+                  {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
+                    <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+                      <div className="lex-modal-card flex max-w-3xl flex-col shadow-2xl animate-in zoom-in-95 duration-300">
                         <Suspense fallback={<PageLoadingFallback label="Loading card…" />}>
                           <Flashcard
                             variant="concepts"
@@ -612,7 +611,8 @@ function App() {
                           />
                         </Suspense>
                       </div>
-                    </div>
+                    </div>,
+                    document.body
                   )}
                   {effectiveMode === 'quiz' && (
                     canAccess('lexify') ? (

@@ -21,16 +21,16 @@ import argparse
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import google.generativeai as genai
+# import google.generativeai as genai
 
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
-DB_URL = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
+DB_URL = "postgresql://bar_admin:RABpass021819!@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
 MODEL_NAME = "gemini-3-flash-preview"
-API_KEY = "REDACTED_API_KEY_HIDDEN"
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-genai.configure(api_key=API_KEY)
+# genai.configure(api_key=API_KEY)
 
 # ---------------------------------------------------------------------------
 # PASS 1 – Router pass: involving ROC?
@@ -45,21 +45,51 @@ PASS1_SCHEMA = """
 }
 """
 
-def call_gemini_with_retry(model_obj, prompt, max_retries=5):
-    """Call Gemini with exponential backoff for 429 errors."""
+import requests
+
+def call_gemini_with_retry(prompt, max_retries=5):
+    """Call Vertex AI Gemini via requests with exponential backoff."""
+    url = f"https://aiplatform.googleapis.com/v1/publishers/google/models/{MODEL_NAME}:generateContent?key={API_KEY}"
+    
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [
+                    {"text": prompt}
+                ]
+            }
+        ],
+        "generationConfig": {
+            "responseMimeType": "application/json"
+        }
+    }
+    
     for i in range(max_retries):
         try:
-            time.sleep(1 + i * 2) # Incremental wait
-            response = model_obj.generate_content(prompt)
-            return response
-        except Exception as exc:
-            err_str = str(exc)
-            if "429" in err_str or "quota" in err_str.lower():
+            time.sleep(i * 1.5) # Basic spacing
+            response = requests.post(url, json=payload, timeout=60)
+            
+            if response.status_code == 200:
+                data = response.json()
+                # Vertex AI response structure check
+                if "candidates" in data and len(data["candidates"]) > 0:
+                     return data["candidates"][0]["content"]["parts"][0]["text"]
+                return None
+                
+            err_text = response.text
+            if response.status_code == 429 or "quota" in err_text.lower():
                 wait_time = (2 ** i) * 5
                 print(f"    ⏳ Rate limited (429). Waiting {wait_time}s before retry {i+1}/{max_retries}...")
                 time.sleep(wait_time)
                 continue
-            raise exc
+            
+            print(f"    ⚠️  API Error {response.status_code}: {err_text[:200]}")
+            time.sleep(2)
+        except Exception as exc:
+            print(f"    ⚠️  Request Exception: {exc}")
+            time.sleep(2)
+            
     return None
 
 def pass1_route(case: dict) -> list:
@@ -92,12 +122,11 @@ OUTPUT ONLY JSON:
 """
     try:
         print(f"    [Pass1] Calling Gemini for {case.get('short_title', 'case')[:30]}...")
-        model_obj = genai.GenerativeModel(MODEL_NAME)
-        response = call_gemini_with_retry(model_obj, prompt)
-        if not response:
+        text = call_gemini_with_retry(prompt)
+        if not text:
              return []
         print("    [Pass1] Gemini response received.")
-        clean_text = response.text.replace("```json", "").replace("```", "").strip()
+        clean_text = text.replace("```json", "").replace("```", "").strip()
         data = json.loads(clean_text)
         return data.get("hits", []) if isinstance(data, dict) else []
     except Exception as exc:
@@ -158,11 +187,10 @@ OUTPUT ONLY JSON:
 {PASS2_SCHEMA}
 """
     try:
-        model_obj = genai.GenerativeModel(MODEL_NAME)
-        response = call_gemini_with_retry(model_obj, prompt)
-        if not response:
+        text = call_gemini_with_retry(prompt)
+        if not text:
              return []
-        clean_text = response.text.replace("```json", "").replace("```", "").strip()
+        clean_text = text.replace("```json", "").replace("```", "").strip()
         data = json.loads(clean_text)
         return data.get("links", []) if isinstance(data, dict) else []
     except Exception as exc:
@@ -310,7 +338,7 @@ def run(limit=None, target_year=2025, workers=1, dry_run=True):
          db_pool.closeall()
          return
 
-    print(f"🔍 Found {len(cases)} cases to analyze\n" + "=" * 70)
+    print(f"[*] Found {len(cases)} cases to analyze\n" + "=" * 70)
 
     total_links = 0
     cases_processed = 0
