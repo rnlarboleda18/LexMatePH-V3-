@@ -32,6 +32,11 @@ const Layout = ({
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    // Close sidebar on mobile when mode changes
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [mode]);
+
     return (
         <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
             {/* Global Glassmorphism Background Orbs — GPU-composited, no external fetch */}
