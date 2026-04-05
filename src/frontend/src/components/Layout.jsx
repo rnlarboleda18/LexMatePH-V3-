@@ -53,8 +53,8 @@ const Layout = ({
                 <header
                     className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
                     ${isDarkMode
-                        ? 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
-                        : 'min-h-[calc(3.5rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
+                        ? 'min-h-[calc(2.75rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
+                        : 'min-h-[calc(2.75rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
                     }`}
                     style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
                 >
@@ -195,7 +195,7 @@ const Layout = ({
             {/* Sidebar (Navigation Drawer) */}
             {!hideAppChrome && (
                 <aside
-                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(3.5rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
+                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'border-r-2 border-slate-300/90 bg-white xl:bg-white/85 xl:backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(15,23,42,0.08)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
@@ -209,7 +209,7 @@ const Layout = ({
 
             {/* Main Content Area — z-10 so mobile sidebar scrim can sit above and capture taps */}
             <main
-                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(3.5rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
+                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(2.75rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
         ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >

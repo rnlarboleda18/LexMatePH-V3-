@@ -421,7 +421,7 @@ const LexCodeViewer = ({
                         <div
                             ref={mainContentRef}
                             id="main-content"
-                            className={`flex min-h-0 flex-1 flex-col max-lg:overflow-visible mb-4 w-full overflow-hidden rounded-[2.5rem] border-2 border-slate-300/80 bg-white/95 glass shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] sm:mb-8 lg:mb-4 lg:overflow-y-auto lg:overscroll-y-contain ${isFullscreen ? 'min-h-0 flex-1' : ''}`}
+                            className={`flex min-h-0 flex-1 flex-col mb-4 w-full overflow-hidden rounded-[2.5rem] border-2 border-slate-300/80 bg-white/95 glass shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] backdrop-blur-3xl dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] sm:mb-8 lg:mb-4 lg:overflow-y-auto lg:overscroll-y-contain ${isFullscreen ? 'min-h-0 flex-1' : ''}`}
                         >
                             {/* Not sticky: whole codal card (this bar + articles) scrolls together in #main-content */}
                             <div className="shrink-0 border-b border-white/25 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/70">
@@ -602,20 +602,21 @@ const LexCodeViewer = ({
 
             {/* Mobile / tablet (<lg): portaled above Layout header — main is z-10 so in-DOM fixed overlays stay under header z-50 and the close control is untappable */}
             {typeof document !== 'undefined' &&
-                (activeJurisArticle || activeAmendmentArticle) &&
+                (activeJurisArticle || activeAmendmentArticle || isSidebarOpen) &&
                 createPortal(
                     <div
-                        className="lg:hidden fixed inset-0 z-[60] flex items-start justify-end bg-black/50 backdrop-blur-md pt-[calc(3.5rem+env(safe-area-inset-top,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-3 md:pt-[calc(5rem+env(safe-area-inset-top,0px))]"
+                        className="lg:hidden fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
                         role="presentation"
                         onClick={(e) => {
                             if (e.target === e.currentTarget) {
                                 setActiveJurisArticle(null);
                                 setActiveJurisParagraph(null);
                                 setActiveAmendmentArticle(null);
+                                setIsSidebarOpen(false);
                             }
                         }}
                     >
-                        <div className="flex h-[min(86dvh,calc(100dvh-3.5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1.25rem))] w-[min(20rem,85vw)] min-h-0 flex-col overflow-hidden rounded-xl border-2 border-slate-300/80 bg-white shadow-2xl animate-in slide-in-from-right duration-300 dark:border-white/10 dark:bg-slate-900 md:h-[min(86dvh,calc(100dvh-5rem-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1.25rem))]">
+                        <div className="lex-modal-card glass relative flex max-w-2xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45 mx-auto">
                             {activeJurisArticle && (
                                 <LexCodeJurisSidebar
                                     articleNum={activeJurisArticle}
@@ -648,6 +649,35 @@ const LexCodeViewer = ({
                                         </button>
                                     </div>
                                     <div className="text-sm">Article {activeAmendmentArticle.article_num}</div>
+                                </div>
+                            )}
+                            {isSidebarOpen && !activeJurisArticle && !activeAmendmentArticle && (
+                                <div className="flex h-full min-h-0 w-full flex-col font-sans">
+                                    <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-4 dark:border-white/5 dark:bg-slate-800/30">
+                                        <div className="flex items-center justify-between">
+                                            <span className="font-bold text-gray-800 dark:text-gray-200 text-lg">Table of Contents</span>
+                                            <button onClick={() => setIsSidebarOpen(false)} className="rounded-md p-1.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                                <X size={20} />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto p-4 md:p-6">
+                                        <div key={tocVersion} className="space-y-1">
+                                            {tocData.articles.map((art) => (
+                                                <button
+                                                    key={art.id}
+                                                    onClick={() => scrollToArticle(art.id)}
+                                                    className="w-full truncate rounded px-2 py-2 text-left font-sans text-sm font-medium text-gray-700 hover:bg-amber-50 hover:text-amber-800 dark:text-gray-300 dark:hover:bg-amber-900/20 dark:hover:text-amber-400"
+                                                >
+                                                    {art.label}
+                                                </button>
+                                            ))}
+                                            {tocData.children.map((node) => (
+                                                <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>
