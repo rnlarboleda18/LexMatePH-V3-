@@ -1,6 +1,7 @@
 import React from 'react';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
+import { SubjectIcon } from '../utils/subjectIcons';
 
 import { HighlightText } from '../utils/highlight';
 
@@ -13,11 +14,16 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className={`group relative flex flex-col h-full overflow-hidden rounded-xl border-2 p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} border-l-[5px] ${borderColor}`}
+            className={`group relative flex flex-col h-[15rem] overflow-hidden rounded-xl border-2 p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} border-l-[5px] ${borderColor}`}
         >
             {/* Header: ID - Subject (Year) */}
-            <div className={`text-sm font-bold mb-2 ${textColor}`}>
-                #{question.id} – {subjectKey} ({question.year})
+            <div className={`flex items-center gap-2 mb-2 ${textColor}`}>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/60 bg-white/80 dark:border-white/10 dark:bg-slate-900/50">
+                    <SubjectIcon subject={subjectKey} className="h-4 w-4" />
+                </span>
+                <span className="min-w-0 text-sm font-bold leading-tight">
+                    #{question.id} – {subjectKey} ({question.year})
+                </span>
             </div>
 
             {/* Source Label */}

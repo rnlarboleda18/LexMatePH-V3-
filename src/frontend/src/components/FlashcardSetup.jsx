@@ -72,7 +72,7 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex min-h-[148px] w-full flex-col overflow-hidden rounded-xl border-2 border-l-[5px] border-gray-400 bg-gray-50 p-3 shadow-sm transition-all hover:shadow-md dark:border-gray-600 dark:bg-gray-900/30 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex h-[15rem] w-full flex-col overflow-hidden rounded-xl border-2 border-l-[5px] border-gray-400 bg-gray-50 p-3 shadow-sm transition-all hover:shadow-md dark:border-gray-600 dark:bg-gray-900/30 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
                                 <span className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-700 dark:text-gray-200">
                                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-white/90 text-gray-600 dark:border-gray-600 dark:bg-slate-800/80 dark:text-gray-300">
@@ -101,7 +101,7 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className={`group relative flex min-h-[148px] flex-col overflow-hidden rounded-xl border-2 border-l-[5px] p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} ${borderColor} disabled:pointer-events-none disabled:opacity-50`}
+                                        className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-l-[5px] p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} ${borderColor} disabled:pointer-events-none disabled:opacity-50`}
                                     >
                                         <span className={`mb-2 flex items-center gap-2 text-sm font-bold ${textColor}`}>
                                             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/60 bg-white/80 dark:border-white/10 dark:bg-slate-900/50">
