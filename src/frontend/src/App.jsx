@@ -672,7 +672,7 @@ function App() {
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                       <div className="glass mb-4 rounded-lg border-2 border-slate-300/85 bg-white/90 p-4 shadow-md dark:border-white/10 dark:bg-slate-900/35">
-                        <div className="min-w-0 max-w-md">
+                        <div className="min-w-0 w-full">
                           <label htmlFor="bar-subject-filter" className="mb-1.5 block text-xs font-medium text-gray-500 dark:text-gray-400">
                             Bar subject
                             <span className="ml-2 font-normal tabular-nums text-gray-400 dark:text-gray-500">

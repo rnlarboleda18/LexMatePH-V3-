@@ -427,7 +427,7 @@ const LexCodeViewer = ({
                             <div className="shrink-0 border-b border-white/25 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/70">
                                 {Array.isArray(codalOptions) && codalOptions.length > 0 && typeof onCodalChange === 'function' && (
                                     <div className="border-b border-white/20 px-4 py-3 dark:border-white/10">
-                                        <div className="min-w-0 max-w-md">
+                                        <div className="min-w-0 flex-1">
                                             <label htmlFor="lexcode-codal-filter-inline" className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                                                 Codal
                                             </label>
