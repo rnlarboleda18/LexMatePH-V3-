@@ -495,7 +495,7 @@ const LexCodeViewer = ({
                                 </div>
                             </div>
 
-                            <div className="p-4 sm:p-8 lg:p-12">
+                            <div className="p-3 sm:p-6 lg:p-12">
                                 <Suspense fallback={<div className="p-12 text-center animate-pulse">Loading Codal Stream...</div>}>
                                     {renderMainContent()}
                                 </Suspense>
