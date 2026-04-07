@@ -161,7 +161,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     useEffect(() => { setVisibleCount(INITIAL_CHUNK); }, [articles]);
 
     const loadMore = useCallback(() => {
-        setVisibleCount(prev => Math.min(prev + 50, articles.length));
+        setVisibleCount(prev => Math.min(prev + 20, articles.length));
     }, [articles.length]);
 
     // When an external targetArticleId is provided (e.g. from TOC click),
@@ -180,12 +180,9 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     useEffect(() => {
         const sentinel = sentinelRef.current;
         if (!sentinel) return;
-        // Use a smaller rootMargin on mobile to avoid triggering a jarring batch-load
-        // when the user is only partway through the first chunk.
-        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
         const observer = new IntersectionObserver(
             (entries) => { if (entries[0].isIntersecting) loadMore(); },
-            { rootMargin: isMobile ? '200px' : '800px' }
+            { rootMargin: '300px' }
         );
         observer.observe(sentinel);
         return () => observer.disconnect();
@@ -212,7 +209,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     if (articles.length === 0) return <div className="p-8 text-center text-gray-400">No articles found.</div>;
 
     return (
-        <div className="max-w-full mx-auto px-0 pt-0 pb-8 overflow-hidden">
+        <div className="max-w-full mx-auto px-0 pt-0 pb-8">
             <div>
                 {/* Main Document Title — shown only when not already shown in a parent toolbar */}
                 {showDocHeader && !hideDocHeader && (
