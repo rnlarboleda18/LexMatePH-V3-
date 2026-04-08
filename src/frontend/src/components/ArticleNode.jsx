@@ -337,7 +337,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                !cleanFirstSeg.includes('(');
 
     return (
-        <div id={`article-${stableId}`} className="relative group mt-4 overflow-x-hidden">
+        <div id={`article-${stableId}`} className="relative group mt-4">
 
             {/* Main Content Area with Floated Badge */}
             {hasHeaderContent && (
@@ -756,20 +756,14 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
                                         components={{
-                                            pre: ({ node, ...props }) => <div className="not-prose pl-4 overflow-x-auto" {...props} />,
+                                            pre: ({ node, ...props }) => <div className="not-prose pl-4" {...props} />,
                                             code: ({ node, inline, className, children, ...props }) => {
                                                 return (
-                                                    <span className={`${inline ? 'font-mono bg-gray-100 dark:bg-gray-800 rounded px-1' : 'block whitespace-pre-wrap break-words font-sans overflow-x-auto'}`} {...props}>
+                                                    <span className={`${inline ? 'font-mono bg-gray-100 dark:bg-gray-800 rounded px-1' : 'block whitespace-pre-wrap font-sans'}`} {...props}>
                                                         {children}
                                                     </span>
                                                 );
                                             },
-                                            // Wrap tables in a scrollable container so they don't overflow the mobile viewport
-                                            table: ({ node, ...props }) => (
-                                                <div className="overflow-x-auto w-full my-2">
-                                                    <table className="min-w-max" {...props} />
-                                                </div>
-                                            ),
                                             a: ({ node, href, children, ...props }) => {
                                                 const footnoteMatch =
                                                     typeof href === 'string' ? href.match(/#footnote-(\d+)/) : null;

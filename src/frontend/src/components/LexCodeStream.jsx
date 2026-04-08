@@ -5,7 +5,7 @@ import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { lexCache } from '../utils/cache';
 import { Play, Loader2 } from 'lucide-react';
 
-const INITIAL_CHUNK = 40; // articles to render at first load
+const INITIAL_CHUNK = 30; // articles to render at first load
 
 // Convert integer to Roman numeral for chapter/title headings
 const intToRoman = (num) => {
@@ -161,7 +161,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     useEffect(() => { setVisibleCount(INITIAL_CHUNK); }, [articles]);
 
     const loadMore = useCallback(() => {
-        setVisibleCount(prev => Math.min(prev + 20, articles.length));
+        setVisibleCount(prev => Math.min(prev + 50, articles.length));
     }, [articles.length]);
 
     // When an external targetArticleId is provided (e.g. from TOC click),
@@ -182,7 +182,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
         if (!sentinel) return;
         const observer = new IntersectionObserver(
             (entries) => { if (entries[0].isIntersecting) loadMore(); },
-            { rootMargin: '300px' }
+            { rootMargin: '800px' }  // start loading 800px before reaching bottom
         );
         observer.observe(sentinel);
         return () => observer.disconnect();
@@ -209,7 +209,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     if (articles.length === 0) return <div className="p-8 text-center text-gray-400">No articles found.</div>;
 
     return (
-        <div className="max-w-full mx-auto px-0 pt-0 pb-8">
+        <div className="max-w-full mx-auto px-4 pt-0 pb-8">
             <div>
                 {/* Main Document Title — shown only when not already shown in a parent toolbar */}
                 {showDocHeader && !hideDocHeader && (
@@ -404,14 +404,8 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
                                             </h1>
                                         )}
 
-                                        <h2 className={`font-sans ${colorClass} ${sizeClass} tracking-wide leading-snug break-words`}>
-                                            {/* Replace embedded newlines with spaces on mobile to prevent horizontal overflow */}
-                                            {h.text.split('\n').map((line, li) => (
-                                                <React.Fragment key={li}>
-                                                    {li > 0 && <br />}
-                                                    {toTitleCase(line.trim(), skipKeywords)}
-                                                </React.Fragment>
-                                            ))}
+                                        <h2 className={`font-sans ${colorClass} ${sizeClass} tracking-wide whitespace-pre-line leading-tight`}>
+                                            {toTitleCase(h.text.replace(/\n\s*\n/g, '\n'), skipKeywords)}
                                         </h2>
                                     </div>
                                 );
