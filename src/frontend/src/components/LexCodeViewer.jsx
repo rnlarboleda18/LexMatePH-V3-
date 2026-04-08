@@ -1,8 +1,8 @@
-﻿import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import CodalStream from './CodalStream';
-import CodexJurisSidebar from './CodexJurisSidebar';
+import LexCodeStream from './LexCodeStream';
+import LexCodeJurisSidebar from './LexCodeJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -57,7 +57,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen, subscriptionTier }) => {
+const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
     const { canAccess, openUpgradeModal } = useSubscription();
 
 
@@ -409,7 +409,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             targetArticleId
         };
 
-        return <CodalStream {...commonProps} />;
+        return <LexCodeStream {...commonProps} />;
     };
 
     return (
@@ -465,43 +465,63 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* Codal Stream Card */}
             <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative`} id="main-content">
+                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative overflow-clip`} id="main-content">
 
                     {/* ΓöÇΓöÇ Sticky Header Bar ΓöÇΓöÇ */}
-                    <div className="sticky top-0 z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5 px-4 py-3 flex items-center gap-3">
-                        {/* TOC / Menu Button */}
-                        {!isSidebarOpen && (
-                            <button
-                                onClick={() => setIsSidebarOpen(true)}
-                                className="shrink-0 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-amber-700 dark:text-amber-500 transition-colors shadow-sm border border-gray-100 dark:border-gray-700"
-                                title="Table of Contents"
-                            >
-                                <Menu size={20} />
-                            </button>
+                    <div className="sticky top-0 z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5 flex flex-col">
+                        
+                        {/* Row 1: Codal Filter Dropdown */}
+                        {codalOptions && codalOptions.length > 0 && onCodalChange && (
+                            <div className="px-4 py-2.5 border-b border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30">
+                                <select
+                                    value={selectedCodal || shortName?.toLowerCase()}
+                                    onChange={(e) => onCodalChange(e.target.value)}
+                                    className="w-full text-sm font-semibold rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors cursor-pointer"
+                                    title="Switch Codal"
+                                >
+                                    {codalOptions.filter(o => !o.disabled).map(o => (
+                                        <option key={o.id} value={o.id}>{o.label}</option>
+                                    ))}
+                                </select>
+                            </div>
                         )}
 
-                        {/* Document Title ΓÇö centred in remaining space */}
-                        <div className="flex-1 text-center min-w-0 px-2">
-                            <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans leading-tight">
-                                {toTitleCase(codeTitle)}
-                            </h1>
-                            {codeSubtitle && (
-                                <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
-                                    {toTitleCase(codeSubtitle)}
-                                </p>
+                        {/* Row 2: Title and Controls */}
+                        <div className="px-4 py-3 flex items-center gap-3">
+                            {/* TOC / Menu Button */}
+                            {!isSidebarOpen && (
+                                <button
+                                    onClick={() => setIsSidebarOpen(true)}
+                                    className="shrink-0 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-amber-700 dark:text-amber-500 transition-colors shadow-sm border border-gray-100 dark:border-gray-700"
+                                    title="Table of Contents"
+                                >
+                                    <Menu size={20} />
+                                </button>
+                            )}
+
+                            {/* Document Title ΓÇö centred in remaining space */}
+                            <div className="flex-1 text-center min-w-0 px-2">
+                                <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans leading-tight">
+                                    {toTitleCase(codeTitle)}
+                                </h1>
+                                {codeSubtitle && (
+                                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
+                                        {toTitleCase(codeSubtitle)}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Fullscreen Toggle */}
+                            {onToggleFullscreen && (
+                                <button
+                                    onClick={onToggleFullscreen}
+                                    className="shrink-0 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-amber-700 dark:text-amber-500 transition-colors shadow-sm border border-gray-100 dark:border-gray-700"
+                                    title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Mode"}
+                                >
+                                    {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                                </button>
                             )}
                         </div>
-
-                        {/* Fullscreen Toggle */}
-                        {onToggleFullscreen && (
-                            <button
-                                onClick={onToggleFullscreen}
-                                className="shrink-0 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-amber-700 dark:text-amber-500 transition-colors shadow-sm border border-gray-100 dark:border-gray-700"
-                                title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Mode"}
-                            >
-                                {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-                            </button>
-                        )}
                     </div>
 
                     {/* ΓöÇΓöÇ Content Body ΓöÇΓöÇ */}
@@ -519,7 +539,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             `}>
                 <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-[calc(100vh-100px)]">
                     {activeJurisArticle && (
-                        <CodexJurisSidebar
+                        <LexCodeJurisSidebar
                             articleNum={activeJurisArticle}
                             statuteId={shortName} // Pass current Code ID (e.g. RPC)
                             paragraphFilter={activeJurisParagraph}
