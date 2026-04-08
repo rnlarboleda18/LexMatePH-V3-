@@ -413,10 +413,10 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     };
 
     return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 pb-6 justify-center items-stretch h-[calc(100vh-90px)]">
+        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 pb-6 justify-center items-start">
             {/* 1. Floating TOC Sidebar (Left) */}
             <div className={`
-                flex-none z-20 mt-0 transition-all duration-300 ease-in-out h-full
+                flex-none z-20 sticky top-28 mt-0 transition-all duration-300 ease-in-out h-[calc(100vh-120px)]
                 ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
@@ -464,7 +464,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             )}
 
             {/* Codal Stream Card */}
-            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 h-full ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
+            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 h-[calc(100vh-120px)] ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
                 <div ref={mainContentRef} className={`w-full h-full flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 relative overflow-clip`} id="main-content">
 
                     {/* ΓöÇΓöÇ Sticky Header Bar ΓöÇΓöÇ */}
@@ -533,7 +533,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* 3. Floating Right Sidebar (Jurisprudence/Amendments) */}
             <div className={`
-                flex-none z-30 mt-0 transition-all duration-300 ease-in-out h-full
+                flex-none z-30 sticky top-28 mt-0 transition-all duration-300 ease-in-out h-[calc(100vh-120px)]
                 ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
