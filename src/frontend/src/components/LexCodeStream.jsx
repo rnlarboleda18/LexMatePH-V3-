@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+﻿import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import ArticleNode from './ArticleNode';
 import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
@@ -21,7 +21,7 @@ const intToRoman = (num) => {
     return result;
 };
 
-const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, onJurisprudenceClick, onAmendmentClick, targetArticleId }) => {
+const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, onJurisprudenceClick, onAmendmentClick, targetArticleId }) => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -152,7 +152,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
         fetchData();
     }, [code, bookNum, titleNum, apiCode]);
 
-    // Progressive rendering — start with CHUNK_SIZE articles, load more on scroll
+    // Progressive rendering ΓÇö start with CHUNK_SIZE articles, load more on scroll
     // MUST BE BEFORE EARLY RETURNS because React requires hooks to be called consistently
     const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK);
     const sentinelRef = useRef(null);
@@ -211,7 +211,7 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     return (
         <div className="max-w-full mx-auto px-4 pt-0 pb-8">
             <div>
-                {/* Main Document Title — shown only when not already shown in a parent toolbar */}
+                {/* Main Document Title ΓÇö shown only when not already shown in a parent toolbar */}
                 {showDocHeader && !hideDocHeader && (
                     <div className="text-center mb-6 relative">
                         <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans uppercase">
@@ -435,4 +435,4 @@ const LexCodeStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false,
     );
 };
 
-export default LexCodeStream;
+export default CodalStream;
