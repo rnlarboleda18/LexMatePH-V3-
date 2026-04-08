@@ -413,14 +413,14 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     };
 
     return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 lg:pb-8 justify-center items-start">
+        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 pb-6 justify-center items-stretch h-[calc(100vh-90px)]">
             {/* 1. Floating TOC Sidebar (Left) */}
             <div className={`
-                flex-none z-20 sticky top-28 mt-0 transition-all duration-300 ease-in-out
+                flex-none z-20 mt-0 transition-all duration-300 ease-in-out h-full
                 ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden max-h-[calc(100vh-100px)]">
+                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-full">
                     <div className="flex-none p-4 pb-0 border-b border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30">
                         <div className="flex justify-between items-center mb-4">
                             <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
@@ -464,8 +464,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             )}
 
             {/* Codal Stream Card */}
-            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 min-h-max mb-20 relative overflow-clip`} id="main-content">
+            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 h-full ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
+                <div ref={mainContentRef} className={`w-full h-full flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 relative overflow-clip`} id="main-content">
 
                     {/* ΓöÇΓöÇ Sticky Header Bar ΓöÇΓöÇ */}
                     <div className="sticky top-0 z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5 flex flex-col">
@@ -524,8 +524,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         </div>
                     </div>
 
-                    {/* ΓöÇΓöÇ Content Body ΓöÇΓöÇ */}
-                    <div className="px-2 pt-4">
+                    {/* ── Content Body ── */}
+                    <div className="flex-1 overflow-y-auto px-2 pt-4 pb-24 custom-scrollbar">
                         {renderMainContent()}
                     </div>
                 </div>
@@ -533,11 +533,11 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* 3. Floating Right Sidebar (Jurisprudence/Amendments) */}
             <div className={`
-                flex-none z-30 sticky top-28 mt-0 transition-all duration-300 ease-in-out
+                flex-none z-30 mt-0 transition-all duration-300 ease-in-out h-full
                 ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
                 hidden lg:block
             `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-[calc(100vh-100px)]">
+                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-full">
                     {activeJurisArticle && (
                         <LexCodeJurisSidebar
                             articleNum={activeJurisArticle}
