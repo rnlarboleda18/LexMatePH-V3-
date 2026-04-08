@@ -636,7 +636,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                 >
                     <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
                         {activeJurisArticle && (
-                            <CodexJurisSidebar
+                            <LexCodeJurisSidebar
                                 articleNum={activeJurisArticle}
                                 statuteId={shortName}
                                 paragraphFilter={activeJurisParagraph}
