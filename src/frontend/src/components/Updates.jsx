@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Timeline } from 'react-twitter-widgets';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Twitter,
   Facebook,
@@ -62,6 +61,23 @@ const NEWS_LINKS = [
   }
 ];
 
+function buildFacebookPagePluginSrc() {
+  const base = 'https://www.facebook.com/plugins/page.php';
+  const params = new URLSearchParams({
+    href: 'https://www.facebook.com/SupremeCourtPhilippines',
+    tabs: 'timeline',
+    width: '500',
+    height: '600',
+    small_header: 'true',
+    adapt_container_width: 'true',
+    hide_cover: 'false',
+    show_facepile: 'false'
+  });
+  const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
+  if (appId) params.set('appId', String(appId));
+  return `${base}?${params.toString()}`;
+}
+
 const Updates = ({ isDarkMode = false }) => {
   const [latestDecisions, setLatestDecisions] = useState([]);
   const [loadingDecisions, setLoadingDecisions] = useState(true);
@@ -70,7 +86,11 @@ const Updates = ({ isDarkMode = false }) => {
   const [feedLoading, setFeedLoading] = useState(true);
   const [feedError, setFeedError] = useState(null);
 
-  const fbEmbedRef = useRef(null);
+  const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(), []);
+  const twitterEmbedSrc = useMemo(
+    () => apiUrl(`/api/embeds/twitter-scpio?theme=${isDarkMode ? 'dark' : 'light'}`),
+    [isDarkMode]
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -117,52 +137,6 @@ const Updates = ({ isDarkMode = false }) => {
         console.error('Error fetching decisions:', err);
         setLoadingDecisions(false);
       });
-  }, []);
-
-  useEffect(() => {
-    const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
-
-    const parse = () => {
-      if (window.FB?.XFBML?.parse && fbEmbedRef.current) {
-        try {
-          window.FB.XFBML.parse(fbEmbedRef.current);
-        } catch (e) {
-          console.warn('FB.XFBML.parse failed:', e);
-        }
-      }
-    };
-
-    if (document.getElementById('facebook-jssdk')) {
-      const t = window.setTimeout(parse, 400);
-      return () => window.clearTimeout(t);
-    }
-
-    if (!document.getElementById('fb-root')) {
-      const root = document.createElement('div');
-      root.id = 'fb-root';
-      document.body.appendChild(root);
-    }
-
-    window.fbAsyncInit = function fbAsyncInit() {
-      try {
-        window.FB.init({
-          xfbml: true,
-          version: 'v21.0',
-          ...(appId ? { appId: String(appId) } : {})
-        });
-      } catch (e) {
-        console.warn('FB.init failed:', e);
-      }
-      parse();
-    };
-
-    const js = document.createElement('script');
-    js.id = 'facebook-jssdk';
-    js.async = true;
-    js.defer = true;
-    js.crossOrigin = 'anonymous';
-    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0';
-    document.body.appendChild(js);
   }, []);
 
   const bar2026Updates = [
@@ -511,69 +485,46 @@ const Updates = ({ isDarkMode = false }) => {
               </div>
 
               <div className="bg-slate-50 dark:bg-[#0d1117] p-4 relative">
-                <div className="min-h-[400px] w-full overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/50">
-                  <Timeline
-                    key={isDarkMode ? 'tw-dark' : 'tw-light'}
-                    dataSource={{ sourceType: 'profile', screenName: 'SCPh_PIO' }}
-                    options={{
-                      height: 580,
-                      theme: isDarkMode ? 'dark' : 'light',
-                      chrome: 'noheader nofooter noborders transparent',
-                      dnt: true
-                    }}
-                    renderError={() => (
-                      <div className="flex flex-col items-center justify-center gap-4 py-12 px-4 text-center text-slate-500 dark:text-slate-400">
-                        <Twitter size={36} className="text-sky-500 opacity-70" />
-                        <p className="text-sm font-medium">Could not load the X timeline (network or blocker).</p>
-                        <a
-                          href="https://x.com/SCPh_PIO"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2 text-sm font-bold text-white shadow-lg hover:bg-sky-400"
-                        >
-                          <ExternalLink size={14} /> Open @SCPh_PIO on X
-                        </a>
-                      </div>
-                    )}
+                <p className="mb-3 text-center text-[11px] text-slate-500 dark:text-slate-400">
+                  Feeds load in isolated frames from this app&apos;s API (X) and from Meta (Facebook). Ad blockers may hide them.
+                </p>
+                <div className="min-h-[600px] w-full overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-950">
+                  <iframe
+                    key={twitterEmbedSrc}
+                    title="Supreme Court PIO posts on X"
+                    src={twitterEmbedSrc}
+                    className="h-[600px] w-full border-0 bg-white dark:bg-black"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allow="encrypted-media; fullscreen"
                   />
                 </div>
-                <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-3 px-2">
-                  Embed loads from X. If it stays blank, open{' '}
+                <p className="mt-3 text-center text-xs text-slate-500 dark:text-slate-400 px-2">
+                  If the frame is empty, open{' '}
                   <a href="https://x.com/SCPh_PIO" target="_blank" rel="noopener noreferrer" className="text-sky-500 font-semibold">
-                    Official X
+                    @SCPh_PIO on X
                   </a>
                   .
                 </p>
 
-                <div ref={fbEmbedRef} className="mt-6 w-full overflow-hidden rounded-2xl bg-white dark:bg-slate-900">
-                  <div
-                    className="fb-page"
-                    data-href="https://www.facebook.com/SupremeCourtPhilippines"
-                    data-tabs="timeline"
-                    data-width="500"
-                    data-height="520"
-                    data-small-header="true"
-                    data-adapt-container-width="true"
-                    data-hide-cover="false"
-                    data-show-facepile="false"
-                    data-lazy="false"
-                  >
-                    <blockquote cite="https://www.facebook.com/SupremeCourtPhilippines" className="fb-xfbml-parse-ignore">
-                      <a href="https://www.facebook.com/SupremeCourtPhilippines">Supreme Court of the Philippines</a>
-                    </blockquote>
-                  </div>
+                <div className="mt-6 w-full min-h-[520px] overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900">
+                  <iframe
+                    title="Supreme Court of the Philippines on Facebook"
+                    src={fbIframeSrc}
+                    width="100%"
+                    height="600"
+                    style={{ border: 'none', overflow: 'hidden' }}
+                    scrolling="no"
+                    frameBorder="0"
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  />
                 </div>
-                <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-2 px-2">
-                  Facebook may require a{' '}
-                  <a
-                    href="https://developers.facebook.com/docs/plugins/page-plugin"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sky-500 font-semibold"
-                  >
-                    Meta app ID
-                  </a>{' '}
-                  for the plugin — set <code className="text-[10px]">VITE_FACEBOOK_APP_ID</code> in build secrets if the box stays empty.
+                <p className="mt-2 text-center text-xs text-slate-500 dark:text-slate-400 px-2">
+                  If Facebook stays blank, add your site domain in the Meta app and set repository secret{' '}
+                  <code className="text-[10px]">VITE_FACEBOOK_APP_ID</code>, then redeploy.
                 </p>
               </div>
             </div>

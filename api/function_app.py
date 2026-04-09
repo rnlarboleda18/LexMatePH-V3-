@@ -35,6 +35,7 @@ try:
     from blueprints.clerk_webhook import clerk_webhook_bp
     from blueprints.roc import roc_bp
     from blueprints.paymongo import paymongo_bp
+    from blueprints.embeds import embeds_bp
 
     app.register_functions(questions_bp)
     app.register_functions(lexify_bp)
@@ -54,6 +55,7 @@ try:
     app.register_functions(clerk_webhook_bp)
     app.register_functions(roc_bp)
     app.register_functions(paymongo_bp)
+    app.register_functions(embeds_bp)
 
 except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"
