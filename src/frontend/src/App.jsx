@@ -76,6 +76,8 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false); // Default to Light Mode
   /** Hide minimized LexPlayer during Lexify exam simulation (not dashboard / results). */
   const [lexifyExamSimulationActive, setLexifyExamSimulationActive] = useState(false);
+  /** User dismissed the docked mini LexPlayer (X); show again after opening full LexPlay. */
+  const [lexPlayMiniDismissed, setLexPlayMiniDismissed] = useState(false);
   // Global case modal state (shared between SC Decisions and Codex)
   const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
   /** Only block ghost-tap reopen of the *same* case right after close (not all case opens — that broke sync + other picks). */
@@ -128,6 +130,10 @@ function App() {
     }
   }, [isDrawerOpen, mode, setIsDrawerOpen]);
 
+  useEffect(() => {
+    if (mode === 'lexplay') setLexPlayMiniDismissed(false);
+  }, [mode]);
+
   // No manual session check needed with Clerk
 
   // 1. Bar questions: IndexedDB SWR (do not await swr — so cached data shows before network finishes)
@@ -140,7 +146,7 @@ function App() {
         'questions',
         QUESTIONS_CACHE_KEY,
         async () => {
-          const response = await fetch('/api/questions?limit=5000');
+          const response = await fetch(apiUrl('/api/questions?limit=5000'));
           if (!response.ok) throw new Error('Failed to fetch questions');
           return response.json();
         },
@@ -162,6 +168,10 @@ function App() {
   }, []);
 
   const [flashcardFetchNonce, setFlashcardFetchNonce] = useState(0);
+  /** When true, request ?bar_focus=0 to include non-peripheral concepts with weaker Bar syllabus match. */
+  const [flashcardRelaxedBarMatch, setFlashcardRelaxedBarMatch] = useState(false);
+  /** When true, API returns only concepts with bar_2026_aligned=true (after other filters). */
+  const [flashcardBar2026Only, setFlashcardBar2026Only] = useState(false);
 
   // Spinner only when user is on Flashcards and we still have nothing to show.
   const flashcardConceptsLoading =
@@ -184,8 +194,15 @@ function App() {
         setFlashcardConceptPool([]);
       }
       try {
-        const q = flashcardFetchNonce > 0 ? '?nocache=1' : '';
-        const res = await fetch(apiUrl(`/api/sc_decisions/flashcard_concepts${q}`), { signal: ac.signal });
+        const params = new URLSearchParams();
+        if (flashcardFetchNonce > 0) params.set('nocache', '1');
+        if (flashcardRelaxedBarMatch) params.set('bar_focus', '0');
+        if (flashcardBar2026Only) params.set('bar_2026_only', '1');
+        const qs = params.toString();
+        const res = await fetch(
+          apiUrl(`/api/sc_decisions/flashcard_concepts${qs ? `?${qs}` : ''}`),
+          { signal: ac.signal }
+        );
         const raw = await res.text();
         if (cancelled) return;
         if (!res.ok) {
@@ -227,7 +244,7 @@ function App() {
       cancelled = true;
       ac.abort();
     };
-  }, [flashcardFetchNonce]);
+  }, [flashcardFetchNonce, flashcardRelaxedBarMatch, flashcardBar2026Only]);
 
   const refetchFlashcardConcepts = useCallback(() => {
     setFlashcardFetchNonce((n) => n + 1);
@@ -257,7 +274,7 @@ function App() {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch('/api/questions?limit=5000');
+      const response = await fetch(apiUrl('/api/questions?limit=5000'));
       if (!response.ok) throw new Error('Failed to fetch questions');
       const data = await response.json();
       await lexCache.set('questions', QUESTIONS_CACHE_KEY, data);
@@ -492,7 +509,10 @@ function App() {
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
-                      <Updates />
+                      <Updates
+                        isDarkMode={isDarkMode}
+                        onOpenSupremeDecisions={() => setMode('supreme_decisions')}
+                      />
                     </Suspense>
                   )}
                   {effectiveMode === 'supreme_decisions' && (
@@ -577,7 +597,7 @@ function App() {
                               Flashcards
                             </h1>
                             <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
-                              Concept and Bar exam study deck
+                              Bar syllabus–aligned key concepts from SC digests
                             </p>
                           </div>
                         </div>
@@ -592,24 +612,40 @@ function App() {
                             deckError={flashcardDeckError}
                             subjectCounts={flashcardSubjectCounts}
                             onRetryConcepts={refetchFlashcardConcepts}
+                            relaxedBarMatch={flashcardRelaxedBarMatch}
+                            onRelaxedBarMatchChange={setFlashcardRelaxedBarMatch}
+                            bar2026Only={flashcardBar2026Only}
+                            onBar2026OnlyChange={setFlashcardBar2026Only}
                           />
                         </Suspense>
                       </main>
                     </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
-                    <div className="fixed inset-0 z-[540] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-                      <div className="flex w-full max-w-2xl h-[75vh] min-h-[500px] max-h-[850px] flex-col shadow-2xl animate-in zoom-in-95 duration-300">
-                        <Suspense fallback={<PageLoadingFallback label="Loading card…" />}>
-                          <Flashcard
-                            variant="concepts"
-                            card={flashcardQuestions[flashcardIndex]}
-                            total={flashcardQuestions.length}
-                            currentIndex={flashcardIndex}
-                            onNext={handleNextFlashcard}
-                            onClose={() => setMode('supreme_decisions')}
-                          />
-                        </Suspense>
+                    <div
+                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-transparent animate-in fade-in duration-200 md:!items-stretch"
+                      onClick={() => setMode('supreme_decisions')}
+                      role="presentation"
+                    >
+                      <div
+                        className="lex-modal-card relative flex max-w-5xl flex-col overflow-visible border-0 bg-transparent shadow-none animate-in zoom-in-95 duration-300 md:!h-full md:max-h-full md:min-h-0 md:w-full md:max-w-6xl lg:max-w-7xl"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Flashcard"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto p-2 max-md:min-h-0 md:h-full md:max-h-full md:items-center md:justify-center md:overflow-visible md:p-6 lg:p-8">
+                          <Suspense fallback={<PageLoadingFallback label="Loading card…" />}>
+                            <Flashcard
+                              variant="concepts"
+                              card={flashcardQuestions[flashcardIndex]}
+                              total={flashcardQuestions.length}
+                              currentIndex={flashcardIndex}
+                              onNext={handleNextFlashcard}
+                              onClose={() => setMode('supreme_decisions')}
+                            />
+                          </Suspense>
+                        </div>
                       </div>
                     </div>,
                     document.body
@@ -768,6 +804,10 @@ function App() {
                   isMinimized={false}
                   isDarkMode={isDarkMode}
                   onMinimize={() => setMode(previousMode || 'supreme_decisions')}
+                  onCloseFull={() => {
+                    setMode(previousMode || 'supreme_decisions');
+                    setLexPlayMiniDismissed(true);
+                  }}
                 />
               </ErrorBoundary>
             )}
@@ -790,7 +830,7 @@ function App() {
       )}
 
       {/* Global Minimized LexPlayer — docked to bottom when not in full LexPlay; hidden during Lexify exam simulation */}
-      {mode !== 'lexplay' && !lexifyExamSimulationActive && (
+      {mode !== 'lexplay' && !lexifyExamSimulationActive && !lexPlayMiniDismissed && (
         <ErrorBoundary>
           <LexPlayer
             isMinimized={true}
@@ -799,6 +839,7 @@ function App() {
               setPreviousMode(mode);
               setMode('lexplay');
             }}
+            onCloseMini={() => setLexPlayMiniDismissed(true)}
           />
         </ErrorBoundary>
       )}

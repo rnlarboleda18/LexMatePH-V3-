@@ -1,6 +1,10 @@
 import logging
 import json
 import os
+from datetime import datetime, timezone
+import urllib.error
+import urllib.request
+import xml.etree.ElementTree as ET
 import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -15,7 +19,10 @@ from config import (
     CACHE_TTL_DECISIONS,
     CACHE_TTL_PONENTES,
     CACHE_TTL_FLASHCARD_CONCEPTS,
+    CACHE_TTL_SC_JUDICIARY_FEED,
     FLASHCARD_CONCEPTS_CACHE_KEY,
+    FLASHCARD_BAR_MIN_TOS_SCORE,
+    FLASHCARD_BAR_2026_ONLY_DEFAULT,
 )
 import re
 
@@ -28,6 +35,165 @@ from utils.flashcard_legal_concepts import (
 )
 
 supreme_bp = func.Blueprint()
+
+SC_JUDICIARY_FEED_URL = "https://sc.judiciary.gov.ph/feed/"
+SC_FEED_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+)
+
+
+def _bar_related_post(item: dict) -> bool:
+    t = (item.get("title") or "").lower()
+    cats = " ".join(item.get("categories") or []).lower()
+    blob = f"{t} {cats}"
+    keys = (
+        "bar examination",
+        "bar exam",
+        "bar 202",
+        "barista",
+        "bar bulletin",
+        "philippine bar",
+        "bar matters",
+        "candidate",
+    )
+    return any(k in blob for k in keys)
+
+
+def _parse_sc_judiciary_all_items(xml_bytes: bytes):
+    """All RSS items in feed order (newest first as published by WordPress)."""
+    root = ET.fromstring(xml_bytes)
+    channel = root.find("channel")
+    if channel is None:
+        return []
+    parsed = []
+    for item in channel.findall("item"):
+        title_el = item.find("title")
+        link_el = item.find("link")
+        pub_el = item.find("pubDate")
+        title = (title_el.text or "").strip() if title_el is not None else ""
+        link = (link_el.text or "").strip() if link_el is not None else ""
+        pub = (pub_el.text or "").strip() if pub_el is not None else ""
+        categories = []
+        for c in item.findall("category"):
+            if c is not None and c.text:
+                categories.append(c.text.strip())
+        desc_el = item.find("description")
+        raw_desc = (desc_el.text or "").strip() if desc_el is not None else ""
+        snippet = re.sub(r"<[^>]+>", " ", raw_desc)
+        snippet = re.sub(r"\s+", " ", snippet).strip()[:280]
+        parsed.append(
+            {
+                "title": title,
+                "link": link,
+                "pub_date": pub,
+                "categories": categories,
+                "snippet": snippet or None,
+            }
+        )
+    return parsed
+
+
+def _parse_sc_judiciary_rss(xml_bytes: bytes, limit: int, bar_only: bool):
+    all_items = _parse_sc_judiciary_all_items(xml_bytes)
+    if bar_only:
+        all_items = [x for x in all_items if _bar_related_post(x)]
+    return all_items[:limit]
+
+
+@supreme_bp.route(route="sc_judiciary_feed", auth_level=func.AuthLevel.ANONYMOUS)
+def sc_judiciary_feed(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Proxies the official SC WordPress RSS feed (same origin as API = no browser CORS).
+    Cached so upstream rate limits and latency stay predictable.
+
+    Query params:
+      limit — max main items (default 12, max 40)
+      bar_only=1 — only Bar-related posts (legacy)
+      include_bar=1 — include bar_items in the same response (one upstream fetch + parse)
+      bar_limit — max bar_items when include_bar=1 (default 8, max 20)
+    """
+    try:
+        limit = min(max(int(req.params.get("limit", "12")), 1), 40)
+    except ValueError:
+        limit = 12
+    bar_only = str(req.params.get("bar_only", "")).lower() in ("1", "true", "yes")
+    include_bar = str(req.params.get("include_bar", "")).lower() in ("1", "true", "yes")
+    try:
+        bar_limit = min(max(int(req.params.get("bar_limit", "8")), 1), 20)
+    except ValueError:
+        bar_limit = 8
+
+    if include_bar and bar_only:
+        return func.HttpResponse(
+            json.dumps({"error": "invalid_params", "message": "Use include_bar or bar_only, not both."}),
+            mimetype="application/json",
+            status_code=400,
+        )
+
+    if include_bar:
+        cache_key = f"sc_judiciary_feed:bundle:{limit}:{bar_limit}"
+    else:
+        cache_key = f"sc_judiciary_feed:{limit}:bar={int(bar_only)}"
+
+    if REDIS_ENABLED:
+        cached = cache_get(cache_key)
+        if cached is not None:
+            return func.HttpResponse(
+                json.dumps(cached),
+                mimetype="application/json",
+                status_code=200,
+                headers={"Cache-Control": f"public, max-age={min(CACHE_TTL_SC_JUDICIARY_FEED, 600)}"},
+            )
+    try:
+        request = urllib.request.Request(
+            SC_JUDICIARY_FEED_URL,
+            headers={"User-Agent": SC_FEED_UA, "Accept": "application/rss+xml, application/xml, text/xml, */*"},
+        )
+        with urllib.request.urlopen(request, timeout=25) as resp:
+            xml_bytes = resp.read()
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        logging.error("sc_judiciary_feed fetch failed: %s", e)
+        body = {
+            "items": [],
+            "source": SC_JUDICIARY_FEED_URL,
+            "error": "feed_unavailable",
+        }
+        if include_bar:
+            body["bar_items"] = []
+        return func.HttpResponse(json.dumps(body), mimetype="application/json", status_code=200)
+
+    try:
+        if include_bar:
+            all_items = _parse_sc_judiciary_all_items(xml_bytes)
+            items = all_items[:limit]
+            bar_items = [x for x in all_items if _bar_related_post(x)][:bar_limit]
+        else:
+            items = _parse_sc_judiciary_rss(xml_bytes, limit, bar_only)
+            bar_items = None
+    except ET.ParseError as e:
+        logging.error("sc_judiciary_feed XML parse error: %s", e)
+        body = {"items": [], "source": SC_JUDICIARY_FEED_URL, "error": "parse_error"}
+        if include_bar:
+            body["bar_items"] = []
+        return func.HttpResponse(json.dumps(body), mimetype="application/json", status_code=200)
+
+    payload = {
+        "items": items,
+        "source": SC_JUDICIARY_FEED_URL,
+        "fetched_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+    }
+    if include_bar:
+        payload["bar_items"] = bar_items
+    if REDIS_ENABLED:
+        cache_set(cache_key, payload, ttl=CACHE_TTL_SC_JUDICIARY_FEED)
+    return func.HttpResponse(
+        json.dumps(payload),
+        mimetype="application/json",
+        status_code=200,
+        headers={"Cache-Control": f"public, max-age={min(CACHE_TTL_SC_JUDICIARY_FEED, 600)}"},
+    )
+
 
 # Bar subject filter values from SupremeDecisions.jsx — must match dropdown + normalizeSubjectForColor buckets
 ALLOWED_BAR_SUBJECT_FILTERS = frozenset(
@@ -529,11 +695,54 @@ def _normalize_subject_bar(raw):
 
 @supreme_bp.route(route="sc_decisions/flashcard_concepts", auth_level=func.AuthLevel.ANONYMOUS)
 def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
-    """Deduplicated legal concepts (flashcard_concepts table, or digest merge if empty): years 1987–2025, En Banc only. Optional ?subject= canonical bar subject."""
+    """Deduplicated legal concepts (flashcard_concepts table, or digest merge if empty): years 1987–2025, En Banc only.
+
+    Query: ?subject= canonical bar subject (optional).
+    ?include_peripheral=1 — include concepts labeled peripheral (default: omit them after TOS labeling).
+    ?bar_focus=0 — include all non-peripheral \"core\" rows even when Bar (TOS) match score is below the minimum
+        (default: only concepts with strong syllabus overlap, see FLASHCARD_BAR_MIN_TOS_SCORE).
+    ?bar_2026_only=1 — keep only concepts labeled bar_2026_aligned=true (see scripts/label_flashcard_bar2026_gemini.py).
+        ?bar_2026_only=0 disables even if FLASHCARD_BAR_2026_ONLY env default is on.
+    """
     subject_filter = (req.params.get("subject") or "").strip()
     ns_filter = _normalize_subject_bar(subject_filter) if subject_filter else ""
+    include_peripheral = (req.params.get("include_peripheral") or "").lower() in ("1", "true", "yes")
+    bar_focus_off = (req.params.get("bar_focus") or "").lower() in ("0", "false", "no")
+    raw_bar26 = (req.params.get("bar_2026_only") or "").strip().lower()
+    if raw_bar26 in ("1", "true", "yes"):
+        bar_2026_only = True
+    elif raw_bar26 in ("0", "false", "no"):
+        bar_2026_only = False
+    else:
+        bar_2026_only = FLASHCARD_BAR_2026_ONLY_DEFAULT
+
+    def _bar_exam_aligned(c):
+        """When bar exam focus is on, drop labeled rows whose TOS match is weak (e.g. core only via case_count)."""
+        if bar_focus_off or include_peripheral:
+            return True
+        sc = c.get("tos_match_score")
+        if sc is None:
+            return True
+        try:
+            scf = float(sc)
+        except (TypeError, ValueError):
+            return True
+        return scf >= FLASHCARD_BAR_MIN_TOS_SCORE
+
+    def _concept_visible(c):
+        if include_peripheral:
+            return True
+        tier = (c.get("importance_tier") or "core").strip().lower()
+        if tier == "peripheral":
+            return False
+        if not _bar_exam_aligned(c):
+            return False
+        if bar_2026_only and c.get("bar_2026_aligned") is not True:
+            return False
+        return True
 
     def _build_response_payload(out_list):
+        out_list = [c for c in out_list if _concept_visible(c)]
         if ns_filter:
             filtered = []
             for c in out_list:
@@ -569,18 +778,78 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
         out = []
+        stored = []
         try:
             cur.execute(
                 """
-                SELECT term, definition, sources
+                SELECT term, definition, sources, case_count, importance_tier, tos_topic_id, tos_match_score,
+                       bar_2026_aligned
                 FROM flashcard_concepts
                 ORDER BY term
                 """
             )
             stored = cur.fetchall() or []
         except Exception as ex:
-            logging.warning(f"flashcard_concepts: table read failed (run migration?), falling back to digest merge: {ex}")
-            stored = []
+            err = str(ex).lower()
+            if "bar_2026_aligned" in err:
+                try:
+                    cur.execute(
+                        """
+                        SELECT term, definition, sources, case_count, importance_tier, tos_topic_id, tos_match_score
+                        FROM flashcard_concepts
+                        ORDER BY term
+                        """
+                    )
+                    stored = cur.fetchall() or []
+                    logging.warning(
+                        "flashcard_concepts: reading without bar_2026_aligned (run sql/flashcard_bar2026_migration.sql)"
+                    )
+                except Exception as ex_b:
+                    err_b = str(ex_b).lower()
+                    if "case_count" in err_b or "importance_tier" in err_b or "does not exist" in err_b:
+                        try:
+                            cur.execute(
+                                """
+                                SELECT term, definition, sources
+                                FROM flashcard_concepts
+                                ORDER BY term
+                                """
+                            )
+                            stored = cur.fetchall() or []
+                            logging.warning(
+                                "flashcard_concepts: reading without importance + bar_2026 columns"
+                            )
+                        except Exception as ex3:
+                            logging.warning(
+                                f"flashcard_concepts: table read failed, falling back to digest merge: {ex3}"
+                            )
+                            stored = []
+                    else:
+                        logging.warning(
+                            f"flashcard_concepts: table read failed, falling back to digest merge: {ex_b}"
+                        )
+                        stored = []
+            elif "case_count" in err or "importance_tier" in err or "does not exist" in err:
+                try:
+                    cur.execute(
+                        """
+                        SELECT term, definition, sources
+                        FROM flashcard_concepts
+                        ORDER BY term
+                        """
+                    )
+                    stored = cur.fetchall() or []
+                    logging.warning(
+                        "flashcard_concepts: reading without importance columns (run sql/flashcard_concepts_importance_migration.sql)"
+                    )
+                except Exception as ex2:
+                    logging.warning(
+                        f"flashcard_concepts: table read failed, falling back to digest merge: {ex2}"
+                    )
+                    stored = []
+            else:
+                logging.warning(f"flashcard_concepts: table read failed, falling back to digest merge: {ex}")
+                stored = []
 
         if stored:
             logging.info(f"flashcard_concepts: loaded {len(stored)} rows from flashcard_concepts table")
@@ -593,11 +862,30 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
                         src = []
                 if not isinstance(src, list):
                     src = []
+                cc = r.get("case_count")
+                try:
+                    cc = int(cc) if cc is not None else 0
+                except (TypeError, ValueError):
+                    cc = 0
+                tier = (r.get("importance_tier") or "core").strip() or "core"
+                tms = r.get("tos_match_score")
+                try:
+                    tms_f = float(tms) if tms is not None else None
+                except (TypeError, ValueError):
+                    tms_f = None
+                b26 = r.get("bar_2026_aligned")
+                if b26 is not None and not isinstance(b26, bool):
+                    b26 = bool(b26)
                 out.append(
                     {
                         "term": r.get("term") or "",
                         "definition": (r.get("definition") or "").strip(),
                         "sources": sources_keep_latest_only(src),
+                        "case_count": cc,
+                        "importance_tier": tier,
+                        "tos_topic_id": r.get("tos_topic_id"),
+                        "tos_match_score": tms_f,
+                        "bar_2026_aligned": b26,
                     }
                 )
         else:
@@ -609,6 +897,11 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
                 f"(years {FLASHCARD_SOURCE_YEAR_MIN}–{FLASHCARD_SOURCE_YEAR_MAX}, En Banc only)"
             )
             out = merge_digest_rows_to_concepts_list(rows or [])
+            for c in out:
+                c.setdefault("importance_tier", "core")
+                c.setdefault("tos_topic_id", None)
+                c.setdefault("tos_match_score", None)
+                c.setdefault("bar_2026_aligned", None)
 
         if REDIS_ENABLED and out:
             try:

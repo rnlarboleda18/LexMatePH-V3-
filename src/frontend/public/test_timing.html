@@ -13,6 +13,13 @@
     <script>
         const resultsDiv = document.getElementById('results');
 
+        function countItems(data) {
+            if (Array.isArray(data?.data)) return data.data.length;
+            if (Array.isArray(data?.items)) return data.items.length;
+            if (Array.isArray(data)) return data.length;
+            return 'unknown';
+        }
+
         async function testAPI(name, url) {
             const start = performance.now();
             try {
@@ -21,7 +28,8 @@
                 const end = performance.now();
                 const time = (end - start) / 1000;
 
-                const result = `${name}: ${time.toFixed(2)}s (${data.data?.length || data.length || 'unknown'} items)<br>`;
+                const n = countItems(data);
+                const result = `${name}: ${time.toFixed(2)}s (${n} items)<br>`;
                 resultsDiv.innerHTML += result;
                 console.log(result);
 
@@ -41,6 +49,8 @@
             const totalStart = performance.now();
 
             await testAPI('SC Decisions', '/api/sc_decisions?search=&page=1&limit=20');
+            await testAPI('SC Judiciary RSS (bundle)', '/api/sc_judiciary_feed?limit=10&include_bar=1&bar_limit=8');
+            await testAPI('SC Judiciary RSS (Bar only)', '/api/sc_judiciary_feed?limit=8&bar_only=1');
             await testAPI('Ponentes', '/api/sc_decisions/ponentes');
             await testAPI('Doctrinal Cases', '/api/doctrinal_cases?t=' + Date.now());
             await testAPI('Questions', '/api/questions?limit=3000');
