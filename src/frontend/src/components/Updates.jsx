@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Timeline } from 'react-twitter-widgets';
 import {
   Twitter,
   Facebook,
@@ -17,8 +18,16 @@ import {
 import FeaturePageShell from './FeaturePageShell';
 import { apiUrl } from '../utils/apiUrl';
 
-const TWITTER_WIDGET_SRC = 'https://platform.twitter.com/widgets.js';
-const TWITTER_WIDGET_ID = 'twitter-wjs';
+/** Official SC portal — full decisions index (not LexMate digests). */
+const SC_DECISIONS_INDEX = 'https://sc.judiciary.gov.ph/decisions/';
+
+function officialScDecisionUrl(decision) {
+  const raw = typeof decision?.sc_url === 'string' ? decision.sc_url.trim() : '';
+  if (raw && /^https?:\/\//i.test(raw)) return raw;
+  const q = (decision?.case_number || decision?.title || '').trim();
+  if (q) return `https://sc.judiciary.gov.ph/?s=${encodeURIComponent(q)}`;
+  return SC_DECISIONS_INDEX;
+}
 
 const NEWS_LINKS = [
   {
@@ -53,24 +62,7 @@ const NEWS_LINKS = [
   }
 ];
 
-function buildFacebookPagePluginSrc() {
-  const base = 'https://www.facebook.com/plugins/page.php';
-  const params = new URLSearchParams({
-    href: 'https://www.facebook.com/SupremeCourtPhilippines',
-    tabs: 'timeline',
-    width: '340',
-    height: '500',
-    small_header: 'true',
-    adapt_container_width: 'true',
-    hide_cover: 'false',
-    show_facepile: 'false'
-  });
-  const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
-  if (appId) params.set('appId', String(appId));
-  return `${base}?${params.toString()}`;
-}
-
-const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
+const Updates = ({ isDarkMode = false }) => {
   const [latestDecisions, setLatestDecisions] = useState([]);
   const [loadingDecisions, setLoadingDecisions] = useState(true);
   const [feedItems, setFeedItems] = useState([]);
@@ -78,8 +70,7 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
   const [feedLoading, setFeedLoading] = useState(true);
   const [feedError, setFeedError] = useState(null);
 
-  const twitterWrapRef = useRef(null);
-  const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(), []);
+  const fbEmbedRef = useRef(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -129,52 +120,50 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
   }, []);
 
   useEffect(() => {
-    const container = twitterWrapRef.current;
-    if (!container) return;
+    const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
 
-    const applyTheme = () => {
-      const anchor = container.querySelector('a.twitter-timeline');
-      if (anchor) {
-        anchor.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-      }
-    };
-
-    const loadWidgets = () => {
-      applyTheme();
-      if (window.twttr?.widgets?.load) {
+    const parse = () => {
+      if (window.FB?.XFBML?.parse && fbEmbedRef.current) {
         try {
-          window.twttr.widgets.load(container);
+          window.FB.XFBML.parse(fbEmbedRef.current);
         } catch (e) {
-          console.warn('Twitter widgets.load failed:', e);
+          console.warn('FB.XFBML.parse failed:', e);
         }
       }
     };
 
-    applyTheme();
-
-    const existing = document.getElementById(TWITTER_WIDGET_ID);
-    if (window.twttr?.widgets) {
-      loadWidgets();
-      return undefined;
+    if (document.getElementById('facebook-jssdk')) {
+      const t = window.setTimeout(parse, 400);
+      return () => window.clearTimeout(t);
     }
 
-    if (existing) {
-      existing.addEventListener('load', loadWidgets);
-      return () => existing.removeEventListener('load', loadWidgets);
+    if (!document.getElementById('fb-root')) {
+      const root = document.createElement('div');
+      root.id = 'fb-root';
+      document.body.appendChild(root);
     }
 
-    const script = document.createElement('script');
-    script.id = TWITTER_WIDGET_ID;
-    script.src = TWITTER_WIDGET_SRC;
-    script.async = true;
-    script.charset = 'utf-8';
-    script.onload = loadWidgets;
-    document.body.appendChild(script);
-
-    return () => {
-      script.onload = null;
+    window.fbAsyncInit = function fbAsyncInit() {
+      try {
+        window.FB.init({
+          xfbml: true,
+          version: 'v21.0',
+          ...(appId ? { appId: String(appId) } : {})
+        });
+      } catch (e) {
+        console.warn('FB.init failed:', e);
+      }
+      parse();
     };
-  }, [isDarkMode]);
+
+    const js = document.createElement('script');
+    js.id = 'facebook-jssdk';
+    js.async = true;
+    js.defer = true;
+    js.crossOrigin = 'anonymous';
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0';
+    document.body.appendChild(js);
+  }, []);
 
   const bar2026Updates = [
     {
@@ -206,12 +195,6 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
       cta: 'View PDF'
     }
   ];
-
-  const openArchive = () => {
-    if (typeof onOpenSupremeDecisions === 'function') {
-      onOpenSupremeDecisions();
-    }
-  };
 
   return (
     <FeaturePageShell
@@ -409,7 +392,7 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
                   <div>
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Supreme Decision Highlights</h3>
                     <p className="text-slate-500 dark:text-slate-400">
-                      Newly released jurisprudence from the En Banc & Divisions.
+                      Newly released jurisprudence — links open the official Supreme Court website (not LexMate digests).
                     </p>
                   </div>
                 </div>
@@ -424,18 +407,12 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
               ) : (
                 <div className="space-y-6">
                   {latestDecisions.map((decision) => (
-                    <div
+                    <a
                       key={decision.id}
-                      role="button"
-                      tabIndex={0}
-                      onClick={openArchive}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          openArchive();
-                        }
-                      }}
-                      className="group p-8 bg-white/40 dark:bg-slate-800/20 backdrop-blur-sm rounded-3xl border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-slate-800/40 hover:scale-[1.01] hover:shadow-xl transition-all duration-300 cursor-pointer"
+                      href={officialScDecisionUrl(decision)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-8 bg-white/40 dark:bg-slate-800/20 backdrop-blur-sm rounded-3xl border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-slate-800/40 hover:scale-[1.01] hover:shadow-xl transition-all duration-300 cursor-pointer"
                     >
                       <div className="flex flex-wrap items-center gap-3 mb-4">
                         <span className="px-3 py-1 bg-indigo-500 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
@@ -460,19 +437,20 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
                           )}
                         </div>
                         <div className="p-2 bg-indigo-500/0 text-indigo-500 group-hover:bg-indigo-500/10 rounded-full transition-all">
-                          <ChevronRight size={20} />
+                          <ExternalLink size={20} />
                         </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
 
-                  <button
-                    type="button"
-                    onClick={openArchive}
+                  <a
+                    href={SC_DECISIONS_INDEX}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-3xl font-black uppercase tracking-widest shadow-xl shadow-indigo-600/20 hover:shadow-indigo-600/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-3"
                   >
-                    View Jurisprudence Archive <Scale size={20} />
-                  </button>
+                    Full decisions on SC website <ExternalLink size={20} />
+                  </a>
                 </div>
               )}
             </div>
@@ -533,43 +511,70 @@ const Updates = ({ onOpenSupremeDecisions, isDarkMode = false }) => {
               </div>
 
               <div className="bg-slate-50 dark:bg-[#0d1117] p-4 relative">
-                <div
-                  id="twitter-timeline-host"
-                  ref={twitterWrapRef}
-                  className="scrollbar-hide min-h-[400px]"
-                >
-                  <a
-                    className="twitter-timeline"
-                    data-height="580"
-                    data-theme={isDarkMode ? 'dark' : 'light'}
-                    data-chrome="noheader nofooter noborders transparent"
-                    href="https://twitter.com/SCPh_PIO"
-                  >
-                    Tweets by @SCPh_PIO
-                  </a>
+                <div className="min-h-[400px] w-full overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900/50">
+                  <Timeline
+                    key={isDarkMode ? 'tw-dark' : 'tw-light'}
+                    dataSource={{ sourceType: 'profile', screenName: 'SCPh_PIO' }}
+                    options={{
+                      height: 580,
+                      theme: isDarkMode ? 'dark' : 'light',
+                      chrome: 'noheader nofooter noborders transparent',
+                      dnt: true
+                    }}
+                    renderError={() => (
+                      <div className="flex flex-col items-center justify-center gap-4 py-12 px-4 text-center text-slate-500 dark:text-slate-400">
+                        <Twitter size={36} className="text-sky-500 opacity-70" />
+                        <p className="text-sm font-medium">Could not load the X timeline (network or blocker).</p>
+                        <a
+                          href="https://x.com/SCPh_PIO"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2 text-sm font-bold text-white shadow-lg hover:bg-sky-400"
+                        >
+                          <ExternalLink size={14} /> Open @SCPh_PIO on X
+                        </a>
+                      </div>
+                    )}
+                  />
                 </div>
                 <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-3 px-2">
-                  If the timeline does not appear (blocked third-party scripts or login walls), use{' '}
+                  Embed loads from X. If it stays blank, open{' '}
                   <a href="https://x.com/SCPh_PIO" target="_blank" rel="noopener noreferrer" className="text-sky-500 font-semibold">
                     Official X
                   </a>
                   .
                 </p>
 
-                <div className="mt-6">
-                  <iframe
-                    src={fbIframeSrc}
-                    width="100%"
-                    height="500"
-                    style={{ border: 'none', overflow: 'hidden', borderRadius: '16px' }}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    title="Supreme Court Philippines Facebook"
-                  />
+                <div ref={fbEmbedRef} className="mt-6 w-full overflow-hidden rounded-2xl bg-white dark:bg-slate-900">
+                  <div
+                    className="fb-page"
+                    data-href="https://www.facebook.com/SupremeCourtPhilippines"
+                    data-tabs="timeline"
+                    data-width="500"
+                    data-height="520"
+                    data-small-header="true"
+                    data-adapt-container-width="true"
+                    data-hide-cover="false"
+                    data-show-facepile="false"
+                    data-lazy="false"
+                  >
+                    <blockquote cite="https://www.facebook.com/SupremeCourtPhilippines" className="fb-xfbml-parse-ignore">
+                      <a href="https://www.facebook.com/SupremeCourtPhilippines">Supreme Court of the Philippines</a>
+                    </blockquote>
+                  </div>
                 </div>
+                <p className="text-center text-xs text-slate-500 dark:text-slate-400 mt-2 px-2">
+                  Facebook may require a{' '}
+                  <a
+                    href="https://developers.facebook.com/docs/plugins/page-plugin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-500 font-semibold"
+                  >
+                    Meta app ID
+                  </a>{' '}
+                  for the plugin — set <code className="text-[10px]">VITE_FACEBOOK_APP_ID</code> in build secrets if the box stays empty.
+                </p>
               </div>
             </div>
 

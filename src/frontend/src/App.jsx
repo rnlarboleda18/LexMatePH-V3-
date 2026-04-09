@@ -509,10 +509,7 @@ function App() {
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
-                      <Updates
-                        isDarkMode={isDarkMode}
-                        onOpenSupremeDecisions={() => setMode('supreme_decisions')}
-                      />
+                      <Updates isDarkMode={isDarkMode} />
                     </Suspense>
                   )}
                   {effectiveMode === 'supreme_decisions' && (
