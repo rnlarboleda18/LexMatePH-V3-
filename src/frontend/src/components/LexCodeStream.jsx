@@ -209,8 +209,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
     if (articles.length === 0) return <div className="p-8 text-center text-gray-400">No articles found.</div>;
 
     return (
-        <div className="max-w-full mx-auto px-4 pt-0 pb-8">
-            <div>
+        <div className="mx-auto min-w-0 max-w-full px-4 pb-8 pt-0 [overflow-wrap:anywhere] [word-break:break-word]">
+            <div className="min-w-0 max-w-full">
                 {/* Main Document Title ΓÇö shown only when not already shown in a parent toolbar */}
                 {showDocHeader && !hideDocHeader && (
                     <div className="text-center mb-6 relative">
@@ -378,7 +378,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     }
 
                     return (
-                        <div key={art.id} className="mb-4">
+                        <div key={art.id} className="mb-4 min-w-0 max-w-full">
                             {/* Render Hoisted Headers */}
                             {headersToRender.map((h, i) => {
                                 let sizeClass = "text-[16px]";

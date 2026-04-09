@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
@@ -103,6 +104,60 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     const searchBoxRef = useRef(null);
     const suggestionsRef = useRef(null);
     const mainContentRef = useRef(null);
+    /** Spacers measure horizontal position for fixed side panels (sticky breaks with body overflow-x + transforms). */
+    const tocSpacerRef = useRef(null);
+    const jurisSpacerRef = useRef(null);
+    const [tocFixedLeft, setTocFixedLeft] = useState(null);
+    const [jurisFixedLeft, setJurisFixedLeft] = useState(null);
+
+    const syncFixedPanelPositions = useCallback(() => {
+        if (typeof window === 'undefined' || window.innerWidth < 1024) {
+            setTocFixedLeft(null);
+            setJurisFixedLeft(null);
+            return;
+        }
+        const tocEl = tocSpacerRef.current;
+        const jurEl = jurisSpacerRef.current;
+        if (tocEl && isSidebarOpen) {
+            setTocFixedLeft(tocEl.getBoundingClientRect().left);
+        } else {
+            setTocFixedLeft(null);
+        }
+        if (jurEl && (activeJurisArticle || activeAmendmentArticle)) {
+            setJurisFixedLeft(jurEl.getBoundingClientRect().left);
+        } else {
+            setJurisFixedLeft(null);
+        }
+    }, [isSidebarOpen, activeJurisArticle, activeAmendmentArticle]);
+
+    useLayoutEffect(() => {
+        syncFixedPanelPositions();
+        const ro = new ResizeObserver(() => syncFixedPanelPositions());
+        if (tocSpacerRef.current) ro.observe(tocSpacerRef.current);
+        if (jurisSpacerRef.current) ro.observe(jurisSpacerRef.current);
+        window.addEventListener('resize', syncFixedPanelPositions);
+        return () => {
+            window.removeEventListener('resize', syncFixedPanelPositions);
+            ro.disconnect();
+        };
+    }, [syncFixedPanelPositions]);
+
+    /** Re-measure after fullscreen toggles (main padding / width change). */
+    useLayoutEffect(() => {
+        syncFixedPanelPositions();
+    }, [isFullscreen, syncFixedPanelPositions]);
+
+    const fixedPanelStyle = useMemo(
+        () => ({
+            top: isFullscreen
+                ? 'calc(env(safe-area-inset-top, 0px) + 4.25rem)'
+                : 'calc(5rem + env(safe-area-inset-top, 0px) + 4.25rem)',
+            maxHeight: isFullscreen
+                ? 'calc(100dvh - var(--player-height, 0px) - 5.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))'
+                : 'calc(100dvh - var(--player-height, 0px) - 10.25rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))',
+        }),
+        [isFullscreen]
+    );
 
     // Body-scroll lock ΓÇö simple overflow:hidden (no reflow, no scrollTo)
     // Only lock on mobile screens (<1024px) where the sidebar renders as a full-screen overlay
@@ -412,34 +467,139 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         return <LexCodeStream {...commonProps} />;
     };
 
-    return (
-        <div className="flex bg-transparent gap-4 lg:gap-6 xl:gap-8 p-0 lg:px-8 pb-6 justify-center items-stretch h-[calc(100vh-90px)]">
-            {/* 1. Floating TOC Sidebar (Left) */}
-            <div className={`
-                flex-none z-20 mt-0 transition-all duration-300 ease-in-out h-full
-                ${isSidebarOpen ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 -translate-x-10 overflow-hidden'}
-                hidden lg:block
-            `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-full">
-                    <div className="flex-none p-4 pb-0 border-b border-white/20 dark:border-white/5 bg-white/30 dark:bg-slate-800/30">
-                        <div className="flex justify-between items-center mb-4">
-                            <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
-                            <button onClick={() => setIsSidebarOpen(false)} className="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500"><X size={20} /></button>
-                        </div>
-                    </div>
-
-                    <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-                        {activeTab === 'toc' && tocData && (
-                            <div key={tocVersion} className="space-y-1">
-                                {tocData.articles.map(art => (
-                                    <button key={art.id} onClick={() => scrollToArticle(art.id)} className="px-2 py-1.5 text-xs font-sans text-left text-gray-700 dark:text-gray-400 hover:text-amber-800 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded transition-colors truncate w-full">{art.label}</button>
-                                ))}
-                                {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
-                            </div>
-                        )}
+    /** Fixed panels (portals): `position:fixed` avoids sticky breaking from `html,body{overflow-x:hidden}` and other ancestors. */
+    const desktopTocPortal =
+        typeof document !== 'undefined' &&
+        tocFixedLeft != null &&
+        isSidebarOpen &&
+        createPortal(
+            <div
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
+                style={{ left: tocFixedLeft, top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight }}
+            >
+                <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-0 dark:border-white/5 dark:bg-slate-800/30">
+                    <div className="mb-4 flex items-center justify-between">
+                        <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
+                        <button type="button" onClick={() => setIsSidebarOpen(false)} className="rounded-md p-1 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700">
+                            <X size={20} />
+                        </button>
                     </div>
                 </div>
-            </div>
+                <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto p-4">
+                    {activeTab === 'toc' && tocData && (
+                        <div key={tocVersion} className="space-y-1">
+                            {tocData.articles.map((art) => (
+                                <button
+                                    key={art.id}
+                                    type="button"
+                                    onClick={() => scrollToArticle(art.id)}
+                                    className="w-full truncate rounded px-2 py-1.5 text-left text-xs font-sans text-gray-700 transition-colors hover:bg-amber-50 hover:text-amber-800 dark:text-gray-400 dark:hover:bg-amber-900/20 dark:hover:text-amber-400"
+                                >
+                                    {art.label}
+                                </button>
+                            ))}
+                            {tocData.children.map((node) => (
+                                <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>,
+            document.body
+        );
+
+    const desktopJurisPortal =
+        typeof document !== 'undefined' &&
+        jurisFixedLeft != null &&
+        (activeJurisArticle || activeAmendmentArticle) &&
+        createPortal(
+            <div
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
+                style={{ left: jurisFixedLeft, top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight }}
+            >
+                {activeJurisArticle && (
+                    <LexCodeJurisSidebar
+                        articleNum={activeJurisArticle}
+                        statuteId={shortName}
+                        paragraphFilter={activeJurisParagraph}
+                        onClose={() => {
+                            setActiveJurisArticle(null);
+                            setActiveJurisParagraph(null);
+                        }}
+                        onSelectRatio={async (caseId, ratioIndex) => {
+                            try {
+                                const res = await fetch(`/api/sc_decisions/${caseId}`);
+                                if (res.ok) {
+                                    const caseData = await res.json();
+                                    caseData.scrollToRatioIndex = ratioIndex;
+                                    onCaseSelect && onCaseSelect(caseData);
+                                }
+                            } catch (err) {
+                                console.error('Failed to fetch case:', err);
+                            }
+                        }}
+                    />
+                )}
+                {activeAmendmentArticle && !activeJurisArticle && (
+                    <div className="flex min-h-0 flex-1 flex-col bg-transparent">
+                        <div className="flex flex-none items-center justify-between border-b border-white/20 bg-white/30 p-4 backdrop-blur-sm dark:border-white/5 dark:bg-slate-800/30">
+                            <div>
+                                <h3 className="font-serif text-lg font-bold text-rose-700 dark:text-rose-400">Amendments</h3>
+                                <div className="text-xs font-bold uppercase tracking-wider text-stone-500">Article {activeAmendmentArticle.article_num}</div>
+                            </div>
+                            <button type="button" onClick={() => setActiveAmendmentArticle(null)} className="rounded-full p-1.5 text-stone-400 hover:bg-stone-200 dark:hover:bg-gray-700">
+                                <X size={18} />
+                            </button>
+                        </div>
+                        <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto p-4">
+                            {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
+                                <div
+                                    key={idx}
+                                    className="group relative overflow-hidden rounded-xl border border-white/40 bg-white/60 p-5 shadow-sm dark:border-white/5 dark:bg-slate-800/40 glass"
+                                >
+                                    <div className="absolute left-0 top-0 h-full w-1 bg-rose-500/80" />
+                                    <div className="mb-2 flex items-start justify-between pl-2">
+                                        <h4 className="pr-2 text-sm font-bold leading-tight text-gray-900 dark:text-gray-100">{am.amendment_law}</h4>
+                                        <span className="whitespace-nowrap rounded border border-rose-100 px-1.5 py-0.5 text-[10px] font-medium text-rose-600 dark:border-rose-900/30 dark:bg-rose-900/20 dark:text-rose-400">
+                                            {am.amendment_type}
+                                        </span>
+                                    </div>
+                                    <div className="mb-3 pl-2">
+                                        <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+                                            <Calendar size={12} />
+                                            <span>Effectivity: {am.valid_from || 'N/A'}</span>
+                                        </div>
+                                    </div>
+                                    <div className="pl-2 font-sans text-sm leading-relaxed text-gray-700 dark:text-gray-300">{am.description}</div>
+                                    {am.source_url && (
+                                        <div className="mt-3 border-t border-stone-100 pt-3 pl-2 dark:border-gray-700/50">
+                                            <a
+                                                href={am.source_url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-1 text-xs font-semibold text-rose-600 transition-transform hover:text-rose-700 hover:underline dark:text-rose-400"
+                                            >
+                                                View Official Text <ChevronRight size={12} />
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>,
+            document.body
+        );
+
+    return (
+        <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 bg-transparent p-0 pb-8 lg:flex-row lg:items-start lg:gap-6 lg:px-8 xl:gap-8">
+            {/* TOC layout spacer — real panel is `position:fixed` via portal */}
+            <div
+                ref={tocSpacerRef}
+                className={`hidden shrink-0 transition-[width,opacity] duration-300 ease-in-out lg:block ${isSidebarOpen ? 'w-80' : 'pointer-events-none w-0 overflow-hidden opacity-0'}`}
+                aria-hidden
+            />
 
             {/* Mobile/Overlay Sidebar (for smaller screens) */}
             {isSidebarOpen && (
@@ -463,12 +623,18 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                 </div>
             )}
 
-            {/* Codal Stream Card */}
-            <div className={`flex-1 min-w-0 mt-0 transition-all duration-300 relative z-30 h-full ${isFullscreen ? 'max-w-full' : ((activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl')}`}>
-                <div ref={mainContentRef} className={`w-full h-full flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 relative overflow-clip`} id="main-content">
+            {/* Codal stream — grows with content; scrolls with the main page */}
+            <div className={`relative z-30 mt-0 min-w-0 flex-1 transition-all duration-300 ${isFullscreen ? 'max-w-full' : (activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
+                {/* Outer shell keeps shadow; inner clips body text to rounded corners */}
+                <div className="rounded-2xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.45)]">
+                    <div
+                        ref={mainContentRef}
+                        id="main-content"
+                        className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/40 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40 glass"
+                    >
 
-                    {/* ΓöÇΓöÇ Sticky Header Bar ΓöÇΓöÇ */}
-                    <div className="sticky top-0 z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-white/20 dark:border-white/5 flex flex-col">
+                    {/* Toolbar (scrolls with article text) */}
+                    <div className="flex flex-col rounded-t-2xl border-b border-white/20 bg-white/60 backdrop-blur-md dark:border-white/5 dark:bg-slate-900/60">
                         
                         {/* Row 1: Codal Filter Dropdown */}
                         {codalOptions && codalOptions.length > 0 && onCodalChange && (
@@ -524,109 +690,22 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         </div>
                     </div>
 
-                    {/* ── Content Body ── */}
-                    <div className="flex-1 overflow-y-auto px-2 pt-4 pb-24 custom-scrollbar">
+                    <div className="custom-scrollbar min-w-0 max-w-full rounded-b-2xl px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]">
                         {renderMainContent()}
+                    </div>
                     </div>
                 </div>
             </div>
 
-            {/* 3. Floating Right Sidebar (Jurisprudence/Amendments) */}
-            <div className={`
-                flex-none z-30 mt-0 transition-all duration-300 ease-in-out h-full
-                ${(activeJurisArticle || activeAmendmentArticle) ? 'w-80 opacity-100 translate-x-0' : 'w-0 opacity-0 translate-x-10 overflow-hidden'}
-                hidden lg:block
-            `}>
-                <div className="w-80 flex flex-col glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] rounded-xl border border-white/40 dark:border-white/10 overflow-hidden h-full">
-                    {activeJurisArticle && (
-                        <LexCodeJurisSidebar
-                            articleNum={activeJurisArticle}
-                            statuteId={shortName} // Pass current Code ID (e.g. RPC)
-                            paragraphFilter={activeJurisParagraph}
-                            onClose={() => {
-                                setActiveJurisArticle(null);
-                                setActiveJurisParagraph(null);
-                            }}
-                            onSelectRatio={async (caseId, ratioIndex) => {
-                                // Fetch the full case data and trigger the App-level modal
-                                try {
-                                    const res = await fetch(`/api/sc_decisions/${caseId}`);
-                                    if (res.ok) {
-                                        const caseData = await res.json();
-                                        // Add ratioIndex for scroll sync
-                                        caseData.scrollToRatioIndex = ratioIndex;
-                                        onCaseSelect && onCaseSelect(caseData);
-                                    }
-                                } catch (err) {
-                                    console.error('Failed to fetch case:', err);
-                                }
-                            }}
-                        />
-                    )}
+            {/* Juris / amendments layout spacer — real panel is `position:fixed` via portal */}
+            <div
+                ref={jurisSpacerRef}
+                className={`hidden shrink-0 transition-[width,opacity] duration-300 ease-in-out lg:block ${activeJurisArticle || activeAmendmentArticle ? 'w-80' : 'pointer-events-none w-0 overflow-hidden opacity-0'}`}
+                aria-hidden
+            />
 
-                    {activeAmendmentArticle && !activeJurisArticle && (
-                        <div className="h-full flex flex-col bg-transparent">
-                            <div className="flex-none p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm">
-                                <div>
-                                    <h3 className="font-bold text-lg text-rose-700 dark:text-rose-400 font-serif">
-                                        Amendments
-                                    </h3>
-                                    <div className="text-xs text-stone-500 uppercase tracking-wider font-bold">
-                                        Article {activeAmendmentArticle.article_num}
-                                    </div>
-                                </div>
-                                <button
-                                    onClick={() => setActiveAmendmentArticle(null)}
-                                    className="p-1.5 rounded-full hover:bg-stone-200 dark:hover:bg-gray-700 text-stone-400 transition-colors"
-                                >
-                                    <X size={18} />
-                                </button>
-                            </div>
-
-                            <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
-                                {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
-                                    <div key={idx} className="glass bg-white/60 dark:bg-slate-800/40 p-5 rounded-xl shadow-sm border border-white/40 dark:border-white/5 relative overflow-hidden group">
-                                        <div className="absolute top-0 left-0 w-1 h-full bg-rose-500/80"></div>
-
-                                        <div className="flex justify-between items-start mb-2 pl-2">
-                                            <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm leading-tight pr-2">
-                                                {am.amendment_law}
-                                            </h4>
-                                            <span className="text-[10px] items-center px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 font-medium whitespace-nowrap border border-rose-100 dark:border-rose-900/30">
-                                                {am.amendment_type}
-                                            </span>
-                                        </div>
-
-                                        <div className="pl-2 mb-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
-                                                <Calendar size={12} />
-                                                <span>Effectivity: {am.valid_from || 'N/A'}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="pl-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
-                                            {am.description}
-                                        </div>
-
-                                        {am.source_url && (
-                                            <div className="pl-2 mt-3 pt-3 border-t border-stone-100 dark:border-gray-700/50">
-                                                <a
-                                                    href={am.source_url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 hover:underline flex items-center gap-1 group-hover:translate-x-1 transition-transform"
-                                                >
-                                                    View Official Text <ChevronRight size={12} />
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
+            {desktopTocPortal}
+            {desktopJurisPortal}
 
             {/* Mobile Overlay for Right Sidebar */}
             {(activeJurisArticle || activeAmendmentArticle) && (

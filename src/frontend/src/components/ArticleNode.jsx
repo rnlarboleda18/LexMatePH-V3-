@@ -258,11 +258,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                !cleanFirstSeg.includes('(');
 
     return (
-        <div id={`article-${stableId}`} className="relative group mt-4">
+        <div id={`article-${stableId}`} className="group relative mt-4 min-w-0 max-w-full">
 
             {/* Main Content Area with Floated Badge */}
             {hasHeaderContent && (
-                <div className="max-w-none text-gray-800 dark:text-gray-200 leading-relaxed font-sans text-[16px]" style={{ maxWidth: '100%' }}>
+                <div className="max-w-full min-w-0 text-[16px] font-sans leading-relaxed text-gray-800 dark:text-gray-200">
 
                 {/* Floating Badge */}
                 <div className="flex flex-col mb-1 relative">
@@ -629,10 +629,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         let indentClass = "";
                         if (!isConst) {
                             indentClass = isRocOrRpc ? (
-                                effectiveLevel === 1 ? "ml-3" :
-                                effectiveLevel === 2 ? "ml-6" :
-                                effectiveLevel === 3 ? "ml-9" :
-                                effectiveLevel === 4 ? "ml-12" : ""
+                                effectiveLevel === 1 ? "ml-2 sm:ml-3" :
+                                effectiveLevel === 2 ? "ml-3 sm:ml-6" :
+                                effectiveLevel === 3 ? "ml-4 sm:ml-9" :
+                                effectiveLevel === 4 ? "ml-5 sm:ml-12" : ""
                             ) : (
                                 effectiveLevel === 1 ? "ml-4" :
                                 effectiveLevel === 2 ? "ml-8" :
@@ -672,12 +672,40 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                         })}
                                     </div>
                                 )}
-                                <div className={`prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200 leading-relaxed font-sans text-[16px] relative ${indentClass} ${isSubHeader ? 'text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide mt-0 mb-1 text-[16px]' : ''}`}
-                                     style={{ maxWidth: '100%' }}>
+                                <div
+                                    className={`prose dark:prose-invert relative min-w-0 max-w-full break-words font-sans text-[16px] leading-relaxed text-gray-800 dark:text-gray-200 [overflow-wrap:anywhere] ${indentClass} ${isSubHeader ? 'mt-0 mb-1 text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : ''}`}
+                                >
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
                                         components={{
                                             pre: ({ node, ...props }) => <div className="not-prose pl-4" {...props} />,
+                                            table: ({ node, children, ...props }) => (
+                                                <div className="not-prose my-4 max-w-full overflow-x-auto overscroll-x-contain rounded-lg border border-gray-200/90 bg-white/70 shadow-sm [-webkit-overflow-scrolling:touch] dark:border-gray-600/80 dark:bg-slate-900/55">
+                                                    <table
+                                                        className="w-max min-w-full border-collapse text-left text-sm leading-snug text-gray-800 dark:text-gray-200"
+                                                        {...props}
+                                                    >
+                                                        {children}
+                                                    </table>
+                                                </div>
+                                            ),
+                                            thead: ({ node, ...props }) => <thead className="bg-gray-100/95 dark:bg-slate-800/90" {...props} />,
+                                            tbody: ({ node, ...props }) => <tbody {...props} />,
+                                            tr: ({ node, ...props }) => (
+                                                <tr className="border-b border-gray-200 last:border-b-0 dark:border-gray-700" {...props} />
+                                            ),
+                                            th: ({ node, ...props }) => (
+                                                <th
+                                                    className="break-normal border border-gray-200 px-3 py-2 text-left align-top text-xs font-semibold uppercase tracking-wide text-gray-900 [overflow-wrap:normal] [word-break:normal] dark:border-gray-600 dark:text-gray-100"
+                                                    {...props}
+                                                />
+                                            ),
+                                            td: ({ node, ...props }) => (
+                                                <td
+                                                    className="break-normal border border-gray-200 px-3 py-2 align-top text-[15px] [overflow-wrap:normal] [word-break:normal] dark:border-gray-600"
+                                                    {...props}
+                                                />
+                                            ),
                                             code: ({ node, inline, className, children, ...props }) => {
                                                 return (
                                                     <span className={`${inline ? 'font-mono bg-gray-100 dark:bg-gray-800 rounded px-1' : 'block whitespace-pre-wrap font-sans'}`} {...props}>
@@ -771,7 +799,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                      
                                                      let markerWidth = 0;
                                                      if (hasMarker) {
-                                                         const mText = baseMarkerMatch ? (baseMarkerMatch[1] + " ") : (ordinalMatch[1] + ". ");
+                                                         const mText = baseMarkerMatch ? `${baseMarkerMatch[1]} ` : '';
                                                          markerWidth = mText.length * 0.35; // Approx 0.35rem per char
                                                          if (markerWidth < 1.0) markerWidth = 1.0;
                                                          if (markerWidth > 3.5) markerWidth = 3.5; // clamp
@@ -782,17 +810,29 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                      const cascadingOffset = spaceCount * indentationPerSpace;
                                                      
                                                      // Total padding = offset + markerWidth + nestedOffset
-                                                     const finalPadding = hasMarker 
-                                                         ? (cascadingOffset + markerWidth + nestedOffset) 
-                                                         : (cascadingOffset + nestedOffset);
-                                                    const finalIndent = hasMarker ? `-${markerWidth}rem` : '0';
+                                                     let finalPadding = hasMarker
+                                                         ? cascadingOffset + markerWidth + nestedOffset
+                                                         : cascadingOffset + nestedOffset;
+                                                     // Mobile: deep NBSP-indented RPC blocks can exceed viewport; cap inset (rem)
+                                                     finalPadding = Math.min(finalPadding, 6);
+                                                    const finalIndent = hasMarker ? `-${Math.min(markerWidth, 2.5)}rem` : '0';
                                                     
                                                     // Clean up the first child (strip leading spaces)
                                                     const cleanSegments = [...segmentsArr];
                                                     cleanSegments[0] = strippedFromLeading;
 
                                                     return (
-                                                        <p {...props} className={`!m-0 whitespace-pre-wrap ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`} style={{ paddingLeft: isSubHeader ? "0" : `${finalPadding}rem`, textIndent: isSubHeader ? "0" : finalIndent, maxWidth: "none" }}>
+                                                        <p
+                                                            {...props}
+                                                            className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`}
+                                                            style={{
+                                                                paddingLeft: isSubHeader ? '0' : `${finalPadding}rem`,
+                                                                textIndent: isSubHeader ? '0' : finalIndent,
+                                                                maxWidth: '100%',
+                                                                overflowWrap: 'anywhere',
+                                                                wordBreak: 'break-word',
+                                                            }}
+                                                        >
                                                              {cleanSegments}
                                                              {"\u00A0"}
                                                              {linkCount > 0 && (
@@ -830,7 +870,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                                                 // Fallback for standard paragraphs
                                                 return (
-                                                    <p {...props} className={`whitespace-pre-wrap !m-0 ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : "text-justify"}`} style={{ maxWidth: "none" }}>
+                                                    <p
+                                                        {...props}
+                                                        className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : 'text-justify'}`}
+                                                        style={{ maxWidth: '100%', overflowWrap: 'anywhere', wordBreak: 'break-word' }}
+                                                    >
                                                          {children}
                                                          {"\u00A0"}
                                                          {linkCount > 0 && (
