@@ -828,10 +828,15 @@ def _get_text_for_codal(content_id, code_id=None):
                                 if g_lower in boundaries['group_header'] and str(boundaries['group_header'][g_lower]) == str(section_id):
                                     is_group_start = True
 
+                            # Is this a sub-chapter article? (e.g. IX-A-1 has 3 parts, middle is a letter)
+                            is_sub_chapter = len(parts) == 3 and not parts[1].isdigit()
+                            # Include the article name only for the very first sub-chapter (A)
+                            # or for plain articles (no sub-chapter letter). B/C/D sub-chapters
+                            # only announce their group header — the article was already introduced by A.
+                            include_art_name = not is_sub_chapter or parts[1] == 'A'
+
                             if is_group_start:
-                                # Prepend the group header naturally
-                                # For Section 1, also include Article name
-                                if sect_num == '1':
+                                if sect_num == '1' and include_art_name:
                                     art_label = f"Article {art_roman}"
                                     if art_title and not is_redundant:
                                         art_label += f'. {art_title}'
