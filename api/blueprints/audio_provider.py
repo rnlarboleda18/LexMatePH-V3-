@@ -803,12 +803,11 @@ def _get_text_for_codal(content_id, code_id=None):
                         parts = art_num_db.split('-')
                         sect_num = parts[-1]  # Always the last segment (e.g. '0', '1', '5')
 
-                        # Build article identifier
-                        if len(parts) == 3 and not parts[1].isdigit():
-                            # e.g. IX-A-1 → sub-article "IX-A"
-                            art_roman = f"{parts[0]}-{parts[1]}"
-                        else:
-                            art_roman = parts[0]  # e.g. 'I', 'II', 'XVIII'
+                        # Build article identifier - always top-level Roman numeral only.
+                        # Sub-chapter letters (A/B/C/D in Art. IX) are announced via
+                        # group_header; including them in art_roman causes the letter
+                        # to be spoken twice ("Article IX-A … A. Common Provisions").
+                        art_roman = parts[0]  # e.g. 'IX' for IX-A-1, 'II' for II-5
 
                         # Handle special Article I (has body but no sections, encoded as I-0)
                         if sect_num == '0':
