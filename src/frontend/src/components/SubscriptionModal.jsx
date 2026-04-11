@@ -354,15 +354,25 @@ export default function SubscriptionModal({ onClose }) {
   );
 
   return createPortal(
-    <div className="fixed inset-0 z-[540] flex items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-[540] overflow-y-auto overscroll-contain bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+      onClick={onClose}
+    >
+      {/* Safe-area + scroll: avoids clipping under status bar / Dynamic Island on iOS */}
       <div
-        className="relative w-full max-w-5xl mx-4 flex flex-col overflow-hidden rounded-2xl border-0 shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="subscription-modal-title"
-        onClick={(e) => e.stopPropagation()}
+        className="flex min-h-[100dvh] min-h-[100svh] items-center justify-center pt-[max(1rem,calc(env(safe-area-inset-top,0px)_+_0.75rem))] pb-[max(1rem,calc(env(safe-area-inset-bottom,0px)_+_0.75rem))] pl-[max(1rem,calc(env(safe-area-inset-left,0px)_+_0.75rem))] pr-[max(1rem,calc(env(safe-area-inset-right,0px)_+_0.75rem))]"
+        onClick={onClose}
+        role="presentation"
       >
-        {panelContent}
+        <div
+          className="relative mx-auto my-auto flex w-full max-w-5xl max-h-[min(calc(100dvh_-_env(safe-area-inset-top,0px)_-_env(safe-area-inset-bottom,0px)_-_1.5rem),calc(100svh_-_env(safe-area-inset-top,0px)_-_env(safe-area-inset-bottom,0px)_-_1.5rem))] flex-col overflow-y-auto overflow-x-hidden rounded-2xl border-0 shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="subscription-modal-title"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {panelContent}
+        </div>
       </div>
     </div>,
     document.body
