@@ -240,7 +240,7 @@ export default function SubscriptionModal({ onClose }) {
 
         {/* Plan Cards — subtle gradient background */}
         <div className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
-        <div className="grid grid-cols-2 gap-4 p-5 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 p-5">
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
