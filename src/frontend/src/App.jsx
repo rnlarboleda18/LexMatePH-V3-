@@ -250,6 +250,17 @@ function App() {
     setFlashcardFetchNonce((n) => n + 1);
   }, []);
 
+  /**
+   * Returns the primary subject of a concept card.
+   * Prefers the backend-computed `primary_subject` field (modal across ALL sources
+   * before the keep-latest collapse).  Falls back to sources[0]?.subject so
+   * older cached responses without the field still work.
+   */
+  const getCardPrimarySubject = useCallback((card) => {
+    if (card.primary_subject) return normalizeBarSubject(card.primary_subject);
+    return normalizeBarSubject((card.sources || [])[0]?.subject) || null;
+  }, []);
+
   const flashcardSubjectCounts = useMemo(() => {
     const subjects = [
       'Civil Law',
@@ -263,12 +274,12 @@ function App() {
     ];
     const counts = { all: flashcardConceptPool.length };
     subjects.forEach((s) => {
-      counts[s] = flashcardConceptPool.filter((c) =>
-        normalizeBarSubject((c.sources || [])[0]?.subject) === s
+      counts[s] = flashcardConceptPool.filter(
+        (c) => getCardPrimarySubject(c) === s
       ).length;
     });
     return counts;
-  }, [flashcardConceptPool]);
+  }, [flashcardConceptPool, getCardPrimarySubject]);
 
   const handleRetryFetch = useCallback(async () => {
     setError(null);
@@ -329,8 +340,8 @@ function App() {
 
     let selected = [];
     if (subject) {
-      selected = flashcardConceptPool.filter((c) =>
-        normalizeBarSubject((c.sources || [])[0]?.subject) === subject
+      selected = flashcardConceptPool.filter(
+        (c) => getCardPrimarySubject(c) === subject
       );
     } else {
       selected = [...flashcardConceptPool];

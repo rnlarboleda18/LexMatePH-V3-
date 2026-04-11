@@ -98,6 +98,27 @@ def sources_keep_latest_only(sources: Any) -> List[Dict[str, Any]]:
     return [best]
 
 
+def get_primary_subject(sources: Any) -> str:
+    """Return the most frequent (modal) subject across all sources.
+
+    This must be called BEFORE sources_keep_latest_only so the full set of
+    source cases is available.  Falls back to the single remaining source's
+    subject if called post-collapse.
+    """
+    if not isinstance(sources, list) or not sources:
+        return ""
+    freq: Dict[str, int] = {}
+    for src in sources:
+        if not isinstance(src, dict):
+            continue
+        s = (src.get("subject") or "").strip()
+        if s:
+            freq[s] = freq.get(s, 0) + 1
+    if not freq:
+        return ""
+    return max(freq, key=lambda k: freq[k])
+
+
 def merge_concept_into_map(
     concepts_map: MutableMapping[str, Any],
     term: str,
@@ -158,12 +179,14 @@ def merge_digest_rows_to_concepts_list(rows: Sequence[Mapping[str, Any]]) -> Lis
     out: List[Dict[str, Any]] = []
     for _k, ent in concepts_map.items():
         ent.pop("_seen_case_ids", None)
-        case_count = len(ent.get("sources") or [])
+        all_sources = ent.get("sources") or []
+        case_count = len(all_sources)
         out.append(
             {
                 "term": ent["term"],
                 "definition": ent.get("definition") or "",
-                "sources": sources_keep_latest_only(ent["sources"]),
+                "sources": sources_keep_latest_only(all_sources),
+                "primary_subject": get_primary_subject(all_sources),
                 "case_count": case_count,
             }
         )

@@ -109,26 +109,28 @@ const QuestionDetailModal = ({
                         </span>
                     </div>
                     <div className="flex justify-center justify-self-center">
-                        <div className="flex items-center rounded-md border border-white/60 bg-white/60 p-px dark:border-white/10 dark:bg-white/5">
+                        <div className="flex items-center gap-1.5">
                             <button
                                 type="button"
                                 onClick={onPrev}
                                 disabled={!hasPrev}
-                                className="touch-manipulation flex h-7 w-7 items-center justify-center rounded text-gray-600 transition-all hover:bg-white/90 disabled:opacity-30 dark:text-gray-300 dark:hover:bg-white/10"
+                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:border-white/25 dark:hover:bg-white/12 dark:hover:text-white"
                                 title="Previous question"
                                 aria-label="Previous question"
                             >
-                                <ChevronLeft className="h-3.5 w-3.5" strokeWidth={2.25} />
+                                <ChevronLeft className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+                                <span className="hidden sm:inline">Prev</span>
                             </button>
                             <button
                                 type="button"
                                 onClick={onNext}
                                 disabled={!hasNext}
-                                className="touch-manipulation flex h-7 w-7 items-center justify-center rounded text-gray-600 transition-all hover:bg-white/90 disabled:opacity-30 dark:text-gray-300 dark:hover:bg-white/10"
+                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:border-white/25 dark:hover:bg-white/12 dark:hover:text-white"
                                 title="Next question"
                                 aria-label="Next question"
                             >
-                                <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.25} />
+                                <span className="hidden sm:inline">Next</span>
+                                <ChevronRight className="h-4 w-4 shrink-0" strokeWidth={2.5} />
                             </button>
                         </div>
                     </div>

@@ -32,6 +32,7 @@ from utils.flashcard_legal_concepts import (
     merge_digest_rows_to_concepts_list,
     flashcard_digest_select_sql_and_params,
     sources_keep_latest_only,
+    get_primary_subject,
 )
 
 supreme_bp = func.Blueprint()
@@ -881,6 +882,7 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
                         "term": r.get("term") or "",
                         "definition": (r.get("definition") or "").strip(),
                         "sources": sources_keep_latest_only(src),
+                        "primary_subject": get_primary_subject(src),
                         "case_count": cc,
                         "importance_tier": tier,
                         "tos_topic_id": r.get("tos_topic_id"),
