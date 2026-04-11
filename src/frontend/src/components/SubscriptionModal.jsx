@@ -188,59 +188,69 @@ export default function SubscriptionModal({ onClose }) {
 
   const panelContent = (
     <>
-        {/* Header — gradient banner */}
-        <div className="relative z-20 shrink-0 overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
-          {/* Ambient glow blobs */}
-          <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
-          <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-indigo-400/20 blur-2xl" />
+        {/* Glass orbs — same pattern as case digest modal */}
+        <div className="pointer-events-none absolute left-[-10%] top-[-20%] z-0 h-[500px] w-[500px] rounded-full bg-violet-500/15 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-[-20%] right-[-10%] z-0 h-[500px] w-[500px] rounded-full bg-indigo-500/15 blur-[120px]" />
 
-          <div className="relative flex items-center justify-between gap-4 px-6 py-4">
-            {/* Left: title + subtitle */}
-            <div className="min-w-0">
-              <h2 id="subscription-modal-title" className="text-xl font-extrabold tracking-tight text-white drop-shadow-sm">
+        {/* Header — aligned with CaseDecisionModal (clean bar, not full-bleed gradient) */}
+        <div className="relative z-30 shrink-0 border-b-2 border-slate-300/85 bg-white/25 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
+          <div className="flex min-w-0 items-start justify-between gap-3 px-3 py-3 sm:px-4 md:px-5">
+            <div className="min-w-0 flex-1">
+              <h2
+                id="subscription-modal-title"
+                className="break-words text-[15px] font-semibold leading-snug tracking-tight text-gray-900 [overflow-wrap:anywhere] dark:text-white md:text-[17px]"
+              >
                 Upgrade Your Plan
               </h2>
-              <p className="mt-0.5 text-[11px] font-medium text-white/70">
-                GCash · Maya · Card · GrabPay · BSP Regulated
+              <p className="mt-1 text-[11px] leading-snug text-gray-500 dark:text-gray-400">
+                GCash · Maya · Card · GrabPay · BSP regulated
               </p>
             </div>
-
-            {/* Center: billing toggle */}
-            <div className="inline-flex items-center gap-0.5 rounded-xl border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
+            <button
+              type="button"
+              onClick={onClose}
+              className="touch-manipulation mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
+              title="Close"
+              aria-label="Close"
+            >
+              <X className="h-3.5 w-3.5" strokeWidth={2.25} />
+            </button>
+          </div>
+          <div className="border-t border-slate-200/70 px-3 pb-3 pt-2 dark:border-white/10 sm:px-4 md:px-5">
+            <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+              Billing cycle
+            </p>
+            <div className="inline-flex w-full max-w-md rounded-lg border border-slate-200/90 bg-slate-50/90 p-0.5 dark:border-slate-600 dark:bg-slate-800/90">
               {['monthly', 'yearly'].map((b) => (
                 <button
                   key={b}
                   type="button"
                   onClick={() => setBilling(b)}
-                  className={`rounded-lg px-4 py-1.5 text-xs font-bold transition-all ${
+                  className={`min-h-[2.25rem] flex-1 rounded-md px-3 py-1.5 text-xs font-semibold transition-all ${
                     billing === b
-                      ? 'bg-white text-purple-700 shadow-md'
-                      : 'text-white/80 hover:text-white'
+                      ? 'bg-white text-purple-700 shadow-sm dark:bg-slate-700 dark:text-purple-300'
+                      : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
                   }`}
                 >
-                  {b === 'monthly' ? 'Monthly' : (
-                    <>Yearly <span className="ml-1 rounded-full bg-green-400/20 px-1.5 py-px text-[10px] font-extrabold text-green-300">-17%</span></>
+                  {b === 'monthly' ? (
+                    'Monthly'
+                  ) : (
+                    <span className="inline-flex items-center justify-center gap-1">
+                      Yearly
+                      <span className="rounded-full bg-emerald-100 px-1.5 py-0 text-[10px] font-bold text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
+                        −17%
+                      </span>
+                    </span>
                   )}
                 </button>
               ))}
             </div>
-
-            {/* Close */}
-            <button
-              type="button"
-              onClick={onClose}
-              className="touch-manipulation shrink-0 rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
-              aria-label="Close"
-            >
-              <X size={20} />
-            </button>
           </div>
         </div>
 
-        {/* Plan Cards — subtle gradient background */}
-        <div className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
-        <div className="grid grid-cols-1 gap-4 p-5">
+        {/* Body — scroll inside card (same flex pattern as case digest) */}
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto lex-modal-scroll bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 custom-scrollbar">
+        <div className="grid grid-cols-1 gap-4 p-4 sm:p-5">
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
@@ -341,12 +351,12 @@ export default function SubscriptionModal({ onClose }) {
         </div>
 
         {errorMsg && (
-          <div className="mx-5 mb-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+          <div className="mx-4 mb-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400 sm:mx-5">
             {errorMsg}
           </div>
         )}
 
-        <p className="px-5 pb-5 text-center text-xs text-gray-400 dark:text-gray-600">
+        <p className="px-4 pb-4 text-center text-xs text-gray-400 dark:text-gray-600 sm:px-5 sm:pb-5">
           Secured by PayMongo · Cancel anytime
         </p>
         </div>
@@ -355,24 +365,17 @@ export default function SubscriptionModal({ onClose }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[540] overflow-y-auto overscroll-contain bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
     >
-      {/* Safe-area + scroll: avoids clipping under status bar / Dynamic Island on iOS */}
       <div
-        className="flex min-h-[100dvh] min-h-[100svh] items-center justify-center pt-[max(1rem,calc(env(safe-area-inset-top,0px)_+_0.75rem))] pb-[max(1rem,calc(env(safe-area-inset-bottom,0px)_+_0.75rem))] pl-[max(1rem,calc(env(safe-area-inset-left,0px)_+_0.75rem))] pr-[max(1rem,calc(env(safe-area-inset-right,0px)_+_0.75rem))]"
-        onClick={onClose}
-        role="presentation"
+        className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="subscription-modal-title"
+        onClick={(e) => e.stopPropagation()}
       >
-        <div
-          className="relative mx-auto my-auto flex w-full max-w-5xl max-h-[min(calc(100dvh_-_env(safe-area-inset-top,0px)_-_env(safe-area-inset-bottom,0px)_-_1.5rem),calc(100svh_-_env(safe-area-inset-top,0px)_-_env(safe-area-inset-bottom,0px)_-_1.5rem))] flex-col overflow-y-auto overflow-x-hidden rounded-2xl border-0 shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="subscription-modal-title"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {panelContent}
-        </div>
+        {panelContent}
       </div>
     </div>,
     document.body
