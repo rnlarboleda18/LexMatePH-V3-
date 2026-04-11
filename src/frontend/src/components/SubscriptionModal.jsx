@@ -336,7 +336,9 @@ export default function SubscriptionModal({ onClose }) {
             : 'relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 custom-scrollbar'
         }
       >
-        <div className={`grid grid-cols-1 gap-4 ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}>
+        <div
+          className={`grid grid-cols-1 gap-4 md:grid-cols-4 md:items-stretch ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}
+        >
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
