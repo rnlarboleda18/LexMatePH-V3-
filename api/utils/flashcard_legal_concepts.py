@@ -158,11 +158,13 @@ def merge_digest_rows_to_concepts_list(rows: Sequence[Mapping[str, Any]]) -> Lis
     out: List[Dict[str, Any]] = []
     for _k, ent in concepts_map.items():
         ent.pop("_seen_case_ids", None)
+        case_count = len(ent.get("sources") or [])
         out.append(
             {
                 "term": ent["term"],
                 "definition": ent.get("definition") or "",
                 "sources": sources_keep_latest_only(ent["sources"]),
+                "case_count": case_count,
             }
         )
     return out

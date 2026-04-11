@@ -264,7 +264,7 @@ function App() {
     const counts = { all: flashcardConceptPool.length };
     subjects.forEach((s) => {
       counts[s] = flashcardConceptPool.filter((c) =>
-        (c.sources || []).some((src) => normalizeBarSubject(src.subject) === s)
+        normalizeBarSubject((c.sources || [])[0]?.subject) === s
       ).length;
     });
     return counts;
@@ -330,7 +330,7 @@ function App() {
     let selected = [];
     if (subject) {
       selected = flashcardConceptPool.filter((c) =>
-        (c.sources || []).some((src) => normalizeBarSubject(src.subject) === subject)
+        normalizeBarSubject((c.sources || [])[0]?.subject) === subject
       );
     } else {
       selected = [...flashcardConceptPool];
@@ -364,7 +364,7 @@ function App() {
     if (flashcardIndex < flashcardQuestions.length - 1) {
       setFlashcardIndex(prev => prev + 1);
     } else {
-      setMode('supreme_decisions');
+      setFlashcardState('setup');
     }
   };
 
@@ -609,10 +609,6 @@ function App() {
                             deckError={flashcardDeckError}
                             subjectCounts={flashcardSubjectCounts}
                             onRetryConcepts={refetchFlashcardConcepts}
-                            relaxedBarMatch={flashcardRelaxedBarMatch}
-                            onRelaxedBarMatchChange={setFlashcardRelaxedBarMatch}
-                            bar2026Only={flashcardBar2026Only}
-                            onBar2026OnlyChange={setFlashcardBar2026Only}
                           />
                         </Suspense>
                       </main>
@@ -621,7 +617,7 @@ function App() {
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
                     <div
                       className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-transparent animate-in fade-in duration-200 md:!items-stretch"
-                      onClick={() => setMode('supreme_decisions')}
+                      onClick={() => setFlashcardState('setup')}
                       role="presentation"
                     >
                       <div
@@ -639,7 +635,7 @@ function App() {
                               total={flashcardQuestions.length}
                               currentIndex={flashcardIndex}
                               onNext={handleNextFlashcard}
-                              onClose={() => setMode('supreme_decisions')}
+                              onClose={() => setFlashcardState('setup')}
                             />
                           </Suspense>
                         </div>

@@ -93,17 +93,19 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         const data2 = res2.ok ? await res2.json() : [];
                         return [...data1, ...data2];
                     } else if (code === 'CIV') {
-                        const [res1, res2, res3, res4] = await Promise.all([
+                        const [res0, res1, res2, res3, res4] = await Promise.all([
+                            fetch(`/api/civ/preliminary`),
                             fetch(`/api/civ/book/1`),
                             fetch(`/api/civ/book/2`),
                             fetch(`/api/civ/book/3`),
                             fetch(`/api/civ/book/4`)
                         ]);
+                        const data0 = res0.ok ? await res0.json() : [];
                         const data1 = res1.ok ? await res1.json() : [];
                         const data2 = res2.ok ? await res2.json() : [];
                         const data3 = res3.ok ? await res3.json() : [];
                         const data4 = res4.ok ? await res4.json() : [];
-                        return [...data1, ...data2, ...data3, ...data4];
+                        return [...data0, ...data1, ...data2, ...data3, ...data4];
                     } else if (apiCode === 'roc') {
                         const res = await fetch(`/api/roc/all`);
                         return res.ok ? await res.json() : [];
@@ -269,6 +271,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     // SKIP for Article 0 (Preamble) as it has its own custom header
                     // SKIP if the book_label duplicates the main document title (already shown at top)
                     const normalizeTitle = (s) => (s || '').replace(/[^a-z0-9]/gi, '').toLowerCase();
+                    const foldAlnum = (s) => (s || '').replace(/[^a-z0-9]+/gi, '').toLowerCase();
                     const mainTitleNorm = normalizeTitle(mainTitle);
 
                     // Client-side rule cleaner ensures immediate formatting regardless of backend caching
@@ -297,33 +300,34 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         return proc;
                     };
 
+                    let bookHdr = null;
+                    let chapterHdr = null;
+                    let sectionHdr = null;
+                    let ruleHdr = null;
+                    let titleHdr = null;
+
                     if (String(art.article_num) !== '0') {
                         if (art.book_label && art.book_label !== prevArt.book_label) {
-                            if (art.book_label.toUpperCase().includes('PRELIMINARY')) {
-                                // SKIP at Book level as it's redundant/wrong
-                            } else {
+                            if (!art.book_label.toUpperCase().includes('PRELIMINARY')) {
                                 const bookPrefix = code.toLowerCase() === 'roc' ? 'Part' : 'Book';
                                 const cleanLabel = toTitleCase(art.book_label);
-                                
                                 const bookText = cleanLabel.toUpperCase().includes(bookPrefix.toUpperCase())
                                     ? cleanLabel
                                     : art.book ? `${bookPrefix} ${art.book} - ${cleanLabel}` : cleanLabel;
-                                    
-                                // Don't render if this is just repeating the main doc title
                                 const bookNorm = normalizeTitle(bookText);
                                 if (!mainTitleNorm.includes(bookNorm) && !bookNorm.includes(mainTitleNorm)) {
-                                    headersToRender.push({ type: 'BOOK', text: bookText });
+                                    bookHdr = { type: 'BOOK', text: bookText };
                                 }
                             }
                         } else if (!art.book_label && art.book && art.book !== prevArt.book) {
                             const bookPrefix = code.toLowerCase() === 'roc' ? 'Part' : 'Book';
-                            headersToRender.push({ type: 'BOOK', text: `${bookPrefix} ${art.book}` });
+                            bookHdr = { type: 'BOOK', text: `${bookPrefix} ${art.book}` };
                         }
-                    } else if (String(art.article_num) === '0' && art.title_label) {
-                        headersToRender.push({ type: 'PREAMBLE', text: art.title_label });
                     }
 
-                    // Render Chapter (Group 1 / outer group) if changed
+                    const isConstStream = code.toLowerCase() === 'const';
+                    const isRocStream = code.toLowerCase() === 'roc';
+
                     if (art.chapter_label && art.chapter_label !== prevArt.chapter_label) {
                         const cleanLabel = formatHeader(art.chapter_label);
                         const chapterText = (cleanLabel.toUpperCase().startsWith('CHAPTER'))
@@ -331,29 +335,30 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             : (art.chapter_num && parseInt(art.chapter_num) > 0)
                                 ? `Chapter ${intToRoman(parseInt(art.chapter_num))} - ${cleanLabel}`
                                 : cleanLabel;
-                        headersToRender.push({ type: 'CHAPTER', text: chapterText });
+                        chapterHdr = { type: 'CHAPTER', text: chapterText };
                     }
 
-                    const isConstStream = code.toLowerCase() === 'const';
-
-                    // Render Section (Group 2 / sub-group) if changed
-                    if (art.section_label && art.section_label !== prevArt.section_label) {
-                        // FIX: Do not hoist section labels for Constitution to prevent double 
-                        // "Article I" and redundant "Section 1" headers, as they are part of paragraph text.
-                        if (!isConstStream) {
-                            headersToRender.push({ type: 'SECTION', text: formatHeader(art.section_label) });
+                    if (chapterHdr && art.article_title && !isRocStream) {
+                        const chTail = chapterHdr.text.replace(/^Chapter\s+[IVXLCDM]+\s*-\s*/i, '').trim();
+                        if (chTail && foldAlnum(chTail) === foldAlnum(art.article_title)) {
+                            chapterHdr = null;
                         }
                     }
 
-                    // ROC: render "Rule N" as its own header when the rule changes
-                    const isRocStream = code.toLowerCase() === 'roc';
-                    if (isRocStream && art.title_num != null && art.title_num !== prevArt.title_num) {
-                        headersToRender.push({ type: 'RULE', text: `Rule ${art.title_num}` });
+                    if (!isConstStream && art.section_label && art.section_label !== prevArt.section_label) {
+                        sectionHdr = { type: 'SECTION', text: formatHeader(art.section_label) };
                     }
 
-                    // Render Title Label (rule title for ROC, Title N for others) if changed
-                    // For ROC trigger on title_num change so it always fires with the rule
-                    const titleTrigger = isRocStream
+                    if (isRocStream && art.title_num != null && art.title_num !== prevArt.title_num) {
+                        ruleHdr = { type: 'RULE', text: `Rule ${art.title_num}` };
+                    }
+
+                    // For all structured codals: use title_num (integer) when available so a single
+                    // NULL-title_label article (e.g. Art 274) does not reset the "seen" state and
+                    // cause the title to be re-announced for the very next article.
+                    const hasTitleNum = art.title_num != null;
+                    const prevHasTitleNum = prevArt.title_num != null;
+                    const titleTrigger = (hasTitleNum || isRocStream)
                         ? (art.title_num != null && art.title_num !== prevArt.title_num)
                         : (art.title_label && art.title_label !== prevArt.title_label);
                     if (String(art.article_num) !== '0' && art.title_label && titleTrigger) {
@@ -363,12 +368,38 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             : (art.title_num && parseInt(art.title_num) > 0 && !isRocStream)
                                 ? `Title ${intToRoman(parseInt(art.title_num))} - ${cleanLabel}`
                                 : cleanLabel;
-                        if (!headersToRender.some(h => normalizeTitle(h.text) === normalizeTitle(titleText))) {
-                            headersToRender.push({ type: 'TITLE', text: titleText });
+                        const dup = [bookHdr, chapterHdr, sectionHdr].some(
+                            h => h && normalizeTitle(h.text) === normalizeTitle(titleText)
+                        );
+                        const stripTitleRomanPrefix = (s) => String(s || '').replace(/^Title\s+[IVXLCDM]+\s*-\s*/i, '').trim();
+                        const titleTail = stripTitleRomanPrefix(titleText);
+                        const artTitle = (art.article_title || '').trim();
+                        const titleDupesArticle =
+                            !isRocStream &&
+                            artTitle &&
+                            foldAlnum(titleTail) === foldAlnum(artTitle);
+                        if (!dup && !titleDupesArticle) {
+                            titleHdr = { type: 'TITLE', text: titleText };
                         }
                     }
 
-                    // Render Group Header (Constitution/General) - Moved to bottom so it appears UNDER Article/Rule titles
+                    if (String(art.article_num) === '0' && art.title_label) {
+                        headersToRender.push({ type: 'PREAMBLE', text: art.title_label });
+                    }
+                    if (bookHdr) headersToRender.push(bookHdr);
+
+                    // RPC / CIV / Labor: Title (major division) before Chapter / Section
+                    if (isRocStream) {
+                        if (chapterHdr) headersToRender.push(chapterHdr);
+                        if (sectionHdr) headersToRender.push(sectionHdr);
+                        if (ruleHdr) headersToRender.push(ruleHdr);
+                        if (titleHdr) headersToRender.push(titleHdr);
+                    } else {
+                        if (titleHdr) headersToRender.push(titleHdr);
+                        if (chapterHdr) headersToRender.push(chapterHdr);
+                        if (sectionHdr) headersToRender.push(sectionHdr);
+                    }
+
                     if (art.group_header && art.group_header !== prevArt.group_header) {
                         const parts = art.group_header.split('\n');
                         parts.forEach((p, idx) => {

@@ -23,6 +23,10 @@ const FlashcardSetup = ({
     subjectCounts = {},
     onRetryConcepts,
     embedded = false,
+    relaxedBarMatch = false,
+    onRelaxedBarMatchChange,
+    bar2026Only = false,
+    onBar2026OnlyChange,
 }) => {
     const countFor = (key) => {
         if (key === 'all') return subjectCounts.all ?? 0;
@@ -59,9 +63,53 @@ const FlashcardSetup = ({
 
                 <div className={embedded ? "flex-1 space-y-6" : "flex-1 space-y-10 overflow-y-auto p-6 sm:p-8"}>
                     <section>
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-3">
-                            Key legal concepts (SC digests)
+                        <h3 className="text-base font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-3">
+                            Legal concepts (SC digests)
                         </h3>
+                        <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                            The default deck keeps concepts that align strongly with the Bar syllabus (Table of
+                            Specifications topics). Peripheral items stay hidden.
+                        </p>
+                        {typeof onBar2026OnlyChange === 'function' && (
+                            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200/90 bg-white/50 px-3 py-2.5 dark:border-white/10 dark:bg-slate-900/30">
+                                <input
+                                    type="checkbox"
+                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-600"
+                                    checked={bar2026Only}
+                                    onChange={(e) => onBar2026OnlyChange(e.target.checked)}
+                                    disabled={conceptsLoading}
+                                />
+                                <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="font-semibold text-gray-900 dark:text-gray-100">
+                                        2026 Bar syllabus only
+                                    </span>
+                                    <span className="block text-xs font-normal text-gray-500 dark:text-gray-400">
+                                        Only concepts AI-labeled against your 2026 syllabi files (smaller deck). Leave off
+                                        if you have not run the Gemini labeler yet.
+                                    </span>
+                                </span>
+                            </label>
+                        )}
+                        {typeof onRelaxedBarMatchChange === 'function' && (
+                            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200/90 bg-white/50 px-3 py-2.5 dark:border-white/10 dark:bg-slate-900/30">
+                                <input
+                                    type="checkbox"
+                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-600"
+                                    checked={relaxedBarMatch}
+                                    onChange={(e) => onRelaxedBarMatchChange(e.target.checked)}
+                                    disabled={conceptsLoading}
+                                />
+                                <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="font-semibold text-gray-900 dark:text-gray-100">
+                                        Broader deck
+                                    </span>
+                                    <span className="block text-xs font-normal text-gray-500 dark:text-gray-400">
+                                        Also include non-peripheral concepts with weaker syllabus overlap (more cards,
+                                        less Bar-focused).
+                                    </span>
+                                </span>
+                            </label>
+                        )}
                         {!conceptsLoading && !conceptsError && countFor('all') === 0 && (
                             <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
                                 No digest cards loaded yet. Deploy the latest API (it merges legal_concepts and digest flashcards), then Retry.

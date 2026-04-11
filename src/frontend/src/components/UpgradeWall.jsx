@@ -45,15 +45,40 @@ const FEATURE_COPY = {
     description: "You've used your 5 free flashcards for today.",
     benefit: 'Practice with unlimited flashcards across all subjects.',
   },
+  case_digest_download_unlimited: {
+    title: 'Unlimited Case Digest Downloads',
+    description: "You've reached your 5 free case digest downloads for today.",
+    benefit: 'Download unlimited case digests as PDF for offline study.',
+  },
   codex_linked_cases: {
-    title: 'Linked Jurisprudence',
-    description: 'Viewing linked cases in LexCode requires an Amicus subscription.',
-    benefit: 'See which Supreme Court cases apply to each codal provision.',
+    title: 'LexCode Jurisprudence + Case Digests',
+    description: 'Viewing linked jurisprudence and case digests in LexCode requires a Juris subscription.',
+    benefit: 'See which Supreme Court cases apply to each codal provision, and read their full digests inline.',
   },
   lexplay_unlimited: {
-    title: 'Unlimited LexPlay',
-    description: "You've reached your 5-minute daily LexPlay limit.",
-    benefit: 'Listen to legal lectures and codal readings without time limits.',
+    title: 'Unlimited Codal LexPlay',
+    description: "You've reached your daily Codal LexPlay limit.",
+    benefit: 'Listen to codal provisions without any daily time limit.',
+  },
+  lexplay_flashcard: {
+    title: 'LexPlay — Flashcards',
+    description: 'Audio playback for Flashcards requires a Juris subscription.',
+    benefit: 'Listen to legal concept terms, definitions, and bar question flashcards read aloud.',
+  },
+  lexplay_bar: {
+    title: 'LexPlay — Bar Questions',
+    description: 'Audio playback for Bar Questions requires a Barrister subscription.',
+    benefit: 'Listen to Bar Exam questions and suggested answers read aloud.',
+  },
+  lexplay_case_digest: {
+    title: 'LexPlay — Case Digests',
+    description: 'Audio playback for Case Digests requires a Barrister subscription.',
+    benefit: 'Listen to Supreme Court case digests read aloud.',
+  },
+  download_tracks: {
+    title: 'Download Tracks to Device',
+    description: 'Downloading audio tracks for offline use requires a Juris subscription.',
+    benefit: 'Save any LexPlay track to your device for offline listening.',
   },
   lexify: {
     title: 'Lexify Bar Simulator',

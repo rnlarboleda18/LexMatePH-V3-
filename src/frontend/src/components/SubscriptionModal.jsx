@@ -19,12 +19,16 @@ const PLANS = [
       '5 Case Digests / day',
       '5 Bar Questions / day',
       '5 Flashcards / day',
+      '5 Case Digest Downloads / day',
       'LexCode (read-only)',
-      'LexPlay (5 min / day)',
+      'LexPlay Codal (5 min / day)',
     ],
     locked: [
-      'Linked Jurisprudence',
+      'LexCode Jurisprudence + Case Digests',
       'Unlimited LexPlay',
+      'LexPlay Flashcards',
+      'LexPlay Bar Questions & Case Digests',
+      'Download Tracks to Device',
       'Lexify Bar Simulator',
     ],
   },
@@ -42,12 +46,16 @@ const PLANS = [
       'Unlimited Case Digests',
       'Unlimited Bar Questions',
       'Unlimited Flashcards',
-      'LexCode + Linked Jurisprudence',
-      'LexPlay (5 min / day)',
-      'Case Detail Sidebar',
+      'Unlimited Case Digest Downloads',
+      'LexCode (read-only)',
+      'LexPlay Codal (10 min / day)',
     ],
     locked: [
+      'LexCode Jurisprudence + Case Digests',
       'Unlimited LexPlay',
+      'LexPlay Flashcards',
+      'LexPlay Bar Questions & Case Digests',
+      'Download Tracks to Device',
       'Lexify Bar Simulator',
     ],
   },
@@ -64,11 +72,15 @@ const PLANS = [
     popular: true,
     features: [
       'Everything in Amicus',
-      'Unlimited LexPlay',
-      'Full Codal Audio Listening',
-      'Add to LexPlaylist — No Limits',
+      'LexCode Jurisprudence + Case Digests',
+      'Unlimited Codal LexPlay (no daily cap)',
+      'LexPlay Flashcards (Concepts + Bar)',
+      'Download Tracks to Device (Offline)',
     ],
-    locked: ['Lexify Bar Simulator'],
+    locked: [
+      'LexPlay Bar Questions & Case Digests',
+      'Lexify Bar Simulator',
+    ],
   },
   {
     id: 'barrister',
@@ -82,6 +94,7 @@ const PLANS = [
     planKey: { monthly: 'barrister_monthly', yearly: 'barrister_yearly' },
     features: [
       'Everything in Juris',
+      'LexPlay Bar Questions & Case Digests',
       'Lexify Bar Exam Simulator',
       'AI Essay Grading (ALAC Rubric)',
       'Mock Bar Attempt Tracking',
@@ -171,66 +184,76 @@ export default function SubscriptionModal({ onClose }) {
     }
   };
 
+  const MAX_LOCKED_SHOWN = 3;
+
   const panelContent = (
     <>
-        {/* Header: always reachable; not inside scroll (fixes overlap with badges / LexPlayer) */}
-        {/* Header: always reachable; not inside scroll (fixes overlap with badges / LexPlayer) */}
-        <div className="relative z-20 flex shrink-0 items-center justify-between gap-3 border-b-2 border-slate-200/90 bg-white/95 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/95">
-          <h2 id="subscription-modal-title" className="min-w-0 text-lg font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-xl">
-            Upgrade Your Plan
-          </h2>
-          <button
-            type="button"
-            onClick={onClose}
-            className="touch-manipulation shrink-0 rounded-full p-2.5 text-gray-500 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-            aria-label="Close"
-          >
-            <X size={22} />
-          </button>
-        </div>
+        {/* Header — gradient banner */}
+        <div className="relative z-20 shrink-0 overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
+          {/* Ambient glow blobs */}
+          <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
+          <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-indigo-400/20 blur-2xl" />
 
-        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
-          <div className="px-4 pb-2 pt-4 text-center sm:px-6">
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Choose the plan that fits your study needs. All subscriptions support GCash, Maya, Card, and GrabPay.
-            </p>
+          <div className="relative flex items-center justify-between gap-4 px-6 py-4">
+            {/* Left: title + subtitle */}
+            <div className="min-w-0">
+              <h2 id="subscription-modal-title" className="text-xl font-extrabold tracking-tight text-white drop-shadow-sm">
+                Upgrade Your Plan
+              </h2>
+              <p className="mt-0.5 text-[11px] font-medium text-white/70">
+                GCash · Maya · Card · GrabPay · BSP Regulated
+              </p>
+            </div>
 
-            <div className="mt-4 inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-gray-100 p-1 dark:border-gray-700 dark:bg-gray-800">
+            {/* Center: billing toggle */}
+            <div className="inline-flex items-center gap-0.5 rounded-xl border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
               {['monthly', 'yearly'].map((b) => (
                 <button
                   key={b}
                   type="button"
                   onClick={() => setBilling(b)}
-                  className={`rounded-lg px-4 py-2 text-sm font-bold transition-all sm:px-5 ${
+                  className={`rounded-lg px-4 py-1.5 text-xs font-bold transition-all ${
                     billing === b
-                      ? 'bg-white text-gray-900 shadow-sm dark:bg-slate-700 dark:text-white'
-                      : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                      ? 'bg-white text-purple-700 shadow-md'
+                      : 'text-white/80 hover:text-white'
                   }`}
                 >
-                  {b === 'monthly' ? 'Monthly' : 'Yearly'}
-                  {b === 'yearly' && (
-                    <span className="ml-2 rounded-full bg-green-100 px-1.5 py-0.5 text-[10px] font-extrabold text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                      SAVE 17%
-                    </span>
+                  {b === 'monthly' ? 'Monthly' : (
+                    <>Yearly <span className="ml-1 rounded-full bg-green-400/20 px-1.5 py-px text-[10px] font-extrabold text-green-300">-17%</span></>
                   )}
                 </button>
               ))}
             </div>
-          </div>
 
-        {/* Plan Cards */}
-        <div className="grid grid-cols-1 gap-4 px-4 pb-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:pb-8">
+            {/* Close */}
+            <button
+              type="button"
+              onClick={onClose}
+              className="touch-manipulation shrink-0 rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
+              aria-label="Close"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Plan Cards — subtle gradient background */}
+        <div className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="grid grid-cols-2 gap-4 p-5 lg:grid-cols-4">
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
             const price = plan.price[billing];
+            const visibleLocked = plan.locked.slice(0, MAX_LOCKED_SHOWN);
+            const hiddenCount = plan.locked.length - visibleLocked.length;
 
             return (
               <div
                 key={plan.id}
-                className={`relative flex flex-col overflow-visible rounded-2xl border-2 ${plan.borderColor} ${isCurrent ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-5 pt-6 transition-all hover:shadow-lg`}
+                className={`relative flex flex-col overflow-visible rounded-2xl border-2 ${plan.borderColor} ${isCurrent ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-4 pt-6 transition-all hover:shadow-lg`}
               >
-                {/* Badges inside card top (no negative offset — avoids overlapping modal chrome) */}
+                {/* Badges */}
                 {plan.popular && !isCurrent && (
                   <div className="absolute left-1/2 top-2 z-[1] -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-purple-500 to-violet-600 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow">
                     Most Popular
@@ -243,13 +266,15 @@ export default function SubscriptionModal({ onClose }) {
                 )}
 
                 {/* Icon + Name */}
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center text-white mb-3 shadow`}>
-                  {plan.icon}
+                <div className="mb-2.5 flex items-center gap-2">
+                  <div className={`h-9 w-9 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center text-white shadow`}>
+                    {React.cloneElement(plan.icon, { className: 'w-5 h-5' })}
+                  </div>
+                  <h3 className={`text-base font-extrabold ${plan.accentColor}`}>{plan.name}</h3>
                 </div>
-                <h3 className={`text-lg font-extrabold ${plan.accentColor} mb-1`}>{plan.name}</h3>
 
                 {/* Price */}
-                <div className="mb-4">
+                <div className="mb-3">
                   {price === 0 ? (
                     <span className="text-2xl font-extrabold text-gray-900 dark:text-white">Free</span>
                   ) : (
@@ -263,26 +288,31 @@ export default function SubscriptionModal({ onClose }) {
                 </div>
 
                 {/* Features */}
-                <ul className="flex-1 space-y-2 mb-5">
+                <ul className="mb-4 flex-1 space-y-1.5">
                   {plan.features.map(f => (
-                    <li key={f} className="flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300">
-                      <Check className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${plan.accentColor}`} />
+                    <li key={f} className="flex items-start gap-2 text-xs leading-snug text-gray-700 dark:text-gray-300">
+                      <Check className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${plan.accentColor}`} />
                       {f}
                     </li>
                   ))}
-                  {plan.locked.map(f => (
-                    <li key={f} className="flex items-start gap-2 text-xs text-gray-400 dark:text-gray-600 line-through opacity-60">
-                      <X className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gray-300 dark:text-gray-700" />
+                  {visibleLocked.map(f => (
+                    <li key={f} className="flex items-start gap-2 text-xs leading-snug text-gray-400 line-through opacity-50 dark:text-gray-600">
+                      <X className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-300 dark:text-gray-700" />
                       {f}
                     </li>
                   ))}
+                  {hiddenCount > 0 && (
+                    <li className="pl-5 text-[11px] text-gray-400 dark:text-gray-600">
+                      +{hiddenCount} more locked
+                    </li>
+                  )}
                 </ul>
 
                 {/* CTA */}
                 <button
                   disabled={!!isDisabled}
                   onClick={() => handleSubscribe(plan)}
-                  className={`w-full py-2.5 rounded-xl text-sm font-extrabold transition-all flex items-center justify-center gap-2
+                  className={`w-full rounded-xl py-2.5 text-xs font-extrabold transition-all flex items-center justify-center gap-2
                     ${successPlan === plan.id
                       ? 'bg-green-500 text-white'
                       : isCurrent
@@ -305,29 +335,28 @@ export default function SubscriptionModal({ onClose }) {
                     bypassMode ? `⚡ Activate ${plan.name}` : `Get ${plan.name}`
                   )}
                 </button>
-
               </div>
             );
           })}
         </div>
 
-          {errorMsg && (
-            <div className="mx-4 mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400 sm:mx-6">
-              {errorMsg}
-            </div>
-          )}
+        {errorMsg && (
+          <div className="mx-5 mb-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+            {errorMsg}
+          </div>
+        )}
 
-          <p className="px-4 pb-6 text-center text-xs text-gray-400 dark:text-gray-600 sm:px-6">
-            Payments processed securely by PayMongo · Cancel anytime · BSP Regulated
-          </p>
+        <p className="px-5 pb-5 text-center text-xs text-gray-400 dark:text-gray-600">
+          Secured by PayMongo · Cancel anytime
+        </p>
         </div>
     </>
   );
 
   return createPortal(
-    <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
+    <div className="fixed inset-0 z-[540] flex items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
       <div
-        className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+        className="relative w-full max-w-5xl mx-4 flex flex-col overflow-hidden rounded-2xl border-0 shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300"
         role="dialog"
         aria-modal="true"
         aria-labelledby="subscription-modal-title"

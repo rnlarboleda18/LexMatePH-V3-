@@ -1,11 +1,45 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { useLexPlay } from './useLexPlay';
+import { useUser } from '@clerk/clerk-react';
+import { useLexPlay, LEXPLAY_CODAL_AUDIO_CV } from './useLexPlay';
+import { useSubscription } from '../../context/SubscriptionContext';
 import {
-    Play, Pause, SkipBack, SkipForward, Maximize2, Minimize2,
+    Play, Pause, SkipBack, SkipForward, Minimize2,
     Volume2, ListMusic, Trash2, X, Headphones, Plus, Edit2, Save, ChevronDown,
-    DownloadCloud, CheckCircle2, Loader2, Eraser, Square,
+    DownloadCloud, CheckCircle2, Loader2, Eraser, Square, Lock, Clock,
 } from 'lucide-react';
+
+/** Daily LexPlay limits (seconds) per tier. Only codal playback counts toward this cap. */
+const LEXPLAY_DAILY_LIMITS = {
+    free: 5 * 60,
+    amicus: 10 * 60,
+    juris: Infinity,
+    barrister: Infinity,
+};
+
+function getLexPlayUsageKey(userId) {
+    const today = new Date().toISOString().split('T')[0];
+    return `lexplay_codal_used_${userId || 'anon'}_${today}`;
+}
+
+function getLexPlayUsedSeconds(userId) {
+    try {
+        return parseInt(localStorage.getItem(getLexPlayUsageKey(userId)) || '0', 10) || 0;
+    } catch {
+        return 0;
+    }
+}
+
+function addLexPlayUsedSeconds(userId, n) {
+    try {
+        const key = getLexPlayUsageKey(userId);
+        const used = getLexPlayUsedSeconds(userId) + n;
+        localStorage.setItem(key, String(used));
+        return used;
+    } catch {
+        return 0;
+    }
+}
 
 /** Remove one track’s audio from the Cache Storage `audio-cache` bucket (matches buildAudioUrl @ rate 1.0). */
 async function removeTrackAudioFromCache(track, buildAudioUrlFn) {
@@ -247,12 +281,15 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
  */
 const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, onPlay, onRemove, onClearDownload }) => {
     const { cachedTrackIds, downloadingTrackIds, startTrackCacheDownload, stopTrackCacheDownload } = useLexPlay();
+    const { canAccess, openUpgradeModal } = useSubscription();
     const id = String(item?.id ?? '');
     const isDownloaded = id ? cachedTrackIds.has(id) : false;
     const isDownloading = id ? downloadingTrackIds.has(id) : false;
+    const canDownload = canAccess('download_tracks');
 
     const handleDownloadOrStop = (e) => {
         e.stopPropagation();
+        if (!canDownload) { openUpgradeModal('download_tracks'); return; }
         if (isDownloaded || !item?.id) return;
         if (isDownloading) {
             stopTrackCacheDownload(id);
@@ -311,7 +348,17 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                 <p className="mt-0.5 truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-white/35">{item?.subtitle}</p>
             </div>
             <div className="flex items-center gap-1 shrink-0">
-                {isDownloaded ? (
+                {!canDownload ? (
+                    <button
+                        type="button"
+                        onClick={handleDownloadOrStop}
+                        className="rounded-xl border border-transparent p-2 text-slate-300 opacity-60 transition-all hover:border-amber-200 hover:bg-amber-50 hover:text-amber-600 hover:opacity-100 group-hover:opacity-70 dark:text-white/25 dark:hover:border-amber-500/25 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+                        title="Juris plan required — Download for offline"
+                        aria-label="Upgrade to download"
+                    >
+                        <Lock size={15} strokeWidth={2.25} />
+                    </button>
+                ) : isDownloaded ? (
                     <>
                         <div
                             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-emerald-500/35 bg-emerald-500/12 text-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.12)]"
@@ -429,7 +476,7 @@ const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, onPlay
     );
 };
 
-const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => {
+const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull, isDarkMode = true }) => {
     const {
         playlist,
         displayPlaylist,
@@ -465,6 +512,51 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
         refreshCacheForDisplayPlaylist,
     } = useLexPlay();
 
+    // ── Subscription + LexPlay timer ───────────────────────────────────────────
+    const { tier, canAccess, openUpgradeModal } = useSubscription();
+    const { user } = useUser();
+    const userId = user?.id;
+    const canDownloadAll = canAccess('download_tracks');
+
+    const dailyLimit = LEXPLAY_DAILY_LIMITS[tier] ?? LEXPLAY_DAILY_LIMITS.free;
+    const hasLimit = dailyLimit !== Infinity;
+
+    const [remainingSeconds, setRemainingSeconds] = useState(() =>
+        hasLimit ? Math.max(0, dailyLimit - getLexPlayUsedSeconds(userId)) : null
+    );
+
+    // Sync remaining time whenever tier or user changes
+    useEffect(() => {
+        if (!hasLimit) { setRemainingSeconds(null); return; }
+        setRemainingSeconds(Math.max(0, dailyLimit - getLexPlayUsedSeconds(userId)));
+    }, [tier, userId, dailyLimit, hasLimit]);
+
+    // Tick while codal audio is playing — enforces daily limit
+    const timerRef = useRef(null);
+    useEffect(() => {
+        if (!isPlaying || currentTrack?.type !== 'codal') {
+            if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+            return;
+        }
+        if (!hasLimit) return;
+
+        timerRef.current = setInterval(() => {
+            const newUsed = addLexPlayUsedSeconds(userId, 1);
+            const newRemaining = Math.max(0, dailyLimit - newUsed);
+            setRemainingSeconds(newRemaining);
+            if (newRemaining <= 0) {
+                clearInterval(timerRef.current);
+                timerRef.current = null;
+                handleStop();
+                openUpgradeModal('lexplay_unlimited');
+            }
+        }, 1000);
+
+        return () => { if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; } };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isPlaying, currentTrack?.type, currentTrack?.id, tier, userId]);
+    // ───────────────────────────────────────────────────────────────────────────
+
     const progressBarRef = useRef(null);
     const miniBarRef = useRef(null);
 
@@ -474,11 +566,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
     const [bulkError, setBulkError] = useState('');
     const [activeTab, setActiveTab] = useState('player'); // 'player' | 'playlist'
 
-    // Same URL shape as useLexPlay `buildAudioFetchPath` for cache helpers in this file
+    // Same URL shape as useLexPlay `buildAudioFetchPath` (incl. cv=) for cache helpers
     const buildAudioUrl = useCallback((track, rate = 1.0) => {
         if (!track?.id || !track?.type) return null;
         const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-        return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+        const cvParam =
+            track.type === 'codal' ? `cv=${LEXPLAY_CODAL_AUDIO_CV}&` : '';
+        return `/api/audio/${track.type}/${track.id}?${codeParam}${cvParam}rate=${rate}`;
     }, []);
 
     const clearTrackFromCache = useCallback(
@@ -528,6 +622,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
         }
         return 'Nothing queued — add from Codal or Case Digest';
     }, [error, isLoading, currentTrack, activePlaylistName]);
+
+    const formatRemaining = useCallback((secs) => {
+        if (secs === null) return null;
+        const m = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${m}:${String(s).padStart(2, '0')} codal left today`;
+    }, []);
 
     const miniMarqueeClass = useMemo(() => {
         if (error) return 'text-red-500 dark:text-red-400';
@@ -693,10 +794,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
 
                 {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
-                    className="flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
-                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(0.35rem,env(safe-area-inset-right,0px))] py-0 pb-0.5 md:py-1 md:pb-1"
+                    className="relative flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
+                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(2.25rem,env(safe-area-inset-right,0px))] py-0 pb-0.5 md:py-1 md:pb-1 md:pr-[max(2.75rem,env(safe-area-inset-right,0px))]"
                     onClick={onExpand}
                 >
+                    {typeof onCloseMini === 'function' && (
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onCloseMini();
+                            }}
+                            className="absolute right-[max(0.25rem,env(safe-area-inset-right,0px))] top-0.5 z-30 flex h-8 w-8 items-center justify-center rounded-full border border-gray-200/90 bg-white/95 text-gray-600 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 active:scale-95 md:top-1 dark:border-white/12 dark:bg-white/[0.08] dark:text-white/80 dark:hover:bg-white/12"
+                            title="Close LexPlayer"
+                            aria-label="Close LexPlayer"
+                        >
+                            <X className="h-4 w-4" strokeWidth={2.25} />
+                        </button>
+                    )}
                     <div className="md:hidden w-full px-1.5 pt-1 pb-0">
                         <p
                             className={`truncate text-center text-[10px] font-semibold leading-tight tracking-tight sm:text-[11px] ${miniMarqueeClass}`}
@@ -704,6 +819,12 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                         >
                             {miniMarqueeText}
                         </p>
+                        {remainingSeconds !== null && (
+                            <p className="mt-0.5 text-center text-[9px] font-bold tracking-wide text-amber-600 dark:text-amber-400">
+                                <Clock className="inline w-2.5 h-2.5 mr-0.5 -mt-px" strokeWidth={2.5} />
+                                {formatRemaining(remainingSeconds)}
+                            </p>
+                        )}
                     </div>
 
                     {/* Mobile: compact transport (md+ uses grid below) */}
@@ -726,22 +847,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                     disabled={playlist.length === 0}
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_4px_14px_-4px_rgba(124,58,237,0.45)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_4px_14px_-4px_rgba(124,58,237,0.45)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
                                         <div className="h-5 w-5 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
                                     ) : isPlaying ? (
-                                        /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
-                                        <div className="flex h-3 items-end justify-center gap-0.5" aria-hidden>
-                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="w-0.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
-                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
-                                                />
-                                            ))}
-                                        </div>
+                                        <>
+                                            <div className="flex h-3 items-end justify-center gap-0.5 group-hover:hidden" aria-hidden>
+                                                {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="w-0.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_8px_rgba(255,255,255,0.95)]"
+                                                        style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                    />
+                                                ))}
+                                            </div>
+                                            <Pause className="hidden h-4 w-4 fill-current group-hover:block" />
+                                        </>
                                     ) : (
                                         <Play className="ml-0.5 h-5 w-5 fill-current" />
                                     )}
@@ -771,6 +894,12 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                             >
                                 {miniMarqueeText}
                             </p>
+                            {remainingSeconds !== null && (
+                                <p className="mt-0.5 flex items-center gap-1 text-[9px] font-bold tracking-wide text-amber-600 dark:text-amber-400">
+                                    <Clock className="w-2.5 h-2.5 shrink-0" strokeWidth={2.5} />
+                                    <span className="truncate">{formatRemaining(remainingSeconds)}</span>
+                                </p>
+                            )}
                         </div>
 
                         {/* Transport */}
@@ -792,14 +921,14 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                     disabled={playlist.length === 0}
-                                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
                                         <div className="h-6 w-6 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
                                     ) : isPlaying ? (
-                                        /* Same EQ treatment as playlist rows — no Pause icon while playing (tap still pauses) */
-                                        <div className="flex h-3.5 items-end justify-center gap-0.5" aria-hidden>
+                                        <>
+                                        <div className="flex h-3.5 items-end justify-center gap-0.5 group-hover:hidden" aria-hidden>
                                             {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
                                                 <div
                                                     key={i}
@@ -808,6 +937,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                                 />
                                             ))}
                                         </div>
+                                        <Pause className="hidden h-5 w-5 fill-current group-hover:block" />
+                                        </>
                                     ) : (
                                         <Play className="ml-0.5 h-6 w-6 fill-current" />
                                     )}
@@ -834,10 +965,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
         return typeof document !== 'undefined' ? createPortal(miniPlayer, document.body) : null;
     }
 
-    // Full Screen Mode — portaled to body so z-index stacks above Layout header (main is z-10; header z-50)
+    // Full Screen Mode — portaled to body; z above app modals (e.g. z-[540] case/question/flashcard overlays) so minimize stays reachable
     const fullScreenUi = (
         <div
-            className={`fixed inset-0 z-[120] flex items-stretch justify-center md:items-center ${isDarkMode ? 'dark' : ''}`}
+            className={`fixed inset-0 z-[600] flex items-stretch justify-center md:items-center ${isDarkMode ? 'dark' : ''}`}
             data-lexplay-theme={isDarkMode ? 'dark' : 'light'}
         >
             {/* Backdrop Overlay — explicit light/dark so it matches Layout (not only html.dark timing) */}
@@ -859,7 +990,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                 <div className="pointer-events-none absolute inset-0 z-0 opacity-0 bg-gradient-to-b from-white/10 to-transparent dark:opacity-30" aria-hidden />
                 {/* Mobile + tablet (<lg): centered pills + minimize; lg+ uses floating minimize only */}
                 <div className="pointer-events-none absolute inset-x-0 top-[max(0.75rem,env(safe-area-inset-top,0px))] z-[60] h-12 lg:hidden">
-                    <div className="pointer-events-auto absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-5.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-slate-300/85 bg-white/95 p-1 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+                    <div className="pointer-events-auto absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-9.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-slate-300/85 bg-white/95 p-1 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
                         <button
                             type="button"
                             onClick={() => setActiveTab('player')}
@@ -875,27 +1006,51 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                             Playlist
                         </button>
                     </div>
-                    <div className="pointer-events-auto absolute right-4 top-1/2 z-[61] flex h-11 w-11 -translate-y-1/2 items-center justify-center">
+                    <div className="pointer-events-auto absolute right-[max(1rem,env(safe-area-inset-right,0px))] top-1/2 z-[61] flex -translate-y-1/2 items-center gap-1.5">
                         <button
                             type="button"
-                            onClick={onMinimize}
+                            onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
                             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                            title="Minimize Player"
+                            title="Minimize LexPlayer"
+                            aria-label="Minimize LexPlayer"
                         >
                             <Minimize2 className="h-5 w-5" strokeWidth={2.25} />
                         </button>
+                        {typeof onCloseFull === 'function' && (
+                            <button
+                                type="button"
+                                onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
+                                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                title="Close LexPlayer"
+                                aria-label="Close LexPlayer"
+                            >
+                                <X className="h-5 w-5" strokeWidth={2.25} />
+                            </button>
+                        )}
                     </div>
                 </div>
-                {/* Desktop (lg+): top-right minimize — tabs are inline in playlist/player headers below lg */}
-                <div className="pointer-events-none absolute z-[60] hidden lg:top-[calc(1.25rem+0.0625rem)] lg:flex lg:items-center lg:right-10 xl:right-12">
+                {/* Desktop (lg+): top-right minimize + close — tabs are inline in playlist/player headers below lg */}
+                <div className="pointer-events-none absolute z-[60] hidden lg:top-[max(1.25rem,env(safe-area-inset-top,0px))] lg:flex lg:items-center lg:gap-2 lg:right-[max(1rem,env(safe-area-inset-right,0px))]">
                     <button
                         type="button"
-                        onClick={onMinimize}
+                        onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
                         className="group pointer-events-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] md:h-12 md:w-12 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                        title="Minimize Player"
+                        title="Minimize LexPlayer"
+                        aria-label="Minimize LexPlayer"
                     >
                         <Minimize2 className="h-5 w-5 transition-transform group-hover:scale-105" strokeWidth={2.25} />
                     </button>
+                    {typeof onCloseFull === 'function' && (
+                        <button
+                            type="button"
+                            onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
+                            className="group pointer-events-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] md:h-12 md:w-12 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                            title="Close LexPlayer"
+                            aria-label="Close LexPlayer"
+                        >
+                            <X className="h-5 w-5 transition-transform group-hover:scale-105" strokeWidth={2.25} />
+                        </button>
+                    )}
                 </div>
 
                 <div className="flex h-full w-full flex-col lg:flex-row-reverse">
@@ -904,6 +1059,18 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                     <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-50 via-white to-slate-100/95 backdrop-blur-2xl transition-all duration-500 ease-in-out dark:from-slate-950/90 dark:via-[#0c1222]/95 dark:to-slate-950/90 lg:overflow-y-auto lg:overscroll-contain lg:border-l-2 lg:border-slate-300/80 lg:shadow-none dark:lg:border-white/[0.07] dark:lg:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-purple-500/[0.04] via-transparent to-indigo-100/30 dark:from-purple-500/[0.06] dark:to-indigo-950/20" />
                         <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-400/10 blur-[90px] dark:bg-purple-500/10 md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)] lg:top-[42%]" />
+
+                        {/* Daily limit badge — top-left of player stage, free/amicus only */}
+                        {remainingSeconds !== null && (
+                            <div className="pointer-events-none absolute left-4 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-20 lg:top-4">
+                                <div className="flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50/95 px-3 py-1.5 shadow-md backdrop-blur-sm dark:border-amber-500/40 dark:bg-amber-950/80">
+                                    <Clock className="h-3.5 w-3.5 shrink-0 text-amber-600 dark:text-amber-400" strokeWidth={2.5} />
+                                    <span className="text-[11px] font-extrabold tracking-wide text-amber-700 dark:text-amber-300">
+                                        {formatRemaining(remainingSeconds)}
+                                    </span>
+                                </div>
+                            </div>
+                        )}
 
                         {/* max-lg: vertically centered block + even gaps; lg+: centered column */}
                         <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center px-4 pt-[calc(env(safe-area-inset-top,0px)+3rem)] sm:px-5 md:max-lg:max-w-4xl md:max-lg:px-5 md:max-lg:pt-[calc(env(safe-area-inset-top,0px)+3rem)] lg:max-w-2xl lg:min-h-0 lg:shrink lg:flex-1 lg:justify-center lg:gap-7 lg:px-8 lg:pb-5 lg:pt-12 max-lg:flex-1 max-lg:justify-center max-lg:gap-4 max-lg:py-2 max-lg:pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
@@ -973,21 +1140,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                                 type="button"
                                                 onClick={handlePlayPause}
                                                 disabled={playlist.length === 0}
-                                                className="flex h-[7.5rem] w-[7.5rem] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_16px_44px_-6px_rgba(124,58,237,0.55)] ring-2 ring-white/10 transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 sm:h-[8.25rem] sm:w-[8.25rem] md:max-lg:h-[9rem] md:max-lg:w-[9rem] lg:h-[6.5rem] lg:w-[6.5rem] lg:ring-1"
+                                                className="group flex h-[7.5rem] w-[7.5rem] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_16px_44px_-6px_rgba(124,58,237,0.55)] ring-2 ring-white/10 transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 sm:h-[8.25rem] sm:w-[8.25rem] md:max-lg:h-[9rem] md:max-lg:w-[9rem] lg:h-[6.5rem] lg:w-[6.5rem] lg:ring-1"
                                                 aria-label={isPlaying ? 'Pause' : 'Play'}
                                             >
                                                 {isLoading ? (
                                                     <div className="h-11 w-11 animate-spin rounded-full border-[3px] border-white/25 border-t-white sm:h-12 sm:w-12 md:max-lg:h-14 md:max-lg:w-14 lg:h-10 lg:w-10" />
                                                 ) : isPlaying ? (
-                                                    <div className="flex h-8 w-[4.25rem] items-end justify-center gap-0.5 sm:h-9 sm:w-20 sm:gap-1 md:max-lg:h-12 md:max-lg:w-24 lg:h-6 lg:w-12" aria-hidden>
-                                                        {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
-                                                            <div
-                                                                key={i}
-                                                                className="w-2.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_10px_rgba(255,255,255,0.95)] sm:w-3 md:max-lg:w-3.5 lg:w-1.5"
-                                                                style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
-                                                            />
-                                                        ))}
-                                                    </div>
+                                                    <>
+                                                        <div className="flex h-8 w-[4.25rem] items-end justify-center gap-0.5 group-hover:hidden sm:h-9 sm:w-20 sm:gap-1 md:max-lg:h-12 md:max-lg:w-24 lg:h-6 lg:w-12" aria-hidden>
+                                                            {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    className="w-2.5 rounded-full bg-white animate-[bounce_0.8s_infinite] shadow-[0_0_10px_rgba(255,255,255,0.95)] sm:w-3 md:max-lg:w-3.5 lg:w-1.5"
+                                                                    style={{ height: `${h * 100}%`, animationDelay: `${i * 0.15}s` }}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                        <Pause className="hidden fill-current group-hover:block h-14 w-14 sm:h-16 sm:w-16 md:max-lg:h-[4.5rem] md:max-lg:w-[4.5rem] lg:h-12 lg:w-12" />
+                                                    </>
                                                 ) : (
                                                     <Play className="ml-1 h-14 w-14 sm:h-16 sm:w-16 md:max-lg:h-[4.5rem] md:max-lg:w-[4.5rem] lg:h-12 lg:w-12" fill="currentColor" />
                                                 )}
@@ -1037,20 +1207,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, isDarkMode = true }) => 
                                     <>
                                         <button
                                             type="button"
-                                            onClick={handleBulkCacheDownloadClick}
-                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${isBulkDownloading ? 'border-rose-300 bg-rose-50 text-rose-800 hover:bg-rose-100 dark:border-rose-500/35 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25' : cachedCount === displayPlaylist.length ? 'border-emerald-300/80 bg-emerald-50 text-emerald-700 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-400' : 'border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/55 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white'}`}
+                                            onClick={canDownloadAll ? handleBulkCacheDownloadClick : () => openUpgradeModal('download_tracks')}
+                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${!canDownloadAll ? 'border-amber-300/70 bg-amber-50/80 text-amber-600 hover:border-amber-400/60 hover:bg-amber-100/80 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-amber-300 dark:hover:border-amber-400/40 dark:hover:bg-amber-500/15' : isBulkDownloading ? 'border-rose-300 bg-rose-50 text-rose-800 hover:bg-rose-100 dark:border-rose-500/35 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25' : cachedCount === displayPlaylist.length ? 'border-emerald-300/80 bg-emerald-50 text-emerald-700 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-400' : 'border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/55 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white'}`}
                                             title={
-                                                isBulkDownloading
-                                                    ? 'Stop download'
-                                                    : cachedCount === displayPlaylist.length
-                                                      ? 'All tracks cached for offline'
-                                                      : cachedCount > 0
-                                                        ? `${cachedCount}/${displayPlaylist.length} items cached — download all for offline`
-                                                        : 'Download all for offline'
+                                                !canDownloadAll
+                                                    ? 'Juris plan required — Download all for offline'
+                                                    : isBulkDownloading
+                                                        ? 'Stop download'
+                                                        : cachedCount === displayPlaylist.length
+                                                          ? 'All tracks cached for offline'
+                                                          : cachedCount > 0
+                                                            ? `${cachedCount}/${displayPlaylist.length} items cached — download all for offline`
+                                                            : 'Download all for offline'
                                             }
-                                            aria-label={isBulkDownloading ? 'Stop bulk download' : 'Download all for offline'}
+                                            aria-label={!canDownloadAll ? 'Upgrade to download' : isBulkDownloading ? 'Stop bulk download' : 'Download all for offline'}
                                         >
-                                            {isBulkDownloading ? (
+                                            {!canDownloadAll ? (
+                                                <Lock className="w-5 h-5" strokeWidth={2.25} />
+                                            ) : isBulkDownloading ? (
                                                 <div className="relative flex items-center justify-center">
                                                     <div className="absolute -inset-2.5 animate-spin rounded-full border-[3px] border-rose-500/20 border-t-rose-600 dark:border-rose-400/20 dark:border-t-rose-400" />
                                                     <Square className="h-4 w-4 fill-current relative z-10" strokeWidth={2.5} />

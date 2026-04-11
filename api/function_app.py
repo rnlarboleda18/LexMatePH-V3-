@@ -105,6 +105,8 @@ def founding_promo_expire_timer(myTimer: func.TimerRequest) -> None:
         return
     try:
         with psycopg.connect(cs) as conn:
+            from utils.trial import expire_all_trials
+            expire_all_trials(conn)
             expire_all_founding_promo_past_due(conn)
     except Exception as e:
         logging.error("founding_promo_expire_timer: %s", e)

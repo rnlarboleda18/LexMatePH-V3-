@@ -1,4 +1,3 @@
-
 import psycopg2
 import json
 import re
@@ -6,6 +5,14 @@ import uuid
 import zipfile
 import xml.etree.ElementTree as ET
 import os
+import sys
+from pathlib import Path
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_api = str(_REPO_ROOT / "api")
+if _api not in sys.path:
+    sys.path.insert(0, _api)
+from codal_text import normalize_storage_markdown
 
 # Database Connection
 def get_db_connection():
@@ -137,16 +144,17 @@ def ingest_codex(filepath, code_short_name, code_full_name, valid_from="1900-01-
         
         # 3. Insert Versions & Sync rpc_codal logic
         for art in articles:
+            norm_content = normalize_storage_markdown(art['content'])
             # A. Insert into article_versions
             cur.execute("""
                 INSERT INTO article_versions (code_id, article_number, content, valid_from, created_at)
                 VALUES (%s, %s, %s, %s, NOW())
-            """, (code_id, art['full_num'], art['content'], valid_from))
+            """, (code_id, art['full_num'], norm_content, valid_from))
             
             # B. Generate Structural Map
             # Logic: If suffix exists -> [-1] (Teal), else [0] (Red)
-            # Split content to count paragraphs
-            segments = art['content'].split('\n\n')
+            # Split content to count paragraphs (aligned with normalized storage)
+            segments = norm_content.split('\n\n')
             base_id = -1 if art['suffix'] else 0
             struct_map = [[base_id] for _ in segments]
             
@@ -164,7 +172,7 @@ def ingest_codex(filepath, code_short_name, code_full_name, valid_from="1900-01-
                         structural_map = %s,
                         updated_at = NOW()
                     WHERE id = %s
-                """, (art['title'], art['content'], json.dumps(struct_map), existing[0]))
+                """, (art['title'], norm_content, json.dumps(struct_map), existing[0]))
             else:
                 # Default "Book 1", "Title 1" for generic laws if structure is unknown
                 # Ideally we parse this too, but for automation we set safe defaults.
@@ -172,7 +180,7 @@ def ingest_codex(filepath, code_short_name, code_full_name, valid_from="1900-01-
                     INSERT INTO rpc_codal 
                     (book, title_num, title_label, article_num, article_suffix, article_title, content_md, structural_map)
                     VALUES (1, 1, 'Generic Title', %s, %s, %s, %s, %s)
-                """, (art['num'], art['suffix'], art['title'], art['content'], json.dumps(struct_map)))
+                """, (art['num'], art['suffix'], art['title'], norm_content, json.dumps(struct_map)))
                 
         conn.commit()
         print(f"Successfully processed {code_short_name}.")

@@ -4,6 +4,8 @@ import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
 import { toTitleCase } from '../utils/textUtils';
+import { fixStrayQuotationArtifacts } from '../utils/codalMarkdown';
+import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
     if (!article) return null;
@@ -89,6 +91,41 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     };
 
     let contentToDisplay = article.content_md || '';
+    contentToDisplay = fixStrayQuotationArtifacts(contentToDisplay);
+    contentToDisplay = contentToDisplay
+        .replace(/\*Provided,\*\s*That/gi, '*Provided,* That')
+        .replace(/\*Provided,\s*further,\*\s*That/gi, '*Provided, further,* That')
+        .replace(/:\s*Provided,\s*That(?=\s|[A-Za-z(])/gi, ': Provided, That ')
+        .replace(/:\s*Provided,\s*further,\s*That(?=\s|[A-Za-z(])/gi, ': Provided, further, That ');
+
+    const articleNumKey = String(article.article_num ?? article.article_number ?? '').trim();
+    const normArticleKey = (s) => {
+        const m = String(s || '').match(/article\s+([\d]+(?:-[a-z]+)?)/i);
+        return m ? m[1].toLowerCase() : String(s || '').toLowerCase().replace(/\s+/g, '');
+    };
+
+    const isRpcLike = (codeId || '').toLowerCase() === 'rpc' || (article?.code_id || '').toLowerCase() === 'rpc';
+
+    // Stale DB: Article 266 row sometimes still opens with a 266-A fragment; recover real Art. 266 body.
+    // Never clear the whole article: the strict \n\n anchor often fails (single newlines, OCR spacing).
+    if (isRpcLike && articleNumKey === '266') {
+        let t = contentToDisplay.trimStart();
+        if (/^"?\s*Article\s+266-A\./i.test(t)) {
+            const phrase = 'the crime of slight physical injuries';
+            const ix = contentToDisplay.toLowerCase().indexOf(phrase);
+            if (ix !== -1) {
+                contentToDisplay = contentToDisplay.slice(ix).trimStart();
+            } else {
+                for (let i = 0; i < 25 && /^"?\s*Article\s+266-A\./i.test(contentToDisplay.trimStart()); i++) {
+                    contentToDisplay = contentToDisplay.replace(/^[^\n]*(?:\n|$)/, '').trimStart();
+                }
+            }
+        }
+    }
+
+    if (isRpcLike && articleNumKey === '266' && isCorruptedRpcArticle266Body(contentToDisplay)) {
+        contentToDisplay = RPC_ARTICLE_266_BODY_MD;
+    }
 
     // GLOBAL PRE-PROCESS: The DB stores enumeration markers as backslash-escaped parens, e.g. \(2\).
     // Un-escape all \(X\) patterns to (X) so all downstream regex splitting works correctly.
@@ -147,16 +184,32 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 introPart = introPart.substring(1).trim();
             }
 
-            customHeaderNode = (
-                <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                    {toTitleCase(boldPart, skipKeywords)}
-                </h3>
-            );
+            const embeddedKey = normArticleKey(boldPart);
+            const rowKey = normArticleKey(`Article ${articleNumKey}`);
+            const isConstArticle = codeId === 'const' || (article?.code_id && article.code_id.toLowerCase() === 'const');
+            const redundantEmbedded =
+                embeddedKey &&
+                rowKey &&
+                embeddedKey === rowKey &&
+                String(article.article_num) !== '0' &&
+                !String(article.article_num || '').includes('Header') &&
+                !String(article.article_num || '').includes('Subheader') &&
+                !isConstArticle;
 
-            // Push the intro part back into the content body as the first paragraph
-            // This ensures it renders below the header, matching standard articles.
-            const restOfBody = parts.slice(1).join('\n\n');
-            contentToDisplay = introPart ? `${introPart}\n\n${restOfBody}` : restOfBody;
+            if (redundantEmbedded) {
+                customHeaderNode = null;
+                const restOfBody = parts.slice(1).join('\n\n');
+                contentToDisplay = introPart ? `${introPart}\n\n${restOfBody}` : restOfBody;
+            } else {
+                customHeaderNode = (
+                    <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
+                        {toTitleCase(boldPart, skipKeywords)}
+                    </h3>
+                );
+
+                const restOfBody = parts.slice(1).join('\n\n');
+                contentToDisplay = introPart ? `${introPart}\n\n${restOfBody}` : restOfBody;
+            }
         } else {
             // Fallback: Just render the whole first block as H3
             customHeaderNode = (
@@ -165,6 +218,22 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 </h3>
             );
             contentToDisplay = parts.slice(1).join('\n\n');
+        }
+    }
+
+    // Run-in "Article 266-A...." (no **) duplicates the H3; only strip for suffixed articles.
+    // Plain "266"/"267" often use one line "Article 266. Title. - The crime..." — stripping would delete the body.
+    if (
+        isRpcLike &&
+        articleNumKey &&
+        /^[\d]+-[A-Za-z]+$/.test(articleNumKey) &&
+        String(article.article_num) !== '0' &&
+        !String(article.article_num || '').includes('Header')
+    ) {
+        const esc = articleNumKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const runInLine = new RegExp(`^"?\\s*Article\\s+${esc}\\.[^\\n]*(?:\\n|$)`, 'i');
+        for (let i = 0; i < 3 && runInLine.test(contentToDisplay.trimStart()); i++) {
+            contentToDisplay = contentToDisplay.replace(runInLine, '').trimStart();
         }
     }
 
@@ -368,7 +437,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                             <span className="text-gray-500 dark:text-gray-500 font-normal">{am.date || 'No Date'}</span>
                                         </div>
                                         <div className="bg-orange-50 dark:bg-orange-900/10 p-2.5 rounded border border-orange-100 dark:border-orange-900/20 leading-relaxed">
-                                            "{am.description || am.summary || 'No Description'}"
+                                            {am.description || am.summary || 'No Description'}
                                         </div>
                                     </div>
                                 ))}
@@ -592,14 +661,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                             // Fallback to regex (for documents without explicit space indentation)
                             const textForIndent = cleanSeg.replace(/^(?:\[\d+\]\([^)]+\)\s*)*\[?\s*/, '');
-                            
-                            // Updated Regex: marker followed by space/nbsp OR end of string
-                            if (/^(\([a-z]\)|[a-z][\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 1;
-                            if (/^\d+[\.\)]([\s\u00A0]|$)/.test(textForIndent)) return 2;
+
+                            // RPC/ROC hierarchy: outer Arabic 1. / 1) first, then lettered (a) / a) nested under it,
+                            // then parenthetical (1), then roman (i). Higher level number = more ml-* (was inverted before).
+                            if (/^\d+[\.\)]([\s\u00A0]|$)/.test(textForIndent)) return 1;
+                            if (/^(\([a-z]\)|[a-z][\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 2;
+                            if (/^\(\d+\)([\s\u00A0]|$)/.test(textForIndent)) return 3;
                             if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.([\s\u00A0]|$)/i.test(textForIndent)) {
                                 return 3;
                             }
-                            if (/^\(\d+\)([\s\u00A0]|$)/.test(textForIndent)) return 3;
                             if (/^\([ivxl]+\)([\s\u00A0]|$)/i.test(textForIndent)) return 4;
                             return 0;
                         })();
@@ -641,7 +711,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             );
                         }
 
-                        const paddingClass = hasBands ? "pl-6" : "";
+                        // Bands reserve left rail; indentation (cascade) still applies to body text
+                        const paddingClass = hasBands ? "pl-6 sm:pl-7" : "";
 
                         // Determine link count for this paragraph
                         const paragraphIndex = baseId + segIdx;

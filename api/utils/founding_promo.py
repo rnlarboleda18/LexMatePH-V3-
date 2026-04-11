@@ -80,11 +80,12 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         cur.execute(
             """
             UPDATE users SET
-                subscription_tier = 'barrister',
-                subscription_status = 'active',
-                founding_promo_slot = %s,
+                subscription_tier       = 'barrister',
+                subscription_status     = 'active',
+                founding_promo_slot     = %s,
                 founding_promo_granted_at = NOW(),
-                subscription_source = 'founding_promo'
+                subscription_source     = 'founding_promo',
+                subscription_expires_at = NULL
             WHERE clerk_id = %s AND founding_promo_slot IS NULL
             """,
             (slot, clerk_id),

@@ -5,6 +5,7 @@ import re
 import json
 import time
 import threading
+import uuid
 from datetime import datetime, timedelta
 
 # Removed local file logging as it causes permission errors in production
@@ -13,6 +14,21 @@ import azure.functions as func
 # Database connection
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
+from codal_text import (
+    _ROMAN_TO_ARABIC,
+    body_embeds_rpc_section,
+    body_starts_with_article_identifier,
+    dedupe_codal_header_prefix,
+    raw_markdown_opens_with_article_line,
+    repair_rpc_article_266_for_tts,
+    strip_codal_citation_tail,
+    tts_book_heading_line,
+    tts_flatten_codal_body,
+    tts_format_structural_label,
+    tts_strip_leading_embedded_section,
+    tts_strip_leading_embedded_title,
+)
+from codal_structural import fetch_codal_family_bounds, normalize_codal_label_key
 
 # Azure Storage (optional - used for caching)
 from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions, ContentSettings
@@ -27,7 +43,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v1"  # Reset to v1 as blobs are being cleared
+CACHE_VERSION = "v21"  # v21: fc_codal title headers use Arabic numerals; no redundant "Family Code" prefix
 
 # Global lock: Azure Speech F0 allows only 1 concurrent real-time synthesis.
 # This prevents 429 errors when multiple requests overlap (e.g. fast track skipping).
@@ -243,7 +259,25 @@ def _apply_custom_pronunciations(text):
     text = re.sub(r'\b[Aa]rts\.?', 'Articles', text)
     # Singular: Art. or art. -> Article
     text = re.sub(r'\b[Aa]rt\.', 'Article', text)
-    
+
+    # 8. Legal statute abbreviations (spell out so TTS doesn't read letters)
+    text = re.sub(r'\bR\.A\.\s*(?=\d)', 'Republic Act ', text)
+    text = re.sub(r'\bP\.D\.\s*(?=\d)', 'Presidential Decree ', text)
+    text = re.sub(r'\bB\.P\.\s*(?=\d)', 'Batas Pambansa ', text)
+    text = re.sub(r'\bE\.O\.\s*(?=\d)', 'Executive Order ', text)
+    text = re.sub(r'\bR\.R\.\s*(?=\d)', 'Revenue Regulation ', text)
+
+    # 9. Structural abbreviations
+    text = re.sub(r'\b[Ss]ecs?\.\s*(?=\d)', lambda m: 'Sections ' if m.group(0).lower().startswith('secs') else 'Section ', text)
+    text = re.sub(r'\b[Pp]ars?\.\s*(?=\d)', lambda m: 'paragraphs ' if m.group(0).lower().startswith('pars') else 'paragraph ', text)
+    text = re.sub(r'\b[Cc]h\.\s*(?=\d)', 'Chapter ', text)
+
+    # 10. Common Latin/English abbreviations that TTS spells out
+    text = re.sub(r'\bi\.e\.', 'that is,', text)
+    text = re.sub(r'\be\.g\.', 'for example,', text)
+    text = re.sub(r'\bet al\.', 'and others', text)
+    text = re.sub(r'\b[Vv]s\.(?=\s)', ' versus ', text)
+
     return text
 
 # ----- Blob Cache (best-effort, degrades silently) -----
@@ -371,7 +405,27 @@ _codal_boundaries_lock = threading.Lock()
 def get_codal_boundaries(table_name):
     global _codal_boundaries
     if table_name in _codal_boundaries:
-        return _codal_boundaries[table_name]
+        cached = _codal_boundaries[table_name]
+        # Self-heal: drop stale entries when structural maps gain new keys (e.g. chapter_start / section_start).
+        if table_name in ('rpc_codal', 'civ_codal', 'labor_codal'):
+            stale = (
+                'title_start_book_num' not in cached
+                or 'chapter_start' not in cached
+                or 'section_start' not in cached
+            )
+            if stale:
+                with _codal_boundaries_lock:
+                    _codal_boundaries.pop(table_name, None)
+            else:
+                return cached
+        elif table_name == 'fc_codal':
+            if 'section_label' not in cached:
+                with _codal_boundaries_lock:
+                    _codal_boundaries.pop(table_name, None)
+            else:
+                return cached
+        else:
+            return cached
         
     with _codal_boundaries_lock:
         if table_name in _codal_boundaries:
@@ -392,15 +446,48 @@ def get_codal_boundaries(table_name):
                             if g2 and g2 not in bounds['g2']: bounds['g2'][g2] = id_str
                         
                     elif table_name in ['const_codal', 'consti_codal', 'fc_codal']:
-                        bounds = {'group_header': {}}
-                        cur.execute(f"SELECT LOWER(group_header), MIN(id) FROM {table_name} WHERE group_header IS NOT NULL AND group_header != '' GROUP BY LOWER(group_header)")
-                        for r in cur.fetchall(): bounds['group_header'][r[0]] = r[1]
+                        bounds = {'group_header': {}, 'section_label': {}}
+                        if table_name == 'fc_codal':
+                            # Family Code: use list_order for correct reading order.
+                            from codal_structural import _LABEL_KEY_SQL
+                            # Title boundaries (group_header)
+                            key_expr = _LABEL_KEY_SQL.format(col='group_header')
+                            cur.execute(f"""
+                                WITH ranked AS (
+                                    SELECT id, {key_expr} AS lk,
+                                        ROW_NUMBER() OVER (
+                                            PARTITION BY {key_expr}
+                                            ORDER BY list_order ASC NULLS LAST
+                                        ) AS rn
+                                    FROM fc_codal
+                                    WHERE group_header IS NOT NULL AND TRIM(group_header) <> ''
+                                )
+                                SELECT lk, id FROM ranked WHERE rn = 1
+                            """)
+                            for r in cur.fetchall():
+                                bounds['group_header'][r[0]] = str(r[1])
+                            # Chapter boundaries (section_label)
+                            sec_key_expr = _LABEL_KEY_SQL.format(col='section_label')
+                            cur.execute(f"""
+                                WITH ranked AS (
+                                    SELECT id, {sec_key_expr} AS lk,
+                                        ROW_NUMBER() OVER (
+                                            PARTITION BY {sec_key_expr}
+                                            ORDER BY list_order ASC NULLS LAST
+                                        ) AS rn
+                                    FROM fc_codal
+                                    WHERE section_label IS NOT NULL AND TRIM(section_label) <> ''
+                                )
+                                SELECT lk, id FROM ranked WHERE rn = 1
+                            """)
+                            for r in cur.fetchall():
+                                bounds['section_label'][r[0]] = str(r[1])
+                        else:
+                            cur.execute(f"SELECT LOWER(group_header), MIN(id) FROM {table_name} WHERE group_header IS NOT NULL AND group_header != '' GROUP BY LOWER(group_header)")
+                            for r in cur.fetchall(): bounds['group_header'][r[0]] = r[1]
                         
                     elif table_name in ['rpc_codal', 'civ_codal', 'labor_codal']:
-                        bounds = {'book_label': {}, 'title_label': {}, 'chapter_label': {}}
-                        for col in bounds.keys():
-                            cur.execute(f"SELECT LOWER({col}), MIN(id) FROM {table_name} WHERE {col} IS NOT NULL AND {col} != '' GROUP BY LOWER({col})")
-                            for r in cur.fetchall(): bounds[col][r[0]] = r[1]
+                        bounds = fetch_codal_family_bounds(cur, table_name)
                             
             finally:
                 put_db_connection(conn)
@@ -480,6 +567,42 @@ def _get_text_for_case(content_id):
     finally:
         put_db_connection(conn)
 
+
+def _looks_like_uuid(s: str) -> bool:
+    try:
+        uuid.UUID(str(s).strip())
+        return True
+    except (ValueError, AttributeError, TypeError):
+        return False
+
+
+def _rpc_normalize_article_token(s: str) -> str:
+    t = (s or "").strip()
+    t = re.sub(r"[\u2010-\u2015\u2212]", "-", t)
+    m = re.match(r"(?i)^(?:article|art\.)\s+(.+)$", t)
+    if m:
+        t = m.group(1).strip()
+    return t
+
+
+def _rpc_article_num_regex_pattern(cid_str: str):
+    """
+    PostgreSQL ~* pattern: match rpc_codal.article_num for exactly one provision.
+    e.g. '266' matches '266' and 'Article 266' but not '266-A' (which would otherwise
+    match a loose 'Art% 266%' LIKE and return the wrong row).
+    """
+    t = (cid_str or "").strip()
+    if not t:
+        return None
+    m = re.match(r"(?i)^article\s+(.+)$", t)
+    if m:
+        t = m.group(1).strip()
+    if not re.fullmatch(r"\d+(?:-[A-Za-z]+)?", t):
+        return None
+    esc = re.escape(t)
+    return rf"^([Aa]rticle[[:space:]]+|[Aa]rt\.[[:space:]]*)?{esc}[[:space:]]*$"
+
+
 def _get_text_for_codal(content_id, code_id=None):
     """
     Fetch article text for TTS.
@@ -509,7 +632,21 @@ def _get_text_for_codal(content_id, code_id=None):
             elif table == "fc_codal":
                 cols = "id, article_num, article_title, content_md, section_label, group_header"
             elif table in ["rpc_codal", "civ_codal", "labor_codal"]:
-                cols = "id, book_label, title_label, chapter_label, article_num, article_title, content_md"
+                # civ_codal and labor_codal store chapter descriptions without
+                # the "Chapter N" prefix; chapter_num is needed to reconstruct it.
+                # rpc_codal embeds "CHAPTER ONE -" in chapter_label directly.
+                if table in ("civ_codal", "labor_codal"):
+                    cols = (
+                        "id, book, book_label, title_num, title_label, "
+                        "chapter_num, chapter_label, section_label, "
+                        "article_num, article_title, content_md"
+                    )
+                else:
+                    cols = (
+                        "id, book, book_label, title_num, title_label, "
+                        "chapter_label, section_label, "
+                        "article_num, article_title, content_md"
+                    )
             elif table == "roc_codal":
                 cols = (
                     "id, rule_section_label AS article_num, section_title AS article_title, "
@@ -543,7 +680,8 @@ def _get_text_for_codal(content_id, code_id=None):
                 search_patterns.append(f"%-{cid_str}")
                 extra_filter = " AND article_num NOT LIKE 'FC-%%'"
             elif code_id.lower() == 'rpc':
-                if not cid_str.lower().startswith("art"):
+                # Loose LIKE 'Art% 266%' matches 266-A; only use when regex cannot apply
+                if not cid_str.lower().startswith("art") and _rpc_article_num_regex_pattern(cid_str) is None:
                     search_patterns.append(f"Art% {cid_str}%")
 
             search_column = "rule_section_label" if table == "roc_codal" else "article_num"
@@ -560,6 +698,48 @@ def _get_text_for_codal(content_id, code_id=None):
                     if row: break
                 except Exception:
                     conn.rollback()
+
+            if not row and table == 'rpc_codal':
+                rpc_pat = _rpc_article_num_regex_pattern(cid_str)
+                if rpc_pat:
+                    try:
+                        cur.execute(
+                            f"SELECT {cols} FROM {table} WHERE article_num ~* %s{extra_filter} LIMIT 1",
+                            (rpc_pat,),
+                        )
+                        row = cur.fetchone()
+                    except Exception:
+                        conn.rollback()
+
+            # If we matched a row but article_num does not match requested token (e.g. wrong row),
+            # replace with a strict regex row — only for non-UUID content_id.
+            if (
+                row
+                and table == "rpc_codal"
+                and code_id
+                and code_id.lower() == "rpc"
+                and not _looks_like_uuid(str(content_id))
+            ):
+                want = _rpc_normalize_article_token(str(content_id))
+                got = _rpc_normalize_article_token(str(row.get("article_num") or ""))
+                if (
+                    want
+                    and got
+                    and re.fullmatch(r"\d+(?:-[A-Za-z]+)?", want, re.I)
+                    and want.lower() != got.lower()
+                ):
+                    pat = _rpc_article_num_regex_pattern(want)
+                    if pat:
+                        try:
+                            cur.execute(
+                                f"SELECT {cols} FROM {table} WHERE article_num ~* %s{extra_filter} LIMIT 1",
+                                (pat,),
+                            )
+                            row2 = cur.fetchone()
+                            if row2:
+                                row = row2
+                        except Exception:
+                            conn.rollback()
             
             # Fallback: Absolute ID lookup (UUID)
             if not row:
@@ -574,43 +754,23 @@ def _get_text_for_codal(content_id, code_id=None):
 
             if row:
                 art_num = str(row.get('article_num') or '')
-                art_title = (row.get('article_title') or '').strip()
+                art_title = strip_codal_citation_tail((row.get('article_title') or '').strip())
                 group_header = (row.get('group_header') or '').strip()
                 content = (row.get('content_md') or '').strip()
                 content = content.replace('\r\n', '\n').replace('\r', '\n')
-                
-                # TTS Cleaning: Remove structural MD only, replace harsh stops with commas
-                clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
-                clean = re.sub(r'[:;]', ',', clean)
-                # Replace all newlines and excessive whitespace with a single space
-                clean = re.sub(r'\s+', ' ', clean).strip()
+                if table == 'rpc_codal':
+                    content = repair_rpc_article_266_for_tts(art_num, content)
+                if table in ('rpc_codal', 'civ_codal', 'labor_codal'):
+                    content = tts_strip_leading_embedded_section(
+                        content,
+                        row.get("section_label"),
+                        art_num,
+                    )
+                    content = tts_strip_leading_embedded_title(
+                        content, row.get("title_label")
+                    )
 
-                # Strip literal backslash-escape text stored in DB content
-                # e.g. DB may store literal '\n' (backslash+n as 2 chars) between enumeration items
-                # Azure TTS reads these as "backslash en" — audible as "backslash TWO backslash"
-                clean = re.sub(r'\\[nrtfvb]', ' ', clean)  # \n \r \t etc. as text
-                clean = clean.replace('\\', ' ')           # any remaining lone backslash
-                clean = re.sub(r'\s+', ' ', clean).strip() # re-collapse after removals
-
-                # Strip redundant digit clarifications like "one (1)" -> "one", "five (5) years" -> "five years"
-                # MUST run BEFORE enumeration conversion while (N) is still in paren form
-                clean = re.sub(r'([a-zA-Z-]+)\s*\(\s*\d+\s*\)', r'\1', clean)
-
-                # Convert enumerated item labels (1) (2) (3) to "1," so TTS reads them naturally
-                # Uses \s* around digit to handle spaces left by backslash stripping: \(2\) -> " (2 )" -> "2,"
-                clean = re.sub(r'\(\s*(\d+)\s*\)', r'\1,', clean)
-
-                # Strip currency repetitions like (₱40,000) or (P200,000)
-                clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
-                
-                # Strip legal citation/version tags ANYWHERE in text:
-                # Matches (n), (1a), (6a), (1a, R2), (1a, n) etc.
-                # Does NOT match pure subsection labels (a),(b),(c) — those have a single letter only
-                clean = re.sub(
-                    r'\s*\(\s*(?:(?:\d+[a-zA-Z]?|n|[A-Z]\d+)(?:\s*,\s*(?:\d+[a-zA-Z]?|n|[A-Z]\d+))*)\s*\)',
-                    ' ', clean
-                )
-                clean = re.sub(r'\s+', ' ', clean).strip()
+                clean = tts_flatten_codal_body(content)
                 
                 # Deduplication logic (for Family Code mostly):
                 is_redundant = False
@@ -752,42 +912,118 @@ def _get_text_for_codal(content_id, code_id=None):
                         if art_title and not is_redundant:
                             header += f". {art_title}"
                     elif table in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                        # Structural lines only on the first article in *codal order* where each
+                        # division starts (not MIN(uuid), which does not follow article sequence).
                         hdr_parts = []
                         starts = get_codal_boundaries(table)
-                        curr_id = row.get('id')
-                        
-                        b_lbl = (row.get('book_label') or '').strip()
-                        if b_lbl and starts['book_label'].get(b_lbl.lower()) == curr_id:
-                            hdr_parts.append(b_lbl.title())
-                            
+                        curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
+
+                        bk = row.get('book')
+                        if bk is not None:
+                            bstart = starts.get('book_start', {}).get(str(bk).strip())
+                            if bstart and bstart == curr_id_str:
+                                book_line = tts_book_heading_line(dict(row))
+                                if book_line:
+                                    hdr_parts.append(book_line)
+
                         t_lbl = (row.get('title_label') or '').strip()
-                        if t_lbl and starts['title_label'].get(t_lbl.lower()) == curr_id:
-                            hdr_parts.append(t_lbl.title())
-                            
                         c_lbl = (row.get('chapter_label') or '').strip()
-                        if c_lbl and starts['chapter_label'].get(c_lbl.lower()) == curr_id:
-                            hdr_parts.append(c_lbl.title())
-                            
+                        s_lbl = (row.get('section_label') or '').strip()
+                        chapter_num = row.get('chapter_num')  # None for rpc_codal (not fetched)
+
+                        bk_s2 = "" if row.get("book") is None else str(row.get("book")).strip()
+                        tn_s2 = "" if row.get("title_num") is None else str(row.get("title_num")).strip()
+                        clk_s2 = normalize_codal_label_key(c_lbl) if c_lbl else ""
+
+                        # Title: only announce when title_num is set (articles without title_num,
+                        # e.g. 266-A–D amendments, must not treat their title_label as a structural header).
+                        tbmap = starts.get("title_start_book_num") or {}
+                        tn = row.get("title_num")
+                        if t_lbl and tn is not None:
+                            tkey = f"{bk_s2}|{str(tn).strip()}"
+                            if tbmap.get(tkey) == curr_id_str:
+                                hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
+                            elif tkey not in tbmap:
+                                nk_t = normalize_codal_label_key(t_lbl)
+                                if nk_t and starts.get("title_label", {}).get(nk_t) == curr_id_str:
+                                    hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
+
+                        # Chapter: compound key (book|title_num|chapter_label_key) prevents
+                        # duplicate labels like "General Provisions" from colliding across titles.
+                        if c_lbl and clk_s2:
+                            ch_compound = f"{bk_s2}|{tn_s2}|{clk_s2}"
+                            ch_map = starts.get('chapter_start', {})
+                            if ch_map.get(ch_compound) == curr_id_str:
+                                hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
+                            elif not ch_map:
+                                # Fallback: legacy single-key map (older cache entries)
+                                if starts.get('chapter_label', {}).get(clk_s2) == curr_id_str:
+                                    hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
+
+                        # Section: compound key (book|title_num|chapter_label_key|section_label_key)
+                        if s_lbl and not body_embeds_rpc_section(content, clean, s_lbl):
+                            slk_s2 = normalize_codal_label_key(s_lbl)
+                            if slk_s2:
+                                sec_compound = f"{bk_s2}|{tn_s2}|{clk_s2}|{slk_s2}"
+                                sec_map = starts.get('section_start', {})
+                                if sec_map.get(sec_compound) == curr_id_str:
+                                    hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
+                                elif not sec_map:
+                                    # Fallback: legacy single-key map
+                                    if starts.get('section_label', {}).get(slk_s2) == curr_id_str:
+                                        hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
+
+                        art_title = strip_codal_citation_tail(art_title)
                         art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
                         if art_title and not is_redundant:
                             art_name += f'. {art_title}'
-                            
-                        hdr_parts.append(art_name)
-                        header = '. '.join(hdr_parts)
+
+                        struct_text = '. '.join(hdr_parts)
+                        body_already_has_article = body_starts_with_article_identifier(
+                            clean,
+                            str(clean_num),
+                            art_title if not is_redundant else None,
+                        ) or raw_markdown_opens_with_article_line(content, str(clean_num))
+                        if body_already_has_article:
+                            header = struct_text
+                        else:
+                            header = f"{struct_text}. {art_name}" if struct_text else art_name
                         
                     elif table == 'fc_codal':
                         hdr_parts = []
                         starts = get_codal_boundaries('fc_codal')
-                        curr_id = row.get('id')
-                        
+                        curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
+
+                        # Title header — group_header holds "FAMILY CODE\nTITLE N description"
                         g_hdr = (row.get('group_header') or '').strip()
-                        if g_hdr and starts['group_header'].get(g_hdr.lower()) == curr_id:
-                            hdr_parts.append(g_hdr.title())
-                            
+                        if g_hdr:
+                            gnk = normalize_codal_label_key(g_hdr)
+                            if gnk and starts['group_header'].get(gnk) == curr_id_str:
+                                lines = [l.strip() for l in g_hdr.splitlines() if l.strip()]
+                                # Take the "TITLE N description" line (second line); fall back to full header
+                                title_line = lines[1] if len(lines) >= 2 else (lines[0] if lines else g_hdr)
+                                # FC format: "TITLE III RIGHTS AND OBLIGATIONS..." (space separator, no dash)
+                                mt = re.match(r'^TITLE\s+([IVX]+|\d+)\s+(.+)$', title_line, re.IGNORECASE)
+                                if mt:
+                                    raw_num = mt.group(1).lower()
+                                    title_desc = mt.group(2).strip().title()
+                                    arabic_num = _ROMAN_TO_ARABIC.get(raw_num, raw_num)
+                                    hdr_parts.append(f"Title {arabic_num}. {title_desc}")
+                                else:
+                                    hdr_parts.append(tts_format_structural_label(title_line, None, "Title"))
+
+                        # Chapter header — section_label holds "Chapter N. Description"
+                        s_lbl = (row.get('section_label') or '').strip()
+                        if s_lbl:
+                            snk = normalize_codal_label_key(s_lbl)
+                            if snk and starts.get('section_label', {}).get(snk) == curr_id_str:
+                                hdr_parts.append(strip_codal_citation_tail(s_lbl))
+
+                        art_title = strip_codal_citation_tail(art_title)
                         art_name = str(clean_num) if re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE) else f'Article {clean_num}'
                         if art_title and not is_redundant:
                             art_name += f'. {art_title}'
-                            
+
                         hdr_parts.append(art_name)
                         header = '. '.join(hdr_parts)
                         
@@ -800,12 +1036,10 @@ def _get_text_for_codal(content_id, code_id=None):
                         if art_title and not is_redundant: 
                             header += f'. {art_title}'
                     
-                # Deduplicate: if the stored content body already BEGINS with the article header, skip the prefix
-                # This handles cases like 266-A where content starts with "Article 266-A. Rape..."
-                header_bare = f'article {clean_num}'.lower()
-                clean_header = (header or '').lower().rstrip('.')
-                if header and (clean.lower().startswith(header_bare) or clean.lower().startswith(clean_header)):
-                    header = ""
+                # Dedupe: RPC/CIV/Labor already drop only the article line when the body repeats it,
+                # keeping Book/Title/Section. Other codals use full-header dedupe.
+                if table not in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                    header, _ = dedupe_codal_header_prefix(clean, header, str(clean_num))
                 full_text = f"{header}. {clean}" if header else clean
                 full_text = _apply_custom_pronunciations(full_text)
                 return full_text, None
@@ -827,36 +1061,60 @@ def _get_text_for_codal(content_id, code_id=None):
         art_num = row.get('article_number', '')
         content = row.get('content', '') or ''
         content = content.replace('\r\n', '\n').replace('\r', '\n')
-        # TTS Cleaning: Remove structural MD, soften colons/semicolons
-        clean = re.sub(r'[#*`_\[\]]', ' ', str(content))
-        clean = re.sub(r'[:;]', ',', clean)
-        clean = re.sub(r'\s+', ' ', clean).strip()
-
-        # Strip literal backslash-escape text stored in DB content
-        # e.g. DB stores \(1\) as Markdown-escaped parens — TTS reads \ as "backslash"
-        clean = re.sub(r'\\[nrtfvb]', ' ', clean)  # literal \n \r \t as text
-        clean = clean.replace('\\', ' ')           # any remaining lone backslash
-        clean = re.sub(r'\s+', ' ', clean).strip() # re-collapse
-
-        # Convert enumerated item labels \(1\) / (1) to "1," for natural TTS speech
-        clean = re.sub(r'\(\s*(\d+)\s*\)', r'\1,', clean)
-
-        # Strip currency repetitions like (₱40,000) or (P200,000)
-        clean = re.sub(r'\(\s*[₱P]\s*[\d,.]+\s*\)', '', clean)
-        
-        # Strip legal citation/version tags ANYWHERE in text (n), (1a), (6a), (1a, R2)
-        clean = re.sub(
-            r'\s*\(\s*(?:(?:\d+[a-zA-Z]?|n|[A-Z]\d+)(?:\s*,\s*(?:\d+[a-zA-Z]?|n|[A-Z]\d+))*)\s*\)',
-            ' ', clean
-        )
-        clean = re.sub(r'\s+', ' ', clean).strip()
+        clean = tts_flatten_codal_body(str(content))
 
         header = 'Preliminary Article' if str(art_num) == '0' else f'Article {art_num}'
+        header, _ = dedupe_codal_header_prefix(clean, header, str(art_num).strip())
         full_text = f"{header}. {clean}" if header else clean
         full_text = _apply_custom_pronunciations(full_text)
         return full_text, None
     finally:
         put_db_connection(conn)
+
+def _get_text_for_flashcard(term):
+    """Fetch flashcard concept text for TTS by term (URL-decoded)."""
+    from urllib.parse import unquote
+    term_decoded = unquote(str(term)).strip()
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    try:
+        cur.execute(
+            "SELECT term, definition, sources FROM flashcard_concepts WHERE LOWER(term) = LOWER(%s) LIMIT 1",
+            (term_decoded,)
+        )
+        row = cur.fetchone()
+        if not row:
+            return None, f"Flashcard concept '{term_decoded}' not found"
+
+        t = (row.get('term') or '').strip()
+        d = (row.get('definition') or '').strip()
+        sources = row.get('sources') or []
+        if isinstance(sources, str):
+            try:
+                sources = json.loads(sources)
+            except Exception:
+                sources = []
+
+        subject = ''
+        if sources and isinstance(sources, list) and sources[0]:
+            subject = (sources[0].get('subject') or '').strip()
+
+        parts = []
+        if t:
+            parts.append(f"Legal concept: {t}.")
+        if subject:
+            parts.append(f"Under {subject}.")
+        if d:
+            parts.append(d)
+
+        full_text = ' '.join(parts)
+        full_text = re.sub(r'[#*`_\[\]]', ' ', full_text)
+        full_text = re.sub(r'\s+', ' ', full_text).strip()
+        full_text = _apply_custom_pronunciations(full_text)
+        return full_text, None
+    finally:
+        put_db_connection(conn)
+
 
 def _get_text_for_question(content_id):
     """
@@ -903,9 +1161,12 @@ def _get_text_for_question(content_id):
         full_text = f"{intro} {q_clean} {a_clean}"
         
         # Basic cleanup
-        full_text = re.sub(r'[#*`_\[\]]', ' ', full_text)
-        full_text = re.sub(r'[:;]', ',', full_text)
+        full_text = re.sub(r'[#*`_\[\]^]', ' ', full_text)
+        full_text = re.sub(r';', '. ', full_text)
+        full_text = re.sub(r':', ', ', full_text)
         full_text = re.sub(r'\s+', ' ', full_text).strip()
+        full_text = re.sub(r'(?<=[.,]) (\d{1,2})\. (?=[A-Za-z])', r' \1, ', full_text)
+        full_text = strip_codal_citation_tail(full_text)
         
         # Apply custom pronunciations (Latin, Names, etc.)
         full_text = _apply_custom_pronunciations(full_text)
@@ -1062,9 +1323,9 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
     except (ValueError, TypeError):
         rate = 1.0
 
-    if content_type not in ['codal', 'case', 'question']:
+    if content_type not in ['codal', 'case', 'question', 'flashcard']:
         return func.HttpResponse(
-            json.dumps({"error": "Invalid content type. Use 'codal', 'case', or 'question'."}),
+            json.dumps({"error": "Invalid content type. Use 'codal', 'case', 'question', or 'flashcard'."}),
             status_code=400, mimetype="application/json"
         )
 
@@ -1109,6 +1370,8 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
             text, err = _get_text_for_case(content_id)
         elif content_type == 'question':
             text, err = _get_text_for_question(content_id)
+        elif content_type == 'flashcard':
+            text, err = _get_text_for_flashcard(content_id)
         else:
             text, err = _get_text_for_codal(content_id, code_id=code_id)
     except Exception as e:

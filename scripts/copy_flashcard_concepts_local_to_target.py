@@ -162,6 +162,8 @@ def main() -> None:
                 c["term"],
                 c.get("definition") or "",
                 Json(c.get("sources") or []),
+                int(c.get("case_count") or 0),
+                "core",
             )
             for c in merged
         ]
@@ -172,11 +174,11 @@ def main() -> None:
             execute_values(
                 tcur,
                 """
-                INSERT INTO flashcard_concepts (term_key, term, definition, sources)
+                INSERT INTO flashcard_concepts (term_key, term, definition, sources, case_count, importance_tier)
                 VALUES %s
                 """,
                 chunk,
-                template="(%s, %s, %s, %s::jsonb)",
+                template="(%s, %s, %s, %s::jsonb, %s, %s)",
                 page_size=len(chunk),
             )
             if len(tuples) > batch:

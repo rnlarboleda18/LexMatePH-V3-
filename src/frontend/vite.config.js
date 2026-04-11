@@ -110,7 +110,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:7071',
+        target: 'http://127.0.0.1:7071',
         changeOrigin: true,
         // Flashcard concepts aggregation can exceed default proxy timeouts
         timeout: 180000,

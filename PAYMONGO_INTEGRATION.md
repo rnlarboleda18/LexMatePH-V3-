@@ -65,9 +65,9 @@ Feature renders              SubscriptionModal opens
 | Internal Key | Display Name | Price | Description |
 |---|---|---|---|
 | `free` | Free | ₱0 | Default for all new users |
-| `amicus` | Amicus | ₱199/mo · ₱1,990/yr | Unlimited core legal content, limited LexPlay |
-| `juris` | Juris | ₱499/mo · ₱4,990/yr | Unlimited everything except Lexify |
-| `barrister` | Barrister | ₱999/mo · ₱9,990/yr | All features including Lexify AI grading |
+| `amicus` | Amicus | ₱199/mo · ₱1,990/yr | Unlimited core content + downloads, 10 min Codal LexPlay |
+| `juris` | Juris | ₱499/mo · ₱4,990/yr | Full LexCode, unlimited Codal LexPlay, track downloads |
+| `barrister` | Barrister | ₱999/mo · ₱9,990/yr | All LexPlay (Codal, Bar, Cases) + Lexify AI grading |
 | `admin` | Administrator | N/A | Bypasses all restrictions (Hardcoded emails) |
 
 ### Feature Matrix
@@ -77,11 +77,14 @@ Feature renders              SubscriptionModal opens
 | Case Digests (SC Decisions) | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
 | Bar Questions (detail view) | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
 | Flashcards | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
+| Case Digest Downloads | 5/day | Unlimited | Unlimited | Unlimited | Unlimited |
 | LexCode (read-only) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| LexCode Linked Jurisprudence | ❌ | ✅ | ✅ | ✅ | ✅ |
-| Case Digest Sidebar in LexCode | ❌ | ✅ | ✅ | ✅ | ✅ |
-| LexPlay (audio/video) | 5 min/day | 5 min/day | Unlimited | Unlimited | Unlimited |
+| LexCode Jurisprudence + Case Digests | ❌ | ❌ | ✅ | ✅ | ✅ |
+| LexPlay — Codal | 5 min/day | 10 min/day | Unlimited | Unlimited | Unlimited |
+| LexPlay — Bar Questions | ❌ | ❌ | ❌ | ✅ | ✅ |
+| LexPlay — Case Digests | ❌ | ❌ | ❌ | ✅ | ✅ |
 | LexPlaylist | Add only | Add only | Full | Full | Full |
+| Download Tracks to Device | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Lexify Bar Simulator + AI Grading | ❌ | ❌ | ❌ | ✅ | ✅ |
 
 

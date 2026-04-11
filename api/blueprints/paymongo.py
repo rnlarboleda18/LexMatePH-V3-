@@ -10,6 +10,7 @@ import requests
 
 from utils.clerk_auth import get_authenticated_user_id
 from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
+from utils.trial import expire_trial_for_user
 
 paymongo_bp = func.Blueprint()
 
@@ -41,6 +42,7 @@ FREE_TIER_DAILY_LIMITS = {
     "case_digest": 5,
     "bar_question": 5,
     "flashcard": 5,
+    "case_digest_download": 5,
 }
 
 ADMIN_EMAILS = [
@@ -84,19 +86,35 @@ def _get_db():
 
 def _get_or_create_paymongo_customer(clerk_id: str, email: str) -> str:
     """Get existing PayMongo customer ID from DB or create a new one."""
+    first_name = None
+    last_name = None
     with _get_db() as conn:
         with conn.cursor() as cur:
-            cur.execute("SELECT paymongo_customer_id FROM users WHERE clerk_id = %s", (clerk_id,))
+            cur.execute(
+                "SELECT paymongo_customer_id, first_name, last_name FROM users WHERE clerk_id = %s",
+                (clerk_id,),
+            )
             row = cur.fetchone()
             if row and row[0]:
                 return row[0]
+            if row:
+                first_name = row[1]
+                last_name = row[2]
 
-    # Create new PayMongo customer
+    # Fallback: derive names from email when Clerk didn't provide them
+    if not first_name:
+        first_name = email.split("@")[0].replace(".", " ").replace("_", " ").title() or "User"
+    if not last_name:
+        last_name = "."
+
+    # Create new PayMongo customer — first_name, last_name, email, default_device are all required
     payload = {
         "data": {
             "attributes": {
+                "first_name": first_name,
+                "last_name": last_name,
                 "email": email,
-                "default_device": "phone"
+                "default_device": "phone",
             }
         }
     }
@@ -160,6 +178,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
+                    expire_trial_for_user(cur, clerk_id)
                     expire_founding_promo_for_user(cur, clerk_id)
                     cur.execute(
                         "SELECT is_admin, email FROM users WHERE clerk_id = %s",
@@ -172,8 +191,9 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
                         is_admin_flag = bool(db_admin) or (em in admin_list)
                         try_grant_founding_promo(cur, clerk_id, is_admin_flag)
+                    conn.commit()
         except Exception as ex:
-            logging.warning("founding promo expire/grant: %s", ex)
+            logging.warning("trial/founding promo expire/grant: %s", ex)
 
         with _get_db() as conn:
             with conn.cursor() as cur:
@@ -341,19 +361,44 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 mimetype="application/json", status_code=502
             )
 
-        # Extract checkout URL from the latest invoice
-        checkout_url = (
-            resp_data.get("data", {})
-            .get("attributes", {})
+        sub_id = resp_data["data"]["id"]
+        sub_attrs = resp_data["data"]["attributes"]
+
+        # Extract the Payment Intent ID from the first invoice.
+        # PayMongo subscriptions use the Payment Intent workflow — there is no
+        # single hosted checkout URL. The frontend must create a payment method
+        # (card or Maya) and attach it to this PI to complete the first payment.
+        pi_id = (
+            sub_attrs
             .get("latest_invoice", {})
-            .get("attributes", {})
-            .get("hosted_url", "")
+            .get("payment_intent", {})
+            .get("id", "")
         )
+
+        # Retrieve the PI to get the client_key the frontend needs
+        client_key = ""
+        if pi_id:
+            pi_resp = requests.get(
+                f"{PAYMONGO_BASE_URL}/payment_intents/{pi_id}",
+                headers=_paymongo_headers(),
+                timeout=15,
+            )
+            if pi_resp.status_code == 200:
+                client_key = (
+                    pi_resp.json()
+                    .get("data", {})
+                    .get("attributes", {})
+                    .get("client_key", "")
+                )
 
         return func.HttpResponse(
             json.dumps({
-                "checkout_url": checkout_url,
-                "subscription_id": resp_data["data"]["id"]
+                "payment_intent_id": pi_id,
+                "client_key": client_key,
+                "subscription_id": sub_id,
+                # checkout_url is intentionally absent — PayMongo subscriptions
+                # require a client-side payment method form (card / Maya).
+                # See PAYMONGO_INTEGRATION.md §10 for the full checkout flow.
             }),
             mimetype="application/json", status_code=200
         )
@@ -392,16 +437,28 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                     )
                 sub_id = row[0]
 
-        # Cancel via PayMongo API
-        # (Assuming PayMongo has a cancel endpoint or similar)
-        # response = requests.post(f"{PAYMONGO_BASE_URL}/subscriptions/{sub_id}/cancel", headers=_paymongo_headers())
+        # Cancel via PayMongo API: POST /v1/subscriptions/{id}/cancel
+        cancel_response = requests.post(
+            f"{PAYMONGO_BASE_URL}/subscriptions/{sub_id}/cancel",
+            json={"data": {"attributes": {"cancellation_reason": "other"}}},
+            headers=_paymongo_headers(),
+            timeout=15,
+        )
+        if cancel_response.status_code not in (200, 201):
+            logging.warning(
+                f"PayMongo cancel returned {cancel_response.status_code}: {cancel_response.text}"
+            )
+            # Still downgrade locally so the user isn't stuck on a paid tier
         
-        # For now, let's just update DB
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "UPDATE users SET subscription_tier = 'free', subscription_status = 'cancelled' WHERE clerk_id = %s",
-                    (clerk_id,)
+                    """UPDATE users SET
+                           subscription_tier = 'free',
+                           subscription_status = 'cancelled',
+                           paymongo_subscription_id = NULL
+                       WHERE clerk_id = %s""",
+                    (clerk_id,),
                 )
                 conn.commit()
 
@@ -524,14 +581,20 @@ def paymongo_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
         logging.info(f"PayMongo webhook received: {evt_type}")
 
-        if evt_type == "subscription.created":
-            _handle_subscription_created(evt_data)
-        elif evt_type == "invoice.payment_succeeded":
-            _handle_invoice_succeeded(evt_data)
-        elif evt_type == "subscription.cancelled":
-            _handle_subscription_cancelled(evt_data)
-        elif evt_type == "invoice.payment_failed":
-            _handle_invoice_failed(evt_data)
+        # Actual PayMongo event names (corrected from original implementation)
+        if evt_type == "subscription.activated":
+            _handle_subscription_activated(evt_data)
+        elif evt_type == "subscription.updated":
+            # Covers both 'cancelled' and 'incomplete_cancelled' status changes
+            _handle_subscription_updated(evt_data)
+        elif evt_type == "subscription.past_due":
+            _handle_subscription_past_due(evt_data)
+        elif evt_type == "subscription.unpaid":
+            _handle_subscription_unpaid(evt_data)
+        elif evt_type == "subscription.invoice.paid":
+            _handle_invoice_paid(evt_data)
+        elif evt_type == "subscription.invoice.payment_failed":
+            _handle_invoice_payment_failed(evt_data)
         else:
             logging.info(f"PayMongo webhook: unhandled event type: {evt_type}")
 
@@ -557,70 +620,117 @@ def _get_clerk_id_from_customer(customer_id: str) -> str | None:
         return None
 
 
-def _handle_subscription_created(data: dict):
+def _handle_subscription_activated(data: dict):
+    """subscription.activated — first payment succeeded, subscription is now active."""
     sub_id = data.get("id", "")
-    plan_id = data.get("attributes", {}).get("plan_id", "")
-    customer_id = data.get("attributes", {}).get("customer_id", "")
+    attrs = data.get("attributes", {})
+    plan_id = attrs.get("plan_id", "")
+    customer_id = attrs.get("customer_id", "")
     tier = PLAN_TIER_MAP.get(plan_id, "free")
 
     clerk_id = _get_clerk_id_from_customer(customer_id)
     if not clerk_id:
-        logging.error(f"subscription.created: No user found for customer_id {customer_id}")
+        logging.error(f"subscription.activated: No user found for customer_id={customer_id}")
         return
 
     with _get_db() as conn:
         with conn.cursor() as cur:
-            cur.execute("""
+            cur.execute(
+                """
                 UPDATE users SET
-                    subscription_tier = %s,
-                    subscription_status = 'active',
+                    subscription_tier        = %s,
+                    subscription_status      = 'active',
                     paymongo_subscription_id = %s,
-                    subscription_source = 'paymongo'
+                    subscription_source      = 'paymongo',
+                    subscription_expires_at  = NULL
                 WHERE clerk_id = %s
-            """, (tier, sub_id, clerk_id))
+                """,
+                (tier, sub_id, clerk_id),
+            )
             conn.commit()
-    logging.info(f"Subscription created: clerk_id={clerk_id}, tier={tier}")
+    logging.info(f"subscription.activated: clerk_id={clerk_id}, tier={tier}")
 
 
-def _handle_invoice_succeeded(data: dict):
-    """Renew / confirm active subscription on successful payment."""
-    sub_id = data.get("attributes", {}).get("subscription_id", "")
-    if not sub_id:
-        return
-    with _get_db() as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
-                UPDATE users SET subscription_status = 'active'
-                WHERE paymongo_subscription_id = %s
-            """, (sub_id,))
-            conn.commit()
-    logging.info(f"Invoice payment succeeded for subscription: {sub_id}")
+def _handle_subscription_updated(data: dict):
+    """subscription.updated — catches 'cancelled' and 'incomplete_cancelled' status changes."""
+    sub_id = data.get("id", "")
+    status = data.get("attributes", {}).get("status", "")
+
+    if status in ("cancelled", "incomplete_cancelled"):
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    UPDATE users SET
+                        subscription_tier        = 'free',
+                        subscription_status      = 'cancelled',
+                        paymongo_subscription_id = NULL
+                    WHERE paymongo_subscription_id = %s
+                    """,
+                    (sub_id,),
+                )
+                conn.commit()
+        logging.info(f"subscription.updated → cancelled: sub_id={sub_id}")
+    else:
+        logging.info(f"subscription.updated: sub_id={sub_id}, status={status} (no action taken)")
 
 
-def _handle_subscription_cancelled(data: dict):
+def _handle_subscription_past_due(data: dict):
+    """subscription.past_due — payment failed, grace period started."""
     sub_id = data.get("id", "")
     with _get_db() as conn:
         with conn.cursor() as cur:
-            cur.execute("""
-                UPDATE users SET
-                    subscription_tier = 'free',
-                    subscription_status = 'cancelled',
-                    paymongo_subscription_id = NULL
-                WHERE paymongo_subscription_id = %s
-            """, (sub_id,))
+            cur.execute(
+                "UPDATE users SET subscription_status = 'past_due' WHERE paymongo_subscription_id = %s",
+                (sub_id,),
+            )
             conn.commit()
-    logging.info(f"Subscription cancelled: {sub_id}")
+    logging.warning(f"subscription.past_due: sub_id={sub_id}")
 
 
-def _handle_invoice_failed(data: dict):
-    sub_id = data.get("attributes", {}).get("subscription_id", "")
+def _handle_subscription_unpaid(data: dict):
+    """subscription.unpaid — all retries exhausted, subscription is unpaid."""
+    sub_id = data.get("id", "")
+    with _get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE users SET subscription_status = 'unpaid' WHERE paymongo_subscription_id = %s",
+                (sub_id,),
+            )
+            conn.commit()
+    logging.warning(f"subscription.unpaid: sub_id={sub_id}")
+
+
+def _handle_invoice_paid(data: dict):
+    """subscription.invoice.paid — renewal payment succeeded."""
+    # Invoice resource: subscription ID is at data.attributes.resource_id
+    attrs = data.get("attributes", {})
+    sub_id = attrs.get("resource_id", "")
     if not sub_id:
+        logging.warning("subscription.invoice.paid: missing resource_id")
         return
     with _get_db() as conn:
         with conn.cursor() as cur:
-            cur.execute("""
-                UPDATE users SET subscription_status = 'past_due'
-                WHERE paymongo_subscription_id = %s
-            """, (sub_id,))
+            cur.execute(
+                "UPDATE users SET subscription_status = 'active' WHERE paymongo_subscription_id = %s",
+                (sub_id,),
+            )
             conn.commit()
-    logging.warning(f"Invoice payment FAILED for subscription: {sub_id}")
+    logging.info(f"subscription.invoice.paid: sub_id={sub_id}")
+
+
+def _handle_invoice_payment_failed(data: dict):
+    """subscription.invoice.payment_failed — renewal payment failed."""
+    attrs = data.get("attributes", {})
+    sub_id = attrs.get("resource_id", "")
+    if not sub_id:
+        logging.warning("subscription.invoice.payment_failed: missing resource_id")
+        return
+    with _get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE users SET subscription_status = 'past_due' WHERE paymongo_subscription_id = %s",
+                (sub_id,),
+            )
+            conn.commit()
+    logging.warning(f"subscription.invoice.payment_failed: sub_id={sub_id}")

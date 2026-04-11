@@ -7,6 +7,7 @@ import { lexCache } from '../utils/cache';
 
 
 import { formatDate } from '../utils/dateUtils';
+import { apiUrl } from '../utils/apiUrl';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -16,7 +17,7 @@ async function parseResponseJson(response) {
     const text = await response.text();
     if (text == null || !String(text).trim()) {
         throw new Error(
-            `Empty response (HTTP ${response.status}). Start the API (Azure Functions on http://localhost:7071) so Vite can proxy /api, or set VITE_API_BASE_URL.`
+            `Empty response (HTTP ${response.status}). Start Azure Functions on http://localhost:7071. If you use http://localhost:4280 (SWA CLI), ensure swa-cli.config.json has apiLocation "api" and apiDevserverUrl "http://127.0.0.1:7071". Or set VITE_API_BASE_URL=http://127.0.0.1:7071 and restart Vite.`
         );
     }
     try {
@@ -542,7 +543,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const prefetchDetails = async (id) => {
         if (!id || prefetchCache[id]) return;
         try {
-            const res = await fetch(`/api/sc_decisions/${id}`);
+            const res = await fetch(apiUrl(`/api/sc_decisions/${id}`));
             const data = await res.json();
             setPrefetchCache(prev => ({ ...prev, [id]: data }));
         } catch (err) {
@@ -584,7 +585,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     const fetchPonentes = async () => {
         try {
-            const response = await fetch('/api/sc_decisions/ponentes');
+            const response = await fetch(apiUrl('/api/sc_decisions/ponentes'));
             const data = await response.json();
             if (Array.isArray(data)) {
                 setAvailablePonentes(data);
@@ -596,7 +597,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     const fetchDivisions = async () => {
         try {
-            const response = await fetch('/api/sc_decisions/divisions');
+            const response = await fetch(apiUrl('/api/sc_decisions/divisions'));
             const data = await response.json();
             if (Array.isArray(data)) {
                 setAvailableDivisions(data);
@@ -641,7 +642,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
             setDebugUrl(query);
 
-            const response = await fetch(query, { signal });
+            const response = await fetch(apiUrl(query), { signal });
 
             let data;
             try {
@@ -703,7 +704,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         setLoadingDetails(true);
         try {
             const fetcher = async () => {
-                const response = await fetch(`/api/sc_decisions/${id}`);
+                const response = await fetch(apiUrl(`/api/sc_decisions/${id}`));
                 return parseResponseJson(response);
             };
 
@@ -731,7 +732,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         if (!fullData || !fullData.digest_facts) {
             document.body.style.cursor = 'wait';
             try {
-                const res = await fetch(`/api/sc_decisions/${decision.id}`);
+                const res = await fetch(apiUrl(`/api/sc_decisions/${decision.id}`));
                 fullData = await parseResponseJson(res);
                 if (!res.ok || fullData?.error) {
                     console.error('Case detail error:', fullData?.error || res.status);
@@ -787,7 +788,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
             // Strategy 1: Try strict search first
             console.log("SmartLink: Strategy 1 - Exact search");
-            let response = await fetch(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`);
+            let response = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`));
             let data = await response.json();
 
             if (data.data && data.data.length > 0) {
@@ -805,7 +806,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             const cleanedTitle = caseRef.replace(/\s*\([^)]{5,}\)$/, '').trim();
             if (cleanedTitle !== caseRef) {
                 console.log("SmartLink: Strategy 2 - Cleaned title:", cleanedTitle);
-                response = await fetch(`/api/sc_decisions?search=${encodeURIComponent(cleanedTitle)}&limit=1`);
+                response = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(cleanedTitle)}&limit=1`));
                 data = await response.json();
                 if (data.data && data.data.length > 0) {
                     console.log("SmartLink: Found match (Cleaned)", data.data[0].id);
@@ -823,7 +824,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             const caseNoMatch = caseRef.match(/(G\.R\.|A\.M\.|A\.C\.|B\.M\.|U\.D\.K\.|Bar Matter)\s*(No\.)?\s*[\w-]+/i);
             if (caseNoMatch) {
                 console.log("SmartLink: Strategy 3 - Case number:", caseNoMatch[0]);
-                const retryResp = await fetch(`/api/sc_decisions?search=${encodeURIComponent(caseNoMatch[0])}&limit=1`);
+                const retryResp = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseNoMatch[0])}&limit=1`));
                 const retryData = await retryResp.json();
                 if (retryData.data && retryData.data.length > 0) {
                     console.log("SmartLink: Found match (Case No)", retryData.data[0].id);

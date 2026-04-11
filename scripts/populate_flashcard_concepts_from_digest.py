@@ -5,8 +5,10 @@ Create/populate flashcard_concepts from sc_decided_cases.legal_concepts (case di
 Source rows are filtered to: decision years 1987 through 2025 and division matching En Banc (see api/utils/flashcard_legal_concepts.py).
 
 Prerequisites:
-  1. Run sql/flashcard_concepts_migration.sql against your database.
+  1. Run sql/flashcard_concepts_importance_migration.sql (and your base flashcard_concepts DDL if needed).
   2. Set DB_CONNECTION_STRING (e.g. from api/local.settings.json Values).
+
+After repopulating, re-run scripts/label_flashcard_importance.py if you use importance_tier (TRUNCATE clears labels).
 
 Why it was slow before: one INSERT per concept (10k+ round trips to cloud Postgres).
 This version uses batched INSERTs (execute_values) in chunks.
@@ -140,6 +142,8 @@ def main() -> None:
                 c["term"],
                 c.get("definition") or "",
                 Json(c.get("sources") or []),
+                int(c.get("case_count") or 0),
+                "core",
             )
             for c in merged
         ]
@@ -151,11 +155,11 @@ def main() -> None:
             execute_values(
                 cur,
                 """
-                INSERT INTO flashcard_concepts (term_key, term, definition, sources)
+                INSERT INTO flashcard_concepts (term_key, term, definition, sources, case_count, importance_tier)
                 VALUES %s
                 """,
                 chunk,
-                template="(%s, %s, %s, %s::jsonb)",
+                template="(%s, %s, %s, %s::jsonb, %s, %s)",
                 page_size=len(chunk),
             )
             inserted += len(chunk)

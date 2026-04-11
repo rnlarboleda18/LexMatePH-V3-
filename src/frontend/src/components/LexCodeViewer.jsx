@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { Book, Calendar, Menu, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
+import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, Search, ArrowUp, ArrowDown, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
@@ -80,6 +80,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     const [error, setError] = useState(null);
     const [viewDate, setViewDate] = useState('');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    /** One-time mobile hint for edge-swipe TOC (sessionStorage dismiss). */
+    const [tocEdgeHintVisible, setTocEdgeHintVisible] = useState(false);
     const [activeTab, setActiveTab] = useState('toc');
     const [tocData, setTocData] = useState({ id: 'root', children: [], articles: [] });
     const [expandedGroups, setExpandedGroups] = useState({});
@@ -104,16 +106,21 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     const searchBoxRef = useRef(null);
     const suggestionsRef = useRef(null);
     const mainContentRef = useRef(null);
+    /** Top of rounded codal shell — desktop fixed TOC/juris panels align to this edge (clamped below app header on scroll). */
+    const codalShellRef = useRef(null);
     /** Spacers measure horizontal position for fixed side panels (sticky breaks with body overflow-x + transforms). */
     const tocSpacerRef = useRef(null);
     const jurisSpacerRef = useRef(null);
     const [tocFixedLeft, setTocFixedLeft] = useState(null);
     const [jurisFixedLeft, setJurisFixedLeft] = useState(null);
+    /** Measured viewport `top` (px) for portaled side panels; null = fall back to fixedPanelStyle. */
+    const [fixedPanelTopPx, setFixedPanelTopPx] = useState(null);
 
     const syncFixedPanelPositions = useCallback(() => {
         if (typeof window === 'undefined' || window.innerWidth < 1024) {
             setTocFixedLeft(null);
             setJurisFixedLeft(null);
+            setFixedPanelTopPx(null);
             return;
         }
         const tocEl = tocSpacerRef.current;
@@ -128,24 +135,130 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         } else {
             setJurisFixedLeft(null);
         }
+
+        const wantAlignedTop =
+            isSidebarOpen || !!(activeJurisArticle || activeAmendmentArticle);
+        const shell = codalShellRef.current;
+        if (wantAlignedTop && shell) {
+            const r = shell.getBoundingClientRect();
+            const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
+            const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 96 : 56);
+            setFixedPanelTopPx(Math.max(minTop, r.top));
+        } else {
+            setFixedPanelTopPx(null);
+        }
     }, [isSidebarOpen, activeJurisArticle, activeAmendmentArticle]);
 
     useLayoutEffect(() => {
         syncFixedPanelPositions();
+        let rafId = 0;
+        const scheduleSync = () => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                rafId = 0;
+                syncFixedPanelPositions();
+            });
+        };
         const ro = new ResizeObserver(() => syncFixedPanelPositions());
         if (tocSpacerRef.current) ro.observe(tocSpacerRef.current);
         if (jurisSpacerRef.current) ro.observe(jurisSpacerRef.current);
+        if (codalShellRef.current) ro.observe(codalShellRef.current);
         window.addEventListener('resize', syncFixedPanelPositions);
+        window.addEventListener('scroll', scheduleSync, true);
         return () => {
             window.removeEventListener('resize', syncFixedPanelPositions);
+            window.removeEventListener('scroll', scheduleSync, true);
             ro.disconnect();
+            if (rafId) cancelAnimationFrame(rafId);
         };
-    }, [syncFixedPanelPositions]);
+    }, [syncFixedPanelPositions, data, loading, error]);
 
     /** Re-measure after fullscreen toggles (main padding / width change). */
     useLayoutEffect(() => {
         syncFixedPanelPositions();
     }, [isFullscreen, syncFixedPanelPositions]);
+
+    /** In-flow anchor for TOC FAB; actual control is `position:fixed` via portal (sticky breaks under page overflow-x / transforms). */
+    const tocFabAnchorRef = useRef(null);
+    const [tocFabPos, setTocFabPos] = useState(null);
+
+    const syncTocFabPosition = useCallback(() => {
+        if (typeof window === 'undefined') return;
+        if (isSidebarOpen) {
+            setTocFabPos(null);
+            return;
+        }
+        // Mobile uses bottom Contents chip; side FAB + anchor only at lg (1024px).
+        if (window.innerWidth < 1024) {
+            setTocFabPos(null);
+            return;
+        }
+        const el = tocFabAnchorRef.current;
+        if (!el) {
+            setTocFabPos(null);
+            return;
+        }
+        const r = el.getBoundingClientRect();
+        const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
+        const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 96 : 56);
+        setTocFabPos({
+            left: r.left,
+            top: Math.max(minTop, r.top),
+        });
+    }, [isSidebarOpen]);
+
+    useLayoutEffect(() => {
+        if (loading || error || !data) return undefined;
+        syncTocFabPosition();
+        let rafId = 0;
+        const onScrollOrResize = () => {
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                rafId = 0;
+                syncTocFabPosition();
+            });
+        };
+        const ro = new ResizeObserver(() => syncTocFabPosition());
+        const anchor = tocFabAnchorRef.current;
+        if (anchor) {
+            ro.observe(anchor);
+            if (anchor.parentElement) ro.observe(anchor.parentElement);
+        }
+        // Spacers use width transitions (lg); anchor size stays 48×48 so RO on anchor misses sibling-driven shifts.
+        if (tocSpacerRef.current) ro.observe(tocSpacerRef.current);
+        if (jurisSpacerRef.current) ro.observe(jurisSpacerRef.current);
+        if (codalShellRef.current) ro.observe(codalShellRef.current);
+        window.addEventListener('scroll', onScrollOrResize, true);
+        window.addEventListener('resize', syncTocFabPosition);
+        return () => {
+            window.removeEventListener('scroll', onScrollOrResize, true);
+            window.removeEventListener('resize', syncTocFabPosition);
+            ro.disconnect();
+            if (rafId) cancelAnimationFrame(rafId);
+        };
+    }, [loading, error, data, isSidebarOpen, syncTocFabPosition]);
+
+    /** After TOC/juris spacer width finishes transitioning, remeasure FAB (avoids stale coords on first layout frame). */
+    useLayoutEffect(() => {
+        if (loading || error || !data || isSidebarOpen) return undefined;
+        let alive = true;
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                if (alive) syncTocFabPosition();
+            });
+        });
+        const t = window.setTimeout(() => {
+            if (alive) syncTocFabPosition();
+        }, 340);
+        return () => {
+            alive = false;
+            window.clearTimeout(t);
+        };
+    }, [isSidebarOpen, activeJurisArticle, activeAmendmentArticle, loading, error, data, syncTocFabPosition]);
+
+    useLayoutEffect(() => {
+        syncTocFabPosition();
+    }, [isFullscreen, syncTocFabPosition]);
 
     const fixedPanelStyle = useMemo(
         () => ({
@@ -159,6 +272,16 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         [isFullscreen]
     );
 
+    const fixedSidePanelStyle = useMemo(() => {
+        if (fixedPanelTopPx != null) {
+            return {
+                top: fixedPanelTopPx,
+                maxHeight: `calc(100dvh - ${fixedPanelTopPx}px - var(--player-height, 0px) - env(safe-area-inset-bottom, 0px) - 12px)`,
+            };
+        }
+        return { top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight };
+    }, [fixedPanelTopPx, fixedPanelStyle.top, fixedPanelStyle.maxHeight]);
+
     // Body-scroll lock ΓÇö simple overflow:hidden (no reflow, no scrollTo)
     // Only lock on mobile screens (<1024px) where the sidebar renders as a full-screen overlay
     const isSidebarActive = !!(activeJurisArticle || activeAmendmentArticle);
@@ -167,6 +290,92 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         document.body.style.overflow = 'hidden';
         return () => { document.body.style.overflow = ''; };
     }, [isSidebarActive]);
+
+    const dismissTocEdgeHint = useCallback(() => {
+        setTocEdgeHintVisible(false);
+        try {
+            sessionStorage.setItem('lexmate_lexcode_toc_edge_hint_dismissed', '1');
+        } catch {
+            /* private mode */
+        }
+    }, []);
+
+    useEffect(() => {
+        if (loading || error || !data) return;
+        if (typeof window === 'undefined' || window.innerWidth >= 1024) return;
+        try {
+            if (sessionStorage.getItem('lexmate_lexcode_toc_edge_hint_dismissed') === '1') return;
+        } catch {
+            /* ignore */
+        }
+        setTocEdgeHintVisible(true);
+    }, [loading, error, data]);
+
+    useEffect(() => {
+        if (!isSidebarOpen) return;
+        setTocEdgeHintVisible(false);
+        try {
+            sessionStorage.setItem('lexmate_lexcode_toc_edge_hint_dismissed', '1');
+        } catch {
+            /* ignore */
+        }
+    }, [isSidebarOpen]);
+
+    /** Mobile: swipe right from left screen edge opens TOC (lg+ uses side FAB). */
+    useEffect(() => {
+        if (loading || error || !data) return undefined;
+
+        const EDGE_PX = 32;
+        const MIN_DX = 76;
+        const MAX_ABS_DY = 110;
+
+        let active = false;
+        let sx = 0;
+        let sy = 0;
+
+        const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 1024;
+
+        const onTouchStart = (e) => {
+            if (!isMobile() || isSidebarOpen) return;
+            const t = e.touches?.[0];
+            if (!t) return;
+            const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
+            const belowHeader = gh ? t.clientY >= gh.getBoundingClientRect().bottom + 4 : t.clientY >= 56;
+            if (t.clientX <= EDGE_PX && belowHeader) {
+                active = true;
+                sx = t.clientX;
+                sy = t.clientY;
+            } else {
+                active = false;
+            }
+        };
+
+        const onTouchEnd = (e) => {
+            if (!active) return;
+            active = false;
+            if (!isMobile() || isSidebarOpen) return;
+            const t = e.changedTouches?.[0];
+            if (!t) return;
+            const dx = t.clientX - sx;
+            const dy = Math.abs(t.clientY - sy);
+            if (dx >= MIN_DX && dy <= MAX_ABS_DY) {
+                setIsSidebarOpen(true);
+            }
+        };
+
+        const onTouchCancel = () => {
+            active = false;
+        };
+
+        document.addEventListener('touchstart', onTouchStart, { capture: true, passive: true });
+        document.addEventListener('touchend', onTouchEnd, { capture: true, passive: true });
+        document.addEventListener('touchcancel', onTouchCancel, { capture: true, passive: true });
+        return () => {
+            document.removeEventListener('touchstart', onTouchStart, true);
+            document.removeEventListener('touchend', onTouchEnd, true);
+            document.removeEventListener('touchcancel', onTouchCancel, true);
+        };
+    }, [loading, error, data, isSidebarOpen]);
 
     // Toggle TOC group expansion
     const toggleGroup = (idx) => {
@@ -475,7 +684,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         createPortal(
             <div
                 className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
-                style={{ left: tocFixedLeft, top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight }}
+                style={{ left: tocFixedLeft, ...fixedSidePanelStyle }}
             >
                 <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-0 dark:border-white/5 dark:bg-slate-800/30">
                     <div className="mb-4 flex items-center justify-between">
@@ -515,7 +724,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         createPortal(
             <div
                 className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
-                style={{ left: jurisFixedLeft, top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight }}
+                style={{ left: jurisFixedLeft, ...fixedSidePanelStyle }}
             >
                 {activeJurisArticle && (
                     <LexCodeJurisSidebar
@@ -603,7 +812,10 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* Mobile/Overlay Sidebar (for smaller screens) */}
             {isSidebarOpen && (
-                <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start p-4" onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}>
+                <div
+                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                    onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
+                >
                     <div className="w-80 max-h-[80vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
                         <div className="p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30">
                             <span className="font-bold">Contents</span>
@@ -625,8 +837,20 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
             {/* Codal stream — grows with content; scrolls with the main page */}
             <div className={`relative z-30 mt-0 min-w-0 flex-1 transition-all duration-300 ${isFullscreen ? 'max-w-full' : (activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
-                {/* Outer shell keeps shadow; inner clips body text to rounded corners */}
-                <div className="rounded-2xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.45)]">
+                {/* TOC: lg = anchor + side FAB; small viewports = full-width codal + edge-swipe to open */}
+                <div className="flex min-w-0 items-start gap-1.5 sm:gap-2 lg:gap-2.5">
+                    {!isSidebarOpen && (
+                        <div
+                            ref={tocFabAnchorRef}
+                            className="hidden h-12 w-12 shrink-0 pointer-events-none lg:block"
+                            aria-hidden
+                        />
+                    )}
+                    {/* Outer shell keeps shadow; inner clips body text to rounded corners */}
+                    <div
+                        ref={codalShellRef}
+                        className="min-w-0 flex-1 rounded-2xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.45)]"
+                    >
                     <div
                         ref={mainContentRef}
                         id="main-content"
@@ -652,19 +876,8 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                             </div>
                         )}
 
-                        {/* Row 2: Title and Controls */}
-                        <div className="px-4 py-3 flex items-center gap-3">
-                            {/* TOC / Menu Button */}
-                            {!isSidebarOpen && (
-                                <button
-                                    onClick={() => setIsSidebarOpen(true)}
-                                    className="shrink-0 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-amber-700 dark:text-amber-500 transition-colors shadow-sm border border-gray-100 dark:border-gray-700"
-                                    title="Table of Contents"
-                                >
-                                    <Menu size={20} />
-                                </button>
-                            )}
-
+                        {/* Row 2: Title and Controls (TOC: mobile edge swipe, desktop FAB beside codal) */}
+                        <div className="flex items-center gap-3 px-4 py-3">
                             {/* Document Title ΓÇö centred in remaining space */}
                             <div className="flex-1 text-center min-w-0 px-2">
                                 <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans leading-tight">
@@ -694,6 +907,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         {renderMainContent()}
                     </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
@@ -707,10 +921,54 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             {desktopTocPortal}
             {desktopJurisPortal}
 
+            {typeof document !== 'undefined' &&
+                tocFabPos != null &&
+                !isSidebarOpen &&
+                createPortal(
+                    <button
+                        type="button"
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="fixed z-[42] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-amber-300/90 bg-gradient-to-br from-amber-500 via-amber-500 to-orange-600 text-white shadow-[0_6px_24px_rgba(217,119,6,0.4)] ring-2 ring-white/25 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-amber-400/40 dark:from-amber-600 dark:via-amber-600 dark:to-orange-700 dark:ring-amber-950/30"
+                        style={{ left: tocFabPos.left, top: tocFabPos.top }}
+                        title="Table of contents"
+                        aria-label="Open table of contents"
+                    >
+                        <ListTree className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+                    </button>,
+                    document.body
+                )}
+
+            {typeof document !== 'undefined' &&
+                tocEdgeHintVisible &&
+                !isSidebarOpen &&
+                createPortal(
+                    <div
+                        className="pointer-events-none fixed inset-x-0 z-[41] flex justify-center px-3 lg:hidden"
+                        style={{
+                            bottom: 'calc(var(--player-height, 0px) + 0.5rem + env(safe-area-inset-bottom, 0px))',
+                        }}
+                    >
+                        <div className="pointer-events-auto flex max-w-sm items-center gap-2 rounded-2xl border-2 border-slate-700 bg-slate-900 px-3 py-2.5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-2 ring-black/20 dark:border-slate-500 dark:bg-slate-950 dark:ring-white/10">
+                            <p className="text-center text-xs font-medium leading-snug text-white">
+                                Swipe from the left edge of the screen to open contents.
+                            </p>
+                            <button
+                                type="button"
+                                onClick={dismissTocEdgeHint}
+                                className="shrink-0 rounded-lg p-1 text-white hover:bg-white/15"
+                                aria-label="Dismiss hint"
+                            >
+                                <X size={16} strokeWidth={2} />
+                            </button>
+                        </div>
+                    </div>,
+                    document.body
+                )}
+
             {/* Mobile Overlay for Right Sidebar */}
             {(activeJurisArticle || activeAmendmentArticle) && (
                 <div
-                    className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-start justify-end p-4"
+                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start justify-end bg-black/50 p-4 backdrop-blur-md top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
                 >
                     <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">

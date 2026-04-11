@@ -6,12 +6,23 @@ const SubscriptionContext = createContext(null);
 const TIER_ORDER = ['free', 'amicus', 'juris', 'barrister'];
 
 const FEATURE_REQUIREMENTS = {
+  // Amicus unlocks unlimited daily usage
   case_digest_unlimited: 'amicus',
   bar_question_unlimited: 'amicus',
   flashcard_unlimited: 'amicus',
-  codex_linked_cases: 'amicus',
-  lexplay_unlimited: 'juris',
-  case_digest_download: 'juris',
+  case_digest_download_unlimited: 'amicus',
+
+  // Juris unlocks deeper LexCode features, unlimited codal playback, track downloads, and flashcard audio
+  codex_linked_cases: 'juris',   // covers both the jurisprudence panel and the inline case digest sidebar
+  lexplay_unlimited: 'juris',    // unlimited codal audio only
+  lexplay_flashcard: 'juris',    // concept + bar flashcard audio
+  download_tracks: 'juris',
+
+  // Barrister unlocks bar question and case digest audio
+  lexplay_bar: 'barrister',
+  lexplay_case_digest: 'barrister',
+
+  // Barrister only
   lexify: 'barrister',
 };
 
@@ -55,6 +66,7 @@ export function SubscriptionProvider({ children }) {
   const [tier, setTier] = useState('free');
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
+  const [subscriptionSource, setSubscriptionSource] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -104,6 +116,7 @@ export function SubscriptionProvider({ children }) {
         setTier(effectiveTier);
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
+        setSubscriptionSource(data.subscription_source || null);
         setIsAdmin(backendAdmin);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
       } else {
@@ -124,6 +137,9 @@ export function SubscriptionProvider({ children }) {
 
   // Effective tier takes admin override first, then test tier, then real tier
   const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
+
+  const isTrial = !isAdmin && subscriptionSource === 'trial' && status === 'active';
+  const trialExpiresAt = isTrial ? expiresAt : null;
 
   const canAccess = (feature) => {
     if (isAdmin) return true;
@@ -175,6 +191,9 @@ export function SubscriptionProvider({ children }) {
         tier: effectiveTier,
         status,
         expiresAt,
+        isTrial,
+        trialExpiresAt,
+        subscriptionSource,
         loading,
         canAccess,
         requireAccess,
@@ -184,7 +203,11 @@ export function SubscriptionProvider({ children }) {
         openUpgradeModal,
         closeUpgradeModal,
         refreshStatus,
-        tierLabel: isAdmin ? 'Administrator' : (TIER_LABELS[effectiveTier] || 'Free'),
+        tierLabel: isAdmin
+          ? 'Administrator'
+          : isTrial
+            ? `${TIER_LABELS[effectiveTier] || 'Free'} (Trial)`
+            : (TIER_LABELS[effectiveTier] || 'Free'),
         TIER_LABELS,
         FEATURE_REQUIREMENTS,
         testTier,

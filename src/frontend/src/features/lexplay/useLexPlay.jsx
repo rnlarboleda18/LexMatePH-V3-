@@ -4,10 +4,15 @@ import { useAuth } from '@clerk/clerk-react';
 const LexPlayContext = createContext();
 const LexPlayApiContext = createContext();
 
+/** Bust Service Worker `audio-cache` after server TTS text changes (bump with api `CACHE_VERSION` for codal). */
+export const LEXPLAY_CODAL_AUDIO_CV = 'v21';
+
 /** Relative URL for LexPlay TTS/audio (same formula as playTrack). */
 function buildAudioFetchPath(track, rate = 1.0) {
     const codeParam = track.code_id ? `code=${track.code_id}&` : '';
-    return `/api/audio/${track.type}/${track.id}?${codeParam}rate=${rate}`;
+    const cvParam =
+        track.type === 'codal' ? `cv=${LEXPLAY_CODAL_AUDIO_CV}&` : '';
+    return `/api/audio/${track.type}/${track.id}?${codeParam}${cvParam}rate=${rate}`;
 }
 
 /** Compare loaded audio URL to the track (pathname + query). Fixes resume after lock screen: old check omitted `rate=` so src never matched and we always reloaded. */

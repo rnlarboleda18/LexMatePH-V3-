@@ -4,6 +4,14 @@ import sys
 import re
 import psycopg2
 from datetime import datetime
+from pathlib import Path
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_api = str(_REPO_ROOT / "api")
+if _api not in sys.path:
+    sys.path.insert(0, _api)
+from codal_text import normalize_storage_markdown
+
 from parse_amendment import parse_amendment_document
 from apply_amendment import apply_amendment_with_ai
 
@@ -147,7 +155,7 @@ def update_const_codal(conn, article_number, new_content, amendment_id, amendmen
                     updated_at = NOW()
                 WHERE id = %s
             """
-            cur.execute(update_sql, (new_content, json.dumps(existing_amendments), cid))
+            cur.execute(update_sql, (normalize_storage_markdown(new_content), json.dumps(existing_amendments), cid))
             print(f"    [SYNC] const_codal updated for Art {article_number}")
             
         else:
@@ -167,6 +175,7 @@ def update_rpc_codal(conn, article_number, new_content, amendment_id, amendment_
     try:
         # 1. Parse new Title and Body
         title, body = parse_article_title_body(new_content)
+        body = normalize_storage_markdown(body)
         if not title:
             # If parsing fails, use a placeholder or keep existing?
             # Better to fetch existing loop? No, assume the amendment provides the full text including title.

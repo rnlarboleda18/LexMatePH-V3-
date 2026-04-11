@@ -9,6 +9,28 @@ from db_pool import get_db_connection, put_db_connection
 
 civ_bp = func.Blueprint()
 
+@civ_bp.route(route="civ/preliminary", auth_level=func.AuthLevel.ANONYMOUS)
+def get_civ_preliminary(req: func.HttpRequest) -> func.HttpResponse:
+    """Return Preliminary Title articles (book IS NULL, i.e. Arts 1-36)."""
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("""
+            SELECT * FROM civ_codal
+            WHERE book IS NULL
+            ORDER BY
+                CAST(REGEXP_REPLACE(article_num, '\D', '', 'g') AS INTEGER) ASC,
+                article_num ASC
+        """)
+        results = cur.fetchall()
+        attach_link_counts(cur, results)
+        attach_amendment_links(cur, results)
+        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+    except Exception as e:
+        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+    finally:
+        if 'conn' in locals(): put_db_connection(conn)
+
 @civ_bp.route(route="civ/book/{book_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_civ_by_book(req: func.HttpRequest) -> func.HttpResponse:
     book_num = req.route_params.get('book_num')

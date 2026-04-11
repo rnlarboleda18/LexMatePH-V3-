@@ -19,6 +19,12 @@ import argparse
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_API_DIR = os.path.normpath(os.path.join(_SCRIPT_DIR, "..", "..", "api"))
+if _API_DIR not in sys.path:
+    sys.path.insert(0, _API_DIR)
+from codal_text import normalize_storage_markdown
+
 
 def get_db_connection():
     try:
@@ -98,7 +104,7 @@ def reingest_articles(md_path, target_articles):
 
         data = parsed[art_num]
         title = data['title']
-        body = data['body']
+        body = normalize_storage_markdown(data['body'])
 
         # Check if article exists in rpc_codal
         cur.execute("SELECT id, article_num, article_title FROM rpc_codal WHERE article_num = %s", (art_num,))
