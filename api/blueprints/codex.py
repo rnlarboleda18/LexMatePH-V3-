@@ -191,18 +191,23 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      title_lbl = f"{r.get('article_label', '')}"
                      if r.get('article_title'):
                          title_lbl += f"\n{r['article_title']}"
-                     title_n = r['article_num']
                      chapter_lbl = ""
                      chapter_n = ""
-                     
+
                      # Preamble Handling
                      if "PREAMBLE" in title_lbl.upper():
                          title_lbl = "PREAMBLE"
-                     
+
+                     # Use only the top-level Roman numeral part of article_num as the
+                     # title change key so the ARTICLE header fires once per article,
+                     # not once per section.  "IX-A-1" → "IX", "II-3" → "II".
+                     raw_art_num = str(r.get('article_num') or '')
+                     title_n = raw_art_num.split('-')[0] if raw_art_num else None
+
                      # Hide section_label entirely for CONST because it's rendered inline by ArticleNode
                      section_lbl = ""
-                         
-                     article_num = str(r.get('article_num') or "")
+
+                     article_num = raw_art_num
 
                      # Skip stub chapter-header rows: article_num has no '-' and content is very short.
                      # e.g. 'II', 'X', 'XIV' are nav dividers, NOT real audio articles.
