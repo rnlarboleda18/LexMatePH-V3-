@@ -543,9 +543,17 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const prefetchDetails = async (id) => {
         if (!id || prefetchCache[id]) return;
         try {
+            // Check IndexedDB first — no network if already cached from a prior session
+            const idbHit = await lexCache.get('cases', id);
+            if (idbHit && idbHit.digest_facts) {
+                setPrefetchCache(prev => ({ ...prev, [id]: idbHit }));
+                return;
+            }
             const res = await fetch(apiUrl(`/api/sc_decisions/${id}`));
             const data = await res.json();
             setPrefetchCache(prev => ({ ...prev, [id]: data }));
+            // Persist to IndexedDB so future sessions (and page reloads) are instant
+            lexCache.set('cases', id, data).catch(() => {});
         } catch (err) {
             console.error("Prefetch failed", err);
         }
@@ -725,11 +733,22 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     const handleCaseClick = async (decision) => {
-        // Enforce "one instance" feel (Disable Lazy Load)
-        // If not cached, we fetch IT ALL before opening the modal.
+        // Layer 1: in-memory prefetch cache (same session, fastest)
         let fullData = prefetchCache[decision.id];
-        
+
         if (!fullData || !fullData.digest_facts) {
+            // Layer 2: IndexedDB (persists across page reloads — no network needed)
+            try {
+                const idbHit = await lexCache.get('cases', decision.id);
+                if (idbHit && idbHit.digest_facts) {
+                    fullData = idbHit;
+                    setPrefetchCache(prev => ({ ...prev, [decision.id]: idbHit }));
+                }
+            } catch (_) {}
+        }
+
+        if (!fullData || !fullData.digest_facts) {
+            // Layer 3: network fetch (Redis-cached on the server — usually fast)
             document.body.style.cursor = 'wait';
             try {
                 const res = await fetch(apiUrl(`/api/sc_decisions/${decision.id}`));
@@ -737,8 +756,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 if (!res.ok || fullData?.error) {
                     console.error('Case detail error:', fullData?.error || res.status);
                 }
-                // Update cache so next time it's instant
+                // Populate both caches for next time
                 setPrefetchCache(prev => ({ ...prev, [decision.id]: fullData }));
+                lexCache.set('cases', decision.id, fullData).catch(() => {});
             } catch (err) {
                 console.error("Manual fetch failed", err);
             } finally {
@@ -748,11 +768,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
         const enrichedDecision = { ...decision, ...fullData };
 
-        // Delegate to parent (App.jsx) which handles the Global Modal
         if (onCaseSelect) {
             onCaseSelect(enrichedDecision);
         } else {
-            // Fallback (shouldn't happen in new architecture)
             setSelectedDecision(enrichedDecision);
         }
     };

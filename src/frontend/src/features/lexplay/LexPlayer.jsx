@@ -1398,6 +1398,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                         options={[
                                             { value: "RPC", label: "Revised Penal Code" },
                                             { value: "CIV", label: "Civil Code" },
+                                            { value: "RCC", label: "Revised Corporation Code" },
                                             { value: "FC", label: "Family Code" },
                                             { value: "CONST", label: "1987 Constitution" },
                                             { value: "LABOR", label: "Labor Code" },

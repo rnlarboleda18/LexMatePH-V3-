@@ -2,7 +2,7 @@
 # Target: 100 Ascending + 100 Descending Workers (Total 200)
 
 $env:GOOGLE_API_KEY = "REDACTED_API_KEY_HIDDEN"
-$env:DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+$env:DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 Write-Host "--- SCALING UP FLEETS TO 200 WORKERS ---" -ForegroundColor Cyan
 

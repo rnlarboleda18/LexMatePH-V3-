@@ -43,7 +43,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v21"  # v21: fc_codal title headers use Arabic numerals; no redundant "Family Code" prefix
+CACHE_VERSION = "v23"  # v23: RCC (rcc_codal) LexPlay / boundaries same family as CIV
 
 # Global lock: Azure Speech F0 allows only 1 concurrent real-time synthesis.
 # This prevents 429 errors when multiple requests overlap (e.g. fast track skipping).
@@ -407,7 +407,7 @@ def get_codal_boundaries(table_name):
     if table_name in _codal_boundaries:
         cached = _codal_boundaries[table_name]
         # Self-heal: drop stale entries when structural maps gain new keys (e.g. chapter_start / section_start).
-        if table_name in ('rpc_codal', 'civ_codal', 'labor_codal'):
+        if table_name in ('rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal'):
             stale = (
                 'title_start_book_num' not in cached
                 or 'chapter_start' not in cached
@@ -486,7 +486,7 @@ def get_codal_boundaries(table_name):
                             cur.execute(f"SELECT LOWER(group_header), MIN(id) FROM {table_name} WHERE group_header IS NOT NULL AND group_header != '' GROUP BY LOWER(group_header)")
                             for r in cur.fetchall(): bounds['group_header'][r[0]] = r[1]
                         
-                    elif table_name in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                    elif table_name in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
                         bounds = fetch_codal_family_bounds(cur, table_name)
                             
             finally:
@@ -618,6 +618,7 @@ def _get_text_for_codal(content_id, code_id=None):
     LEGACY_TABLES = {
         'rpc': 'rpc_codal',
         'civ': 'civ_codal',
+        'rcc': 'rcc_codal',
         'labor': 'labor_codal',
         'const': 'consti_codal',
         'fc': 'fc_codal',
@@ -631,17 +632,23 @@ def _get_text_for_codal(content_id, code_id=None):
                 cols = "id, article_num, article_title, group_header, content_md, section_label"
             elif table == "fc_codal":
                 cols = "id, article_num, article_title, content_md, section_label, group_header"
-            elif table in ["rpc_codal", "civ_codal", "labor_codal"]:
-                # civ_codal and labor_codal store chapter descriptions without
-                # the "Chapter N" prefix; chapter_num is needed to reconstruct it.
+            elif table in ["rpc_codal", "civ_codal", "rcc_codal", "labor_codal"]:
+                # labor_codal has no section_label column; civ_codal / rcc_codal and rpc_codal do.
+                # civ_codal / labor_codal store plain chapter descriptions; chapter_num needed.
                 # rpc_codal embeds "CHAPTER ONE -" in chapter_label directly.
-                if table in ("civ_codal", "labor_codal"):
+                if table == "labor_codal":
+                    cols = (
+                        "id, book, book_label, title_num, title_label, "
+                        "chapter_num, chapter_label, "
+                        "article_num, article_title, content_md"
+                    )
+                elif table in ("civ_codal", "rcc_codal"):
                     cols = (
                         "id, book, book_label, title_num, title_label, "
                         "chapter_num, chapter_label, section_label, "
                         "article_num, article_title, content_md"
                     )
-                else:
+                else:  # rpc_codal
                     cols = (
                         "id, book, book_label, title_num, title_label, "
                         "chapter_label, section_label, "
@@ -760,7 +767,7 @@ def _get_text_for_codal(content_id, code_id=None):
                 content = content.replace('\r\n', '\n').replace('\r', '\n')
                 if table == 'rpc_codal':
                     content = repair_rpc_article_266_for_tts(art_num, content)
-                if table in ('rpc_codal', 'civ_codal', 'labor_codal'):
+                if table in ('rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal'):
                     content = tts_strip_leading_embedded_section(
                         content,
                         row.get("section_label"),
@@ -915,7 +922,7 @@ def _get_text_for_codal(content_id, code_id=None):
                             
                         if art_title and not is_redundant:
                             header += f". {art_title}"
-                    elif table in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                    elif table in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
                         # Structural lines only on the first article in *codal order* where each
                         # division starts (not MIN(uuid), which does not follow article sequence).
                         hdr_parts = []
@@ -1042,7 +1049,7 @@ def _get_text_for_codal(content_id, code_id=None):
                     
                 # Dedupe: RPC/CIV/Labor already drop only the article line when the body repeats it,
                 # keeping Book/Title/Section. Other codals use full-header dedupe.
-                if table not in ['rpc_codal', 'civ_codal', 'labor_codal']:
+                if table not in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
                     header, _ = dedupe_codal_header_prefix(clean, header, str(clean_num))
                 full_text = f"{header}. {clean}" if header else clean
                 full_text = _apply_custom_pronunciations(full_text)

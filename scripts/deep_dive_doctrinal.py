@@ -5,7 +5,7 @@ import os
 from datetime import datetime, timedelta
 
 SQLITE_DB_PATH = "api/questions.db"
-PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def normalize_title_token(text):
     if not text: return ""

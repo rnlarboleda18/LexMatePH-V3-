@@ -28,8 +28,8 @@ def _load_local_settings():
 
 def _conn_str():
     cs = (os.environ.get("DB_CONNECTION_STRING") or "").strip()
-    if ":6432/" in cs:
-        cs = cs.replace(":6432/", ":5432/")
+    if ":5432/" in cs:
+        cs = cs.replace(":5432/", ":5432/")
     return cs
 
 

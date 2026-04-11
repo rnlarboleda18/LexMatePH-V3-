@@ -17,13 +17,13 @@ if _API not in sys.path:
 def _conn_str() -> str:
     env = os.environ.get("DB_CONNECTION_STRING", "").strip()
     if env:
-        return env.replace(":6432/", ":5432/")
+        return env.replace(":5432/", ":5432/")
     path = os.path.join(_API, "local.settings.json")
     if os.path.isfile(path):
         with open(path, encoding="utf-8") as f:
             v = (json.load(f).get("Values") or {}).get("DB_CONNECTION_STRING", "").strip()
         if v:
-            return v.replace(":6432/", ":5432/")
+            return v.replace(":5432/", ":5432/")
     print("Set DB_CONNECTION_STRING or Values.DB_CONNECTION_STRING in api/local.settings.json")
     sys.exit(1)
     return ""

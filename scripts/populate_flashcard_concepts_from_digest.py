@@ -63,8 +63,8 @@ def main() -> None:
         print("DB_CONNECTION_STRING not set and api/local.settings.json missing Values.DB_CONNECTION_STRING.")
         sys.exit(1)
 
-    if ":6432/" in conn_str:
-        conn_str = conn_str.replace(":6432/", ":5432/")
+    if ":5432/" in conn_str:
+        conn_str = conn_str.replace(":5432/", ":5432/")
 
     import psycopg2
     from psycopg2.extras import Json, RealDictCursor, execute_values

@@ -15,6 +15,10 @@ Write-Host "[CONFIG] Use cloud Postgres via api\local.settings.json with key DB_
 Write-Host "         Do not set ENVIRONMENT=local unless you intend a local database." -ForegroundColor DarkGray
 Write-Host ""
 
+# Ensure stale environment variables don't shadow local.settings.json
+$env:DB_CONNECTION_STRING = $null
+$env:ENVIRONMENT = $null
+
 # ── Prerequisites ───────────────────────────────────────────────────────────
 $apiDir       = Join-Path $Root "api"
 $frontendDir  = Join-Path $Root "src\frontend"
@@ -113,6 +117,8 @@ $backendCmd = @"
 @echo off
 cd /d "$apiDir"
 call .venv\Scripts\activate.bat
+set DB_CONNECTION_STRING=
+set ENVIRONMENT=
 set PYTHONPATH=.
 echo API directory: %CD%
 echo Starting func host on http://localhost:7071 ...

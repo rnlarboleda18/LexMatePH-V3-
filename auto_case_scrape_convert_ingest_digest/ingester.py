@@ -7,7 +7,7 @@ import logging
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MD_DIR = Path(BASE_DIR).parent / "data" / "lawphil_md"
-DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 

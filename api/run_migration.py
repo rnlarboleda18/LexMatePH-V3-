@@ -17,8 +17,8 @@ load_settings()
 
 conn_str = os.environ.get("DB_CONNECTION_STRING") or ""
 # Force 5432 for local direct connection
-if ":6432/" in conn_str:
-    conn_str = conn_str.replace(":6432/", ":5432/")
+if ":5432/" in conn_str:
+    conn_str = conn_str.replace(":5432/", ":5432/")
 
 sql = """
 ALTER TABLE questions 

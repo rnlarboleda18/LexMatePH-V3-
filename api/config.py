@@ -20,6 +20,7 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 
 # Cache TTL settings (in seconds)
 CACHE_TTL_DECISIONS = int(os.getenv("CACHE_TTL_DECISIONS", "60"))  # 1 minute
+CACHE_TTL_DECISION_DETAIL = int(os.getenv("CACHE_TTL_DECISION_DETAIL", "600"))  # 10 minutes — case detail rarely changes
 CACHE_TTL_PONENTES = int(os.getenv("CACHE_TTL_PONENTES", "300"))  # 5 minutes
 CACHE_TTL_FILTERS = int(os.getenv("CACHE_TTL_FILTERS", "300"))  # 5 minutes
 # Proxied SC judiciary RSS (https://sc.judiciary.gov.ph/feed/) — refreshes when upstream publishes.

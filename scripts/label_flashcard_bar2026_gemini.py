@@ -282,8 +282,8 @@ def main() -> None:
     if not conn_str:
         print("DB_CONNECTION_STRING missing.", file=sys.stderr)
         sys.exit(1)
-    if ":6432/" in conn_str:
-        conn_str = conn_str.replace(":6432/", ":5432/")
+    if ":5432/" in conn_str:
+        conn_str = conn_str.replace(":5432/", ":5432/")
 
     syllabus = load_syllabus_text(args.syllabi_dir.resolve(), args.max_syllabus_chars)
 

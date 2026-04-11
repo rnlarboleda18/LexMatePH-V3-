@@ -17,6 +17,7 @@ from config import (
     DB_CONNECTION_STRING,
     REDIS_ENABLED,
     CACHE_TTL_DECISIONS,
+    CACHE_TTL_DECISION_DETAIL,
     CACHE_TTL_PONENTES,
     CACHE_TTL_FLASHCARD_CONCEPTS,
     CACHE_TTL_SC_JUDICIARY_FEED,
@@ -938,40 +939,67 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
 @supreme_bp.route(route="sc_decisions/{id:int}", auth_level=func.AuthLevel.ANONYMOUS)
 def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Processing Supreme Decision Detail request.')
-    
+
+    decision_id = req.route_params.get('id')
+    cache_key = f"sc_decisions:detail:{decision_id}"
+
+    # --- Redis cache check ---
+    if REDIS_ENABLED:
+        cached = cache_get(cache_key)
+        if cached is not None:
+            body = json.dumps(cached, default=str)
+            import hashlib
+            etag = f'W/"{hashlib.md5(body.encode()).hexdigest()}"'
+            return func.HttpResponse(
+                body,
+                mimetype="application/json",
+                status_code=200,
+                headers={
+                    "Cache-Control": f"public, max-age={CACHE_TTL_DECISION_DETAIL}",
+                    "ETag": etag,
+                },
+            )
+
     try:
-        decision_id = req.route_params.get('id')
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
-        
 
-        # Fetch ALL fields for the digest
         cur.execute("SELECT * FROM sc_decided_cases WHERE id = %s", (decision_id,))
         result = cur.fetchone()
-        
+
         if result:
             if not result.get('full_text_md'):
-                 result['full_text_md'] = "*Content not available in Markdown format yet.*"
+                result['full_text_md'] = "*Content not available in Markdown format yet.*"
 
             cur.execute("""
-                SELECT id, short_title as title, document_type, full_text_md 
-                FROM sc_decided_cases 
+                SELECT id, short_title as title, document_type, full_text_md
+                FROM sc_decided_cases
                 WHERE parent_id = %s
                 ORDER BY id ASC
             """, (decision_id,))
-            children = cur.fetchall()
-            result['related_opinions'] = children
+            result['related_opinions'] = cur.fetchall()
 
+            # Store in Redis for subsequent opens
+            if REDIS_ENABLED:
+                cache_set(cache_key, result, ttl=CACHE_TTL_DECISION_DETAIL)
+
+            body = json.dumps(result, default=str)
+            import hashlib
+            etag = f'W/"{hashlib.md5(body.encode()).hexdigest()}"'
             return func.HttpResponse(
-                json.dumps(result, default=str),
+                body,
                 mimetype="application/json",
-                status_code=200
+                status_code=200,
+                headers={
+                    "Cache-Control": f"public, max-age={CACHE_TTL_DECISION_DETAIL}",
+                    "ETag": etag,
+                },
             )
         else:
             return func.HttpResponse(
                 json.dumps({"error": "Not Found"}),
                 mimetype="application/json",
-                status_code=404
+                status_code=404,
             )
 
     except Exception as e:
@@ -979,7 +1007,7 @@ def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             json.dumps({"error": str(e)}),
             mimetype="application/json",
-            status_code=500
+            status_code=500,
         )
     finally:
         if 'cur' in locals() and cur: cur.close()

@@ -45,7 +45,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         'FC': 'Family Code of the Philippines',
         'LABOR': 'Labor Code of the Philippines',
         'ROC': 'Rules of Court of the Philippines',
-        // Add others as needed
+        'RCC': 'REVISED CORPORATION CODE OF THE PHILIPPINES',
     };
     const mainTitle = codeTitles[code.toUpperCase()] || code;
     const centerLayout = false; // Left-aligned by default to match body text flow
@@ -57,6 +57,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         'LABOR': 'Presidential Decree No. 442, as amended',
         'FC': 'Executive Order No. 209, as amended',
         'ROC': 'As amended, 2019',
+        'RCC': 'Republic Act No. 11232, as amended',
     };
     const docSubtitle = codeSubtitles[code.toUpperCase()] || null;
 
@@ -134,6 +135,25 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             }
                         }
                         return allData;
+                    } else if (code === 'RCC') {
+                        const res = await fetch('/api/codex/versions?short_name=RCC');
+                        if (!res.ok) {
+                            let msg = `Codex HTTP ${res.status}`;
+                            try {
+                                const err = await res.json();
+                                if (err && typeof err.detail === 'string' && err.detail) msg = err.detail;
+                                else if (err && typeof err.error === 'string' && err.error) msg = err.error;
+                            } catch {
+                                /* ignore */
+                            }
+                            throw new Error(msg);
+                        }
+                        const json = await res.json();
+                        return (json.articles || []).map((a) => ({
+                            ...a,
+                            article_num: a.article_num ?? a.article_number ?? a.key_id,
+                            content_md: a.content_md || a.content,
+                        }));
                     }
                 }
                 return [];

@@ -164,7 +164,7 @@ def _partition_section_first_by_context(cur, table: str) -> dict[str, str]:
 
 def fetch_codal_family_bounds(cur, table_name: str) -> dict:
     """
-    For rpc_codal / civ_codal / labor_codal: structural "start" row ids in codal order.
+    For rpc_codal / civ_codal / rcc_codal / labor_codal: structural "start" row ids in codal order.
     Keys:
       book_start          : {book -> id}
       title_label         : {normalized_label -> id}  (fallback)
@@ -174,7 +174,7 @@ def fetch_codal_family_bounds(cur, table_name: str) -> dict:
       chapter_label       : {normalized_label -> id}  (legacy fallback, single-key)
       section_label       : {normalized_label -> id}  (legacy fallback, single-key)
     """
-    if table_name not in ("rpc_codal", "civ_codal", "labor_codal"):
+    if table_name not in ("rpc_codal", "civ_codal", "rcc_codal", "labor_codal"):
         raise ValueError(f"Unsupported table: {table_name}")
 
     bounds: dict = {

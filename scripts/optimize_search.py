@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-db_url = os.environ.get("DB_CONNECTION_STRING") or "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+db_url = os.environ.get("DB_CONNECTION_STRING") or "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 conn = psycopg2.connect(db_url)
 conn.autocommit = True # Required for CREATE INDEX CONCURRENTLY
 cur = conn.cursor()

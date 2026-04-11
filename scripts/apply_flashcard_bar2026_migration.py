@@ -16,8 +16,8 @@ def main() -> None:
     if not cs:
         print("No DB_CONNECTION_STRING", file=sys.stderr)
         sys.exit(1)
-    if ":6432/" in cs:
-        cs = cs.replace(":6432/", ":5432/")
+    if ":5432/" in cs:
+        cs = cs.replace(":5432/", ":5432/")
     import psycopg2
 
     stmts = [

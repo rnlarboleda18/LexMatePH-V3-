@@ -59,7 +59,7 @@ CIR vs. Unioil,G.R. No. 204405,"Aug 4, 2021"
 CIR vs. Toledo Power Co.,G.R. No. 238260,"June 21, 2023"
 """
 
-PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def normalize_title_token(text):
     if not text: return set()

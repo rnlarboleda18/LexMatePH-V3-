@@ -119,7 +119,17 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
         code_meta = cur.fetchone()
         
         if not code_meta:
-             return func.HttpResponse(json.dumps({"error": "Code not found"}), status_code=404)
+             return func.HttpResponse(
+                 json.dumps(
+                     {
+                         "error": "Code not found",
+                         "detail": f"No legal_codes row for short_name={short_name.upper()!r}. "
+                         "For RCC run: python scripts/rcc_codal_cli.py schema",
+                     }
+                 ),
+                 status_code=404,
+                 mimetype="application/json",
+             )
         
         code_id = code_meta['code_id']
         
@@ -130,6 +140,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
             'LABOR': 'labor_codal',
             'RPC': 'rpc_codal',
             'CIV': 'civ_codal',
+            'RCC': 'rcc_codal',
             'ROC': 'roc_codal'
         }
         
@@ -235,7 +246,10 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      article_num = str(raw_anum.split('-')[-1] if '-' in raw_anum else raw_anum)
                  else:
                      book_lbl = r.get('book_label') or ""
-                     book_n = r.get('book_num')
+                     # civ_codal / rcc_codal / rpc_codal / labor_codal use column "book", not book_num
+                     book_n = r.get('book')
+                     if book_n is None:
+                         book_n = r.get('book_num')
                      title_lbl = clean_structural_label(r.get('title_label'))
                      title_n = r.get('title_num')
                      chapter_lbl = clean_structural_label(r.get('chapter_label'))
@@ -279,7 +293,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      content_to_send = "\n\n".join(injections) + "\n\n" + content_to_send
 
                  # Format for prefix Article X
-                 if short_name.upper() in ['LABOR', 'RPC', 'CIV', 'FC']:
+                 if short_name.upper() in ['LABOR', 'RPC', 'CIV', 'RCC', 'FC']:
                      art_title = r.get('article_title') or ""
                      prefix = f"Article {article_num}."
                      if art_title:

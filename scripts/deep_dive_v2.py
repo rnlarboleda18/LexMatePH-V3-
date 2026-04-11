@@ -3,7 +3,7 @@ import re
 from datetime import datetime, timedelta
 import os
 
-PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+PG_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def normalize(text):
     return re.sub(r'[^a-zA-Z0-9]', '', text).lower()

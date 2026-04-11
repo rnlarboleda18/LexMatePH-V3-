@@ -41,8 +41,8 @@ if _API not in sys.path:
 
 
 def _normalize_port(conn: str) -> str:
-    if ":6432/" in conn:
-        return conn.replace(":6432/", ":5432/")
+    if ":5432/" in conn:
+        return conn.replace(":5432/", ":5432/")
     return conn
 
 

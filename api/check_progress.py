@@ -16,8 +16,8 @@ def load_settings():
 load_settings()
 
 conn_str = os.environ.get("DB_CONNECTION_STRING") or ""
-if ":6432/" in conn_str:
-    conn_str = conn_str.replace(":6432/", ":5432/")
+if ":5432/" in conn_str:
+    conn_str = conn_str.replace(":5432/", ":5432/")
 
 try:
     conn = psycopg2.connect(conn_str)

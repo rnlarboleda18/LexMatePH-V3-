@@ -35,6 +35,7 @@ const QUESTIONS_CACHE_KEY = 'bar_questions_limit5000';
 const CODAL_FILTER_OPTIONS = [
   { id: 'rpc', label: 'Revised Penal Code' },
   { id: 'civ', label: 'Civil Code of the Philippines' },
+  { id: 'rcc', label: 'Revised Corporation Code' },
   { id: 'fc', label: 'Family Code' },
   { id: 'roc', label: 'Rules of Court' },
   { id: 'const', label: 'Philippine Constitution' },
@@ -826,6 +827,7 @@ function App() {
       {globalSelectedCase && (
         <Suspense fallback={null}>
           <CaseDecisionModal
+            key={globalSelectedCase.id}
             decision={globalSelectedCase}
             onClose={closeGlobalCaseModal}
             onCaseSelect={selectGlobalCase}

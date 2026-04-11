@@ -27,7 +27,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Constants (Must match audio_provider.py get_audio_stream cache_key)
-CACHE_VERSION = "v21"  # Keep in sync with audio_provider.CACHE_VERSION
+CACHE_VERSION = "v22"  # Keep in sync with audio_provider.CACHE_VERSION
 VOICE_NAME = "en-US-JennyMultilingualNeural"  # same voice as live endpoint
 RATE = 1.0
 RATE_SLUG = "1p0"

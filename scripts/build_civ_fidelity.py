@@ -62,7 +62,7 @@ def _load_db_url() -> str:
         url = (data.get("Values") or {}).get("DB_CONNECTION_STRING", "")
         if url and "REPLACE_WITH" not in url:
             # Port 6432 (PgBouncer) is no longer active; normalise to 5432
-            url = url.replace(":6432/", ":5432/")
+            url = url.replace(":5432/", ":5432/")
             return url
     raise FileNotFoundError(
         "DB_CONNECTION_STRING not found or is a placeholder in local.settings.json"

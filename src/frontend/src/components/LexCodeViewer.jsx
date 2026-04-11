@@ -70,6 +70,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         'FC': { title: 'Family Code of the Philippines', subtitle: 'Executive Order No. 209, as amended' },
         'LABOR': { title: 'Labor Code of the Philippines', subtitle: 'Presidential Decree No. 442, as amended' },
         'ROC': { title: 'Rules of Court of the Philippines', subtitle: 'As amended, 2019' },
+        'RCC': { title: 'Revised Corporation Code of the Philippines', subtitle: 'Republic Act No. 11232, as amended' },
     };
     const codeKey = (shortName || '').toUpperCase();
     const codeTitle = codeTitleMap[codeKey]?.title || shortName || '';
@@ -440,7 +441,17 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                 
                 const fetcher = async () => {
                     const res = await fetch(url);
-                    if (!res.ok) throw new Error('Failed to load Codex');
+                    if (!res.ok) {
+                        let msg = `Codex HTTP ${res.status}`;
+                        try {
+                            const err = await res.json();
+                            if (err && typeof err.detail === 'string' && err.detail) msg = err.detail;
+                            else if (err && typeof err.error === 'string' && err.error) msg = err.error;
+                        } catch {
+                            /* ignore */
+                        }
+                        throw new Error(msg);
+                    }
                     return await res.json();
                 };
 

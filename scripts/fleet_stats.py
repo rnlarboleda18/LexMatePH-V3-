@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 import sys
 
-DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')

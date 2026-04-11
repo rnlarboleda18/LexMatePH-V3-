@@ -45,8 +45,8 @@ def load_settings():
 load_settings()
 
 DB_CONN_STR = os.environ.get("DB_CONNECTION_STRING") or os.environ.get("DATABASE_URL", "")
-if ":6432/" in DB_CONN_STR:
-    DB_CONN_STR = DB_CONN_STR.replace(":6432/", ":5432/")
+if ":5432/" in DB_CONN_STR:
+    DB_CONN_STR = DB_CONN_STR.replace(":5432/", ":5432/")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
 BATCH_SIZE = 10          # Questions per Gemini call (balance cost vs speed)
 SLEEP_BETWEEN_BATCHES = 1.0   # Seconds between API calls (avoid rate limiting)

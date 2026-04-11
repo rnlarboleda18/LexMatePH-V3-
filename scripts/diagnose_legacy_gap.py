@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+DB_CONNECTION_STRING = "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 
 try:
     conn = psycopg2.connect(DB_CONNECTION_STRING)

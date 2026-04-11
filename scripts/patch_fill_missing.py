@@ -6,7 +6,7 @@ import time
 import traceback
 
 # Config
-DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:6432/postgres?sslmode=require"
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgres://barappadmin:BRApass021819!@bar-reviewer-app-db.postgres.database.azure.com:5432/postgres?sslmode=require"
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY") 
 MODEL_NAME = "gemini-2.5-flash-lite"
 
