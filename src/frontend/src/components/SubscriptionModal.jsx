@@ -201,13 +201,13 @@ export default function SubscriptionModal({ onClose }) {
   const MAX_LOCKED_SHOWN = 3;
 
   const billingToggleDesktop = (
-    <div className="inline-flex shrink-0 items-center gap-0.5 rounded-xl border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
+    <div className="inline-flex max-w-full shrink-0 items-center gap-0.5 rounded-xl border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
       {['monthly', 'yearly'].map((b) => (
         <button
           key={b}
           type="button"
           onClick={() => setBilling(b)}
-          className={`rounded-lg px-4 py-1.5 text-xs font-bold transition-all ${
+          className={`rounded-lg px-2.5 py-1.5 text-[11px] font-bold transition-all sm:px-4 sm:text-xs ${
             billing === b
               ? 'bg-white text-purple-700 shadow-md'
               : 'text-white/80 hover:text-white'
@@ -228,34 +228,6 @@ export default function SubscriptionModal({ onClose }) {
     </div>
   );
 
-  const billingToggleMobile = (
-    <div className="inline-flex w-full max-w-md rounded-lg border border-slate-200/90 bg-slate-50/90 p-0.5 dark:border-slate-600 dark:bg-slate-800/90">
-      {['monthly', 'yearly'].map((b) => (
-        <button
-          key={b}
-          type="button"
-          onClick={() => setBilling(b)}
-          className={`min-h-[2.25rem] flex-1 rounded-md px-3 py-1.5 text-xs font-semibold transition-all ${
-            billing === b
-              ? 'bg-white text-purple-700 shadow-sm dark:bg-slate-700 dark:text-purple-300'
-              : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
-          }`}
-        >
-          {b === 'monthly' ? (
-            'Monthly'
-          ) : (
-            <span className="inline-flex items-center justify-center gap-1">
-              Yearly
-              <span className="rounded-full bg-emerald-100 px-1.5 py-0 text-[10px] font-bold text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">
-                −17%
-              </span>
-            </span>
-          )}
-        </button>
-      ))}
-    </div>
-  );
-
   const panelContent = (
     <>
       {isMobileLayout && (
@@ -265,69 +237,39 @@ export default function SubscriptionModal({ onClose }) {
         </>
       )}
 
-      {isMobileLayout ? (
-        <div className="relative z-30 shrink-0 border-b-2 border-slate-300/85 bg-white/25 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
-          <div className="flex min-w-0 items-start justify-between gap-3 px-3 py-3 sm:px-4">
-            <div className="min-w-0 flex-1">
-              <h2
-                id="subscription-modal-title"
-                className="break-words text-[15px] font-semibold leading-snug tracking-tight text-gray-900 [overflow-wrap:anywhere] dark:text-white"
-              >
-                Upgrade Your Plan
-              </h2>
-              <p className="mt-1 text-[11px] leading-snug text-gray-500 dark:text-gray-400">
-                GCash · Maya · Card · GrabPay · BSP regulated
-              </p>
+      {/* Header — same purple gradient on mobile and desktop */}
+      <div className="relative z-30 shrink-0 overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
+        <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
+        <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-indigo-400/20 blur-2xl" />
+
+        <div className="relative flex flex-col gap-3 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-4">
+          <div className="min-w-0 sm:mr-auto">
+            <h2
+              id="subscription-modal-title"
+              className="text-lg font-extrabold tracking-tight text-white drop-shadow-sm sm:text-xl"
+            >
+              Upgrade Your Plan
+            </h2>
+            <p className="mt-0.5 text-[11px] font-medium text-white/70">
+              GCash · Maya · Card · GrabPay · BSP Regulated
+            </p>
+          </div>
+          <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-3">
+            <div className="min-w-0 flex-1 overflow-x-auto pb-0.5 sm:flex-initial sm:overflow-visible">
+              {billingToggleDesktop}
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="touch-manipulation mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
-              title="Close"
+              className="touch-manipulation shrink-0 rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
               aria-label="Close"
             >
-              <X className="h-3.5 w-3.5" strokeWidth={2.25} />
+              <X size={20} />
             </button>
           </div>
-          <div className="border-t border-slate-200/70 px-3 pb-3 pt-2 dark:border-white/10 sm:px-4">
-            <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-              Billing cycle
-            </p>
-            {billingToggleMobile}
-          </div>
         </div>
-      ) : (
-        <div className="relative z-20 shrink-0 overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
-          <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
-          <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-indigo-400/20 blur-2xl" />
-
-          <div className="relative flex flex-col gap-4 px-6 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-            <div className="min-w-0 sm:mr-auto">
-              <h2
-                id="subscription-modal-title"
-                className="text-xl font-extrabold tracking-tight text-white drop-shadow-sm"
-              >
-                Upgrade Your Plan
-              </h2>
-              <p className="mt-0.5 text-[11px] font-medium text-white/70">
-                GCash · Maya · Card · GrabPay · BSP Regulated
-              </p>
-            </div>
-            <div className="flex shrink-0 items-center justify-between gap-3 sm:justify-end">
-              {billingToggleDesktop}
-              <button
-                type="button"
-                onClick={onClose}
-                className="touch-manipulation shrink-0 rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
-                aria-label="Close"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div
         className={
