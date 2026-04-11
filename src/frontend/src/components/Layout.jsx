@@ -215,14 +215,14 @@ const Layout = ({
             {/* Main Content Area — z-10 so mobile sidebar scrim can sit above and capture taps */}
             <main
                 className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(2.75rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
-        ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
+        ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
                 <div
                     className={`${
                         hideAppChrome
                             ? 'max-w-full'
-                            : ['codex', 'about', 'updates', 'quiz'].includes(mode)
+                            : ['codex', 'about', 'updates', 'quiz', 'landing'].includes(mode)
                               ? 'max-w-full ml-0'
                               : mainFullWidth
                                 ? 'mx-auto w-full max-w-none'

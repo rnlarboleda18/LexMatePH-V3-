@@ -28,6 +28,7 @@ export default {
             },
             fontFamily: {
                 sans: ['Outfit', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+                display: ['"Playfair Display"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
             }
         },
     },

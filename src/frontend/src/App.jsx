@@ -9,6 +9,7 @@ import QuestionCard from './components/QuestionCard';
 import SupremeDecisions from './components/SupremeDecisions';
 import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
+import LandingPage from './components/LandingPage';
 import FeaturePageShell from './components/FeaturePageShell';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
@@ -64,7 +65,8 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   // UI State
-  const [mode, setMode] = useState('supreme_decisions'); // Default to 'supreme_decisions'
+  /** Marketing landing on every full load; user taps through to the app each time. */
+  const [mode, setMode] = useState('landing');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
@@ -125,11 +127,16 @@ function App() {
   // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
     if (isDrawerOpen && mode !== 'lexplay') {
-      setPreviousMode(mode);
+      // Never return to marketing landing when exiting LexPlay fullscreen
+      setPreviousMode(mode === 'landing' ? 'supreme_decisions' : mode);
       setMode('lexplay');
       setIsDrawerOpen(false); // Consume the signal
     }
   }, [isDrawerOpen, mode, setIsDrawerOpen]);
+
+  const handleEnterFromLanding = useCallback(() => {
+    setMode('supreme_decisions');
+  }, []);
 
   useEffect(() => {
     if (mode === 'lexplay') setLexPlayMiniDismissed(false);
@@ -437,7 +444,7 @@ function App() {
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
       flashcardStudying={mode === 'flashcard' && flashcardState === 'active'}
-      hideAppChrome={isFullscreen || lexifyExamSimulationActive}
+      hideAppChrome={isFullscreen || lexifyExamSimulationActive || mode === 'landing'}
       lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {
@@ -488,11 +495,11 @@ function App() {
 
             {/* Content Area - Always mounted so scroll position is preserved */}
             <div aria-hidden={isLexPlayerFull ? "true" : undefined} className={isLexPlayerFull ? "pointer-events-none" : ""}>
-              {loading && effectiveMode !== 'flashcard' ? (
+              {loading && effectiveMode !== 'flashcard' && effectiveMode !== 'landing' ? (
                 <div className="flex justify-center items-center h-64">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                 </div>
-              ) : error && effectiveMode !== 'flashcard' ? (
+              ) : error && effectiveMode !== 'flashcard' && effectiveMode !== 'landing' ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center space-y-6">
                   <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.3)]">
                     <AlertTriangle size={40} />
@@ -514,6 +521,31 @@ function App() {
               ) : (
                 <ErrorBoundary message="Content area encountered an error.">
                   <>
+                  {/* Mount default SC Decisions screen while on landing so list + prefetch run in background */}
+                  {(mode === 'landing' || effectiveMode === 'supreme_decisions') && (
+                    <div
+                      className={
+                        mode === 'landing'
+                          ? 'pointer-events-none fixed left-0 top-0 z-0 min-h-[85vh] w-full max-w-[100rem] -translate-x-full opacity-0'
+                          : ''
+                      }
+                      aria-hidden={mode === 'landing' ? 'true' : undefined}
+                    >
+                      <SupremeDecisions
+                        externalSelectedCase={globalSelectedCase}
+                        onCaseSelect={selectGlobalCase}
+                      />
+                    </div>
+                  )}
+                  {effectiveMode === 'landing' && (
+                    <div className="relative z-10">
+                      <LandingPage
+                        isDarkMode={isDarkMode}
+                        toggleTheme={toggleTheme}
+                        onEnterApp={handleEnterFromLanding}
+                      />
+                    </div>
+                  )}
                   {effectiveMode === 'about' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
                       <About />
@@ -523,12 +555,6 @@ function App() {
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
                       <Updates isDarkMode={isDarkMode} />
                     </Suspense>
-                  )}
-                  {effectiveMode === 'supreme_decisions' && (
-                    <SupremeDecisions
-                      externalSelectedCase={globalSelectedCase}
-                      onCaseSelect={selectGlobalCase}
-                    />
                   )}
                   {effectiveMode === 'codex' && (
                     <div className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
