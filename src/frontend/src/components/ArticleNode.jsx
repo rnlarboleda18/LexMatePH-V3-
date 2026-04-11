@@ -635,6 +635,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                            !cleanSeg.endsWith(':') &&
                                            !cleanSeg.endsWith(';') &&
                                            !cleanSeg.endsWith(',') &&
+                                           !cleanSeg.endsWith('-') && // dash = continuation marker, not a heading
                                            !/^(SECTION|ARTICLE|PREAMBLE)/i.test(cleanSeg) &&
                                            !/^(\d+|[a-zA-Z])[\.\)]/i.test(cleanSeg) && // Don't treat markers 1. or a) as headers
                                            !cleanSeg.includes('(') &&
