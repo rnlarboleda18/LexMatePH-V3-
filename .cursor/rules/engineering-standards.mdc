@@ -1,0 +1,79 @@
+---
+description: LexMatePH engineering standards — always-enforced for all files and agents
+alwaysApply: true
+---
+
+# LexMatePH engineering standards
+
+Read this before making any change. These rules are enforced in CI and must not be bypassed.
+
+## 1. File placement (hard rules)
+
+| File type | Correct location | Forbidden locations |
+|-----------|-----------------|---------------------|
+| Azure Functions HTTP handlers | `api/blueprints/` and registered in `function_app.py` | `api/` root, `api/legacy/`, anywhere else |
+| Diagnostic / maintenance scripts | `api/tools/` | `api/blueprints/`, `api/` root |
+| One-off historical fixes | `api/legacy/` | `api/blueprints/` |
+| React components | `src/frontend/src/components/` | Root, `features/` (unless a named feature) |
+| Custom React hooks | `src/frontend/src/hooks/` | `App.jsx`, component files |
+| Frontend unit tests | `src/frontend/src/test/` | Any other location |
+| General maintenance scripts | `scripts/` | Repo root, `api/` root |
+| Architecture decisions | `docs/adr/` | `docs/` root |
+
+**Never** create backup copies of source files (e.g. `foo_backup.py`, `Foo_v2.jsx`). Use Git branches and tags instead.
+
+## 2. No dead code
+
+- Do not leave commented-out code blocks, unused imports, or backup file copies.
+- Deleted functionality goes in a dedicated commit — do not comment it out.
+
+## 3. Build and tests must pass
+
+Before finishing any task:
+- `npm run build` in `src/frontend/` must succeed (exit 0).
+- `npm run test` must succeed (exit 0) — 8 tests minimum; add a test for every new hook or critical component.
+- `python -c "import function_app"` in `api/` must succeed.
+
+## 4. App.jsx must stay thin
+
+`App.jsx` is the layout orchestrator only. Do **not** add new data-fetching `useEffect` blocks directly to it.  
+→ Create a hook in `src/frontend/src/hooks/` and import it.
+
+## 5. New API routes
+
+Every new endpoint requires:
+1. A blueprint file in `api/blueprints/` registered in `function_app.py`.
+2. Thin handler (parse → service call → response). No SQL queries inline; extract shared helpers.
+3. Structured logging via `from utils.logging import get_logger`.
+
+## 6. Debug endpoints
+
+All diagnostic/debug HTTP routes must check `ALLOW_DEBUG_ROUTES` env var and return 404 if not set.
+
+## 7. Webhook security checklist
+
+Any route that receives external webhooks (Clerk, PayMongo, etc.) must:
+- [ ] Verify HMAC / Svix signature before processing the body.
+- [ ] Deduplicate via the `webhook_events` table (event ID insert-or-skip).
+- [ ] Never log raw payloads containing PII.
+
+## 8. Secrets
+
+Never commit real credentials. See `.cursor/rules/secrets-and-env.mdc` for the full list of forbidden values.  
+Unknown keys → add to `api/local.settings.sample.json` with an empty value and a comment.
+
+## 9. CI quality gates
+
+Every push to `main` or PR runs:
+- Frontend build + unit tests (blocking)
+- API import smoke test (blocking)
+- Ruff lint on `api/` (advisory)
+- ESLint on `src/frontend/` (advisory until backlog clears)
+
+Do **not** add `continue-on-error: true` to the build, test, or smoke test steps.
+
+## 10. Documentation
+
+- New architectural decisions → `docs/adr/NNN-title.md`.
+- New incident resolution patterns → `docs/RUNBOOK.md`.
+- New maintenance scripts → entry in `api/tools/README.md` or `scripts/README.md`.

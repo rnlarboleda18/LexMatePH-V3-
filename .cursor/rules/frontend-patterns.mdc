@@ -1,0 +1,60 @@
+---
+description: Frontend component, hook, and testing conventions for LexMatePH
+globs: src/frontend/**/*.{js,jsx}
+alwaysApply: false
+---
+
+# Frontend patterns
+
+## File placement
+
+| What | Where |
+|------|-------|
+| React components | `src/frontend/src/components/` |
+| Custom hooks (`use*`) | `src/frontend/src/hooks/` |
+| Feature modules | `src/frontend/src/features/<name>/` |
+| Utilities | `src/frontend/src/utils/` |
+| Unit tests | `src/frontend/src/test/` |
+
+**Never** add Python scripts, SQL files, or non-JS/JSX files to `src/frontend/src/`.
+
+## Hooks over monolith
+
+`App.jsx` is the layout orchestrator — keep it thin. Extract data-fetching into custom hooks:
+
+```jsx
+// ✅ correct — new data concern goes in its own hook
+// src/frontend/src/hooks/useMyFeature.js
+export function useMyFeature() { /* fetch, state, memos */ }
+
+// Then import in App.jsx:
+const { data, loading } = useMyFeature();
+```
+
+Do **not** add new `useState` + `useEffect` data-fetching blocks directly to `App.jsx`.
+
+## URL navigation
+
+Modes map to routes. When adding a new section:
+1. Add `MODE_TO_PATH` entry in `App.jsx`
+2. Navigate with `useNavigate` or `<Link>` — never manipulate `window.location` directly.
+
+## Tests
+
+Every new hook or non-trivial component gets a test in `src/frontend/src/test/`.  
+Run `npm run test` before committing; CI will block the PR if tests fail.
+
+```js
+// ✅ minimal hook smoke test
+import { renderHook, waitFor } from '@testing-library/react';
+import { useMyFeature } from '../hooks/useMyFeature';
+it('loads data', async () => {
+  const { result } = renderHook(() => useMyFeature());
+  await waitFor(() => expect(result.current.loading).toBe(false));
+});
+```
+
+## Dependencies
+
+- `puppeteer` and other build-time-only tools → `devDependencies`.
+- Production deps added to `dependencies` must be justified (bundle cost).

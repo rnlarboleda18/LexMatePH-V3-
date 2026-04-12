@@ -1,0 +1,69 @@
+---
+description: Azure Functions API conventions — blueprints, tools, logging, and security
+globs: api/**/*.py
+alwaysApply: false
+---
+
+# API patterns
+
+## File placement
+
+| What | Where |
+|------|-------|
+| HTTP route handlers (registered in `function_app.py`) | `api/blueprints/` |
+| Shared modules (`config`, `cache`, `db_pool`, etc.) | `api/` root |
+| Maintenance / diagnostic scripts | `api/tools/` |
+| Historical one-off fixes (not re-run) | `api/legacy/` |
+
+**Never** put a non-route script in `api/blueprints/`. If it is not imported by `function_app.py`, it belongs in `api/tools/`.
+
+## Thin blueprints
+
+Blueprint functions parse the request, call a helper, and return a response. Business logic lives in shared modules or `utils/`.
+
+```python
+# ✅ thin blueprint
+@my_bp.route(route="my-endpoint", methods=["POST"])
+def my_endpoint(req: func.HttpRequest) -> func.HttpResponse:
+    clerk_id, err = get_authenticated_user_id(req)
+    if err:
+        return func.HttpResponse(json.dumps({"error": err}), status_code=401, mimetype="application/json")
+    result = my_service.do_work(clerk_id, req.get_json())
+    return func.HttpResponse(json.dumps(result), mimetype="application/json")
+```
+
+## Registering a new blueprint
+
+1. Create `api/blueprints/my_feature.py` with a `my_feature_bp = func.Blueprint()` object.
+2. Add import + `app.register_functions(my_feature_bp)` to `api/function_app.py`.
+3. Run the import smoke test: `python -c "import function_app; print('ok')"`.
+
+## Structured logging
+
+Use `get_logger` so every log line carries a correlation ID:
+
+```python
+from utils.logging import get_logger
+log = get_logger(__name__, req)   # req is the HttpRequest
+log.info("Processing request", extra={"clerk_id": clerk_id})
+```
+
+Do **not** use bare `print()` statements in production blueprint code.
+
+## Debug / diagnostic endpoints
+
+Any endpoint that exposes internal state **must** be gated:
+
+```python
+if os.environ.get("ALLOW_DEBUG_ROUTES", "").lower() not in ("1", "true", "yes"):
+    return func.HttpResponse("Not found.", status_code=404)
+```
+
+Never expose debug routes unconditionally in deployed code.
+
+## Webhook security
+
+Every inbound webhook route must:
+1. **Verify the signature** before processing the payload.
+2. **Deduplicate events** via the `webhook_events` table (insert-or-skip on event ID).
+3. **Not log raw payloads** that may contain PII.
