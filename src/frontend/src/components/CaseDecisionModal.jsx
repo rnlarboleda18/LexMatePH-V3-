@@ -11,55 +11,9 @@ import { useSubscription } from '../context/SubscriptionContext';
 import DigestHtmlViewer from './DigestHtmlViewer';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 import { apiUrl } from '../utils/apiUrl';
+import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDigestMarkdown';
 
 // --- HELPER COMPONENTS ---
-
-const SMART_LINK_REGEX = /(G\.R\. Nos?\.\s?\d+[\w\,&\s-]*)|(Republic Act No\.\s?\d+)/gi;
-
-const SmartLink = React.memo(({ text, onCaseClick }) => {
-    if (!text) return null;
-    const parts = text.split(SMART_LINK_REGEX).filter(p => p !== undefined);
-
-    if (parts.length === 1) return <span>{text}</span>;
-
-    return (
-        <span>
-            {parts.map((part, i) => {
-                const isMatch = typeof part === 'string' && part.match(SMART_LINK_REGEX);
-                if (isMatch) {
-                    return (
-                        <span
-                            key={i}
-                            className="text-blue-600 dark:text-amber-400 cursor-pointer hover:underline font-medium relative group"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                if (onCaseClick) onCaseClick(part);
-                            }}
-                        >
-                            {part}
-                        </span>
-                    );
-                }
-                return <span key={i}>{part}</span>;
-            })}
-        </span>
-    );
-});
-
-const SmartLinkWrapper = React.memo(({ children, onCaseClick }) => {
-    if (typeof children === 'string') return <SmartLink text={children} onCaseClick={onCaseClick} />;
-    if (Array.isArray(children)) {
-        return (
-            <>
-                {children.map((child, idx) => {
-                    if (typeof child === 'string') return <SmartLink key={idx} text={child} onCaseClick={onCaseClick} />;
-                    return <React.Fragment key={idx}>{child}</React.Fragment>;
-                })}
-            </>
-        );
-    }
-    return <>{children}</>;
-});
 
 const getCategoryColor = (cat) => {
     const c = cat?.toUpperCase() || 'REITERATION';
@@ -153,20 +107,22 @@ const LegalConceptsSection = React.memo(({ concepts }) => {
     if (!items || items.length === 0) return null;
 
     return (
-        <div className="bg-purple-50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/30 p-5 rounded-lg my-6">
-            <h4 className="text-[16px] font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2 mb-3">
-                <BookOpen className="w-5 h-5" />
-                KEY LEGAL CONCEPTS
-            </h4>
-            <div className="space-y-4">
-                {items.map((item, idx) => (
-                    <div key={idx} className="text-sm">
-                        <span className="font-bold text-purple-900 dark:text-purple-200 block mb-1">{item.term}</span>
-                        <div className="text-gray-800 dark:text-gray-200 border-l-2 border-purple-300 dark:border-purple-600 pl-3 leading-relaxed">
-                            {item.definition}
+        <div className="mb-6 pt-4 md:pt-6">
+            <div className="rounded-lg border border-purple-100 bg-purple-50 p-5 dark:border-purple-900/30 dark:bg-purple-900/10">
+                <h4 className="text-[16px] font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2 mb-3">
+                    <BookOpen className="w-5 h-5" />
+                    KEY LEGAL CONCEPTS
+                </h4>
+                <div className="space-y-4">
+                    {items.map((item, idx) => (
+                        <div key={idx} className="text-sm">
+                            <span className="font-bold text-purple-900 dark:text-purple-200 block mb-1">{item.term}</span>
+                            <div className="text-gray-800 dark:text-gray-200 border-l-2 border-purple-300 dark:border-purple-600 pl-3 leading-relaxed">
+                                {item.definition}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -186,7 +142,7 @@ const SignificanceSection = React.memo(({ narrative, category }) => {
     };
 
     return (
-        <section className="mb-8">
+        <section className="mb-8 pt-4 md:pt-6">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
                 <span className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
@@ -214,27 +170,6 @@ const formatRatioToParagraphs = (text) => {
     formatted = formatted.replace(/([^\n])\s*(\*\*.*?\*\*[:?])/g, '$1\n\n$2');
     return formatted.trim();
 };
-
-const MarkdownText = React.memo(({ content, onCaseClick, variant = 'default', contextRef }) => {
-    if (!content) return null;
-    let processedContent = content;
-    if (variant === 'facts') {
-        processedContent = content.replace(/([^\n])\n(\*\*.*?\*\*[:?])/g, '$1\n\n$2');
-    }
-
-    return (
-        <div ref={contextRef} className="text-gray-800 dark:text-gray-200 leading-relaxed text-left text-sm">
-            <ReactMarkdown components={{
-                p: ({ children }) => <div className="mb-4 text-gray-800 dark:text-gray-200 leading-relaxed text-left"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></div>,
-                strong: ({ children }) => <strong className="font-bold text-gray-900 dark:text-gray-100">{children}</strong>,
-                ul: ({ children }) => <ul className="mb-4 list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-200">{children}</ul>,
-                li: ({ children }) => <li className="pl-1 leading-relaxed"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></li>
-            }}>
-                {processedContent}
-            </ReactMarkdown>
-        </div>
-    );
-});
 
 // --- NEW HELPER COMPONENTS FOR STATUTES & CITATIONS ---
 
@@ -295,7 +230,7 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
     };
 
     return (
-        <div className="mb-8">
+        <div className="mb-8 pt-4 md:pt-6">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center gap-2">
                 <Gavel className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                 CITED JURISPRUDENCE
@@ -883,7 +818,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <MarkdownText content={fullDecision.digest_facts} variant="facts" onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_facts} variant="facts" onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </section>
                             )}
@@ -893,7 +828,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* ISSUE */}
                             {fullDecision.digest_issues && (
-                                <section className="mb-6 sm:mb-10">
+                                <section className="mb-6 sm:mb-10 pt-4 md:pt-6">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
                                             <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
@@ -902,7 +837,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <MarkdownText content={fullDecision.digest_issues} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_issues} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </section>
                             )}
@@ -918,7 +853,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <MarkdownText content={fullDecision.digest_ruling} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_ruling} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </section>
                             )}
@@ -934,7 +869,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <MarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} onCaseClick={handleSmartCaseClick} />
                                     </div>
                                 </section>
                             )}
@@ -973,7 +908,10 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             </div>
 
                             <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify">
-                                <MarkdownText content={fullDecision.full_text_md || "*Content not available in Markdown format.*"} onCaseClick={handleSmartCaseClick} />
+                                <CaseFullTextMarkdown
+                                    content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
+                                    onCaseClick={handleSmartCaseClick}
+                                />
                             </div>
 
                             {/* Also show separate opinions in full text mode if they are appended? 
