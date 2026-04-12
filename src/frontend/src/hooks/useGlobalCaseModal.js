@@ -6,6 +6,10 @@ import { useState, useCallback, useRef } from 'react';
  *
  * Ghost-tap prevention: re-opening the same case within 750 ms of closing it
  * is suppressed to avoid accidental re-opens from residual touch events.
+ *
+ * IMPORTANT: refs MUST be updated synchronously inside closeModal (not inside
+ * the setSelectedCase updater callback) so that selectCase's suppress check
+ * sees the correct values immediately — even before React commits the render.
  */
 export function useGlobalCaseModal() {
   const [selectedCase, setSelectedCase] = useState(null);
@@ -25,14 +29,14 @@ export function useGlobalCaseModal() {
   }, []);
 
   const closeModal = useCallback(() => {
-    setSelectedCase((prev) => {
-      if (prev?.id != null) {
-        lastClosedIdRef.current = prev.id;
-        suppressUntilRef.current = Date.now() + 750;
-      }
-      return null;
-    });
-  }, []);
+    // Update refs synchronously so the suppress check works immediately,
+    // even within the same React event batch before the state update commits.
+    if (selectedCase?.id != null) {
+      lastClosedIdRef.current = selectedCase.id;
+      suppressUntilRef.current = Date.now() + 750;
+    }
+    setSelectedCase(null);
+  }, [selectedCase]); // selectedCase in deps so we read the current value
 
   return { selectedCase, selectCase, closeModal };
 }

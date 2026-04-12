@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import Layout from './components/Layout';
@@ -43,6 +43,24 @@ const CODAL_FILTER_OPTIONS = [
   { id: 'special', label: 'Special Laws', disabled: true },
 ];
 
+/** Canonical URL path for each app mode — defined outside the component so it
+ *  is never recreated and never causes extra renders via closure references. */
+const MODE_TO_PATH = {
+  landing: '/',
+  supreme_decisions: '/decisions',
+  codex: '/lexcode',
+  flashcard: '/flashcards',
+  quiz: '/lexify',
+  about: '/about',
+  updates: '/updates',
+  browse_bar: '/bar-questions',
+  lexplay: '/lexplay',
+};
+
+const PATH_TO_MODE = Object.fromEntries(
+  Object.entries(MODE_TO_PATH).map(([m, p]) => [p, m])
+);
+
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
   const { showUpgradeModal, closeUpgradeModal, tier, canAccess } = useSubscription();
@@ -62,24 +80,6 @@ function App() {
 
   // --- URL ↔ mode mapping ---
   const navigate = useNavigate();
-  const location = useLocation();
-
-  /** Canonical URL path for each mode. */
-  const MODE_TO_PATH = {
-    landing: '/',
-    supreme_decisions: '/decisions',
-    codex: '/lexcode',
-    flashcard: '/flashcards',
-    quiz: '/lexify',
-    about: '/about',
-    updates: '/updates',
-    browse_bar: '/bar-questions',
-    lexplay: '/lexplay',
-  };
-
-  const PATH_TO_MODE = Object.fromEntries(
-    Object.entries(MODE_TO_PATH).map(([m, p]) => [p, m])
-  );
 
   // --- State ---
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -93,8 +93,11 @@ function App() {
 
   // UI State
   /** Marketing landing on every full load; user taps through to the app each time.
-   *  Initial mode is derived from the URL so deep-links and refreshes land correctly. */
-  const [mode, setMode] = useState(() => PATH_TO_MODE[location.pathname] ?? 'landing');
+   *  Initial mode is derived from the URL so deep-links and refreshes land correctly.
+   *  We read window.location.pathname directly (not useLocation) to avoid subscribing
+   *  App to the React Router context, which would cause an extra re-render on every
+   *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly. */
+  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'landing');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
@@ -121,19 +124,29 @@ function App() {
   ];
 
 
-  // Sync mode → URL
+  // Sync mode → URL.
+  // We read window.location.pathname instead of location from useLocation so that
+  // the navigate() call below does NOT trigger a React Router context update that
+  // would re-render App (and all its heavy children) a second time.
   useEffect(() => {
     const path = MODE_TO_PATH[mode] ?? '/';
-    if (location.pathname !== path) navigate(path, { replace: true });
+    if (window.location.pathname !== path) navigate(path, { replace: true });
+  // navigate is stable (React Router guarantee); MODE_TO_PATH is a module constant.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
-  // Sync URL → mode (handles browser back/forward)
+  // Sync URL → mode for browser back/forward navigation.
+  // popstate fires on history.back() / history.forward() but NOT on replaceState,
+  // so this handler only activates for genuine browser navigation gestures.
   useEffect(() => {
-    const m = PATH_TO_MODE[location.pathname];
-    if (m && m !== mode) setMode(m);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+    const handlePopState = () => {
+      const m = PATH_TO_MODE[window.location.pathname];
+      if (m) setMode(m);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  // Empty deps: listener is registered once; setMode is stable.
+  }, []);
 
   // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
