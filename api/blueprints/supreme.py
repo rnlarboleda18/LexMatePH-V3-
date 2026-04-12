@@ -312,7 +312,9 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
                 ai_model
         """
 
-        # FTS Expression (Enhanced to include digest fields)
+        # FTS Expression — omits full_text_md intentionally: it can be 100KB+ per row
+        # and is expensive to compute inline on every search.  The title, doctrine and
+        # digest fields already cover the vast majority of meaningful queries.
         fts_expr = """
             to_tsvector('english', 
                 COALESCE(short_title, '') || ' ' || 
@@ -320,8 +322,7 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
                 COALESCE(main_doctrine, '') || ' ' || 
                 COALESCE(digest_facts, '') || ' ' || 
                 COALESCE(digest_ruling, '') || ' ' || 
-                COALESCE(digest_ratio, '') || ' ' || 
-                COALESCE(full_text_md, '')
+                COALESCE(digest_ratio, '')
             )
         """
 
@@ -360,108 +361,157 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
             base_params.append(model_filter)
 
         # 2. Determine Search Logic (Cascading Tiers)
+        #
+        # Performance design:
+        #   • Tier probes use  SELECT 1 … LIMIT 1  (stops at first hit, no full scan).
+        #   • The winning tier's SELECT embeds  COUNT(*) OVER() AS _total_count  so the
+        #     pagination total and the page of rows arrive in a single round-trip.
+        #   • This keeps the worst-case round-trips at ≈ 5 (probe × tiers) + 1 (data).
+
         final_query = ""
         final_params = []
         total_count = 0
-        
+
+        def _probe(where_clause, params):
+            """Return True if at least one row matches without counting all of them."""
+            cur.execute(
+                f"SELECT 1 FROM sc_decided_cases {where_clause} LIMIT 1",
+                params,
+            )
+            return cur.fetchone() is not None
+
+        # select_cols extended with a window-function total so count + data = 1 query.
+        select_with_count = select_cols + ", COUNT(*) OVER() AS _total_count"
+
         if search_term:
-            # TIER 0: Exact ID Match (if numeric)
+            # TIER 0: Exact ID Match (numeric only)
             if search_term.isdigit():
                 t0_where = base_where + " AND id = %s"
                 t0_params = list(base_params) + [int(search_term)]
-                
-                cur.execute(f"SELECT COUNT(*) as count FROM sc_decided_cases {t0_where}", t0_params)
-                t0_count = cur.fetchone()['count']
-                
-                if t0_count > 0:
-                    logging.info(f"Search Hit Tier 0 (ID Match): {t0_count} results")
-                    final_query = f"SELECT {select_cols} FROM sc_decided_cases {t0_where}"
+                if _probe(t0_where, t0_params):
+                    logging.info("Search Hit Tier 0 (ID Match)")
+                    final_query = f"SELECT {select_with_count} FROM sc_decided_cases {t0_where}"
                     final_params = t0_params
-                    total_count = t0_count
-            
-            # TIER 1: Metadata Exact/Partial Match (Short Title OR Case Number)
-            # TIER 1: Metadata Exact/Partial Match (Short Title OR Case Number)
-            if total_count == 0:
-                # "Look first in the short_title... or case_number (implicit Metadata)"
+
+            # TIER 1: Metadata partial match (case_number OR short_title)
+            if not final_query:
                 t1_where = base_where + " AND (case_number ILIKE %s OR short_title ILIKE %s)"
                 t1_params = list(base_params) + [f"%{search_term}%", f"%{search_term}%"]
-                
-                t_check_start = time.time()
-                cur.execute(f"SELECT COUNT(*) as count FROM sc_decided_cases {t1_where}", t1_params)
-                t1_count = cur.fetchone()['count']
-            
-                if t1_count > 0:
-                    # MATCH FOUND IN TIER 1
-                    logging.info(f"Search Hit Tier 1 (Metadata): {t1_count} results")
-                    final_query = f"SELECT {select_cols} FROM sc_decided_cases {t1_where} ORDER BY date DESC, id DESC"
+                if _probe(t1_where, t1_params):
+                    logging.info("Search Hit Tier 1 (Metadata)")
+                    final_query = (
+                        f"SELECT {select_with_count} FROM sc_decided_cases"
+                        f" {t1_where} ORDER BY date DESC, id DESC"
+                    )
                     final_params = t1_params
-                    total_count = t1_count
-                    
-                else:
-                    # TIER 2: Full Title Match
-                    # "If none, look in full_title"
-                    t2_where = base_where + " AND full_title ILIKE %s"
-                    t2_params = list(base_params) + [f"%{search_term}%"]
-                    
-                    cur.execute(f"SELECT COUNT(*) as count FROM sc_decided_cases {t2_where}", t2_params)
-                    t2_count = cur.fetchone()['count']
-                    
-                    if t2_count > 0:
-                        # MATCH FOUND IN TIER 2
-                        logging.info(f"Search Hit Tier 2 (Full Title): {t2_count} results")
-                        final_query = f"SELECT {select_cols} FROM sc_decided_cases {t2_where} ORDER BY date DESC, id DESC"
-                        final_params = t2_params
-                        total_count = t2_count
-                        
-                    else:
-                        # TIER 3: Full Text / FTS (Source of Truth)
-                        # "Then last in the full_text_md"
-                        logging.info(f"Search Fallback to Tier 3 (FTS)")
-                        
-                        # Standard FTS for ALL terms (including numeric)
-                        # Use rank for ordering in FTS
-                        t3_where = base_where + f" AND ({fts_expr} @@ websearch_to_tsquery('english', %s))"
-                        t3_params = list(base_params) + [search_term]
-                        final_query = f"SELECT {select_cols}, ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) as rank FROM sc_decided_cases {t3_where} ORDER BY rank DESC, date DESC"
-                        
-                        # Note: matching query placeholders:
-                        # 1. ts_rank_cd(..., %s)  -> search_term
-                        # 2. base_where placeholders -> base_params
-                        # 3. t3_where (%s)        -> search_term
-                        final_params = [search_term] + list(base_params) + [search_term]
 
-                        # Need to count for Tier 3
-                        count_q = f"SELECT COUNT(*) as count FROM sc_decided_cases {t3_where}"
-                        count_p = list(base_params) + [search_term]
-                        
-                        cur.execute(count_q, count_p)
-                        total_count = cur.fetchone()['count']
+            # TIER 1.5: Multi-token all-words match.
+            # Splits the query on whitespace and requires EVERY token to appear
+            # somewhere in short_title.  Catches queries like "tan andal" which
+            # won't match "Tan-Andal vs Andal" as a single substring (Tier 1)
+            # but whose individual words "tan" and "andal" both appear in it.
+            if not final_query:
+                tokens = [t for t in search_term.split() if len(t) >= 2]
+                if len(tokens) > 1:
+                    token_clauses = " AND ".join(["short_title ILIKE %s" for _ in tokens])
+                    t15_where = base_where + f" AND ({token_clauses})"
+                    t15_params = list(base_params) + [f"%{t}%" for t in tokens]
+                    if _probe(t15_where, t15_params):
+                        logging.info("Search Hit Tier 1.5 (Multi-token)")
+                        final_query = (
+                            f"SELECT {select_with_count} FROM sc_decided_cases"
+                            f" {t15_where} ORDER BY date DESC, id DESC"
+                        )
+                        final_params = t15_params
+
+            # TIER 2: Full Title Match
+            if not final_query:
+                t2_where = base_where + " AND full_title ILIKE %s"
+                t2_params = list(base_params) + [f"%{search_term}%"]
+                if _probe(t2_where, t2_params):
+                    logging.info("Search Hit Tier 2 (Full Title)")
+                    final_query = (
+                        f"SELECT {select_with_count} FROM sc_decided_cases"
+                        f" {t2_where} ORDER BY date DESC, id DESC"
+                    )
+                    final_params = t2_params
+
+            # TIER 3: Full-Text Search
+            if not final_query:
+                logging.info("Search Fallback to Tier 3 (FTS)")
+                t3_where = base_where + f" AND ({fts_expr} @@ websearch_to_tsquery('english', %s))"
+                t3_params = list(base_params) + [search_term]
+                if _probe(t3_where, t3_params):
+                    # Placeholder order: 1=ts_rank_cd, 2…=base_params, last=t3_where
+                    final_query = (
+                        f"SELECT {select_with_count},"
+                        f" ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) AS rank"
+                        f" FROM sc_decided_cases {t3_where}"
+                        f" ORDER BY rank DESC, date DESC"
+                    )
+                    final_params = [search_term] + list(base_params) + [search_term]
+
+            # TIER 4: Trigram similarity fallback (pg_trgm) — catches typos / near-misses.
+            # e.g. "paricide" → "parricide".
+            # Gracefully skipped if pg_trgm is not installed.
+            if not final_query:
+                logging.info("Search Fallback to Tier 4 (Trigram / pg_trgm)")
+                try:
+                    t4_where = (
+                        base_where
+                        + " AND (short_title %% %s OR full_title %% %s)"
+                    )
+                    t4_params = list(base_params) + [search_term, search_term]
+                    if _probe(t4_where, t4_params):
+                        logging.info("Search Hit Tier 4 (Trigram)")
+                        final_query = f"""
+                            SELECT {select_with_count},
+                                GREATEST(
+                                    similarity(COALESCE(short_title,''), %s),
+                                    similarity(COALESCE(full_title,''), %s)
+                                ) AS sim_score
+                            FROM sc_decided_cases {t4_where}
+                            ORDER BY sim_score DESC, date DESC
+                        """
+                        final_params = [search_term, search_term] + t4_params
+                except Exception as trgm_err:
+                    logging.warning("Tier 4 (pg_trgm) unavailable: %s", trgm_err)
 
         else:
             # NO SEARCH TERM (Browse Mode)
-            final_query = f"SELECT {select_cols} FROM sc_decided_cases {base_where} ORDER BY date DESC, id DESC"
+            final_query = (
+                f"SELECT {select_with_count} FROM sc_decided_cases"
+                f" {base_where} ORDER BY date DESC, id DESC"
+            )
             final_params = base_params
-            
-            # Count
-            cur.execute(f"SELECT COUNT(*) as count FROM sc_decided_cases {base_where}", base_params)
-            total_count = cur.fetchone()['count']
 
-        logging.info(f"Tier Check took {time.time() - t_conn_end:.4f}s") # Reuse t_conn_end as start of logic
+        logging.info(f"Tier Check took {time.time() - t_conn_end:.4f}s")
 
-        # 3. Apply Pagination
+        # No tier matched (zero results) — short-circuit before hitting the DB again.
+        if not final_query:
+            response_data = {"data": [], "total": 0, "page": page, "limit": limit}
+            if REDIS_ENABLED:
+                cache_set(cache_key, response_data, ttl=CACHE_TTL_DECISIONS)
+            return func.HttpResponse(
+                json.dumps(response_data, default=str),
+                mimetype="application/json",
+                status_code=200,
+            )
+
+        # 3. Apply Pagination and execute data query.
+        # COUNT(*) OVER() in select_with_count means total and rows arrive together.
         final_query += " LIMIT %s OFFSET %s"
         final_params.extend([limit, offset])
 
-        # Execute Data Query
         t_data_start = time.time()
         cur.execute(final_query, final_params)
-
-
-
         results = cur.fetchall()
         t_data_end = time.time()
         logging.info(f"Data Query took {t_data_end - t_data_start:.4f}s")
-        
+
+        # Extract pagination total from the window function embedded in the query.
+        total_count = int(results[0]['_total_count']) if results else 0
+
         logging.info(f"Total Request Processing: {t_data_end - t_start:.4f}s")
 
         # Generate snippets for cases missing them

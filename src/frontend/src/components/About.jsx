@@ -56,7 +56,7 @@ const FEATURES = [
 
 const About = () => {
   return (
-    <FeaturePageShell icon={Scale} title="LEXMATEPH" subtitle="YOUR LEGAL COMPANION">
+    <FeaturePageShell>
       <div className="mx-auto max-w-4xl space-y-8">
         <div className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
           <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">About this App</h3>

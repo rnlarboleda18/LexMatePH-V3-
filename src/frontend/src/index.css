@@ -7,10 +7,25 @@
 :root {
   font-family: 'Outfit', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --player-height: 0px;
+  /* Fixed app header — used by Layout, sticky toolbars, modals (keep in sync) */
+  --app-header-height: 2.5rem;
   /* Light mode: stronger chrome for borders & type (overridden in .dark via existing tokens) */
   --lex-light-border: rgba(51, 65, 85, 0.28);
   --lex-light-border-strong: rgba(30, 41, 59, 0.38);
   --lex-light-surface: rgba(255, 255, 255, 0.94);
+}
+
+/* sm+: tagline + center nav row — header is taller than phone-only */
+@media (min-width: 640px) {
+  :root {
+    --app-header-height: 3.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --app-header-height: 3.5rem;
+  }
 }
 
 /* Full-screen modals: on mobile, blur the ENTIRE screen and respect safe areas 
@@ -39,7 +54,7 @@
   .lex-modal-overlay {
     padding: 2rem !important;
     /* md+: constrain below header and above player */
-    top: calc(5rem + env(safe-area-inset-top, 0px)) !important;
+    top: calc(var(--app-header-height) + env(safe-area-inset-top, 0px)) !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
   }
 }

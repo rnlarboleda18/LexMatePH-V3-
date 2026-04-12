@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, Search, ChevronLeft, Maximize, Minimize, Lock } from 'lucide-react';
+import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, Search, ChevronLeft, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
 import { useSubscription } from '../context/SubscriptionContext';
+import Fuse from 'fuse.js';
 import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
 
@@ -60,11 +61,10 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
+const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
     const { canAccess, openUpgradeModal } = useSubscription();
 
-
-    // Title mapping (mirrors CodalStream ΓÇö keep in sync)
+    // Title mapping (mirrors CodalStream — keep in sync)
     const codeTitleMap = {
         'RPC': { title: 'The Revised Penal Code', subtitle: 'Act No. 3815, as amended' },
         'CIV': { title: 'The Civil Code of the Philippines', subtitle: 'Republic Act No. 386, as amended' },
@@ -98,6 +98,11 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     // Search States
     const [searchTerm, setSearchTerm] = useState('');
     const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    /** Measured rect of the search input — used to position the portaled dropdown
+     *  outside the overflow-hidden codal shell so it isn't clipped. */
+    const [searchBoxRect, setSearchBoxRect] = useState(null);
+    const closeSuggestionsTimerRef = useRef(null);
     const searchBoxRef = useRef(null);
     const mainContentRef = useRef(null);
     /** Top of rounded codal shell — desktop fixed TOC/juris panels align to this edge (clamped below app header on scroll). */
@@ -136,7 +141,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         if (wantAlignedTop && shell) {
             const r = shell.getBoundingClientRect();
             const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-            const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 96 : 56);
+            const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 64 : 48);
             setFixedPanelTopPx(Math.max(minTop, r.top));
         } else {
             setFixedPanelTopPx(null);
@@ -167,11 +172,6 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         };
     }, [syncFixedPanelPositions, data, loading, error]);
 
-    /** Re-measure after fullscreen toggles (main padding / width change). */
-    useLayoutEffect(() => {
-        syncFixedPanelPositions();
-    }, [isFullscreen, syncFixedPanelPositions]);
-
     /** In-flow anchor for TOC FAB; actual control is `position:fixed` via portal (sticky breaks under page overflow-x / transforms). */
     const tocFabAnchorRef = useRef(null);
     const [tocFabPos, setTocFabPos] = useState(null);
@@ -194,7 +194,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         }
         const r = el.getBoundingClientRect();
         const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-        const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 96 : 56);
+        const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 64 : 48);
         setTocFabPos({
             left: r.left,
             top: Math.max(minTop, r.top),
@@ -250,20 +250,13 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         };
     }, [isSidebarOpen, activeJurisArticle, activeAmendmentArticle, loading, error, data, syncTocFabPosition]);
 
-    useLayoutEffect(() => {
-        syncTocFabPosition();
-    }, [isFullscreen, syncTocFabPosition]);
-
     const fixedPanelStyle = useMemo(
         () => ({
-            top: isFullscreen
-                ? 'calc(env(safe-area-inset-top, 0px) + 4.25rem)'
-                : 'calc(5rem + env(safe-area-inset-top, 0px) + 4.25rem)',
-            maxHeight: isFullscreen
-                ? 'calc(100dvh - var(--player-height, 0px) - 5.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))'
-                : 'calc(100dvh - var(--player-height, 0px) - 10.25rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))',
+            top: 'calc(var(--app-header-height) + env(safe-area-inset-top, 0px) + 4.25rem)',
+            maxHeight:
+                'calc(100dvh - var(--player-height, 0px) - var(--app-header-height) - 5.25rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))',
         }),
-        [isFullscreen]
+        []
     );
 
     const fixedSidePanelStyle = useMemo(() => {
@@ -417,7 +410,13 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!shortName) return;
+            if (!shortName) {
+                setLoading(false);
+                setData(null);
+                setError(null);
+                setTocData({ id: 'root', label: 'root', rank: -1, children: [], articles: [] });
+                return;
+            }
             setLoading(true);
             setError(null);
             try {
@@ -598,29 +597,44 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     // Debounce the typed term so we don't recompute on every keystroke.
     const debouncedSearchTerm = useDebounce(searchTerm, 250);
 
-    // Client-side article search: filters data.articles by the debounced term.
+    // Build a Fuse index whenever the codal data changes.
+    // Keys are weighted: article_title and article_number surface first;
+    // content is included so body text matches (e.g. typing "parricide" or
+    // "paricide" still finds Article 246 of the RPC).
+    const fuseRef = useRef(null);
+    useEffect(() => {
+        if (!data?.articles) { fuseRef.current = null; return; }
+        const articles = data.articles.filter(
+            (art) => !art.article_number?.includes('(') // skip sub-articles like "5(b)"
+        );
+        fuseRef.current = new Fuse(articles, {
+            keys: [
+                { name: 'article_title',  weight: 0.5 },
+                { name: 'article_number', weight: 0.3 },
+                { name: 'content',        weight: 0.2 },
+            ],
+            threshold: 0.4,   // 0 = exact, 1 = match anything; 0.4 tolerates ~1-2 char typos
+            distance: 200,    // how far into each field to look
+            minMatchCharLength: 2,
+            includeScore: false,
+        });
+    }, [data]);
+
+    // Run fuzzy search on the debounced term.
     useEffect(() => {
         if (!debouncedSearchTerm.trim()) {
             setSearchSuggestions([]);
             return;
         }
-        if (!data?.articles) return;
+        if (!fuseRef.current) return;
 
-        const q = debouncedSearchTerm.toLowerCase();
-        const results = data.articles
-            .filter(
-                (art) =>
-                    !art.article_number?.includes('(') && // skip sub-articles like "5(b)"
-                    (
-                        (art.article_title || '').toLowerCase().includes(q) ||
-                        String(art.article_number || '').toLowerCase().includes(q) ||
-                        (art.content || '').toLowerCase().includes(q)
-                    )
-            )
+        const results = fuseRef.current
+            .search(debouncedSearchTerm)
+            .map((r) => r.item)
             .slice(0, 50);
 
         setSearchSuggestions(results);
-    }, [debouncedSearchTerm, data]);
+    }, [debouncedSearchTerm]);
 
     const handleSearchSubmit = (e) => { e?.preventDefault?.(); };
 
@@ -629,16 +643,38 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     const handleClearSearch = () => {
         setSearchTerm('');
         setSearchSuggestions([]);
+        setShowSuggestions(false);
+        setSearchBoxRect(null);
     };
+
+    // Keep the dropdown anchored correctly when the page scrolls while it's open.
+    useEffect(() => {
+        if (!showSuggestions) return;
+        const update = () => {
+            if (searchBoxRef.current) {
+                setSearchBoxRect(searchBoxRef.current.getBoundingClientRect());
+            }
+        };
+        window.addEventListener('scroll', update, true);
+        window.addEventListener('resize', update);
+        return () => {
+            window.removeEventListener('scroll', update, true);
+            window.removeEventListener('resize', update);
+        };
+    }, [showSuggestions]);
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Escape') handleClearSearch();
+        if (e.key === 'Escape') {
+            handleClearSearch();
+            searchBoxRef.current?.blur();
+        }
     };
 
-    // Clicking a search result navigates to the article and clears search.
+    // Clicking a suggestion navigates to the article and closes the dropdown.
     const handleSuggestionClick = (articleId) => {
         setSearchTerm('');
         setSearchSuggestions([]);
+        setShowSuggestions(false);
         scrollToArticle(articleId);
     };
 
@@ -653,10 +689,6 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     const sectionTitle = '';
     const isFirstArticle = false;
     const isLastArticle = false;
-
-    if (loading) return <div className="p-8 text-center text-gray-500 animate-pulse">Loading Codex...</div>;
-    if (error) return <div className="p-8 text-center text-red-500">Error: {error}</div>;
-    if (!data) return null;
 
     // Renderers
     const renderers = {
@@ -705,7 +737,28 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
     };
 
     const renderMainContent = () => {
-        if (!data) return null;
+        if (!shortName) {
+            return (
+                <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 py-12 text-center text-gray-500 dark:text-gray-400">
+                    <p className="max-w-md text-sm font-medium leading-relaxed">
+                        Choose a codal from the menu above to open the Lex Code viewer.
+                    </p>
+                </div>
+            );
+        }
+        if (loading) {
+            return <div className="p-8 text-center text-gray-500 animate-pulse">Loading Codex...</div>;
+        }
+        if (error) {
+            return <div className="p-8 text-center text-red-500">Error: {error}</div>;
+        }
+        if (!data) {
+            return (
+                <div className="p-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                    No codal data loaded.
+                </div>
+            );
+        }
 
         const commonProps = {
             code: shortName,
@@ -844,18 +897,85 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
         );
 
     return (
-        <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 bg-transparent p-0 pb-8 lg:flex-row lg:items-start lg:gap-6 lg:px-8 xl:gap-8">
-            {/* TOC layout spacer — real panel is `position:fixed` via portal */}
-            <div
-                ref={tocSpacerRef}
-                className={`hidden shrink-0 transition-[width,opacity] duration-300 ease-in-out lg:block ${isSidebarOpen ? 'w-80' : 'pointer-events-none w-0 overflow-hidden opacity-0'}`}
-                aria-hidden
-            />
+        <>
+        <div className="min-h-screen bg-transparent font-sans text-gray-900 dark:text-gray-100">
+            {/* Sticky bar — same shell + control sizing as Bar Questions (App browse_bar) */}
+            <div className="sticky top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
+                <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+                        {codalOptions && codalOptions.length > 0 && onCodalChange && (
+                            <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
+                                <label htmlFor="lexcode-codal-select" className="sr-only">
+                                    Choose codal
+                                </label>
+                                <select
+                                    id="lexcode-codal-select"
+                                    value={selectedCodal != null && selectedCodal !== '' ? selectedCodal : ''}
+                                    onChange={(e) => onCodalChange(e.target.value)}
+                                    title="Switch Codal"
+                                    className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                >
+                                    <option value="">Choose Codal</option>
+                                    {codalOptions.filter(o => !o.disabled).map(o => (
+                                        <option key={o.id} value={o.id}>{o.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+                        <form
+                            onSubmit={handleSearchSubmit}
+                            className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto"
+                        >
+                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+                                <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} aria-hidden />
+                            </div>
+                            <input
+                                ref={searchBoxRef}
+                                type="search"
+                                value={searchTerm}
+                                onChange={(e) => { setSearchTerm(e.target.value); setShowSuggestions(true); }}
+                                onFocus={() => {
+                                    clearTimeout(closeSuggestionsTimerRef.current);
+                                    if (searchBoxRef.current) {
+                                        setSearchBoxRect(searchBoxRef.current.getBoundingClientRect());
+                                    }
+                                    setShowSuggestions(true);
+                                }}
+                                onBlur={() => {
+                                    closeSuggestionsTimerRef.current = setTimeout(() => setShowSuggestions(false), 160);
+                                }}
+                                onKeyDown={handleKeyDown}
+                                placeholder="Search articles…"
+                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                            />
+                            {searchTerm && (
+                                <button
+                                    type="button"
+                                    onClick={handleClearSearch}
+                                    className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700"
+                                    aria-label="Clear search"
+                                >
+                                    <X size={14} />
+                                </button>
+                            )}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mx-auto max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
+                    {/* TOC layout spacer — real panel is `position:fixed` via portal */}
+                    <div
+                        ref={tocSpacerRef}
+                        className={`hidden shrink-0 transition-[width,opacity] duration-300 ease-in-out lg:block ${isSidebarOpen ? 'w-80' : 'pointer-events-none w-0 overflow-hidden opacity-0'}`}
+                        aria-hidden
+                    />
 
             {/* Mobile/Overlay Sidebar (for smaller screens) */}
             {isSidebarOpen && (
                 <div
-                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
                 >
                     <div className="w-80 max-h-[80vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
@@ -878,7 +998,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             )}
 
             {/* Codal stream — grows with content; scrolls with the main page */}
-            <div className={`relative z-30 mt-0 min-w-0 flex-1 transition-all duration-300 ${isFullscreen ? 'max-w-full' : (activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
+            <div className={`relative z-30 mt-0 min-w-0 flex-1 transition-all duration-300 ${(activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
                 {/* TOC: lg = anchor + side FAB; small viewports = full-width codal + edge-swipe to open */}
                 <div className="flex min-w-0 items-start gap-1.5 sm:gap-2 lg:gap-2.5">
                     {!isSidebarOpen && (
@@ -899,130 +1019,12 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                         className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/40 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40 glass"
                     >
 
-                    {/* Toolbar (scrolls with article text) */}
+                    {/* Toolbar — codal title + subtitle */}
                     <div className="flex flex-col rounded-t-2xl border-b border-white/20 bg-white/60 backdrop-blur-md dark:border-white/5 dark:bg-slate-900/60">
-
-                        {/* Row 1: Codal chooser + article search (inline) */}
-                        <div className="flex flex-col gap-2 border-b border-white/20 px-4 py-2.5 dark:border-white/5 bg-white/30 dark:bg-slate-800/30 sm:flex-row sm:items-center sm:gap-3">
-                            {codalOptions && codalOptions.length > 0 && onCodalChange && (
-                                <select
-                                    value={selectedCodal || shortName?.toLowerCase()}
-                                    onChange={(e) => onCodalChange(e.target.value)}
-                                    className="w-full shrink-0 text-sm font-semibold rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors cursor-pointer sm:w-[min(42%,16rem)] sm:max-w-xs"
-                                    title="Switch Codal"
-                                >
-                                    {codalOptions.filter(o => !o.disabled).map(o => (
-                                        <option key={o.id} value={o.id}>{o.label}</option>
-                                    ))}
-                                </select>
-                            )}
-                            <form onSubmit={handleSearchSubmit} className="relative min-w-0 flex-1">
-                                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                                <input
-                                    ref={searchBoxRef}
-                                    type="search"
-                                    value={searchTerm}
-                                    onChange={handleSearchInputChange}
-                                    onKeyDown={handleKeyDown}
-                                    placeholder="Search articles…"
-                                    className="w-full rounded-lg border border-gray-200 bg-gray-50/90 py-2 pl-9 pr-8 text-sm text-gray-900 placeholder-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 dark:border-gray-700 dark:bg-slate-800/90 dark:text-white"
-                                />
-                                {searchTerm && (
-                                    <button
-                                        type="button"
-                                        onClick={handleClearSearch}
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700"
-                                        aria-label="Clear search"
-                                    >
-                                        <X size={14} />
-                                    </button>
-                                )}
-                            </form>
-                        </div>
-
-                        {/* Article matches — always visible (scrollable); codal body stays below */}
-                        <div className="border-b border-white/20 bg-white/25 px-3 py-2 dark:border-white/5 dark:bg-slate-900/40">
-                            <div className="mb-1.5 flex items-center justify-between gap-2 px-1">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                    Article matches
-                                </span>
-                                {debouncedSearchTerm.trim() ? (
-                                    <span className="tabular-nums text-[10px] font-semibold text-gray-400 dark:text-gray-500">
-                                        {searchSuggestions.length} shown
-                                    </span>
-                                ) : null}
-                            </div>
-                            <div className="lex-modal-scroll max-h-52 min-h-[2.5rem] overflow-y-auto rounded-lg border border-gray-200/80 bg-white/80 dark:border-white/10 dark:bg-slate-900/60">
-                                {!debouncedSearchTerm.trim() ? (
-                                    <p className="px-3 py-3 text-center text-xs text-gray-400 dark:text-gray-500">
-                                        Type above to list matching articles in this codal.
-                                    </p>
-                                ) : searchSuggestions.length === 0 ? (
-                                    <div className="flex flex-col items-center gap-2 px-3 py-4 text-center">
-                                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                                            No articles match{' '}
-                                            <span className="font-semibold text-gray-700 dark:text-gray-300">
-                                                &quot;{debouncedSearchTerm}&quot;
-                                            </span>
-                                        </p>
-                                        <button
-                                            type="button"
-                                            onClick={handleClearSearch}
-                                            className="text-xs text-amber-600 hover:underline dark:text-amber-400"
-                                        >
-                                            Clear search
-                                        </button>
-                                    </div>
-                                ) : (
-                                    <div className="divide-y divide-gray-100 dark:divide-white/5">
-                                        {searchSuggestions.map((art) => {
-                                            const titleText =
-                                                art.article_title ||
-                                                (art.article_number
-                                                    ? `Article ${art.article_number}`
-                                                    : 'Article');
-                                            const rawSnippet = (art.content || '')
-                                                .replace(/[#*`_~]/g, '')
-                                                .trim()
-                                                .slice(0, 200);
-                                            return (
-                                                <button
-                                                    key={art.id || art.article_number}
-                                                    type="button"
-                                                    onClick={() =>
-                                                        handleSuggestionClick(
-                                                            art.id || art.article_number
-                                                        )
-                                                    }
-                                                    className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
-                                                >
-                                                    <p className="line-clamp-1 text-sm font-bold text-amber-800 dark:text-amber-400">
-                                                        <HighlightText
-                                                            text={titleText}
-                                                            query={debouncedSearchTerm}
-                                                        />
-                                                    </p>
-                                                    {rawSnippet ? (
-                                                        <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                                                            <HighlightText
-                                                                text={rawSnippet}
-                                                                query={debouncedSearchTerm}
-                                                            />
-                                                        </p>
-                                                    ) : null}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Row 2: Title and fullscreen */}
                         <div className="flex items-center gap-3 px-4 py-3">
                             <div className="min-w-0 flex-1 px-2 text-center">
                                 <h1 className="text-[16px] font-extrabold tracking-wide text-gray-900 dark:text-gray-100 font-sans leading-tight">
-                                    {toTitleCase(codeTitle)}
+                                    {codeTitle ? toTitleCase(codeTitle) : 'Lex Code'}
                                 </h1>
                                 {codeSubtitle && (
                                     <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
@@ -1030,20 +1032,10 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                                     </p>
                                 )}
                             </div>
-                            {onToggleFullscreen && (
-                                <button
-                                    type="button"
-                                    onClick={onToggleFullscreen}
-                                    className="shrink-0 rounded-lg border border-gray-100 bg-gray-50 p-2 text-amber-700 shadow-sm transition-colors hover:bg-amber-50 dark:border-gray-700 dark:bg-gray-800 dark:text-amber-500 dark:hover:bg-amber-900/30"
-                                    title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Mode'}
-                                >
-                                    {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-                                </button>
-                            )}
                         </div>
                     </div>
 
-                    <div className="custom-scrollbar min-w-0 max-w-full rounded-b-2xl px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]">
+                    <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]">
                         {renderMainContent()}
                     </div>
                     </div>
@@ -1059,6 +1051,84 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             />
 
             {desktopTocPortal}
+
+            {/* Search dropdown — portaled to body so it escapes overflow-hidden on the codal shell */}
+            {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
+                createPortal(
+                    <div
+                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                        style={{
+                            top: searchBoxRect.bottom + 4,
+                            left: searchBoxRect.left,
+                            width: searchBoxRect.width,
+                        }}
+                        onMouseDown={(e) => e.preventDefault()} // keep focus on input so blur doesn't fire
+                    >
+                        {!debouncedSearchTerm.trim() ? (
+                            <p className="px-3 py-4 text-center text-xs text-gray-400 dark:text-gray-500">
+                                Start typing to find articles in this codal…
+                            </p>
+                        ) : searchSuggestions.length === 0 ? (
+                            <div className="flex flex-col items-center gap-2 px-3 py-5 text-center">
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                    No articles match{' '}
+                                    <span className="font-semibold text-gray-700 dark:text-gray-300">
+                                        &ldquo;{debouncedSearchTerm}&rdquo;
+                                    </span>
+                                </p>
+                                <button
+                                    type="button"
+                                    onClick={handleClearSearch}
+                                    className="text-xs text-amber-600 hover:underline dark:text-amber-400"
+                                >
+                                    Clear
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="border-b border-gray-100 px-3 py-1.5 dark:border-white/5">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                                        {searchSuggestions.length} article{searchSuggestions.length !== 1 ? 's' : ''} found — click to jump
+                                    </span>
+                                </div>
+                                <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                    {searchSuggestions.map((art) => {
+                                        const titleText =
+                                            art.article_title ||
+                                            (art.article_number
+                                                ? `Article ${art.article_number}`
+                                                : 'Article');
+                                        const rawSnippet = (art.content || '')
+                                            .replace(/[#*`_~]/g, '')
+                                            .trim()
+                                            .slice(0, 180);
+                                        return (
+                                            <button
+                                                key={art.id || art.article_number}
+                                                type="button"
+                                                onClick={() =>
+                                                    handleSuggestionClick(art.id || art.article_number)
+                                                }
+                                                className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                            >
+                                                <p className="line-clamp-1 text-sm font-bold text-amber-800 dark:text-amber-400">
+                                                    <HighlightText text={titleText} query={debouncedSearchTerm} />
+                                                </p>
+                                                {rawSnippet && (
+                                                    <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                                                        <HighlightText text={rawSnippet} query={debouncedSearchTerm} />
+                                                    </p>
+                                                )}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        )}
+                    </div>,
+                    document.body
+                )
+            }
             {desktopJurisPortal}
 
             {typeof document !== 'undefined' &&
@@ -1108,7 +1178,7 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
             {/* Mobile Overlay for Right Sidebar */}
             {(activeJurisArticle || activeAmendmentArticle) && (
                 <div
-                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start justify-end bg-black/50 p-4 backdrop-blur-md top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
+                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start justify-end bg-black/50 p-4 backdrop-blur-md top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
                 >
                     <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
@@ -1147,7 +1217,10 @@ const CodexViewer = ({ shortName, onCaseSelect, isFullscreen, onToggleFullscreen
                     </div>
                 </div>
             )}
+                </div>
+            </div>
         </div>
+        </>
     );
 };
 

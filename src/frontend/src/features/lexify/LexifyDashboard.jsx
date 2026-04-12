@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Brain } from 'lucide-react';
 import FeaturePageShell from '../../components/FeaturePageShell';
 
 const PROCTOR_PASSWORD = 'LEXIFY2025';
@@ -130,11 +129,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
               : 'text-indigo-700 dark:text-indigo-400';
 
     return (
-        <FeaturePageShell
-            icon={Brain}
-            title="Lexify"
-            subtitle="2026 Philippine Bar mock exams · secure simulator"
-        >
+        <FeaturePageShell>
             {/* Dashboard only: full-screen exam UI lives in LexifyApp (other exam states). */}
             <div className="flex flex-col overflow-hidden rounded-2xl border-2 border-slate-300/80 bg-white/45 font-sans text-gray-900 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-slate-900/35 dark:text-gray-100">
             <div className="flex h-12 shrink-0 select-none items-center justify-between border-b-2 border-slate-300/85 bg-white/50 px-4 sm:px-6 dark:border-white/10 dark:bg-slate-900/50">

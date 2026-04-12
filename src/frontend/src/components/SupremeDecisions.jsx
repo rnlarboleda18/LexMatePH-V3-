@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Search, Gavel, FileText, X, Filter, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, Landmark } from 'lucide-react';
+import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
 import { lexCache } from '../utils/cache';
 
 
@@ -12,7 +13,6 @@ import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
 import { useDebounce } from '../hooks/useDebounce';
-import { useSearchHistory } from '../hooks/useSearchHistory';
 import { HighlightText } from '../utils/highlight';
 
 /** Read fetch body as JSON once; throws with actionable text if empty or non-JSON (common when API is down or returns HTML). */
@@ -503,9 +503,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     );
     const [searchResults, setSearchResults] = useState([]);
 
-    // Search history (localStorage)
-    const { history: searchHistory, addToHistory, clearHistory } =
-        useSearchHistory('lexmate_sc_search_history');
+    // Search dropdown (portal — escapes any overflow-hidden ancestor)
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [searchBoxRect, setSearchBoxRect] = useState(null);
+    const searchInputRef = useRef(null);
+    const closeSuggestionsTimerRef = useRef(null);
+
     /** Start true so we never flash "No decisions found" before the first request runs. */
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState(null);
@@ -519,7 +522,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const [loadingMockExam, setLoadingMockExam] = useState(false);
 
     // Filter states
-    const [showMobileFilters, setShowMobileFilters] = useState(false);
+    /** Custom filter grid (year, ponente, …) — toggled to save space; chrome bar stays fixed while scrolling. */
+    const [showCustomFilters, setShowCustomFilters] = useState(false);
+    const filterChromeRef = useRef(null);
+    const [filterChromeHeight, setFilterChromeHeight] = useState(52);
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedPonente, setSelectedPonente] = useState('');
@@ -549,6 +555,37 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         fetchPonentes();
         fetchDivisions();
     }, []);
+
+    // Keep dropdown anchored when the page scrolls / resizes while it's open.
+    useEffect(() => {
+        if (!showSuggestions) return;
+        const update = () => {
+            if (searchInputRef.current) {
+                setSearchBoxRect(searchInputRef.current.getBoundingClientRect());
+            }
+        };
+        window.addEventListener('scroll', update, true);
+        window.addEventListener('resize', update);
+        return () => {
+            window.removeEventListener('scroll', update, true);
+            window.removeEventListener('resize', update);
+        };
+    }, [showSuggestions]);
+
+    // Keep main content below the fixed filter bar (height changes when custom filters expand).
+    useLayoutEffect(() => {
+        const el = filterChromeRef.current;
+        if (!el || typeof ResizeObserver === 'undefined') {
+            return;
+        }
+        const measure = () => {
+            setFilterChromeHeight(Math.ceil(el.getBoundingClientRect().height));
+        };
+        measure();
+        const ro = new ResizeObserver(measure);
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, [showCustomFilters, loading]);
 
     // Global pre-fetch cache to make modals "instant" (Disable Lazy Load)
     const [prefetchCache, setPrefetchCache] = useState({});
@@ -713,7 +750,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 setTotalCount(parseInt(data.total, 10) || 0);
                 setFetchError(null);
                 // Save non-trivial search terms to recent-searches history.
-                if (searchTerm.trim().length >= 2) addToHistory(searchTerm.trim());
             }
         } catch (error) {
             if (error.name === 'AbortError') {
@@ -997,253 +1033,167 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     return (
         <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-            {/* Header — glass + accents; sticky below app chrome on all breakpoints (matches Layout main offset) */}
-            <header
-                className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
-                style={{ willChange: 'transform' }}
+            {/* Fixed search + optional custom filters — same horizontal band as sidebar layout (xl:left-52); height drives main padding */}
+            <div
+                ref={filterChromeRef}
+                className="fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 xl:left-52"
             >
-                <div
-                    className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
-                    aria-hidden
-                />
-                <div
-                    className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
-                    aria-hidden
-                />
-                <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
-                    <div
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
-                        aria-hidden
-                    >
-                        <Gavel className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
-                    </div>
-                    <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
-                        <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
-                            Case Digest
-                        </h1>
-                        <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
-                            Case digests & jurisprudence
-                        </p>
-                    </div>
-                </div>
-            </header>
-
-            <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                {/* Search & Filter Section */}
-                <div className="glass bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl rounded-xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] p-4 mb-4 border-2 border-slate-300/80 dark:border-white/10">
-                    <div className="space-y-3">
-                        {/* Main Search Input + always-visible suggestion panels */}
-                        <div className="space-y-2">
-                            <div className="relative">
-                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <Search className="h-5 w-5 text-gray-400" />
+                <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
+                    <div className="flex flex-col gap-2">
+                        {/* Bar Questions order: filter column first (same width md:w-44), then search */}
+                        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+                            <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowCustomFilters((v) => !v)}
+                                    className="box-border flex h-9 w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-stone-400 bg-gray-50 px-2 text-xs font-semibold uppercase leading-tight tracking-wide text-gray-800 shadow-sm transition-colors hover:bg-gray-100 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800 sm:text-sm"
+                                    aria-expanded={showCustomFilters}
+                                    aria-label={showCustomFilters ? 'Hide case digest filters' : 'Show case digest filters'}
+                                >
+                                    <Filter className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                    {showCustomFilters ? (
+                                        <>
+                                            <ChevronUp className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                            <span className="max-sm:sr-only">Hide</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ChevronDown className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                            <span className="max-sm:sr-only">Filters</span>
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                            <div className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto">
+                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+                                    <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} />
                                 </div>
                                 <input
+                                    ref={searchInputRef}
                                     type="search"
-                                    className="block w-full rounded-lg border border-stone-400 bg-gray-50 py-2.5 pl-10 pr-10 leading-5 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-base"
-                                    placeholder="Start typing to search cases..."
+                                    className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                    placeholder="Search cases…"
                                     value={searchTerm}
                                     onFocus={() => {
-                                        setSelectedYear('');
-                                        setSelectedMonth('');
-                                        setSelectedPonente('');
-                                        setSelectedSubject('');
-                                        setSelectedDivision('');
-                                        setSelectedSignificance('');
+                                        clearTimeout(closeSuggestionsTimerRef.current);
+                                        if (searchInputRef.current) {
+                                            setSearchBoxRect(searchInputRef.current.getBoundingClientRect());
+                                        }
+                                        setShowSuggestions(true);
+                                    }}
+                                    onBlur={() => {
+                                        closeSuggestionsTimerRef.current = setTimeout(
+                                            () => setShowSuggestions(false),
+                                            160
+                                        );
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Escape') {
+                                            setShowSuggestions(false);
+                                            searchInputRef.current?.blur();
+                                        }
                                     }}
                                     onChange={(e) => {
                                         setSearchTerm(e.target.value);
                                         setCurrentPage(1);
+                                        setShowSuggestions(true);
                                     }}
                                 />
                                 {loading && (
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-blue-600" />
+                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                        <div className="h-3.5 w-3.5 animate-spin rounded-full border-b-2 border-blue-600" />
                                     </div>
                                 )}
                             </div>
+                        </div>
 
-                            {/* Always visible: recent + current result list (full page of matches) */}
-                            <div className="max-h-80 overflow-y-auto rounded-xl border-2 border-slate-200 bg-white/95 shadow-inner dark:border-white/10 dark:bg-slate-900/95">
-                                {searchHistory.length > 0 && (
-                                    <div className="border-b border-gray-100 dark:border-white/10">
-                                        <div className="flex items-center justify-between bg-amber-50/50 px-3 py-2 dark:bg-amber-950/20">
-                                            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                Recent searches
-                                            </span>
-                                            <button
-                                                type="button"
-                                                onClick={() => clearHistory()}
-                                                className="text-[10px] text-gray-400 transition-colors hover:text-red-500"
-                                            >
-                                                Clear
-                                            </button>
-                                        </div>
-                                        {searchHistory.map((term, i) => (
-                                            <button
-                                                key={i}
-                                                type="button"
-                                                onClick={() => {
-                                                    setSearchTerm(term);
-                                                    setCurrentPage(1);
-                                                }}
-                                                className="flex w-full items-center gap-2.5 border-b border-gray-50 px-3 py-2.5 text-left text-sm text-gray-700 transition-colors last:border-0 hover:bg-amber-50 dark:border-white/5 dark:text-gray-300 dark:hover:bg-amber-900/20"
-                                            >
-                                                <Clock size={12} className="shrink-0 text-gray-400" />
-                                                {term}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-
-                                <div className="bg-white dark:bg-slate-900">
-                                    <div className="flex items-center justify-between border-b border-gray-100 px-3 py-2 dark:border-white/10">
-                                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                            Matching cases (this page)
-                                        </span>
-                                        {searchTerm.trim().length >= 2 && !loading && (
-                                            <span className="tabular-nums text-[10px] font-semibold text-gray-400">
-                                                {searchResults.length} shown
-                                            </span>
-                                        )}
-                                    </div>
-                                    {searchTerm.trim().length < 2 ? (
-                                        <p className="px-3 py-4 text-center text-xs text-gray-400 dark:text-gray-500">
-                                            Type at least 2 characters to search. Results for your query appear here and in the grid below.
-                                        </p>
-                                    ) : loading ? (
-                                        <p className="px-3 py-6 text-center text-xs text-gray-400">Loading…</p>
-                                    ) : searchResults.length === 0 ? (
-                                        <p className="px-3 py-4 text-center text-xs text-gray-400 dark:text-gray-500">
-                                            No cases match this search on the current filters / page.
-                                        </p>
-                                    ) : (
-                                        <div className="divide-y divide-gray-100 dark:divide-white/5">
-                                            {searchResults.map((r) => (
-                                                <button
-                                                    key={r.id}
-                                                    type="button"
-                                                    onClick={() => onCaseSelect && onCaseSelect(r)}
-                                                    className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
-                                                >
-                                                    <span className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                                        <HighlightText
-                                                            text={r.short_title || r.title || r.case_number}
-                                                            query={searchTerm}
-                                                        />
-                                                    </span>
-                                                    <span className="font-mono text-xs text-gray-400 dark:text-gray-500">
-                                                        {r.case_number}
-                                                    </span>
-                                                </button>
+                        {showCustomFilters && (
+                            <div className="max-h-[38vh] overflow-y-auto border-t border-slate-200/80 pt-2 dark:border-white/10">
+                                <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                                    <div className="min-w-0 flex flex-col">
+                                        <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Year</label>
+                                        <select
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            value={selectedYear}
+                                            onChange={(e) => { setSelectedYear(e.target.value); setCurrentPage(1); }}
+                                        >
+                                            <option value="">All Years</option>
+                                            {availableYears.map(year => (
+                                                <option key={year} value={year}>{year}</option>
                                             ))}
-                                        </div>
-                                    )}
+                                        </select>
+                                    </div>
+                                    <div className="min-w-0 flex flex-col">
+                                        <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Ponente</label>
+                                        <select
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            value={selectedPonente}
+                                            onChange={(e) => { setSelectedPonente(e.target.value); setCurrentPage(1); }}
+                                        >
+                                            <option value="">All Ponentes</option>
+                                            {availablePonentes.map((ponente, idx) => (
+                                                <option key={idx} value={ponente}>{ponente}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className="min-w-0 flex flex-col">
+                                        <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Bar subject</label>
+                                        <select
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            value={selectedSubject}
+                                            onChange={(e) => { setSelectedSubject(e.target.value); setCurrentPage(1); }}
+                                        >
+                                            <option value="" style={{ color: '#6B7280' }}>All Subjects</option>
+                                            <option value="Civil Law" style={{ color: '#3B82F6', fontWeight: '600' }}>Civil Law</option>
+                                            <option value="Commercial Law" style={{ color: '#06B6D4', fontWeight: '600' }}>Commercial Law</option>
+                                            <option value="Criminal Law" style={{ color: '#EF4444', fontWeight: '600' }}>Criminal Law</option>
+                                            <option value="Labor Law" style={{ color: '#EAB308', fontWeight: '600' }}>Labor Law</option>
+                                            <option value="Legal Ethics" style={{ color: '#22C55E', fontWeight: '600' }}>Legal Ethics</option>
+                                            <option value="Political Law" style={{ color: '#A855F7', fontWeight: '600' }}>Political Law</option>
+                                            <option value="Remedial Law" style={{ color: '#EC4899', fontWeight: '600' }}>Remedial Law</option>
+                                            <option value="Taxation Law" style={{ color: '#F97316', fontWeight: '600' }}>Taxation Law</option>
+                                        </select>
+                                    </div>
+                                    <div className="min-w-0 flex flex-col">
+                                        <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Significance</label>
+                                        <select
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            value={selectedSignificance}
+                                            onChange={(e) => { setSelectedSignificance(e.target.value); setCurrentPage(1); }}
+                                        >
+                                            <option value="">All Classifications</option>
+                                            <option value="NEW DOCTRINE">New Doctrine</option>
+                                            <option value="REITERATION">Reiteration</option>
+                                            <option value="MODIFICATION">Modification</option>
+                                            <option value="CLARIFICATION">Clarification</option>
+                                            <option value="ABANDONMENT">Abandonment</option>
+                                            <option value="REVERSAL">Reversal</option>
+                                        </select>
+                                    </div>
+                                    <div className="min-w-0 flex flex-col">
+                                        <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Court body</label>
+                                        <select
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            value={selectedDivision}
+                                            onChange={(e) => { setSelectedDivision(e.target.value); setCurrentPage(1); }}
+                                        >
+                                            <option value="">All Court Bodies</option>
+                                            {availableDivisions.map((division, idx) => (
+                                                <option key={idx} value={division}>{division}</option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Mobile Filter Toggle */}
-                        <div className="md:hidden">
-                            <button
-                                onClick={() => setShowMobileFilters(!showMobileFilters)}
-                                className="w-full flex items-center justify-center gap-2 rounded-lg border-2 border-slate-300/80 px-4 py-2 dark:border-white/10 text-sm font-medium text-gray-700 dark:text-gray-200 glass bg-white/40 dark:bg-slate-800/40 hover:bg-white/60 dark:hover:bg-slate-700/60 transition-colors shadow-sm"
-                            >
-                                <Filter className="h-4 w-4" />
-                                {showMobileFilters ? "Hide Filters" : "Filter Results"}
-                            </button>
-                        </div>
-
-                        {/* Filters Grid */}
-                        <div className={`grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 ${showMobileFilters ? 'grid' : 'hidden md:grid'}`}>
-                            {/* Year Filter */}
-                            <div className="relative">
-                                <label className="block text-xs font-medium text-gray-500 mb-1">Year</label>
-                                <select
-                                    className="block w-full pl-3 pr-8 py-2 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md dark:bg-gray-900 dark:text-white"
-                                    value={selectedYear}
-                                    onChange={(e) => { setSelectedYear(e.target.value); setCurrentPage(1); }}
-                                >
-                                    <option value="">All Years</option>
-                                    {availableYears.map(year => (
-                                        <option key={year} value={year}>{year}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            {/* Ponente Filter */}
-                            <div className="relative">
-                                <label className="block text-xs font-medium text-gray-500 mb-1">Ponente</label>
-                                <select
-                                    className="block w-full pl-3 pr-8 py-2 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md dark:bg-gray-900 dark:text-white"
-                                    value={selectedPonente}
-                                    onChange={(e) => { setSelectedPonente(e.target.value); setCurrentPage(1); }}
-                                >
-                                    <option value="">All Ponentes</option>
-                                    {availablePonentes.map((ponente, idx) => (
-                                        <option key={idx} value={ponente}>{ponente}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            {/* Subject Filter */}
-                            <div className="relative">
-                                <label className="block text-xs font-medium text-gray-500 mb-1">Bar Subject</label>
-                                <select
-                                    className="block w-full pl-3 pr-8 py-2 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md dark:bg-gray-900 dark:text-white"
-                                    value={selectedSubject}
-                                    onChange={(e) => { setSelectedSubject(e.target.value); setCurrentPage(1); }}
-                                >
-                                    <option value="" style={{ color: '#6B7280' }}>All Subjects</option>
-                                    <option value="Civil Law" style={{ color: '#3B82F6', fontWeight: '600' }}>Civil Law</option>
-                                    <option value="Commercial Law" style={{ color: '#06B6D4', fontWeight: '600' }}>Commercial Law</option>
-                                    <option value="Criminal Law" style={{ color: '#EF4444', fontWeight: '600' }}>Criminal Law</option>
-                                    <option value="Labor Law" style={{ color: '#EAB308', fontWeight: '600' }}>Labor Law</option>
-                                    <option value="Legal Ethics" style={{ color: '#22C55E', fontWeight: '600' }}>Legal Ethics</option>
-                                    <option value="Political Law" style={{ color: '#A855F7', fontWeight: '600' }}>Political Law</option>
-                                    <option value="Remedial Law" style={{ color: '#EC4899', fontWeight: '600' }}>Remedial Law</option>
-                                    <option value="Taxation Law" style={{ color: '#F97316', fontWeight: '600' }}>Taxation Law</option>
-                                </select>
-                            </div>
-
-                            {/* Significance Filter */}
-                            <div className="relative">
-                                <label className="block text-xs font-medium text-gray-500 mb-1">Significance</label>
-                                <select
-                                    className="block w-full pl-3 pr-8 py-2 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md dark:bg-gray-900 dark:text-white"
-                                    value={selectedSignificance}
-                                    onChange={(e) => { setSelectedSignificance(e.target.value); setCurrentPage(1); }}
-                                >
-                                    <option value="">All Classifications</option>
-                                    <option value="NEW DOCTRINE">New Doctrine</option>
-                                    <option value="REITERATION">Reiteration</option>
-                                    <option value="MODIFICATION">Modification</option>
-                                    <option value="CLARIFICATION">Clarification</option>
-                                    <option value="ABANDONMENT">Abandonment</option>
-                                    <option value="REVERSAL">Reversal</option>
-                                </select>
-                            </div>
-
-                            {/* Division Filter */}
-                            <div className="relative">
-                                <label className="block text-xs font-medium text-gray-500 mb-1">Court Body</label>
-                                <select
-                                    className="block w-full pl-3 pr-8 py-2 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md dark:bg-gray-900 dark:text-white"
-                                    value={selectedDivision}
-                                    onChange={(e) => { setSelectedDivision(e.target.value); setCurrentPage(1); }}
-                                >
-                                    <option value="">All Court Bodies</option>
-                                    {availableDivisions.map((division, idx) => (
-                                        <option key={idx} value={division}>{division}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-
-                        </div>
+                        )}
                     </div>
                 </div>
+            </div>
 
+            <main
+                className="mx-auto max-w-7xl px-3 pb-4 sm:px-5 sm:pb-5 lg:px-6"
+                style={{ paddingTop: `${filterChromeHeight + 12}px` }}
+            >
                 {/* Status Indicator */}
                 {loading && (
                     <div className="flex justify-center mb-4">
@@ -1545,6 +1495,71 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             </main>
 
             {/* Detail Modal moved to Global App.jsx Level */}
+
+            {/* Search dropdown — portaled to body so it escapes overflow-hidden ancestors */}
+            {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
+                createPortal(
+                    <div
+                        className="fixed z-[200] max-h-80 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                        style={{
+                            top: searchBoxRect.bottom + 4,
+                            left: searchBoxRect.left,
+                            width: searchBoxRect.width,
+                        }}
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
+                        {/* API results */}
+                        <div>
+                            <div className="flex items-center justify-between border-b border-gray-100 px-3 py-1.5 dark:border-white/10">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                    Matching cases
+                                </span>
+                                {searchTerm.trim().length >= 2 && !loading && (
+                                    <span className="tabular-nums text-[10px] font-semibold text-gray-400">
+                                        {searchResults.length} shown
+                                    </span>
+                                )}
+                            </div>
+                            {searchTerm.trim().length < 2 ? (
+                                <p className="px-3 py-3 text-center text-xs text-gray-400 dark:text-gray-500">
+                                    Type at least 2 characters to search.
+                                </p>
+                            ) : loading ? (
+                                <p className="px-3 py-4 text-center text-xs text-gray-400">Loading…</p>
+                            ) : searchResults.length === 0 ? (
+                                <p className="px-3 py-3 text-center text-xs text-gray-400 dark:text-gray-500">
+                                    No cases match on the current filters / page.
+                                </p>
+                            ) : (
+                                <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                    {searchResults.map((r) => (
+                                        <button
+                                            key={r.id}
+                                            type="button"
+                                            onClick={() => {
+                                                setShowSuggestions(false);
+                                                onCaseSelect && onCaseSelect(r);
+                                            }}
+                                            className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                        >
+                                            <span className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                                <HighlightText
+                                                    text={r.short_title || r.title || r.case_number}
+                                                    query={searchTerm}
+                                                />
+                                            </span>
+                                            <span className="font-mono text-xs text-gray-400 dark:text-gray-500">
+                                                {r.case_number}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>,
+                    document.body
+                )
+            }
         </div>
     );
 };

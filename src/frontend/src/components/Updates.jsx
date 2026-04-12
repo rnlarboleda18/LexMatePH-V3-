@@ -171,11 +171,7 @@ const Updates = ({ isDarkMode = false }) => {
   ];
 
   return (
-    <FeaturePageShell
-      icon={Newspaper}
-      title="Updates"
-      subtitle="SC news, Bar 2026 resources & social feeds"
-    >
+    <FeaturePageShell>
       <div className="animate-in fade-in space-y-12 pb-12 duration-700">
         {/* Live feed from official RSS (refreshed on the server on a short TTL) */}
         <section>

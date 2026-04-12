@@ -56,52 +56,48 @@ const Layout = ({
             {/* Header */}
             {!hideAppChrome && (
                 <header
-                    className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 px-3 pt-[env(safe-area-inset-top,0px)] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-4 md:px-8
+                    className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
+                    min-h-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
                     ${isDarkMode
-                        ? 'min-h-[calc(2.75rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
-                        : 'min-h-[calc(2.75rem+env(safe-area-inset-top,0px))] md:min-h-[calc(5rem+env(safe-area-inset-top,0px))] border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
+                        ? 'bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
+                        : 'border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
                     }`}
                     style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
                 >
 
-                    {/* LEFT — Brand */}
-                    <div className="relative z-10 flex min-w-0 items-center gap-2 md:gap-3">
-                        {/* Mobile hamburger — box size matches scales mark beside it */}
+                    {/* Brand + menu */}
+                    <div className="relative z-10 flex min-w-0 min-h-0 shrink-0 items-center gap-2 md:gap-2.5">
                         <button
                             type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden flex shrink-0 h-9 w-9 items-center justify-center rounded-xl border transition-colors sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors ${
                                 isDarkMode
-                                    ? 'border-white/10 bg-white/[0.06] text-gray-300 hover:text-amber-400 hover:bg-amber-900/20'
-                                    : 'border-2 border-slate-400/70 bg-white text-gray-700 shadow-sm hover:text-amber-800 hover:bg-amber-50'
+                                    ? 'border-white/10 bg-white/[0.06] text-gray-300 hover:bg-amber-900/20 hover:text-amber-400'
+                                    : 'border-2 border-slate-400/70 bg-white text-gray-700 shadow-sm hover:bg-amber-50 hover:text-amber-800'
                             }`}
                             aria-label="Toggle Sidebar"
                         >
                             {isSidebarOpen ? (
-                                <X className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8" strokeWidth={2} />
+                                <X className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
                             ) : (
-                                <Menu className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8" strokeWidth={2} />
+                                <Menu className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
                             )}
                         </button>
 
-                        {/* Brand — wordmark + scales mark (no vertical bar); LexMatePH casing preserved */}
-                        <div className="flex min-w-0 items-center gap-2.5 md:gap-3">
+                        <div className="flex min-w-0 items-center gap-2 md:gap-2.5">
                             <div
-                                className={`flex shrink-0 items-center justify-center rounded-xl border h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${
                                     isDarkMode
                                         ? 'border-white/10 bg-white/[0.06] text-indigo-300'
                                         : 'border-2 border-slate-400/70 bg-white text-indigo-700 shadow-sm'
                                 }`}
                                 aria-hidden
                             >
-                                <Scale
-                                    className="h-[1.15rem] w-[1.15rem] sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8"
-                                    strokeWidth={2}
-                                />
+                                <Scale className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
                             </div>
-                            <div className="flex min-w-0 flex-col">
+                            <div className="flex min-w-0 flex-col justify-center leading-tight">
                                 <span
-                                    className={`select-none font-semibold leading-none tracking-tight text-[1.125rem] sm:text-xl md:text-2xl lg:text-[1.75rem] ${
+                                    className={`select-none truncate font-semibold tracking-tight text-base sm:text-lg md:text-[1.125rem] ${
                                         isDarkMode
                                             ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
                                             : 'text-slate-950'
@@ -110,7 +106,7 @@ const Layout = ({
                                     LexMatePH
                                 </span>
                                 <span
-                                    className={`mt-1 hidden text-[11px] font-medium leading-snug tracking-tight md:block md:text-xs lg:text-[13px] ${
+                                    className={`mt-0.5 hidden text-[10px] font-medium leading-tight tracking-tight sm:block sm:text-[11px] md:text-xs ${
                                         isDarkMode ? 'text-slate-400' : 'text-slate-600'
                                     }`}
                                 >
@@ -120,13 +116,13 @@ const Layout = ({
                         </div>
                     </div>
 
-                    {/* CENTER — Feature strip (same row as logo; grid-centered between brand and actions) */}
+                    {/* Center links — flex-1 keeps spacing between brand and actions; wraps only on very narrow sm */}
                     <nav
-                        className="hidden min-w-0 max-w-[min(46vw,32rem)] justify-center justify-self-center px-1 text-center md:flex md:items-center"
+                        className="order-last hidden w-full min-w-0 justify-center border-t border-slate-200/70 px-1 pt-1.5 dark:border-white/10 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
                         aria-label="LexMatePH feature areas"
                     >
                         <p
-                            className={`flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[15px] font-semibold leading-snug tracking-tight md:text-[17px] lg:text-lg xl:text-xl ${
+                            className={`flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-[10px] font-semibold leading-snug tracking-tight sm:text-[11px] md:text-xs lg:text-sm xl:text-[0.9375rem] ${
                                 isDarkMode ? 'text-slate-300' : 'text-slate-700'
                             }`}
                         >
@@ -146,47 +142,52 @@ const Layout = ({
                         </p>
                     </nav>
 
-                    {/* RIGHT — Actions */}
-                    <div className="relative z-10 col-start-2 flex shrink-0 items-center justify-end gap-1.5 justify-self-end md:col-start-3 md:gap-2">
-
-                        {/* Theme Toggle */}
+                    <div className="relative z-10 flex shrink-0 items-center justify-end gap-1 md:gap-1.5">
                         <button
                             onClick={toggleTheme}
+                            type="button"
                             title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                            className={`flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-base md:text-lg font-medium transition-all duration-200
+                            className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium transition-all duration-200 md:gap-2 md:px-2.5 md:py-1.5 md:text-base
                                 ${isDarkMode
-                                    ? 'text-gray-400 hover:text-amber-400 hover:bg-amber-900/20 border border-transparent hover:border-amber-800/40'
+                                    ? 'border border-transparent text-gray-400 hover:border-amber-800/40 hover:bg-amber-900/20 hover:text-amber-400'
                                     : 'border-2 border-transparent text-gray-700 hover:border-amber-300/90 hover:bg-amber-50 hover:text-amber-900'
                                 }`}
                         >
-                            {isDarkMode ? <Sun size={18} className="text-amber-400 md:w-[20px] md:h-[20px]" /> : <Moon size={18} className="text-violet-500 md:w-[20px] md:h-[20px]" />}
-                            <span className="hidden md:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
+                            {isDarkMode ? (
+                                <Sun size={17} className="shrink-0 text-amber-400 md:h-[18px] md:w-[18px]" />
+                            ) : (
+                                <Moon size={17} className="shrink-0 text-violet-500 md:h-[18px] md:w-[18px]" />
+                            )}
+                            <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
                         </button>
 
+                        <div className={`hidden sm:block h-4 w-px shrink-0 rounded-full md:h-5 ${isDarkMode ? 'bg-gray-700' : 'bg-slate-400/80'}`} />
 
-                        {/* Divider */}
-                        <div className={`hidden sm:block w-0.5 h-5 md:h-6 mx-1 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-slate-400/80'}`} />
-
-                        {/* Auth - Hidden on mobile, moved to sidebar */}
-                        <div className="hidden md:flex items-center gap-2">
+                        <div className="hidden items-center gap-1.5 md:flex">
                             <SignedIn>
-                                <UserButton 
+                                <UserButton
                                     appearance={{
                                         elements: {
-                                            userButtonAvatarBox: "w-10 h-10"
-                                        }
+                                            userButtonAvatarBox: 'h-9 w-9',
+                                        },
                                     }}
                                 />
                             </SignedIn>
                             <SignedOut>
-                                <div className="flex items-center gap-1.5">
+                                <div className="flex items-center gap-1">
                                     <SignInButton mode="modal">
-                                        <button className={`px-4 py-2 rounded-lg text-lg font-semibold transition-all duration-200 ${isDarkMode ? 'text-amber-400 hover:bg-amber-900/20' : 'text-amber-700 hover:bg-amber-50'}`}>
+                                        <button
+                                            type="button"
+                                            className={`rounded-md px-2.5 py-1.5 text-sm font-semibold transition-all duration-200 md:px-3 md:text-[0.9375rem] ${isDarkMode ? 'text-amber-400 hover:bg-amber-900/20' : 'text-amber-700 hover:bg-amber-50'}`}
+                                        >
                                             Log In
                                         </button>
                                     </SignInButton>
                                     <SignUpButton mode="modal">
-                                        <button className="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-lg font-semibold transition-all duration-200 shadow-sm">
+                                        <button
+                                            type="button"
+                                            className="rounded-md bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-amber-700 md:px-3 md:text-[0.9375rem]"
+                                        >
                                             Sign Up
                                         </button>
                                     </SignUpButton>
@@ -200,7 +201,7 @@ const Layout = ({
             {/* Sidebar (Navigation Drawer) */}
             {!hideAppChrome && (
                 <aside
-                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]
+                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
             ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'border-r-2 border-slate-300/90 bg-white xl:bg-white/85 xl:backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(15,23,42,0.08)]'}
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
             xl:translate-x-0 xl:block`}
@@ -214,7 +215,7 @@ const Layout = ({
 
             {/* Main Content Area — z-10 so mobile sidebar scrim can sit above and capture taps */}
             <main
-                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(5rem+env(safe-area-inset-top,0px))]' : 'pt-[calc(2.75rem+env(safe-area-inset-top,0px))] md:pt-[calc(5rem+env(safe-area-inset-top,0px))]'} min-h-screen
+                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]' : 'pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]'} min-h-screen
         ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >

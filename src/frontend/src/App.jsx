@@ -2,7 +2,8 @@ import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMe
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
-import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
+import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
+import Fuse from 'fuse.js';
 import Layout from './components/Layout';
 import Sidebar from './components/Sidebar';
 import ControlBar from './components/ControlBar';
@@ -111,10 +112,17 @@ function App() {
   const [lexifyExamSimulationActive, setLexifyExamSimulationActive] = useState(false);
   /** User dismissed the docked mini LexPlayer (X); show again after opening full LexPlay. */
   const [lexPlayMiniDismissed, setLexPlayMiniDismissed] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
   const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
+
+  // Bar search portal
+  const [showBarSuggestions, setShowBarSuggestions] = useState(false);
+  const [barSearchRect, setBarSearchRect] = useState(null);
+  const barSearchInputRef = useRef(null);
+  const barCloseSuggestionsTimerRef = useRef(null);
+  const barFuseRef = useRef(null);
+  const [barFuseReady, setBarFuseReady] = useState(false);
 
   const BAR_SUBJECT_OPTIONS = [
     'Civil Law',
@@ -176,25 +184,67 @@ function App() {
     setBarCurrentPage(1);
   }, [currentSubject, searchTerm]);
 
-  // Pre-filter bar questions (both subject and free-text) so the JSX stays clean.
+  // Build fuzzy-search index whenever the questions list changes.
+  useEffect(() => {
+    if (!questions?.length) {
+      barFuseRef.current = null;
+      setBarFuseReady(false);
+      return;
+    }
+    barFuseRef.current = new Fuse(questions, {
+      keys: [
+        { name: 'question', weight: 0.5 },
+        { name: 'answer',   weight: 0.3 },
+        { name: 'subject',  weight: 0.2 },
+      ],
+      threshold: 0.4,
+      distance: 400,
+      minMatchCharLength: 2,
+      includeScore: false,
+    });
+    setBarFuseReady(true);
+  }, [questions]);
+
+  // Keep bar-search dropdown anchored when page scrolls / resizes.
+  useEffect(() => {
+    if (!showBarSuggestions) return;
+    const update = () => {
+      if (barSearchInputRef.current) {
+        setBarSearchRect(barSearchInputRef.current.getBoundingClientRect());
+      }
+    };
+    window.addEventListener('scroll', update, true);
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update, true);
+      window.removeEventListener('resize', update);
+    };
+  }, [showBarSuggestions]);
+
+  // Pre-filter bar questions (both subject and free-text/fuzzy) so the JSX stays clean.
   const filteredBarQuestions = useMemo(() => {
-    let result = questions;
+    let pool = questions;
     if (currentSubject) {
-      result = result.filter(
+      pool = pool.filter(
         (q) => normalizeBarSubject(q.subject) === currentSubject
       );
     }
-    if (searchTerm.trim()) {
-      const lq = searchTerm.toLowerCase();
-      result = result.filter(
-        (q) =>
-          (q.question || '').toLowerCase().includes(lq) ||
-          (q.answer || '').toLowerCase().includes(lq) ||
-          (q.subject || '').toLowerCase().includes(lq)
+    if (!searchTerm.trim()) return pool;
+    if (barFuseRef.current) {
+      const matchedIds = new Set(
+        barFuseRef.current.search(searchTerm).map((r) => r.item.id)
       );
+      return pool.filter((q) => matchedIds.has(q.id));
     }
-    return result;
-  }, [questions, currentSubject, searchTerm]);
+    // Fuse index not ready yet — fall back to includes.
+    const lq = searchTerm.toLowerCase();
+    return pool.filter(
+      (q) =>
+        (q.question || '').toLowerCase().includes(lq) ||
+        (q.answer || '').toLowerCase().includes(lq) ||
+        (q.subject || '').toLowerCase().includes(lq)
+    );
+  }, [questions, currentSubject, searchTerm, barFuseReady]);
 
   // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
@@ -312,45 +362,6 @@ function App() {
     setMode('codex');
   }, []);
 
-  // Handle Native Fullscreen
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        setIsFullscreen(false);
-      }
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    // Webkit specific
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-    };
-  }, []);
-
-  const handleToggleFullscreen = () => {
-    if (!isFullscreen) {
-      // Enter Fullscreen
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen().catch(err => {
-          console.error(`Error attempting to enable fullscreen: ${err.message}`);
-        });
-      }
-      setIsFullscreen(true);
-    } else {
-      // Exit Fullscreen
-      if (document.exitFullscreen && document.fullscreenElement) {
-        document.exitFullscreen().catch(err => {
-          console.error(`Error attempting to exit fullscreen: ${err.message}`);
-        });
-      }
-      setIsFullscreen(false);
-    }
-  };
-
   // --- Render ---
   return (
     <Layout
@@ -359,7 +370,7 @@ function App() {
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
       flashcardStudying={mode === 'flashcard' && flashcardState === 'active'}
-      hideAppChrome={isFullscreen || lexifyExamSimulationActive || mode === 'landing'}
+      hideAppChrome={lexifyExamSimulationActive || mode === 'landing'}
       lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {
@@ -383,7 +394,6 @@ function App() {
           }}
           onToggleLexCode={handleToggleLexCode}
           mode={mode}
-          isFullscreen={isFullscreen}
         />
       }
     >
@@ -473,85 +483,23 @@ function App() {
                   )}
                   {effectiveMode === 'codex' && (
                     <div className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <header
-                        className="sticky z-20 shrink-0 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
-                        style={{ willChange: 'transform' }}
-                      >
-                        <div
-                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
-                          aria-hidden
+                      <Suspense fallback={<PageLoadingFallback label="Loading LexCode…" />}>
+                        <LexCodeViewer
+                          shortName={selectedCodalCode ? selectedCodalCode.toUpperCase() : ''}
+                          codalOptions={CODAL_FILTER_OPTIONS}
+                          selectedCodal={selectedCodalCode}
+                          onCodalChange={(id) => {
+                            setSelectedCodalCode(id);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          onCaseSelect={selectGlobalCase}
+                          subscriptionTier={tier}
                         />
-                        <div
-                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
-                          aria-hidden
-                        />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
-                            aria-hidden
-                          >
-                            <Library className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
-                          </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
-                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
-                              LexCode
-                            </h1>
-                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
-                              Philippine codals & statutes
-                            </p>
-                          </div>
-                        </div>
-                      </header>
-                      <div className="mx-auto w-full max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                        <Suspense fallback={<PageLoadingFallback label="Loading LexCode…" />}>
-                          <LexCodeViewer
-                            shortName={selectedCodalCode.toUpperCase()}
-                            codalOptions={CODAL_FILTER_OPTIONS}
-                            selectedCodal={selectedCodalCode}
-                            onCodalChange={(id) => {
-                              setSelectedCodalCode(id);
-                              window.scrollTo({ top: 0, behavior: 'smooth' });
-                            }}
-                            onCaseSelect={selectGlobalCase}
-                            isFullscreen={isFullscreen}
-                            onToggleFullscreen={handleToggleFullscreen}
-                            subscriptionTier={tier}
-                          />
-                        </Suspense>
-                      </div>
+                      </Suspense>
                     </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <header
-                        className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
-                        style={{ willChange: 'transform' }}
-                      >
-                        <div
-                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
-                          aria-hidden
-                        />
-                        <div
-                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
-                          aria-hidden
-                        />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
-                            aria-hidden
-                          >
-                            <SquareStack className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
-                          </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
-                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
-                              Flashcards
-                            </h1>
-                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
-                              Bar syllabus–aligned key concepts from SC digests
-                            </p>
-                          </div>
-                        </div>
-                      </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                         <Suspense fallback={<PageLoadingFallback label="Loading Flashcards…" />}>
                           <FlashcardSetup
@@ -606,11 +554,7 @@ function App() {
                         />
                       </Suspense>
                     ) : (
-                      <FeaturePageShell
-                        icon={Brain}
-                        title="Lexify"
-                        subtitle="2026 Philippine Bar mock exams · upgrade to unlock"
-                      >
+                      <FeaturePageShell>
                         <div className="flex min-h-[40vh] items-center justify-center">
                           <div className="w-full max-w-md">
                             <Suspense fallback={<PageLoadingFallback />}>
@@ -623,78 +567,139 @@ function App() {
                   )}
                   {effectiveMode === 'browse_bar' && (
                     <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <header
-                        className="sticky z-20 overflow-hidden border-b-2 border-slate-300/85 bg-white/88 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/35 dark:shadow-[0_8px_30px_rgb(0,0,0,0.25)] md:rounded-b-2xl md:shadow-[0_12px_40px_rgb(0,0,0,0.08)] md:backdrop-blur-2xl dark:md:shadow-[0_12px_40px_rgb(0,0,0,0.22)] lg:shadow-[0_16px_48px_rgb(0,0,0,0.09)] dark:lg:shadow-[0_16px_48px_rgb(0,0,0,0.28)] top-[calc(2.75rem+env(safe-area-inset-top,0px))] md:top-[calc(5rem+env(safe-area-inset-top,0px))]"
-                        style={{ willChange: 'transform' }}
-                      >
-                        <div
-                          className="pointer-events-none absolute -left-[10%] -top-[60%] h-[280px] w-[280px] rounded-full bg-indigo-500/20 blur-[100px] dark:bg-blue-500/15 md:h-[360px] md:w-[360px] md:blur-[120px] lg:left-0 lg:h-[420px] lg:w-[420px]"
-                          aria-hidden
-                        />
-                        <div
-                          className="pointer-events-none absolute -bottom-[80%] -right-[15%] h-[260px] w-[260px] rounded-full bg-purple-500/18 blur-[100px] dark:bg-purple-500/12 md:h-[340px] md:w-[340px] md:blur-[120px] lg:right-0 lg:bottom-[-40%] lg:h-[400px] lg:w-[400px]"
-                          aria-hidden
-                        />
-                        <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:py-3 lg:gap-4 lg:px-5 lg:py-3">
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-[0_4px_14px_rgba(79,70,229,0.12)] dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:h-10 sm:w-10 md:h-11 md:w-11 md:rounded-xl md:shadow-[0_8px_24px_rgba(79,70,229,0.15)] lg:h-11 lg:w-11"
-                            aria-hidden
-                          >
-                            <ClipboardList className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6" strokeWidth={2} />
+                      {/* Sticky search + filter bar */}
+                      <div className="sticky top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
+                        <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
+                          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+                            <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
+                              <label htmlFor="bar-subject-filter" className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 sm:sr-only">
+                                Bar subject ({filteredBarQuestions.length} question{filteredBarQuestions.length !== 1 ? 's' : ''})
+                              </label>
+                              <select
+                                id="bar-subject-filter"
+                                aria-label="Filter by Bar subject"
+                                value={currentSubject ?? ''}
+                                onChange={(e) => {
+                                  const v = e.target.value;
+                                  setCurrentSubject(v === '' ? null : v);
+                                  setBarCurrentPage(1);
+                                }}
+                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                              >
+                                <option value="">All subjects</option>
+                                {BAR_SUBJECT_OPTIONS.map((s) => (
+                                  <option key={s} value={s}>{s}</option>
+                                ))}
+                              </select>
+                            </div>
+                            <div className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto">
+                              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+                                <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} />
+                              </div>
+                              <input
+                                ref={barSearchInputRef}
+                                type="search"
+                                placeholder="Search questions, answers, subjects…"
+                                value={searchTerm}
+                                onChange={(e) => {
+                                  setSearchTerm(e.target.value);
+                                  setBarCurrentPage(1);
+                                  setShowBarSuggestions(true);
+                                }}
+                                onFocus={() => {
+                                  clearTimeout(barCloseSuggestionsTimerRef.current);
+                                  if (barSearchInputRef.current) {
+                                    setBarSearchRect(barSearchInputRef.current.getBoundingClientRect());
+                                  }
+                                  setShowBarSuggestions(true);
+                                }}
+                                onBlur={() => {
+                                  barCloseSuggestionsTimerRef.current = setTimeout(
+                                    () => setShowBarSuggestions(false),
+                                    160
+                                  );
+                                }}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Escape') {
+                                    setShowBarSuggestions(false);
+                                    barSearchInputRef.current?.blur();
+                                  } else if (e.key === 'Enter') {
+                                    setShowBarSuggestions(false);
+                                  }
+                                }}
+                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                              />
+                            </div>
                           </div>
-                          <div className="min-w-0 flex-1 border-l-[3px] border-l-indigo-500 pl-2 dark:border-l-indigo-400 sm:pl-3 md:pl-4 lg:pl-4">
-                            <h1 className="truncate text-base font-bold tracking-tight sm:text-lg md:text-xl md:tracking-tight lg:text-[1.375rem] xl:text-[1.5rem] bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-200 dark:via-blue-200 dark:to-indigo-100">
-                              Bar Questions
-                            </h1>
-                            <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400 sm:text-[10px] md:mt-1 md:text-[11px] md:tracking-[0.2em] lg:text-xs lg:tracking-[0.16em]">
-                              Actual Bar questions & suggested answers
-                            </p>
-                          </div>
-                        </div>
-                      </header>
-                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                      <div className="glass mb-4 rounded-lg border-2 border-slate-300/85 bg-white/90 p-4 shadow-md dark:border-white/10 dark:bg-slate-900/35 space-y-3">
-                        {/* Text search */}
-                        <div className="relative">
-                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
-                            </svg>
-                          </div>
-                          <input
-                            type="search"
-                            placeholder="Search questions, answers, subjects…"
-                            value={searchTerm}
-                            onChange={(e) => { setSearchTerm(e.target.value); setBarCurrentPage(1); }}
-                            className="block w-full pl-9 pr-4 py-2.5 text-sm border border-stone-400 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                          />
-                        </div>
-
-                        {/* Subject filter */}
-                        <div className="min-w-0 w-full">
-                          <label htmlFor="bar-subject-filter" className="mb-1.5 block text-xs font-medium text-gray-500 dark:text-gray-400">
-                            Bar subject
-                            <span className="ml-2 font-normal tabular-nums text-gray-400 dark:text-gray-500">
-                              ({filteredBarQuestions.length} question{filteredBarQuestions.length !== 1 ? 's' : ''})
-                            </span>
-                          </label>
-                          <select
-                            id="bar-subject-filter"
-                            value={currentSubject ?? ''}
-                            onChange={(e) => {
-                              const v = e.target.value;
-                              setCurrentSubject(v === '' ? null : v);
-                              setBarCurrentPage(1);
-                            }}
-                            className="block w-full pl-3 pr-8 py-2.5 text-sm border border-stone-400 dark:border-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 rounded-lg dark:bg-gray-900 dark:text-white"
-                          >
-                            <option value="">All subjects</option>
-                            {BAR_SUBJECT_OPTIONS.map((s) => (
-                              <option key={s} value={s}>{s}</option>
-                            ))}
-                          </select>
                         </div>
                       </div>
+
+                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                      {/* Bar search suggestions — portaled to body so it escapes overflow-hidden */}
+                      {showBarSuggestions && barSearchRect && typeof document !== 'undefined' &&
+                        createPortal(
+                          <div
+                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                            style={{
+                              top: barSearchRect.bottom + 4,
+                              left: barSearchRect.left,
+                              width: barSearchRect.width,
+                            }}
+                            onMouseDown={(e) => e.preventDefault()}
+                          >
+                            {/* Fuzzy question matches */}
+                            {(() => {
+                              if (!searchTerm.trim()) {
+                                return (
+                                  <p className="px-3 py-3 text-center text-xs text-gray-400 dark:text-gray-500">
+                                    Start typing to search questions…
+                                  </p>
+                                );
+                              }
+                              const hits = barFuseRef.current
+                                ? barFuseRef.current.search(searchTerm).map((r) => r.item).slice(0, 8)
+                                : [];
+                              if (hits.length === 0) {
+                                return (
+                                  <p className="px-3 py-3 text-center text-xs text-gray-400 dark:text-gray-500">
+                                    No questions match &ldquo;{searchTerm}&rdquo;
+                                  </p>
+                                );
+                              }
+                              return (
+                                <>
+                                  <div className="border-b border-gray-100 px-3 py-1.5 dark:border-white/10">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                                      Top matches — click to open
+                                    </span>
+                                  </div>
+                                  <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                    {hits.map((q) => (
+                                      <button
+                                        key={q.id}
+                                        type="button"
+                                        onClick={() => {
+                                          setShowBarSuggestions(false);
+                                          setSelectedQuestion(q);
+                                        }}
+                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                      >
+                                        <p className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                          {q.question}
+                                        </p>
+                                        <p className="mt-0.5 text-[11px] text-gray-400 dark:text-gray-500">
+                                          {q.subject} · {q.year}
+                                        </p>
+                                      </button>
+                                    ))}
+                                  </div>
+                                </>
+                              );
+                            })()}
+                          </div>,
+                          document.body
+                        )
+                      }
 
                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                         {filteredBarQuestions

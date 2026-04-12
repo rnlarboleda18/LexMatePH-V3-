@@ -24,7 +24,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
     return (
-        <nav className="space-y-1 px-1.5 sm:px-2 pb-[calc(5rem_+_var(--player-height,0px))]">
+        <nav className="space-y-1 px-1.5 sm:px-2 pb-[calc(var(--app-header-height)+var(--player-height,0px))]">
 
             {/* Mobile Only Actions */}
             <div className="lg:hidden mb-5 space-y-4">
