@@ -10,6 +10,7 @@ import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
 import DigestHtmlViewer from './DigestHtmlViewer';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
+import { apiUrl } from '../utils/apiUrl';
 
 // --- HELPER COMPONENTS ---
 
@@ -419,22 +420,41 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         return () => mq.removeEventListener('change', onViewportChange);
     }, []);
 
-    // Internal Smart Link Handler
+    // Internal Smart Link Handler — search rows omit long digest fields (e.g. digest_significance); merge detail like SupremeDecisions.handleCaseClick.
     const handleSmartCaseClick = useCallback(async (caseRef) => {
+        const mergeDetail = async (row) => {
+            if (!row?.id) {
+                onCaseSelect(row);
+                return;
+            }
+            try {
+                const res = await fetch(apiUrl(`/api/sc_decisions/${row.id}`));
+                const detail = await res.json();
+                if (res.ok && detail && !detail.error) {
+                    onCaseSelect({ ...row, ...detail });
+                } else {
+                    onCaseSelect(row);
+                }
+            } catch (e) {
+                console.error(e);
+                onCaseSelect(row);
+            }
+        };
+
         try {
             document.body.style.cursor = 'wait';
-            let res = await fetch(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`);
+            let res = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`));
             let data = await res.json();
             if (data.data?.length > 0) {
-                onCaseSelect(data.data[0]);
+                await mergeDetail(data.data[0]);
                 return;
             }
             const cleaned = caseRef.replace(/\s*\([^)]{5,}\)$/, '').trim();
             if (cleaned !== caseRef) {
-                res = await fetch(`/api/sc_decisions?search=${encodeURIComponent(cleaned)}&limit=1`);
+                res = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(cleaned)}&limit=1`));
                 data = await res.json();
                 if (data.data?.length > 0) {
-                    onCaseSelect(data.data[0]);
+                    await mergeDetail(data.data[0]);
                     return;
                 }
             }

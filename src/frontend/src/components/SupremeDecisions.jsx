@@ -1536,9 +1536,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                         <button
                                             key={r.id}
                                             type="button"
-                                            onClick={() => {
+                                            onClick={async () => {
                                                 setShowSuggestions(false);
-                                                onCaseSelect && onCaseSelect(r);
+                                                await handleCaseClick(r);
                                             }}
                                             className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
                                         >
