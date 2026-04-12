@@ -1,0 +1,33 @@
+---
+description: Repo layout, thin routes, and scope discipline for agents
+alwaysApply: true
+---
+
+# Codebase layout and agent discipline
+
+Follow these conventions so the repo stays maintainable for human and agent contributors.
+
+## Where files belong
+
+- **Production Azure Functions code** lives under [`api/`](api/) (blueprints, shared modules). Do not add one-off diagnostics, data dumps, or migration experiments next to shipped modules unless the user explicitly asks.
+- **CLI / maintenance scripts** belong under [`scripts/`](scripts/) (or a dedicated `tools/` folder). New scripts should include a short top-of-file docstring: purpose, inputs, and required env vars.
+- **`api/blueprints/`** is for **HTTP route modules registered** in [`api/function_app.py`](api/function_app.py). Do not place standalone fix/migration utilities here; use `scripts/` or `docs/legacy/` instead.
+- **Frontend app code** lives under [`src/frontend/src/`](src/frontend/src/). Prefer small components and hooks over growing [`App.jsx`](src/frontend/src/App.jsx) without a refactor plan.
+
+## Blueprints and services
+
+- Keep HTTP handlers **thin**: parse input, call helpers in `services/` or `repositories/` (create those modules when logic grows), return responses.
+- Avoid duplicating SQL, cache key strings, or provider SDK calls across blueprints; extract shared functions.
+
+## Change scope
+
+- Only modify files required for the task. No drive-by refactors, mass renames, or unrelated formatting in files you were not asked to touch.
+- Match existing naming, imports, and patterns in the directory you edit.
+
+## CI expectations
+
+- Pushes to `main` run **quality gates** before Static Web Apps deploy: frontend `npm run build`, API import smoke test, and ESLint (ESLint may be non-blocking until the lint backlog is cleared—still fix issues in files you touch).
+
+## Database default
+
+- Follow the workspace rule: assume **cloud** Postgres via `DB_CONNECTION_STRING` unless the user explicitly opts into local DB.

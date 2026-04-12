@@ -10,7 +10,54 @@ on:
       - main
 
 jobs:
+  quality_gates:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Quality gates
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          lfs: false
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/frontend/package-lock.json
+
+      - name: Frontend install and build
+        working-directory: src/frontend
+        run: |
+          npm ci
+          npm run build
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Frontend ESLint
+        working-directory: src/frontend
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: api/requirements.txt
+
+      - name: API dependencies and import smoke
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r api/requirements.txt
+      - name: Import function_app
+        working-directory: api
+        run: python -c "import function_app; print('function_app import ok')"
+
   build_and_deploy_job:
+    needs: [quality_gates]
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
