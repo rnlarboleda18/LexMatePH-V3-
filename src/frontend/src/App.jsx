@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
@@ -84,12 +84,16 @@ function App() {
   // --- State ---
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
-
   // Filters
   const [currentSubject, setCurrentSubject] = useState(null);
   const [selectedCodalCode, setSelectedCodalCode] = useState('rpc');
   const [selectedYear, setSelectedYear] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  // Bar-questions search term — seeded from ?q= if we land directly on /bar-questions
+  const [searchTerm, setSearchTerm] = useState(() =>
+    PATH_TO_MODE[window.location.pathname] === 'browse_bar'
+      ? (new URLSearchParams(window.location.search).get('q') ?? '')
+      : ''
+  );
 
   // UI State
   /** Marketing landing on every full load; user taps through to the app each time.
@@ -148,6 +152,50 @@ function App() {
   // Empty deps: listener is registered once; setMode is stable.
   }, []);
 
+  // Persist bar-questions search term in the URL (?q=) so users can share / refresh.
+  // Uses window.history.replaceState directly (no React Router) to avoid triggering
+  // a router context update that would cause extra re-renders.
+  useEffect(() => {
+    if (mode !== 'browse_bar') return;
+    const params = new URLSearchParams(window.location.search);
+    if (searchTerm) {
+      params.set('q', searchTerm);
+    } else {
+      params.delete('q');
+    }
+    const qs = params.toString();
+    window.history.replaceState(
+      null,
+      '',
+      window.location.pathname + (qs ? `?${qs}` : '')
+    );
+  }, [searchTerm, mode]);
+
+  // Reset bar page when search term or subject changes
+  useEffect(() => {
+    setBarCurrentPage(1);
+  }, [currentSubject, searchTerm]);
+
+  // Pre-filter bar questions (both subject and free-text) so the JSX stays clean.
+  const filteredBarQuestions = useMemo(() => {
+    let result = questions;
+    if (currentSubject) {
+      result = result.filter(
+        (q) => normalizeBarSubject(q.subject) === currentSubject
+      );
+    }
+    if (searchTerm.trim()) {
+      const lq = searchTerm.toLowerCase();
+      result = result.filter(
+        (q) =>
+          (q.question || '').toLowerCase().includes(lq) ||
+          (q.answer || '').toLowerCase().includes(lq) ||
+          (q.subject || '').toLowerCase().includes(lq)
+      );
+    }
+    return result;
+  }, [questions, currentSubject, searchTerm]);
+
   // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
     if (isDrawerOpen && mode !== 'lexplay') {
@@ -183,10 +231,6 @@ function App() {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
-  // Reset bar pagination when filters change
-  useEffect(() => {
-    setBarCurrentPage(1);
-  }, [currentSubject, searchTerm]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -609,14 +653,29 @@ function App() {
                         </div>
                       </header>
                       <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-                      <div className="glass mb-4 rounded-lg border-2 border-slate-300/85 bg-white/90 p-4 shadow-md dark:border-white/10 dark:bg-slate-900/35">
+                      <div className="glass mb-4 rounded-lg border-2 border-slate-300/85 bg-white/90 p-4 shadow-md dark:border-white/10 dark:bg-slate-900/35 space-y-3">
+                        {/* Text search */}
+                        <div className="relative">
+                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0Z" />
+                            </svg>
+                          </div>
+                          <input
+                            type="search"
+                            placeholder="Search questions, answers, subjects…"
+                            value={searchTerm}
+                            onChange={(e) => { setSearchTerm(e.target.value); setBarCurrentPage(1); }}
+                            className="block w-full pl-9 pr-4 py-2.5 text-sm border border-stone-400 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+                          />
+                        </div>
+
+                        {/* Subject filter */}
                         <div className="min-w-0 w-full">
                           <label htmlFor="bar-subject-filter" className="mb-1.5 block text-xs font-medium text-gray-500 dark:text-gray-400">
                             Bar subject
                             <span className="ml-2 font-normal tabular-nums text-gray-400 dark:text-gray-500">
-                              (
-                              {questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject).length}{' '}
-                              questions)
+                              ({filteredBarQuestions.length} question{filteredBarQuestions.length !== 1 ? 's' : ''})
                             </span>
                           </label>
                           <select
@@ -631,32 +690,37 @@ function App() {
                           >
                             <option value="">All subjects</option>
                             {BAR_SUBJECT_OPTIONS.map((s) => (
-                              <option key={s} value={s}>
-                                {s}
-                              </option>
+                              <option key={s} value={s}>{s}</option>
                             ))}
                           </select>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                        {(() => {
-                          const filtered = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
-                          const paginated = filtered.slice((barCurrentPage - 1) * BAR_ITEMS_PER_PAGE, barCurrentPage * BAR_ITEMS_PER_PAGE);
-                          return paginated.map((q) => (
+                        {filteredBarQuestions
+                          .slice(
+                            (barCurrentPage - 1) * BAR_ITEMS_PER_PAGE,
+                            barCurrentPage * BAR_ITEMS_PER_PAGE
+                          )
+                          .map((q) => (
                             <QuestionCard
                               key={q.id}
                               question={q}
+                              searchQuery={searchTerm}
                               onClick={() => setSelectedQuestion(q)}
                             />
-                          ));
-                        })()}
+                          ))}
                       </div>
+
+                      {filteredBarQuestions.length === 0 && !loading && (
+                        <p className="py-12 text-center text-sm text-gray-400 dark:text-gray-500">
+                          No questions match your search.
+                        </p>
+                      )}
 
                       {/* Pagination UI */}
                       {(() => {
-                        const filtered = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
-                        const totalCount = filtered.length;
+                        const totalCount = filteredBarQuestions.length;
                         if (totalCount <= BAR_ITEMS_PER_PAGE) return null;
                         
                         return (

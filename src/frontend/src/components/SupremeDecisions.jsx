@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { jsPDF } from "jspdf";
 import { Search, Gavel, FileText, X, Filter, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, Landmark } from 'lucide-react';
 import { lexCache } from '../utils/cache';
@@ -11,6 +11,9 @@ import { apiUrl } from '../utils/apiUrl';
 import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
+import { useDebounce } from '../hooks/useDebounce';
+import { useSearchHistory } from '../hooks/useSearchHistory';
+import { HighlightText } from '../utils/highlight';
 
 /** Read fetch body as JSON once; throws with actionable text if empty or non-JSON (common when API is down or returns HTML). */
 async function parseResponseJson(response) {
@@ -491,8 +494,24 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const { requireAccess } = useSubscription();
-    const [searchTerm, setSearchTerm] = useState('');
+
+    // Seed from ?q= so direct links and page-refreshes restore the search.
+    const [searchTerm, setSearchTerm] = useState(() =>
+        window.location.pathname === '/decisions'
+            ? (new URLSearchParams(window.location.search).get('q') ?? '')
+            : ''
+    );
     const [searchResults, setSearchResults] = useState([]);
+
+    // Suggestions dropdown
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const searchInputRef = useRef(null);
+    const suggestionsDropRef = useRef(null);
+    const closeSuggestionsTimerRef = useRef(null);
+
+    // Search history (localStorage)
+    const { history: searchHistory, addToHistory, clearHistory } =
+        useSearchHistory('lexmate_sc_search_history');
     /** Start true so we never flash "No decisions found" before the first request runs. */
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState(null);
@@ -582,6 +601,39 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             }
         };
     }, [searchTerm, selectedYear, selectedMonth, selectedPonente, selectedSubject, selectedDivision, selectedSignificance, isDoctrinal, currentPage]);
+
+    // Persist search term in URL (?q=) using debounce so we don't spam history.
+    const debouncedSearchTerm = useDebounce(searchTerm, 400);
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (debouncedSearchTerm) {
+            params.set('q', debouncedSearchTerm);
+        } else {
+            params.delete('q');
+        }
+        const qs = params.toString();
+        window.history.replaceState(
+            null,
+            '',
+            window.location.pathname + (qs ? `?${qs}` : '')
+        );
+    }, [debouncedSearchTerm]);
+
+    // Close suggestions when clicking outside the input + dropdown.
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (
+                searchInputRef.current &&
+                !searchInputRef.current.contains(e.target) &&
+                suggestionsDropRef.current &&
+                !suggestionsDropRef.current.contains(e.target)
+            ) {
+                setShowSuggestions(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     // Sync external case selection from App.jsx
     useEffect(() => {
@@ -682,6 +734,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 setSearchResults(rows);
                 setTotalCount(parseInt(data.total, 10) || 0);
                 setFetchError(null);
+                // Save non-trivial search terms to recent-searches history.
+                if (searchTerm.trim().length >= 2) addToHistory(searchTerm.trim());
             }
         } catch (error) {
             if (error.name === 'AbortError') {
@@ -1006,27 +1060,122 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                 <Search className="h-5 w-5 text-gray-400" />
                             </div>
                             <input
-                                type="text"
+                                ref={searchInputRef}
+                                type="search"
                                 className="block w-full pl-10 pr-10 py-2.5 border border-stone-400 dark:border-gray-600 shadow-sm rounded-lg leading-5 bg-gray-50 dark:bg-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-base dark:text-white transition-colors"
                                 placeholder="Start typing to search cases..."
                                 value={searchTerm}
                                 onFocus={() => {
-                                    // Auto-reset filters for global search experience
                                     setSelectedYear('');
                                     setSelectedMonth('');
                                     setSelectedPonente('');
                                     setSelectedSubject('');
                                     setSelectedDivision('');
                                     setSelectedSignificance('');
-                                    // Optional: Keep isDoctrinal or reset it? 
-                                    // "Automatically set the year filter to 'all years' for global search"
-                                    // implies resetting restrictive filters.
+                                    clearTimeout(closeSuggestionsTimerRef.current);
+                                    setShowSuggestions(true);
                                 }}
-                                onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                                onBlur={() => {
+                                    // Delay so clicking a suggestion registers before hiding the dropdown.
+                                    closeSuggestionsTimerRef.current = setTimeout(
+                                        () => setShowSuggestions(false),
+                                        160
+                                    );
+                                }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Escape') {
+                                        setShowSuggestions(false);
+                                        searchInputRef.current?.blur();
+                                    }
+                                }}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    setCurrentPage(1);
+                                    setShowSuggestions(true);
+                                }}
                             />
                             {loading && (
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                                </div>
+                            )}
+
+                            {/* Suggestions dropdown */}
+                            {showSuggestions && (
+                                <div
+                                    ref={suggestionsDropRef}
+                                    className="absolute z-50 left-0 right-0 top-full mt-1 rounded-xl border border-slate-200 dark:border-white/10 bg-white/98 dark:bg-slate-900/98 backdrop-blur-xl shadow-2xl overflow-hidden"
+                                    onMouseDown={(e) => e.preventDefault()} // prevent blur before click
+                                >
+                                    {/* Recent searches — shown when input is empty */}
+                                    {!searchTerm.trim() && searchHistory.length > 0 && (
+                                        <div>
+                                            <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 dark:border-white/5">
+                                                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Recent searches</span>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => { clearHistory(); setShowSuggestions(false); }}
+                                                    className="text-[10px] text-gray-400 hover:text-red-500 transition-colors"
+                                                >
+                                                    Clear
+                                                </button>
+                                            </div>
+                                            {searchHistory.map((term, i) => (
+                                                <button
+                                                    key={i}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setSearchTerm(term);
+                                                        setCurrentPage(1);
+                                                        setShowSuggestions(false);
+                                                    }}
+                                                    className="w-full text-left flex items-center gap-2.5 px-3 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors border-b border-gray-50 dark:border-white/5 last:border-0"
+                                                >
+                                                    <Clock size={12} className="shrink-0 text-gray-400" />
+                                                    {term}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Autocomplete — first 5 results while typing */}
+                                    {searchTerm.trim().length >= 2 && searchResults.length > 0 && (
+                                        <div>
+                                            {!searchTerm.trim() ? null : (
+                                                <div className="px-3 py-1.5 border-b border-gray-100 dark:border-white/5">
+                                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Suggestions</span>
+                                                </div>
+                                            )}
+                                            {searchResults.slice(0, 5).map((r) => (
+                                                <button
+                                                    key={r.id}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setShowSuggestions(false);
+                                                        onCaseSelect && onCaseSelect(r);
+                                                    }}
+                                                    className="w-full text-left flex flex-col gap-0.5 px-3 py-2.5 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors border-b border-gray-50 dark:border-white/5 last:border-0"
+                                                >
+                                                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 line-clamp-1">
+                                                        <HighlightText
+                                                            text={r.short_title || r.title || r.case_number}
+                                                            query={searchTerm}
+                                                        />
+                                                    </span>
+                                                    <span className="text-xs text-gray-400 dark:text-gray-500 font-mono">
+                                                        {r.case_number}
+                                                    </span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Empty state when no history and no results yet */}
+                                    {!searchTerm.trim() && searchHistory.length === 0 && (
+                                        <p className="px-3 py-4 text-xs text-gray-400 text-center">
+                                            Start typing to search cases…
+                                        </p>
+                                    )}
                                 </div>
                             )}
                         </div>
