@@ -1,0 +1,33 @@
+name: npm audit (scheduled)
+
+on:
+  schedule:
+    # Every Monday at 08:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    name: npm audit (production deps)
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/frontend/package-lock.json
+
+      - name: Install deps (omit dev to audit only production)
+        working-directory: src/frontend
+        run: npm ci --omit=dev
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Run audit
+        working-directory: src/frontend
+        run: npm audit --omit=dev
+        continue-on-error: true

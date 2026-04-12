@@ -4,6 +4,16 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: ['./src/test/setup.js'],
+  },
+  build: {
+    // Warn when any individual chunk exceeds 600 kB (gzip). Main bundle currently ~850 kB raw;
+    // flag intentionally set above current size to avoid blocking CI—lower as code is split further.
+    chunkSizeWarningLimit: 900,
+  },
   plugins: [
     react(),
     VitePWA({

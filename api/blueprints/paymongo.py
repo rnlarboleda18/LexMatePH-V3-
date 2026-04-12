@@ -576,10 +576,31 @@ def paymongo_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
         event = json.loads(raw_body)
+        evt_id = event.get("data", {}).get("id", "")
         evt_type = event.get("data", {}).get("attributes", {}).get("type", "")
         evt_data = event.get("data", {}).get("attributes", {}).get("data", {})
 
-        logging.info(f"PayMongo webhook received: {evt_type}")
+        # Idempotency: skip duplicate deliveries for the same event ID.
+        # The webhook_events table must have: id TEXT PRIMARY KEY, received_at TIMESTAMPTZ.
+        # Create with: CREATE TABLE IF NOT EXISTS webhook_events (id TEXT PRIMARY KEY, received_at TIMESTAMPTZ DEFAULT NOW());
+        if evt_id:
+            try:
+                with _get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "INSERT INTO webhook_events (id) VALUES (%s) ON CONFLICT (id) DO NOTHING",
+                            (evt_id,),
+                        )
+                        inserted = cur.rowcount
+                        conn.commit()
+                if inserted == 0:
+                    logging.info(f"PayMongo webhook: duplicate event {evt_id} ({evt_type}) — skipping")
+                    return func.HttpResponse("OK", status_code=200)
+            except Exception as idem_err:
+                # If the table doesn't exist yet, log a warning and proceed (don't block webhooks).
+                logging.warning(f"PayMongo webhook idempotency check skipped (table missing?): {idem_err}")
+
+        logging.info(f"PayMongo webhook received: {evt_type} (id={evt_id})")
 
         # Actual PayMongo event names (corrected from original implementation)
         if evt_type == "subscription.activated":

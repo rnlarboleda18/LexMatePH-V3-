@@ -1,6 +1,27 @@
 """
-Redis caching layer for Bar Reviewer API
-Provides get/set operations with automatic JSON serialization and TTL support
+Redis caching layer for LexMatePH API.
+
+TTL / invalidation reference (see config.py for env-tunable defaults):
+
+| Key pattern                     | Default TTL  | Invalidation trigger                        |
+|---------------------------------|--------------|---------------------------------------------|
+| sc_decisions:*                  | 60 s         | CACHE_TTL_DECISIONS env; auto-expires        |
+| sc_decisions:detail:*           | 600 s        | CACHE_TTL_DECISION_DETAIL; auto-expires      |
+| sc_decisions:ponentes           | 300 s        | CACHE_TTL_PONENTES; auto-expires             |
+| sc_decisions:filters            | 300 s        | CACHE_TTL_FILTERS; auto-expires              |
+| sc_judiciary_feed               | 900 s        | CACHE_TTL_SC_JUDICIARY_FEED; auto-expires    |
+| flashcard_concepts:v*:bar_2026  | 86400 s (1d) | Run scripts/populate_flashcard_concepts_from_digest.py,
+|                                 |              | then bump FLASHCARD_CONCEPTS_CACHE_KEY in env.
+|                                 |              | Or call cache_delete(FLASHCARD_CONCEPTS_CACHE_KEY) directly.
+|                                 |              | See config.py for the current key version.   |
+
+Codal boundary cache (in audio_provider.py):
+  - Stored in a module-level dict (_family_bounds_cache) with CACHE_VERSION suffix.
+  - Invalidated by bumping CACHE_VERSION in audio_provider.py (forces reload on next deploy).
+  - TTL is effectively the lifetime of the function worker instance.
+
+On Redis unavailability: all cache_* functions return None/False gracefully; the
+  API falls back to direct DB queries.  REDIS_ENABLED=false disables the client entirely.
 """
 import redis
 import json

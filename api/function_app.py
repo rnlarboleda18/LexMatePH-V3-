@@ -62,8 +62,10 @@ except Exception as e:
 
 @app.route(route="debug_imports", methods=["GET"])
 def debug_imports(req: func.HttpRequest) -> func.HttpResponse:
+    """Diagnostic endpoint: only active when ALLOW_DEBUG_ROUTES=1 in app settings."""
+    if os.environ.get("ALLOW_DEBUG_ROUTES", "").lower() not in ("1", "true", "yes"):
+        return func.HttpResponse("Not found.", status_code=404)
     if import_error:
-        # Mask sensitive parts of connection string if present in error
         sanitized_error = import_error.replace(os.environ.get("DB_CONNECTION_STRING", "SECRET"), "REDACTED_CONN_STRING")
         return func.HttpResponse(sanitized_error, status_code=500, mimetype="text/plain")
     return func.HttpResponse("All imports successful.", status_code=200)

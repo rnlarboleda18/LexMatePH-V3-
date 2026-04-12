@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
-import { useUser, SignedIn, SignedOut } from '@clerk/clerk-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, ClipboardList, Brain, SquareStack, Library } from 'lucide-react';
 import Layout from './components/Layout';
 import Sidebar from './components/Sidebar';
@@ -13,10 +14,10 @@ import LandingPage from './components/LandingPage';
 import FeaturePageShell from './components/FeaturePageShell';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
-import { lexCache } from './utils/cache';
-import { buildBalancedQuestions } from './utils/barQuestionsTransform';
 import { normalizeBarSubject } from './utils/subjectNormalize';
-import { apiUrl } from './utils/apiUrl';
+import { useBarQuestions } from './hooks/useBarQuestions';
+import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
+import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
 
 const About = lazy(() => import('./components/About'));
 const Updates = lazy(() => import('./components/Updates'));
@@ -28,9 +29,6 @@ const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
 const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
 const SubscriptionModal = lazy(() => import('./components/SubscriptionModal'));
 const UpgradeWall = lazy(() => import('./components/UpgradeWall'));
-
-/** IndexedDB key for bar questions list (must match fetch URL shape). */
-const QUESTIONS_CACHE_KEY = 'bar_questions_limit5000';
 
 /** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
 const CODAL_FILTER_OPTIONS = [
@@ -48,14 +46,43 @@ const CODAL_FILTER_OPTIONS = [
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
   const { showUpgradeModal, closeUpgradeModal, tier, canAccess } = useSubscription();
-  
-  // --- State ---
-  const [questions, setQuestions] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
   const { user } = useUser();
+
+  // --- Hooks ---
+  const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions();
+  const {
+    conceptPool: flashcardConceptPool,
+    busy: flashcardConceptsBusy,
+    conceptsError: flashcardConceptsError,
+    refetch: refetchFlashcardConcepts,
+    getPrimarySubject: getCardPrimarySubject,
+    subjectCounts: flashcardSubjectCounts,
+  } = useFlashcardConcepts();
+  const { selectedCase: globalSelectedCase, selectCase: selectGlobalCase, closeModal: closeGlobalCaseModal } = useGlobalCaseModal();
+
+  // --- URL ↔ mode mapping ---
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  /** Canonical URL path for each mode. */
+  const MODE_TO_PATH = {
+    landing: '/',
+    supreme_decisions: '/decisions',
+    codex: '/lexcode',
+    flashcard: '/flashcards',
+    quiz: '/lexify',
+    about: '/about',
+    updates: '/updates',
+    browse_bar: '/bar-questions',
+    lexplay: '/lexplay',
+  };
+
+  const PATH_TO_MODE = Object.fromEntries(
+    Object.entries(MODE_TO_PATH).map(([m, p]) => [p, m])
+  );
+
+  // --- State ---
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
 
 
   // Filters
@@ -65,48 +92,18 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   // UI State
-  /** Marketing landing on every full load; user taps through to the app each time. */
-  const [mode, setMode] = useState('landing');
+  /** Marketing landing on every full load; user taps through to the app each time.
+   *  Initial mode is derived from the URL so deep-links and refreshes land correctly. */
+  const [mode, setMode] = useState(() => PATH_TO_MODE[location.pathname] ?? 'landing');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
-  const [flashcardConceptPool, setFlashcardConceptPool] = useState([]);
-  /** True while /flashcard_concepts request is in flight (prefetch on load or retry). */
-  const [flashcardConceptsBusy, setFlashcardConceptsBusy] = useState(false);
-  const [flashcardConceptsError, setFlashcardConceptsError] = useState(null);
   const [flashcardDeckError, setFlashcardDeckError] = useState(null);
-  /** 'concepts' = SC digest key legal concepts; 'bar' = bar exam questions fallback */
   const [isDarkMode, setIsDarkMode] = useState(false); // Default to Light Mode
   /** Hide minimized LexPlayer during Lexify exam simulation (not dashboard / results). */
   const [lexifyExamSimulationActive, setLexifyExamSimulationActive] = useState(false);
   /** User dismissed the docked mini LexPlayer (X); show again after opening full LexPlay. */
   const [lexPlayMiniDismissed, setLexPlayMiniDismissed] = useState(false);
-  // Global case modal state (shared between SC Decisions and Codex)
-  const [globalSelectedCase, setGlobalSelectedCase] = useState(null);
-  /** Only block ghost-tap reopen of the *same* case right after close (not all case opens — that broke sync + other picks). */
-  const lastClosedCaseIdRef = useRef(null);
-  const suppressSameCaseReopenUntilRef = useRef(0);
-
-  const selectGlobalCase = useCallback((next) => {
-    if (
-      next != null &&
-      lastClosedCaseIdRef.current != null &&
-      next.id === lastClosedCaseIdRef.current &&
-      Date.now() < suppressSameCaseReopenUntilRef.current
-    ) {
-      return;
-    }
-    setGlobalSelectedCase(next);
-  }, []);
-
-  const closeGlobalCaseModal = useCallback(() => {
-    const id = globalSelectedCase?.id;
-    if (id != null) {
-      lastClosedCaseIdRef.current = id;
-    }
-    suppressSameCaseReopenUntilRef.current = Date.now() + 750;
-    setGlobalSelectedCase(null);
-  }, [globalSelectedCase]);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
@@ -123,6 +120,20 @@ function App() {
     'Taxation Law',
   ];
 
+
+  // Sync mode → URL
+  useEffect(() => {
+    const path = MODE_TO_PATH[mode] ?? '/';
+    if (location.pathname !== path) navigate(path, { replace: true });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
+  // Sync URL → mode (handles browser back/forward)
+  useEffect(() => {
+    const m = PATH_TO_MODE[location.pathname];
+    if (m && m !== mode) setMode(m);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   // Intercept playNow signals to force full-screen LexPlay
   useEffect(() => {
@@ -144,42 +155,6 @@ function App() {
 
   // No manual session check needed with Clerk
 
-  // 1. Bar questions: IndexedDB SWR (do not await swr — so cached data shows before network finishes)
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-    lexCache
-      .swr(
-        'questions',
-        QUESTIONS_CACHE_KEY,
-        async () => {
-          const response = await fetch(apiUrl('/api/questions?limit=5000'));
-          if (!response.ok) throw new Error('Failed to fetch questions');
-          return response.json();
-        },
-        (data) => {
-          if (cancelled) return;
-          setQuestions(buildBalancedQuestions(Array.isArray(data) ? data : []));
-          setLoading(false);
-        }
-      )
-      .catch((err) => {
-        if (!cancelled) {
-          setError(err.message || 'Failed to load questions');
-          setLoading(false);
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const [flashcardFetchNonce, setFlashcardFetchNonce] = useState(0);
-  /** When true, request ?bar_focus=0 to include non-peripheral concepts with weaker Bar syllabus match. */
-  const [flashcardRelaxedBarMatch, setFlashcardRelaxedBarMatch] = useState(false);
-  /** When true, API returns only concepts with bar_2026_aligned=true (after other filters). */
-  const [flashcardBar2026Only, setFlashcardBar2026Only] = useState(false);
 
   // Spinner only when user is on Flashcards and we still have nothing to show.
   const flashcardConceptsLoading =
@@ -187,123 +162,6 @@ function App() {
     flashcardConceptsBusy &&
     flashcardConceptPool.length === 0 &&
     !flashcardConceptsError;
-
-  // Prefetch SC digest concepts on app load (and on retry) so Flashcards opens fast when Redis/table are warm.
-  useEffect(() => {
-    const ac = new AbortController();
-    const FLASHCARD_FETCH_MS = 300000;
-    const tid = setTimeout(() => ac.abort(), FLASHCARD_FETCH_MS);
-    let cancelled = false;
-
-    const load = async () => {
-      setFlashcardConceptsBusy(true);
-      setFlashcardConceptsError(null);
-      if (flashcardFetchNonce > 0) {
-        setFlashcardConceptPool([]);
-      }
-      try {
-        const params = new URLSearchParams();
-        if (flashcardFetchNonce > 0) params.set('nocache', '1');
-        if (flashcardRelaxedBarMatch) params.set('bar_focus', '0');
-        if (flashcardBar2026Only) params.set('bar_2026_only', '1');
-        const qs = params.toString();
-        const res = await fetch(
-          apiUrl(`/api/sc_decisions/flashcard_concepts${qs ? `?${qs}` : ''}`),
-          { signal: ac.signal }
-        );
-        const raw = await res.text();
-        if (cancelled) return;
-        if (!res.ok) {
-          let msg = 'Failed to load key legal concepts';
-          try {
-            const j = JSON.parse(raw);
-            if (j.error) msg = String(j.error);
-          } catch (_) {
-            if (raw) msg = raw.slice(0, 200);
-          }
-          throw new Error(msg);
-        }
-        const data = JSON.parse(raw);
-        if (cancelled) return;
-        setFlashcardConceptPool(Array.isArray(data.concepts) ? data.concepts : []);
-      } catch (e) {
-        if (cancelled) return;
-        if (e.name === 'AbortError') {
-          setFlashcardConceptsError(
-            'Request timed out (5 min). The API merges digests from the database when the flashcard_concepts table is empty or the cache is cold—that can take several minutes. Fix: run scripts/populate_flashcard_concepts_from_digest.py on your cloud DB so the API reads the prebuilt table (fast). Also ensure the API and DB are reachable; retry once Redis has cached the response.'
-          );
-        } else {
-          let msg = e.message || 'Load failed';
-          if (msg === 'Failed to fetch' || /network/i.test(msg)) {
-            msg =
-              'Could not reach the API. For local dev, start the backend on port 7071 so Vite can proxy /api (see vite.config.js).';
-          }
-          setFlashcardConceptsError(msg);
-        }
-        setFlashcardConceptPool([]);
-      } finally {
-        clearTimeout(tid);
-        if (!cancelled) setFlashcardConceptsBusy(false);
-      }
-    };
-
-    load();
-    return () => {
-      cancelled = true;
-      ac.abort();
-    };
-  }, [flashcardFetchNonce, flashcardRelaxedBarMatch, flashcardBar2026Only]);
-
-  const refetchFlashcardConcepts = useCallback(() => {
-    setFlashcardFetchNonce((n) => n + 1);
-  }, []);
-
-  /**
-   * Returns the primary subject of a concept card.
-   * Prefers the backend-computed `primary_subject` field (modal across ALL sources
-   * before the keep-latest collapse).  Falls back to sources[0]?.subject so
-   * older cached responses without the field still work.
-   */
-  const getCardPrimarySubject = useCallback((card) => {
-    if (card.primary_subject) return normalizeBarSubject(card.primary_subject);
-    return normalizeBarSubject((card.sources || [])[0]?.subject) || null;
-  }, []);
-
-  const flashcardSubjectCounts = useMemo(() => {
-    const subjects = [
-      'Civil Law',
-      'Commercial Law',
-      'Criminal Law',
-      'Labor Law',
-      'Legal Ethics',
-      'Political Law',
-      'Remedial Law',
-      'Taxation Law',
-    ];
-    const counts = { all: flashcardConceptPool.length };
-    subjects.forEach((s) => {
-      counts[s] = flashcardConceptPool.filter(
-        (c) => getCardPrimarySubject(c) === s
-      ).length;
-    });
-    return counts;
-  }, [flashcardConceptPool, getCardPrimarySubject]);
-
-  const handleRetryFetch = useCallback(async () => {
-    setError(null);
-    setLoading(true);
-    try {
-      const response = await fetch(apiUrl('/api/questions?limit=5000'));
-      if (!response.ok) throw new Error('Failed to fetch questions');
-      const data = await response.json();
-      await lexCache.set('questions', QUESTIONS_CACHE_KEY, data);
-      setQuestions(buildBalancedQuestions(data));
-    } catch (err) {
-      setError(err.message || 'Failed to fetch questions');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
 
 
 
