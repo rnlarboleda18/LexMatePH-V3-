@@ -3,19 +3,19 @@ import {
   Twitter,
   Facebook,
   ExternalLink,
-  Bell,
   Scale,
-  FileText,
   Newspaper,
   ChevronRight,
-  Info,
   ShieldCheck,
   Zap,
   Bookmark,
-  Rss
+  Rss,
+  Sparkles,
+  Gavel,
 } from 'lucide-react';
 import FeaturePageShell from './FeaturePageShell';
 import { apiUrl } from '../utils/apiUrl';
+import { buildUnifiedFeed } from '../utils/scJudiciaryFeed';
 
 /** Official SC portal — full decisions index (not LexMate digests). */
 const SC_DECISIONS_INDEX = 'https://sc.judiciary.gov.ph/decisions/';
@@ -31,34 +31,25 @@ function officialScDecisionUrl(decision) {
 const NEWS_LINKS = [
   {
     label: 'Judiciary News',
-    desc: 'Latest press releases',
+    desc: 'Press releases',
     icon: Newspaper,
     href: 'https://sc.judiciary.gov.ph/news/',
-    iconWrapClass:
-      'p-4 bg-blue-500/10 text-blue-600 rounded-2xl mb-4 group-hover:scale-110 transition-transform w-fit',
-    ctaClass:
-      'text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 flex items-center gap-2'
+    accent: 'from-sky-500/20 to-blue-600/5 text-sky-600 dark:text-sky-400',
   },
   {
     label: 'Bar Bulletins',
     desc: 'Official issuances',
     icon: Scale,
     href: 'https://sc.judiciary.gov.ph/bar-matters/',
-    iconWrapClass:
-      'p-4 bg-amber-500/10 text-amber-600 rounded-2xl mb-4 group-hover:scale-110 transition-transform w-fit',
-    ctaClass:
-      'text-[10px] font-black uppercase tracking-widest text-amber-600 dark:text-amber-400 flex items-center gap-2'
+    accent: 'from-amber-500/20 to-orange-600/5 text-amber-700 dark:text-amber-400',
   },
   {
-    label: 'BARISTA Portal',
-    desc: 'Candidate login',
+    label: 'BARISTA',
+    desc: 'Candidate portal',
     icon: ShieldCheck,
     href: 'https://sc.judiciary.gov.ph/bar-2026/barista/',
-    iconWrapClass:
-      'p-4 bg-emerald-500/10 text-emerald-600 rounded-2xl mb-4 group-hover:scale-110 transition-transform w-fit',
-    ctaClass:
-      'text-[10px] font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400 flex items-center gap-2'
-  }
+    accent: 'from-emerald-500/20 to-teal-600/5 text-emerald-700 dark:text-emerald-400',
+  },
 ];
 
 function buildFacebookPagePluginSrc() {
@@ -71,12 +62,49 @@ function buildFacebookPagePluginSrc() {
     small_header: 'true',
     adapt_container_width: 'true',
     hide_cover: 'false',
-    show_facepile: 'false'
+    show_facepile: 'false',
   });
   const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
   if (appId) params.set('appId', String(appId));
   return `${base}?${params.toString()}`;
 }
+
+const bar2026Updates = [
+  {
+    title: 'Re: End of the Application for the 2026 Bar Examinations',
+    date: '9 March 2026',
+    type: 'Notice',
+    link: 'https://sc.judiciary.gov.ph/re-end-of-the-application-for-the-2026-bar-examinations/',
+    cta: 'Read notice',
+  },
+  {
+    title: 'Bar Bulletin No. 2: Application Requirements & Venue Selection',
+    date: '8 Dec 2025',
+    type: 'Bulletin',
+    link: 'https://sc.judiciary.gov.ph/wp-content/uploads/2025/12/2026-BAR-Bar-Bulletin-No-2.pdf',
+    cta: 'View PDF',
+  },
+  {
+    title: 'Bar Bulletin No. 1: Conduct, Schedule, & Syllabi',
+    date: '16 Oct 2025',
+    type: 'Bulletin',
+    link: 'https://sc.judiciary.gov.ph/bar-2026/',
+    cta: 'Open portal',
+  },
+  {
+    title: 'Frequently Asked Questions (FAQs)',
+    date: '16 Dec 2025',
+    type: 'FAQ',
+    link: 'https://sc.judiciary.gov.ph/wp-content/uploads/2025/12/2026-BAR-FAQs-12-16-2025.pdf',
+    cta: 'View PDF',
+  },
+];
+
+const FILTER_TABS = [
+  { id: 'all', label: 'All' },
+  { id: 'bar', label: 'Bar & exams' },
+  { id: 'news', label: 'News & pleading' },
+];
 
 const Updates = ({ isDarkMode = false }) => {
   const [latestDecisions, setLatestDecisions] = useState([]);
@@ -85,18 +113,19 @@ const Updates = ({ isDarkMode = false }) => {
   const [barFeedItems, setBarFeedItems] = useState([]);
   const [feedLoading, setFeedLoading] = useState(true);
   const [feedError, setFeedError] = useState(null);
+  const [feedFilter, setFeedFilter] = useState('all');
 
   const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(), []);
   const twitterEmbedSrc = useMemo(
     () => apiUrl(`/api/embeds/twitter-scpio?theme=${isDarkMode ? 'dark' : 'light'}`),
-    [isDarkMode]
+    [isDarkMode],
   );
 
   useEffect(() => {
     let cancelled = false;
     setFeedLoading(true);
     setFeedError(null);
-    fetch(apiUrl('/api/sc_judiciary_feed?limit=10&include_bar=1&bar_limit=8'))
+    fetch(apiUrl('/api/sc_judiciary_feed?limit=22&include_bar=1&bar_limit=18'))
       .then((res) => res.json())
       .then((data) => {
         if (cancelled) return;
@@ -139,376 +168,316 @@ const Updates = ({ isDarkMode = false }) => {
       });
   }, []);
 
-  const bar2026Updates = [
-    {
-      title: 'Re: End of the Application for the 2026 Bar Examinations',
-      date: '9 March 2026',
-      type: 'Notice',
-      link: 'https://sc.judiciary.gov.ph/re-end-of-the-application-for-the-2026-bar-examinations/',
-      cta: 'Read notice'
-    },
-    {
-      title: 'Bar Bulletin No. 2: Application Requirements & Venue Selection',
-      date: '8 Dec 2025',
-      type: 'Bulletin',
-      link: 'https://sc.judiciary.gov.ph/wp-content/uploads/2025/12/2026-BAR-Bar-Bulletin-No-2.pdf',
-      cta: 'View PDF'
-    },
-    {
-      title: 'Bar Bulletin No. 1: Conduct, Schedule, & Syllabi',
-      date: '16 Oct 2025',
-      type: 'Bulletin',
-      link: 'https://sc.judiciary.gov.ph/bar-2026/',
-      cta: 'Open portal'
-    },
-    {
-      title: 'Frequently Asked Questions (FAQs)',
-      date: '16 Dec 2025',
-      type: 'FAQ',
-      link: 'https://sc.judiciary.gov.ph/wp-content/uploads/2025/12/2026-BAR-FAQs-12-16-2025.pdf',
-      cta: 'View PDF'
-    }
-  ];
+  const unifiedFeed = useMemo(() => buildUnifiedFeed(feedItems, barFeedItems), [feedItems, barFeedItems]);
+
+  const visibleFeed = useMemo(() => {
+    if (feedFilter === 'bar') return unifiedFeed.filter((x) => x._barHighlight);
+    if (feedFilter === 'news') return unifiedFeed.filter((x) => !x._barHighlight);
+    return unifiedFeed;
+  }, [unifiedFeed, feedFilter]);
 
   return (
     <FeaturePageShell>
-      <div className="animate-in fade-in space-y-12 pb-12 duration-700">
-        {/* Live feed from official RSS (refreshed on the server on a short TTL) */}
-        <section>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-                <Rss className="text-sky-500" size={32} />
-                Latest from <span className="text-sky-500">sc.judiciary.gov.ph</span>
-              </h2>
-              <p className="text-slate-500 dark:text-slate-400 mt-1">
-                Pulled from the Court&apos;s public RSS feed — updates when they publish new posts.
-              </p>
-            </div>
-            <a
-              href="https://sc.judiciary.gov.ph/feed/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl border border-slate-200 dark:border-slate-700 font-bold text-sm shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2 group"
-            >
-              RSS source <ExternalLink size={16} className="opacity-70" />
-            </a>
-          </div>
+      <div className="animate-in fade-in relative pb-16 duration-700">
+        {/* Ambient orbs — same vocabulary as landing / app chrome */}
+        <div
+          className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-violet-600/15"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute right-0 top-48 h-80 w-80 rounded-full bg-sky-400/15 blur-3xl dark:bg-sky-500/10"
+          aria-hidden
+        />
 
-          {feedLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-28 bg-slate-100 dark:bg-slate-800/50 rounded-2xl animate-pulse" />
-              ))}
-            </div>
-          ) : feedError && feedItems.length === 0 ? (
-            <div className="glass rounded-2xl border p-8 text-center text-slate-600 dark:text-slate-400">
-              <p className="font-semibold mb-2">Could not load the live feed right now.</p>
-              <p className="text-sm mb-4">You can still open the site or RSS directly.</p>
+        <div className="relative mx-auto max-w-6xl space-y-10">
+          {/* Hero */}
+          <header className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/55 px-6 py-10 shadow-[0_24px_80px_-24px_rgba(79,70,229,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/45 dark:shadow-[0_24px_80px_-24px_rgba(0,0,0,0.5)] sm:px-10">
+            <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/60 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-600 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-indigo-300">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Live from the Court
+                </div>
+                <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                  Updates
+                </h1>
+                <p className="max-w-xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
+                  One glass feed for{' '}
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">public pleadings & news</span> and{' '}
+                  <span className="font-semibold text-amber-800 dark:text-amber-200/90">Bar examination flashes</span>,
+                  merged from the same official RSS. Highlights and decisions stay at your side.
+                </p>
+              </div>
               <a
-                href="https://sc.judiciary.gov.ph/news/"
+                href="https://sc.judiciary.gov.ph/feed/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold text-sm"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-white/60 bg-white/70 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg backdrop-blur-md transition hover:border-indigo-300/60 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
               >
-                Open Judiciary News <ExternalLink size={14} />
+                <Rss className="h-4 w-4 text-indigo-500" />
+                RSS source
+                <ExternalLink className="h-4 w-4 opacity-60" />
               </a>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {feedItems.map((item, idx) => (
-                <a
-                  key={`${item.link}-${idx}`}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass group relative p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden text-left"
-                >
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">
-                      {item.pub_date || '—'}
-                    </span>
-                    {item.categories?.[0] && (
-                      <span className="text-[10px] font-bold text-sky-600/80 dark:text-sky-400/90 truncate max-w-[50%]">
-                        {item.categories[0]}
-                      </span>
-                    )}
+          </header>
+
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
+            {/* Main column — unified feed */}
+            <div className="space-y-8 lg:col-span-7">
+              <section className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/35">
+                      <Rss className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
+                        Judiciary pulse
+                      </h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
+                        {unifiedFeed.length} items · sc.judiciary.gov.ph
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-slate-900 dark:text-white text-sm line-clamp-2 leading-snug group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-                    {item.title}
-                  </h3>
-                  {item.snippet && (
-                    <p className="mt-2 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">{item.snippet}</p>
-                  )}
-                  <div className="mt-3 flex items-center text-xs font-bold text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200 gap-1">
-                    Read on SC site <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </a>
-              ))}
-            </div>
-          )}
-
-          {!feedLoading && barFeedItems.length > 0 && (
-            <div className="mt-10 pt-10 border-t border-slate-200/80 dark:border-slate-700/80">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-1">
-                <Scale className="text-amber-500 shrink-0" size={22} />
-                Bar examination headlines
-              </h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-                Same RSS feed, filtered for Bar-related posts (bulletins, candidates, exams).
-              </p>
-              <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
-                {barFeedItems.map((item, idx) => (
-                  <a
-                    key={`bar-${item.link}-${idx}`}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="snap-start shrink-0 w-[min(100%,280px)] glass p-4 rounded-2xl border transition-all hover:border-amber-400/40 hover:shadow-md text-left"
-                  >
-                    <p className="text-[10px] font-bold text-slate-400 mb-2 line-clamp-1">{item.pub_date}</p>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-3 leading-snug">
-                      {item.title}
-                    </p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400">
-                      Open <ChevronRight size={12} />
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-        </section>
-
-        {/* Bar 2026 Featured Section */}
-        <section>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-                <Bookmark className="text-amber-500" size={32} />
-                Bar 2026 <span className="text-amber-500">Special Section</span>
-              </h2>
-              <p className="text-slate-500 dark:text-slate-400 mt-1">
-                Official alerts, bulletins, and candidate resources.
-              </p>
-            </div>
-            <a
-              href="https://sc.judiciary.gov.ph/bar-2026/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-xl border border-slate-200 dark:border-slate-700 font-bold text-sm shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2 group"
-            >
-              Access Portal{' '}
-              <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bar2026Updates.map((update, idx) => (
-              <a
-                key={idx}
-                href={update.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass group relative p-6 rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_50px_rgba(255,255,255,0.05)] overflow-hidden"
-              >
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-colors" />
-
-                <div className="flex items-center justify-between mb-4">
-                  <div
-                    className={`p-2 rounded-lg ${
-                      update.type === 'Notice'
-                        ? 'bg-blue-500/10 text-blue-600'
-                        : update.type === 'Bulletin'
-                          ? 'bg-amber-500/10 text-amber-600'
-                          : 'bg-purple-500/10 text-purple-600'
-                    }`}
-                  >
-                    {update.type === 'Notice' ? (
-                      <Bell size={18} />
-                    ) : update.type === 'Bulletin' ? (
-                      <FileText size={18} />
-                    ) : (
-                      <Info size={18} />
-                    )}
-                  </div>
-                  <span className="text-[10px] font-bold text-slate-400">{update.date}</span>
-                </div>
-
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm line-clamp-3 leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors mb-4">
-                  {update.title}
-                </h3>
-
-                <div className="flex items-center text-xs font-bold text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200 transition-colors uppercase tracking-widest gap-1">
-                  {update.cta} <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-8 space-y-12">
-            <div className="glass rounded-[2.5rem] p-8 md:p-10 shadow-xl border-white/50 dark:border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-10 opacity-5 rotate-12 pointer-events-none">
-                <Scale size={200} />
-              </div>
-
-              <div className="flex items-center justify-between mb-10">
-                <div className="flex items-center gap-4">
-                  <div className="p-4 bg-indigo-500 text-white rounded-2xl shadow-lg shadow-indigo-500/30">
-                    <Scale size={28} />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Supreme Decision Highlights</h3>
-                    <p className="text-slate-500 dark:text-slate-400">
-                      Newly released jurisprudence — links open the official Supreme Court website (not LexMate digests).
-                    </p>
+                  <div className="flex flex-wrap gap-2 rounded-2xl border border-white/50 bg-white/40 p-1 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/40">
+                    {FILTER_TABS.map((tab) => (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => setFeedFilter(tab.id)}
+                        className={`rounded-xl px-3 py-2 text-xs font-bold uppercase tracking-wider transition sm:px-4 ${
+                          feedFilter === tab.id
+                            ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25 dark:bg-indigo-500'
+                            : 'text-slate-500 hover:bg-white/80 dark:text-slate-400 dark:hover:bg-white/5'
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              </div>
 
-              {loadingDecisions ? (
-                <div className="space-y-6">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-40 bg-slate-100 dark:bg-slate-800/50 rounded-3xl animate-pulse" />
-                  ))}
+                {/* Pinned Bar 2026 — curated, not RSS */}
+                <div className="mb-8 rounded-2xl border border-amber-200/50 bg-gradient-to-r from-amber-500/10 via-white/30 to-transparent p-4 backdrop-blur-sm dark:border-amber-500/20 dark:from-amber-500/10 dark:via-slate-900/20">
+                  <div className="mb-3 flex items-center gap-2 text-amber-900 dark:text-amber-200/90">
+                    <Bookmark className="h-4 w-4 shrink-0" />
+                    <span className="text-[11px] font-black uppercase tracking-widest">Bar 2026 · pinned</span>
+                  </div>
+                  <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+                    {bar2026Updates.map((u, i) => (
+                      <a
+                        key={i}
+                        href={u.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-white/60 bg-white/70 p-3 text-left shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:border-amber-300/60 dark:border-white/10 dark:bg-slate-900/50 dark:hover:border-amber-400/30"
+                      >
+                        <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">{u.date}</p>
+                        <p className="mt-1 line-clamp-2 text-xs font-bold text-slate-900 dark:text-white">{u.title}</p>
+                        <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+                          {u.cta} <ChevronRight className="h-3 w-3" />
+                        </span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              ) : (
-                <div className="space-y-6">
-                  {latestDecisions.map((decision) => (
+
+                {feedLoading ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={i}
+                        className="h-24 animate-pulse rounded-2xl border border-white/40 bg-white/40 dark:border-white/5 dark:bg-slate-800/40"
+                      />
+                    ))}
+                  </div>
+                ) : feedError && unifiedFeed.length === 0 ? (
+                  <div className="rounded-2xl border border-white/50 bg-white/50 p-8 text-center backdrop-blur-md dark:border-white/10 dark:bg-slate-900/40">
+                    <p className="font-semibold text-slate-800 dark:text-slate-200">Could not load the live feed.</p>
+                    <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Try the portal directly.</p>
                     <a
-                      key={decision.id}
-                      href={officialScDecisionUrl(decision)}
+                      href="https://sc.judiciary.gov.ph/news/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group block p-8 bg-white/40 dark:bg-slate-800/20 backdrop-blur-sm rounded-3xl border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-slate-800/40 hover:scale-[1.01] hover:shadow-xl transition-all duration-300 cursor-pointer"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400"
                     >
-                      <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <span className="px-3 py-1 bg-indigo-500 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
-                          {decision.date_str}
-                        </span>
-                        <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                          {decision.case_number}
-                        </span>
-                      </div>
-
-                      <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-4 leading-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                        {decision.title}
-                      </h4>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400 font-semibold">
-                          <span className="flex items-center gap-2 italic">
-                            <Zap size={14} className="text-amber-500" /> {decision.ponente}
-                          </span>
-                          {decision.division && (
-                            <span className="hidden md:flex items-center gap-2 opacity-60">• {decision.division}</span>
-                          )}
-                        </div>
-                        <div className="p-2 bg-indigo-500/0 text-indigo-500 group-hover:bg-indigo-500/10 rounded-full transition-all">
-                          <ExternalLink size={20} />
-                        </div>
-                      </div>
+                      Open Judiciary News <ExternalLink className="h-4 w-4" />
                     </a>
-                  ))}
-
-                  <a
-                    href={SC_DECISIONS_INDEX}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-3xl font-black uppercase tracking-widest shadow-xl shadow-indigo-600/20 hover:shadow-indigo-600/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-3"
-                  >
-                    Full decisions on SC website <ExternalLink size={20} />
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {NEWS_LINKS.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-6 rounded-3xl border group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                  >
-                    <div className={item.iconWrapClass}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h4 className="font-bold text-slate-900 dark:text-white mb-1">{item.label}</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">{item.desc}</p>
-                    <div className={item.ctaClass}>
-                      Browse <ExternalLink size={12} />
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 space-y-8">
-            <div className="glass rounded-[2.5rem] overflow-hidden shadow-xl border-white/50 dark:border-white/5">
-              <div className="p-8 bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-900 dark:to-black text-white">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-white/10 rounded-lg">
-                    <Twitter size={24} className="text-sky-400" />
                   </div>
-                  <h3 className="text-xl font-bold">Social Intelligence</h3>
+                ) : visibleFeed.length === 0 ? (
+                  <p className="py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+                    No items in this filter.
+                  </p>
+                ) : (
+                  <ul className="relative space-y-4 border-l border-indigo-200/60 pl-6 dark:border-indigo-500/20">
+                    {visibleFeed.map((item, idx) => (
+                      <li key={`${item.link}-${idx}`} className="relative">
+                        <span className="absolute -left-[1.35rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-white bg-indigo-500 shadow dark:border-slate-900 dark:bg-indigo-400" />
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group block overflow-hidden rounded-2xl border border-white/60 bg-white/50 p-4 shadow-sm backdrop-blur-md transition hover:border-indigo-300/50 hover:bg-white/80 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/35 dark:hover:border-indigo-400/30 dark:hover:bg-slate-900/55 sm:p-5"
+                        >
+                          <div className="mb-2 flex flex-wrap items-center gap-2">
+                            {item._barHighlight ? (
+                              <span className="rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-800 dark:bg-amber-500/20 dark:text-amber-200">
+                                Bar & exams
+                              </span>
+                            ) : (
+                              <span className="rounded-full bg-sky-500/15 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-sky-800 dark:bg-sky-500/20 dark:text-sky-200">
+                                News & pleading
+                              </span>
+                            )}
+                            <span className="text-[10px] font-bold uppercase tracking-wide text-slate-400">
+                              {item.pub_date || '—'}
+                            </span>
+                            {item.categories?.[0] && (
+                              <span className="truncate text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+                                · {item.categories[0]}
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="text-sm font-bold leading-snug text-slate-900 transition group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-300 sm:text-base">
+                            {item.title}
+                          </h3>
+                          {item.snippet && (
+                            <p className="mt-2 line-clamp-2 text-xs text-slate-600 dark:text-slate-400">{item.snippet}</p>
+                          )}
+                          <div className="mt-3 flex items-center gap-1 text-xs font-bold text-slate-400 transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                            Read on SC site <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                          </div>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </div>
+
+            {/* Rail */}
+            <aside className="space-y-6 lg:col-span-5">
+              <div className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+                <div className="mb-6 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+                    <Gavel className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">Decision highlights</h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Official SC site · not LexMate digests</p>
+                  </div>
                 </div>
-                <p className="text-slate-400 text-sm mb-8">Follow official real-time updates from the Supreme Court PIO.</p>
-                <div className="grid grid-cols-2 gap-4">
-                  <a
-                    href="https://x.com/SCPh_PIO"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold"
-                  >
-                    <Twitter size={16} /> Official X
-                  </a>
-                  <a
-                    href="https://www.facebook.com/SupremeCourtPhilippines"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-colors text-sm font-bold"
-                  >
-                    <Facebook size={16} /> Facebook
-                  </a>
-                </div>
+
+                {loadingDecisions ? (
+                  <div className="space-y-3">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="h-28 animate-pulse rounded-2xl bg-white/40 dark:bg-slate-800/40" />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {latestDecisions.map((decision) => (
+                      <a
+                        key={decision.id}
+                        href={officialScDecisionUrl(decision)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block rounded-2xl border border-white/50 bg-white/45 p-4 backdrop-blur-md transition hover:border-indigo-300/50 hover:bg-white/70 dark:border-white/10 dark:bg-slate-900/40 dark:hover:bg-slate-900/60"
+                      >
+                        <div className="mb-2 flex flex-wrap gap-2">
+                          <span className="rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
+                            {decision.date_str}
+                          </span>
+                          <span className="text-[10px] font-bold uppercase tracking-wide text-slate-400">
+                            {decision.case_number}
+                          </span>
+                        </div>
+                        <p className="line-clamp-2 text-sm font-bold text-slate-900 dark:text-white">{decision.title}</p>
+                        <p className="mt-2 line-clamp-1 text-xs text-slate-500 dark:text-slate-400">
+                          <Zap className="mr-1 inline h-3 w-3 text-amber-500" />
+                          {decision.ponente}
+                        </p>
+                      </a>
+                    ))}
+                    <a
+                      href={SC_DECISIONS_INDEX}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-full items-center justify-center gap-2 rounded-2xl bg-indigo-600 py-3.5 text-xs font-black uppercase tracking-widest text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-500"
+                    >
+                      Full index <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </div>
+                )}
               </div>
 
-              <div className="bg-slate-50 dark:bg-[#0d1117] p-4 relative">
-                <p className="mb-3 text-center text-[11px] text-slate-500 dark:text-slate-400">
-                  Feeds load in isolated frames from this app&apos;s API (X) and from Meta (Facebook). Ad blockers may hide them.
-                </p>
-                <div className="min-h-[600px] w-full overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-950">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {NEWS_LINKS.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group flex items-center gap-3 rounded-2xl border border-white/60 bg-gradient-to-br p-4 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 ${item.accent} dark:from-white/5 dark:to-transparent`}
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/50 bg-white/60 dark:bg-slate-900/50">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 text-left">
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">{item.label}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400">{item.desc}</p>
+                      </div>
+                      <ChevronRight className="h-4 w-4 shrink-0 opacity-40 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="glass overflow-hidden rounded-[2rem] shadow-xl">
+                <div className="border-b border-white/40 bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-6 text-white dark:border-white/10 dark:from-slate-950 dark:to-black">
+                  <div className="mb-2 flex items-center gap-2">
+                    <Twitter className="h-5 w-5 text-sky-400" />
+                    <h3 className="text-base font-bold">Social</h3>
+                  </div>
+                  <p className="text-xs text-slate-400">PIO on X · Facebook (iframes may be blocked by extensions)</p>
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    <a
+                      href="https://x.com/SCPh_PIO"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 py-2.5 text-xs font-bold transition hover:bg-white/20"
+                    >
+                      <Twitter className="h-4 w-4" /> X
+                    </a>
+                    <a
+                      href="https://www.facebook.com/SupremeCourtPhilippines"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 py-2.5 text-xs font-bold transition hover:bg-white/20"
+                    >
+                      <Facebook className="h-4 w-4" /> Meta
+                    </a>
+                  </div>
+                </div>
+                <div className="space-y-4 bg-slate-50/80 p-4 dark:bg-slate-950/50">
                   <iframe
                     key={twitterEmbedSrc}
                     title="Supreme Court PIO posts on X"
                     src={twitterEmbedSrc}
-                    className="h-[600px] w-full border-0 bg-white dark:bg-black"
+                    className="h-[420px] w-full rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-black"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     allow="encrypted-media; fullscreen"
                   />
-                </div>
-                <p className="mt-3 text-center text-xs text-slate-500 dark:text-slate-400 px-2">
-                  If the frame is empty, open{' '}
-                  <a href="https://x.com/SCPh_PIO" target="_blank" rel="noopener noreferrer" className="text-sky-500 font-semibold">
-                    @SCPh_PIO on X
-                  </a>
-                  .
-                </p>
-
-                <div className="mt-6 w-full min-h-[520px] overflow-hidden rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-900">
                   <iframe
                     title="Supreme Court of the Philippines on Facebook"
                     src={fbIframeSrc}
                     width="100%"
-                    height="600"
+                    height="480"
                     style={{ border: 'none', overflow: 'hidden' }}
                     scrolling="no"
                     frameBorder="0"
@@ -516,29 +485,27 @@ const Updates = ({ isDarkMode = false }) => {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-slate-900"
                   />
+                  <p className="text-center text-[10px] text-slate-500 dark:text-slate-500">
+                    Facebook blank? Set repo secret <code className="text-indigo-600 dark:text-indigo-400">VITE_FACEBOOK_APP_ID</code> and allow your domain in Meta.
+                  </p>
                 </div>
-                <p className="mt-2 text-center text-xs text-slate-500 dark:text-slate-400 px-2">
-                  If Facebook stays blank, add your site domain in the Meta app and set repository secret{' '}
-                  <code className="text-[10px]">VITE_FACEBOOK_APP_ID</code>, then redeploy.
-                </p>
               </div>
-            </div>
 
-            <div className="p-8 bg-amber-500 rounded-[2.5rem] text-white relative overflow-hidden shadow-2xl animate-float">
-              <div className="absolute top-0 right-0 p-6 opacity-20 -rotate-12">
-                <Zap size={100} />
-              </div>
-              <h4 className="text-xl font-bold mb-2">Want Instant Alerts?</h4>
-              <p className="text-amber-100 text-sm mb-6 font-medium">
-                Coming soon: Smart notifications for Bar bulletins and doctrinal shifts.
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="px-5 py-2.5 bg-white text-amber-600 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg">
-                  Get Notified
+              <div className="relative overflow-hidden rounded-[2rem] border border-amber-400/30 bg-gradient-to-br from-amber-500 via-amber-400 to-orange-500 p-6 text-white shadow-2xl">
+                <div className="pointer-events-none absolute -right-8 -top-8 opacity-25">
+                  <Zap className="h-24 w-24 rotate-12" />
                 </div>
+                <h4 className="relative text-lg font-bold">Instant alerts</h4>
+                <p className="relative mt-1 text-sm font-medium text-amber-50/95">
+                  Coming soon: notifications for Bar bulletins and doctrinal shifts.
+                </p>
+                <span className="relative mt-4 inline-block rounded-xl bg-white/95 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-amber-600 shadow">
+                  Get notified
+                </span>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </div>

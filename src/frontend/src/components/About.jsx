@@ -6,148 +6,240 @@ import {
   Gavel,
   Library,
   Book,
+  Sparkles,
+  Shield,
+  FileCheck,
+  ScanEye,
+  ListChecks,
   Scale,
 } from 'lucide-react';
 import FeaturePageShell from './FeaturePageShell';
 
-/** Feature cards (excludes About / Updates — those are separate nav items, not listed here). */
+/** Feature cards (excludes About / Updates in nav). Purple-forward accents on glass. */
 const FEATURES = [
   {
     icon: Brain,
     title: 'Lexify',
-    color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
+    accent:
+      'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/10 text-fuchsia-700 ring-1 ring-fuchsia-500/20 dark:text-fuchsia-300 dark:ring-fuchsia-400/20',
     description:
       'Timed mock-bar sessions modeled on the exam format for stamina, focus, and self-assessment (where your plan allows).',
   },
   {
     icon: SquareStack,
     title: 'Flashcards',
-    color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400',
+    accent:
+      'bg-gradient-to-br from-violet-500/20 to-indigo-600/10 text-violet-700 ring-1 ring-violet-500/20 dark:text-violet-300 dark:ring-violet-400/20',
     description: 'Flip through concept decks tied to your materials to reinforce doctrines and definitions.',
   },
   {
     icon: Headphones,
     title: 'LexPlay',
-    color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
+    accent:
+      'bg-gradient-to-br from-purple-500/25 to-violet-600/10 text-purple-700 ring-1 ring-purple-500/25 dark:text-purple-300 dark:ring-purple-400/25',
     description: 'Listen to LexMatePH audio content alongside your study flow.',
   },
   {
     icon: Gavel,
     title: 'Case Digest',
-    color: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
+    accent:
+      'bg-gradient-to-br from-rose-500/15 to-purple-600/10 text-rose-700 ring-1 ring-rose-500/15 dark:text-rose-300 dark:ring-rose-400/20',
     description:
       'Browse Supreme Court decisions and evidence-grounded case digests. Our engine analyzes every decision with literal fidelity to official sources.',
   },
   {
     icon: Library,
     title: 'LexCode',
-    color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+    accent:
+      'bg-gradient-to-br from-indigo-500/20 to-purple-600/10 text-indigo-700 ring-1 ring-indigo-500/20 dark:text-indigo-300 dark:ring-indigo-400/20',
     description:
       'Read major codals and statutes (RPC, Civil Code, Rules of Court, Constitution, Labor Code, and more) in one place.',
   },
   {
     icon: Book,
     title: 'Bar Questions',
-    color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-500',
+    accent:
+      'bg-gradient-to-br from-amber-500/15 to-violet-600/10 text-amber-800 ring-1 ring-amber-500/20 dark:text-amber-300 dark:ring-amber-400/20',
     description:
       'Actual past Philippine Bar Examination questions with suggested answers for structured review.',
+  },
+];
+
+const STANDARD_PILLARS = [
+  {
+    icon: Shield,
+    title: 'Professional persona',
+    body: 'Our engine acts as a senior legal editor, surfacing doctrine shifts and bar-relevant traps that generic tools often miss.',
+  },
+  {
+    icon: FileCheck,
+    title: 'Evidence-based',
+    body: 'Classifications like new doctrine or abandonment require direct support from the decision text, not invention.',
+  },
+  {
+    icon: ScanEye,
+    title: 'Full decision context',
+    body: 'Large-context analysis reads entire decisions together so reasoning stays coherent end to end.',
+  },
+  {
+    icon: ListChecks,
+    title: 'Structured ratio',
+    body: 'Each issue is unpacked with clear reasoning chains so you keep the clinical language of the law.',
   },
 ];
 
 const About = () => {
   return (
     <FeaturePageShell>
-      <div className="mx-auto max-w-4xl space-y-8">
-        <div className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
-          <h3 className="mb-3 text-lg font-bold text-gray-900 dark:text-white">About this App</h3>
-          <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            LexMatePH is built for more than bar review alone. Whether you are a law student, professor, bar
-            candidate, or practitioner, you can use these tools to explore codals, past bar questions, Supreme Court
-            materials, and study aids in one workspace.
-          </p>
-          <ul className="mb-4 list-inside list-disc space-y-2 text-sm text-gray-600 dark:text-gray-400">
-            <li>
-              <span className="font-semibold text-gray-800 dark:text-gray-200">Bar Questions</span> are actual past
-              Philippine Bar Examination questions, presented with suggested answers to support your review.
-            </li>
-            <li>
-              <span className="font-semibold text-gray-800 dark:text-gray-200">Case digests</span> and related summary
-              content may be produced or assisted by AI. They are meant for quick orientation only—always read the
-              underlying decisions and verify against official reporters and current law.
-            </li>
-          </ul>
-          <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-500">
-            Disclaimer: Content is for education and research, not legal advice. Verify critical points with primary
-            sources, the latest jurisprudence, and applicable statutes. LexMatePH does not replace professional judgment
-            or counsel.
-          </p>
-        </div>
+      <div className="animate-in fade-in relative pb-16 duration-700">
+        <div
+          className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-purple-500/25 blur-3xl dark:bg-purple-600/20"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute right-0 top-40 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-fuchsia-600/15"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute bottom-20 left-1/3 h-64 w-96 rounded-full bg-indigo-400/15 blur-3xl dark:bg-indigo-500/10"
+          aria-hidden
+        />
 
-        {/* The LexMatePH Standard Section */}
-        <div className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-6 shadow-sm dark:border-white/10 dark:bg-slate-900/35 sm:p-8">
-          <h3 className="mb-4 text-center text-lg font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-            🛡️ The LexMatePH Standard: Engineered Case Digests
-          </h3>
-          <p className="mb-6 text-sm leading-relaxed text-gray-600 dark:text-gray-400 text-center italic">
-            Built specifically for the Philippine Bar: Our high-fidelity legal engine ensures every digest is grounded in literal fidelity.
-          </p>
-          
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <span className="text-rose-500">👨‍⚖️</span> Professional Persona
-              </h4>
-              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-                Our engine acts as a Senior Legal Editor, identifying shifts in doctrine and "Bar Traps" that generic tools miss.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <span className="text-blue-500">📜</span> Evidence-Based
-              </h4>
-              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-                We enforce a "Zero-Hallucination" rule. All classifications (New Doctrine, Abandonment, etc.) require direct quotes from the text.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <span className="text-purple-500">👁️</span> 1M Token Context
-              </h4>
-              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-                We leverage a massive 1-million-token context window to analyze entire decisions at once, ensuring perfect contextual continuity.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="mb-2 text-sm font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <span className="text-amber-500">🔬</span> Exhaustive Ratio
-              </h4>
-              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-                Every issue identified includes at least 5-7 sentences of Reasoning, maintaining the clinical "Language of the Law."
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
-          LexMate Features at a glance
-        </p>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          {FEATURES.map(({ icon: Icon, title, description, color }) => (
-            <div
-              key={title}
-              className="glass rounded-xl border-2 border-slate-300/85 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-slate-900/35"
-            >
-              <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${color}`}>
-                <Icon className="h-5 w-5" strokeWidth={2} />
+        <div className="relative mx-auto w-full max-w-7xl space-y-10">
+          <header className="relative overflow-hidden rounded-[2rem] border border-purple-200/50 bg-gradient-to-br from-white/85 via-white/55 to-purple-100/40 px-6 py-10 shadow-[0_24px_80px_-28px_rgba(109,40,217,0.35)] backdrop-blur-2xl dark:border-white/10 dark:from-slate-950/80 dark:via-slate-950/50 dark:to-purple-950/40 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55)] sm:px-10">
+            <div className="pointer-events-none absolute -right-12 -top-20 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/35 to-fuchsia-500/25 blur-2xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-56 rounded-full bg-violet-400/15 blur-2xl" />
+            <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 rounded-full border border-purple-200/70 bg-white/70 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-700 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-purple-300">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  LexMatePH
+                </div>
+                <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                  About this workspace
+                </h1>
+                <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
+                  Built for law students, teachers, bar candidates, and practitioners: codals, past bar questions,
+                  Supreme Court materials, and study tools in one purple-tinted glass workspace.
+                </p>
               </div>
-              <h3 className="mb-1.5 text-base font-bold text-gray-900 dark:text-white">{title}</h3>
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
+              <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-white/60 bg-white/50 px-5 py-4 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-slate-900/50">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35">
+                  <Scale className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                    Philippine law focus
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">Official sources first, always.</p>
+                </div>
+              </div>
             </div>
-          ))}
+          </header>
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="space-y-6 lg:col-span-7">
+              <section className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+                <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
+                <h2 className="relative text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
+                  What you are using
+                </h2>
+                <p className="relative mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  LexMatePH is built for more than bar review alone. Explore codals, past bar questions, Supreme Court
+                  materials, and study aids together without hopping between siloed sites.
+                </p>
+                <ul className="relative mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                  <li className="flex gap-3 rounded-xl border border-purple-100/60 bg-white/40 p-3 dark:border-white/5 dark:bg-slate-900/30">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-purple-600/15 text-purple-700 dark:text-purple-300">
+                      <Book className="h-3.5 w-3.5" />
+                    </span>
+                    <span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">Bar Questions</span> are
+                      actual past Philippine Bar Examination questions, with suggested answers to support your review.
+                    </span>
+                  </li>
+                  <li className="flex gap-3 rounded-xl border border-purple-100/60 bg-white/40 p-3 dark:border-white/5 dark:bg-slate-900/30">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-violet-600/15 text-violet-700 dark:text-violet-300">
+                      <Gavel className="h-3.5 w-3.5" />
+                    </span>
+                    <span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-200">Case digests</span> and
+                      related summaries may be produced or assisted by AI. Use them for quick orientation only—read the
+                      full decisions and verify against official reporters and current law.
+                    </span>
+                  </li>
+                </ul>
+                <div className="relative mt-6 rounded-2xl border border-amber-200/40 bg-amber-50/50 p-4 text-xs leading-relaxed text-amber-950/90 backdrop-blur-sm dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
+                  <strong className="font-bold">Disclaimer:</strong> Content is for education and research, not legal
+                  advice. Verify critical points with primary sources, current jurisprudence, and applicable statutes.
+                  LexMatePH does not replace professional judgment or counsel.
+                </div>
+              </section>
+            </div>
+
+            <aside className="lg:col-span-5">
+              <section className="glass relative h-full overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+                <div className="pointer-events-none absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-violet-500/15 blur-2xl" />
+                <div className="relative mb-5 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30">
+                    <Shield className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white sm:text-lg">
+                      The LexMatePH standard
+                    </h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Engineered case digests</p>
+                  </div>
+                </div>
+                <p className="relative mb-5 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:text-sm">
+                  Built for the Philippine bar: a high-fidelity pipeline so digests stay grounded in the text you
+                  would cite in practice.
+                </p>
+                <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
+                    <div
+                      key={title}
+                      className="rounded-2xl border border-white/50 bg-white/45 p-4 shadow-sm backdrop-blur-md transition hover:border-purple-300/50 hover:bg-white/70 dark:border-white/10 dark:bg-slate-900/40 dark:hover:border-purple-500/30 dark:hover:bg-slate-900/60"
+                    >
+                      <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-purple-500/15 text-purple-700 dark:text-purple-300">
+                        <Icon className="h-4 w-4" strokeWidth={2} />
+                      </div>
+                      <h3 className="text-xs font-bold text-slate-900 dark:text-white">{title}</h3>
+                      <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">{body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          <section className="space-y-5">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-purple-600/80 dark:text-purple-400/90">
+                Same app, one glass surface
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {FEATURES.map(({ icon: Icon, title, description, accent }) => (
+                <div
+                  key={title}
+                  className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/50 p-5 shadow-md backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-purple-300/40 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/40 dark:hover:border-purple-500/25"
+                >
+                  <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-purple-400/10 blur-2xl transition group-hover:bg-purple-400/20" />
+                  <div
+                    className={`relative mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${accent}`}
+                  >
+                    <Icon className="h-6 w-6" strokeWidth={2} />
+                  </div>
+                  <h3 className="relative text-base font-bold text-slate-900 dark:text-white">{title}</h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </FeaturePageShell>

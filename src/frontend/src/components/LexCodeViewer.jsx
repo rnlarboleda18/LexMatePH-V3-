@@ -126,7 +126,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         return () => mq.removeEventListener('change', on);
     }, []);
     const mainContentRef = useRef(null);
-    /** Top of rounded codal shell — desktop fixed TOC/juris panels align to this edge (clamped below app header on scroll). */
+    /** Rounded codal shell root (layout); portaled TOC/juris `top` follows header + sticky filter chrome, not this rect. */
     const codalShellRef = useRef(null);
     /** Spacers measure horizontal position for fixed side panels (sticky breaks with body overflow-x + transforms). */
     const tocSpacerRef = useRef(null);
@@ -156,14 +156,15 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             setJurisFixedLeft(null);
         }
 
-        const wantAlignedTop =
-            isSidebarOpen || !!(activeJurisArticle || activeAmendmentArticle);
-        const shell = codalShellRef.current;
-        if (wantAlignedTop && shell) {
-            const r = shell.getBoundingClientRect();
+        // Match TOC FAB: pin vertical position to viewport below header + sticky LexCode
+        // chrome — do not tie to codal shell top (that moves on scroll and drags the panel).
+        const wantPanels = isSidebarOpen || !!(activeJurisArticle || activeAmendmentArticle);
+        if (wantPanels) {
             const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-            const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 64 : 48);
-            setFixedPanelTopPx(Math.max(minTop, r.top));
+            const headerBottom = gh ? gh.getBoundingClientRect().bottom : (window.innerWidth >= 768 ? 64 : 48);
+            const filterEl = lexFilterChromeRef.current;
+            const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
+            setFixedPanelTopPx(Math.max(headerBottom, chromeBottom) + 8);
         } else {
             setFixedPanelTopPx(null);
         }
@@ -196,7 +197,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         const ro = new ResizeObserver(() => syncFixedPanelPositions());
         if (tocSpacerRef.current) ro.observe(tocSpacerRef.current);
         if (jurisSpacerRef.current) ro.observe(jurisSpacerRef.current);
-        if (codalShellRef.current) ro.observe(codalShellRef.current);
+        if (lexFilterChromeRef.current) ro.observe(lexFilterChromeRef.current);
         window.addEventListener('resize', syncFixedPanelPositions);
         window.addEventListener('scroll', scheduleSync, true);
         return () => {
