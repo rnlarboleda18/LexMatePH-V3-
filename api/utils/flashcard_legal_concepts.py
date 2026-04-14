@@ -98,25 +98,118 @@ def sources_keep_latest_only(sources: Any) -> List[Dict[str, Any]]:
     return [best]
 
 
-def get_primary_subject(sources: Any) -> str:
-    """Return the most frequent (modal) subject across all sources.
+_CANONICAL_BAR = frozenset(
+    {
+        "Civil Law",
+        "Commercial Law",
+        "Criminal Law",
+        "Labor Law",
+        "Legal Ethics",
+        "Political Law",
+        "Remedial Law",
+        "Taxation Law",
+    }
+)
 
-    This must be called BEFORE sources_keep_latest_only so the full set of
-    source cases is available.  Falls back to the single remaining source's
-    subject if called post-collapse.
+
+def normalize_bar_subject_label(raw: Any) -> str:
+    """Map free-text digest / Bar labels to one canonical subject (aligned with frontend subjectNormalize)."""
+    if raw is None:
+        return ""
+    t = str(raw).strip()
+    if t in _CANONICAL_BAR:
+        return t
+    s = t.lower()
+    if "civil service" in s or "civil-service" in s or re.search(r"\bcsc\b", s):
+        return "Labor Law"
+    if "civil" in s:
+        return "Civil Law"
+    if "commercial" in s or "mercantile" in s:
+        return "Commercial Law"
+    if "criminal" in s or "penal" in s:
+        return "Criminal Law"
+    if "labor" in s or "social legislat" in s:
+        return "Labor Law"
+    if "ethics" in s or "judicial ethics" in s:
+        return "Legal Ethics"
+    if "political" in s or "constitutional" in s:
+        return "Political Law"
+    if "remedial" in s or "procedure" in s:
+        return "Remedial Law"
+    if "taxation" in s or "tax" in s:
+        return "Taxation Law"
+    return t
+
+
+def _segment_after_primary_from_text(blob: str) -> str:
+    """If *blob* contains ``Primary:``, return only that segment (strip ``Secondary:`` and trailing clauses)."""
+    b = (blob or "").strip()
+    if not b:
+        return ""
+    m = re.search(r"primary\s*:\s*", b, flags=re.IGNORECASE)
+    if not m:
+        return b
+    rest = b[m.end() :].strip()
+    sec = re.search(r"\bsecondary\s*:", rest, flags=re.IGNORECASE)
+    if sec:
+        rest = rest[: sec.start()].strip()
+    if ";" in rest:
+        rest = rest.split(";")[0].strip()
+    return rest
+
+
+def extract_digest_primary_from_item(item: Mapping[str, Any], case_subject: str) -> str:
+    """Primary Bar subject from a legal_concepts JSON item; ignores Secondary. Fallback: case row subject."""
+    if not isinstance(item, dict):
+        return normalize_bar_subject_label(case_subject)
+    ps = item.get("primary_subject")
+    if isinstance(ps, str) and ps.strip():
+        return normalize_bar_subject_label(ps.strip())
+    blob_parts: List[str] = []
+    for key in ("subject", "subjects", "topic", "bar_subject"):
+        v = item.get(key)
+        if isinstance(v, str) and v.strip():
+            blob_parts.append(v.strip())
+        elif isinstance(v, list) and v:
+            blob_parts.extend(str(x).strip() for x in v[:5] if str(x).strip())
+    blob = " ".join(blob_parts).strip()
+    if blob and re.search(r"primary\s*:", blob, re.IGNORECASE):
+        seg = _segment_after_primary_from_text(blob)
+        if seg:
+            return normalize_bar_subject_label(seg)
+    if blob:
+        return normalize_bar_subject_label(blob)
+    return normalize_bar_subject_label(case_subject)
+
+
+def get_primary_subject(sources: Any) -> str:
+    """Modal canonical subject from each source's ``digest_primary`` (digest Primary only).
+
+    Legacy rows without ``digest_primary`` fall back to modal of normalized ``subject``.
     """
     if not isinstance(sources, list) or not sources:
         return ""
-    freq: Dict[str, int] = {}
+    dp_freq: Dict[str, int] = {}
+    leg_freq: Dict[str, int] = {}
     for src in sources:
         if not isinstance(src, dict):
             continue
+        dp = (src.get("digest_primary") or "").strip()
+        if dp:
+            lab = normalize_bar_subject_label(dp)
+            if lab:
+                dp_freq[lab] = dp_freq.get(lab, 0) + 1
+            continue
         s = (src.get("subject") or "").strip()
         if s:
-            freq[s] = freq.get(s, 0) + 1
-    if not freq:
-        return ""
-    return max(freq, key=lambda k: freq[k])
+            lab = normalize_bar_subject_label(s)
+            if lab:
+                leg_freq[lab] = leg_freq.get(lab, 0) + 1
+    if dp_freq:
+        return max(dp_freq, key=lambda k: dp_freq[k])
+    if leg_freq:
+        return max(leg_freq, key=lambda k: leg_freq[k])
+    return ""
 
 
 def merge_concept_into_map(
@@ -127,19 +220,22 @@ def merge_concept_into_map(
     case_number: str,
     title: str,
     date_str: str,
-    subj: str,
+    digest_primary: str,
+    case_subject: str,
 ) -> None:
     if not term or not str(term).strip():
         return
     term = str(term).strip()
     definition = (definition or "").strip()
     key = re.sub(r"\s+", " ", term).lower()
+    dp_norm = normalize_bar_subject_label(digest_primary)
     src = {
         "case_id": case_id,
         "case_number": case_number or "",
         "title": title or "",
         "date_str": date_str or "",
-        "subject": subj or "",
+        "subject": case_subject or "",
+        "digest_primary": dp_norm or "",
     }
     if key not in concepts_map:
         concepts_map[key] = {
@@ -174,7 +270,10 @@ def merge_digest_rows_to_concepts_list(rows: Sequence[Mapping[str, Any]]) -> Lis
             if not t:
                 continue
             d = concept_definition(item)
-            merge_concept_into_map(concepts_map, t, d, case_id, case_number, title, date_str, subj)
+            d_primary = extract_digest_primary_from_item(item, subj)
+            merge_concept_into_map(
+                concepts_map, t, d, case_id, case_number, title, date_str, d_primary, subj
+            )
 
     out: List[Dict[str, Any]] = []
     for _k, ent in concepts_map.items():

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronRight, RotateCcw, X, Headphones, Lock } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
+import { getFlashcardConceptPrimarySubject } from '../utils/flashcardPrimarySubject';
 import { SubjectIcon } from '../utils/subjectIcons';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -27,7 +28,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
     const sources = card.sources || [];
     const rawSubjectLabel = isBar
         ? String(card.subject || '').trim() || '—'
-        : String(sources[0]?.subject || '').trim() || '—';
+        : String(getFlashcardConceptPrimarySubject(card) || '').trim() || '—';
     const subjectForColor =
         normalizeBarSubject(rawSubjectLabel) || rawSubjectLabel || '—';
     const headerDate = isBar ? String(card.year ?? '—') : sources[0]?.date_str || '—';
@@ -267,7 +268,10 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                                     <span className="font-mono tabular-nums">{src.case_number || '—'}</span>
                                                     <span>{src.date_str || '—'}</span>
                                                     <span className="font-medium text-violet-700 dark:text-violet-300">
-                                                        {normalizeBarSubject(src.subject) || src.subject || '—'}
+                                                        {normalizeBarSubject(src.digest_primary || src.subject) ||
+                                                            src.digest_primary ||
+                                                            src.subject ||
+                                                            '—'}
                                                     </span>
                                                 </div>
                                             </div>

@@ -34,6 +34,7 @@ from utils.flashcard_legal_concepts import (
     flashcard_digest_select_sql_and_params,
     sources_keep_latest_only,
     get_primary_subject,
+    normalize_bar_subject_label,
 )
 
 supreme_bp = func.Blueprint()
@@ -723,26 +724,8 @@ def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
         )
 
 def _normalize_subject_bar(raw):
-    if not raw:
-        return ""
-    s = str(raw).lower()
-    if "civil" in s:
-        return "Civil Law"
-    if "commercial" in s or "mercantile" in s:
-        return "Commercial Law"
-    if "criminal" in s or "penal" in s:
-        return "Criminal Law"
-    if "labor" in s or "social legislat" in s:
-        return "Labor Law"
-    if "ethics" in s or "judicial ethics" in s:
-        return "Legal Ethics"
-    if "political" in s or "constitutional" in s:
-        return "Political Law"
-    if "remedial" in s or "procedure" in s:
-        return "Remedial Law"
-    if "taxation" in s or re.search(r"\btax\b", s):
-        return "Taxation Law"
-    return str(raw).strip()
+    """Canonical Bar subject for query params (aligned with digest flashcard normalizer)."""
+    return normalize_bar_subject_label(raw) if raw else ""
 
 
 @supreme_bp.route(route="sc_decisions/flashcard_concepts", auth_level=func.AuthLevel.ANONYMOUS)
@@ -793,15 +776,18 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
             return False
         return True
 
+    def _concept_canonical_primary(c):
+        """Same bucketing as flashcard merge: digest_primary modal on sources, else primary_subject."""
+        src = c.get("sources") or []
+        p = get_primary_subject(src)
+        if p:
+            return p
+        return normalize_bar_subject_label(c.get("primary_subject") or "")
+
     def _build_response_payload(out_list):
         out_list = [c for c in out_list if _concept_visible(c)]
         if ns_filter:
-            filtered = []
-            for c in out_list:
-                srcs = [s for s in c["sources"] if _normalize_subject_bar(s.get("subject")) == ns_filter]
-                if srcs:
-                    filtered.append({**c, "sources": srcs})
-            out_list = filtered
+            out_list = [c for c in out_list if _concept_canonical_primary(c) == ns_filter]
         return {"concepts": out_list}
 
     bypass_cache = (req.params.get("nocache") or "").lower() in ("1", "true", "yes")

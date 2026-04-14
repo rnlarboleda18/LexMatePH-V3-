@@ -782,11 +782,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden bg-white/90 dark:bg-gray-900/90 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.3)] transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)]"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden bg-white/90 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950/92 dark:backdrop-blur-xl dark:shadow-[0_-8px_32px_-8px_rgba(0,0,0,0.55)] dark:ring-1 dark:ring-inset dark:ring-white/[0.06]"
             >
                 {/* Top edge: scrub line, full viewport width */}
                 <div
-                    className="w-full shrink-0 border-b-2 border-slate-300/85 dark:border-gray-800"
+                    className="w-full shrink-0 border-b-2 border-slate-300/85 dark:border-zinc-800"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized />
@@ -794,7 +794,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
 
                 {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
-                    className="relative flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-gray-900/95
+                    className="relative flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-white/[0.04]
                         pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(2.25rem,env(safe-area-inset-right,0px))] py-0 pb-0.5 md:py-1 md:pb-1 md:pr-[max(2.75rem,env(safe-area-inset-right,0px))]"
                     onClick={onExpand}
                 >

@@ -21,6 +21,13 @@ import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage'
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
+import {
+  FILTER_CHROME_SURFACE,
+  FILTER_SELECT,
+  FILTER_BAR_SEARCH_INPUT,
+  FILTER_SEARCH_ICON_CLASS,
+  FILTER_FIELD_LABEL,
+} from './utils/filterChromeClasses';
 
 const About = lazy(() => import('./components/About'));
 const Updates = lazy(() => import('./components/Updates'));
@@ -391,9 +398,11 @@ function App() {
 
     let selected = [];
     if (subject) {
-      selected = flashcardConceptPool.filter(
-        (c) => getCardPrimarySubject(c) === subject
-      );
+      const want = normalizeBarSubject(subject);
+      selected = flashcardConceptPool.filter((c) => {
+        const got = getCardPrimarySubject(c);
+        return got != null && normalizeBarSubject(got) === want;
+      });
     } else {
       selected = [...flashcardConceptPool];
     }
@@ -620,7 +629,7 @@ function App() {
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
                     <div
-                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-violet-950/25 backdrop-blur-[2px] animate-in fade-in duration-200 md:!items-stretch dark:bg-purple-950/30"
+                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-violet-950/25 backdrop-blur-[2px] animate-in fade-in duration-200 md:!items-stretch dark:bg-black/40"
                       onClick={() => setFlashcardState('setup')}
                       role="presentation"
                     >
@@ -673,7 +682,7 @@ function App() {
                       {/* Search + filter — scrolls with page below xl; fixed at xl+ */}
                       <div
                         ref={barFilterChromeRef}
-                        className={`z-20 w-full xl:w-auto min-w-0 border-b border-violet-200/70 bg-white/92 shadow-[0_12px_40px_-18px_rgba(109,40,217,0.18)] backdrop-blur-xl dark:border-purple-500/20 dark:bg-slate-900/92 ${
+                        className={`z-20 ${FILTER_CHROME_SURFACE} ${
                           xlFixedChrome
                             ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
                             : 'relative'
@@ -682,7 +691,7 @@ function App() {
                         <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                           <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
-                              <label htmlFor="bar-subject-filter" className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 sm:sr-only">
+                              <label htmlFor="bar-subject-filter" className={`${FILTER_FIELD_LABEL} sm:sr-only`}>
                                 Bar subject ({filteredBarQuestions.length} question{filteredBarQuestions.length !== 1 ? 's' : ''})
                               </label>
                               <select
@@ -694,7 +703,7 @@ function App() {
                                   setCurrentSubject(v === '' ? null : v);
                                   setBarCurrentPage(1);
                                 }}
-                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                className={FILTER_SELECT}
                               >
                                 <option value="">All subjects</option>
                                 {BAR_SUBJECT_OPTIONS.map((s) => (
@@ -704,7 +713,7 @@ function App() {
                             </div>
                             <div className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto">
                               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-                                <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} />
+                                <Search className={FILTER_SEARCH_ICON_CLASS} strokeWidth={2} />
                               </div>
                               <input
                                 ref={barSearchInputRef}
@@ -737,7 +746,7 @@ function App() {
                                     setShowBarSuggestions(false);
                                   }
                                 }}
-                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                className={FILTER_BAR_SEARCH_INPUT}
                               />
                             </div>
                           </div>
@@ -748,11 +757,22 @@ function App() {
                         className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                         style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
                       >
+                      <div className="relative min-w-0 w-full rounded-[1.75rem] border-2 border-violet-200/60 bg-gradient-to-br from-white/70 via-violet-50/35 to-purple-100/30 p-5 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 sm:p-6">
+                      {/* Page description */}
+                      {!loading && (
+                        <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                          <span className="font-medium text-slate-700 dark:text-slate-300">Bar examination questions</span>{' '}
+                          from past Philippine Bar exams, organized by subject. Tap a card to view the suggested answer,
+                          relevant doctrines, and related case citations. Filter by subject or search by keyword to target
+                          specific topics.
+                        </p>
+                      )}
+
                       {/* Bar search suggestions — portaled to body so it escapes overflow-hidden */}
                       {showBarSuggestions && barSearchRect && typeof document !== 'undefined' &&
                         createPortal(
                           <div
-                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-purple-500/25 dark:bg-slate-900/95"
+                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/98"
                             style={{
                               top: barSearchRect.bottom + 4,
                               left: barSearchRect.left,
@@ -795,7 +815,7 @@ function App() {
                                           setShowBarSuggestions(false);
                                           tryOpenBarQuestion(q);
                                         }}
-                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-violet-950/30"
+                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-zinc-800"
                                       >
                                         <p className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
                                           {q.question}
@@ -850,7 +870,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
-                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-purple-500/30 dark:bg-slate-800/50 dark:text-gray-200 dark:hover:bg-slate-700/60 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -864,7 +884,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
-                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-purple-500/30 dark:bg-slate-800/50 dark:text-gray-200 dark:hover:bg-slate-700/60 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -873,6 +893,7 @@ function App() {
                           </div>
                         );
                       })()}
+                      </div>{/* end glass layer */}
                       </main>
                     </PurpleGlassAmbient>
                   )}

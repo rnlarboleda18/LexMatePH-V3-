@@ -123,27 +123,27 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
     /** Unified purple glass cards (About-style); day copy still distinguishes sessions in text. */
     const EXAM_CARD_SHELL =
-        'border border-purple-200/50 bg-gradient-to-br from-white/80 via-violet-50/40 to-purple-100/35 shadow-[0_18px_48px_-22px_rgba(109,40,217,0.22)] backdrop-blur-md dark:border-purple-500/25 dark:from-slate-900/60 dark:via-purple-950/30 dark:to-slate-900/55';
+        'border border-purple-200/50 bg-gradient-to-br from-white/80 via-violet-50/40 to-purple-100/35 shadow-[0_18px_48px_-22px_rgba(109,40,217,0.22)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/80 dark:shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)] dark:backdrop-blur-md';
 
     const WEIGHT_COLOR = (w) =>
         w === '25%'
-            ? 'text-purple-700 dark:text-purple-300'
+            ? 'text-purple-700 dark:text-zinc-400'
             : parseInt(w, 10) >= 20
-              ? 'text-violet-700 dark:text-violet-300'
-              : 'text-fuchsia-700 dark:text-fuchsia-300';
+              ? 'text-violet-700 dark:text-zinc-400'
+              : 'text-fuchsia-700 dark:text-zinc-500';
 
     return (
         <FeaturePageShell>
             <PurpleGlassAmbient className="pb-4">
             {/* Dashboard only: full-screen exam UI lives in LexifyApp (other exam states). */}
-            <div className="flex flex-col overflow-hidden rounded-[2rem] border-2 border-violet-200/70 bg-white/50 font-sans text-gray-900 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/45 dark:text-gray-100">
-            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b-2 border-violet-200/60 bg-white/55 px-4 sm:px-6 dark:border-purple-500/20 dark:bg-slate-900/55">
+            <div className="flex flex-col overflow-hidden rounded-[2rem] border-2 border-violet-200/70 bg-white/50 font-sans text-gray-900 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-gray-100 dark:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] dark:backdrop-blur-xl">
+            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b-2 border-violet-200/60 bg-white/55 px-4 sm:px-6 dark:border-zinc-800 dark:bg-zinc-950/90 dark:backdrop-blur-md">
                 <div className="relative z-50 flex items-center gap-3">
                     <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
                     </button>
                     {showMenu && (
-                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-violet-200/80 bg-white/95 py-2 shadow-[0_20px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-xl dark:border-purple-500/30 dark:bg-slate-900/95">
+                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-violet-200/80 bg-white/95 py-2 shadow-[0_20px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/98">
                             <button type="button" onClick={() => { setShowPrefsModal(true); setShowMenu(false); }} className="w-full px-4 py-2.5 text-left text-sm text-slate-800 transition hover:bg-violet-50 dark:text-slate-100 dark:hover:bg-white/10">Preferences</button>
                             <button type="button" onClick={handleStartNewAttempt} className="w-full px-4 py-2.5 text-left text-sm text-emerald-700 transition hover:bg-emerald-50/80 dark:text-emerald-400 dark:hover:bg-white/10">Start new attempt</button>
                             

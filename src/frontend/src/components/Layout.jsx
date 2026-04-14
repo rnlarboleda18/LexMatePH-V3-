@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import { APP_HEADER_SURFACE, SIDEBAR_ASIDE_SURFACE } from '../utils/filterChromeClasses';
 
 const Layout = ({
     children,
@@ -39,15 +40,15 @@ const Layout = ({
     }, [mode]);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-[#0a0f1c] text-slate-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
+        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-zinc-950 text-zinc-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
             {/* Global Glassmorphism Background Orbs — GPU-composited, no external fetch */}
             <div
                 className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
                 style={{ contain: 'strict', filter: flashcardStudying ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}
             >
-                <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-30 animate-float ${isDarkMode ? 'bg-indigo-900' : 'bg-indigo-200'}`} style={{willChange:'transform'}}></div>
-                <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-30 animate-float ${isDarkMode ? 'bg-purple-900' : 'bg-purple-200'}`} style={{animationDelay: '1s', willChange:'transform'}}></div>
-                <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full filter blur-[80px] opacity-20 animate-float ${isDarkMode ? 'bg-blue-900' : 'bg-blue-200'}`} style={{animationDelay: '2s', willChange:'transform'}}></div>
+                <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-700 opacity-[0.12]' : 'bg-indigo-200 opacity-30'}`} style={{willChange:'transform'}}></div>
+                <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-600 opacity-[0.1]' : 'bg-purple-200 opacity-30'}`} style={{animationDelay: '1s', willChange:'transform'}}></div>
+                <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-800 opacity-[0.08]' : 'bg-blue-200 opacity-20'}`} style={{animationDelay: '2s', willChange:'transform'}}></div>
             </div>
 
             {/* Flashcard blur overlay — removed; blur applied directly via filter on each element below */}
@@ -63,10 +64,7 @@ const Layout = ({
                         <header
                             className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
                     min-h-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
-                    ${isDarkMode
-                        ? 'bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
-                        : 'border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
-                    }`}
+                    ${APP_HEADER_SURFACE}`}
                             style={{
                                 filter: flashcardStudying ? 'blur(4px)' : 'none',
                                 transition: 'filter 0.3s ease',
@@ -78,10 +76,10 @@ const Layout = ({
                         <button
                             type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 transition-colors backdrop-blur-md ${
                                 isDarkMode
-                                    ? 'border-white/10 bg-white/[0.06] text-gray-300 hover:bg-amber-900/20 hover:text-amber-400'
-                                    : 'border-2 border-slate-400/70 bg-white text-gray-700 shadow-sm hover:bg-amber-50 hover:text-amber-800'
+                                    ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06] hover:bg-zinc-800 hover:text-white'
+                                    : 'border-violet-200/90 bg-white/45 text-violet-900 shadow-sm shadow-violet-200/20 ring-1 ring-inset ring-white/60 hover:bg-white/60 hover:text-violet-950'
                             }`}
                             aria-label="Toggle Sidebar"
                         >
@@ -94,10 +92,10 @@ const Layout = ({
 
                         <div className="flex min-w-0 items-center gap-2 md:gap-2.5">
                             <div
-                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${
+                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 backdrop-blur-md ${
                                     isDarkMode
-                                        ? 'border-white/10 bg-white/[0.06] text-indigo-300'
-                                        : 'border-2 border-slate-400/70 bg-white text-indigo-700 shadow-sm'
+                                        ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06]'
+                                        : 'border-violet-200/90 bg-white/45 text-violet-800 shadow-sm shadow-violet-200/20 ring-1 ring-inset ring-white/55'
                                 }`}
                                 aria-hidden
                             >
@@ -107,15 +105,15 @@ const Layout = ({
                                 <span
                                     className={`select-none truncate font-semibold tracking-tight text-base sm:text-lg md:text-[1.125rem] ${
                                         isDarkMode
-                                            ? 'text-stone-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
-                                            : 'text-slate-950'
+                                            ? 'text-zinc-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
+                                            : 'text-violet-950'
                                     }`}
                                 >
                                     LexMatePH
                                 </span>
                                 <span
                                     className={`mt-0.5 hidden text-[10px] font-medium leading-tight tracking-tight sm:block sm:text-[11px] md:text-xs ${
-                                        isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                                        isDarkMode ? 'text-zinc-400' : 'text-violet-800/80'
                                     }`}
                                 >
                                     Your Law Companion
@@ -126,24 +124,24 @@ const Layout = ({
 
                     {/* Center links — flex-1 keeps spacing between brand and actions; wraps only on very narrow sm */}
                     <nav
-                        className="order-last hidden w-full min-w-0 justify-center border-t border-slate-200/70 px-1 pt-1.5 dark:border-white/10 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
+                        className="order-last hidden w-full min-w-0 justify-center border-t border-violet-200/60 px-1 pt-1.5 dark:border-zinc-800 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
                         aria-label="LexMatePH feature areas"
                     >
                         <p
                             className={`flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-[10px] font-semibold leading-snug tracking-tight sm:text-[11px] md:text-xs lg:text-sm xl:text-[0.9375rem] ${
-                                isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                                isDarkMode ? 'text-zinc-300' : 'text-violet-900/90'
                             }`}
                         >
                             <span className="whitespace-nowrap">Bar Questions</span>
-                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
+                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">SC Decisions</span>
-                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
+                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Case Digests</span>
-                            <span className="text-slate-600 dark:text-slate-500" aria-hidden>
+                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Codals</span>
@@ -157,19 +155,19 @@ const Layout = ({
                             title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                             className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium transition-all duration-200 md:gap-2 md:px-2.5 md:py-1.5 md:text-base
                                 ${isDarkMode
-                                    ? 'border border-transparent text-gray-400 hover:border-amber-800/40 hover:bg-amber-900/20 hover:text-amber-400'
-                                    : 'border-2 border-transparent text-gray-700 hover:border-amber-300/90 hover:bg-amber-50 hover:text-amber-900'
+                                    ? 'border border-transparent text-zinc-400 hover:border-zinc-700 hover:bg-zinc-800/80 hover:text-zinc-100'
+                                    : 'border-2 border-transparent text-violet-900/90 hover:border-violet-300/80 hover:bg-violet-100/90 hover:text-violet-950'
                                 }`}
                         >
                             {isDarkMode ? (
-                                <Sun size={17} className="shrink-0 text-amber-400 md:h-[18px] md:w-[18px]" />
+                                <Sun size={17} className="shrink-0 text-amber-300 md:h-[18px] md:w-[18px]" />
                             ) : (
-                                <Moon size={17} className="shrink-0 text-violet-500 md:h-[18px] md:w-[18px]" />
+                                <Moon size={17} className="shrink-0 text-violet-600 md:h-[18px] md:w-[18px]" />
                             )}
                             <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        <div className={`hidden sm:block h-4 w-px shrink-0 rounded-full md:h-5 ${isDarkMode ? 'bg-gray-700' : 'bg-slate-400/80'}`} />
+                        <div className={`hidden sm:block h-4 w-px shrink-0 rounded-full md:h-5 ${isDarkMode ? 'bg-zinc-700' : 'bg-violet-300/70'}`} />
 
                         <div className="hidden items-center gap-1.5 md:flex">
                             <SignedIn>
@@ -186,7 +184,7 @@ const Layout = ({
                                     <SignInButton mode="modal">
                                         <button
                                             type="button"
-                                            className={`rounded-md px-2.5 py-1.5 text-sm font-semibold transition-all duration-200 md:px-3 md:text-[0.9375rem] ${isDarkMode ? 'text-amber-400 hover:bg-amber-900/20' : 'text-amber-700 hover:bg-amber-50'}`}
+                                            className={`rounded-md px-2.5 py-1.5 text-sm font-semibold transition-all duration-200 md:px-3 md:text-[0.9375rem] ${isDarkMode ? 'text-zinc-300 hover:bg-zinc-800' : 'text-violet-800 hover:bg-violet-100/90'}`}
                                         >
                                             Log In
                                         </button>
@@ -194,7 +192,7 @@ const Layout = ({
                                     <SignUpButton mode="modal">
                                         <button
                                             type="button"
-                                            className="rounded-md bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-amber-700 md:px-3 md:text-[0.9375rem]"
+                                            className="rounded-md bg-gradient-to-r from-violet-600 to-purple-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md shadow-violet-900/25 transition-all duration-200 hover:opacity-95 md:px-3 md:text-[0.9375rem]"
                                         >
                                             Sign Up
                                         </button>
@@ -211,9 +209,9 @@ const Layout = ({
             {/* Sidebar (Navigation Drawer) */}
             {!hideAppChrome && (
                 <aside
-                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out shadow-xl overflow-y-auto top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
-            ${isDarkMode ? 'bg-slate-900 xl:bg-slate-900/40 xl:backdrop-blur-xl border-r border-white/10 shadow-[6px_0_24px_-4px_rgba(0,0,0,0.3)]' : 'border-r-2 border-slate-300/90 bg-white xl:bg-white/85 xl:backdrop-blur-xl shadow-[6px_0_24px_-4px_rgba(15,23,42,0.08)]'}
-            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
+            ${SIDEBAR_ASIDE_SURFACE}
+            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             xl:translate-x-0 xl:block`}
                     style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
                 >

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
+import { getFlashcardConceptPrimarySubject } from '../utils/flashcardPrimarySubject';
 import { apiUrl } from '../utils/apiUrl';
 
 const FLASHCARD_FETCH_MS = 300000;
@@ -81,10 +82,10 @@ export function useFlashcardConcepts() {
 
   const refetch = useCallback(() => setFetchNonce((n) => n + 1), []);
 
-  const getPrimarySubject = useCallback((card) => {
-    if (card.primary_subject) return normalizeBarSubject(card.primary_subject);
-    return normalizeBarSubject((card.sources || [])[0]?.subject) || null;
-  }, []);
+  const getPrimarySubject = useCallback(
+    (card) => getFlashcardConceptPrimarySubject(card),
+    []
+  );
 
   const subjectCounts = useMemo(() => {
     const subjects = [
