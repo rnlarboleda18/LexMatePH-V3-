@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
+import { getSubjectColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
 import { SubjectIcon } from '../utils/subjectIcons';
 
@@ -10,13 +10,10 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
     const colorClass = getSubjectColor(subjectKey);
     const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
     const borderColor = colorClass.split(' ').find((c) => c.startsWith('border-'));
-    // Side-specific left-band color so the outer border can be uniform violet
-    const leftBandColor = borderColor?.replace('border-', 'border-l-') ?? '';
-    const surfaceClass = getSubjectAnswerColor(subjectKey);
 
     return (
         <div
-            className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 p-3 shadow-sm transition-all hover:shadow-lg dark:border-purple-400/35 ${surfaceClass} border-l-[5px] ${leftBandColor}`}
+            className="group relative flex h-[15rem] flex-col overflow-hidden rounded-lg border-2 border-violet-300/80 bg-white/85 p-3 shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60"
         >
             {/* Header: ID - Subject (Year) */}
             <div className={`flex items-center gap-2 mb-2 ${textColor}`}>

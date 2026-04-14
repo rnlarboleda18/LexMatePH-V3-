@@ -1,7 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { RefreshCw } from 'lucide-react';
-import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
+import { getSubjectColor } from '../utils/colors';
 import { SubjectIcon, AllSubjectsIcon } from '../utils/subjectIcons';
 
 const subjects = [
@@ -133,7 +133,7 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/80 border-l-[6px] border-l-violet-500 bg-white/55 p-4 text-left shadow-md transition-all hover:shadow-lg dark:border-purple-400/35 dark:border-l-purple-400 dark:bg-slate-900/45 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border-2 border-violet-300/80 bg-white/85 p-4 text-left shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
                                 <div className="min-w-0 space-y-2">
                                     <span className="flex items-start gap-2.5 text-sm font-bold text-slate-800 dark:text-slate-100">
@@ -155,8 +155,6 @@ const FlashcardSetup = ({
                                 const colorClass = getSubjectColor(subject);
                                 const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
                                 const borderColor = colorClass.split(' ').find((c) => c.startsWith('border-'));
-                                const leftBandColor = borderColor?.replace('border-', 'border-l-') ?? '';
-                                const surfaceClass = getSubjectAnswerColor(subject);
                                 const n = countFor(subject);
 
                                 return (
@@ -165,7 +163,7 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/80 border-l-[6px] p-4 text-left shadow-md transition-all hover:shadow-lg dark:border-purple-400/35 disabled:pointer-events-none disabled:opacity-50 ${surfaceClass} ${leftBandColor}`}
+                                        className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border-2 border-violet-300/80 bg-white/85 p-4 text-left shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60 disabled:pointer-events-none disabled:opacity-50"
                                     >
                                         <div className="min-w-0 space-y-2">
                                             <span className={`flex items-start gap-2.5 text-sm font-bold ${textColor}`}>
@@ -177,7 +175,7 @@ const FlashcardSetup = ({
                                             <span className="block pl-[2.75rem] text-sm text-slate-600 dark:text-slate-400">{n} concepts</span>
                                         </div>
                                         <span
-                                            className={`shrink-0 rounded-xl border-2 bg-white/90 py-2.5 text-center text-sm font-semibold shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:bg-slate-900/75 dark:hover:bg-slate-800/90 ${borderColor} ${textColor}`}
+                                            className={`shrink-0 rounded-xl border-2 bg-white/90 py-2.5 text-center text-sm font-semibold shadow-sm transition-colors hover:bg-white dark:bg-slate-900/75 dark:hover:bg-slate-800/90 ${borderColor} ${textColor}`}
                                         >
                                             Start deck
                                         </span>
