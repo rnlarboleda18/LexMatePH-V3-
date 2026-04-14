@@ -34,3 +34,79 @@ export const subjectAnswerColors = {
 export const getSubjectAnswerColor = (subject) => {
     return subjectAnswerColors[subject] || "bg-gray-50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-800";
 };
+
+/** Map free-text / Primary: … subject strings to a bar subject key for theming. */
+export const normalizeSubjectForColor = (subject) => {
+    if (!subject) return "Political Law";
+    let s = subject.toString();
+    const primaryMatch = s.match(/Primary:\s*([^;]+)/i);
+    if (primaryMatch) s = primaryMatch[1];
+
+    if (s.includes("Political") || s.includes("Constitutional") || s.includes("Admin") || s.includes("Election") || s.includes("Public Corp")) return "Political Law";
+    if (s.includes("Labor")) return "Labor Law";
+    if (s.includes("Civil") || s.includes("Family") || s.includes("Property") || s.includes("Succession") || s.includes("Obligations")) return "Civil Law";
+    if (s.includes("Taxation") || s.includes("Tax")) return "Taxation Law";
+    if (s.includes("Commercial") || s.includes("Mercantile") || s.includes("Corporate") || s.includes("Insurance") || s.includes("Transportation")) return "Commercial Law";
+    if (s.includes("Criminal")) return "Criminal Law";
+    if (s.includes("Remedial") || s.includes("Procedure") || s.includes("Evidence")) return "Remedial Law";
+    if (s.includes("Ethics") || s.includes("Legal Ethics") || s.includes("Judicial")) return "Legal Ethics";
+
+    return "Political Law";
+};
+
+/** Gradient / stripe / icon classes for the Main Doctrine card in CaseDecisionModal (full Tailwind strings for purge). */
+export const subjectMainDoctrinePanelClasses = {
+    "Political Law": {
+        card: "from-purple-50/60 to-white/40 dark:from-purple-950/30 dark:to-slate-900/40",
+        stripe: "from-purple-400 to-violet-600 dark:from-purple-500 dark:to-violet-500",
+        title: "from-purple-600 to-violet-600 dark:from-purple-400 dark:to-violet-400",
+        icon: "text-purple-500 dark:text-purple-400",
+    },
+    "Labor Law": {
+        card: "from-yellow-50/60 to-white/40 dark:from-yellow-950/25 dark:to-slate-900/40",
+        stripe: "from-yellow-400 to-amber-600 dark:from-yellow-500 dark:to-amber-500",
+        title: "from-yellow-600 to-amber-600 dark:from-yellow-400 dark:to-amber-400",
+        icon: "text-yellow-500 dark:text-yellow-400",
+    },
+    "Civil Law": {
+        card: "from-blue-50/60 to-white/40 dark:from-slate-800/60 dark:to-slate-900/40",
+        stripe: "from-blue-400 to-indigo-600 dark:from-blue-500 dark:to-indigo-500",
+        title: "from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400",
+        icon: "text-blue-500 dark:text-blue-400",
+    },
+    "Taxation Law": {
+        card: "from-orange-50/60 to-white/40 dark:from-orange-950/25 dark:to-slate-900/40",
+        stripe: "from-orange-400 to-amber-600 dark:from-orange-500 dark:to-amber-500",
+        title: "from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400",
+        icon: "text-orange-500 dark:text-orange-400",
+    },
+    "Commercial Law": {
+        card: "from-cyan-50/60 to-white/40 dark:from-cyan-950/25 dark:to-slate-900/40",
+        stripe: "from-cyan-400 to-teal-600 dark:from-cyan-500 dark:to-teal-500",
+        title: "from-cyan-600 to-teal-600 dark:from-cyan-400 dark:to-teal-400",
+        icon: "text-cyan-500 dark:text-cyan-400",
+    },
+    "Criminal Law": {
+        card: "from-red-50/60 to-white/40 dark:from-red-950/25 dark:to-slate-900/40",
+        stripe: "from-red-400 to-rose-600 dark:from-red-500 dark:to-rose-500",
+        title: "from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400",
+        icon: "text-red-500 dark:text-red-400",
+    },
+    "Remedial Law": {
+        card: "from-pink-50/60 to-white/40 dark:from-pink-950/25 dark:to-slate-900/40",
+        stripe: "from-pink-400 to-fuchsia-600 dark:from-pink-500 dark:to-fuchsia-500",
+        title: "from-pink-600 to-fuchsia-600 dark:from-pink-400 dark:to-fuchsia-400",
+        icon: "text-pink-500 dark:text-pink-400",
+    },
+    "Legal Ethics": {
+        card: "from-green-50/60 to-white/40 dark:from-green-950/25 dark:to-slate-900/40",
+        stripe: "from-green-400 to-emerald-600 dark:from-green-500 dark:to-emerald-500",
+        title: "from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400",
+        icon: "text-green-500 dark:text-green-400",
+    },
+};
+
+export const getSubjectMainDoctrinePanelClasses = (subject) => {
+    const key = normalizeSubjectForColor(subject);
+    return subjectMainDoctrinePanelClasses[key] || subjectMainDoctrinePanelClasses["Political Law"];
+};
