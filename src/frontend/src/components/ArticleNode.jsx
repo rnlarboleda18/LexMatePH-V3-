@@ -321,7 +321,6 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         }
         contentToDisplay = repairRccListMidItemLineBreaks(contentToDisplay);
     }
-    const rccSectionLabel = 'Section';
     const rccSectionNumDisplay = isRcc
         ? rccSectionNumberDisplayWithPeriod(currentArtNum)
         : String(currentArtNum ?? '').trim();
