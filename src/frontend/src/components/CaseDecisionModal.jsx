@@ -274,7 +274,8 @@ const isMobileDigestPdfDisabled = () =>
     typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
-    const { requireAccess } = useSubscription();
+    const { requireAccess, canAccess, openUpgradeModal } = useSubscription();
+    const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
@@ -656,9 +657,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     <div className="flex min-w-0 items-start gap-1.5 px-1.5 pt-1.5 pb-1 sm:gap-2 sm:px-2 md:px-3">
                         <button
                             type="button"
-                            onClick={() => setShowPlaylistSelector(true)}
+                            onClick={() => {
+                                if (!canLexPlay) { openUpgradeModal('lexplay_case_digest'); return; }
+                                setShowPlaylistSelector(true);
+                            }}
                             className="touch-manipulation mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
-                            title="Add audio digest to LexPlay playlist"
+                            title={canLexPlay ? "Add audio digest to LexPlay playlist" : "Upgrade to add case digest audio to LexPlay"}
                             aria-label="Add to LexPlay playlist"
                         >
                             <Headphones className="h-3 w-3" strokeWidth={2} />

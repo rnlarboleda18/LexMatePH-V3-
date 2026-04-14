@@ -4,6 +4,7 @@ import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucid
 import { getSubjectColor } from '../utils/colors';
 import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
+import { useSubscription } from '../context/SubscriptionContext';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 
 const QuestionDetailModal = ({ 
@@ -31,6 +32,9 @@ const QuestionDetailModal = ({
         setIsDrawerOpen,
         fetchPlaylists 
     } = useLexPlay();
+
+    const { canAccess, openUpgradeModal } = useSubscription();
+    const canLexPlay = canAccess('lexplay_bar');
 
     const handleAddToPlaylist = useCallback(async (playlistId) => {
         try {
@@ -97,9 +101,12 @@ const QuestionDetailModal = ({
                     <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                         <button
                             type="button"
-                            onClick={() => setShowPlaylistSelector(true)}
+                            onClick={() => {
+                                if (!canLexPlay) { openUpgradeModal('lexplay_bar'); return; }
+                                setShowPlaylistSelector(true);
+                            }}
                             className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
-                            title="Add question audio to LexPlay playlist"
+                            title={canLexPlay ? "Add question audio to LexPlay playlist" : "Upgrade to add bar question audio to LexPlay"}
                             aria-label="Add to LexPlay playlist"
                         >
                             <Headphones className="h-3 w-3" strokeWidth={2} />
