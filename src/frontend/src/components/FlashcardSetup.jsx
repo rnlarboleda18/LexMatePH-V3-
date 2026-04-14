@@ -34,9 +34,15 @@ const FlashcardSetup = ({
     };
 
     const content = (
-            <div className={embedded ? "flex w-full flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/65 bg-white/50 p-0 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.2)] backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/45" : "lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/70 bg-white/55 shadow-[0_28px_70px_-24px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in zoom-in-95 duration-200 dark:border-purple-500/30 dark:bg-slate-900/50 glass"}>
+            <div
+                className={
+                    embedded
+                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-[1.75rem] border-2 border-violet-200/60 bg-gradient-to-br from-white/70 via-violet-50/35 to-purple-100/30 p-5 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-purple-500/30 dark:from-slate-900/70 dark:via-purple-950/25 dark:to-slate-900/60 sm:p-6'
+                        : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/70 bg-white/55 shadow-[0_28px_70px_-24px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in zoom-in-95 duration-200 dark:border-purple-500/30 dark:bg-slate-900/50 glass'
+                }
+            >
                 {(conceptsLoading || conceptsError || deckError) && (
-                    <div className="flex flex-col gap-2 border-b border-white/25 px-6 pb-3 pt-4 dark:border-white/10 sm:px-8">
+                    <div className="flex flex-col gap-2 border-b border-violet-200/30 px-1 pb-3 pt-0 dark:border-white/10 sm:px-0">
                         {conceptsLoading && (
                             <p className="text-sm text-gray-500 dark:text-gray-400">Loading SC concepts…</p>
                         )}
@@ -61,12 +67,12 @@ const FlashcardSetup = ({
                     </div>
                 )}
 
-                <div className={embedded ? "flex-1 space-y-6" : "flex-1 space-y-10 overflow-y-auto p-6 sm:p-8"}>
-                    <section>
-                        <h3 className="mb-3 text-base font-bold uppercase tracking-wider text-violet-800 dark:text-violet-300">
+                <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
+                    <section className="min-w-0 max-w-full">
+                        <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-violet-800 dark:text-violet-300">
                             Legal concepts (SC digests)
                         </h3>
-                        <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                        <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                             The default deck keeps concepts that align strongly with the Bar syllabus (Table of
                             Specifications topics). Peripheral items stay hidden.
                         </p>
@@ -115,23 +121,25 @@ const FlashcardSetup = ({
                                 No digest cards loaded yet. Deploy the latest API (it merges legal_concepts and digest flashcards), then Retry.
                             </p>
                         )}
-                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:items-stretch">
+                        <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:items-stretch">
                             <button
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex h-[15rem] w-full flex-col overflow-hidden rounded-xl border-2 border-l-[5px] border-violet-300/70 bg-gradient-to-br from-white/80 to-violet-50/50 p-3 shadow-[0_16px_40px_-20px_rgba(109,40,217,0.2)] transition-all hover:shadow-[0_20px_50px_-18px_rgba(109,40,217,0.28)] dark:border-purple-500/35 dark:from-slate-900/50 dark:to-purple-950/20 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/75 border-l-[6px] border-l-violet-500 bg-white/55 p-4 text-left shadow-md backdrop-blur-md transition-all hover:shadow-[0_20px_48px_-18px_rgba(109,40,217,0.28)] dark:border-purple-500/40 dark:border-l-purple-400 dark:bg-slate-900/45 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
-                                <span className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-700 dark:text-gray-200">
-                                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-white/90 text-gray-600 dark:border-gray-600 dark:bg-slate-800/80 dark:text-gray-300">
-                                        <AllSubjectsIcon className="h-5 w-5" strokeWidth={2} aria-hidden />
+                                <div className="min-w-0 space-y-2">
+                                    <span className="flex items-start gap-2.5 text-sm font-bold text-slate-800 dark:text-slate-100">
+                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-violet-200/80 bg-white/90 text-violet-700 shadow-sm dark:border-purple-500/30 dark:bg-slate-800/90 dark:text-violet-200">
+                                            <AllSubjectsIcon className="h-5 w-5" strokeWidth={2} aria-hidden />
+                                        </span>
+                                        <span className="min-w-0 pt-0.5 leading-snug">Random / All subjects</span>
                                     </span>
-                                    Random / All subjects
-                                </span>
-                                <span className="mb-3 flex-1 text-sm text-gray-600 dark:text-gray-300">
-                                    {countFor('all')} unique concepts
-                                </span>
-                                <span className="w-full rounded-lg border-2 border-violet-300/80 bg-white/90 py-2 text-center text-sm font-semibold text-violet-900 shadow-sm transition-colors hover:bg-white dark:border-purple-500/40 dark:bg-slate-900/70 dark:text-violet-100 dark:hover:bg-slate-800/90">
+                                    <span className="block pl-[2.75rem] text-sm text-slate-600 dark:text-slate-400">
+                                        {countFor('all')} unique concepts
+                                    </span>
+                                </div>
+                                <span className="shrink-0 rounded-xl border-2 border-violet-400/50 bg-gradient-to-r from-violet-600/90 to-purple-600/90 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition group-hover:from-violet-500 group-hover:to-purple-500 dark:border-purple-400/40">
                                     Start deck
                                 </span>
                             </button>
@@ -149,16 +157,20 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-l-[5px] p-3 shadow-md ring-1 ring-violet-200/40 transition-all hover:shadow-[0_18px_44px_-16px_rgba(109,40,217,0.22)] dark:ring-purple-500/15 ${surfaceClass} ${borderColor} disabled:pointer-events-none disabled:opacity-50`}
+                                        className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-l-[6px] p-4 text-left shadow-md backdrop-blur-md transition-all hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${surfaceClass} ${borderColor}`}
                                     >
-                                        <span className={`mb-2 flex items-center gap-2 text-sm font-bold ${textColor}`}>
-                                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/60 bg-white/80 dark:border-white/10 dark:bg-slate-900/50">
-                                                <SubjectIcon subject={subject} className="h-5 w-5" />
+                                        <div className="min-w-0 space-y-2">
+                                            <span className={`flex items-start gap-2.5 text-sm font-bold ${textColor}`}>
+                                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/70 bg-white/85 shadow-sm dark:border-white/10 dark:bg-slate-900/60">
+                                                    <SubjectIcon subject={subject} className="h-5 w-5" />
+                                                </span>
+                                                <span className="min-w-0 break-words pt-0.5 leading-snug">{subject}</span>
                                             </span>
-                                            <span className="min-w-0 leading-snug">{subject}</span>
-                                        </span>
-                                        <span className="mb-3 flex-1 text-sm text-gray-600 dark:text-gray-300">{n} concepts</span>
-                                        <span className={`w-full rounded-lg border-2 py-2 text-center text-sm font-semibold shadow-sm transition-colors bg-white/90 hover:bg-white dark:bg-slate-900/70 dark:hover:bg-slate-800/90 ${borderColor} ${textColor}`}>
+                                            <span className="block pl-[2.75rem] text-sm text-slate-600 dark:text-slate-400">{n} concepts</span>
+                                        </div>
+                                        <span
+                                            className={`shrink-0 rounded-xl border-2 bg-white/90 py-2.5 text-center text-sm font-semibold shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:bg-slate-900/75 dark:hover:bg-slate-800/90 ${borderColor} ${textColor}`}
+                                        >
                                             Start deck
                                         </span>
                                     </button>

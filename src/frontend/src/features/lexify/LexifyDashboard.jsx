@@ -19,7 +19,7 @@ function getFallbackLexifyExams() {
 }
 
 const LexifyDashboard = ({ onBeginExam, onClose }) => {
-    const [exams, setExams] = useState(getFallbackLexifyExams);
+    const [exams, setExams] = useState(() => getFallbackLexifyExams());
     const [rosterRefreshing, setRosterRefreshing] = useState(true);
     const [selectedExam, setSelectedExam] = useState(null);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
