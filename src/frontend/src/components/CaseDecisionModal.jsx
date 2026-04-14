@@ -281,6 +281,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
+    /** Deferred flag: true only after two rAF ticks so the spinner renders before heavy MD parse. */
+    const [fullTextReady, setFullTextReady] = useState(false);
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [showHtmlViewer, setShowHtmlViewer] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
@@ -428,7 +430,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
             return;
         }
-        setShowHtmlViewer(true);
+        // Defer mount so the overlay paint completes before the heavy ReactMarkdown render.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                setShowHtmlViewer(true);
+            });
+        });
     };
 
     const handleDownloadDigestPDF = async () => {
@@ -601,7 +608,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         : '';
 
     return createPortal(
-        <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={handleClose}>
+        <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={handleClose}>
             <div
                 className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
                 role="dialog"
@@ -609,9 +616,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 onClick={(e) => e.stopPropagation()}
             >
                 
-                {/* Ambient glow orbs inside the modal to drive the glass effect */}
-                <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
-                <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+                {/* Lightweight ambient orbs — kept small so modal opens without GPU stall */}
+                <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-blue-400/12 blur-2xl dark:bg-blue-500/10 z-0" aria-hidden />
+                <div className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-purple-400/12 blur-2xl dark:bg-purple-500/10 z-0" aria-hidden />
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
@@ -924,7 +931,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             )}
                         </>
                     ) : (
-                        // FULL TEXT VIEW
+                        // FULL TEXT VIEW — content deferred until fullTextReady to keep UI responsive
                         <div className="animate-in fade-in duration-300">
                             <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
                                 <h3 className="text-[16px] font-bold text-center text-gray-900 dark:text-white mb-2">
@@ -935,20 +942,19 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 </div>
                             </div>
 
-                            <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify">
-                                <CaseFullTextMarkdown
-                                    content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
-                                    onCaseClick={handleSmartCaseClick}
-                                />
-                            </div>
-
-                            {/* Also show separate opinions in full text mode if they are appended? 
-                                usually separate opinions are part of the full text if extracted correctly, 
-                                but sometimes they are separate fields. I'll include them at the bottom just in case context needs them.
-                                But typically full_text_md should have them or the user might expect them.
-                                For now, I'll essentially replicate the logic or just let Full Text be Full Text.
-                                Usually Full Text includes everything.
-                            */}
+                            {!fullTextReady ? (
+                                <div className="flex flex-col items-center gap-4 py-16 text-gray-500 dark:text-gray-400">
+                                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-purple-300 border-t-purple-600 dark:border-purple-700 dark:border-t-purple-300" />
+                                    <span className="text-sm">Loading full text…</span>
+                                </div>
+                            ) : (
+                                <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify">
+                                    <CaseFullTextMarkdown
+                                        content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
+                                        onCaseClick={handleSmartCaseClick}
+                                    />
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -969,7 +975,19 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     )}
                     <button
                         type="button"
-                        onClick={() => setViewMode(viewMode === 'digest' ? 'full' : 'digest')}
+                        onClick={() => {
+                            if (viewMode === 'digest') {
+                                setViewMode('full');
+                                setFullTextReady(false);
+                                // Two rAF ticks: first lets the spinner paint, second starts MD parse
+                                requestAnimationFrame(() =>
+                                    requestAnimationFrame(() => setFullTextReady(true))
+                                );
+                            } else {
+                                setViewMode('digest');
+                                setFullTextReady(false);
+                            }
+                        }}
                         className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/50 bg-white/40 text-gray-700 transition-all hover:bg-white/70 active:scale-95 dark:border-white/15 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
                         title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
                         aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}

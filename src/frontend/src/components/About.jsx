@@ -137,9 +137,9 @@ const About = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="space-y-6 lg:col-span-7">
-              <section className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+          <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="flex min-h-0 flex-col lg:col-span-7 lg:h-full">
+              <section className="glass relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
                 <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
                 <h2 className="relative text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
                   What you are using
@@ -169,6 +169,7 @@ const About = () => {
                     </span>
                   </li>
                 </ul>
+                <div className="min-h-3 flex-1" aria-hidden />
                 <div className="relative mt-6 rounded-2xl border border-amber-200/40 bg-amber-50/50 p-4 text-xs leading-relaxed text-amber-950/90 backdrop-blur-sm dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
                   <strong className="font-bold">Disclaimer:</strong> Content is for education and research, not legal
                   advice. Verify critical points with primary sources, current jurisprudence, and applicable statutes.
@@ -177,8 +178,8 @@ const About = () => {
               </section>
             </div>
 
-            <aside className="lg:col-span-5">
-              <section className="glass relative h-full overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+            <aside className="flex min-h-0 flex-col lg:col-span-5 lg:h-full">
+              <section className="glass relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
                 <div className="pointer-events-none absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-violet-500/15 blur-2xl" />
                 <div className="relative mb-5 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30">
@@ -195,7 +196,7 @@ const About = () => {
                   Built for the Philippine bar: a high-fidelity pipeline so digests stay grounded in the text you
                   would cite in practice.
                 </p>
-                <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="relative grid flex-1 grid-cols-1 content-start gap-3 sm:grid-cols-2">
                   {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
                     <div
                       key={title}

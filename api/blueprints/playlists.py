@@ -20,21 +20,39 @@ def get_playlists(req: func.HttpRequest) -> func.HttpResponse:
         cur = conn.cursor()
         cur.execute("SELECT id, name, created_at FROM playlists WHERE user_id = %s ORDER BY created_at DESC", (user_id,))
         rows = cur.fetchall()
-        playlists = [{"id": str(r[0]), "name": r[1], "created_at": r[2].isoformat()} for r in rows]
-        
-        # Fetch item counts
+        playlists = []
+        for r in rows:
+            created = r[2]
+            playlists.append(
+                {
+                    "id": str(r[0]),
+                    "name": r[1],
+                    "created_at": created.isoformat() if created is not None else None,
+                }
+            )
+
+        # Fetch item counts (avoid ARRAY/ANY quirks across psycopg2 builds)
         if playlists:
             playlist_ids = [p["id"] for p in playlists]
-            cur.execute("SELECT playlist_id, count(*) FROM playlist_items WHERE playlist_id::text = ANY(%s) GROUP BY playlist_id", (playlist_ids,))
-            counts = dict((str(r[0]), r[1]) for r in cur.fetchall())
+            placeholders = ",".join(["%s"] * len(playlist_ids))
+            cur.execute(
+                f"SELECT playlist_id, count(*) FROM playlist_items WHERE playlist_id IN ({placeholders}) GROUP BY playlist_id",
+                tuple(playlist_ids),
+            )
+            counts = {str(r[0]): r[1] for r in cur.fetchall()}
             for p in playlists:
                 p["item_count"] = counts.get(p["id"], 0)
-                        
+
         return func.HttpResponse(json.dumps(playlists), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error fetching playlists: {traceback.format_exc()}")
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
+        if cur:
+            try:
+                cur.close()
+            except Exception:
+                pass
         if conn:
             try:
                 conn.rollback()

@@ -7,10 +7,27 @@ schema_changes = """
 -- First try to create the tables if they don't exist at all
 CREATE TABLE IF NOT EXISTS playlists (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
     name TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
+
+-- Legacy installs: playlists.user_id was UUID; Clerk `sub` is a string (e.g. user_2abc…).
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'playlists'
+          AND column_name = 'user_id'
+          AND udt_name = 'uuid'
+    ) THEN
+        ALTER TABLE playlists ALTER COLUMN user_id TYPE VARCHAR(255) USING user_id::text;
+    END IF;
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'playlists.user_id UUID→VARCHAR migration skipped: %', SQLERRM;
+END $$;
 
 CREATE TABLE IF NOT EXISTS playlist_items (
     id SERIAL PRIMARY KEY,

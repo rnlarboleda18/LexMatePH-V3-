@@ -1315,7 +1315,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                                 ? 'Playlists could not be loaded (server rejected the session). Try refreshing the page.'
                                                 : playlistFetchError === 'network'
                                                   ? 'Could not reach the server to load playlists. Check your connection.'
-                                                  : 'Playlists could not be loaded.'}
+                                                  : playlistFetchError?.startsWith('http_5')
+                                                    ? 'Playlists could not be loaded (server error). Try again; if it keeps failing, check the browser console—your database may need the playlist migration for Clerk user IDs.'
+                                                    : 'Playlists could not be loaded.'}
                                         </p>
                                     )}
                                 </>

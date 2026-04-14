@@ -503,6 +503,11 @@ export const LexPlayProvider = ({ children }) => {
                 detail = await res.text();
             }
             console.warn('[LexPlay] GET /api/playlists failed', res.status, detail);
+            if (res.status >= 500) {
+                console.warn(
+                    '[LexPlay] Server error loading playlists. Common fix: run `python tools/migrate_playlists.py` from the api/ folder so playlists.user_id is VARCHAR for Clerk IDs.'
+                );
+            }
             setSavedPlaylists([]);
             setPlaylistFetchError(res.status === 401 ? 'unauthorized' : `http_${res.status}`);
         } catch (e) {

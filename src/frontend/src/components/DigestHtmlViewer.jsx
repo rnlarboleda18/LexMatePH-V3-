@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Download, X, FileText } from 'lucide-react';
 import { formatDate } from '../utils/dateUtils';
 import { toTitleCase } from '../utils/textUtils';
@@ -6,6 +6,15 @@ import { toTitleCase } from '../utils/textUtils';
 import ReactMarkdown from 'react-markdown';
 
 const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
+    // Defer the heavy ReactMarkdown render so the overlay paints first (prevents main-thread freeze on open).
+    const [contentReady, setContentReady] = useState(false);
+    useEffect(() => {
+        const id = requestAnimationFrame(() =>
+            requestAnimationFrame(() => setContentReady(true))
+        );
+        return () => cancelAnimationFrame(id);
+    }, []);
+
     if (!decision) return null;
 
     // Helper to ensure markdown bold patterns get properly spaced into paragraphs
@@ -71,32 +80,39 @@ const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
 
             {/* SCROLLABLE A4 CANVAS CONTAINER */}
             <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-gray-200 dark:bg-slate-900/80 custom-scrollbar">
-                {/* A4 PAPER SIMULATION */}
-                <div className="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto shadow-2xl p-[20mm] font-sans text-black box-border relative h-max">
-                    
-                    {/* Header: Centered */}
-                    <div className="text-center mb-8 border-b-2 border-black pb-4">
-                        <h1 className="text-[22px] font-bold mb-2">Supreme Court Decision Digest</h1>
+                {!contentReady ? (
+                    <div className="flex flex-col items-center gap-4 py-24 text-gray-500 dark:text-gray-400">
+                        <div className="h-8 w-8 animate-spin rounded-full border-4 border-purple-300 border-t-purple-600 dark:border-purple-700 dark:border-t-purple-300" />
+                        <span className="text-sm">Preparing digest…</span>
+                    </div>
+                ) : (
+                    /* A4 PAPER SIMULATION */
+                    <div className="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto shadow-2xl p-[20mm] font-sans text-black box-border relative h-max">
                         
-                        <h2 className="text-[18px] font-bold leading-snug mx-auto max-w-[90%] mb-2">
-                            {toTitleCase(decision.short_title || decision.title || '')}
-                        </h2>
-                        
-                        <div className="text-[14px]">
-                            G.R. No. {decision.case_number || decision.gr_number} | {formatDate(decision.date_str || decision.date)}
+                        {/* Header: Centered */}
+                        <div className="text-center mb-8 border-b-2 border-black pb-4">
+                            <h1 className="text-[22px] font-bold mb-2">Supreme Court Decision Digest</h1>
+                            
+                            <h2 className="text-[18px] font-bold leading-snug mx-auto max-w-[90%] mb-2">
+                                {toTitleCase(decision.short_title || decision.title || '')}
+                            </h2>
+                            
+                            <div className="text-[14px]">
+                                G.R. No. {decision.case_number || decision.gr_number} | {formatDate(decision.date_str || decision.date)}
+                            </div>
                         </div>
-                    </div>
 
-                    {/* Content Sections */}
-                    <div className="w-full">
-                        <Section title="MAIN DOCTRINE" content={decision.main_doctrine} isItalic={true} />
-                        <Section title="FACTS" content={decision.digest_facts} />
-                        <Section title="ISSUE(S)" content={decision.digest_issues} />
-                        <Section title="RULING" content={decision.digest_ruling} />
-                        <Section title="RATIO DECIDENDI" content={decision.digest_ratio} />
+                        {/* Content Sections */}
+                        <div className="w-full">
+                            <Section title="MAIN DOCTRINE" content={decision.main_doctrine} isItalic={true} />
+                            <Section title="FACTS" content={decision.digest_facts} />
+                            <Section title="ISSUE(S)" content={decision.digest_issues} />
+                            <Section title="RULING" content={decision.digest_ruling} />
+                            <Section title="RATIO DECIDENDI" content={decision.digest_ratio} />
+                        </div>
+                        
                     </div>
-                    
-                </div>
+                )}
             </div>
         </div>
     );

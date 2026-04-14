@@ -36,7 +36,7 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `ingest_questions.py` | Ingest bar exam questions into DB |
 | `ingest_roc.py` / `ingest_roc_cloud.py` / `ingest_roc_combined.py` | Ingest Rules of Court data |
 | `clerk_migration.py` | Migrate legacy users to Clerk-linked rows |
-| `migrate_playlists.py` | Playlist schema migration |
+| `migrate_playlists.py` | Playlist schema migration (ensures `playlists.user_id` is `VARCHAR` for Clerk `sub`, not UUID) |
 | `create_roc_table.py` | Create RoC table structure |
 | `rename_cloud_columns.py` | Column rename migration |
 

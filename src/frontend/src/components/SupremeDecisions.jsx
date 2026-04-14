@@ -586,22 +586,32 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     // Global pre-fetch cache to make modals "instant" (Disable Lazy Load)
     const [prefetchCache, setPrefetchCache] = useState({});
 
+    // Tracks how many prefetch fetches are in-flight; cap at 3 to avoid flooding setState.
+    const prefetchInflightRef = useRef(0);
+
     const prefetchDetails = async (id) => {
-        if (!id || prefetchCache[id]) return;
+        if (!id || prefetchCache[id] || prefetchInflightRef.current >= 3) return;
+        prefetchInflightRef.current += 1;
         try {
             // Check IndexedDB first — no network if already cached from a prior session
             const idbHit = await lexCache.get('cases', id);
             if (idbHit && idbHit.digest_facts) {
-                setPrefetchCache(prev => ({ ...prev, [id]: idbHit }));
+                // Strip huge fields from component state; full data lives in IndexedDB
+                const { full_text_md: _ft, full_text_html: _fh, ...light } = idbHit;
+                setPrefetchCache(prev => ({ ...prev, [id]: light }));
                 return;
             }
             const res = await fetch(apiUrl(`/api/sc_decisions/${id}`));
             const data = await res.json();
-            setPrefetchCache(prev => ({ ...prev, [id]: data }));
-            // Persist to IndexedDB so future sessions (and page reloads) are instant
+            // Persist the FULL object to IndexedDB so modal opens get full_text_md instantly.
             lexCache.set('cases', id, data).catch(() => {});
+            // Only store lightweight fields in component state to keep state small.
+            const { full_text_md: _ft, full_text_html: _fh, ...light } = data;
+            setPrefetchCache(prev => ({ ...prev, [id]: light }));
         } catch (err) {
             console.error("Prefetch failed", err);
+        } finally {
+            prefetchInflightRef.current -= 1;
         }
     };
 
@@ -797,16 +807,17 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     const handleCaseClick = async (decision) => {
-        // Layer 1: in-memory prefetch cache (same session, fastest)
+        // Layer 1: in-memory prefetch cache (same session, fastest) — only if it has full detail
         let fullData = prefetchCache[decision.id];
+        const cacheHasFull = fullData && fullData.digest_facts && fullData.full_text_md !== undefined;
 
-        if (!fullData || !fullData.digest_facts) {
+        if (!cacheHasFull) {
             // Layer 2: IndexedDB (persists across page reloads — no network needed)
+            // The prefetch stores full data here even when it strips it from component state.
             try {
                 const idbHit = await lexCache.get('cases', decision.id);
                 if (idbHit && idbHit.digest_facts) {
                     fullData = idbHit;
-                    setPrefetchCache(prev => ({ ...prev, [decision.id]: idbHit }));
                 }
             } catch (_) {}
         }
@@ -820,9 +831,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 if (!res.ok || fullData?.error) {
                     console.error('Case detail error:', fullData?.error || res.status);
                 }
-                // Populate both caches for next time
-                setPrefetchCache(prev => ({ ...prev, [decision.id]: fullData }));
+                // Persist full data to IndexedDB; keep component state lightweight
                 lexCache.set('cases', decision.id, fullData).catch(() => {});
+                const { full_text_md: _ft, full_text_html: _fh, ...light } = fullData;
+                setPrefetchCache(prev => ({ ...prev, [decision.id]: light }));
             } catch (err) {
                 console.error("Manual fetch failed", err);
             } finally {
@@ -1273,7 +1285,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className={`group min-w-0 glass overflow-hidden rounded-lg border-2 border-violet-200/70 bg-white/65 shadow-sm transition-shadow hover:shadow-[0_16px_40px_-14px_rgba(109,40,217,0.2)] dark:border-purple-500/20 dark:bg-slate-800/45 border-l-4 border-l-current ${subjectAccentText}`}
+                                className="group min-w-0 overflow-hidden rounded-lg border-2 border-violet-300/80 bg-white/85 shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60"
                             >
                                 <div
                                     role="button"

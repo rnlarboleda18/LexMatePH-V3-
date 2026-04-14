@@ -73,8 +73,15 @@ const FlashcardSetup = ({
                             Legal concepts (SC digests)
                         </h3>
                         <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                            The default deck keeps concepts that align strongly with the Bar syllabus (Table of
-                            Specifications topics). Peripheral items stay hidden.
+                            <span className="font-medium text-slate-700 dark:text-slate-300">Legal concepts</span> are
+                            short, exam-style distillations of doctrines and holdings drawn from Supreme Court digest
+                            summaries in the app. They are tagged to the Philippine Bar’s{' '}
+                            <span className="font-medium text-slate-700 dark:text-slate-300">
+                                Table of Specifications
+                            </span>{' '}
+                            so you drill what the syllabus actually weights—useful for quick recall and issue-spotting
+                            under time pressure. The default deck favors strong syllabus matches; clearly peripheral
+                            items stay out unless you widen the deck with the options below.
                         </p>
                         {typeof onBar2026OnlyChange === 'function' && (
                             <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-violet-200/70 bg-white/45 px-3 py-2.5 dark:border-purple-500/20 dark:bg-slate-900/35">
