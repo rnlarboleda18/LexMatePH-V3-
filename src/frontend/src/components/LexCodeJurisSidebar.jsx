@@ -139,7 +139,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     return (
                         <div
                             key={group.caseId}
-                            className="glass bg-white/60 dark:bg-slate-800/40 rounded-lg border-2 border-slate-300/75 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow group overflow-hidden"
+                            className="bg-white/90 dark:bg-slate-800/70 rounded-lg border-2 border-slate-300/75 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow group overflow-hidden"
                         >
                             {/* Card Header: Case Info (Clickable for whole Digest) */}
                             <div

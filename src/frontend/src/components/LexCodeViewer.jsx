@@ -914,7 +914,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
                                 <div
                                     key={idx}
-                                    className="group relative overflow-hidden rounded-xl border border-white/40 bg-white/60 p-5 shadow-sm dark:border-white/5 dark:bg-slate-800/40 glass"
+                                    className="group relative overflow-hidden rounded-xl border border-white/40 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-slate-800/70"
                                 >
                                     <div className="absolute left-0 top-0 h-full w-1 bg-rose-500/80" />
                                     <div className="mb-2 flex items-start justify-between pl-2">
