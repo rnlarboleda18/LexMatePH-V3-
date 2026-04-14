@@ -54,13 +54,15 @@ describe('normalizeFullTextMarkdownForGfm', () => {
 
 describe('repairFullTextMojibake', () => {
     it('repairs UTF-8 punctuation mis-decoded as Windows-1252 (â€… triplets)', () => {
-        const dec = new TextDecoder('windows-1252');
-        const emMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x94]));
-        const enMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x93]));
-        const apMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x99]));
-        expect(repairFullTextMojibake(`thusly${emMoj}end`)).toBe('thusly\u2014end');
-        expect(repairFullTextMojibake(`range${enMoj}here`)).toBe('range\u2013here');
-        expect(repairFullTextMojibake(`don${apMoj}t`)).toBe('don\u2019t');
+        // Hardcode the exact Unicode sequences produced by cp1252 decoding of UTF-8 bytes —
+        // avoids relying on TextDecoder('windows-1252') ICU availability in CI.
+        // Byte E2 80 94 → â (U+00E2) + € (U+20AC) + " (U+201D) in cp1252
+        expect(repairFullTextMojibake('thusly\u00e2\u20ac\u201dend')).toBe('thusly\u2014end');
+        // Byte E2 80 93 → â (U+00E2) + € (U+20AC) + " (U+201C) in cp1252
+        expect(repairFullTextMojibake('range\u00e2\u20ac\u201chere')).toBe('range\u2013here');
+        // Byte E2 80 99 → â (U+00E2) + € (U+20AC) + ™ (U+2122) in cp1252
+        expect(repairFullTextMojibake('don\u00e2\u20ac\u2122t')).toBe('don\u2019t');
+        // em-dash when third byte arrives as ASCII "
         expect(repairFullTextMojibake('thusly\u00e2\u20ac"end')).toBe('thusly\u2014end');
     });
 
