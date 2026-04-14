@@ -176,13 +176,30 @@ export function stripLegacyCodexArticleRunIn(contentMd, articleNum) {
  * Shapes include `_Title. -_`, `_Title._ -`, `_Title —_`, `_Title._ —` (and *…* variants).
  * E-library / RA 11232 also uses a leading word outside emphasis, e.g.
  * `Form _of Articles of Incorporation._ - Unless otherwise…` (Section/Article 14 under Title II).
- * Pull the title for inline display with "Article N." and drop the dash before the body.
+ * Pull the title for inline display with "Section N" chrome and drop the dash before the body.
  */
+/** Numeric part when `article_num` is stored as "Section 32" (API / markdown). */
+export function rccSectionNumberFromArticleNum(articleNum) {
+    const s = String(articleNum ?? '').trim();
+    const m = s.match(/^section\s+(.+)$/i);
+    const token = (m ? m[1] : s).trim();
+    return token.replace(/\.$/, '').trim();
+}
+
+/** Same token as DB chrome, with trailing period (e.g. `32.`). Not used for preliminary rows. */
+export function rccSectionNumberDisplayWithPeriod(articleNum) {
+    const n = rccSectionNumberFromArticleNum(articleNum);
+    return n ? `${n}.` : '';
+}
+
 export function extractRccLeadingShortTitle(md) {
     if (md == null || md === '') return { lead: null, body: md };
     const full = String(md).replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-    const s = full.trimStart();
+    let s = full.trimStart();
     const prefixLen = full.length - s.length;
+    // Drop duplicate "### Section N" line (do not add removed chars to prefixLen — that would put
+    // the heading back into `body` when rebuilding with full.slice(0, prefixLen) + s.slice(…)).
+    s = s.replace(/^#{1,6}\s*section\s+[^\n]+\n+/i, '').replace(/^\n+/, '');
 
     const normalizeLead = (inner) =>
         inner
@@ -219,6 +236,18 @@ export function extractRccLeadingShortTitle(md) {
     for (const re of und) {
         const m = s.match(re);
         if (m) return finish(m, (x) => x[1]);
+    }
+    // Bold then dash — before single-* patterns so `**Title.** -` is not parsed as `*Title*`.
+    const boldDash = s.match(/^\*\*([^*]+)\*\*\s*[-–—]\s+/);
+    if (boldDash) return finish(boldDash, (x) => x[1]);
+    // Plain sentence + dash or em dash (RCC Section 32 style: "Contracts…. — Except…")
+    const plainDotDash = s.match(/^([A-Za-z0-9][^.]{0,220}\.)\s*-\s+/);
+    if (plainDotDash && plainDotDash[1].trim().length >= 3) {
+        return finish(plainDotDash, (x) => x[1].trim());
+    }
+    const plainDotEm = s.match(/^([A-Za-z0-9][^.]{0,220}\.)\s*[–—]\s+/);
+    if (plainDotEm && plainDotEm[1].trim().length >= 3) {
+        return finish(plainDotEm, (x) => x[1].trim());
     }
     const star = [/^\*(.+?)\s*—\s*\*\s+/u, /^\*(.+?)\*\s*[–—]\s+/u, /^\*(.+?)\s*-\s*\*\s+/, /^\*(.+?)\*\s*-\s+/];
     for (const re of star) {

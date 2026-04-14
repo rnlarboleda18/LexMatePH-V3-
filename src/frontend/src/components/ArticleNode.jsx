@@ -10,9 +10,21 @@ import {
     fixStrayQuotationArtifacts,
     repairRccBrokenIncorporatorPipeHeaders,
     repairRccListMidItemLineBreaks,
+    rccSectionNumberFromArticleNum,
+    rccSectionNumberDisplayWithPeriod,
     shieldGfmTables,
 } from '../utils/codalMarkdown';
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
+
+/** RCC chrome: remove trailing dash glue (E-Library “Title. -” before body). */
+function cleanRccSectionHeaderFragment(s) {
+    if (s == null || s === '') return '';
+    return String(s)
+        .replace(/\u00a0/g, ' ')
+        .replace(/\.\s*[-–—]\s*$/u, '.')
+        .replace(/\s*[-–—]\s*$/u, '')
+        .trim();
+}
 
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
     if (!article) return null;
@@ -29,7 +41,12 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                   (article.amendments && article.amendments !== '[]') ||
                   (article.amendment_links && article.amendment_links.length > 0));
 
-    const skipKeywords = ['roc', 'const', 'rcc'].includes(docCode) ? ['SECTION', 'RULE'] : [];
+    const skipKeywords =
+        docCode === 'rcc'
+            ? ['SECTION', 'TITLE', 'CHAPTER']
+            : ['roc', 'const'].includes(docCode)
+              ? ['SECTION', 'RULE']
+              : [];
 
     const handleAddToPlaylist = (e) => {
         e.stopPropagation();
@@ -38,13 +55,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         const provLabel = docCode === 'rcc' ? 'Section' : 'Article';
         let displayTitle = /^(article|preamble|section|rule)/i.test(numStr)
             ? toTitleCase(numStr, skipKeywords)
-            : `${provLabel} ${numStr}`;
-            
+            : docCode === 'rcc'
+              ? `Section ${rccSectionNumberDisplayWithPeriod(numStr)}`
+              : `${provLabel} ${numStr}`;
         if (numStr === '0') displayTitle = docCode === 'rcc' ? 'Preliminary Section' : 'Preliminary Article';
 
         const codexNames = {
             'rpc': 'Revised Penal Code',
             'civ': 'Civil Code of the Philippines',
+            'rcc': 'Revised Corporation Code',
             'fc': 'Family Code',
             'roc': 'Rules of Court',
             'const': 'The 1987 Philippine Constitution',
@@ -302,6 +321,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         }
         contentToDisplay = repairRccListMidItemLineBreaks(contentToDisplay);
     }
+    const rccSectionLabel = 'Section';
+    const rccSectionNumDisplay = isRcc
+        ? rccSectionNumberDisplayWithPeriod(currentArtNum)
+        : String(currentArtNum ?? '').trim();
 
     // Unify Legacy Civil Code/Statutes (stored in separate relational db and served as amendment_links)
     // into the same structure used by the modern Const/RPC embedded JSON payload.
@@ -395,14 +418,17 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                 <h3
                                     className={
                                         rccInlineLeadTitle
-                                            ? `flex flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'w-full justify-center text-center' : 'text-left'}`
-                                            : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
+                                            ? `flex min-w-0 flex-1 flex-row flex-nowrap items-baseline gap-x-1.5 overflow-x-auto text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                            : isRcc && article_title
+                                              ? `flex min-w-0 flex-1 flex-row flex-nowrap items-baseline gap-x-1.5 overflow-x-auto text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                              : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
                                     }
                                 >
                                     {/* Smart prefix: RCC uses "Section"; omit if article_num already includes a structural label */}
                                     {(!article_num || String(article_num).includes('Header') || String(article_num).includes('Subheader')) ? null :
                                         (codeId === 'const' || (article.code_id && article.code_id.toLowerCase() === 'const')) ? null :
-                                        /^(article|preamble|section|rule)/i.test(String(article_num))
+                                        /^(article|preamble|section|rule)/i.test(String(article_num)) &&
+                                        !(isRcc && /^section\s+/i.test(String(article_num)))
                                             ? (() => {
                                                 let displayNum = String(article_num);
                                                 if (codeId === 'roc' || (article.code_id && article.code_id.toLowerCase() === 'roc')) {
@@ -417,18 +443,52 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                             })()
                                             : (() => {
                                                 if (rccInlineLeadTitle) {
+                                                    const lead = cleanRccSectionHeaderFragment(rccInlineLeadTitle);
+                                                    const label = `${rccSectionLabel}\u00a0${rccSectionNumDisplay}`;
                                                     return (
                                                         <>
-                                                            <span className="font-bold">
-                                                                {isRcc ? rccSectionLabel : 'Article'} {article_num}.
-                                                            </span>
-                                                            <span className="font-bold text-gray-900 dark:text-gray-100">
-                                                                {rccInlineLeadTitle}
+                                                            <span className="shrink-0 whitespace-nowrap font-bold">{label}</span>
+                                                            <span className="min-w-0 flex-1 font-bold leading-snug">
+                                                                {toTitleCase(lead, skipKeywords)}
                                                             </span>
                                                         </>
                                                     );
                                                 }
-                                                const prefix = `${isRcc ? rccSectionLabel : 'Article'} ${article_num}`;
+                                                if (isRcc) {
+                                                    const prefix = `Section ${rccSectionNumberFromArticleNum(currentArtNum)}`;
+                                                    const prefixDotted = `${prefix}.`;
+                                                    const titUp = String(article_title || '').trim().toUpperCase();
+                                                    if (
+                                                        article_title &&
+                                                        (titUp.startsWith(prefixDotted.toUpperCase()) ||
+                                                            titUp.startsWith(`${prefix.toUpperCase()} `) ||
+                                                            titUp.startsWith(`${prefix.toUpperCase()}.`))
+                                                    ) {
+                                                        return toTitleCase(
+                                                            cleanRccSectionHeaderFragment(article_title),
+                                                            skipKeywords,
+                                                        );
+                                                    }
+                                                    const tail = cleanRccSectionHeaderFragment(article_title || '');
+                                                    if (tail) {
+                                                        return (
+                                                            <>
+                                                                <span className="shrink-0 whitespace-nowrap font-bold">
+                                                                    {`${rccSectionLabel}\u00a0${rccSectionNumDisplay}`}
+                                                                </span>
+                                                                <span className="min-w-0 flex-1 font-bold leading-snug">
+                                                                    {toTitleCase(tail, skipKeywords)}
+                                                                </span>
+                                                            </>
+                                                        );
+                                                    }
+                                                    return (
+                                                        <span className="font-bold">
+                                                            {`${rccSectionLabel}\u00a0${rccSectionNumDisplay}`}
+                                                        </span>
+                                                    );
+                                                }
+                                                const prefix = `Article ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
                                                     return toTitleCase(article_title, skipKeywords);
                                                 }

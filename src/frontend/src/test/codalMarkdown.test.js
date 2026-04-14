@@ -4,6 +4,8 @@ import {
     extractRccLeadingShortTitle,
     repairRccBrokenIncorporatorPipeHeaders,
     repairRccListMidItemLineBreaks,
+    rccSectionNumberFromArticleNum,
+    rccSectionNumberDisplayWithPeriod,
     shieldGfmTables,
     stripLegacyCodexArticleRunIn,
 } from '../utils/codalMarkdown';
@@ -108,6 +110,57 @@ describe('extractRccLeadingShortTitle', () => {
         const { lead, body } = extractRccLeadingShortTitle(raw);
         expect(lead).toBe('Form of Articles of Incorporation.');
         expect(body).toBe('Unless otherwise prescribed by special law, the articles of incorporation');
+    });
+
+    it('parses **Title.** - body (bold short title, no inner emphasis)', () => {
+        const raw =
+            '**Title of the Code.** - This Code shall be known as the "Revised Corporation Code of the Philippines".';
+        const { lead, body } = extractRccLeadingShortTitle(raw);
+        expect(lead).toBe('Title of the Code.');
+        expect(body).toBe('This Code shall be known as the "Revised Corporation Code of the Philippines".');
+    });
+
+    it('parses plain "Sentence. -" before body (Section 1 E-Library style)', () => {
+        const raw = 'Title of the Code. - This Code shall be known as the "RCC".';
+        const { lead, body } = extractRccLeadingShortTitle(raw);
+        expect(lead).toBe('Title of the Code.');
+        expect(body).toBe('This Code shall be known as the "RCC".');
+    });
+
+    it('parses plain "Sentence. —" em dash before body (Section 32 style)', () => {
+        const raw =
+            'Contracts Between Corporations with Interlocking Directors. — Except in cases of fraud';
+        const { lead, body } = extractRccLeadingShortTitle(raw);
+        expect(lead).toBe('Contracts Between Corporations with Interlocking Directors.');
+        expect(body).toBe('Except in cases of fraud');
+    });
+
+    it('strips leading ### Section N before extracting lead', () => {
+        const raw =
+            '### Section 32\n\nContracts Between Corporations with Interlocking Directors. — Except in cases';
+        const { lead, body } = extractRccLeadingShortTitle(raw);
+        expect(lead).toBe('Contracts Between Corporations with Interlocking Directors.');
+        expect(body).not.toMatch(/###\s*Section/i);
+        expect(body).toContain('Except in cases');
+    });
+});
+
+describe('rccSectionNumberFromArticleNum', () => {
+    it('returns digits when article_num is Section N', () => {
+        expect(rccSectionNumberFromArticleNum('Section 32')).toBe('32');
+    });
+    it('returns raw when numeric only', () => {
+        expect(rccSectionNumberFromArticleNum('32')).toBe('32');
+    });
+    it('strips a trailing period from the token', () => {
+        expect(rccSectionNumberFromArticleNum('Section 32.')).toBe('32');
+        expect(rccSectionNumberFromArticleNum('32.')).toBe('32');
+    });
+});
+
+describe('rccSectionNumberDisplayWithPeriod', () => {
+    it('returns number plus period', () => {
+        expect(rccSectionNumberDisplayWithPeriod('Section 32')).toBe('32.');
     });
 });
 

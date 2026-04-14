@@ -120,6 +120,9 @@ def tts_flatten_codal_body(content: str) -> str:
     # and prevent the tail stripper from recognising patterns like (1395) or (3a, Act No. 2710).
     clean = strip_codal_citation_tail(clean)
 
+    # "one (1)", "two (2)" — spell-out + parenthetical duplicate; reading both sounds like "one one".
+    clean = _collapse_redundant_word_digit_parentheticals(clean)
+
     # Convert inline parenthetical numbers like (1), (2), (3) → "1,", "2,", "3," for TTS.
     # strip_codal_citation_tail already removed trailing source citations before this point,
     # so remaining (N) patterns are list-item numbers or inline references — both read better as "N,".
@@ -139,6 +142,115 @@ def tts_flatten_codal_body(content: str) -> str:
     clean = re.sub(r"(?<=[.,]) (\d{1,2})\. (?=[A-Za-z])", r" \1, ", clean)
 
     return clean
+
+
+_SPELL_WORD_TO_INT = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "thirteen": 13,
+    "fourteen": 14,
+    "fifteen": 15,
+    "sixteen": 16,
+    "seventeen": 17,
+    "eighteen": 18,
+    "nineteen": 19,
+    "twenty": 20,
+}
+
+
+def _collapse_redundant_word_digit_parentheticals(text: str) -> str:
+    """Remove `(N)` when it only repeats a preceding spelled-out number (LexPlay TTS)."""
+
+    def repl(m):
+        w = m.group(1).lower()
+        try:
+            n = int(m.group(2))
+        except ValueError:
+            return m.group(0)
+        if _SPELL_WORD_TO_INT.get(w) == n:
+            return w
+        return m.group(0)
+
+    return re.sub(
+        r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|"
+        r"sixteen|seventeen|eighteen|nineteen|twenty)\s*\(\s*(\d+)\s*\)",
+        repl,
+        text,
+        flags=re.IGNORECASE,
+    )
+
+
+def rcc_section_number_from_article_num(article_num: Optional[str]) -> str:
+    """
+    Numeric / roman token after the word Section in article_num (matches frontend
+    ``rccSectionNumberFromArticleNum``). Strips a trailing period from the token only.
+    """
+    s = (article_num or "").strip()
+    if not s:
+        return ""
+    m = re.match(r"^section\s+(.+)$", s, re.IGNORECASE)
+    token = (m.group(1) if m else s).strip()
+    return token.rstrip(".").strip()
+
+
+def fix_rcc_structural_heading_glue(text: Optional[str]) -> str:
+    """
+    RCC (RA 11232): E-Library / ingest sometimes drops spaces between words in title labels,
+    e.g. 'PROVISIONSDEFINITIONS' or 'General Provisionsdefinitions and Classifications'.
+    """
+    if not text or not isinstance(text, str):
+        return text or ""
+    t = text
+    t = re.sub(r"\bPROVISIONSDEFINITIONS\b", "PROVISIONS DEFINITIONS", t)
+    t = re.sub(r"(?i)Provisionsdefinitions", "Provisions and Definitions", t)
+    t = re.sub(r"(?i)Definitionsand\b", "Definitions and ", t)
+    t = re.sub(r"(?i)Classificationsand\b", "Classifications and ", t)
+    return t
+
+
+_RCC_BOOK_HEADING_MD_RE = re.compile(
+    r"(?im)^\s*#{1,6}\s+BOOK\s+(?:[IVXLCDM]+|\d+)\b[^\n]*\n*",
+)
+_RCC_BOOK_PLAIN_LINE_RE = re.compile(
+    r"(?im)^\s*BOOK\s+(?:[IVXLCDM]+|\d+)\s+REVISED\s+CORPORATION\s+CODE[^\n]*\n*",
+)
+_RCC_BOOK_FLAT_LEAD_RE = re.compile(
+    r"(?is)^book\s+(?:[ivxlcdm]+|\d+|one)\s+revised\s+corporation\s+code[^.]*\.\s*",
+)
+
+
+def tts_strip_rcc_spurious_book_markdown(content_md: str) -> str:
+    """
+    RCC has no Books; legacy rows may embed ``## BOOK I Revised Corporation Code …`` in content_md.
+    Flattening turns ``#`` into spaces, leaving ``BOOK I …`` spoken as "Book One".
+    """
+    if not content_md:
+        return content_md
+    t = content_md.replace("\r\n", "\n").replace("\r", "\n")
+    for _ in range(5):
+        nxt = _RCC_BOOK_HEADING_MD_RE.sub("", t)
+        nxt = _RCC_BOOK_PLAIN_LINE_RE.sub("", nxt)
+        if nxt == t:
+            break
+        t = nxt
+    return t.lstrip()
+
+
+def tts_strip_rcc_spurious_book_from_flat(clean: str) -> str:
+    """Remove a leading BOOK … banner left in flattened body if markdown strip missed it."""
+    if not clean:
+        return clean
+    return _RCC_BOOK_FLAT_LEAD_RE.sub("", clean.strip(), count=1).strip()
 
 
 def dedupe_codal_header_prefix(clean: str, header: Optional[str], clean_num: str) -> Tuple[Optional[str], str]:

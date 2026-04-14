@@ -1,4 +1,18 @@
 /**
+ * RCC (RA 11232): fix E-Library / ingest run-ons in structural labels (matches DB `title_label`).
+ * Example: "GENERAL PROVISIONSDEFINITIONS AND CORPORATE CLASSIFICATIONS" → spaced "PROVISIONS DEFINITIONS".
+ */
+export function fixRccStructuralHeadingGlue(str) {
+    if (!str || typeof str !== 'string') return str;
+    // All-caps SC label first — case-insensitive "Provisionsdefinitions" would match inside it.
+    return str
+        .replace(/\bPROVISIONSDEFINITIONS\b/g, 'PROVISIONS DEFINITIONS')
+        .replace(/Provisionsdefinitions/gi, 'Provisions and Definitions')
+        .replace(/Definitionsand\b/gi, 'Definitions and ')
+        .replace(/Classificationsand\b/gi, 'Classifications and ');
+}
+
+/**
  * Converts ALL CAPS strings to Title Case while preserving legal formatting.
  * Only transforms if the string is currently in UPPERCASE.
  */

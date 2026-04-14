@@ -19,6 +19,8 @@ from codal_text import (
     body_embeds_rpc_section,
     body_starts_with_article_identifier,
     dedupe_codal_header_prefix,
+    fix_rcc_structural_heading_glue,
+    rcc_section_number_from_article_num,
     raw_markdown_opens_with_article_line,
     repair_rpc_article_266_for_tts,
     strip_codal_citation_tail,
@@ -27,6 +29,8 @@ from codal_text import (
     tts_format_structural_label,
     tts_strip_leading_embedded_section,
     tts_strip_leading_embedded_title,
+    tts_strip_rcc_spurious_book_from_flat,
+    tts_strip_rcc_spurious_book_markdown,
 )
 from codal_structural import fetch_codal_family_bounds, normalize_codal_label_key
 
@@ -43,7 +47,7 @@ except Exception:
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v23"  # v23: RCC (rcc_codal) LexPlay / boundaries same family as CIV
+CACHE_VERSION = "v27"  # v27: RCC "Section N." in spoken header; v26: TTS "one (1)" collapse; RCC lead/UI parity
 
 # Global lock: Azure Speech F0 allows only 1 concurrent real-time synthesis.
 # This prevents 429 errors when multiple requests overlap (e.g. fast track skipping).
@@ -776,8 +780,12 @@ def _get_text_for_codal(content_id, code_id=None):
                     content = tts_strip_leading_embedded_title(
                         content, row.get("title_label")
                     )
+                    if table == "rcc_codal":
+                        content = tts_strip_rcc_spurious_book_markdown(content)
 
                 clean = tts_flatten_codal_body(content)
+                if table == "rcc_codal":
+                    clean = tts_strip_rcc_spurious_book_from_flat(clean)
                 
                 # Deduplication logic (for Family Code mostly):
                 is_redundant = False
@@ -928,9 +936,11 @@ def _get_text_for_codal(content_id, code_id=None):
                         hdr_parts = []
                         starts = get_codal_boundaries(table)
                         curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
+                        is_rcc_table = table == 'rcc_codal'
 
                         bk = row.get('book')
-                        if bk is not None:
+                        # RCC (RA 11232) has no Books; legacy book_num=1 must not be spoken.
+                        if not is_rcc_table and bk is not None:
                             bstart = starts.get('book_start', {}).get(str(bk).strip())
                             if bstart and bstart == curr_id_str:
                                 book_line = tts_book_heading_line(dict(row))
@@ -940,6 +950,10 @@ def _get_text_for_codal(content_id, code_id=None):
                         t_lbl = (row.get('title_label') or '').strip()
                         c_lbl = (row.get('chapter_label') or '').strip()
                         s_lbl = (row.get('section_label') or '').strip()
+                        if is_rcc_table:
+                            t_lbl = fix_rcc_structural_heading_glue(t_lbl)
+                            c_lbl = fix_rcc_structural_heading_glue(c_lbl)
+                            s_lbl = fix_rcc_structural_heading_glue(s_lbl)
                         chapter_num = row.get('chapter_num')  # None for rpc_codal (not fetched)
 
                         bk_s2 = "" if row.get("book") is None else str(row.get("book")).strip()
@@ -985,9 +999,19 @@ def _get_text_for_codal(content_id, code_id=None):
                                         hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
 
                         art_title = strip_codal_citation_tail(art_title)
-                        art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
+                        if is_rcc_table and art_title:
+                            art_title = fix_rcc_structural_heading_glue(art_title)
+                        if is_rcc_table:
+                            rcc_disp = rcc_section_number_from_article_num(str(clean_num))
+                            cn0 = str(clean_num).strip() == "0" or rcc_disp == "0"
+                            art_name = "Preliminary Section" if cn0 else f"Section {rcc_disp}."
+                        else:
+                            art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
                         if art_title and not is_redundant:
-                            art_name += f'. {art_title}'
+                            if is_rcc_table and art_name.endswith("."):
+                                art_name = f"{art_name} {art_title}"
+                            else:
+                                art_name += f". {art_title}"
 
                         struct_text = '. '.join(hdr_parts)
                         body_already_has_article = body_starts_with_article_identifier(

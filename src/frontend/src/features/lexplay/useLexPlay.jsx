@@ -5,7 +5,7 @@ const LexPlayContext = createContext();
 const LexPlayApiContext = createContext();
 
 /** Bust Service Worker `audio-cache` after server TTS text changes (bump with api `CACHE_VERSION` for codal). */
-export const LEXPLAY_CODAL_AUDIO_CV = 'v22';
+export const LEXPLAY_CODAL_AUDIO_CV = 'v27';
 
 /** Relative URL for LexPlay TTS/audio (same formula as playTrack). */
 function buildAudioFetchPath(track, rate = 1.0) {

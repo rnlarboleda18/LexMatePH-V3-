@@ -1,11 +1,12 @@
 ﻿import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import ArticleNode from './ArticleNode';
-import { toTitleCase } from '../utils/textUtils';
+import { toTitleCase, fixRccStructuralHeadingGlue } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { lexCache } from '../utils/cache';
 import {
     CODAL_LEXCACHE_REVISION,
     repairRccBrokenIncorporatorPipeHeaders,
+    rccSectionNumberDisplayWithPeriod,
     stripLegacyCodexArticleRunIn,
 } from '../utils/codalMarkdown';
 import { Play, Loader2 } from 'lucide-react';
@@ -41,6 +42,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
     } = useLexPlay();
 
     const apiCode = code.toLowerCase();
+    const isRccStream = apiCode === 'rcc';
 
     // Map code to full title
     const codeTitles = {
@@ -276,7 +278,9 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                                 code_id: code.toUpperCase(), // e.g RPC
                                                 title: /^(article|preamble|section|rule)/i.test(String(currentArtNum))
                                                     ? toTitleCase(String(currentArtNum), code && code.toUpperCase() === 'ROC' ? ['SECTION', 'RULE'] : [])
-                                                    : `Article ${currentArtNum || ''}`,
+                                                    : isRccStream
+                                                      ? `Section ${rccSectionNumberDisplayWithPeriod(String(currentArtNum || ''))}`
+                                                      : `Article ${currentArtNum || ''}`,
                                                 subtitle: a.article_title || mainTitle
                                             };
                                         });
@@ -326,7 +330,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     };
 
                     const formatHeader = (text) => {
-                        let proc = toTitleCase(text);
+                        const raw = isRccStream ? fixRccStructuralHeadingGlue(text) : text;
+                        let proc = toTitleCase(raw);
                         if (code && code.toLowerCase() === 'roc') {
                             proc = cleanRomanRules(proc);
                         }
@@ -339,7 +344,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     let ruleHdr = null;
                     let titleHdr = null;
 
-                    if (String(art.article_num) !== '0') {
+                    if (String(art.article_num) !== '0' && !isRccStream) {
                         if (art.book_label && art.book_label !== prevArt.book_label) {
                             if (!art.book_label.toUpperCase().includes('PRELIMINARY')) {
                                 const bookPrefix = code.toLowerCase() === 'roc' ? 'Part' : 'Book';
@@ -433,7 +438,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         if (sectionHdr) headersToRender.push(sectionHdr);
                     }
 
-                    if (art.group_header && art.group_header !== prevArt.group_header) {
+                    if (!isRccStream && art.group_header && art.group_header !== prevArt.group_header) {
                         const parts = art.group_header.split('\n');
                         parts.forEach((p, idx) => {
                             const type = idx === 0 ? 'BOOK' : 'TITLE';
@@ -449,7 +454,15 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 let colorClass = "text-gray-900 dark:text-gray-200 font-bold";
                                 const isRoc = code && code.toUpperCase() === 'ROC';
                                 const isConst = code && code.toUpperCase() === 'CONST';
-                                const skipKeywords = isRoc ? ['SECTION', 'RULE'] : isConst ? ['SECTION'] : [];
+                                const skipKeywords = isRoc
+                                    ? ['SECTION', 'RULE']
+                                    : isConst
+                                      ? ['SECTION']
+                                      : isRccStream
+                                        ? ['SECTION', 'TITLE', 'CHAPTER']
+                                        : [];
+                                const isRccStructural =
+                                    isRccStream && ['TITLE', 'CHAPTER', 'SECTION'].includes(h.type);
 
                                 if (h.type === 'SECTION') {
                                     sizeClass = "text-[16px]";
@@ -468,8 +481,14 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                             </h1>
                                         )}
 
-                                        <h2 className={`font-sans ${colorClass} ${sizeClass} tracking-wide whitespace-pre-line leading-tight`}>
-                                            {toTitleCase(h.text.replace(/\n\s*\n/g, '\n'), skipKeywords)}
+                                        <h2
+                                            className={`font-sans ${colorClass} ${sizeClass} tracking-wide whitespace-pre-line leading-tight ${isRccStructural ? 'uppercase' : ''}`}
+                                        >
+                                            {isRccStructural
+                                                ? fixRccStructuralHeadingGlue(
+                                                      h.text.replace(/\n\s*\n/g, '\n'),
+                                                  ).toUpperCase()
+                                                : toTitleCase(h.text.replace(/\n\s*\n/g, '\n'), skipKeywords)}
                                         </h2>
                                     </div>
                                 );
