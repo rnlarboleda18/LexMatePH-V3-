@@ -120,6 +120,20 @@ function App() {
   const [showBarSuggestions, setShowBarSuggestions] = useState(false);
   const [barSearchRect, setBarSearchRect] = useState(null);
   const barSearchInputRef = useRef(null);
+  /** Fixed filter row height → main padding (same pattern as SupremeDecisions). */
+  const barFilterChromeRef = useRef(null);
+  const [barFilterChromeHeight, setBarFilterChromeHeight] = useState(52);
+  /** Match Tailwind `xl:` (1280px) — fixed bar-questions chrome only at desktop. */
+  const [xlFixedChrome, setXlFixedChrome] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(min-width: 1280px)').matches,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1280px)');
+    const on = () => setXlFixedChrome(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
   const barCloseSuggestionsTimerRef = useRef(null);
   const barFuseRef = useRef(null);
   const [barFuseReady, setBarFuseReady] = useState(false);
@@ -220,6 +234,25 @@ function App() {
       window.removeEventListener('resize', update);
     };
   }, [showBarSuggestions]);
+
+  /** Bar list stays mounted under LexPlay fullscreen (effectiveMode); keep chrome height in sync. */
+  const browseBarFilterChromeActive =
+    mode === 'browse_bar' || (mode === 'lexplay' && previousMode === 'browse_bar');
+
+  useLayoutEffect(() => {
+    if (!browseBarFilterChromeActive) return undefined;
+    const el = barFilterChromeRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') {
+      return undefined;
+    }
+    const measure = () => {
+      setBarFilterChromeHeight(Math.ceil(el.getBoundingClientRect().height));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [browseBarFilterChromeActive, searchTerm, currentSubject]);
 
   // Pre-filter bar questions (both subject and free-text/fuzzy) so the JSX stays clean.
   const filteredBarQuestions = useMemo(() => {
@@ -566,11 +599,18 @@ function App() {
                     )
                   )}
                   {effectiveMode === 'browse_bar' && (
-                    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      {/* Sticky search + filter bar */}
-                      <div className="sticky top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
-                        <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
-                          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+                    <div className="min-h-screen w-full min-w-0 bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                      {/* Search + filter — scrolls with page below xl; fixed at xl+ */}
+                      <div
+                        ref={barFilterChromeRef}
+                        className={`z-20 w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                          xlFixedChrome
+                            ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
+                            : 'relative'
+                        }`}
+                      >
+                        <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
+                          <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
                               <label htmlFor="bar-subject-filter" className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 sm:sr-only">
                                 Bar subject ({filteredBarQuestions.length} question{filteredBarQuestions.length !== 1 ? 's' : ''})
@@ -592,7 +632,7 @@ function App() {
                                 ))}
                               </select>
                             </div>
-                            <div className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto">
+                            <div className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto">
                               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
                                 <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} />
                               </div>
@@ -627,14 +667,17 @@ function App() {
                                     setShowBarSuggestions(false);
                                   }
                                 }}
-                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                               />
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                      <main
+                        className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
+                        style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
+                      >
                       {/* Bar search suggestions — portaled to body so it escapes overflow-hidden */}
                       {showBarSuggestions && barSearchRect && typeof document !== 'undefined' &&
                         createPortal(

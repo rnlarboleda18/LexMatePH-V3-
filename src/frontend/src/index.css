@@ -82,13 +82,30 @@
   overscroll-behavior: contain;
 }
 
+/* Space below portaled landing marketing header (matches fixed bar + safe area) */
+.lex-landing-header-spacer {
+  height: calc(5.25rem + env(safe-area-inset-top, 0px));
+}
+@media (min-width: 640px) {
+  .lex-landing-header-spacer {
+    height: calc(5.75rem + env(safe-area-inset-top, 0px));
+  }
+}
+
 /* ===== MOBILE SCROLL PERFORMANCE ===== */
 
 /* Momentum scrolling on iOS */
-html, body {
+html {
+  -webkit-overflow-scrolling: touch;
+  /* overflow-x: hidden intentionally NOT set on html — Chrome clips position:fixed children
+     that extend to right:0 when html has overflow-x:hidden, causing the sticky filter chrome
+     to be cut off. Horizontal overflow is controlled on body instead. */
+  touch-action: pan-y;
+}
+
+body {
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
-  /* Prevent browser from waiting for JS before scrolling */
   touch-action: pan-y;
 }
 

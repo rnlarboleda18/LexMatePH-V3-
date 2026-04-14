@@ -9,7 +9,7 @@ import { lexCache } from '../utils/cache';
 
 import { formatDate } from '../utils/dateUtils';
 import { apiUrl } from '../utils/apiUrl';
-import { getSubjectColor, getSubjectAnswerColor } from '../utils/colors';
+import { getSubjectColor, getSubjectAnswerColor, normalizeSubjectForColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
 import { useDebounce } from '../hooks/useDebounce';
@@ -32,25 +32,6 @@ async function parseResponseJson(response) {
         );
     }
 }
-
-/** Map free-text / Primary: … subject strings to a bar subject key for theming. */
-const normalizeSubjectForColor = (subject) => {
-    if (!subject) return 'Political Law';
-    let s = subject.toString();
-    const primaryMatch = s.match(/Primary:\s*([^;]+)/i);
-    if (primaryMatch) s = primaryMatch[1];
-
-    if (s.includes('Political') || s.includes('Constitutional') || s.includes('Admin') || s.includes('Election') || s.includes('Public Corp')) return 'Political Law';
-    if (s.includes('Labor')) return 'Labor Law';
-    if (s.includes('Civil') || s.includes('Family') || s.includes('Property') || s.includes('Succession') || s.includes('Obligations')) return 'Civil Law';
-    if (s.includes('Taxation') || s.includes('Tax')) return 'Taxation Law';
-    if (s.includes('Commercial') || s.includes('Mercantile') || s.includes('Corporate') || s.includes('Insurance') || s.includes('Transportation')) return 'Commercial Law';
-    if (s.includes('Criminal')) return 'Criminal Law';
-    if (s.includes('Remedial') || s.includes('Procedure') || s.includes('Evidence')) return 'Remedial Law';
-    if (s.includes('Ethics') || s.includes('Legal Ethics') || s.includes('Judicial')) return 'Legal Ethics';
-
-    return 'Political Law';
-};
 
 const BAR_SUBJECTS = [
     "Political Law",
@@ -522,10 +503,21 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const [loadingMockExam, setLoadingMockExam] = useState(false);
 
     // Filter states
-    /** Custom filter grid (year, ponente, …) — toggled to save space; chrome bar stays fixed while scrolling. */
+    /** Custom filter grid (year, ponente, …) — toggled to save space; chrome bar fixed only at xl+ while scrolling. */
     const [showCustomFilters, setShowCustomFilters] = useState(false);
     const filterChromeRef = useRef(null);
     const [filterChromeHeight, setFilterChromeHeight] = useState(52);
+    /** Match Tailwind `xl:` (1280px) — fixed filter row only at desktop; mobile/tablet scroll with page. */
+    const [xlFixedChrome, setXlFixedChrome] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(min-width: 1280px)').matches,
+    );
+    useEffect(() => {
+        const mq = window.matchMedia('(min-width: 1280px)');
+        const on = () => setXlFixedChrome(mq.matches);
+        on();
+        mq.addEventListener('change', on);
+        return () => mq.removeEventListener('change', on);
+    }, []);
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedPonente, setSelectedPonente] = useState('');
@@ -1032,16 +1024,20 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     return (
-        <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-            {/* Fixed search + optional custom filters — same horizontal band as sidebar layout (xl:left-52); height drives main padding */}
+        <div className="min-h-screen w-full min-w-0 bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+            {/* Search + optional custom filters — in-flow below xl; fixed under app header at xl+ (xl:left-52 with persistent sidebar) */}
             <div
                 ref={filterChromeRef}
-                className="fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 xl:left-52"
+                className={`z-20 w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                    xlFixedChrome
+                        ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
+                        : 'relative'
+                }`}
             >
-                <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
-                    <div className="flex flex-col gap-2">
+                <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
+                    <div className="flex w-full min-w-0 flex-col gap-2">
                         {/* Bar Questions order: filter column first (same width md:w-44), then search */}
-                        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+                        <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
                                 <button
                                     type="button"
@@ -1064,14 +1060,14 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     )}
                                 </button>
                             </div>
-                            <div className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto">
+                            <div className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto">
                                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
                                     <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} />
                                 </div>
                                 <input
                                     ref={searchInputRef}
                                     type="search"
-                                    className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                    className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                                     placeholder="Search cases…"
                                     value={searchTerm}
                                     onFocus={() => {
@@ -1191,8 +1187,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             </div>
 
             <main
-                className="mx-auto max-w-7xl px-3 pb-4 sm:px-5 sm:pb-5 lg:px-6"
-                style={{ paddingTop: `${filterChromeHeight + 12}px` }}
+                className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
+                style={xlFixedChrome ? { paddingTop: `${filterChromeHeight + 12}px` } : undefined}
             >
                 {/* Status Indicator */}
                 {loading && (

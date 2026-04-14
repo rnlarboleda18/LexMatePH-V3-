@@ -6,6 +6,7 @@ import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
+import { CODAL_LEXCACHE_REVISION, stripLegacyCodexArticleRunIn } from '../utils/codalMarkdown';
 import { useSubscription } from '../context/SubscriptionContext';
 import Fuse from 'fuse.js';
 import { useDebounce } from '../hooks/useDebounce';
@@ -104,6 +105,20 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     const [searchBoxRect, setSearchBoxRect] = useState(null);
     const closeSuggestionsTimerRef = useRef(null);
     const searchBoxRef = useRef(null);
+    /** Codal picker + search row — in-flow below xl; fixed at xl+; height drives content `padding-top` when fixed. */
+    const lexFilterChromeRef = useRef(null);
+    const [lexFilterChromeHeight, setLexFilterChromeHeight] = useState(52);
+    /** Match Tailwind `xl:` (1280px). */
+    const [xlFixedChrome, setXlFixedChrome] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(min-width: 1280px)').matches,
+    );
+    useEffect(() => {
+        const mq = window.matchMedia('(min-width: 1280px)');
+        const on = () => setXlFixedChrome(mq.matches);
+        on();
+        mq.addEventListener('change', on);
+        return () => mq.removeEventListener('change', on);
+    }, []);
     const mainContentRef = useRef(null);
     /** Top of rounded codal shell — desktop fixed TOC/juris panels align to this edge (clamped below app header on scroll). */
     const codalShellRef = useRef(null);
@@ -149,6 +164,20 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     }, [isSidebarOpen, activeJurisArticle, activeAmendmentArticle]);
 
     useLayoutEffect(() => {
+        const el = lexFilterChromeRef.current;
+        if (!el || typeof ResizeObserver === 'undefined') {
+            return undefined;
+        }
+        const measure = () => {
+            setLexFilterChromeHeight(Math.ceil(el.getBoundingClientRect().height));
+        };
+        measure();
+        const ro = new ResizeObserver(measure);
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, []);
+
+    useLayoutEffect(() => {
         syncFixedPanelPositions();
         let rafId = 0;
         const scheduleSync = () => {
@@ -170,7 +199,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             ro.disconnect();
             if (rafId) cancelAnimationFrame(rafId);
         };
-    }, [syncFixedPanelPositions, data, loading, error]);
+    }, [syncFixedPanelPositions, data, loading, error, lexFilterChromeHeight]);
 
     /** In-flow anchor for TOC FAB; actual control is `position:fixed` via portal (sticky breaks under page overflow-x / transforms). */
     const tocFabAnchorRef = useRef(null);
@@ -230,7 +259,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             ro.disconnect();
             if (rafId) cancelAnimationFrame(rafId);
         };
-    }, [loading, error, data, isSidebarOpen, syncTocFabPosition]);
+    }, [loading, error, data, isSidebarOpen, syncTocFabPosition, lexFilterChromeHeight]);
 
     /** After TOC/juris spacer width finishes transitioning, remeasure FAB (avoids stale coords on first layout frame). */
     useLayoutEffect(() => {
@@ -443,10 +472,17 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         }
                         throw new Error(msg);
                     }
-                    return await res.json();
+                    const json = await res.json();
+                    const articles = (json.articles || []).map((a) => {
+                        const num = a.article_num ?? a.article_number ?? a.key_id;
+                        const raw = a.content_md || a.content || '';
+                        const clean = stripLegacyCodexArticleRunIn(raw, num);
+                        return { ...a, content: clean, content_md: clean };
+                    });
+                    return { ...json, articles };
                 };
 
-                const cacheKey = viewDate ? `${shortName}_${viewDate}` : shortName;
+                const cacheKey = (viewDate ? `${shortName}_${viewDate}` : shortName) + CODAL_LEXCACHE_REVISION;
 
                 await lexCache.swr('codals', cacheKey, fetcher, (json, isCached) => {
                     setData(json);
@@ -478,9 +514,11 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         // Filter out sub-articles (e.g., "5(b)")
                         if (art.article_number && art.article_number.includes('(')) return;
 
+                        const artBody = art.content || art.content_md || '';
+
                         // 1. Process headers inside article first (usually at the top)
                         // This ensures the current article falls under the header it contains.
-                        const headers = [...art.content.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
+                        const headers = [...artBody.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
                         headers.forEach(headerText => {
                             const rank = getRank(headerText);
                             const newNode = createNode(headerText, rank, art.id || art.article_number || art.key_id);
@@ -498,7 +536,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
                         // Try to find title in content if not provided by backend
                         if (!art.article_title) {
-                            const titleMatch = art.content.match(/^(?:\*\*)?(Article\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i);
+                            const titleMatch = artBody.match(/^(?:\*\*)?(Article\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i);
                             if (titleMatch && titleMatch[1]) {
                                 label = titleMatch[1].trim();
                                 if (label.length > 65) label = label.substring(0, 65) + '...';
@@ -898,11 +936,18 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
     return (
         <>
-        <div className="min-h-screen bg-transparent font-sans text-gray-900 dark:text-gray-100">
-            {/* Sticky bar — same shell + control sizing as Bar Questions (App browse_bar) */}
-            <div className="sticky top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-20 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95">
-                <div className="mx-auto max-w-7xl px-2 py-2 sm:px-4 lg:px-5">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
+        <div className="min-h-screen w-full min-w-0 bg-transparent font-sans text-gray-900 dark:text-gray-100">
+            {/* Codal picker + search — scrolls with page below xl; fixed at xl+ */}
+            <div
+                ref={lexFilterChromeRef}
+                className={`z-[30] w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                    xlFixedChrome
+                        ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
+                        : 'relative'
+                }`}
+            >
+                <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
+                    <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
                         {codalOptions && codalOptions.length > 0 && onCodalChange && (
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
                                 <label htmlFor="lexcode-codal-select" className="sr-only">
@@ -924,7 +969,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         )}
                         <form
                             onSubmit={handleSearchSubmit}
-                            className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:basis-auto"
+                            className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto"
                         >
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
                                 <Search className="h-3.5 w-3.5 text-gray-400" strokeWidth={2} aria-hidden />
@@ -946,7 +991,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                 }}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Search articles…"
-                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                             />
                             {searchTerm && (
                                 <button
@@ -963,7 +1008,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 </div>
             </div>
 
-            <div className="mx-auto max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+            <div
+                className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
+                style={xlFixedChrome ? { paddingTop: `${lexFilterChromeHeight + 12}px` } : undefined}
+            >
                 <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
                     {/* TOC layout spacer — real panel is `position:fixed` via portal */}
                     <div
@@ -998,7 +1046,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             )}
 
             {/* Codal stream — grows with content; scrolls with the main page */}
-            <div className={`relative z-30 mt-0 min-w-0 flex-1 transition-all duration-300 ${(activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
+            <div className={`relative mt-0 min-w-0 flex-1 transition-all duration-300 ${(activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
                 {/* TOC: lg = anchor + side FAB; small viewports = full-width codal + edge-swipe to open */}
                 <div className="flex min-w-0 items-start gap-1.5 sm:gap-2 lg:gap-2.5">
                     {!isSidebarOpen && (
@@ -1098,7 +1146,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                             (art.article_number
                                                 ? `Article ${art.article_number}`
                                                 : 'Article');
-                                        const rawSnippet = (art.content || '')
+                                        const rawSnippet = (art.content || art.content_md || '')
                                             .replace(/[#*`_~]/g, '')
                                             .trim()
                                             .slice(0, 180);
