@@ -807,20 +807,16 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     const handleCaseClick = async (decision) => {
-        // Layer 1: in-memory prefetch cache (same session, fastest) — only if it has full detail
-        let fullData = prefetchCache[decision.id];
-        const cacheHasFull = fullData && fullData.digest_facts && fullData.full_text_md !== undefined;
-
-        if (!cacheHasFull) {
-            // Layer 2: IndexedDB (persists across page reloads — no network needed)
-            // The prefetch stores full data here even when it strips it from component state.
-            try {
-                const idbHit = await lexCache.get('cases', decision.id);
-                if (idbHit && idbHit.digest_facts) {
-                    fullData = idbHit;
-                }
-            } catch (_) {}
-        }
+        // Layer 1: IndexedDB — prefetchDetails populates this on hover, so it's usually a fast
+        // cache hit with no network. Full text is stored here even though prefetchCache only
+        // holds the lightweight version (to avoid bloating React state).
+        let fullData = null;
+        try {
+            const idbHit = await lexCache.get('cases', decision.id);
+            if (idbHit && idbHit.digest_facts) {
+                fullData = idbHit;
+            }
+        } catch (_) {}
 
         if (!fullData || !fullData.digest_facts) {
             // Layer 3: network fetch (Redis-cached on the server — usually fast)
