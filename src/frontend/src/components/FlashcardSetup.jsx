@@ -133,7 +133,7 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/75 border-l-[6px] border-l-violet-500 bg-white/55 p-4 text-left shadow-md backdrop-blur-md transition-all hover:shadow-[0_20px_48px_-18px_rgba(109,40,217,0.28)] dark:border-purple-500/40 dark:border-l-purple-400 dark:bg-slate-900/45 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/80 border-l-[6px] border-l-violet-500 bg-white/55 p-4 text-left shadow-md transition-all hover:shadow-lg dark:border-purple-400/35 dark:border-l-purple-400 dark:bg-slate-900/45 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
                                 <div className="min-w-0 space-y-2">
                                     <span className="flex items-start gap-2.5 text-sm font-bold text-slate-800 dark:text-slate-100">
@@ -155,6 +155,7 @@ const FlashcardSetup = ({
                                 const colorClass = getSubjectColor(subject);
                                 const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
                                 const borderColor = colorClass.split(' ').find((c) => c.startsWith('border-'));
+                                const leftBandColor = borderColor?.replace('border-', 'border-l-') ?? '';
                                 const surfaceClass = getSubjectAnswerColor(subject);
                                 const n = countFor(subject);
 
@@ -164,7 +165,7 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-l-[6px] p-4 text-left shadow-md backdrop-blur-md transition-all hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${surfaceClass} ${borderColor}`}
+                                        className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-2xl border-2 border-violet-300/80 border-l-[6px] p-4 text-left shadow-md transition-all hover:shadow-lg dark:border-purple-400/35 disabled:pointer-events-none disabled:opacity-50 ${surfaceClass} ${leftBandColor}`}
                                     >
                                         <div className="min-w-0 space-y-2">
                                             <span className={`flex items-start gap-2.5 text-sm font-bold ${textColor}`}>

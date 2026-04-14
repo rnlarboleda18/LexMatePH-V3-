@@ -165,7 +165,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderFrontFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-200/90 bg-gradient-to-b from-white via-violet-50/40 to-fuchsia-50/30 shadow-[0_22px_48px_-18px_rgba(109,40,217,0.22),0_2px_6px_rgba(0,0,0,0.06)] dark:border-purple-500/30 dark:from-slate-800 dark:via-purple-950/40 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 bg-gradient-to-b from-white via-violet-50/40 to-fuchsia-50/30 shadow-[0_22px_48px_-18px_rgba(109,40,217,0.22),0_2px_6px_rgba(0,0,0,0.06)] dark:border-purple-400/35 dark:from-slate-800 dark:via-purple-950/40 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
@@ -216,7 +216,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderBackFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-purple-300/85 bg-gradient-to-b from-violet-50 via-purple-50/80 to-fuchsia-50/70 shadow-[0_22px_48px_-16px_rgba(109,40,217,0.28),0_2px_6px_rgba(0,0,0,0.05)] dark:border-purple-500/35 dark:from-purple-950/95 dark:via-slate-950 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 bg-gradient-to-b from-violet-50 via-purple-50/80 to-fuchsia-50/70 shadow-[0_22px_48px_-16px_rgba(109,40,217,0.28),0_2px_6px_rgba(0,0,0,0.05)] dark:border-purple-400/35 dark:from-purple-950/95 dark:via-slate-950 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',

@@ -10,11 +10,13 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
     const colorClass = getSubjectColor(subjectKey);
     const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
     const borderColor = colorClass.split(' ').find((c) => c.startsWith('border-'));
+    // Side-specific left-band color so the outer border can be uniform violet
+    const leftBandColor = borderColor?.replace('border-', 'border-l-') ?? '';
     const surfaceClass = getSubjectAnswerColor(subjectKey);
 
     return (
         <div
-            className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 p-3 shadow-sm ring-1 ring-violet-300/35 backdrop-blur-[1px] transition-all hover:shadow-[0_18px_44px_-16px_rgba(109,40,217,0.22)] dark:ring-purple-500/20 ${surfaceClass} border-l-[5px] ${borderColor}`}
+            className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 p-3 shadow-sm transition-all hover:shadow-lg dark:border-purple-400/35 ${surfaceClass} border-l-[5px] ${leftBandColor}`}
         >
             {/* Header: ID - Subject (Year) */}
             <div className={`flex items-center gap-2 mb-2 ${textColor}`}>
