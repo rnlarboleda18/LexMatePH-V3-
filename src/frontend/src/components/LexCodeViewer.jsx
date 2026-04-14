@@ -15,6 +15,7 @@ import { useSubscription } from '../context/SubscriptionContext';
 import Fuse from 'fuse.js';
 import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
+import PurpleGlassAmbient from './PurpleGlassAmbient';
 
 
 // Recursive TOC Node Component
@@ -33,7 +34,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
             >
                 <span className="truncate mr-1">{toTitleCase(node.label.replace(/TITLE/i, 'Title').replace(/CHAPTER/i, 'Chapter'))}</span>
                 {hasChildren && (
-                    <span className="text-gray-400 group-hover:text-amber-600 transition-colors">
+                    <span className="text-gray-400 transition-colors group-hover:text-violet-600 dark:group-hover:text-violet-400">
                         {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                     </span>
                 )}
@@ -45,7 +46,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
                         <button
                             key={art.id}
                             onClick={() => onArticleClick(art.id)}
-                            className="px-2 py-1.5 text-xs font-sans text-left text-gray-700 dark:text-gray-400 hover:text-amber-800 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded transition-colors truncate w-full"
+                            className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-800 dark:text-gray-400 dark:hover:bg-violet-950/25 dark:hover:text-violet-300"
                             title={art.label}
                         >
                             {art.label}
@@ -832,7 +833,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         isSidebarOpen &&
         createPortal(
             <div
-                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-violet-200/70 bg-white/50 shadow-[0_28px_55px_-12px_rgba(109,40,217,0.28)] backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/50"
                 style={{ left: tocFixedLeft, ...fixedSidePanelStyle }}
             >
                 <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-0 dark:border-white/5 dark:bg-slate-800/30">
@@ -851,7 +852,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     key={art.id}
                                     type="button"
                                     onClick={() => scrollToArticle(art.id)}
-                                    className="w-full truncate rounded px-2 py-1.5 text-left text-xs font-sans text-gray-700 transition-colors hover:bg-amber-50 hover:text-amber-800 dark:text-gray-400 dark:hover:bg-amber-900/20 dark:hover:text-amber-400"
+                                    className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-800 dark:text-gray-400 dark:hover:bg-violet-950/25 dark:hover:text-violet-300"
                                 >
                                     {art.label}
                                 </button>
@@ -872,7 +873,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         (activeJurisArticle || activeAmendmentArticle) &&
         createPortal(
             <div
-                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-white/40 bg-white/40 shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40"
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-violet-200/70 bg-white/50 shadow-[0_28px_55px_-12px_rgba(109,40,217,0.28)] backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/50"
                 style={{ left: jurisFixedLeft, ...fixedSidePanelStyle }}
             >
                 {activeJurisArticle && (
@@ -952,11 +953,11 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
     return (
         <>
-        <div className="min-h-screen w-full min-w-0 bg-transparent font-sans text-gray-900 dark:text-gray-100">
+        <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
             {/* Codal picker + search — scrolls with page below xl; fixed at xl+ */}
             <div
                 ref={lexFilterChromeRef}
-                className={`z-[30] w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                className={`z-[30] w-full xl:w-auto min-w-0 border-b border-violet-200/70 bg-white/92 shadow-[0_12px_40px_-18px_rgba(109,40,217,0.18)] backdrop-blur-xl dark:border-purple-500/20 dark:bg-slate-900/92 ${
                     xlFixedChrome
                         ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
                         : 'relative'
@@ -974,7 +975,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     value={selectedCodal != null && selectedCodal !== '' ? selectedCodal : ''}
                                     onChange={(e) => onCodalChange(e.target.value)}
                                     title="Switch Codal"
-                                    className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                    className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                 >
                                     <option value="">Choose Codal</option>
                                     {codalOptions.filter(o => !o.disabled).map(o => (
@@ -1007,7 +1008,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                 }}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Search articles…"
-                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                             />
                             {searchTerm && (
                                 <button
@@ -1042,7 +1043,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
                 >
-                    <div className="w-80 max-h-[80vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-left duration-300">
+                    <div className="flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-violet-200/75 bg-white/95 shadow-[0_24px_55px_-14px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in slide-in-from-left duration-300 dark:border-purple-500/25 dark:bg-slate-900/95 glass">
                         <div className="p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30">
                             <span className="font-bold">Contents</span>
                             <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
@@ -1051,7 +1052,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             {tocData && (
                                 <div key={tocVersion} className="space-y-1">
                                     {tocData.articles.map(art => (
-                                        <button key={art.id} onClick={() => scrollToArticle(art.id)} className="px-2 py-1.5 text-xs font-sans text-left text-gray-700 dark:text-gray-400 hover:text-amber-800 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded transition-colors truncate w-full">{art.label}</button>
+                                        <button key={art.id} onClick={() => scrollToArticle(art.id)} className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-800 dark:text-gray-400 dark:hover:bg-violet-950/25 dark:hover:text-violet-300">{art.label}</button>
                                     ))}
                                     {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
                                 </div>
@@ -1075,12 +1076,12 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     {/* Outer shell keeps shadow; inner clips body text to rounded corners */}
                     <div
                         ref={codalShellRef}
-                        className="min-w-0 flex-1 rounded-2xl shadow-[0_30px_60px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.45)]"
+                        className="min-w-0 flex-1 rounded-2xl shadow-[0_28px_60px_-14px_rgba(109,40,217,0.22)] dark:shadow-[0_28px_60px_-12px_rgba(76,29,149,0.35)]"
                     >
                     <div
                         ref={mainContentRef}
                         id="main-content"
-                        className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-white/40 bg-white/40 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/40 glass"
+                        className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-violet-200/65 bg-white/45 backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/45 glass"
                     >
 
                     {/* Toolbar — codal title + subtitle */}
@@ -1091,7 +1092,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     {codeTitle ? toTitleCase(codeTitle) : 'Lex Code'}
                                 </h1>
                                 {codeSubtitle && (
-                                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
+                                    <p className="text-[11px] font-semibold text-violet-700 dark:text-violet-300">
                                         {toTitleCase(codeSubtitle)}
                                     </p>
                                 )}
@@ -1120,7 +1121,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
                 createPortal(
                     <div
-                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-purple-500/25 dark:bg-slate-900/95"
                         style={{
                             top: searchBoxRect.bottom + 4,
                             left: searchBoxRect.left,
@@ -1143,7 +1144,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                 <button
                                     type="button"
                                     onClick={handleClearSearch}
-                                    className="text-xs text-amber-600 hover:underline dark:text-amber-400"
+                                    className="text-xs text-violet-600 hover:underline dark:text-violet-400"
                                 >
                                     Clear
                                 </button>
@@ -1173,9 +1174,9 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                                 onClick={() =>
                                                     handleSuggestionClick(art.id || art.article_number)
                                                 }
-                                                className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                                className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-violet-950/30"
                                             >
-                                                <p className="line-clamp-1 text-sm font-bold text-amber-800 dark:text-amber-400">
+                                                <p className="line-clamp-1 text-sm font-bold text-violet-800 dark:text-violet-300">
                                                     <HighlightText text={titleText} query={debouncedSearchTerm} />
                                                 </p>
                                                 {rawSnippet && (
@@ -1202,7 +1203,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     <button
                         type="button"
                         onClick={() => setIsSidebarOpen(true)}
-                        className="fixed z-[42] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-amber-300/90 bg-gradient-to-br from-amber-500 via-amber-500 to-orange-600 text-white shadow-[0_6px_24px_rgba(217,119,6,0.4)] ring-2 ring-white/25 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-amber-400/40 dark:from-amber-600 dark:via-amber-600 dark:to-orange-700 dark:ring-amber-950/30"
+                        className="fixed z-[42] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-purple-400/50 dark:from-violet-700 dark:via-purple-700 dark:to-fuchsia-700 dark:ring-purple-950/40"
                         style={{ left: tocFabPos.left, top: tocFabPos.top }}
                         title="Table of contents"
                         aria-label="Open table of contents"
@@ -1253,7 +1254,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     }}
                     onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
                 >
-                    <div className="lex-modal-card glass relative flex flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45">
+                    <div className="lex-modal-card glass relative flex flex-col overflow-hidden rounded-2xl border-2 border-violet-200/80 bg-white/92 shadow-[0_28px_70px_-20px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300 dark:border-purple-500/30 dark:bg-slate-900/50">
                         {activeJurisArticle && (
                             <LexCodeJurisSidebar
                                 articleNum={activeJurisArticle}
@@ -1291,7 +1292,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             )}
                 </div>
             </div>
-        </div>
+        </PurpleGlassAmbient>
         </>
     );
 };

@@ -13,6 +13,7 @@ import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
 import LandingPage from './components/LandingPage';
 import FeaturePageShell from './components/FeaturePageShell';
+import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarSubject } from './utils/subjectNormalize';
@@ -601,8 +602,8 @@ function App() {
                     </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
-                    <div className="min-h-screen bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <main className="max-w-7xl mx-auto px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+                    <PurpleGlassAmbient className="min-h-screen w-full bg-transparent pb-6 font-sans text-gray-900 dark:text-gray-100">
+                      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                         <Suspense fallback={<PageLoadingFallback label="Loading Flashcards…" />}>
                           <FlashcardSetup
                             embedded
@@ -615,11 +616,11 @@ function App() {
                           />
                         </Suspense>
                       </main>
-                    </div>
+                    </PurpleGlassAmbient>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
                     <div
-                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-transparent animate-in fade-in duration-200 md:!items-stretch"
+                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-violet-950/25 backdrop-blur-[2px] animate-in fade-in duration-200 md:!items-stretch dark:bg-purple-950/30"
                       onClick={() => setFlashcardState('setup')}
                       role="presentation"
                     >
@@ -668,11 +669,11 @@ function App() {
                     )
                   )}
                   {effectiveMode === 'browse_bar' && (
-                    <div className="min-h-screen w-full min-w-0 bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                    <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-6 font-sans text-gray-900 dark:text-gray-100">
                       {/* Search + filter — scrolls with page below xl; fixed at xl+ */}
                       <div
                         ref={barFilterChromeRef}
-                        className={`z-20 w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                        className={`z-20 w-full xl:w-auto min-w-0 border-b border-violet-200/70 bg-white/92 shadow-[0_12px_40px_-18px_rgba(109,40,217,0.18)] backdrop-blur-xl dark:border-purple-500/20 dark:bg-slate-900/92 ${
                           xlFixedChrome
                             ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
                             : 'relative'
@@ -693,7 +694,7 @@ function App() {
                                   setCurrentSubject(v === '' ? null : v);
                                   setBarCurrentPage(1);
                                 }}
-                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                className="box-border block h-9 w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                               >
                                 <option value="">All subjects</option>
                                 {BAR_SUBJECT_OPTIONS.map((s) => (
@@ -736,7 +737,7 @@ function App() {
                                     setShowBarSuggestions(false);
                                   }
                                 }}
-                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-3 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                               />
                             </div>
                           </div>
@@ -751,7 +752,7 @@ function App() {
                       {showBarSuggestions && barSearchRect && typeof document !== 'undefined' &&
                         createPortal(
                           <div
-                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-purple-500/25 dark:bg-slate-900/95"
                             style={{
                               top: barSearchRect.bottom + 4,
                               left: barSearchRect.left,
@@ -794,7 +795,7 @@ function App() {
                                           setShowBarSuggestions(false);
                                           tryOpenBarQuestion(q);
                                         }}
-                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-violet-950/30"
                                       >
                                         <p className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
                                           {q.question}
@@ -849,7 +850,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
-                                className="px-4 py-2 glass rounded-lg border-2 border-slate-300/80 bg-white/85 text-sm font-medium text-gray-800 shadow-sm transition-colors hover:bg-white dark:border-white/10 dark:bg-slate-700/40 dark:text-gray-200 dark:hover:bg-slate-600/60 flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-purple-500/30 dark:bg-slate-800/50 dark:text-gray-200 dark:hover:bg-slate-700/60 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -863,7 +864,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
-                                className="px-4 py-2 glass rounded-lg border-2 border-slate-300/80 bg-white/85 text-sm font-medium text-gray-800 shadow-sm transition-colors hover:bg-white dark:border-white/10 dark:bg-slate-700/40 dark:text-gray-200 dark:hover:bg-slate-600/60 flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-purple-500/30 dark:bg-slate-800/50 dark:text-gray-200 dark:hover:bg-slate-700/60 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -873,7 +874,7 @@ function App() {
                         );
                       })()}
                       </main>
-                    </div>
+                    </PurpleGlassAmbient>
                   )}
                   </>
                 </ErrorBoundary>

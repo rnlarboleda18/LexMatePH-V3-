@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
 import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
+import PurpleGlassAmbient from './PurpleGlassAmbient';
 
 /** Read fetch body as JSON once; throws with actionable text if empty or non-JSON (common when API is down or returns HTML). */
 async function parseResponseJson(response) {
@@ -1056,11 +1057,11 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     return (
-        <div className="min-h-screen w-full min-w-0 bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+        <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
             {/* Search + optional custom filters — in-flow below xl; fixed under app header at xl+ (xl:left-52 with persistent sidebar) */}
             <div
                 ref={filterChromeRef}
-                className={`z-20 w-full xl:w-auto min-w-0 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/95 ${
+                className={`z-20 w-full xl:w-auto min-w-0 border-b border-violet-200/70 bg-white/92 shadow-[0_12px_40px_-18px_rgba(109,40,217,0.18)] backdrop-blur-xl dark:border-purple-500/20 dark:bg-slate-900/92 ${
                     xlFixedChrome
                         ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
                         : 'relative'
@@ -1074,7 +1075,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                 <button
                                     type="button"
                                     onClick={() => setShowCustomFilters((v) => !v)}
-                                    className="box-border flex h-9 w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-stone-400 bg-gray-50 px-2 text-xs font-semibold uppercase leading-tight tracking-wide text-gray-800 shadow-sm transition-colors hover:bg-gray-100 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800 sm:text-sm"
+                                    className="box-border flex h-9 w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-stone-400 bg-gray-50 px-2 text-xs font-semibold uppercase leading-tight tracking-wide text-gray-800 shadow-sm transition-colors hover:bg-violet-50 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-slate-800 sm:text-sm"
                                     aria-expanded={showCustomFilters}
                                     aria-label={showCustomFilters ? 'Hide case digest filters' : 'Show case digest filters'}
                                 >
@@ -1099,7 +1100,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                 <input
                                     ref={searchInputRef}
                                     type="search"
-                                    className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
+                                    className="box-border block h-9 min-w-0 w-full max-w-full rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-7 pr-8 text-xs leading-tight text-gray-900 shadow-sm placeholder-gray-500 transition-colors focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 sm:text-sm"
                                     placeholder="Search cases…"
                                     value={searchTerm}
                                     onFocus={() => {
@@ -1136,12 +1137,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         </div>
 
                         {showCustomFilters && (
-                            <div className="max-h-[38vh] overflow-y-auto border-t border-slate-200/80 pt-2 dark:border-white/10">
+                            <div className="max-h-[38vh] overflow-y-auto border-t border-violet-200/60 pt-2 dark:border-purple-500/15">
                                 <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                                     <div className="min-w-0 flex flex-col">
                                         <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Year</label>
                                         <select
-                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                             value={selectedYear}
                                             onChange={(e) => { setSelectedYear(e.target.value); setCurrentPage(1); }}
                                         >
@@ -1154,7 +1155,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     <div className="min-w-0 flex flex-col">
                                         <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Ponente</label>
                                         <select
-                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                             value={selectedPonente}
                                             onChange={(e) => { setSelectedPonente(e.target.value); setCurrentPage(1); }}
                                         >
@@ -1167,7 +1168,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     <div className="min-w-0 flex flex-col">
                                         <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Bar subject</label>
                                         <select
-                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                             value={selectedSubject}
                                             onChange={(e) => { setSelectedSubject(e.target.value); setCurrentPage(1); }}
                                         >
@@ -1185,7 +1186,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     <div className="min-w-0 flex flex-col">
                                         <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Significance</label>
                                         <select
-                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                             value={selectedSignificance}
                                             onChange={(e) => { setSelectedSignificance(e.target.value); setCurrentPage(1); }}
                                         >
@@ -1201,7 +1202,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     <div className="min-w-0 flex flex-col">
                                         <label className="mb-0.5 block text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Court body</label>
                                         <select
-                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
+                                            className="box-border block h-9 w-full cursor-pointer rounded-md border border-stone-400 bg-gray-50 py-1.5 pl-2 pr-6 text-xs leading-tight text-gray-900 shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-900 dark:text-white sm:text-sm"
                                             value={selectedDivision}
                                             onChange={(e) => { setSelectedDivision(e.target.value); setCurrentPage(1); }}
                                         >
@@ -1272,7 +1273,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className={`group min-w-0 glass bg-white/60 dark:bg-slate-800/40 rounded-lg border-2 border-slate-300/80 shadow-sm transition-shadow hover:shadow-md overflow-hidden border-l-4 border-l-current dark:border-white/5 ${subjectAccentText}`}
+                                className={`group min-w-0 glass overflow-hidden rounded-lg border-2 border-violet-200/70 bg-white/65 shadow-sm transition-shadow hover:shadow-[0_16px_40px_-14px_rgba(109,40,217,0.2)] dark:border-purple-500/20 dark:bg-slate-800/45 border-l-4 border-l-current ${subjectAccentText}`}
                             >
                                 <div
                                     role="button"
@@ -1289,7 +1290,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     className="p-3 cursor-pointer hover:bg-white/50 dark:hover:bg-slate-700/40 transition-colors"
                                 >
                                     <div className="flex flex-col gap-2">
-                                        <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                        <h3 className="text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-violet-700 dark:text-gray-100 dark:group-hover:text-violet-300">
                                             {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
                                         </h3>
 
@@ -1497,7 +1498,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage === 1 || loading}
-                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="flex items-center gap-2 rounded-lg border border-violet-200/75 bg-white/50 px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm backdrop-blur-sm transition-colors hover:bg-violet-50/80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-purple-500/25 dark:bg-slate-800/45 dark:text-gray-200 dark:hover:bg-slate-700/55"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -1511,7 +1512,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage * ITEMS_PER_PAGE >= totalCount || loading}
-                                className="px-5 py-2.5 glass bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/20 dark:border-white/5 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-white/60 dark:hover:bg-slate-600/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                                className="flex items-center gap-2 rounded-lg border border-violet-200/75 bg-white/50 px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm backdrop-blur-sm transition-colors hover:bg-violet-50/80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-purple-500/25 dark:bg-slate-800/45 dark:text-gray-200 dark:hover:bg-slate-700/55"
                             >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -1528,7 +1529,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
                 createPortal(
                     <div
-                        className="fixed z-[200] max-h-80 overflow-y-auto rounded-xl border border-slate-200 bg-white shadow-2xl dark:border-white/10 dark:bg-slate-900"
+                        className="fixed z-[200] max-h-80 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-purple-500/25 dark:bg-slate-900/95"
                         style={{
                             top: searchBoxRect.bottom + 4,
                             left: searchBoxRect.left,
@@ -1568,7 +1569,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                 setShowSuggestions(false);
                                                 await handleCaseClick(r);
                                             }}
-                                            className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                                            className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-violet-950/30"
                                         >
                                             <span className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
                                                 <HighlightText
@@ -1588,7 +1589,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     document.body
                 )
             }
-        </div>
+        </PurpleGlassAmbient>
     );
 };
 const SeparateOpinionCard = ({ op, idx }) => {

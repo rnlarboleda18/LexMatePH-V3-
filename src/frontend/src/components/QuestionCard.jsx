@@ -14,7 +14,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className={`group relative flex flex-col h-[15rem] overflow-hidden rounded-xl border-2 p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} border-l-[5px] ${borderColor}`}
+            className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 p-3 shadow-sm ring-1 ring-violet-300/35 backdrop-blur-[1px] transition-all hover:shadow-[0_18px_44px_-16px_rgba(109,40,217,0.22)] dark:ring-purple-500/20 ${surfaceClass} border-l-[5px] ${borderColor}`}
         >
             {/* Header: ID - Subject (Year) */}
             <div className={`flex items-center gap-2 mb-2 ${textColor}`}>

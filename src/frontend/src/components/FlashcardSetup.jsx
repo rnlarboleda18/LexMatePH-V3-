@@ -34,7 +34,7 @@ const FlashcardSetup = ({
     };
 
     const content = (
-            <div className={embedded ? "w-full flex flex-col" : "lex-modal-card relative max-w-4xl glass overflow-hidden flex flex-col rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl dark:border-white/10 dark:bg-slate-900/45 animate-in zoom-in-95 duration-200"}>
+            <div className={embedded ? "flex w-full flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/65 bg-white/50 p-0 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.2)] backdrop-blur-xl dark:border-purple-500/25 dark:bg-slate-900/45" : "lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/70 bg-white/55 shadow-[0_28px_70px_-24px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in zoom-in-95 duration-200 dark:border-purple-500/30 dark:bg-slate-900/50 glass"}>
                 {(conceptsLoading || conceptsError || deckError) && (
                     <div className="flex flex-col gap-2 border-b border-white/25 px-6 pb-3 pt-4 dark:border-white/10 sm:px-8">
                         {conceptsLoading && (
@@ -63,7 +63,7 @@ const FlashcardSetup = ({
 
                 <div className={embedded ? "flex-1 space-y-6" : "flex-1 space-y-10 overflow-y-auto p-6 sm:p-8"}>
                     <section>
-                        <h3 className="text-base font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 mb-3">
+                        <h3 className="mb-3 text-base font-bold uppercase tracking-wider text-violet-800 dark:text-violet-300">
                             Legal concepts (SC digests)
                         </h3>
                         <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
@@ -71,10 +71,10 @@ const FlashcardSetup = ({
                             Specifications topics). Peripheral items stay hidden.
                         </p>
                         {typeof onBar2026OnlyChange === 'function' && (
-                            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200/90 bg-white/50 px-3 py-2.5 dark:border-white/10 dark:bg-slate-900/30">
+                            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-violet-200/70 bg-white/45 px-3 py-2.5 dark:border-purple-500/20 dark:bg-slate-900/35">
                                 <input
                                     type="checkbox"
-                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-600"
+                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600 focus:ring-violet-500 dark:border-slate-600"
                                     checked={bar2026Only}
                                     onChange={(e) => onBar2026OnlyChange(e.target.checked)}
                                     disabled={conceptsLoading}
@@ -91,10 +91,10 @@ const FlashcardSetup = ({
                             </label>
                         )}
                         {typeof onRelaxedBarMatchChange === 'function' && (
-                            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200/90 bg-white/50 px-3 py-2.5 dark:border-white/10 dark:bg-slate-900/30">
+                            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-violet-200/70 bg-white/45 px-3 py-2.5 dark:border-purple-500/20 dark:bg-slate-900/35">
                                 <input
                                     type="checkbox"
-                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-600"
+                                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600 focus:ring-violet-500 dark:border-slate-600"
                                     checked={relaxedBarMatch}
                                     onChange={(e) => onRelaxedBarMatchChange(e.target.checked)}
                                     disabled={conceptsLoading}
@@ -120,7 +120,7 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex h-[15rem] w-full flex-col overflow-hidden rounded-xl border-2 border-l-[5px] border-gray-400 bg-gray-50 p-3 shadow-sm transition-all hover:shadow-md dark:border-gray-600 dark:bg-gray-900/30 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex h-[15rem] w-full flex-col overflow-hidden rounded-xl border-2 border-l-[5px] border-violet-300/70 bg-gradient-to-br from-white/80 to-violet-50/50 p-3 shadow-[0_16px_40px_-20px_rgba(109,40,217,0.2)] transition-all hover:shadow-[0_20px_50px_-18px_rgba(109,40,217,0.28)] dark:border-purple-500/35 dark:from-slate-900/50 dark:to-purple-950/20 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
                                 <span className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-700 dark:text-gray-200">
                                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-white/90 text-gray-600 dark:border-gray-600 dark:bg-slate-800/80 dark:text-gray-300">
@@ -131,7 +131,7 @@ const FlashcardSetup = ({
                                 <span className="mb-3 flex-1 text-sm text-gray-600 dark:text-gray-300">
                                     {countFor('all')} unique concepts
                                 </span>
-                                <span className="w-full rounded-lg border-2 border-gray-400 bg-white/90 py-2 text-center text-sm font-semibold text-gray-700 shadow-sm transition-colors hover:bg-white dark:border-gray-600 dark:bg-slate-900/70 dark:text-gray-200 dark:hover:bg-slate-800/90">
+                                <span className="w-full rounded-lg border-2 border-violet-300/80 bg-white/90 py-2 text-center text-sm font-semibold text-violet-900 shadow-sm transition-colors hover:bg-white dark:border-purple-500/40 dark:bg-slate-900/70 dark:text-violet-100 dark:hover:bg-slate-800/90">
                                     Start deck
                                 </span>
                             </button>
@@ -149,7 +149,7 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-l-[5px] p-3 shadow-sm transition-all hover:shadow-md ${surfaceClass} ${borderColor} disabled:pointer-events-none disabled:opacity-50`}
+                                        className={`group relative flex h-[15rem] flex-col overflow-hidden rounded-xl border-2 border-l-[5px] p-3 shadow-md ring-1 ring-violet-200/40 transition-all hover:shadow-[0_18px_44px_-16px_rgba(109,40,217,0.22)] dark:ring-purple-500/15 ${surfaceClass} ${borderColor} disabled:pointer-events-none disabled:opacity-50`}
                                     >
                                         <span className={`mb-2 flex items-center gap-2 text-sm font-bold ${textColor}`}>
                                             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/60 bg-white/80 dark:border-white/10 dark:bg-slate-900/50">
@@ -174,7 +174,7 @@ const FlashcardSetup = ({
                         <button
                             type="button"
                             onClick={() => onStart('CANCEL')}
-                            className="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition-colors shadow-sm"
+                            className="rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-6 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:from-violet-500 hover:to-purple-500"
                         >
                             Cancel
                         </button>

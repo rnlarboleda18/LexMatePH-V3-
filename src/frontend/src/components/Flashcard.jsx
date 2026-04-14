@@ -116,8 +116,8 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
     const renderFaceActions = (tone) => {
         const bar =
             tone === 'front'
-                ? 'border-t border-stone-200/90 bg-stone-100/50 dark:border-white/10 dark:bg-black/20'
-                : 'border-t border-indigo-200/80 bg-indigo-100/40 dark:border-white/10 dark:bg-black/25';
+                ? 'border-t border-violet-200/70 bg-violet-50/40 dark:border-purple-500/20 dark:bg-black/25'
+                : 'border-t border-purple-200/80 bg-purple-100/35 dark:border-fuchsia-500/15 dark:bg-black/30';
         return (
             <div className={`flex shrink-0 items-center gap-1.5 px-2 py-2 sm:gap-2 sm:px-2.5 sm:py-2 ${bar}`} onClick={(e) => e.stopPropagation()}>
                 {/* LexPlay button — gated at Juris */}
@@ -143,7 +143,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         e.stopPropagation();
                         setIsFlipped((f) => !f);
                     }}
-                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-stone-300/90 bg-white px-2 py-1.5 text-[11px] font-bold leading-tight text-stone-900 shadow-sm transition-colors hover:bg-stone-50 active:scale-[0.99] dark:border-white/15 dark:bg-slate-800 dark:text-stone-100 dark:hover:bg-slate-700/90 sm:min-h-[38px] sm:text-xs"
+                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-violet-300/80 bg-white/95 px-2 py-1.5 text-[11px] font-bold leading-tight text-violet-950 shadow-sm transition-colors hover:bg-violet-50 active:scale-[0.99] dark:border-purple-500/30 dark:bg-slate-800 dark:text-violet-100 dark:hover:bg-slate-700/90 sm:min-h-[38px] sm:text-xs"
                 >
                     <RotateCcw size={14} className="shrink-0" strokeWidth={2.25} />
                     {isFlipped ? 'Front' : 'Flip'}
@@ -154,7 +154,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         e.stopPropagation();
                         onNext();
                     }}
-                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-blue-500/35 bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-1.5 text-[11px] font-bold leading-tight text-white shadow-sm transition-colors hover:from-blue-500 hover:to-indigo-500 active:scale-[0.99] sm:min-h-[38px] sm:text-xs"
+                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-violet-500/40 bg-gradient-to-r from-violet-600 to-purple-600 px-2 py-1.5 text-[11px] font-bold leading-tight text-white shadow-sm transition-colors hover:from-violet-500 hover:to-fuchsia-600 active:scale-[0.99] sm:min-h-[38px] sm:text-xs"
                 >
                     Next
                     <ChevronRight size={14} className="shrink-0" strokeWidth={2.25} />
@@ -165,14 +165,14 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderFrontFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-stone-200/95 bg-gradient-to-b from-[#fdfcfa] to-[#f4f1ea] shadow-[0_20px_40px_-14px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.05)] dark:border-stone-600/80 dark:from-slate-800 dark:to-slate-900 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-200/90 bg-gradient-to-b from-white via-violet-50/40 to-fuchsia-50/30 shadow-[0_22px_48px_-18px_rgba(109,40,217,0.22),0_2px_6px_rgba(0,0,0,0.06)] dark:border-purple-500/30 dark:from-slate-800 dark:via-purple-950/40 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(0deg)',
             }}
         >
-            {renderFaceHeader('border-stone-200/90 dark:border-white/10')}
+            {renderFaceHeader('border-violet-200/80 dark:border-purple-500/25')}
             <div className="flex min-h-0 flex-1 flex-col px-2.5 pb-1.5 pt-2 sm:px-3 sm:pb-2 sm:pt-2.5">
                 <span
                     className={`mb-1 shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-900/85 dark:text-amber-400/95 ${!isBar ? 'text-center' : ''}`}
@@ -182,7 +182,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                 <div
                     role="button"
                     tabIndex={0}
-                    className="flex min-h-0 flex-1 cursor-pointer flex-col justify-center rounded-lg py-1 outline-none ring-amber-600/20 focus-visible:ring-2 dark:ring-amber-500/25"
+                    className="flex min-h-0 flex-1 cursor-pointer flex-col justify-center rounded-lg py-1 outline-none ring-violet-500/25 focus-visible:ring-2 dark:ring-purple-400/30"
                     onClick={() => setIsFlipped(true)}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -216,14 +216,14 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderBackFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-indigo-200/90 bg-gradient-to-b from-[#f5f3ff] to-[#ebe8ff] shadow-[0_20px_40px_-14px_rgba(67,56,202,0.2),0_2px_6px_rgba(0,0,0,0.05)] dark:border-indigo-900/50 dark:from-indigo-950/90 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-purple-300/85 bg-gradient-to-b from-violet-50 via-purple-50/80 to-fuchsia-50/70 shadow-[0_22px_48px_-16px_rgba(109,40,217,0.28),0_2px_6px_rgba(0,0,0,0.05)] dark:border-purple-500/35 dark:from-purple-950/95 dark:via-slate-950 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
             }}
         >
-            {renderFaceHeader('border-indigo-200/70 dark:border-white/10')}
+            {renderFaceHeader('border-purple-200/75 dark:border-purple-500/25')}
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-2.5 pb-2 pt-2 sm:px-3 sm:pb-2 sm:pt-2.5">
                 {isBar ? (
                     <>
@@ -235,7 +235,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                 {card.answer || 'Answer not available.'}
                             </p>
                             {card.subQuestions?.map((sub, i) => (
-                                <div key={i} className="relative mt-4 border-t border-indigo-200/80 pt-4 dark:border-white/10">
+                                <div key={i} className="relative mt-4 border-t border-violet-200/80 pt-4 dark:border-purple-500/20">
                                     <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] whitespace-pre-wrap break-words">
                                         {sub.answer || 'Answer not available.'}
                                     </p>
@@ -266,7 +266,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                                 <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-600 dark:text-stone-300">
                                                     <span className="font-mono tabular-nums">{src.case_number || '—'}</span>
                                                     <span>{src.date_str || '—'}</span>
-                                                    <span className="font-medium text-indigo-700 dark:text-indigo-300">
+                                                    <span className="font-medium text-violet-700 dark:text-violet-300">
                                                         {normalizeBarSubject(src.subject) || src.subject || '—'}
                                                     </span>
                                                 </div>

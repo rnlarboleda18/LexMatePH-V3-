@@ -163,6 +163,7 @@ const Updates = ({ isDarkMode = false }) => {
         setLoadingDecisions(false);
       })
       .catch((err) => {
+        // Decision highlights only — unrelated to feedLoading / sc_judiciary_feed above.
         console.error('Error fetching decisions:', err);
         setLoadingDecisions(false);
       });

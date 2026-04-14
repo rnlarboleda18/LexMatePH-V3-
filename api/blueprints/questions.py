@@ -243,55 +243,62 @@ def get_lexify_questions(req: func.HttpRequest) -> func.HttpResponse:
 
 @questions_bp.route(route="lexify_exams", methods=["GET"])
 def get_lexify_exams(req: func.HttpRequest) -> func.HttpResponse:
+    """Lightweight roster for Lexify dashboard. Uses JOIN + COUNT(DISTINCT) so the planner
+    can hash-aggregate; the old EXISTS-per-row pattern could scan the full questions table for seconds."""
+    conn = None
+    cur = None
     try:
         conn = get_db_connection()
-        cur  = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(cursor_factory=RealDictCursor)
 
-        # Count available questions per sub_topic
-        cur.execute("""
-            SELECT sub_topic, COUNT(*) as total
-            FROM questions
-            WHERE sub_topic IS NOT NULL
-              AND EXISTS (SELECT 1 FROM answers a WHERE a.question_id = questions.id)
-            GROUP BY sub_topic
-        """)
+        cur.execute(
+            """
+            SELECT q.sub_topic, COUNT(DISTINCT q.id) AS total
+            FROM questions q
+            INNER JOIN answers a ON a.question_id = q.id
+            WHERE q.sub_topic IS NOT NULL
+            GROUP BY q.sub_topic
+            """
+        )
         counts = {row["sub_topic"]: row["total"] for row in cur.fetchall()}
-        cur.close()
-        put_db_connection(conn)
 
         exams = []
         for exam_id, cfg in EXAM_CONFIG.items():
-            total_available = sum(
-                counts.get(s["sub_topic"], 0) for s in cfg["slots"]
+            total_available = sum(counts.get(s["sub_topic"], 0) for s in cfg["slots"])
+            exams.append(
+                {
+                    "id": exam_id,
+                    "label": cfg["label"],
+                    "day": cfg["day"],
+                    "weight": cfg["overall_weight"],
+                    "total_questions": 20,
+                    "available": total_available,
+                    "ready": total_available >= 20,
+                    "breakdown": [
+                        {
+                            "sub_topic": s["sub_topic"],
+                            "count": s["count"],
+                            "available": counts.get(s["sub_topic"], 0),
+                        }
+                        for s in cfg["slots"]
+                    ],
+                }
             )
-            exams.append({
-                "id":             exam_id,
-                "label":          cfg["label"],
-                "day":            cfg["day"],
-                "weight":         cfg["overall_weight"],
-                "total_questions": 20,
-                "available":      total_available,
-                "ready":          total_available >= 20,
-                "breakdown":      [
-                    {
-                        "sub_topic": s["sub_topic"],
-                        "count":     s["count"],
-                        "available": counts.get(s["sub_topic"], 0)
-                    }
-                    for s in cfg["slots"]
-                ]
-            })
 
-        return func.HttpResponse(
-            body=json.dumps(exams, default=str),
-            mimetype="application/json",
-            status_code=200
-        )
+        return _compressed_json_list(req, exams, max_age=120)
 
     except Exception as e:
         logging.error(f"lexify_exams error: {e}")
         return func.HttpResponse(
             body=json.dumps({"error": str(e)}),
             mimetype="application/json",
-            status_code=500
+            status_code=500,
         )
+    finally:
+        if cur is not None:
+            try:
+                cur.close()
+            except Exception:
+                pass
+        if conn is not None:
+            put_db_connection(conn)
