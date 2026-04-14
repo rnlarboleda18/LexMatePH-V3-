@@ -1,19 +1,37 @@
 import os
 import json
+import re
 import psycopg2
 from google import genai
 from google.genai import types
 import time
 import logging
 import sys
+from pathlib import Path
 from psycopg2.extras import RealDictCursor, register_default_jsonb, Json
 
+# Add scripts directory to path for imports
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from load_local_settings_env import load_api_local_settings_into_environ
+
 # Configuration
-API_KEY = os.getenv("GOOGLE_API_KEY", "REDACTED_API_KEY_HIDDEN")
+load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
+
+API_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
 DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
+VERTEX_PROJECT = os.getenv("VERTEX_AI_PROJECT")
+VERTEX_LOCATION = os.getenv("VERTEX_AI_LOCATION", "us-central1")
+
 # Client Configuration
-client = genai.Client(api_key=API_KEY)
+if VERTEX_PROJECT:
+    logging.info(f"Using Vertex AI Endpoint (project={VERTEX_PROJECT}, location={VERTEX_LOCATION})")
+    client = genai.Client(vertexai=True, project=VERTEX_PROJECT, location=VERTEX_LOCATION)
+else:
+    client = genai.Client(api_key=API_KEY)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -121,6 +139,7 @@ def fetch_and_claim_case(worker_id, conn, year=None, force=False, target_ids=Non
                    digest_issues IS NULL OR digest_issues = '' OR
                    digest_ruling IS NULL OR digest_ruling = '' OR
                    digest_significance IS NULL OR digest_significance = '' OR
+                   digest_significance = 'Unknown' OR
                    
                    digest_ratio IS NULL OR digest_ratio = '' OR
                    keywords IS NULL OR 
@@ -128,7 +147,8 @@ def fetch_and_claim_case(worker_id, conn, year=None, force=False, target_ids=Non
                    flashcards IS NULL OR 
                    spoken_script IS NULL OR spoken_script = '' OR
                    cited_cases IS NULL OR 
-                   statutes_involved IS NULL
+                   statutes_involved IS NULL OR
+                   ai_model IS NULL
                )
              """
 
@@ -204,11 +224,11 @@ def fetch_and_claim_case(worker_id, conn, year=None, force=False, target_ids=Non
 
         cur.execute(query, tuple(params))
         case = cur.fetchone()
-        
+
         if not case:
-            conn.close()
+            # Caller owns connection lifecycle (e.g. generate_digest_batch loop).
             return None
-            
+
         case_id = case[0]
         logging.info(f"Claiming Case ID {case_id}...")
         
@@ -262,6 +282,17 @@ def repair_truncated_json(json_str):
     if is_string:
         json_str += '"'
     
+    # If it ends with a key (e.g. "q"), it will fail parse because of missing : and value.
+    # We look for a pattern like "key" at the end of the string (after stripping whitespace).
+    json_str_trimmed = json_str.rstrip()
+    if json_str_trimmed.endswith('"'):
+        # Primitive check: if the last brace/bracket was { or [ and we just closed a string
+        # we might need a colon and a value. 
+        # More robust: check if the string before the last quote was preceded by { or ,
+        content_around = json_str_trimmed[-20:]
+        if re.search(r'[\{\,]\s*"[^"]+"$', json_str_trimmed):
+            json_str += ': "TRUNCATED"'
+    
     # Remove trailing comma if present (whitespace safe)
     json_str = json_str.rstrip()
     if json_str.endswith(','):
@@ -272,6 +303,21 @@ def repair_truncated_json(json_str):
         closer = stack.pop()
         json_str += closer
         
+    return json_str
+
+def preprocess_json_string(json_str):
+    """Aggressively remove trailing commas and heal missing quotes on common keys."""
+    # 1. Remove trailing commas
+    json_str = re.sub(r',\s*\]', ']', json_str)
+    json_str = re.sub(r',\s*\}', '}', json_str)
+    
+    # 2. Heal Missing Quotes on common string keys (q, a, term, definition)
+    # Simple strategy: If "key": follows with text and ends with newline/comma/brace 
+    # and doesn't have quotes, wrap it.
+    for key in ['q', 'a', 'term', 'definition', 'short_title']:
+        pattern = r'("' + key + r'":\s*)([a-zA-Z0-9][^,\}\n]+)(?=\s*[,\}\n])'
+        json_str = re.sub(pattern, r'\1"\2"', json_str)
+
     return json_str
 
 def normalize_ponente(ponente):
@@ -386,16 +432,17 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
                     digest_ratio = COALESCE(digest_ratio, %s),
                     digest_significance = COALESCE(NULLIF(digest_significance, 'PROCESSING'), %s),
                     significance_category = COALESCE(significance_category, %s),
-                    keywords = COALESCE(keywords, %s),
-                    timeline = COALESCE(timeline, %s),
-                    legal_concepts = COALESCE(legal_concepts, %s),
-                    flashcards = COALESCE(flashcards, %s),
+                    keywords = COALESCE(NULLIF(keywords::text, '[]')::jsonb, %s),
+                    timeline = COALESCE(NULLIF(timeline::text, '[]')::jsonb, %s),
+                    legal_concepts = COALESCE(NULLIF(legal_concepts::text, '[]')::jsonb, %s),
+                    flashcards = COALESCE(NULLIF(flashcards::text, '[]')::jsonb, %s),
                     spoken_script = COALESCE(spoken_script, %s),
                     main_doctrine = COALESCE(main_doctrine, %s),
-                    secondary_rulings = COALESCE(secondary_rulings, %s),
-                    cited_cases = COALESCE(cited_cases, %s),
-                    statutes_involved = COALESCE(statutes_involved, %s),
-                    separate_opinions = COALESCE(separate_opinions, %s),
+                    secondary_rulings = COALESCE(NULLIF(secondary_rulings::text, '[]')::jsonb, %s),
+                    cited_cases = COALESCE(NULLIF(cited_cases::text, '[]')::jsonb, %s),
+                    statutes_involved = COALESCE(NULLIF(statutes_involved::text, '[]')::jsonb, %s),
+                    separate_opinions = COALESCE(NULLIF(separate_opinions::text, '[]')::jsonb, %s),
+                    ai_model = COALESCE(ai_model, %s),
 
                     updated_at = NOW()
                 WHERE id = %s
@@ -424,6 +471,7 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
                 ensure_json(data.get('cited_cases', [])),
                 ensure_json(data.get('statutes_involved', [])),
                 ensure_json(data.get('separate_opinions', [])),
+                model_name,
                 
                 case_id
             ))
@@ -503,6 +551,23 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
         # Do not close conn here
         pass
 
+
+
+def _clear_processing_claim(conn, case_id: int) -> None:
+    """Release PROCESSING lock when exiting without a successful save_digest_result."""
+    try:
+        cur = conn.cursor()
+        cur.execute(
+            "UPDATE sc_decided_cases SET digest_significance = NULL WHERE id = %s AND digest_significance = 'PROCESSING'",
+            (case_id,),
+        )
+        conn.commit()
+    except Exception as e:
+        logging.error("Failed to clear PROCESSING for case %s: %s", case_id, e)
+        try:
+            conn.rollback()
+        except Exception:
+            pass
 
 
 def generate_digest_batch(limit=10, doctrinal_only=False, year=None, force=False, target_ids=None, en_banc_only=False, start_year=None, end_year=None, ascending=False, exclude_ids=None, model_name=None, fix_gemini_3=False, start_date=None, end_date=None, smart_backfill=False, max_pages=None, metadata_backfill=False, retry_blocked=False, seek_and_fill=False, fill_empty=False):
@@ -753,54 +818,60 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                 
             except Exception as e:
                 logging.error(f"Model {model_name} Error: {e}")
-                # Mark as failed and continue to next case
+                _clear_processing_claim(conn, case_id)
                 continue
             
             # Final Check: Did we get a valid response?
             if not response or not response.candidates:
-                 logging.error(f"All model tiers failed for Case {case_id}.")
-                 # Mark as BLOCKED finally
-                 try:
-                    conn_block = get_db_connection()
-                    cur_block = conn_block.cursor()
-                    cur_block.execute(
-                        "UPDATE sc_decided_cases SET digest_significance = 'BLOCKED_SAFETY' WHERE id = %s", 
-                        (case_id,)
+                logging.error(f"All model tiers failed for Case {case_id}.")
+                blocked_ok = False
+                try:
+                    cur_b = conn.cursor()
+                    cur_b.execute(
+                        "UPDATE sc_decided_cases SET digest_significance = 'BLOCKED_SAFETY' WHERE id = %s",
+                        (case_id,),
                     )
-                    conn_block.commit()
-                    conn_block.close()
-                    logging.info(f"Successfully marked Case {case_id} as BLOCKED_SAFETY in DB.")
-                 except Exception as e:
+                    conn.commit()
+                    blocked_ok = cur_b.rowcount > 0
+                    if blocked_ok:
+                        logging.info(f"Successfully marked Case {case_id} as BLOCKED_SAFETY in DB.")
+                except Exception as e:
+                    conn.rollback()
                     logging.error(f"Failed to update DB for blocked case {case_id}: {e}")
-                 continue
+                if not blocked_ok:
+                    _clear_processing_claim(conn, case_id)
+                continue
 
-            
             # Check for empty response (common in blocks)
             if not response.text:
                 logging.warning(f"Case {case_id} returned empty text.")
                 try:
                     logging.info(f"DEBUG CANDIDATES: {response.candidates}")
                     logging.info(f"DEBUG USAGE: {response.usage_metadata}")
-                except:
+                except Exception:
                     pass
-                
+
                 logging.warning(f"Marking as BLOCKED_SAFETY.")
+                blocked_ok = False
                 try:
-                    conn_block = get_db_connection()
-                    cur_block = conn_block.cursor()
-                    cur_block.execute(
-                        "UPDATE sc_decided_cases SET digest_significance = 'BLOCKED_SAFETY' WHERE id = %s", 
-                        (case_id,)
+                    cur_b = conn.cursor()
+                    cur_b.execute(
+                        "UPDATE sc_decided_cases SET digest_significance = 'BLOCKED_SAFETY' WHERE id = %s",
+                        (case_id,),
                     )
-                    conn_block.commit()
-                    conn_block.close()
-                except:
-                    pass
+                    conn.commit()
+                    blocked_ok = cur_b.rowcount > 0
+                except Exception as e:
+                    conn.rollback()
+                    logging.error(f"Failed to mark BLOCKED_SAFETY for empty text case {case_id}: {e}")
+                if not blocked_ok:
+                    _clear_processing_claim(conn, case_id)
                 continue
             
             # Parse JSON safely
             try:
                 clean_text = response.text.replace('```json', '').replace('```', '').strip()
+                clean_text = preprocess_json_string(clean_text)
                 data = json.loads(clean_text)
             except ValueError:
                 logging.warning(f"JSON Parsing failed. Attempting repair for Case {case_id}...")
@@ -814,6 +885,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                      with open(f"failed_digest_{case_id}.txt", "w", encoding="utf-8") as f:
                         f.write(response.text)
                      logging.info(f"Dumped failed response to failed_digest_{case_id}.txt")
+                     _clear_processing_claim(conn, case_id)
                      continue
             
             # Handle case where AI returns a list instead of dict
@@ -823,6 +895,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                     data = data[0]
                 else:
                     logging.error(f"Empty list returned for Case {case_id}, skipping...")
+                    _clear_processing_claim(conn, case_id)
                     continue
             
             # Construct composite significance field
@@ -886,6 +959,69 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
     conn.close()
     return processed_count
 
+
+def _dedupe_target_ids_preserve(ids: list[str]) -> list[str]:
+    """Strip, drop empties, preserve order, first occurrence wins."""
+    seen: set[str] = set()
+    out: list[str] = []
+    for raw in ids:
+        x = (raw or "").strip()
+        if not x or x in seen:
+            continue
+        seen.add(x)
+        out.append(x)
+    return out
+
+
+def _gemini_digest_child_command(args, *, limit: int, target_ids_csv: str | None) -> list[str]:
+    """Argv for a single-worker child (``--workers 1``); used when parent runs with ``--workers`` > 1."""
+    cmd = [sys.executable, os.path.abspath(__file__), "--workers", "1", "--limit", str(limit)]
+    if target_ids_csv is not None:
+        cmd.extend(["--target-ids", target_ids_csv])
+    if args.doctrinal_only:
+        cmd.append("--doctrinal-only")
+    if args.year is not None:
+        cmd.extend(["--year", str(args.year)])
+    if args.exit_on_finish:
+        cmd.append("--exit-on-finish")
+    if args.force:
+        cmd.append("--force")
+    if args.en_banc_only:
+        cmd.append("--en-banc-only")
+    if args.start_year is not None:
+        cmd.extend(["--start-year", str(args.start_year)])
+    if args.end_year is not None:
+        cmd.extend(["--end-year", str(args.end_year)])
+    if args.start_date:
+        cmd.extend(["--start-date", args.start_date])
+    if args.end_date:
+        cmd.extend(["--end-date", args.end_date])
+    cmd.extend(["--model", args.model])
+    if args.ascending:
+        cmd.append("--ascending")
+    if args.fix_gemini_3:
+        cmd.append("--fix-gemini-3")
+    if args.smart_backfill:
+        cmd.append("--smart-backfill")
+    if args.metadata_backfill:
+        cmd.append("--metadata-backfill")
+    if args.seek_and_fill:
+        cmd.append("--seek-and-fill")
+    if args.retry_blocked:
+        cmd.append("--retry-blocked")
+    if args.max_pages is not None:
+        cmd.extend(["--max-pages", str(args.max_pages)])
+    if args.fill_empty:
+        cmd.append("--fill-empty")
+    if args.api_key:
+        cmd.extend(["--api-key", args.api_key])
+    if args.vertex_project:
+        cmd.extend(["--vertex-project", args.vertex_project])
+    if args.vertex_location:
+        cmd.extend(["--vertex-location", args.vertex_location])
+    return cmd
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
@@ -902,7 +1038,7 @@ if __name__ == "__main__":
     parser.add_argument("--end-year", type=int, help="End year filter (inclusive)")
     parser.add_argument("--start-date", type=str, help="Start date filter (YYYY-MM-DD)")
     parser.add_argument("--end-date", type=str, help="End date filter (YYYY-MM-DD)")
-    parser.add_argument("--model", type=str, default="gemini-2.0-flash", help="Gemini Model to use")
+    parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini Model to use")
     parser.add_argument("--ascending", action="store_true", help="Process from oldest to newest")
     parser.add_argument("--fix-gemini-3", action="store_true", help="Backfill mode for Gemini 3 cases with missing fields")
     parser.add_argument("--smart-backfill", action="store_true", help="Smart Backfill: Overwrite weak models, fill incomplete strong models")
@@ -912,11 +1048,24 @@ if __name__ == "__main__":
     parser.add_argument("--max-pages", type=int, help="Max length in pages (approx 3000 chars/page)")
     parser.add_argument("--fill-empty", action="store_true", help="Target only cases with empty digest fields/BLOCKED status")
     parser.add_argument("--api-key", type=str, help="Custom API key for this run")
+    parser.add_argument("--vertex-project", type=str, help="Vertex AI Project ID (enables aiplatform endpoint)")
+    parser.add_argument("--vertex-location", type=str, default="us-central1", help="Vertex AI Location")
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=5,
+        help="Parallel child processes (each runs with --workers 1). Ignored with --continuous.",
+    )
 
     args = parser.parse_args()
     
     # Configure Model and Client from Args
-    if args.api_key:
+    if args.vertex_project or os.getenv("VERTEX_AI_PROJECT"):
+        v_project = args.vertex_project or os.getenv("VERTEX_AI_PROJECT")
+        v_loc = args.vertex_location or os.getenv("VERTEX_AI_LOCATION", "us-central1")
+        logging.info(f"Override: Using Vertex AI Endpoint (project={v_project}, location={v_loc})")
+        client = genai.Client(vertexai=True, project=v_project, location=v_loc)
+    elif args.api_key:
         logging.info(f"Using Custom API Key for this run.")
         client = genai.Client(api_key=args.api_key)
     
@@ -933,18 +1082,73 @@ if __name__ == "__main__":
             with open(args.target_ids_file, 'r') as f:
                 content = f.read()
                 # Handle both newlines and commas
-                file_ids = content.replace('\n', ',').split(',')
-                target_ids_list.extend([x.strip() for x in file_ids if x.strip()])
+                file_ids = content.replace("\n", ",").split(",")
                 target_ids_list.extend([x.strip() for x in file_ids if x.strip()])
             logging.info(f"Loaded {len(target_ids_list)} target IDs from file: {args.target_ids_file}")
         except Exception as e:
             logging.error(f"Failed to read target IDs file: {e}")
+
+    if target_ids_list:
+        target_ids_list = _dedupe_target_ids_preserve(target_ids_list)
 
     # Override limit if specific targets are set to prevent looping/overwriting
     if target_ids_list:
         args.limit = len(target_ids_list)
         logging.info(f"Target IDs provided. Setting limit to {args.limit} to process each exactly once.")
 
+    workers = max(1, int(args.workers))
+
+    if not args.continuous and workers > 1:
+        import subprocess
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        def _run_digest_child(cmd: list[str]) -> int:
+            logging.info("Parallel digest child: %s", " ".join(cmd))
+            return int(subprocess.run(cmd, cwd=repo_root).returncode)
+
+        if target_ids_list:
+            ids = target_ids_list
+            pool_workers = min(workers, len(ids))
+            rcs: list[int] = []
+            with ThreadPoolExecutor(max_workers=pool_workers) as pool:
+                futures = [
+                    pool.submit(
+                        _run_digest_child,
+                        _gemini_digest_child_command(args, limit=1, target_ids_csv=str(xid)),
+                    )
+                    for xid in ids
+                ]
+                for fut in as_completed(futures):
+                    rcs.append(fut.result())
+            bad = [r for r in rcs if r not in (0, 100)]
+            if bad:
+                sys.exit(bad[0])
+            if rcs and all(r == 100 for r in rcs):
+                sys.exit(100)
+            sys.exit(0)
+
+        processed_total = 0
+        limit_total = args.limit
+        while processed_total < limit_total:
+            wave = min(workers, limit_total - processed_total)
+            rcs = []
+            with ThreadPoolExecutor(max_workers=wave) as pool:
+                futures = [
+                    pool.submit(
+                        _run_digest_child,
+                        _gemini_digest_child_command(args, limit=1, target_ids_csv=None),
+                    )
+                    for _ in range(wave)
+                ]
+                for fut in as_completed(futures):
+                    rcs.append(fut.result())
+            successes = sum(1 for r in rcs if r == 0)
+            if successes == 0:
+                sys.exit(100 if processed_total == 0 else 0)
+            processed_total += successes
+        sys.exit(0)
 
     if args.continuous:
         logging.info("Starting CONTINUOUS digestion mode (Connect-Write-Disconnect)...")
@@ -964,18 +1168,19 @@ if __name__ == "__main__":
                     fix_gemini_3=args.fix_gemini_3,
                     start_date=args.start_date,
                     end_date=args.end_date,
+                    smart_backfill=args.smart_backfill,
                     max_pages=args.max_pages,
                     metadata_backfill=args.metadata_backfill,
                     retry_blocked=args.retry_blocked,
                     seek_and_fill=args.seek_and_fill,
-                    fill_empty=args.fill_empty
+                    fill_empty=args.fill_empty,
                 )
-                
+
                 if processed == 0:
                     logging.info("No cases processed in this batch.")
                     if args.exit_on_finish:
                         logging.info("Exiting as requested (--exit-on-finish).")
-                        sys.exit(100) # SIGNAL: NO WORK LEFT
+                        sys.exit(100)  # SIGNAL: NO WORK LEFT
                     time.sleep(5)
                 
             except Exception as e:
@@ -999,6 +1204,7 @@ if __name__ == "__main__":
             end_date=args.end_date,
             smart_backfill=args.smart_backfill,
             max_pages=args.max_pages,
+            metadata_backfill=args.metadata_backfill,
             retry_blocked=args.retry_blocked,
             seek_and_fill=args.seek_and_fill,
             fill_empty=args.fill_empty

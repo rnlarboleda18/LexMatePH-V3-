@@ -1,9 +1,52 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { normalizeFullTextMarkdownForGfm } from '../utils/fullTextMarkdown';
 
 export const SMART_LINK_REGEX = /(G\.R\. Nos?\.\s?\d+[\w\,&\s-]*)|(Republic Act No\.\s?\d+)/gi;
+
+const MODAL_SCROLL_CLASS = 'lex-modal-scroll';
+
+/** Escape an HTML id for use in `querySelector("#…")` (subset safe for footnote ids). */
+function escapeCssIdFragment(id) {
+    if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+        return CSS.escape(id);
+    }
+    return id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
+/**
+ * GFM footnote refs use in-page # anchors; the case modal scrolls inside `.lex-modal-scroll`,
+ * so the browser often does not scroll the footnote into view. Resolve the target inside
+ * that subtree (or document) and scroll it into the visible modal.
+ */
+function scrollInPageHashIntoView(anchorEl, hash) {
+    if (!hash || hash === '#' || typeof document === 'undefined') return false;
+    const raw = hash.startsWith('#') ? hash.slice(1) : hash;
+    let id = raw;
+    try {
+        id = decodeURIComponent(raw);
+    } catch {
+        id = raw;
+    }
+    if (!id) return false;
+
+    const scrollRoot = anchorEl.closest(`.${MODAL_SCROLL_CLASS}`);
+    const pick = (root) => {
+        if (!root) return null;
+        try {
+            return root.querySelector(`#${escapeCssIdFragment(id)}`);
+        } catch {
+            return null;
+        }
+    };
+
+    const target = pick(scrollRoot) || pick(document) || document.getElementById(id);
+    if (!target) return false;
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return true;
+}
 
 export const SmartLink = React.memo(({ text, onCaseClick }) => {
     if (!text) return null;
@@ -51,6 +94,15 @@ const SmartLinkWrapper = React.memo(({ children, onCaseClick }) => {
 });
 
 function useMarkdownComponents(onCaseClick, includeTables) {
+    const onHashLinkClick = useCallback((e) => {
+        const a = e.currentTarget;
+        const href = a.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        if (scrollInPageHashIntoView(a, href)) {
+            e.preventDefault();
+        }
+    }, []);
+
     return useMemo(() => {
         const base = {
             p: ({ children }) => (
@@ -69,6 +121,27 @@ function useMarkdownComponents(onCaseClick, includeTables) {
         if (!includeTables) return base;
         return {
             ...base,
+            a: ({ href, children, node: _node, ...props }) => {
+                if (typeof href === 'string' && href.startsWith('#')) {
+                    return (
+                        <a
+                            {...props}
+                            href={href}
+                            onClick={onHashLinkClick}
+                            className={[props.className, 'text-blue-700 underline-offset-2 hover:underline dark:text-amber-400']
+                                .filter(Boolean)
+                                .join(' ')}
+                        >
+                            {children}
+                        </a>
+                    );
+                }
+                return (
+                    <a {...props} href={href}>
+                        {children}
+                    </a>
+                );
+            },
             table: ({ children }) => (
                 <div className="my-4 w-full overflow-x-auto">
                     <table className="min-w-full border-collapse border border-gray-300 text-left text-sm dark:border-gray-600">
@@ -88,7 +161,7 @@ function useMarkdownComponents(onCaseClick, includeTables) {
                 </td>
             ),
         };
-    }, [onCaseClick, includeTables]);
+    }, [onCaseClick, includeTables, onHashLinkClick]);
 }
 
 /** Digest sections (facts, issues, ruling, ratio) — no GFM tables. */

@@ -3,6 +3,7 @@ import ArticleNode from './ArticleNode';
 import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { lexCache } from '../utils/cache';
+import { CODAL_LEXCACHE_REVISION, stripLegacyCodexArticleRunIn } from '../utils/codalMarkdown';
 import { Play, Loader2 } from 'lucide-react';
 
 const INITIAL_CHUNK = 30; // articles to render at first load
@@ -70,7 +71,9 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
             setLoading(true);
             setError(null);
             
-            const cacheKey = titleNum ? `${apiCode}_title_${titleNum}` : (bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`);
+            const cacheKey =
+                (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) +
+                (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '');
 
             const fetcher = async () => {
                 let url = '';
@@ -149,11 +152,16 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             throw new Error(msg);
                         }
                         const json = await res.json();
-                        return (json.articles || []).map((a) => ({
-                            ...a,
-                            article_num: a.article_num ?? a.article_number ?? a.key_id,
-                            content_md: a.content_md || a.content,
-                        }));
+                        return (json.articles || []).map((a) => {
+                            const num = a.article_num ?? a.article_number ?? a.key_id;
+                            const raw = a.content_md || a.content || '';
+                            const content_md = stripLegacyCodexArticleRunIn(raw, num);
+                            return {
+                                ...a,
+                                article_num: num,
+                                content_md,
+                            };
+                        });
                     }
                 }
                 return [];

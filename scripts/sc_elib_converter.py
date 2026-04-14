@@ -1,9 +1,15 @@
 
 import os
 import re
-from bs4 import BeautifulSoup
+import sys
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
-from markdownify import markdownify as md
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from scraper.elib_html_to_markdown import elib_html_to_markdown
 
 INPUT_DIR = "data/sc_elib_html"
 OUTPUT_DIR = "data/sc_elib_md"
@@ -58,93 +64,19 @@ def convert_file(filename):
     try:
         with open(in_path, 'r', encoding='utf-8', errors='replace') as f:
             raw = f.read()
-            
-        soup = BeautifulSoup(raw, 'html.parser')
-        
-        # 1. content_div extraction
-        content_div = soup.find('div', id='content') or soup.body
-        if not content_div:
+
+        stem = filename.replace('.html', '').replace('.htm', '')
+        source_url = f"https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/{stem}"
+        try:
+            doc_id = int(stem)
+        except ValueError:
+            doc_id = None
+        md_text, err = elib_html_to_markdown(raw, source_url=source_url, elib_doc_id=doc_id)
+        if err or not md_text:
+            print(f"Skipping {filename}: {err or 'empty'}")
             return
 
-        # 2. Locate Start Node (Header)
-        # Look for EN BANC, DIVISION, etc.
-        start_node = None
-        # Common headers in SC cases
-        headers_regex = re.compile(r'^(EN BANC|FIRST DIVISION|SECOND DIVISION|THIRD DIVISION|SPECIAL)', re.I)
-        
-        all_elements = content_div.find_all(recursive=True)
-        
-        for el in all_elements:
-            txt = el.get_text().strip()
-            # Heuristic: Short enough to be a header, matches pattern
-            if len(txt) < 100 and headers_regex.match(txt):
-                start_node = el
-                break
-        
-        # 3. Locate End Node (Credit)
-        end_node = None
-        credit_regex = re.compile(r'Supreme Court E-Library', re.I)
-        
-        # Search backwards might be faster, but forward is fine
-        for el in all_elements:
-             txt = el.get_text().strip()
-             if "Supreme Court E-Library" in txt and "2019" in txt:
-                 end_node = el
-                 break
-        
-        # 4. Filter content
-        # We will create a new container and append only relevant nodes
-        # Use a flag "collecting"
-        
-        final_soup = BeautifulSoup("<div></div>", "html.parser")
-        container = final_soup.div
-        
-        collecting = False
-        if not start_node:
-             # Fallback: Capture everything if no header found (old cases might differ)
-             collecting = True 
-        
-        # Traverse siblings/elements is tricky because of nesting.
-        # Simpler approach: Iterate over the lines of the raw HTML? No, parsing is safer.
-        # Let's iterate over top-level children of content_div
-        
-        for child in content_div.find_all(recursive=False):
-            # Check if this child CONTAINS the start_node (or is it)
-            if not collecting:
-                # If we haven't started, check if this node IS or CONTAINS the start header
-                text_content = child.get_text().strip()
-                if headers_regex.match(text_content) or (start_node and child == start_node) or (start_node and start_node in child.descendants):
-                    collecting = True
-                    # Append it
-                    container.append(child)
-                    continue
-            
-            if collecting:
-                # Check for stop
-                if end_node:
-                    # check if this child IS or CONTAINS end_node
-                    text_content = child.get_text().strip()
-                    if (child == end_node) or (end_node in child.descendants) or ("Supreme Court E-Library" in text_content and "2019" in text_content):
-                        # Don't append the footer itself, stop here
-                        break
-                
-                container.append(child)
-
-        # 5. Markdownify
-        # Extract text via markdownify
-        md_text = md(str(container), heading_style="ATX", 
-                        strip=['img', 'a', 'center', 'font', 'span', 'div', 'style', 'script', 'dir', 'blockquote'])
-        
-
-        # 6. Post-Process Footnotes
-        # We need to handle potential duplicate numbering across opinions (e.g. [1] in Decision, [1] in Dissent).
-        # Strategy: 
-        # 1. Identify "groups" of footnote definitions. 
-        #    A group is a contiguous block of lines starting with [^N]: (after our simple replacement).
-        # 2. For each group, we assume they apply to the text ABOVE them (up to the previous group).
-        # 3. We renumber the markers and definitions in that segment to be unique.
-        
-        final_text = process_inline_footnotes_simple(md_text)
+        final_text = md_text
         
         # Split into lines
         lines = final_text.split('\n')

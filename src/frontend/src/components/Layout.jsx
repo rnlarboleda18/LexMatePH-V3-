@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 
@@ -53,17 +54,24 @@ const Layout = ({
 
             <div className="relative z-10 flex flex-col min-h-screen">
 
-            {/* Header */}
-            {!hideAppChrome && (
-                <header
-                    className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
+            {/* Header — portaled to document.body so position:fixed stays tied to the viewport on mobile
+                (avoids iOS jank when any ancestor uses filter/transform/contain). */}
+            {!hideAppChrome &&
+                typeof document !== 'undefined' &&
+                createPortal(
+                    <div className={isDarkMode ? 'dark' : ''} data-lex-app-chrome>
+                        <header
+                            className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
                     min-h-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
                     ${isDarkMode
                         ? 'bg-slate-900/60 md:bg-slate-900/40 md:backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30_px_rgba(0,0,0,0.3)]'
                         : 'border-b-2 border-slate-300/90 bg-white/95 md:bg-white/90 md:backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)]'
                     }`}
-                    style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
-                >
+                            style={{
+                                filter: flashcardStudying ? 'blur(4px)' : 'none',
+                                transition: 'filter 0.3s ease',
+                            }}
+                        >
 
                     {/* Brand + menu */}
                     <div className="relative z-10 flex min-w-0 min-h-0 shrink-0 items-center gap-2 md:gap-2.5">
@@ -195,8 +203,10 @@ const Layout = ({
                             </SignedOut>
                         </div>
                     </div>
-                </header>
-            )}
+                        </header>
+                    </div>,
+                    document.body
+                )}
 
             {/* Sidebar (Navigation Drawer) */}
             {!hideAppChrome && (
@@ -223,7 +233,7 @@ const Layout = ({
                     className={`${
                         hideAppChrome
                             ? 'max-w-full'
-                            : ['codex', 'about', 'updates', 'quiz', 'landing'].includes(mode)
+                            : ['codex', 'about', 'updates', 'quiz', 'landing', 'supreme_decisions', 'browse_bar', 'flashcard'].includes(mode)
                               ? 'max-w-full ml-0'
                               : mainFullWidth
                                 ? 'mx-auto w-full max-w-none'

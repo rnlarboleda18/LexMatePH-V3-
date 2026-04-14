@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
 import { toTitleCase } from '../utils/textUtils';
-import { fixStrayQuotationArtifacts } from '../utils/codalMarkdown';
+import { extractRccLeadingShortTitle, fixStrayQuotationArtifacts, repairRccListMidItemLineBreaks } from '../utils/codalMarkdown';
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
@@ -266,6 +266,23 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     // We will convert `[1]` -> `[1](#footnote-1)`
     contentToDisplay = contentToDisplay.replace(/\[(\d+)\]/g, '[$1](#footnote-$1)');
 
+    const isRcc = (codeId || '').toLowerCase() === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
+    let rccInlineLeadTitle = null;
+    if (
+        isRcc &&
+        !customHeaderNode &&
+        currentArtNum != null &&
+        String(currentArtNum) !== '0' &&
+        !String(currentArtNum).includes('Header') &&
+        !String(currentArtNum).includes('Subheader')
+    ) {
+        const ex = extractRccLeadingShortTitle(contentToDisplay);
+        if (ex.lead) {
+            rccInlineLeadTitle = ex.lead;
+            contentToDisplay = ex.body;
+        }
+        contentToDisplay = repairRccListMidItemLineBreaks(contentToDisplay);
+    }
 
     // Unify Legacy Civil Code/Statutes (stored in separate relational db and served as amendment_links)
     // into the same structure used by the modern Const/RPC embedded JSON payload.
@@ -356,7 +373,13 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                     Preliminary Article
                                 </h3>
                             ) : (
-                                <h3 className={`text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`}>
+                                <h3
+                                    className={
+                                        rccInlineLeadTitle
+                                            ? `flex flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'w-full justify-center text-center' : 'text-left'}`
+                                            : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
+                                    }
+                                >
                                     {/* Smart Prefix: Don't add "Article" if article_num already has it or is Preamble */}
                                     {(!article_num || String(article_num).includes('Header') || String(article_num).includes('Subheader')) ? null :
                                         (codeId === 'const' || (article.code_id && article.code_id.toLowerCase() === 'const')) ? null :
@@ -374,6 +397,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 return toTitleCase(`${displayNum}. ${article_title}`, skipKeywords);
                                             })()
                                             : (() => {
+                                                if (rccInlineLeadTitle) {
+                                                    return (
+                                                        <>
+                                                            <span className="font-bold">Article {article_num}.</span>
+                                                            <span className="font-bold text-gray-900 dark:text-gray-100">
+                                                                {rccInlineLeadTitle}
+                                                            </span>
+                                                        </>
+                                                    );
+                                                }
                                                 const prefix = `Article ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
                                                     return toTitleCase(article_title, skipKeywords);
@@ -675,14 +708,26 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             return 0;
                         })();
 
-                        // Continuation paragraphs (no marker) inherit the last enumeration level
-                        const effectiveLevel = (
+                        // RCC: continuation lines without a marker used to inherit list indent forever, so
+                        // follow-on paragraphs ("Except as provided…") were mis-indented. Only inherit when the
+                        // segment does not look like a new full prose block (long, sentence case, not (a) line).
+                        const looksLikeLetteredOrSubnumberedLine =
+                            /^\(\s*[a-z]{1,2}\)\s/i.test(cleanSeg) || /^[a-z]\)\s/i.test(cleanSeg);
+                        const rccProseOutdent =
+                            isRcc &&
+                            cleanSeg.length >= 48 &&
+                            /^[A-Z]/.test(cleanSeg) &&
+                            !looksLikeLetteredOrSubnumberedLine;
+
+                        const shouldInheritEnumIndent =
                             indentationLevel === 0 &&
                             lastEnumLevel > 0 &&
                             cleanSeg &&
                             !isSubHeader &&
-                            !cleanSeg.startsWith('#')
-                        ) ? lastEnumLevel : indentationLevel;
+                            !cleanSeg.startsWith('#') &&
+                            !rccProseOutdent;
+
+                        const effectiveLevel = shouldInheritEnumIndent ? lastEnumLevel : indentationLevel;
 
                         // Update tracker ΓÇö reset on section headers, update on new markers
                         if (cleanSeg.startsWith('#')) {
@@ -694,6 +739,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             if (!/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.[\s\u00A0]/i.test(cleanSeg)) {
                                 lastNumericEnumLevel = indentationLevel;
                             }
+                        } else if (rccProseOutdent) {
+                            lastEnumLevel = 0;
+                            lastNumericEnumLevel = 0;
                         }
 
                         // Simple cascading indentation via Tailwind padding classes

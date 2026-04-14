@@ -1,23 +1,62 @@
 import os
 import json
-import psycopg2
-from openai import OpenAI
+import requests
 import time
 import logging
 import sys
+import psycopg2
+from pathlib import Path
 from psycopg2.extras import RealDictCursor, register_default_jsonb, Json
 
+# Add scripts directory to path for imports
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from load_local_settings_env import load_api_local_settings_into_environ
+
 # Configuration
-# Default to XAI API Key if present, otherwise use generic or fail
+load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
+
 API_KEY = os.getenv("XAI_API_KEY") 
 DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
+XAI_RESPONSES_URL = "https://api.x.ai/v1/responses"
 
-# Client Configuration
-# Initialize with default, can be overridden in main
-if API_KEY:
-    client = OpenAI(api_key=API_KEY, base_url="https://api.x.ai/v1")
-else:
-    client = None # Will init in main or error
+
+def extract_xai_responses_api_text(resp_data: dict) -> str:
+    """
+    Assistant-visible text from POST https://api.x.ai/v1/responses JSON.
+
+    The API returns structured ``output`` (list of message blocks with ``output_text``),
+    not a top-level string ``content``. Some payloads may still expose a string ``content``.
+    """
+    if not isinstance(resp_data, dict):
+        return ""
+    top = resp_data.get("content")
+    if isinstance(top, str) and top.strip():
+        return top.strip()
+    out = resp_data.get("output")
+    if not isinstance(out, list):
+        return ""
+    chunks: list[str] = []
+    for item in out:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        content = item.get("content")
+        if isinstance(content, str) and content.strip():
+            chunks.append(content)
+            continue
+        if not isinstance(content, list):
+            continue
+        for block in content:
+            if not isinstance(block, dict):
+                continue
+            if block.get("type") in ("output_text", "text"):
+                t = block.get("text")
+                if isinstance(t, str) and t:
+                    chunks.append(t)
+    return "".join(chunks).strip()
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -29,10 +68,19 @@ logging.basicConfig(
 )
 
 def get_db_connection():
-    conn = psycopg2.connect(DB_CONNECTION_STRING)
-    # Register global JSONB adapter for this connection
-    register_default_jsonb(conn_or_curs=conn, globally=True)
-    return conn
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            conn = psycopg2.connect(DB_CONNECTION_STRING, connect_timeout=10)
+            # Register global JSONB adapter for this connection
+            register_default_jsonb(conn_or_curs=conn, globally=True)
+            return conn
+        except psycopg2.OperationalError as e:
+            if attempt < max_retries - 1:
+                logging.warning(f"DB Connection attempt {attempt + 1} failed, retrying in 2s... Error: {e}")
+                time.sleep(2)
+            else:
+                raise e
 
 def fetch_and_claim_case(worker_id, conn, year=None, force=False, target_ids=None, en_banc_only=False, start_year=None, end_year=None, ascending=False, exclude_ids=None, model_name=None, fix_gemini_3=False, start_date=None, end_date=None, smart_backfill=False, max_pages=None, metadata_backfill=False, retry_blocked=False, seek_and_fill=False, fill_empty=False, doctrinal_only=False):
 
@@ -247,6 +295,12 @@ def repair_truncated_json(json_str):
     if is_string:
         json_str += '"'
     
+    # If it ends with a key (e.g. "q"), it will fail parse because of missing : and value.
+    json_str_trimmed = json_str.rstrip()
+    if json_str_trimmed.endswith('"'):
+        if re.search(r'[\{\,]\s*"[^"]+"$', json_str_trimmed):
+            json_str += ': "TRUNCATED"'
+            
     json_str = json_str.rstrip()
     if json_str.endswith(','):
         json_str = json_str[:-1]
@@ -255,6 +309,22 @@ def repair_truncated_json(json_str):
         closer = stack.pop()
         json_str += closer
         
+    return json_str
+
+
+import re
+
+def preprocess_json_string(json_str):
+    """Aggressively remove trailing commas and heal missing quotes on common keys."""
+    # 1. Remove trailing commas
+    json_str = re.sub(r',\s*\]', ']', json_str)
+    json_str = re.sub(r',\s*\}', '}', json_str)
+    
+    # 2. Heal Missing Quotes on common string keys
+    for key in ['q', 'a', 'term', 'definition', 'short_title']:
+        pattern = r'("' + key + r'":\s*)([a-zA-Z0-9][^,\}\n]+)(?=\s*[,\}\n])'
+        json_str = re.sub(pattern, r'\1"\2"', json_str)
+
     return json_str
 
 def normalize_ponente(ponente):
@@ -339,16 +409,17 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
                     digest_ratio = COALESCE(digest_ratio, %s),
                     digest_significance = COALESCE(NULLIF(digest_significance, 'PROCESSING'), %s),
                     significance_category = COALESCE(significance_category, %s),
-                    keywords = COALESCE(keywords, %s),
-                    timeline = COALESCE(timeline, %s),
-                    legal_concepts = COALESCE(legal_concepts, %s),
-                    flashcards = COALESCE(flashcards, %s),
+                    keywords = COALESCE(NULLIF(keywords::text, '[]')::jsonb, %s),
+                    timeline = COALESCE(NULLIF(timeline::text, '[]')::jsonb, %s),
+                    legal_concepts = COALESCE(NULLIF(legal_concepts::text, '[]')::jsonb, %s),
+                    flashcards = COALESCE(NULLIF(flashcards::text, '[]')::jsonb, %s),
                     spoken_script = COALESCE(spoken_script, %s),
                     main_doctrine = COALESCE(main_doctrine, %s),
-                    secondary_rulings = COALESCE(secondary_rulings, %s),
-                    cited_cases = COALESCE(cited_cases, %s),
-                    statutes_involved = COALESCE(statutes_involved, %s),
-                    separate_opinions = COALESCE(separate_opinions, %s),
+                    secondary_rulings = COALESCE(NULLIF(secondary_rulings::text, '[]')::jsonb, %s),
+                    cited_cases = COALESCE(NULLIF(cited_cases::text, '[]')::jsonb, %s),
+                    statutes_involved = COALESCE(NULLIF(statutes_involved::text, '[]')::jsonb, %s),
+                    separate_opinions = COALESCE(NULLIF(separate_opinions::text, '[]')::jsonb, %s),
+                    ai_model = COALESCE(ai_model, %s),
 
                     updated_at = NOW()
                 WHERE id = %s
@@ -377,6 +448,7 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
                 ensure_json(data.get('cited_cases', [])),
                 ensure_json(data.get('statutes_involved', [])),
                 ensure_json(data.get('separate_opinions', [])),
+                model_name,
                 
                 case_id
             ))
@@ -499,78 +571,134 @@ def generate_digest_batch(limit=10, doctrinal_only=False, year=None, force=False
             safe_content = content
             
             # --- PROMPT (UPDATED FOR GROK: FORCE ELABORATION) ---
-            sys_instruction = """ROLE: You are an Expert Legal Analyst and Senior Bar Reviewer for Philippine Jurisprudence.
-YOUR GOAL: Create valid JSON digests that are EXHAUSTIVE, DETAILED, AND ACADEMICALLY RIGOROUS. 
-CRITICAL INSTRUCTION: DO NOT SUMMARIZE for brevity. Summarize for DEPTH. Conciseness is NOT the goal. The goal is complete legal analysis sufficient for a Bar Exam top-notcher study material.
-TONE: Formal, clinical, authoritative. Use standard legal terminology."""
+            
+            sys_instruction = """ROLE: You are an Expert Legal Analyst and Senior Reporter for the Supreme Court of the Philippines. Your objective is to extract a precise, clinical case digest for a professional Bar Review Database.
+STYLE: Formal, forensic, and objective. Use the exact legal terminology found in Philippine Jurisprudence.
+CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdown blocks like ```json. Just output the raw JSON object."""
 
             prompt = f"""
-            **CRITICAL RULE: ELABORATE, DO NOT CONDENSE.**
-            - **Grok Specific Instruction:** You tend to be too concise. FORCE yourself to write detailed paragraphs.
-            - **Facts:** Must be detailed enough to tell the full story (Antecedents -> Procedure -> Arguments).
-            - **Issues:** Extract the specific legal questions raised, derived from the assignment of errors or the Court's statement of issues. Format as a bulleted list.
-            - **Ruling/Ratio:** Must explain the "WHY" in depth. Avoid one-sentence answers.
-            - **Doctrines/Main Doctrine:** Summarize the core jurisprudence in a minimum of 5 sentences. Focus on the rule and its application, but avoid excessive verbosity.
-            - **Separate Opinions:** DO NOT read or summarize the text of separate opinions. Only extract the VOTE (concur/dissent) from the signatories section of the main decision.
-
-            **SIGNIFICANCE CLASSIFICATION HIERARCHY & CONSTRAINTS**
-
-            **REITERATION**: The Court applies settled SC doctrine.
-            *CRITICAL: Reversing a Court of Appeals or Trial Court decision based on established SC precedent is a REITERATION, not a Reversal of doctrine.*
-
-            **NEW DOCTRINE**: The Court establishes a novel rule, principle, or interpretation for a "case of first impression" where no prior SC precedent existed.
-
-            **MODIFICATION**: The SC explicitly adjusts, narrows, or expands an EXISTING SC DOCTRINE.
-            *WARNING: Modifying a criminal penalty (e.g., from Reclusion Perpetua to 12 years) or adjusting monetary damages is REITERATION, not Modification of doctrine.*
-
-            **ABANDONMENT**: The SC explicitly overturns or departs from an EXISTING SC DOCTRINE.
-            The SC explicitly overturns an existing doctrine in a new and different case (e.g., Carpio-Morales abandoning the Condonation Doctrine). This sets a new precedent for the entire legal system.
-            *LOGIC: This requires the Court to state that a previous SC ruling is no longer "good law."*
-
-            **REVERSAL (via Resolution)**: The SC reverses its own prior decision in the same case via a Motion for Reconsideration (MR).
-
-            **THOUGHT PROCESS (INTERNAL MONOLOGUE)**
-            Before providing the output, you must:
-            1. Identify the Ratio Decidendi.
-            2. Check if the Court cites a "Lead Case."
-            3. Determine if the Court is "Clarifying" (Modification) or "Following" (Reiteration).
-            4. Check for False Positives: Did the Court merely reverse the CA? If yes, classify as REITERATION.
-
-            **PRECISION GUARDRAILS**
-            - **Outcome vs. Doctrine**: If the SC reverses its own decision on MR, classify as REVERSAL. If the SC tells the public "the old rule from 1990 is no longer good law," classify as ABANDONMENT.
-            - **Lower Court Reversals**: If the SC reverses the Court of Appeals, this is usually REITERATION unless they state they are creating a new rule.
-            - **Penalty/Award Changes**: Changing "Death" to "Life Imprisonment" based on existing law is REITERATION.
+            **ROLE:**
+            Senior Reporter for the Supreme Court of the Philippines. Your objective is to extract a precise, clinical case digest for a professional Bar Review Database.
+            **STYLE:**
+            Formal, forensic, and objective. Use the exact legal terminology found in Philippine Jurisprudence. 
+            **TASK:**
+            Distill the provided text into a high-yield digest while maintaining the "Language of the Law."
+            **INSTRUCTIONS:**
+            1. **Legal Verbatim:** Use the actual words and phrases from the input text (e.g., "treachery," "evident premeditation," "grave abuse of discretion"). Do not sanitize legal terms, as they are essential for Bar Exam preparation.
+            2. **Clinical Focus:** Filter out emotional narratives. Retain only the facts necessary to satisfy the elements of the crime or the legal doctrine.
+            3. **Safety Protocol:** Only redact or abstract content if it involves the specific names of victims in sensitive cases (e.g., use "AAA" or "The Victim" per RA 9262 protocols), but keep the description of the legal acts intact.
+            4. **Separate Opinions (MINIMAL FORMAT - ALL Justices, NO SUMMARIES):** Identify ALL Justices who filed separate opinions. For each, provide ONLY the Justice name and Type. Types: "Dissenting", "Concurring", "Separate Concurring", "Separate Dissenting". Format example: {{"justice": "Leonardo-De Castro, J.", "type": "Dissenting"}}. **CRITICAL: DO NOT include a summary field** - output should be compact with just name + type for each Justice.
+ You MUST identify and summarize **ALL** Concurring, Dissenting, Separate Concurring, and Separate Dissenting Opinions found in the text. En Banc cases often have 10+ separate opinions—scan the ENTIRE document thoroughly, including footnotes and signature blocks, to capture every opinion. For the Ponente, identify if they expressed a personal "Separate View" distinct from the majority. The `summary` field for each opinion MUST be populated with at least 3-4 sentences; it cannot be null.
 
             **INPUT TEXT:**
             {safe_content}
+            
+            **YOUR GOAL:**
+            Analyze the provided legal text and generate a structured, educational JSON digest for Bar Review students.
 
-            **OUTPUT FORMAT (JSON):**
-            Return ONLY valid JSON with this structure:
+            **STRICT DATA INTEGRITY RULES:**
+            1. **No Hallucinations:** If a specific detail (date, justice, fact) is NOT found in the text, return `null` for strings/dates or an empty array `[]` for lists. Do NOT invent data.
+            2. **JSON Safety:** You MUST escape all double quotes (") and control characters (newlines \\n, tabs \\t) within string values to ensure valid JSON parsing.
+            3. **Database Compatibility:** Follow ISO formats exactly.
+            4. **Structural Alignment:** For every issue listed in "digest_issues", there MUST be a corresponding and clearly labeled bullet point in "digest_ratio" (e.g., "* **On Issue 1:** ...", "* **On Issue 2:** ..."). Do NOT group issues together or skip indices.
+            5. **Acronyms & Abbreviations:** You MUST define all acronyms and abbreviations in full upon their first occurrence in the text (e.g., "Sexual Orientation, Gender Identity and Expression, and Sex Characteristics (SOGIESC)"). Subsequent mentions can use the acronym alone. Do NOT use undefined acronyms.
+            6. **No "None" Strings:** If a field has no data, use `null` or `[]`. Do not write the literal string "None" or "N/A".
+
+            **YOUR TASKS (Execute in Order):**
+
+            1. **EXTRACT METADATA & STATUTES:**
+               - **Document Type:** Identify if this is a [Decision | Resolution | Concurring Opinion | Dissenting Opinion | Separate Opinion].
+               - **Short Title (SC 2023 Rule):** Follow the Supreme Court Stylebook (2023). 
+                 * **General Rule:** The short title should ideally be the surname of the first party listed in the full title (e.g., "Falcis").
+                 * **Exceptions:** If the surname is very common, use the other party's surname. For "People" cases, use the surname of the accused (e.g., "Dela Cruz"). For government agencies, use the acronym (e.g., "COMELEC").
+                 * **Usage:** This `short_title` field will be used for citations (e.g., "Falcis v. Civil Registrar General"). Ensure it follows the format "Petitioner v. Respondent" using surnames/acronyms only, sentence case, and "v." instead of "vs.".
+               - **Court Body:** En Banc vs. Division.
+               - **Ponente:** Justice Name.
+               - **Subject:** Identify the primary and secondary subjects. Choose from: [Political, Civil, Commercial, Labor, Criminal, Taxation, Ethics, Remedial]. Provide as "Primary: [Subject]; Secondary: [Subject1, Subject2]". If only one applies, just list it as Primary.
+               - **Keywords:** Extract 5-10 specific legal keywords.
+               - **Statutes Involved:** Scan for specific laws cited (e.g., "Article 36, Family Code"). Limit to the **Top 5 most relevant** statutes.
+               - **Main Doctrine (ELABORATE):** Provide a **comprehensive 3-5 sentence explanation** of the primary legal doctrine established or applied by this case. Explain the rule, its rationale, and its significance for Philippine jurisprudence. Do NOT just state the doctrine—elaborate on its meaning and application.
+
+            2. **JURISPRUDENCE MAPPING (Contextual):**
+               - Identify Supreme Court cases cited in the text.
+               - **Classify the relationship:** "Applied" or "Distinguished".
+               - **Elaboration:** You MUST provide 2-3 sentences explaining EXACTLY how the case was applied or why it was distinguished. Do NOT just list the case.
+               - **LIMIT RULES (CRITICAL):**
+                 * **Maximum Total:** 10 cited cases.
+                 * **Priority - Distinguished Cases:** Include ALL distinguished cases, up to a maximum of 5.
+                 * **Applied Cases:** Include ONLY those cases that the Court explicitly emphasized or relied upon as the main precedents. Skip minor citations.
+                 * If you have space after Distinguished cases (up to 10 total), add the most important Applied cases.
+               - **Constraint:** Ensure the 'elaboration' field in the JSON output is populated.
+
+            3. **TIMELINE GENERATION (For UI Rendering):**
+               - Extract key events with dates into a chronological list.
+               - Format dates in events as consistently as possible. Use `null` if the entire timeline is missing.
+
+            4. **DIGEST THE CASE (CHRONOLOGICAL):**
+               - **Facts Structure:** The "digest_facts" section MUST follow this three-part structure. **CRITICAL:** You MUST insert exactly TWO newline characters (`\n\n`) between each section to ensure they appear as separate paragraphs in the UI. Do NOT run them together.
+                 * **The Antecedents:** The underlying events/dispute.
+                 * **Procedural History:** The path through lower courts/agencies.
+                 * **The Petition** (or **The Appeal**): Specifically describe the procedural vehicle (e.g., Rule 45 petition) and the main arguments raised by the petitioner/appellant to the Supreme Court.
+               - **Issues:** Provide a list of ALL issues (Procedural & Substantive) using **BULLET POINTS**.
+               - **Ruling:** Final Verdict and Dispositive Portion.
+               - **Ratio (POINT-BY-POINT):**
+                 - Address every issue using the bullet points from the Issues section.
+                 - **Reasoning Requirement:** For each issue, elaborate clearly how the Supreme Court reasoned. Provide a **MINIMUM of 5 sentences** per issue.
+                 - **Citation Rule:** Explicitly name referenced cases (e.g., "Applying *Tan-Andal*...").
+
+            5. **SIGNIFICANCE (THE "BAR TRAPS"):**
+
+                 **Step A: Primary Classification**
+                 [REITERATION | NEW DOCTRINE | ABANDONMENT | MODIFICATION | CLARIFICATION | REVERSAL]
+                 
+                 **Classification Definitions:**
+                 - **NEW DOCTRINE**: Establishes a new legal principle or rule on a novel issue.
+                 - **REITERATION**: Reaffirms or applies an existing doctrine without change.
+                 - **MODIFICATION**: Modifies, adjusts, or refines an existing doctrine or ruling.
+                 - **CLARIFICATION**: The Supreme Court clarifies the application of law or doctrine (e.g., resolving ambiguity, providing guidance on interpretation).
+                 - **ABANDONMENT**: Explicitly abandons, overturns, or departs from a previous doctrine.
+                 - **REVERSAL**: This means reversal of the Supreme Court of its own Decision (Not the Supreme Court reversing the lower courts). The Supreme Court in its Resolution reverses its OWN Decision on Motion for Reconsideration of either of the Party regardless of how many motions were filed. This classification (REVERSAL) should be accompanied by any of the other classification eg Modification etc, (depending on the final resolution). SO the Output should be "REVERSAL" and "MODIFICATION" or "REVERSAL" and "ABANDONMENT"
+
+                 **Step B: Reasoning & Evidence (Mandatory)**
+                 Provide a **classification_reasoning** sentence. If you classify as NEW DOCTRINE, ABANDONMENT, MODIFICATION, or CLARIFICATION, you MUST quote the specific sentence where the Court indicates this (e.g., "We now abandon the ruling in...", "We clarify that...", "We modify our prior ruling...").
+
+                 **Step C: Collateral Matters (Mandatory Check)**
+                 Scan for "Bar Exam Traps": Quantum of Proof changes, Win/Loss paradoxes, Procedural anomalies, Prospective applications, Novel definitions.
+
+            6. **EDUCATIONAL ASSETS:**
+               - **Legal Concepts:**
+                 - Extract 5 concepts: "Concept - Definition".
+                 - **Rule:** Use EXACT wording from the case for the definition.
+                 - **Citations:** Cite the source case AND the specific provision of the law (e.g., "Article 3, Section 1, 1987 Constitution").
+               - **Flashcards:** Create 3 cards (Concept, Distinction, Scenario). Do NOT ask "What is the doctrine?".
+
+            **OUTPUT FORMAT:**
+            Return ONLY valid JSON:
             {{
                 "full_title": "...",
                 "short_title": "...",
-                "significance_category": "REITERATION | NEW DOCTRINE | MODIFICATION | ABANDONMENT | REVERSAL", 
-                "classification": "REITERATION | NEW DOCTRINE | MODIFICATION | ABANDONMENT | REVERSAL",
+                "significance_category": "REITERATION | NEW DOCTRINE | CLARIFICATION | MODIFICATION | ABANDONMENT | REVERSAL", 
+                "classification": "REITERATION | NEW DOCTRINE | CLARIFICATION | MODIFICATION | ABANDONMENT | REVERSAL",
                 "classification_reasoning": "Evidence and quote from the text justifying the classification...",
-                "significance_narrative": "Explain the nuances and significance to Bar examinees. Avoid the word 'trap'. Use phrases like 'examinees may misappreciate'. Do not just repeat the ruling.",
+                "significance_narrative": "Detailed explanation of Bar Traps and significance...",
                 "relevant_doctrine": "...",
                 "statutes_involved": [
                     {{"law": "Family Code", "provision": "Article 36"}},
                     {{"law": "Rules of Court", "provision": "Rule 65, Sec. 1"}}
                 ],
-                "main_doctrine": "[Summary of the Doctrine - Minimum 5 sentences.] ...",
+                "main_doctrine": "...",
                 "keywords": ["Keyword1", "Keyword2"],
                 "court_division": "En Banc | Third Division",
                 "ponente": "...",
-                "document_type": "Decision | Resolution",
-                "subject": "Political Law | Labor Law | Civil Law | Taxation Law | Commercial Law | Criminal Law | Remedial Law | Legal Ethics. (Pick ONLY from these 8. Do NOT invent subtitles like 'Constitutional Law'.)",
+                "document_type": "Decision | Resolution | ...",
+                "subject": "Primary: [Subject]; Secondary: [Subject1, Subject2]",
                 "date": "YYYY-MM-DD",
                 "case_number": "...",
                 
-                "digest_facts": "1. **The Antecedents:** [DETAILED NARRATIVE OF EVENTS - Min. 5 sentences] ... \\n\\n 2. **Procedural History:** [DETAILED LOWER COURT ACTION] ... \\n\\n 3. **The Petition:** [ARGUMENTS] ...",
-                "issue": "* Issue 1\\n* Issue 2",
+                "digest_facts": "1. **The Antecedents:** ... \\n\\n 2. **Procedural History:** ...",
+                "issue": "* Issue 1\\n* Issue 2 (STRICT: Return as a single Markdown string with bullet points, NOT a JSON array)",
                 "ruling": "...",
-                "ratio": "* **On Issue 1:** [EXTENSIVE REASONING - Minimum 5-7 sentences. Citing specific laws and precedents...]\\n* **On Issue 2:** [EXTENSIVE REASONING...]",
+                "ratio": "* **On Issue 1:** [5+ sentences of reasoning...]\\n* **On Issue 2:** [5+ sentences...](STRICT: Return as a single Markdown string with bullet points, NOT a JSON array. **CRITICAL:** All reasoning for a single issue MUST be contained within its corresponding bullet point. DO NOT create separate bullets labeled 'Continued' or 'Incurability' etc. Place ALL analysis for Issue 1 under the '**On Issue 1:**' bullet point.)",
                 
                 "timeline": [
                     {{"date": "2020-01-01", "event": "Incident occurred..."}},
@@ -590,9 +718,12 @@ TONE: Formal, clinical, authoritative. Use standard legal terminology."""
                     {{"type": "Scenario", "q": "...", "a": "..."}}
                 ],
                 "spoken_script": "A 1-minute script: 'Hi! Today we are discussing [Case]. The main takeaway is...'",
+                "legal_concepts": [
+                    {{"term": "Political Question", "definition": "those questions which... [citing Article X, Section Y]"}},
+                    {{"term": "Buyer in Good Faith", "definition": "... [citing Case Title]"}}
+                ],
                 "separate_opinions": [
-                    "Justice Carpio dissents",
-                    "Justice Leonen concurs"
+                    {{"justice": "Name", "type": "Concurring", "summary": "...", "text": "..."}}
                 ],
                 "secondary_rulings": [
                     {{"topic": "Quantum of Proof", "ruling": "..."}}
@@ -600,22 +731,51 @@ TONE: Formal, clinical, authoritative. Use standard legal terminology."""
             }}
             """
             
+            
+
             response = None
             used_model = model_name
             
-            logging.info(f"Attempting digest with {model_name} (XAI/Grok)...")
+            logging.info(f"Attempting digest with {model_name} (XAI/Grok Responses API)...")
             try:
-                # USING OPENAI CLIENT FOR GROK
-                chat_completion = client.chat.completions.create(
-                    model=model_name,
-                    messages=[
+                # USING REQUESTS FOR CUSTOM XAI RESPONSES API
+                headers = {
+                    "Authorization": f"Bearer {API_KEY}",
+                    "Content-Type": "application/json"
+                }
+                
+                payload = {
+                    "model": model_name,
+                    "input": [
                         {"role": "system", "content": sys_instruction},
                         {"role": "user", "content": prompt}
-                    ],
-                    temperature=0.1,
-                )
+                    ]
+                }
                 
-                response_text = chat_completion.choices[0].message.content
+                # Note: temperature/top_p might be adjusted by the API for reasoning models automatically
+                # but we'll include it if it's allowed.
+                payload["temperature"] = 0.1
+                
+                resp = requests.post(XAI_RESPONSES_URL, headers=headers, json=payload, timeout=300)
+                
+                if resp.status_code != 200:
+                    logging.error(f"XAI API Error ({resp.status_code}): {resp.text}")
+                    if resp.status_code == 429:
+                        logging.warning("Hit Rate Limit. Sleeping...")
+                        time.sleep(90)
+                    continue
+                
+                resp_data = resp.json()
+                if not isinstance(resp_data, dict):
+                    logging.error("XAI API returned non-object JSON")
+                    continue
+                response_text = extract_xai_responses_api_text(resp_data)
+
+                reasoning = resp_data.get("reasoning_content")
+                if not reasoning and isinstance(resp_data.get("reasoning"), str):
+                    reasoning = resp_data.get("reasoning")
+                if reasoning:
+                    logging.info("Captured reasoning trace (chars: %s)", len(reasoning))
                 
             except Exception as e:
                 logging.error(f"Model {model_name} Error: {e}")
@@ -685,6 +845,65 @@ TONE: Formal, clinical, authoritative. Use standard legal terminology."""
     conn.close()
     return processed_count
 
+
+def _dedupe_target_ids_preserve(ids: list[str]) -> list[str]:
+    """Strip, drop empties, preserve order, first occurrence wins."""
+    seen: set[str] = set()
+    out: list[str] = []
+    for raw in ids:
+        x = (raw or "").strip()
+        if not x or x in seen:
+            continue
+        seen.add(x)
+        out.append(x)
+    return out
+
+
+def _grok_digest_child_command(args, *, limit: int, target_ids_csv: str | None) -> list[str]:
+    """Argv for a single-worker child (``--workers 1``); used when parent runs with ``--workers`` > 1."""
+    cmd = [sys.executable, os.path.abspath(__file__), "--workers", "1", "--limit", str(limit)]
+    if target_ids_csv is not None:
+        cmd.extend(["--target-ids", target_ids_csv])
+    if args.doctrinal_only:
+        cmd.append("--doctrinal-only")
+    if args.year is not None:
+        cmd.extend(["--year", str(args.year)])
+    if args.exit_on_finish:
+        cmd.append("--exit-on-finish")
+    if args.force:
+        cmd.append("--force")
+    if args.en_banc_only:
+        cmd.append("--en-banc-only")
+    if args.start_year is not None:
+        cmd.extend(["--start-year", str(args.start_year)])
+    if args.end_year is not None:
+        cmd.extend(["--end-year", str(args.end_year)])
+    if args.start_date:
+        cmd.extend(["--start-date", args.start_date])
+    if args.end_date:
+        cmd.extend(["--end-date", args.end_date])
+    cmd.extend(["--model", args.model])
+    if args.ascending:
+        cmd.append("--ascending")
+    if args.fix_gemini_3:
+        cmd.append("--fix-gemini-3")
+    if args.smart_backfill:
+        cmd.append("--smart-backfill")
+    if args.metadata_backfill:
+        cmd.append("--metadata-backfill")
+    if args.seek_and_fill:
+        cmd.append("--seek-and-fill")
+    if args.retry_blocked:
+        cmd.append("--retry-blocked")
+    if args.max_pages is not None:
+        cmd.extend(["--max-pages", str(args.max_pages)])
+    if args.fill_empty:
+        cmd.append("--fill-empty")
+    if args.api_key:
+        cmd.extend(["--api-key", args.api_key])
+    return cmd
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
@@ -701,7 +920,7 @@ if __name__ == "__main__":
     parser.add_argument("--end-year", type=int, help="End year filter (inclusive)")
     parser.add_argument("--start-date", type=str, help="Start date filter (YYYY-MM-DD)")
     parser.add_argument("--end-date", type=str, help="End date filter (YYYY-MM-DD)")
-    parser.add_argument("--model", type=str, default="grok-beta", help="Grok Model to use")
+    parser.add_argument("--model", type=str, default="grok-4-1-fast-reasoning", help="Grok Model to use")
     parser.add_argument("--ascending", action="store_true", help="Process from oldest to newest")
     parser.add_argument("--fix-gemini-3", action="store_true", help="Backfill mode for Gemini 3 cases")
     parser.add_argument("--smart-backfill", action="store_true", help="Smart Backfill")
@@ -711,19 +930,58 @@ if __name__ == "__main__":
     parser.add_argument("--max-pages", type=int, help="Max length in pages")
     parser.add_argument("--fill-empty", action="store_true", help="Target only cases with empty digest fields")
     parser.add_argument("--api-key", type=str, help="Custom XAI API key")
+    parser.add_argument("--test-api", action="store_true", help="Test xAI Responses API connectivity and exit")
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=5,
+        help="Parallel child processes (each runs with --workers 1). Ignored with --continuous.",
+    )
 
     args = parser.parse_args()
     
     # Configure Client from Args if provided
     if args.api_key:
         logging.info(f"Using Custom API Key for this run.")
-        client = OpenAI(api_key=args.api_key, base_url="https://api.x.ai/v1")
-    elif not client:
+        API_KEY = args.api_key
+        
+    if not API_KEY:
         logging.error("No API Key provided (env XAI_API_KEY or --api-key). Exiting.")
         sys.exit(1)
     
     logging.info(f"Using Model: {args.model}")
     
+    if args.test_api:
+        logging.info("Testing xAI Responses API connectivity...")
+        headers = {
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": args.model,
+            "input": [{"role": "user", "content": "Hello! Reply with 'LexMatePH API Connectivity: SUCCESS' if you receive this."}]
+        }
+        try:
+            resp = requests.post(XAI_RESPONSES_URL, headers=headers, json=payload, timeout=30)
+            if resp.status_code == 200:
+                body = resp.json()
+                out = extract_xai_responses_api_text(body) if isinstance(body, dict) else ""
+                logging.info("API Response: %s", out[:500] if out else "(empty)")
+                if not out.strip():
+                    logging.error("Connectivity test: 200 OK but no assistant text (check response JSON shape).")
+                    print("API Connectivity: FAILED (empty body)")
+                    sys.exit(1)
+                print("API Connectivity: SUCCESS")
+                sys.exit(0)
+            else:
+                logging.error(f"API Error ({resp.status_code}): {resp.text}")
+                print(f"API Connectivity: FAILED ({resp.status_code})")
+                sys.exit(1)
+        except Exception as e:
+            logging.error(f"API Request Exception: {e}")
+            print(f"API Connectivity: ERROR")
+            sys.exit(1)
+
     target_ids_list = None
     if args.target_ids:
         target_ids_list = [x.strip() for x in args.target_ids.split(',')]
@@ -740,7 +998,64 @@ if __name__ == "__main__":
             logging.error(f"Failed to read target IDs file: {e}")
 
     if target_ids_list:
+        target_ids_list = _dedupe_target_ids_preserve(target_ids_list)
+
+    if target_ids_list:
         args.limit = len(target_ids_list)
+
+    workers = max(1, int(args.workers))
+
+    if not args.continuous and workers > 1:
+        import subprocess
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        def _run_digest_child(cmd: list[str]) -> int:
+            logging.info("Parallel digest child: %s", " ".join(cmd))
+            return int(subprocess.run(cmd, cwd=repo_root).returncode)
+
+        if target_ids_list:
+            ids = target_ids_list
+            pool_workers = min(workers, len(ids))
+            rcs: list[int] = []
+            with ThreadPoolExecutor(max_workers=pool_workers) as pool:
+                futures = [
+                    pool.submit(
+                        _run_digest_child,
+                        _grok_digest_child_command(args, limit=1, target_ids_csv=str(xid)),
+                    )
+                    for xid in ids
+                ]
+                for fut in as_completed(futures):
+                    rcs.append(fut.result())
+            bad = [r for r in rcs if r not in (0, 100)]
+            if bad:
+                sys.exit(bad[0])
+            if rcs and all(r == 100 for r in rcs):
+                sys.exit(100)
+            sys.exit(0)
+
+        processed_total = 0
+        limit_total = args.limit
+        while processed_total < limit_total:
+            wave = min(workers, limit_total - processed_total)
+            rcs = []
+            with ThreadPoolExecutor(max_workers=wave) as pool:
+                futures = [
+                    pool.submit(
+                        _run_digest_child,
+                        _grok_digest_child_command(args, limit=1, target_ids_csv=None),
+                    )
+                    for _ in range(wave)
+                ]
+                for fut in as_completed(futures):
+                    rcs.append(fut.result())
+            successes = sum(1 for r in rcs if r == 0)
+            if successes == 0:
+                sys.exit(100 if processed_total == 0 else 0)
+            processed_total += successes
+        sys.exit(0)
 
     if args.continuous:
         logging.info("Starting CONTINUOUS digestion mode (Connect-Write-Disconnect)...")
@@ -760,13 +1075,14 @@ if __name__ == "__main__":
                     fix_gemini_3=args.fix_gemini_3,
                     start_date=args.start_date,
                     end_date=args.end_date,
+                    smart_backfill=args.smart_backfill,
                     max_pages=args.max_pages,
                     metadata_backfill=args.metadata_backfill,
                     retry_blocked=args.retry_blocked,
                     seek_and_fill=args.seek_and_fill,
-                    fill_empty=args.fill_empty
+                    fill_empty=args.fill_empty,
                 )
-                
+
                 if processed == 0:
                     logging.info("No cases processed in this batch.")
                     if args.exit_on_finish:
@@ -777,11 +1093,11 @@ if __name__ == "__main__":
                 logging.error(f"Loop error: {e}")
                 time.sleep(5)
     else:
-        # One-off run
-        generate_digest_batch(
-            limit=args.limit, 
-            doctrinal_only=args.doctrinal_only, 
-            year=args.year, 
+        # One-off run (exit 100 = no case processed; matches Gemini digester for subprocess callers)
+        count = generate_digest_batch(
+            limit=args.limit,
+            doctrinal_only=args.doctrinal_only,
+            year=args.year,
             force=args.force,
             target_ids=target_ids_list,
             en_banc_only=args.en_banc_only,
@@ -794,7 +1110,10 @@ if __name__ == "__main__":
             end_date=args.end_date,
             smart_backfill=args.smart_backfill,
             max_pages=args.max_pages,
+            metadata_backfill=args.metadata_backfill,
             retry_blocked=args.retry_blocked,
             seek_and_fill=args.seek_and_fill,
-            fill_empty=args.fill_empty
+            fill_empty=args.fill_empty,
         )
+        if count == 0:
+            sys.exit(100)

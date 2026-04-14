@@ -42,9 +42,7 @@ Holders of nonvoting shares shall nevertheless be entitled to vote on the follow
 
 (f) Merger or consolidation of the corporation with another corporation or other corporations;
 
-(g) Investment of corporate funds in another corporation or business in accordance with this
-
-Code; and
+(g) Investment of corporate funds in another corporation or business in accordance with this Code; and
 
 (h) Dissolution of the corporation.
 
@@ -145,25 +143,21 @@ Fourth: That the corporation shall have perpetual existence or a term of years f
 
 Fifth: That the names, nationalities, and residence addresses of the incorporators of the corporation are as follows:
 
-| Name                                                                             | Nationality                                                                                  | Residence                                                                                    |
+| Name | Nationality | Residence |
+| --- | --- | --- |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 
-| | |  |
-| - |  |
+Sixth: That the number of directors or trustees of the corporation shall be \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ ; and the names, nationalities, and residence addresses of the first directors or trustees of the corporation are as follows:
 
-Sixth: That the number of directors or trustees of the corporation shall be \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ ; and the names, nationalities, and residence addresses of the first directors or trustees of the corporation are as follows:
-
-| Name                                                                             | Nationality                                                                                  | Residence                                                                                    |
+| Name | Nationality | Residence |
+| --- | --- | --- |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
-
-| | |  |
-| - |  |
 
 Seventh: That the authorized capital stock of the corporation is \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ PESOS (P\_\_\_\_\_\_\_ ), divided into \_\_\_\_\_\_\_ shares with the par value of \_\_\_\_\_\_\_\_\_\_\_\_\_\_ PESOS (P\_\_\_\_\_\_\_\_\_) per share. (In case all the shares are without par value): That the capital stock of the corporation is \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ shares without par value.
 
@@ -172,11 +166,12 @@ Seventh: That the authorized capital stock of the corporation is \_\_\_\_\_\_\_\
 Eighth: That the number of shares of the authorized capital stock above-stated has been subscribed as follows:
 
 | Name of Subscriber | Nationality | No. of Shares Subscribed | Amount Subscribed | Amount Paid |
-| |                  |             |                          |                   |             |
-| |                  |             |                          |                   |             |
-| |                  |             |                          |                   |             |
-| |                  |             |                          |                   |             |
-| |                  |             |                          |                   |             |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
 
 (Modify No. 8 if shares are with no-par value. In case the corporation is nonstock, Nos. 7 and 8 of the above articles may be modified accordingly, and it is sufficient if the articles state the amount of capital or money contributed or donated by specified persons, stating the names, nationalities, and residence addresses of the contributors or donors and the respective amount given by each.)
 

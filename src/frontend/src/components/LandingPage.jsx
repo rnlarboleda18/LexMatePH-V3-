@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import {
     ArrowRight,
     BookOpen,
@@ -25,61 +26,71 @@ const LG_NEST = 'landing-glass-nested';
  * Copy echoes About: one workspace, engineered digests, verify primary sources.
  */
 const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
+    const landingHeader =
+        typeof document !== 'undefined' ? (
+            createPortal(
+                <div className={isDarkMode ? 'dark' : ''} data-lex-landing-chrome>
+                    <header className="landing-page fixed top-0 left-0 right-0 z-50 px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-2 sm:px-5">
+                        <div
+                            className={`${LG} landing-glass-header mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5`}
+                        >
+                            <div className="flex min-w-0 items-center gap-2.5">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-sm dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 sm:h-10 sm:w-10">
+                                    <Scale className="h-5 w-5" strokeWidth={2} />
+                                </div>
+                                <div className="min-w-0">
+                                    <span className="font-display block truncate text-lg font-semibold tracking-tight sm:text-xl">
+                                        LexMatePH
+                                    </span>
+                                    <span className="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 sm:block">
+                                        Your legal companion
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+                                <button
+                                    type="button"
+                                    onClick={toggleTheme}
+                                    className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-transparent text-gray-700 transition-colors hover:border-amber-300/90 hover:bg-amber-50 hover:text-amber-900 dark:text-gray-300 dark:hover:border-amber-800/40 dark:hover:bg-amber-900/20 dark:hover:text-amber-300"
+                                    aria-label={isDarkMode ? 'Light mode' : 'Dark mode'}
+                                >
+                                    {isDarkMode ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-violet-600" />}
+                                </button>
+                                <div className="flex items-center gap-1">
+                                    <SignedIn>
+                                        <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-9 h-9' } }} />
+                                    </SignedIn>
+                                    <SignedOut>
+                                        <SignInButton mode="modal">
+                                            <button
+                                                type="button"
+                                                className="rounded-lg px-2.5 py-1.5 text-sm font-semibold text-gray-800 hover:bg-white/80 dark:text-gray-200 dark:hover:bg-white/10 sm:px-3"
+                                            >
+                                                Log in
+                                            </button>
+                                        </SignInButton>
+                                        <SignUpButton mode="modal">
+                                            <button
+                                                type="button"
+                                                className="rounded-lg bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-amber-500 sm:px-3"
+                                            >
+                                                Sign up
+                                            </button>
+                                        </SignUpButton>
+                                    </SignedOut>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </div>,
+                document.body
+            )
+        ) : null;
+
     return (
         <div className="landing-page min-h-screen bg-transparent font-sans text-gray-900 dark:text-gray-100">
-            {/* Floating glass header */}
-            <header className="sticky top-0 z-50 px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-2 sm:px-5">
-                <div
-                    className={`${LG} landing-glass-header mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5`}
-                >
-                    <div className="flex min-w-0 items-center gap-2.5">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-sm dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 sm:h-10 sm:w-10">
-                            <Scale className="h-5 w-5" strokeWidth={2} />
-                        </div>
-                        <div className="min-w-0">
-                            <span className="font-display block truncate text-lg font-semibold tracking-tight sm:text-xl">
-                                LexMatePH
-                            </span>
-                            <span className="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 sm:block">
-                                Your legal companion
-                            </span>
-                        </div>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-                        <button
-                            type="button"
-                            onClick={toggleTheme}
-                            className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-transparent text-gray-700 transition-colors hover:border-amber-300/90 hover:bg-amber-50 hover:text-amber-900 dark:text-gray-300 dark:hover:border-amber-800/40 dark:hover:bg-amber-900/20 dark:hover:text-amber-300"
-                            aria-label={isDarkMode ? 'Light mode' : 'Dark mode'}
-                        >
-                            {isDarkMode ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-violet-600" />}
-                        </button>
-                        <div className="flex items-center gap-1">
-                            <SignedIn>
-                                <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-9 h-9' } }} />
-                            </SignedIn>
-                            <SignedOut>
-                                <SignInButton mode="modal">
-                                    <button
-                                        type="button"
-                                        className="rounded-lg px-2.5 py-1.5 text-sm font-semibold text-gray-800 hover:bg-white/80 dark:text-gray-200 dark:hover:bg-white/10 sm:px-3"
-                                    >
-                                        Log in
-                                    </button>
-                                </SignInButton>
-                                <SignUpButton mode="modal">
-                                    <button
-                                        type="button"
-                                        className="rounded-lg bg-amber-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-amber-500 sm:px-3"
-                                    >
-                                        Sign up
-                                    </button>
-                                </SignUpButton>
-                            </SignedOut>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            {landingHeader}
+            <div className="lex-landing-header-spacer shrink-0" aria-hidden />
 
             <div className="mx-auto max-w-6xl space-y-10 px-3 pb-20 pt-4 sm:space-y-12 sm:px-5 sm:pb-24 sm:pt-6">
                 {/* Hero — large glass panel */}

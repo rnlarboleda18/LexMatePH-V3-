@@ -289,16 +289,28 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                      injections.append(f"## {section_lbl}")
                      prev_section = section_lbl
 
-                 if injections:
+                 # LexCodeStream (CodalStream) already hoists book/title/chapter/section from row fields.
+                 # Prepending "## …" here then "Article N." on the same line duplicates headers and leaves
+                 # raw "##" in the body (not at line start, so ReactMarkdown does not render headings).
+                 _append_embedded_codal_markdown = short_name.upper() not in (
+                     "RCC",
+                     "CIV",
+                     "LABOR",
+                     "RPC",
+                     "FC",
+                 )
+
+                 if injections and _append_embedded_codal_markdown:
                      content_to_send = "\n\n".join(injections) + "\n\n" + content_to_send
 
                  # Format for prefix Article X
                  if short_name.upper() in ['LABOR', 'RPC', 'CIV', 'RCC', 'FC']:
-                     art_title = r.get('article_title') or ""
-                     prefix = f"Article {article_num}."
-                     if art_title:
-                         prefix += f" **{art_title}** -"
-                     content_to_send = f"{prefix} {content_to_send}"
+                     if _append_embedded_codal_markdown:
+                         art_title = r.get('article_title') or ""
+                         prefix = f"Article {article_num}."
+                         if art_title:
+                             prefix += f" **{art_title}** -"
+                         content_to_send = f"{prefix} {content_to_send}"
 
                  # Footnotes
                  fn_json = r.get('footnotes')

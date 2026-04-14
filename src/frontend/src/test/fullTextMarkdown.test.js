@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import {
+    escapeLegalCaptionCommaAsterisks,
     normalizeFullTextMarkdownForGfm,
     normalizeLooseFootnoteCarets,
+    repairFullTextBracketGlitches,
+    repairFullTextMojibake,
     splitInlineLetterSpacedHeadings,
     splitSpacedHeadingFromCaseTitleLines,
 } from '../utils/fullTextMarkdown';
@@ -46,5 +49,42 @@ describe('normalizeFullTextMarkdownForGfm', () => {
         const out = normalizeFullTextMarkdownForGfm(input);
         expect(out).toContain('### Resolution');
         expect(out).toContain('Held[^1].');
+    });
+});
+
+describe('repairFullTextMojibake', () => {
+    it('repairs UTF-8 punctuation mis-decoded as Windows-1252 (â€… triplets)', () => {
+        const dec = new TextDecoder('windows-1252');
+        const emMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x94]));
+        const enMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x93]));
+        const apMoj = dec.decode(new Uint8Array([0xe2, 0x80, 0x99]));
+        expect(repairFullTextMojibake(`thusly${emMoj}end`)).toBe('thusly\u2014end');
+        expect(repairFullTextMojibake(`range${enMoj}here`)).toBe('range\u2013here');
+        expect(repairFullTextMojibake(`don${apMoj}t`)).toBe('don\u2019t');
+        expect(repairFullTextMojibake('thusly\u00e2\u20ac"end')).toBe('thusly\u2014end');
+    });
+
+    it('repairs truncated mojibake (â + apostrophe, lone â)', () => {
+        expect(repairFullTextMojibake('accounts\u00e2\u20ac\' inclusion')).toBe('accounts\u2019 inclusion');
+        expect(repairFullTextMojibake('plaintiff\u00e2\' cause')).toBe('plaintiff\u2019s cause');
+        expect(repairFullTextMojibake('confusions\u00e2bench')).toBe('confusions\u2014bench');
+        expect(repairFullTextMojibake('reiterating\u00e2 in the')).toBe('reiterating\u2014 in the');
+        expect(repairFullTextMojibake('certiorari.\u00e2\' When')).toBe('certiorari.\u2014 When');
+    });
+});
+
+describe('repairFullTextBracketGlitches', () => {
+    it('fixes common PDF bracket artifacts in Tagalog snippets', () => {
+        expect(repairFullTextBracketGlitches('homes an[g] na-expose')).toBe('homes ang na-expose');
+        expect(repairFullTextBracketGlitches('nakaraang ling[g]o')).toBe('nakaraang linggo');
+    });
+});
+
+describe('escapeLegalCaptionCommaAsterisks', () => {
+    it('escapes comma-footnote asterisks before capitalized names or JJ.', () => {
+        const line = 'ROSARIO,** JJ., concur.';
+        expect(escapeLegalCaptionCommaAsterisks(line)).toBe('ROSARIO,\\*\\* JJ., concur.');
+        expect(escapeLegalCaptionCommaAsterisks('NAME,* JUNRI')).toBe('NAME,\\* JUNRI');
+        expect(escapeLegalCaptionCommaAsterisks('LEONEN,* ACTING C.J.')).toBe('LEONEN,\\* ACTING C.J.');
     });
 });

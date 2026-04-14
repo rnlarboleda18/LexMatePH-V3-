@@ -46,17 +46,23 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                         </div>
                     </SignedIn>
                     <SignedOut>
-                        <div className="grid grid-cols-2 gap-2.5">
+                        <div className="flex flex-col gap-2">
                             <SignInButton mode="modal">
-                                <button className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-400/70 bg-white py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition-all active:scale-[0.98] dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-100">
-                                    <LogIn size={18} />
-                                    <span>Log In</span>
+                                <button
+                                    type="button"
+                                    className="flex w-full min-h-11 items-center justify-center gap-2 rounded-xl border-2 border-slate-400/70 bg-white px-3 py-2.5 text-center text-xs font-semibold leading-tight tracking-tight text-slate-900 shadow-sm backdrop-blur-sm transition-all active:scale-[0.98] dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-100 sm:text-[13px]"
+                                >
+                                    <LogIn className="h-4 w-4 shrink-0" strokeWidth={2.25} aria-hidden />
+                                    <span className="min-w-0">Log In</span>
                                 </button>
                             </SignInButton>
                             <SignUpButton mode="modal">
-                                <button className="flex items-center justify-center gap-2 rounded-xl bg-amber-600 py-2.5 text-sm font-semibold text-white shadow-md shadow-amber-900/25 transition-all active:scale-[0.98]">
-                                    <UserPlus size={18} />
-                                    <span>Sign Up</span>
+                                <button
+                                    type="button"
+                                    className="flex w-full min-h-11 items-center justify-center gap-2 rounded-xl bg-amber-600 px-3 py-2.5 text-center text-xs font-semibold leading-tight tracking-tight text-white shadow-md shadow-amber-900/25 transition-all active:scale-[0.98] sm:text-[13px]"
+                                >
+                                    <UserPlus className="h-4 w-4 shrink-0" strokeWidth={2.25} aria-hidden />
+                                    <span className="min-w-0">Sign Up</span>
                                 </button>
                             </SignUpButton>
                         </div>

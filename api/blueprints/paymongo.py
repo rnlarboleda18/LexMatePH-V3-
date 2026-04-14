@@ -15,6 +15,7 @@ from utils.trial import expire_trial_for_user
 paymongo_bp = func.Blueprint()
 
 PAYMONGO_SECRET_KEY = os.environ.get("PAYMONGO_SECRET_KEY", "")
+PAYMONGO_PUBLIC_KEY = os.environ.get("PAYMONGO_PUBLIC_KEY", "")
 PAYMONGO_WEBHOOK_SECRET = os.environ.get("PAYMONGO_WEBHOOK_SECRET", "")
 PAYMONGO_BASE_URL = "https://api.paymongo.com/v1"
 
@@ -554,15 +555,122 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @paymongo_bp.route(route="available-plans", methods=["GET"])
 def available_plans(req: func.HttpRequest) -> func.HttpResponse:
-    """Return available plan IDs for the frontend to use."""
+    """Return available plan IDs and public key for the frontend to use."""
     return func.HttpResponse(
-        json.dumps({**AVAILABLE_PLANS, "bypass_mode": PAYMONGO_BYPASS}),
+        json.dumps({
+            **AVAILABLE_PLANS,
+            "bypass_mode": PAYMONGO_BYPASS,
+            "public_key": PAYMONGO_PUBLIC_KEY,
+        }),
         mimetype="application/json", status_code=200
     )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Route: POST /api/paymongo-webhook
+# Route: POST /api/attach-payment-method
+# ─────────────────────────────────────────────────────────────────────────────
+@paymongo_bp.route(route="attach-payment-method", methods=["POST"])
+def attach_payment_method(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Attach a PaymentMethod to a PaymentIntent to complete a subscription's
+    first payment.  Called by the frontend after collecting card details.
+
+    Request body:
+      {
+        "payment_intent_id": "pi_...",
+        "payment_method_id": "pm_...",   # created client-side via public key
+        "return_url":        "https://..."  # where to land after 3DS
+      }
+
+    Responses:
+      200 { "status": "succeeded" }                         — payment done
+      200 { "status": "awaiting_next_action",               — 3DS required
+             "redirect_url": "https://..." }
+      502 { "error": "...", "detail": {...} }               — PayMongo error
+    """
+    clerk_id, error = get_authenticated_user_id(req)
+    if error:
+        return func.HttpResponse(
+            json.dumps({"error": "Unauthorized", "detail": error}),
+            mimetype="application/json", status_code=401,
+        )
+    try:
+        body = req.get_json()
+        payment_intent_id = (body.get("payment_intent_id") or "").strip()
+        payment_method_id = (body.get("payment_method_id") or "").strip()
+        return_url = (
+            body.get("return_url")
+            or os.environ.get("FRONTEND_URL", "https://lexmateph.com")
+        )
+
+        if not payment_intent_id or not payment_method_id:
+            return func.HttpResponse(
+                json.dumps({"error": "payment_intent_id and payment_method_id are required"}),
+                mimetype="application/json", status_code=400,
+            )
+
+        # Attach the payment method to the payment intent
+        response = requests.post(
+            f"{PAYMONGO_BASE_URL}/payment_intents/{payment_intent_id}/attach",
+            json={
+                "data": {
+                    "attributes": {
+                        "payment_method": payment_method_id,
+                        "return_url": return_url,
+                    }
+                }
+            },
+            headers=_paymongo_headers(),
+            timeout=20,
+        )
+        resp_data = response.json()
+
+        if response.status_code not in (200, 201):
+            logging.error(f"attach_payment_method PayMongo error: {resp_data}")
+            return func.HttpResponse(
+                json.dumps({"error": "PayMongo attach failed", "detail": resp_data}),
+                mimetype="application/json", status_code=502,
+            )
+
+        attrs = resp_data.get("data", {}).get("attributes", {})
+        status = attrs.get("status", "")
+
+        if status == "succeeded":
+            logging.info(
+                f"attach_payment_method: succeeded pi={payment_intent_id} clerk_id={clerk_id}"
+            )
+            return func.HttpResponse(
+                json.dumps({"status": "succeeded"}),
+                mimetype="application/json", status_code=200,
+            )
+
+        if status in ("awaiting_next_action", "processing"):
+            next_action = attrs.get("next_action") or {}
+            redirect_url = next_action.get("redirect", {}).get("url", "")
+            logging.info(
+                f"attach_payment_method: {status} — 3DS redirect pi={payment_intent_id}"
+            )
+            return func.HttpResponse(
+                json.dumps({"status": status, "redirect_url": redirect_url}),
+                mimetype="application/json", status_code=200,
+            )
+
+        # Unexpected status (e.g. 'awaiting_payment_method', 'cancelled')
+        logging.warning(
+            f"attach_payment_method: unexpected status={status} pi={payment_intent_id}"
+        )
+        return func.HttpResponse(
+            json.dumps({"status": status, "error": f"Unexpected payment status: {status}"}),
+            mimetype="application/json", status_code=200,
+        )
+
+    except Exception as e:
+        logging.error(f"attach_payment_method error: {e}")
+        return func.HttpResponse(
+            json.dumps({"error": str(e)}),
+            mimetype="application/json", status_code=500,
+        )
+
 # ─────────────────────────────────────────────────────────────────────────────
 @paymongo_bp.route(route="paymongo-webhook", methods=["POST"])
 def paymongo_webhook(req: func.HttpRequest) -> func.HttpResponse:

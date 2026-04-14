@@ -9,4 +9,11 @@ describe('CaseFullTextMarkdown', () => {
         expect(screen.getByRole('table')).toBeTruthy();
         expect(screen.getByRole('columnheader', { name: /Col A/i })).toBeTruthy();
     });
+
+    it('renders GFM footnote markup (ref + section)', () => {
+        const md = ['Hello[^1].', '', '[^1]: First footnote.'].join('\n');
+        const { container } = render(<CaseFullTextMarkdown content={md} onCaseClick={() => {}} />);
+        expect(container.querySelector('a[data-footnote-ref]')).toBeTruthy();
+        expect(container.querySelector('section[data-footnotes]')).toBeTruthy();
+    });
 });

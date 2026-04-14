@@ -989,7 +989,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 {/* Inner shine layer for glass effect */}
                 <div className="pointer-events-none absolute inset-0 z-0 opacity-0 bg-gradient-to-b from-white/10 to-transparent dark:opacity-30" aria-hidden />
                 {/* Mobile + tablet (<lg): centered pills + minimize; lg+ uses floating minimize only */}
-                <div className="pointer-events-none absolute inset-x-0 top-[max(0.75rem,env(safe-area-inset-top,0px))] z-[60] h-12 lg:hidden">
+                <div className="pointer-events-none absolute inset-x-0 top-[max(0.75rem,env(safe-area-inset-top,0px))] z-[60] h-10 sm:h-11 lg:hidden">
                     <div className="pointer-events-auto absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-9.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-slate-300/85 bg-white/95 p-1 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
                         <button
                             type="button"
@@ -1010,21 +1010,21 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         <button
                             type="button"
                             onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
-                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                             title="Minimize LexPlayer"
                             aria-label="Minimize LexPlayer"
                         >
-                            <Minimize2 className="h-5 w-5" strokeWidth={2.25} />
+                            <Minimize2 className="h-4 w-4" strokeWidth={2.25} />
                         </button>
                         {typeof onCloseFull === 'function' && (
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
-                                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                 title="Close LexPlayer"
                                 aria-label="Close LexPlayer"
                             >
-                                <X className="h-5 w-5" strokeWidth={2.25} />
+                                <X className="h-4 w-4" strokeWidth={2.25} />
                             </button>
                         )}
                     </div>
@@ -1034,21 +1034,21 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                     <button
                         type="button"
                         onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
-                        className="group pointer-events-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] md:h-12 md:w-12 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                        className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                         title="Minimize LexPlayer"
                         aria-label="Minimize LexPlayer"
                     >
-                        <Minimize2 className="h-5 w-5 transition-transform group-hover:scale-105" strokeWidth={2.25} />
+                        <Minimize2 className="h-4 w-4 transition-transform group-hover:scale-105" strokeWidth={2.25} />
                     </button>
                     {typeof onCloseFull === 'function' && (
                         <button
                             type="button"
                             onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
-                            className="group pointer-events-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] md:h-12 md:w-12 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                            className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                             title="Close LexPlayer"
                             aria-label="Close LexPlayer"
                         >
-                            <X className="h-5 w-5 transition-transform group-hover:scale-105" strokeWidth={2.25} />
+                            <X className="h-4 w-4 transition-transform group-hover:scale-105" strokeWidth={2.25} />
                         </button>
                     )}
                 </div>
@@ -1060,9 +1060,9 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-purple-500/[0.04] via-transparent to-indigo-100/30 dark:from-purple-500/[0.06] dark:to-indigo-950/20" />
                         <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-400/10 blur-[90px] dark:bg-purple-500/10 md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)] lg:top-[42%]" />
 
-                        {/* Daily limit badge — top-left of player stage, free/amicus only */}
+                        {/* Daily limit badge — desktop (lg+): top-left of player stage; mobile/tablet: below play in transport row */}
                         {remainingSeconds !== null && (
-                            <div className="pointer-events-none absolute left-4 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-20 lg:top-4">
+                            <div className="pointer-events-none absolute left-4 top-[calc(env(safe-area-inset-top,0px)+3.75rem)] z-20 max-lg:hidden lg:top-4">
                                 <div className="flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50/95 px-3 py-1.5 shadow-md backdrop-blur-sm dark:border-amber-500/40 dark:bg-amber-950/80">
                                     <Clock className="h-3.5 w-3.5 shrink-0 text-amber-600 dark:text-amber-400" strokeWidth={2.5} />
                                     <span className="text-[11px] font-extrabold tracking-wide text-amber-700 dark:text-amber-300">
@@ -1073,7 +1073,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         )}
 
                         {/* max-lg: vertically centered block + even gaps; lg+: centered column */}
-                        <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center px-4 pt-[calc(env(safe-area-inset-top,0px)+3rem)] sm:px-5 md:max-lg:max-w-4xl md:max-lg:px-5 md:max-lg:pt-[calc(env(safe-area-inset-top,0px)+3rem)] lg:max-w-2xl lg:min-h-0 lg:shrink lg:flex-1 lg:justify-center lg:gap-7 lg:px-8 lg:pb-5 lg:pt-12 max-lg:flex-1 max-lg:justify-center max-lg:gap-4 max-lg:py-2 max-lg:pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
+                        <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center px-4 pt-[calc(env(safe-area-inset-top,0px)+3rem+0.5cm)] sm:px-5 md:max-lg:max-w-4xl md:max-lg:px-5 md:max-lg:pt-[calc(env(safe-area-inset-top,0px)+3rem+0.5cm)] lg:max-w-2xl lg:min-h-0 lg:shrink lg:flex-1 lg:justify-center lg:gap-6 lg:px-8 lg:pb-5 lg:pt-10 max-lg:flex-1 max-lg:justify-center max-lg:gap-3 max-lg:pb-[max(1rem,env(safe-area-inset-bottom,0px))]">
                             <header className="flex w-full flex-col items-center justify-center max-lg:mb-0 lg:pt-0">
                                 <p className="flex items-baseline gap-0.5 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-2xl md:max-lg:text-[1.35rem] lg:text-[1.65rem] dark:text-white" aria-label="LexPlayer">
                                     <span className="dark:text-white">Lex</span>
@@ -1083,7 +1083,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                             </header>
 
                             {/* Mobile: vertical; Tablet (md–lg): art | meta+controls; Desktop lg+: vertical stack */}
-                            <div className="flex w-full flex-col items-center gap-4 md:max-lg:flex-row md:max-lg:items-start md:max-lg:gap-4 lg:flex-col lg:items-center lg:gap-7">
+                            <div className="flex w-full flex-col items-center gap-3 md:max-lg:flex-row md:max-lg:items-start md:max-lg:gap-3 lg:flex-col lg:items-center lg:gap-6">
                                 {/* Artwork column */}
                                 <div className="relative flex w-full max-w-[min(100%,18rem)] shrink-0 justify-center md:max-lg:max-w-none md:max-lg:w-[40%] md:max-lg:min-w-0 md:max-lg:self-center lg:max-w-none lg:w-full">
                                     <div className="group relative flex-shrink-0">
@@ -1173,6 +1173,16 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                                 <SkipForward className="h-6 w-6 sm:h-7 sm:w-7 md:max-lg:h-8 md:max-lg:w-8 lg:h-6 lg:w-6" fill="currentColor" />
                                             </button>
                                         </div>
+                                        {remainingSeconds !== null && (
+                                            <div className="mt-3 flex w-full justify-center lg:hidden" aria-live="polite">
+                                                <div className="pointer-events-none flex items-center gap-1.5 rounded-full border border-amber-300/70 bg-amber-50/95 px-3 py-1.5 shadow-md backdrop-blur-sm dark:border-amber-500/40 dark:bg-amber-950/80">
+                                                    <Clock className="h-3.5 w-3.5 shrink-0 text-amber-600 dark:text-amber-400" strokeWidth={2.5} />
+                                                    <span className="text-[11px] font-extrabold tracking-wide text-amber-700 dark:text-amber-300">
+                                                        {formatRemaining(remainingSeconds)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

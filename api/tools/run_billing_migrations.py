@@ -1,8 +1,14 @@
 """
-Apply sql/paymongo_migration.sql then sql/founding_promo_migration.sql to DB_CONNECTION_STRING.
+Apply PayMongo-related SQL migrations to DB_CONNECTION_STRING.
+
+Migrations applied (in order):
+  1. sql/paymongo_migration.sql           — subscription columns + usage_logs table
+  2. sql/founding_promo_migration.sql     — founding promo columns
+  3. sql/webhook_events_idempotency.sql   — webhook deduplication table
+
 Loads api/local.settings.json Values into os.environ (same pattern as run_migration.py).
-Run from repo root: python api/run_billing_migrations.py
-Or from api:       python run_billing_migrations.py
+Run from repo root: python api/tools/run_billing_migrations.py
+Or from api/tools: python run_billing_migrations.py
 """
 import json
 import os
@@ -12,9 +18,10 @@ from pathlib import Path
 import psycopg
 
 def _load_local_settings():
-    here = Path(__file__).resolve().parent
-    root = here.parent
-    for candidate in (here / "local.settings.json", root / "local.settings.json"):
+    here = Path(__file__).resolve().parent          # api/tools/
+    api_dir = here.parent                           # api/
+    repo_root = here.parent.parent                  # repo root
+    for candidate in (here / "local.settings.json", api_dir / "local.settings.json", repo_root / "api" / "local.settings.json"):
         try:
             with open(candidate, encoding="utf-8") as f:
                 data = json.load(f)
@@ -47,11 +54,12 @@ def main() -> int:
         print("DB_CONNECTION_STRING not set. Add Values.DB_CONNECTION_STRING to api/local.settings.json or export it.")
         return 1
 
-    here = Path(__file__).resolve().parent
-    root = here.parent
+    here = Path(__file__).resolve().parent       # api/tools/
+    root = here.parent.parent                    # repo root (sql/ lives here)
     files = [
         root / "sql" / "paymongo_migration.sql",
         root / "sql" / "founding_promo_migration.sql",
+        root / "sql" / "webhook_events_idempotency.sql",
     ]
     for p in files:
         if not p.is_file():

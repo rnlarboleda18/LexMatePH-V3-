@@ -9,6 +9,7 @@ import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
 import DigestHtmlViewer from './DigestHtmlViewer';
+import { getSubjectMainDoctrinePanelClasses } from '../utils/colors';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 import { apiUrl } from '../utils/apiUrl';
 import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDigestMarkdown';
@@ -564,6 +565,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
     if (!fullDecision) return null;
 
+    const doctrinePanel = getSubjectMainDoctrinePanelClasses(fullDecision.subject);
+
     const decisionYear = fullDecision.date_str
         ? (() => {
               try {
@@ -795,10 +798,10 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     {viewMode === 'digest' ? (
                         <>
                              {fullDecision.main_doctrine && (
-                                <div className="glass relative mb-6 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br from-blue-50/60 to-white/40 p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] sm:mb-10 dark:border-white/10 dark:from-slate-800/60 dark:to-slate-900/40 sm:p-6 md:p-8">
-                                    <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-600"></div>
-                                    <h4 className="mb-4 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[13px] font-black uppercase tracking-widest text-transparent dark:from-blue-400 dark:to-indigo-400">
-                                        <Lightbulb className="w-5 h-5 text-blue-500 drop-shadow-sm" /> 
+                                <div className={`glass relative mb-6 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br ${doctrinePanel.card} p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] sm:mb-10 dark:border-white/10 sm:p-6 md:p-8`}>
+                                    <div className={`absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b ${doctrinePanel.stripe}`}></div>
+                                    <h4 className={`mb-4 flex items-center gap-2 bg-gradient-to-r ${doctrinePanel.title} bg-clip-text text-[13px] font-black uppercase tracking-widest text-transparent`}>
+                                        <Lightbulb className={`h-5 w-5 drop-shadow-sm ${doctrinePanel.icon}`} />
                                         Main Doctrine
                                     </h4>
                                     <div className="text-gray-800 dark:text-gray-100 text-sm leading-relaxed font-medium">

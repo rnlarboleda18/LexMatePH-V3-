@@ -3,8 +3,8 @@ import re
 import psycopg2
 from datetime import datetime
 
-# DB Connection
-DB_CONNECTION_STRING = "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
+# DB Connection (cloud Postgres — set in environment; never commit real URLs)
+DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING")
 MD_DIR = "data/sc_elib_md (missing from lawphil)"
 
 def normalize_caseno(cn):
@@ -14,8 +14,11 @@ def normalize_caseno(cn):
 def get_db_records():
     print("Fetching DB records for de-duplication...")
     records = set()
-    db_by_date = {} 
-    
+    db_by_date = {}
+
+    if not DB_CONNECTION_STRING:
+        raise RuntimeError("DB_CONNECTION_STRING is not set.")
+
     conn = psycopg2.connect(DB_CONNECTION_STRING)
     cur = conn.cursor()
     cur.execute("SELECT case_number, date FROM sc_decided_cases WHERE case_number IS NOT NULL AND date IS NOT NULL")
@@ -76,10 +79,13 @@ def ingest_files():
         
     print(f"Found {len(to_insert)} UNIQUE files to ingest.")
     
+    if not DB_CONNECTION_STRING:
+        raise RuntimeError("DB_CONNECTION_STRING is not set.")
+
     conn = psycopg2.connect(DB_CONNECTION_STRING)
     cur = conn.cursor()
     success_count = 0
-    
+
     for item in to_insert:
         try:
             elib_id = item['filename'].replace('.md', '')
